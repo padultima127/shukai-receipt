@@ -754,8 +754,17 @@ function renderMember(r) {
 }
 
 // 図鑑全体から代用を探すボタン。リーダー・フレンドは本体を変えるとリーダースキルが変わるので武器（アシスト）だけ
+// 作者が「原則代用できない」とした枠（毎ターン使う生成キャラなど）
+function noSubstituteReason(team, mem) {
+  const no = monster(mem.id)?.no;
+  return team?.slotRoles?.find((sr) => sr.noSubstitute && sr.part === "base" && familyOf(sr.target) === familyOf(no))?.noSubstitute ?? null;
+}
+
 function altButton(r) {
   if (r.idx < 0 || !r.m?.no) return "";
+  const team = db.teams.find((t) => t.id === r.teamId);
+  const ns = noSubstituteReason(team, r.mem);
+  if (ns && r.mem.role === "S" && !assistNoOf(r.mem)) return `<div class="sub-line"><span class="st st-ng">原則代用不可</span> ${esc(ns)}</div>`;
   const weaponOnly = r.mem.role !== "S";
   if (weaponOnly && !assistNoOf(r.mem)) return "";
   const label = weaponOnly ? "武器の代用を探す" : "代用を探す";
@@ -772,7 +781,9 @@ function searchAltFor(teamId, idx) {
     ? `<p class="hint">図鑑全体から探しています。手持ちBOXにいるキャラを上に表示します。</p>`
     : `<p class="hint">図鑑全体から探しています。手持ちBOXを登録すると、持っているキャラが上に並びます。</p>`;
   const opts = { pool: "all", limit: 5 };
-  const baseList = mem.role === "S" ? findSubstitutes("base", mem, important, team, opts) : null;
+  const ns = noSubstituteReason(team, mem);
+  const baseList = mem.role === "S" && !ns ? findSubstitutes("base", mem, important, team, opts) : null;
+  const nsNote = ns ? `<p class="endorsed-note"><span class="st st-ng">本体は原則代用不可</span> ${esc(ns)}（作者本人の説明）。武器の代用だけを探します。</p>` : "";
   const assistList = assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, opts) : null;
   const endorsedNotes = [monster(mem.id)?.no, assistNoOf(mem)]
     .map((no) => endorsedFor(team, no))
@@ -781,7 +792,7 @@ function searchAltFor(teamId, idx) {
     .map((e) => `<p class="endorsed-note"><span class="st st-ok">作者の記載</span> ${esc(e.text)}</p>`)
     .join("");
   const weaponNote = mem.role !== "S" ? `<p class="hint">リーダー・フレンドはリーダースキルが変わるため、武器（アシスト）の代用だけを探します。</p>` : "";
-  return note + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "");
+  return note + nsNote + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "");
 }
 
 // ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）

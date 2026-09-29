@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 42,
+  "version": 43,
   "seed": true,
   "monsters": [
     {
@@ -9684,6 +9684,46 @@ window.PAD_SEED = {
               "cap": "dropEnhance",
               "why": "スキルのドロップ強化はおまけ",
               "optional": true
+            }
+          ]
+        },
+        {
+          "target": 12930,
+          "part": "base",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "noSubstitute": "毎ターン使う生成キャラ（L字の光生成）は原則として代用できない",
+          "roles": [
+            {
+              "cap": "lShapeGen",
+              "why": "毎ターン確実にL字（光）を生成し、功とキコルのリーダースキル（軽減・倍率・固定2000万）を発動させる",
+              "note": true
+            },
+            {
+              "cap": "comboAbsorbNull",
+              "why": "攻撃タイプエンハンス中、毎ターンのコンボ吸収を無効化"
+            },
+            {
+              "cap": "kikoruNote",
+              "why": "サブとフレンドの2体を交互に使って毎ターン使用。フレンドはリーダースキル（落ちコンなし・L字で82%軽減・200倍）も担う",
+              "note": true
+            }
+          ]
+        },
+        {
+          "target": 7265,
+          "part": "assist",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "haste",
+              "why": "1Fで使うヘイスト（3ターン）",
+              "minHaste": 3,
+              "fireAtFloor": 1
+            },
+            {
+              "cap": "attrAbsorbNull",
+              "why": "1Fから使ってクリアまで続く属性吸収無効（18ターン）",
+              "minDur": 10
             }
           ]
         }
