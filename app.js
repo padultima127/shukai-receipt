@@ -186,8 +186,8 @@ const GIMMICK_LABEL = {
 const GIMMICK_COUNTERS = {
   dmgVoid: ["voidPierce", "voidPierceAwk"], dmgAbsorb: ["dmgAbsorbNull"], attrAbsorb: ["attrAbsorbNull"],
   comboAbsorb: ["comboAbsorbNull", "comboAdd"], assistVoid: ["levitate", "assistVoidResist"],
-  skillSeal: ["sealResist"], awakenVoid: ["awakenHeal"], board54: ["board76", "board65"],
-  skillDelay: ["delayResist"], weakenAwaken: ["dropEnhance"], cloud: ["cloudResist"], tape: ["tapeResist"],
+  skillSeal: ["sealResist"], awakenVoid: ["awakenHeal"], board54: ["board76", "board65"], unerasable: ["unerasableHeal"],
+  skillDelay: ["delayResist"], weakenAwaken: ["dropEnhance", "dropEnhanceAwk"], cloud: ["cloudResist"], tape: ["tapeResist"],
   darkness: ["darkResist"], jammer: ["jammerResist", "afternoonTea"], poison: ["poisonResist", "afternoonTea"],
   lock: ["lockRelease"], bind: ["bindResist", "bindHeal", "bindHealAwk"], comboDown: ["comboAdd"],
   timeDown: ["fingers", "timeResist"], bigHit: ["reduce", "hpUp"], maxHpDown: ["hpUp"],
@@ -195,7 +195,7 @@ const GIMMICK_COUNTERS = {
 };
 const CAP_LABEL = {
   voidPierce: "無効貫通", voidPierceAwk: "無効貫通(覚醒)", dmgAbsorbNull: "ダメージ吸収無効", attrAbsorbNull: "属性吸収無効",
-  comboAbsorbNull: "コンボ吸収無効", board76: "7×6化", board65: "6×5化", delay: "遅延", reduce: "軽減", hpUp: "HP倍率",
+  comboAbsorbNull: "コンボ吸収無効", unerasableHeal: "消せないドロップ回復", dropEnhanceAwk: "強化ドロップ目覚め", board76: "7×6化", board65: "6×5化", delay: "遅延", reduce: "軽減", hpUp: "HP倍率",
   heal: "回復", regen: "リジェネ", enhance: "エンハンス", capUp: "上限解放", comboAdd: "コンボ加算", noSkyfall: "落ちコンなし",
   lockRelease: "ロック解除", awakenHeal: "覚醒無効回復", bindHeal: "バインド回復", gravity: "割合ダメージ", fixedDmg: "固定ダメージ",
   orbChange: "ドロップ変換", boardRefresh: "陣", attrChange: "属性変化", transform: "変身", delayResist: "遅延耐性",
@@ -301,12 +301,17 @@ function votesFor(teamId, mem, candNo) {
 const assistNoOf = (mem) => Number(String(mem.assist ?? "").match(/No\.?\s*(\d+)/)?.[1]) || null;
 
 // 図鑑1体分の能力。アシストとして付ける場合、覚醒は武器（覚醒アシスト持ち）のときだけ本体に付く
+// 変身キャラは変身前後でスキルが違うので、本体として使う場合は同じ変身グループ全員のスキルを合わせる
+const familyRows = new Map();
+for (const r of MDB_ROWS) if (r[9]) (familyRows.get(r[9]) ?? familyRows.set(r[9], []).get(r[9])).push(r);
+
 function capsOfNo(no, asAssist) {
   const row = MDB.get(no);
   if (!row) return null;
   const skill = new Set(), awk = new Set();
   let haste = 0;
-  for (const t of (row[6] ?? "").split(",").filter(Boolean)) {
+  const skillRows = !asAssist && row[9] ? familyRows.get(row[9]) : [row];
+  for (const t of skillRows.flatMap((r) => (r[6] ?? "").split(",")).filter(Boolean)) {
     if (/^h\d+$/.test(t)) haste = Math.max(haste, Number(t.slice(1)));
     else if (t.startsWith("grant:")) awk.add(t.slice(6)); // スキルで付与される覚醒
     else skill.add(t);
@@ -396,8 +401,16 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     if (!endorsedHit && Math.abs(turnDiff) > TURN_TOLERANCE) continue;
     if (!endorsedHit && !kept.length && important.size) continue;
     const hasteDiff = orig?.haste ? cand.haste - orig.haste : 0;
-    const [oDur, oMult] = String(orig?.row?.[12] ?? "0:0").split(":").map(Number);
-    const [cDur, cMult] = String(row[12] ?? "0:0").split(":").map(Number);
+    // 変身キャラ（本体として使う場合）は変身前後のうち長い方の効果ターン・大きい方の倍率
+    const skillNums = (r) => {
+      const rows = part === "base" && r?.[9] ? familyRows.get(r[9]) : [r];
+      return rows.filter(Boolean).reduce(([d, m], x) => {
+        const [dd, mm] = String(x[12] ?? "0:0").split(":").map(Number);
+        return [Math.max(d, dd), Math.max(m, mm)];
+      }, [0, 0]);
+    };
+    const [oDur, oMult] = skillNums(orig?.row);
+    const [cDur, cMult] = skillNums(row);
     const durDiff = oDur && cDur ? cDur - oDur : 0;
     // 持続ターンの条件は、その役割を担っている部品（本体 or アシスト）を置き換える時だけ見る
     const needDur = Math.max(0, ...[...important.values()].filter((v) => !v.part || v.part === part).map((v) => v.minDur ?? 0));
@@ -667,7 +680,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const short = c.durShort ? `<span class="ng">✗効果${c.cDur}ターンで、必要な${c.durShort}ターンに届かない</span>` : "";
     const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
     const mult = c.multRatio && Math.abs(c.multRatio - 1) > 0.05 ? `<span class="${c.multRatio < 1 ? "warnc" : "ok"}">攻撃倍率 ×${c.multRatio.toFixed(2)}</span>` : "";
-    const sa = c.fire?.candSA ? `<span class="muted">超覚醒: ${esc(AWAKEN_NAME[c.fire.candSA] ?? "")}を選ぶ想定</span>` : "";
+    const sa = c.fire?.candSA && AWAKEN_NAME[c.fire.candSA] ? `<span class="muted">超覚醒: ${esc(AWAKEN_NAME[c.fire.candSA] ?? "")}を選ぶ想定</span>` : "";
     const votes = shared.mode === "firebase"
       ? `<span class="votes">使った人: 回れた ${c.votes.ok} / 回れなかった ${c.votes.ng}
          <button type="button" class="link vote-btn" data-cand="${c.no}" data-ok="1">回れた</button>

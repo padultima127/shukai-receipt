@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 36,
+  "version": 37,
   "seed": true,
   "monsters": [
     {
@@ -9555,6 +9555,45 @@ window.PAD_SEED = {
               "cap": "leaderSkill",
               "why": "リーダーの一番の理由は、L字消しで入る固定2000万ダメージ",
               "note": true
+            },
+            {
+              "cap": "enhance",
+              "why": "主な役割は攻撃タイプエンハンス。全体の攻撃力デバフが来たら功で上書きする"
+            },
+            {
+              "cap": "enhanceNote",
+              "why": "覚醒無効回復に功を使わず、エンハンス用に温存するためにミーメルを採用",
+              "note": true
+            }
+          ]
+        },
+        {
+          "target": 13003,
+          "part": "base",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "regen",
+              "why": "変身前のスキルで、クリアまで（10ターン）続く割合回復。一番の理由",
+              "minDur": 10
+            },
+            {
+              "cap": "unerasableHeal",
+              "why": "変身後のスキル（3ターン）で消せないドロップを回復"
+            },
+            {
+              "cap": "awakenHeal",
+              "why": "変身後のスキル（3ターン）で覚醒無効を回復"
+            },
+            {
+              "cap": "dropEnhanceAwk",
+              "why": "強化ドロップ目覚めはおまけ（キコルのスキルにドロップ強化があるため）",
+              "optional": true
+            },
+            {
+              "cap": "altNote",
+              "why": "代用するなら「スキルターンの短い覚醒無効回復キャラ」＋「クリアまで続く割合回復の武器」の組み合わせでもよい",
+              "note": true
             }
           ]
         }
@@ -9565,6 +9604,11 @@ window.PAD_SEED = {
           "target": 12930,
           "from": 1,
           "why": "キコルを1Fからクリアまで毎ターン使う（リーダー・フレンドの倍率と火力の前提）",
+          "source": "作者本人（@pad_ultima127）の説明"
+        },
+        {
+          "type": "enhanceActive",
+          "why": "攻撃タイプエンハンス中でないと、キコルのコンボ吸収無効とドロップ強化が働かない（この編成では両方必須）",
           "source": "作者本人（@pad_ultima127）の説明"
         }
       ]
