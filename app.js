@@ -186,7 +186,7 @@ const GIMMICK_LABEL = {
 const GIMMICK_COUNTERS = {
   dmgVoid: ["voidPierce", "voidPierceAwk"], dmgAbsorb: ["dmgAbsorbNull"], attrAbsorb: ["attrAbsorbNull"],
   comboAbsorb: ["comboAbsorbNull", "comboAdd"], assistVoid: ["levitate", "assistVoidResist"],
-  skillSeal: ["sealResist"], awakenVoid: ["awakenHeal"], board54: ["board76", "board65"], unerasable: ["unerasableHeal"],
+  skillSeal: ["sealResist"], awakenVoid: ["awakenHeal"], board54: ["board76", "board65"], unerasable: ["unerasableHeal"], shield: ["shieldBreak"],
   skillDelay: ["delayResist"], weakenAwaken: ["dropEnhance", "dropEnhanceAwk"], cloud: ["cloudResist"], tape: ["tapeResist"],
   darkness: ["darkResist"], jammer: ["jammerResist", "afternoonTea"], poison: ["poisonResist", "afternoonTea"],
   lock: ["lockRelease"], bind: ["bindResist", "bindHeal", "bindHealAwk"], comboDown: ["comboAdd"],
@@ -195,7 +195,7 @@ const GIMMICK_COUNTERS = {
 };
 const CAP_LABEL = {
   voidPierce: "無効貫通", voidPierceAwk: "無効貫通(覚醒)", dmgAbsorbNull: "ダメージ吸収無効", attrAbsorbNull: "属性吸収無効",
-  comboAbsorbNull: "コンボ吸収無効", unerasableHeal: "消せないドロップ回復", dropEnhanceAwk: "強化ドロップ目覚め", board76: "7×6化", board65: "6×5化", delay: "遅延", reduce: "軽減", hpUp: "HP倍率",
+  comboAbsorbNull: "コンボ吸収無効", unerasableHeal: "消せないドロップ回復", shieldBreak: "シールド破壊", dropEnhanceAwk: "強化ドロップ目覚め", board76: "7×6化", board65: "6×5化", delay: "遅延", reduce: "軽減", hpUp: "HP倍率",
   heal: "回復", regen: "リジェネ", enhance: "エンハンス", capUp: "上限解放", comboAdd: "コンボ加算", noSkyfall: "落ちコンなし",
   lockRelease: "ロック解除", awakenHeal: "覚醒無効回復", bindHeal: "バインド回復", gravity: "割合ダメージ", fixedDmg: "固定ダメージ",
   orbChange: "ドロップ変換", boardRefresh: "陣", attrChange: "属性変化", transform: "変身", delayResist: "遅延耐性",
@@ -212,7 +212,10 @@ const KEY_SKILL_CAPS = new Set(["voidPierce", "dmgAbsorbNull", "attrAbsorbNull",
   "fixedDmg", "lockRelease", "haste"]);
 const TURN_TOLERANCE = 5;
 const MAJOR_WEIGHT = 5; // これ以上の重みの能力を「重要」として目立たせる（未満は耐性など） // スキルターンのずれの許容（本人指定: 3〜5ターンなら可、ずれは表示）
-const capLabel = (c) => CAP_LABEL[c] ?? c;
+CAP_LABEL.enhanceAll = "全体エンハンス";
+CAP_LABEL.enhanceSelf = "個別エンハンス（自分）";
+const capLabel = (c) =>
+  CAP_LABEL[c] ?? (c.startsWith("enhanceType:") ? `${c.slice(12)}タイプエンハンス` : c.startsWith("enhanceAttr:") ? `${c.slice(12)}属性エンハンス` : c);
 
 // ---------- 火力覚醒 ----------
 // 覚醒番号 → [種類, 倍率]（padmdb の覚醒データの damage_multiplier など。条件付きの倍率は条件を満たした時の値）
@@ -364,7 +367,7 @@ function importantCaps(mem, team, dungeon) {
       if (r.note) reasons.set(r.cap, { why, weight: 0, note: true });
       else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true });
       else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true });
-      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, part: sr.part, author: true });
+      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, mustBeBase: !!r.mustBeBase, part: sr.part, author: true });
     }
   }
   return reasons;
@@ -376,7 +379,9 @@ const ownedFamilies = () => new Set([...ownedNos()].map(familyOf));
 
 // 欠けている部品（本体 or アシスト）の代用候補を、重要能力をどれだけ守れるかで並べる
 // pool: "owned"（手持ちBOXから）/ "all"（図鑑全体から。手持ちを上に並べる）
+let currentDungeon = null;
 function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3 } = {}) {
+  currentDungeon = db.dungeons.find((d) => d.id === team.dungeonId) ?? null;
   const baseNo = monster(mem.id)?.no;
   const assistNo = assistNoOf(mem);
   const orig = capsOfNo(part === "base" ? baseNo : assistNo, part === "assist");
@@ -421,12 +426,17 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const hasteShort = needHaste && cand.haste < needHaste ? needHaste : 0;
     const fireFloor = partRoles.find((v) => v.fireAtFloor)?.fireAtFloor ?? null;
     const lateFire = fireFloor && orig?.turn && cand.turn > orig.turn ? fireFloor : 0;
+    // アシスト無効の階より後で使う役割を、武器（アシスト）のスキルで担うとスキルターンがリセットされる
+    const avFloors = (typeof currentDungeon !== "undefined" && currentDungeon?.gimmickFloors?.assistVoid) || [];
+    const resetRisk = part === "assist" && partRoles.some((v) => v.fireAtFloor && avFloors.some((f) => f < v.fireAtFloor))
+      ? avFloors.filter((f) => partRoles.some((v) => v.fireAtFloor > f))[0] : 0;
     const multRatio = oMult > 1 && cMult > 0 ? cMult / oMult : null;
     let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2 - Math.max(0, -durDiff) * 1.5;
     if (multRatio) score += Math.max(-6, Math.min(3, Math.log2(multRatio) * 3));
     if (durShort) score -= 20;
     if (hasteShort) score -= 15;
     if (lateFire) score -= 15;
+    if (resetRisk) score -= 15;
     // 作者がレシートで挙げている代用は最優先
     const endorsed = endorsedFor(team, part === "base" ? baseNo : assistNo);
     const isEndorsed = endorsed?.nos.some((n) => familyOf(n) === familyOf(no));
@@ -448,7 +458,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, hasteShort, candHaste: cand.haste, lateFire, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -677,6 +687,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const endorsedBadge = c.endorsed ? `<span class="st st-ok">作者公認の代用</span> ` : "";
     const hs = c.hasteShort ? `<span class="ng">✗ヘイスト${c.candHaste || 0}ターン（必要${c.hasteShort}ターン。足りない分をほかの枠で補う必要あり）</span>` : "";
     const late = c.lateFire ? `<span class="ng">✗スキル${c.candTurn}ターンで元（${c.origTurn}ターン）より重く、${c.lateFire}Fで使えない可能性</span>` : "";
+    const reset = c.resetRisk ? `<span class="ng">✗${c.resetRisk}Fのアシスト無効でスキルターンがリセットされ、間に合わない可能性</span>` : "";
     const short = c.durShort ? `<span class="ng">✗効果${c.cDur}ターンで、必要な${c.durShort}ターンに届かない</span>` : "";
     const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
     const mult = c.multRatio && Math.abs(c.multRatio - 1) > 0.05 ? `<span class="${c.multRatio < 1 ? "warnc" : "ok"}">攻撃倍率 ×${c.multRatio.toFixed(2)}</span>` : "";
@@ -694,7 +705,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
     return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, sa, short, hs, late, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
+      <div class="alt-caps">${[attr, fire, sa, short, hs, late, reset, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
   });
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }
@@ -704,7 +715,7 @@ function renderImportant(r) {
   const entries = [...r.important].sort((a, b) => b[1].weight - a[1].weight);
   const major = entries.filter(([, v]) => v.weight >= MAJOR_WEIGHT);
   const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT && !v.teamWide && !v.optional && !v.note);
-  const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}<small>・${esc(v.why)}</small></span>`).join("");
+  const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}${v.mustBeBase ? "（本体で持つ）" : ""}<small>・${esc(v.why)}</small></span>`).join("");
   const team = entries.filter(([, v]) => v.teamWide).map(([c, v]) => `<div class="sub-line muted">チーム全体で必要: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("")
     + entries.filter(([, v]) => v.optional).map(([c, v]) => `<div class="sub-line muted">条件付き: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("")
     + entries.filter(([, v]) => v.note).map(([, v]) => `<div class="sub-line"><span class="st st-ok">役割メモ</span> ${esc(v.why)}</div>`).join("");

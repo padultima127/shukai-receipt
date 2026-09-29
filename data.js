@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 38,
+  "version": 40,
   "seed": true,
   "monsters": [
     {
@@ -3387,7 +3387,12 @@ window.PAD_SEED = {
           "爆弾・回復力減少: ゲームウィズのみ記載。ダメージ無効・ロック: ゲームエイトのみ記載"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算"
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "gimmickFloors": {
+        "assistVoid": [
+          2
+        ]
+      }
     },
     {
       "id": "senju",
@@ -9557,8 +9562,8 @@ window.PAD_SEED = {
               "note": true
             },
             {
-              "cap": "enhance",
-              "why": "主な役割は攻撃タイプエンハンス（5ターン）をループさせること。全体の攻撃デバフが来たら功で上書きする"
+              "cap": "enhanceType:攻撃",
+              "why": "主な役割は攻撃タイプエンハンス（5ターン）をループさせること。キコルのコンボ吸収無効は「攻撃タイプエンハンス発動中」が条件なので、全体エンハンスや個別エンハンスでは代わりにならない。全体の攻撃デバフが来たら功で上書きする"
             },
             {
               "cap": "enhanceNote",
@@ -9600,6 +9605,41 @@ window.PAD_SEED = {
               "why": "変身前スキルのヘイスト（2ターン）で、1Fにキコルより先に功を使えるようにする（ほかの枠で同じ分を補えればOK）",
               "minHaste": 2,
               "fireAtFloor": 1
+            }
+          ]
+        },
+        {
+          "target": 13074,
+          "part": "base",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "shieldBreak",
+              "why": "ボス（9F）のシールド2枚を割る。武器（アシスト）だと2Fのアシスト無効でスキルターンがリセットされ、ボスに間に合わないので本体で持つ",
+              "fireAtFloor": 9,
+              "mustBeBase": true
+            },
+            {
+              "cap": "magnaNote",
+              "why": "道中で使わないのは、功の上限値で超根性以外はワンパンで抜けるため",
+              "note": true
+            }
+          ]
+        },
+        {
+          "target": 12873,
+          "part": "assist",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "skillBoost",
+              "why": "覚醒のスキブ目的。サノスを8Fで使えるようにするためのスキブ確保（チーム全体の合計で足りればOK）",
+              "teamWide": true
+            },
+            {
+              "cap": "dropEnhance",
+              "why": "覚醒のドロップ強化はおまけ（キコルのドロップ強化の処理時間を短縮）",
+              "optional": true
             }
           ]
         }

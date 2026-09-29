@@ -32,6 +32,7 @@ SKILL_TAGS = [
     ("hpUp", r"最大HP[^。]*倍|HPが[\d.]+倍"),
     ("heal", r"HPを[^。]*回復|HP全回復|HPを全回復"),
     ("regen", r"毎ターン[^。]*回復|\d+ターンの間[^。]*HPを[\d.]+[%％]回復"),
+    ("shieldBreak", r"シールドを\d+つ破壊"),
     ("unerasableHeal", r"消せないドロップ[^。]*回復"),
     ("dropEnhanceAwk", r"\[強化ドロップ目覚め\]|強化ドロップ目覚め"),
     ("enhance", r"攻撃力が[\d.]+倍"),
@@ -104,6 +105,15 @@ def skill_info(ids, skills):
         for tag, pat in SKILL_TAGS:
             if re.search(pat, text):
                 tags.add(tag)
+        # エンハンスの種類: 全体 / 個別（自分） / タイプ / 属性（どれが条件になるかで代用できるかが変わる）
+        if re.search(r"全員の攻撃力", text):
+            tags.add("enhanceAll")
+        if re.search(r"自分の攻撃力|自身の攻撃力", text):
+            tags.add("enhanceSelf")
+        for tname in re.findall(r"\[(\S+?)タイプ\]の攻撃力", text):
+            tags.add("enhanceType:" + tname)
+        for aname in re.findall(r"\[?([火水木光闇])\]?属性の攻撃力", text):
+            tags.add("enhanceAttr:" + aname)
         for other, n in HASTE.findall(text):
             tags.add(f"h{n}")
         # スキルで付与される覚醒（例: [浮遊]を付与）は覚醒の能力として扱う
