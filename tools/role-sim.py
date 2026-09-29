@@ -142,6 +142,10 @@ def simulate():
                     continue
                 used.add((name, is_assist))
                 for eff, dur in effects_of(no).items():
+                    # 味方にかかる効果は同じ効果のスキルでターン数が上書きされる（重ならない）
+                    for a in active:
+                        if a["effect"] == eff and a["until"] >= turn:
+                            a["until"] = turn - 1
                     active.append({"src": c, "no": no, "effect": eff, "from": turn, "until": turn + max(dur, 1) - 1, "floor": floor})
             # このターンに有効なギミック（階の最初のターンから継続ターン分）
             for g, gdur in KIRISAME.get(floor, []):
