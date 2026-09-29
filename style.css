@@ -289,3 +289,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .end-table th, .end-table td { padding: 4px 8px; border-bottom: 1px solid var(--line, #ddd); text-align: right; white-space: nowrap; }
 .end-table th:nth-child(2), .end-table td:nth-child(2) { text-align: left; }
 .end-table tr.ng td { color: var(--ng, #c0392b); font-weight: 600; }
+
+/* 役割一覧（本体・武器） */
+.part-block { margin-top: 6px; padding-left: 8px; border-left: 3px solid var(--line); }
+.part-head { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }

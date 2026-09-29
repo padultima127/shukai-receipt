@@ -81,11 +81,12 @@ COUNTERS = {
 GIMMICK_JP = {
     "dmgVoid": "ダメージ無効", "dmgAbsorb": "ダメージ吸収", "attrAbsorb": "属性吸収", "awakenVoid": "覚醒無効",
     "comboAbsorb": "コンボ吸収", "comboVoid": "コンボ無効", "shield3": "シールド3枚", "capDown": "上限値低下",
-    "assistVoid": "アシスト無効", "turnPass": "1ターン経過扱い",
+    "assistVoid": "アシスト無効", "turnPass": "1ターン経過扱い", "turnPassOnClear": "突破時に1ターン経過扱い",
 }
 # 「LSの軽減が剥がれる攻撃（マイクロ）」などで1ターン経過扱いになるギミック。
 # 効果ターンのあるスキルや「◯ターン後に発動」もすべて1ターン進む（本人談）
-TURN_PASS = {"turnPass"}
+# turnPass: 階に入った時点で1ターン進む／turnPassOnClear: その階を突破した時点で1ターン進む（新百式の2F）
+TURN_PASS = {"turnPass", "turnPassOnClear"}
 EFFECT_JP = {
     "voidPierce": "無効貫通", "absorbNull": "ダメージ吸収無効", "attrAbsorbNull": "属性吸収無効", "awakenHeal": "覚醒無効回復",
     "comboAdd": "コンボ加算", "shieldBreak": "シールド破壊", "capUp": "上限解放", "haste": "ヘイスト", "partDmg": "部位ダメージ",
@@ -137,7 +138,7 @@ def simulate():
     floor_first_turn = {}
     for floor, turns in RECEIPT.items():
         # 階に入った時点で1ターン経過扱いになるギミック
-        turn += sum(1 for g, _ in KIRISAME.get(floor, []) if g in TURN_PASS)
+        turn += sum(1 for g, _ in KIRISAME.get(floor, []) if g == "turnPass")
         for ti, calls in enumerate(turns):
             turn += 1
             floor_first_turn.setdefault(floor, turn)
@@ -160,6 +161,8 @@ def simulate():
                     continue
                 cover = [a for a in active if a["effect"] in COUNTERS.get(g, []) and a["from"] <= turn <= a["until"]]
                 findings.append({"floor": floor, "turn": turn, "gimmick": g, "cover": cover})
+        # この階を突破した時点で1ターン経過扱い
+        turn += sum(1 for g, _ in KIRISAME.get(floor, []) if g == "turnPassOnClear")
     return findings, used, turn
 
 

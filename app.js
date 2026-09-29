@@ -404,6 +404,8 @@ function importantCaps(mem, team, dungeon) {
   for (const sr of team.slotRoles ?? []) {
     const hit = sr.part === "assist" ? familyOf(assistNoOf(mem)) === familyOf(sr.target) : familyOf(baseNo) === familyOf(sr.target);
     if (!hit) continue;
+    // 作者が「役割ではない」とした能力は推定から外す
+    for (const c of sr.notRoles ?? []) reasons.delete(c);
     // 作者が「挙げた役割以外は不要」とした枠（スキルを使わない武器など）はギミックからの推定を捨てる
     if (sr.onlyListed && sr.part === "assist") {
       const baseAll = capsOfNo(baseNo, false)?.all ?? new Set();
@@ -411,9 +413,9 @@ function importantCaps(mem, team, dungeon) {
     }
     for (const r of sr.roles) {
       const why = `${r.why}（${sr.source}）`;
-      if (r.note) reasons.set(r.cap, { why, weight: 0, note: true, byAuthor: true });
-      else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true, byAuthor: true });
-      else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true, byAuthor: true });
+      if (r.note) reasons.set(r.cap, { why, weight: 0, note: true, byAuthor: true, part: sr.part });
+      else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true, byAuthor: true, part: sr.part });
+      else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true, byAuthor: true, part: sr.part });
       else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, mustBeBase: !!r.mustBeBase, part: sr.part, author: true, byAuthor: true });
     }
   }
@@ -436,12 +438,16 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
   const owned = ownedFamilies();
   const out = [];
   const nos = pool === "all" ? MDB_ROWS.map((r) => r[0]) : ownedNos();
+  // 元の編成が武器のスキルを使っていて、元の本体が変身キャラでないなら、変身キャラは本体の代用にしない（作者談）
+  const weaponUsed = assistNo && !(team.slotRoles ?? []).some((sr) => sr.part === "assist" && familyOf(sr.target) === familyOf(assistNo) && sr.roles.some((r) => r.cap === "skillFree"));
+  const noTransform = part === "base" && weaponUsed && !MDB.get(baseNo)?.[9];
   for (const no of nos) {
     if (used.has(familyOf(no))) continue;
     const row = MDB.get(no);
     if (!row || (part === "assist" && !row[4])) continue;
     // 本体の代用に装備（覚醒アシスト持ちの武器）は使えない
     if (part === "base" && row[8]) continue;
+    if (noTransform && row[9]) continue;
     const cand = capsOfNo(no, part === "assist");
     const caps = part === "base" ? slotCaps(no, assistNo) : slotCaps(baseNo, no);
     // 耐性は「パーティー全体で100%あればよい」（作者談）。足りていればこの枠になくても保持扱い
@@ -779,9 +785,32 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }
 
+// 役割一覧は本体と武器（アシスト）に分けて表示する
 function renderImportant(r) {
   if (!r.important?.size) return "";
-  const entries = [...r.important].sort((a, b) => b[1].weight - a[1].weight);
+  const baseNo = r.m?.no;
+  const assistNo = assistNoOf(r.mem);
+  const baseCaps = capsOfNo(baseNo, false)?.all ?? new Set();
+  const assistCaps = assistNo ? capsOfNo(assistNo, true)?.all ?? new Set() : new Set();
+  // 作者の説明は枠の指定どおり。推定した役割は、持っている側（両方なら本体）
+  const partOf = (c, v) => v.part ?? (baseCaps.has(c) || !assistCaps.has(c) ? "base" : "assist");
+  const all = [...r.important];
+  const groups = [
+    ["base", "本体の役割"],
+    ["assist", `武器の役割（${esc(MDB.get(assistNo)?.[1] ?? "")}）`],
+  ];
+  if (!assistNo) return renderImportantPart(all);
+  return groups
+    .map(([part, title]) => {
+      const html = renderImportantPart(all.filter(([c, v]) => partOf(c, v) === part));
+      return html ? `<div class="part-block"><div class="part-head">${title}</div>${html}</div>` : "";
+    })
+    .join("");
+}
+
+function renderImportantPart(list) {
+  if (!list.length) return "";
+  const entries = [...list].sort((a, b) => b[1].weight - a[1].weight);
   const major = entries.filter(([, v]) => v.weight >= MAJOR_WEIGHT);
   const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT && !v.teamWide && !v.optional && !v.note);
   const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}${v.mustBeBase ? "（本体で持つ）" : ""}<small>・${esc(v.why)}</small></span>`).join("");
@@ -1131,7 +1160,12 @@ function enduranceSetup(t) {
       }
     }
   }
-  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom };
+  // 超根性を割合ダメージで剥がしてワンパンする階（作者の役割: gravity を◯Fで使う）→ 超根性発動時の攻撃は来ない
+  const strip = new Map();
+  for (const sr of t.slotRoles ?? []) {
+    for (const r of sr.roles) if (r.cap === "gravity" && r.fireAtFloor) strip.set(r.fireAtFloor, MDB.get(sr.target)?.[1] ?? "");
+  }
+  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip };
 }
 
 // skillRed: スキルの軽減%（0 ならなし）。LSの軽減が剥がれる攻撃（noLsReduce）にはスキルの軽減だけが乗る
@@ -1143,6 +1177,17 @@ function simulateEndurance(d, setup, maxHp, skillRed = 0) {
     // 階に入る前のターン終わりに回復（毎ターン回復生成なら満タン）
     hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
     for (const h of f.hits) {
+      // 味方の攻撃→敵の攻撃の順なので、ワンパンした階は先制以外受けない
+      //   turn: 通常攻撃・初回行動時の攻撃（ワンパン前提なので数えない）
+      //   superResolve: 超根性発動時の攻撃（その階で超根性を剥がしてワンパンするなら来ない）
+      if (h.kind === "turn") {
+        rows.push({ floor: f.floor, label: h.label, skipped: "ワンパンする前提なので受けない（1ターンで倒せないと受ける）" });
+        continue;
+      }
+      if (h.kind === "superResolve" && setup.strip?.has(f.floor)) {
+        rows.push({ floor: f.floor, label: h.label, skipped: `${setup.strip.get(f.floor)}で超根性を剥がしてワンパンするため受けない` });
+        continue;
+      }
       const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
       const red = h.noLsReduce ? skillRed / 100 : 1 - (1 - setup.reduce) * (1 - skillRed / 100);
       const taken = Math.round(raw * (1 - red));
@@ -1179,7 +1224,7 @@ function renderEnduranceResult(t, d, maxHp) {
   return `${verdict}${skillLine}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提。スキルの軽減は入れていません）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
-    ${sim.rows.map((r) => `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
+    ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="3">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
 }
 
