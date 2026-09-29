@@ -276,3 +276,4 @@ button:disabled { opacity: .6; cursor: wait; }
 .endorsed-note { margin: 4px 0; font-size: .8rem; }
 .votes { display: block; font-size: .75rem; color: var(--muted); margin-top: 2px; }
 .votes .link { font-size: .75rem; }
+.tag.tag-author { border-color: var(--ok); }

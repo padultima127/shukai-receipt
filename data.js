@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 33,
+  "version": 34,
   "seed": true,
   "monsters": [
     {
@@ -9520,7 +9520,30 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "slotRoles": [
+        {
+          "target": 7266,
+          "part": "assist",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "reduce",
+              "why": "3Fでリーダー・フレンドの軽減が剥がれた時のダメージを、HP倍率のないリーダースキルで受けるための軽減"
+            },
+            {
+              "cap": "voidPierce",
+              "why": "1Fから最後まで続くダメージ無効貫通",
+              "minDur": 10
+            },
+            {
+              "cap": "haste",
+              "why": "1Fで使えるヘイスト（ほかの枠が持っていてもOK）",
+              "teamWide": true
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "hyaku-mastergundam-nanaminn",
