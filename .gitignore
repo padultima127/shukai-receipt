@@ -1,0 +1,4 @@
+artifact/
+.DS_Store
+.firebase/
+*.log

@@ -1,7 +1,7 @@
-<title>パズドラ周回編成ナビ</title>
+<title>周回レシート図鑑</title>
 <link rel="stylesheet" href="style.css">
 <header>
-    <h1>パズドラ周回編成ナビ <span class="beta">β版</span></h1>
+    <h1>周回レシート図鑑 <span class="beta">β版</span></h1>
     <nav>
       <button class="tab active" data-tab="search">編成検索</button>
       <button class="tab" data-tab="box">手持ちBOX</button>
@@ -72,6 +72,7 @@
       <form id="reg-form" class="card" novalidate>
         <h2 id="reg-heading">編成を登録</h2>
         <p id="reg-mode" class="hint">登録した編成はこのブラウザに保存され、編成検索に並びます。</p>
+        <div id="reg-auth" class="row" hidden></div>
         <p class="hint">モンスターは図鑑No.か名前で入力して候補から選んでください。<span class="req">必須</span>はダンジョン・1周のタイム・リーダーだけです。</p>
 
         <div class="form-grid">
@@ -136,6 +137,13 @@
         <h2 id="reg-list-title">自分で登録した編成</h2>
         <div id="reg-list"></div>
       </div>
+
+    <section id="admin-panel" class="card" hidden>
+      <h2>管理者: 承認待ちの編成</h2>
+      <div id="admin-pending"></div>
+      <h2>通報</h2>
+      <div id="admin-reports"></div>
+    </section>
     </section>
 
     <!-- データ管理 -->
