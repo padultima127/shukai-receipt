@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 41,
+  "version": 42,
   "seed": true,
   "monsters": [
     {
@@ -9639,6 +9639,50 @@ window.PAD_SEED = {
             {
               "cap": "dropEnhance",
               "why": "覚醒のドロップ強化はおまけ（キコルのドロップ強化の処理時間を短縮）",
+              "optional": true
+            }
+          ]
+        },
+        {
+          "target": 6978,
+          "part": "base",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "gravity",
+              "why": "8Fの超根性を剥がす（敵の残りHP50%減少）。超根性はどれだけ大きいダメージでも最大HPの一定割合（原則50%）で一度止まるので、先にサノスで削ってワンパンにする",
+              "fireAtFloor": 8
+            },
+            {
+              "cap": "thanosNote",
+              "why": "攻撃タイプだが火力覚醒的に火力枠ではない。功のHP倍率（攻撃タイプ2.7倍）が乗るのでHP条件が緩和される",
+              "note": true
+            }
+          ]
+        },
+        {
+          "target": 7544,
+          "part": "assist",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "poisonResist",
+              "why": "編成全体で毒耐性を盛るため（キコルの生成は光5個だけで毒・爆弾を消しにくく、毒ダメージでHPが計算とずれる事故を防ぐ）",
+              "teamWide": true
+            },
+            {
+              "cap": "jammerResist",
+              "why": "編成全体でお邪魔耐性を盛るため",
+              "teamWide": true
+            },
+            {
+              "cap": "darkResist",
+              "why": "編成全体で暗闇耐性を盛るため",
+              "teamWide": true
+            },
+            {
+              "cap": "dropEnhance",
+              "why": "スキルのドロップ強化はおまけ",
               "optional": true
             }
           ]
