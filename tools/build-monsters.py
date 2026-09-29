@@ -7,6 +7,8 @@
 各行: [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキルの能力タグ, 覚醒の能力タグ, 覚醒アシスト(武器), 変身グループ]
   変身グループ: 変身前後のキャラをまとめた番号（グループ内で一番小さいNo.）。変身しないキャラは0
   火力覚醒: 攻撃倍率に関わる覚醒の番号を「.」区切りで（同じ覚醒は個数分）。倍率は app.js の DMG_AWK
+  超覚醒: 選べる超覚醒の番号を「.」区切りで（どれか1つを付けられる）
+  スキル数値: "効果ターン:攻撃倍率"（スキル文の「◯ターンの間」の最大値と「攻撃力が◯倍」の最大値。なければ0）
   能力タグはカンマ区切り。ヘイストは "h2"（2ターン溜まる）のように数値付き
 """
 import json
@@ -144,6 +146,21 @@ def transform_groups(monsters, skills):
     return group
 
 
+def skill_numbers(ids, skills):
+    ids = ids if isinstance(ids, list) else [ids]
+    dur, mult = 0, 0.0
+    for sid in ids:
+        s = skills.get(str(sid)) if sid else None
+        if not s:
+            continue
+        text = s.get("description", "")
+        for n in re.findall(r"(\d+)ターンの間", text):
+            dur = max(dur, int(n))
+        for n in re.findall(r"攻撃力が([\d.]+)倍", text):
+            mult = max(mult, float(n))
+    return f"{dur}:{mult:g}"
+
+
 def main():
     monsters = fetch("monster_list_full.json")
     skills = fetch("skill_list.json")
@@ -162,11 +179,13 @@ def main():
             turn or 0, ",".join(s_tags), ",".join(a_tags), 1 if 49 in awakens else 0,
             groups.get(int(no), 0),
             ".".join(str(a) for a in awakens if a in DMG_AWAKENS),
+            ".".join(str(a) for a in (m.get("superAwakens") or []) if a),
+            skill_numbers(m.get("skill"), skills),
         ])
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))

@@ -97,6 +97,17 @@
         (e) => console.warn("reports", e)
       );
     },
+    // 代用の評価。1人1候補につき1票（上書き）
+    vote({ teamId, baseNo, candFamily, ok }) {
+      const u = auth.currentUser;
+      if (!u) throw Object.assign(new Error("ログインしてください"), { code: "unauthenticated" });
+      const id = `${teamId}_${baseNo}_${candFamily}_${u.uid}`.replace(/[^\w-]/g, "-");
+      return fs.collection("subVotes").doc(id).set({ teamId, baseNo, candFamily, ok: !!ok, uid: u.uid, at: ts() });
+    },
+    async getVotes(teamId) {
+      const snap = await fs.collection("subVotes").where("teamId", "==", teamId).limit(500).get();
+      return snap.docs.map((d) => d.data());
+    },
     resolveReport(id) {
       return fs.collection("reports").doc(id).delete();
     },

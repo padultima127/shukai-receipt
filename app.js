@@ -230,6 +230,11 @@ const DMG_AWK = {
   31: ["killer", 5], 32: ["killer", 5], 33: ["killer", 5], 34: ["killer", 5], 35: ["killer", 5], 36: ["killer", 5], 37: ["killer", 5], 38: ["killer", 5],
   127: ["stat", 1.5], 142: ["stat", 1.8], 138: ["stat", 3], 139: ["stat", 3], 145: ["stat", 1.5], 146: ["stat", 1.5], 147: ["stat", 1.5],
 };
+const AWAKEN_NAME = { 27: "2体攻撃", 96: "2体攻撃＋", 43: "コンボ強化", 107: "コンボ強化+", 61: "超コンボ強化", 111: "超コンボ強化＋", 144: "超絶コンボ強化",
+  60: "L字消し攻撃", 108: "L字消し攻撃+", 59: "回復L字消し", 126: "T字消し攻撃", 78: "十字消し攻撃", 110: "十字消し攻撃＋", 48: "ダメージ無効貫通",
+  109: "ダメージ無効貫通＋", 79: "3色攻撃強化", 112: "3色攻撃強化＋", 80: "4色攻撃強化", 113: "4色攻撃強化＋", 81: "5色攻撃強化", 114: "5色攻撃強化＋",
+  82: "超つなげ消し強化", 57: "HP50%以上強化", 58: "HP50%以下強化", 44: "ガードブレイク", 127: "全パラメータ強化", 142: "全パラメータ強化＋",
+  31: "ドラゴンキラー", 32: "神キラー", 33: "悪魔キラー", 34: "マシンキラー", 35: "バランスキラー", 36: "攻撃キラー", 37: "体力キラー", 38: "回復キラー" };
 const DMG_LABEL = {
   "2way": "2体攻撃", c7: "7コンボ強化", c10: "10コンボ強化", c15: "15コンボ強化", L: "L字", healL: "回復L字", T: "T字",
   cross: "十字", vp: "無効貫通", col3: "3色", col4: "4色", col5: "5色", link: "超つなげ", hpHigh: "HP50%以上",
@@ -248,18 +253,49 @@ function firepowerOf(no) {
 }
 
 // 元のキャラが持つ火力覚醒の条件で比べる（元が組んでいた消し方を代用でも組む想定）
+// 超覚醒（どれか1つを選んで付けられる）を1つ足した火力覚醒の候補
+function firepowerChoices(no) {
+  const base = firepowerOf(no);
+  const out = [{ fp: base, sa: null }];
+  for (const id of String(MDB.get(no)?.[11] ?? "").split(".").filter(Boolean)) {
+    const [type, mult] = DMG_AWK[id] ?? [];
+    if (!type) continue;
+    out.push({ fp: { ...base, [type]: (base[type] ?? 1) * mult }, sa: Number(id) });
+  }
+  return out;
+}
+
 function compareFirepower(origNo, candNo) {
-  const o = firepowerOf(origNo);
-  const c = firepowerOf(candNo);
+  // 元のキャラは超覚醒込みで一番強い形、候補も元の条件に一番合う超覚醒を選んだ形で比べる
+  const origBest = firepowerChoices(origNo).reduce((a, b) => (fpScore(b.fp, b.fp) > fpScore(a.fp, a.fp) ? b : a));
+  const o = origBest.fp;
   const types = Object.keys(o).filter((t) => t !== "stat");
   const prod = (f) => types.reduce((x, t) => x * (f[t] ?? 1), 1) * (f.stat ?? 1);
+  const candBest = firepowerChoices(candNo).reduce((a, b) => (prod(b.fp) > prod(a.fp) ? b : a));
+  const c = candBest.fp;
   const orig = prod(o);
   const cand = prod(c);
   const lost = types.filter((t) => (c[t] ?? 1) < o[t]);
-  return { orig, cand, ratio: orig ? cand / orig : 1, lost };
+  return { orig, cand, ratio: orig ? cand / orig : 1, lost, candSA: candBest.sa, origSA: origBest.sa };
 }
+const fpScore = (f) => Object.values(f).reduce((x, v) => x * v, 1);
 
 const fmtMult = (x) => (x >= 100 ? Math.round(x).toLocaleString() : x >= 10 ? x.toFixed(0) : x.toFixed(1)) + "倍";
+
+// 作者がレシートで挙げた代用（team.endorsedAlts）から、対象No.の分を探す
+function endorsedFor(team, targetNo) {
+  if (!targetNo) return null;
+  return team.endorsedAlts?.find((e) => familyOf(e.target) === familyOf(targetNo)) ?? null;
+}
+
+// 代用の評価（Firebase の subVotes から集計）。キー: 編成id|枠の本体No.|候補No.
+const subVotes = new Map();
+function voteKey(teamId, mem, candNo) {
+  return `${teamId}|${monster(mem.id)?.no ?? mem.id}|${familyOf(candNo)}`;
+}
+function votesFor(teamId, mem, candNo) {
+  return subVotes.get(voteKey(teamId, mem, candNo)) ?? { ok: 0, ng: 0 };
+}
 
 const assistNoOf = (mem) => Number(String(mem.assist ?? "").match(/No\.?\s*(\d+)/)?.[1]) || null;
 
@@ -343,10 +379,23 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const lost = keys.filter((c) => !caps.has(c));
     const w = (list) => list.reduce((sum, c) => sum + important.get(c).weight, 0);
     const turnDiff = orig?.turn && cand.turn ? cand.turn - orig.turn : 0;
-    if (Math.abs(turnDiff) > TURN_TOLERANCE) continue;
-    if (!kept.length && important.size) continue;
+    const endorsedHit = endorsedFor(team, part === "base" ? baseNo : assistNo)?.nos.some((n) => familyOf(n) === familyOf(no));
+    if (!endorsedHit && Math.abs(turnDiff) > TURN_TOLERANCE) continue;
+    if (!endorsedHit && !kept.length && important.size) continue;
     const hasteDiff = orig?.haste ? cand.haste - orig.haste : 0;
-    let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2;
+    const [oDur, oMult] = String(orig?.row?.[12] ?? "0:0").split(":").map(Number);
+    const [cDur, cMult] = String(row[12] ?? "0:0").split(":").map(Number);
+    const durDiff = oDur && cDur ? cDur - oDur : 0;
+    const multRatio = oMult > 1 && cMult > 0 ? cMult / oMult : null;
+    let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2 - Math.max(0, -durDiff) * 1.5;
+    if (multRatio) score += Math.max(-6, Math.min(3, Math.log2(multRatio) * 3));
+    // 作者がレシートで挙げている代用は最優先
+    const endorsed = endorsedFor(team, part === "base" ? baseNo : assistNo);
+    const isEndorsed = endorsed?.nos.some((n) => familyOf(n) === familyOf(no));
+    if (isEndorsed) score += 100;
+    // 使った人の評価（回れた +、回れなかった −）
+    const v = votesFor(team.id, mem, no);
+    score += (v.ok - v.ng) * 4;
     let attr = null;
     let fire = null;
     if (part === "base" && orig?.row) {
@@ -361,7 +410,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, score, owned: isOwned, attr, fire });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -582,6 +631,15 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
           ? `<span class="warnc">△副属性が違う（${esc(os || "なし")}→${esc(cs || "なし")}）</span>`
           : `<span class="ok">✓属性同じ（${esc(om)}${os ? "/" + esc(os) : ""}）</span>`;
     }
+    const endorsedBadge = c.endorsed ? `<span class="st st-ok">作者公認の代用</span> ` : "";
+    const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
+    const mult = c.multRatio && Math.abs(c.multRatio - 1) > 0.05 ? `<span class="${c.multRatio < 1 ? "warnc" : "ok"}">攻撃倍率 ×${c.multRatio.toFixed(2)}</span>` : "";
+    const sa = c.fire?.candSA ? `<span class="muted">超覚醒: ${esc(AWAKEN_NAME[c.fire.candSA] ?? "")}を選ぶ想定</span>` : "";
+    const votes = shared.mode === "firebase"
+      ? `<span class="votes">使った人: 回れた ${c.votes.ok} / 回れなかった ${c.votes.ng}
+         <button type="button" class="link vote-btn" data-cand="${c.no}" data-ok="1">回れた</button>
+         <button type="button" class="link vote-btn" data-cand="${c.no}" data-ok="0">回れなかった</button></span>`
+      : "";
     let fire = "";
     if (c.fire && c.fire.orig > 1) {
       const cls = c.fire.ratio >= 0.99 ? "ok" : c.fire.ratio >= 0.5 ? "warnc" : "ng";
@@ -589,8 +647,8 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
       fire = `<span class="${cls}">火力覚醒 ${fmtMult(c.fire.orig)}→${fmtMult(c.fire.cand)}${lost}</span>`;
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
-    return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, kept, lost, turn, haste].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div></li>`;
+    return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
+      <div class="alt-caps">${[attr, fire, sa, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
   });
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }
@@ -656,8 +714,14 @@ function searchAltFor(teamId, idx) {
   const opts = { pool: "all", limit: 5 };
   const baseList = mem.role === "S" ? findSubstitutes("base", mem, important, team, opts) : null;
   const assistList = assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, opts) : null;
+  const endorsedNotes = [monster(mem.id)?.no, assistNoOf(mem)]
+    .map((no) => endorsedFor(team, no))
+    .filter(Boolean)
+    .filter((e) => mem.role === "S" || e.part === "assist")
+    .map((e) => `<p class="endorsed-note"><span class="st st-ok">作者の記載</span> ${esc(e.text)}</p>`)
+    .join("");
   const weaponNote = mem.role !== "S" ? `<p class="hint">リーダー・フレンドはリーダースキルが変わるため、武器（アシスト）の代用だけを探します。</p>` : "";
-  return note + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "");
+  return note + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "");
 }
 
 // ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）
@@ -1636,7 +1700,33 @@ document.querySelectorAll("#mode button").forEach((b) =>
 );
 
 $("#run").addEventListener("click", search);
+async function loadVotes(teamId) {
+  if (shared.mode !== "firebase") return;
+  const list = await shared.fb.getVotes(teamId).catch(() => []);
+  for (const k of [...subVotes.keys()]) if (k.startsWith(teamId + "|")) subVotes.delete(k);
+  for (const v of list) {
+    const k = `${v.teamId}|${v.baseNo}|${v.candFamily}`;
+    const cur = subVotes.get(k) ?? { ok: 0, ng: 0 };
+    v.ok ? cur.ok++ : cur.ng++;
+    subVotes.set(k, cur);
+  }
+}
+
 $("#results").addEventListener("click", (e) => {
+  const vb = e.target.closest(".vote-btn");
+  if (vb) {
+    const box = vb.closest(".alt-search");
+    const btn = box.querySelector(".alt-btn");
+    const team = db.teams.find((t) => t.id === btn.dataset.team);
+    const mem = team.members[Number(btn.dataset.idx)];
+    if (!shared.fb?.user) return window.alert?.("評価にはGoogleログインが必要です（編成登録タブからログインできます）");
+    shared.fb
+      .vote({ teamId: team.id, baseNo: monster(mem.id)?.no ?? 0, candFamily: familyOf(Number(vb.dataset.cand)), ok: vb.dataset.ok === "1" })
+      .then(() => loadVotes(team.id))
+      .then(() => (box.querySelector(".alt-out").innerHTML = searchAltFor(team.id, Number(btn.dataset.idx))))
+      .catch((err) => window.alert?.(`評価できませんでした: ${err.message}`));
+    return;
+  }
   const rep = e.target.closest(".report-btn");
   if (rep) {
     if (!shared.fb.user) return window.alert?.("報告にはGoogleログインが必要です（編成登録タブからログインできます）");
@@ -1655,7 +1745,8 @@ $("#results").addEventListener("click", (e) => {
   btn.disabled = true;
   btn.textContent = "探しています…";
   // 図鑑1.4万体を調べるので、表示を更新してから計算する
-  setTimeout(() => {
+  setTimeout(async () => {
+    await loadVotes(btn.dataset.team);
     out.innerHTML = searchAltFor(btn.dataset.team, Number(btn.dataset.idx));
     btn.disabled = false;
     btn.textContent = "代用候補を閉じる";

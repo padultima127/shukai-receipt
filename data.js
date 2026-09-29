@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 32,
+  "version": 33,
   "seed": true,
   "monsters": [
     {
@@ -3991,7 +3991,25 @@ window.PAD_SEED = {
         "zurashi": 31,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "endorsedAlts": [
+        {
+          "target": 14136,
+          "part": "assist",
+          "nos": [
+            11387
+          ],
+          "text": "Dフェニックスの起動キーの代わりに紅蓮の起動キー（カレン装備）。ほかに火付与ヘイスト3武器・カレン武器・のりん武器など"
+        },
+        {
+          "target": 12359,
+          "part": "assist",
+          "nos": [
+            13420
+          ],
+          "text": "真田武器の代わりにシュタルク装備（スキルLv1）"
+        }
+      ]
     },
     {
       "id": "kirisame-heartia-eriryuu",
@@ -6258,7 +6276,31 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "endorsedAlts": [
+        {
+          "target": 13617,
+          "part": "assist",
+          "nos": [
+            13244
+          ],
+          "text": "ユラ装備と正月メタトロン装備は入れ替え可"
+        },
+        {
+          "target": 13244,
+          "part": "assist",
+          "nos": [
+            13617
+          ],
+          "text": "正月メタトロン装備とユラ装備は入れ替え可"
+        },
+        {
+          "target": 13851,
+          "part": "assist",
+          "nos": [],
+          "text": "カフェクラウディア装備の代わりに5ターン継続の属性吸収無効武器（3Fエルゲヌビで追加1コンボが必要）"
+        }
+      ]
     },
     {
       "id": "jupiter-hitsugaya-yamajun",
@@ -6385,7 +6427,37 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": "not-required"
-      }
+      },
+      "endorsedAlts": [
+        {
+          "target": 12499,
+          "part": "base",
+          "nos": [
+            13430
+          ],
+          "text": "ライル本体の代わりにラント"
+        },
+        {
+          "target": 6303,
+          "part": "assist",
+          "nos": [
+            14053
+          ],
+          "text": "旧爆豪の代わりに恋次など、火共鳴で火列強×3と部位ボがある武器"
+        },
+        {
+          "target": 12327,
+          "part": "assist",
+          "nos": [],
+          "text": "山本ユニフォームの代わりにリアナ武器（1枚まで）"
+        },
+        {
+          "target": 13739,
+          "part": "assist",
+          "nos": [],
+          "text": "ヒトヨタケの代わりに部位ボがある武器（最後の立ち回りが変わる）"
+        }
+      ]
     },
     {
       "id": "jupiter-shiva-pmaru",
@@ -8807,7 +8879,41 @@ window.PAD_SEED = {
         "zurashi": 3,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "endorsedAlts": [
+        {
+          "target": 12773,
+          "part": "base",
+          "nos": [
+            13909
+          ],
+          "text": "L字持ち属性吸収無効＋ヘイストのキャラ（超覚醒L字の極性光シルヴィ等）。代用時はボス1のアシスト無効解除にL字消しを追加"
+        },
+        {
+          "target": 12327,
+          "part": "assist",
+          "nos": [
+            12770
+          ],
+          "text": "山本猛虎装備の代わりに火付与浮遊武器（夏休みミネルヴァ装備など）"
+        },
+        {
+          "target": 14013,
+          "part": "assist",
+          "nos": [
+            6303
+          ],
+          "text": "グレオン装備の代わりに爆豪装備など（1Fのワンパンは諦める）"
+        },
+        {
+          "target": 8443,
+          "part": "assist",
+          "nos": [
+            10646
+          ],
+          "text": "アレキサンダー装備の代わりにチームHPと水木光闇ドロ強付きの武器（ハロウィンパイモン装備等）"
+        }
+      ]
     },
     {
       "id": "sun-dain-ana",
@@ -9250,7 +9356,45 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "endorsedAlts": [
+        {
+          "target": 12149,
+          "part": "assist",
+          "nos": [],
+          "text": "六人の少年少女の代わりに覚醒無効回復＋泥強＋10コンボの武器（1Fで打てるように）"
+        },
+        {
+          "target": 12244,
+          "part": "assist",
+          "nos": [],
+          "text": "テミス武器の代わりに泥強武器"
+        },
+        {
+          "target": 8443,
+          "part": "assist",
+          "nos": [],
+          "text": "アレキサンダー武器の代わりに泥強武器"
+        },
+        {
+          "target": 13053,
+          "part": "assist",
+          "nos": [
+            13584,
+            13486
+          ],
+          "text": "メルナ武器の代わりに加蓮武器・ブラムベル武器"
+        },
+        {
+          "target": 13505,
+          "part": "assist",
+          "nos": [
+            11938,
+            11443
+          ],
+          "text": "虚栄の代わりに大王クロミ・ナツイグ・イシネフ（落ちコンあり）"
+        }
+      ]
     },
     {
       "id": "hyaku-kikoru-mori",
@@ -9752,7 +9896,21 @@ window.PAD_SEED = {
         "zurashi": 2,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "endorsedAlts": [
+        {
+          "target": 13367,
+          "part": "assist",
+          "nos": [],
+          "text": "エキドナ武器の代わりに消滅3ヘイスト武器"
+        },
+        {
+          "target": 13244,
+          "part": "assist",
+          "nos": [],
+          "text": "メタトロン武器の代わりに消滅ヘイスト武器（泥強持ち推奨）"
+        }
+      ]
     },
     {
       "id": "senju-reinhard-nanaminn",

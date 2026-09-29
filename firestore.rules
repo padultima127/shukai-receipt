@@ -64,6 +64,21 @@ service cloud.firestore {
         && request.resource.data.lastSubmitAt == request.time;
     }
 
+    // 代用の評価: 誰でも読める。書けるのは本人の票だけ（ドキュメントIDの末尾が自分のuid）
+    match /subVotes/{id} {
+      allow read: if true;
+      allow create, update: if signedIn()
+        && id.matches('.*_' + request.auth.uid)
+        && request.resource.data.keys().hasOnly(['teamId', 'baseNo', 'candFamily', 'ok', 'uid', 'at'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.ok is bool
+        && shortStr(request.resource.data.teamId, 80)
+        && request.resource.data.baseNo is number
+        && request.resource.data.candFamily is number
+        && request.resource.data.at == request.time;
+      allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
     match /reports/{id} {
       allow read, delete: if isAdmin();
       allow create: if signedIn()
