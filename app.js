@@ -5,7 +5,8 @@ const BOX_KEY = "pad-farming:box";
 // ロード・リザルト画面などダンジョン外で1周ごとにかかる秒数
 const RUN_OVERHEAD_SEC = 20;
 // 経験値効率で並べるモード → evaluate() の値の名前
-const EXP_MODES = { expHour: "expPerHour", expStamina: "expPerStamina" };
+// 効率順のモード。素材で探す時は探している素材の効率、ダンジョンで探す時は経験値の効率で並べる
+const EXP_MODES = { expHour: "effPerHour", expStamina: "effPerStamina" };
 const MODE_WEIGHTS = {
   ease: { speed: 0.25, ease: 0.75 },
   balance: { speed: 0.5, ease: 0.5 },
@@ -570,6 +571,11 @@ function search() {
   const maxPerHour = Math.max(...rows.map((r) => r.perHour), 1e-9);
   const penalty = (r) => r.missing * PENALTY_MISSING + r.substituted * PENALTY_SUBSTITUTE;
   for (const r of rows) r.speedScore = (r.perHour / maxPerHour) * 100;
+  // 効率の対象: 素材で探す→その素材、ダンジョンで探す→経験値
+  for (const r of rows) {
+    r.effPerHour = item ? r.perHour : r.expPerHour;
+    r.effPerStamina = item ? (r.dungeon.stamina > 0 && r.rate > 0 ? r.rate / r.dungeon.stamina : null) : r.expPerStamina;
+  }
   const expKey = EXP_MODES[mode];
   if (expKey) {
     // 経験値効率順: 一番効率のいい編成を100点。データがない編成は最後に回す
@@ -858,9 +864,10 @@ function renderResult(r, i, item) {
       : "";
   let staminaLine = "";
   if (item && r.dungeon.stamina > 0 && r.rate > 0) {
+    const hl = mode === "expStamina" ? "hl" : "";
     staminaLine = r.staminaPer >= 1
-      ? `<div><dt>1個あたりスタミナ</dt><dd>${r.staminaPer.toFixed(0)}${dropEst}</dd></div>`
-      : `<div><dt>スタミナ1あたり</dt><dd>${formatCount(r.rate / r.dungeon.stamina)}個${dropEst}</dd></div>`;
+      ? `<div class="${hl}"><dt>1個あたりスタミナ</dt><dd>${r.staminaPer.toFixed(0)}${dropEst}</dd></div>`
+      : `<div class="${hl}"><dt>スタミナ1あたり</dt><dd>${formatCount(r.rate / r.dungeon.stamina)}個${dropEst}</dd></div>`;
   }
   const warn = r.missing
     ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
@@ -876,10 +883,10 @@ function renderResult(r, i, item) {
     ${r.ease.legacy ? "" : renderEaseBreakdown(r.ease.parts)}
     <dl class="stats">
       <div><dt>1周</dt><dd>${formatTime(t.timeSec)}${est("timeSec")}</dd></div>
-      <div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
-      <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>
+      ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
+      <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
-      <div><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
+      <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>
            <div><dt>楽さ</dt><dd>${"★".repeat(t.ease)}${"☆".repeat(5 - t.ease)}${est("ease")}</dd></div>`
@@ -1672,8 +1679,21 @@ document.querySelectorAll(".tab").forEach((b) =>
   })
 );
 
+function updateModeLabels() {
+  const b1 = $('#mode [data-mode="expHour"]');
+  const b2 = $('#mode [data-mode="expStamina"]');
+  if (searchType === "dungeon") {
+    b1.textContent = "経験値/時";
+    b2.textContent = "経験値/スタミナ";
+  } else {
+    b1.textContent = "素材/時";
+    b2.textContent = "素材/スタミナ";
+  }
+}
+
 function setSearchType(type) {
   searchType = type;
+  updateModeLabels();
   const t = SEARCH_TYPES[type];
   document.querySelectorAll("#search-type button").forEach((x) => x.classList.toggle("active", x.dataset.type === type));
   $("#q-label").textContent = t.label;
