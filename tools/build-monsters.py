@@ -178,9 +178,62 @@ def skill_numbers(ids, skills):
     return f"{dur}:{mult:g}"
 
 
+TYPE_ID = {"バランス": 1, "体力": 2, "回復": 3, "ドラゴン": 4, "神": 5, "攻撃": 6, "悪魔": 7, "マシン": 8}
+ATTR_ID = {v: k for k, v in ATTR.items()}
+
+
+def endurance_numbers(ids, skills):
+    """耐久チェック用: "リジェネ%:毎ターン回復生成"。
+    リジェネ = 「◯ターンの間…HPを◯%回復」の最大値。回復生成 = [回復]を生成/[回復]に変化"""
+    ids = ids if isinstance(ids, list) else [ids]
+    regen, gen = 0, 0
+    for sid in ids:
+        s = skills.get(str(sid)) if sid else None
+        if not s:
+            continue
+        for sentence in s.get("description", "").replace("\r", "").replace("\n", "").split("。"):
+            if "ターンの間" in sentence:
+                for n in re.findall(r"HPを([\d.]+)[%％]回復", sentence):
+                    regen = max(regen, float(n))
+            if re.search(r"\[回復\][^。]*(生成|に変化)|回復ドロップ[^。]*生成", sentence):
+                gen = 1
+    return f"{regen:g}:{gen}"
+
+
+def leader_numbers(ls):
+    """リーダースキルの軽減率とHP倍率。"軽減%|HP倍率の条件=倍率,..."（条件: all / t6 = 攻撃タイプ / a4 = 光属性）"""
+    if not ls:
+        return ""
+    text = ls.get("description", "").replace("\r", "").replace("\n", "")
+    red = 0.0
+    if "ダメージを半減" in text:
+        red = 50.0
+    for n in re.findall(r"ダメージを([\d.]+)[%％]軽減", text):
+        red = max(red, float(n))
+    hp = []
+    for sentence in text.split("。"):
+        for grp, mult in re.findall(r"((?:\[[^\]]+\](?:属性|タイプ)?[と・、]?)+)の(?:HP|全パラメータ)[^。倍]*?([\d.]+)倍", sentence):
+            for name in re.findall(r"\[([^\]]+)\]", grp):
+                if name.endswith("タイプ") or name in TYPE_ID:
+                    t = TYPE_ID.get(name.replace("タイプ", ""))
+                    if t:
+                        hp.append(f"t{t}={mult}")
+                elif name in ATTR_ID:
+                    hp.append(f"a{ATTR_ID[name]}={mult}")
+        for grp, mult in re.findall(r"(?<!\])((?:[火水木光闇][と・、]?)+)属性の(?:HP|全パラメータ)[^。倍]*?([\d.]+)倍", sentence):
+            for name in re.findall(r"[火水木光闇]", grp):
+                hp.append(f"a{ATTR_ID[name]}={mult}")
+        if not hp:
+            m = re.search(r"(?:^|、)HP(?:と[^。倍]*)?が([\d.]+)倍", sentence)
+            if m:
+                hp.append(f"all={m.group(1)}")
+    return f"{red:g}|{','.join(hp)}" if red or hp else ""
+
+
 def main():
     monsters = fetch("monster_list_full.json")
     skills = fetch("skill_list.json")
+    leaders = fetch("leader_skill_list.json")
     updated = fetch("last_modified.json")["monster_list_full"]
     groups = transform_groups(monsters, skills)
     rows = []
@@ -205,11 +258,16 @@ def main():
                      for n, p in ((11, 68), (12, 69), (13, 70))),
             # スキルブーストの数（スキブ+ は2）
             sum(1 if a == 21 else 2 if a == 56 else 0 for a in awakens),
+            # 耐久チェック用: リジェネ%:回復生成 / 最大HP（限界突破があればその値）/ HP覚醒の増減:チームHP強化の数 / LS
+            endurance_numbers(m.get("skill"), skills),
+            (m.get("overLimitParam") or {}).get("hp") or (m.get("maxParam") or {}).get("hp") or 0,
+            f"{sum(3000 if a == 1 else -2500 if a == 65 else 0 for a in awakens)}:{awakens.count(46)}",
+            leader_numbers(leaders.get(str(m.get("leaderSkill")))) if m.get("leaderSkill", 1) > 1 else "",
         ])
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))

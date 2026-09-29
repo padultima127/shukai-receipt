@@ -1037,9 +1037,137 @@ function renderResult(r, i, item) {
     ${warn}
     ${renderConstraints(t)}
     ${renderMembers(r)}
+    ${renderEndurance(t, r.dungeon)}
     ${t.steps?.length ? `<details><summary>立ち回り</summary><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></details>` : ""}
     ${src}
   </article>`;
+}
+
+// ---------- 耐久チェック（試作） ----------
+// 回復の考え方（本人の指定）:
+//   毎ターン使うスキルで回復ドロップを生成する → 毎ターンHP満タン（100%回復）として計算
+//   そうでない → 編成内のリジェネ（◯ターンの間HPを◯%回復）の値で計算
+function lsNumbers(no) {
+  const [red, hp] = String(MDB.get(no)?.[19] ?? "").split("|");
+  const mults = (hp ?? "").split(",").filter(Boolean).map((x) => {
+    const [cond, m] = x.split("=");
+    return { cond, mult: Number(m) };
+  });
+  return { red: Number(red) || 0, mults };
+}
+
+function hpMultFor(row, ls) {
+  const types = String(row[13] ?? "").split(".");
+  const attrs = [row[2], row[3]];
+  const ATTR_BY_ID = { 1: "火", 2: "水", 3: "木", 4: "光", 5: "闇" };
+  let m = 1;
+  for (const { cond, mult } of ls.mults) {
+    if (cond === "all" || (cond[0] === "t" && types.includes(cond.slice(1))) || (cond[0] === "a" && attrs.includes(ATTR_BY_ID[cond.slice(1)]))) {
+      m *= mult;
+      break; // 同じLSで重複して掛けない
+    }
+  }
+  return m;
+}
+
+function enduranceSetup(t) {
+  const mems = t.members.filter((m) => m.role !== "free");
+  const leader = mems.find((m) => m.role === "L");
+  const friend = mems.find((m) => m.role === "F");
+  const lsL = lsNumbers(monster(leader?.id)?.no);
+  const lsF = lsNumbers(monster(friend?.id)?.no);
+  // HP推定: 最大HP（限界突破値）＋297の990、HP覚醒、LSのHP倍率、チームHP強化（5%/個）
+  let total = 0;
+  let teamHp = 0;
+  let unknown = 0;
+  for (const m of mems) {
+    const no = monster(m.id)?.no;
+    const row = MDB.get(no);
+    if (!row) {
+      unknown++;
+      continue;
+    }
+    const [flat, cnt] = String(row[18] ?? "0:0").split(":").map(Number);
+    let hp = (row[17] || 0) + 990 + flat;
+    teamHp += cnt;
+    const a = MDB.get(assistNoOf(m));
+    if (a?.[8]) {
+      const [af, ac] = String(a[18] ?? "0:0").split(":").map(Number);
+      hp += af;
+      teamHp += ac;
+    }
+    total += Math.max(1, hp) * hpMultFor(row, lsL) * hpMultFor(row, lsF);
+  }
+  total = Math.round(total * (1 + 0.05 * teamHp));
+  const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
+  // 回復: 毎ターン使うスキルが回復ドロップを生成するか
+  const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
+  const genRows = (no) => (MDB.get(no)?.[9] ? familyRows.get(MDB.get(no)[9]) : [MDB.get(no)]).filter(Boolean);
+  const healGen = everyTurn.some((no) => genRows(no).some((r) => String(r[16] ?? "").split(":")[1] === "1"));
+  let regen = 0;
+  let regenFrom = "";
+  for (const m of mems) {
+    for (const r of [...genRows(monster(m.id)?.no), ...(assistNoOf(m) ? [MDB.get(assistNoOf(m))].filter(Boolean) : [])]) {
+      const v = Number(String(r[16] ?? "0").split(":")[0]) || 0;
+      if (v > regen) {
+        regen = v;
+        regenFrom = r[1];
+      }
+    }
+  }
+  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp };
+}
+
+function simulateEndurance(d, setup, maxHp) {
+  let hp = maxHp;
+  const rows = [];
+  let deadAt = null;
+  for (const f of d.damage.floors) {
+    // 階に入る前のターン終わりに回復（毎ターン回復生成なら満タン）
+    hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
+    for (const h of f.hits) {
+      const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
+      const taken = Math.round(raw * (1 - setup.reduce));
+      hp -= taken;
+      rows.push({ floor: f.floor, label: h.label, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
+      if (hp <= 0) {
+        deadAt = f.floor;
+        break;
+      }
+    }
+    if (deadAt != null) break;
+  }
+  return { rows, deadAt };
+}
+
+function renderEnduranceResult(t, d, maxHp) {
+  const setup = enduranceSetup(t);
+  const sim = simulateEndurance(d, setup, maxHp);
+  const heal = setup.healGen
+    ? "毎ターン使うスキルで回復ドロップを生成 → 毎ターンHP満タンとして計算"
+    : setup.regen
+      ? `回復ドロップの毎ターン生成なし → リジェネ（${esc(setup.regenFrom)}の${setup.regen}%）で計算`
+      : "回復ドロップの毎ターン生成・リジェネなし → 回復なしで計算";
+  const verdict = sim.deadAt == null
+    ? `<p class="ok"><strong>全フロア耐えられる計算です</strong></p>`
+    : `<p class="ng"><strong>${sim.deadAt}Fで倒れる計算です</strong></p>`;
+  return `${verdict}
+    <p class="hint">軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提。スキルの軽減は入れていません）／${heal}</p>
+    <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
+    ${sim.rows.map((r) => `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
+    </tbody></table></div>`;
+}
+
+function renderEndurance(t, d) {
+  if (!d?.damage?.floors?.length || t.multi) return "";
+  const setup = enduranceSetup(t);
+  const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
+  return `<details class="endurance"><summary>耐久チェック（試作）</summary>
+    <label class="end-hp-label">チームHP <input type="number" class="end-hp" data-team="${esc(t.id)}" min="1" step="1000" value="${setup.estHp}"></label>
+    <p class="hint">初期値は推定です（最大HP＋297、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個。潜在・超覚醒・共鳴は未計算${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
+    <div class="end-result">${renderEnduranceResult(t, d, setup.estHp)}</div>
+    <p class="hint">敵の攻撃: <a href="${esc(d.damage.source.url)}" target="_blank" rel="noopener">${esc(d.damage.source.site)}</a>（${esc(d.damage.note)}）${notes ? `<br>${notes}` : ""}</p>
+  </details>`;
 }
 
 // ---------- BOX ----------
@@ -1873,6 +2001,17 @@ async function loadVotes(teamId) {
     subVotes.set(k, cur);
   }
 }
+
+// 耐久チェック: HPを書き換えたら再計算
+$("#results").addEventListener("input", (e) => {
+  const inp = e.target.closest(".end-hp");
+  if (!inp) return;
+  const t = db.teams.find((x) => x.id === inp.dataset.team);
+  const d = t && db.dungeons.find((x) => x.id === t.dungeonId);
+  const hp = Number(inp.value);
+  if (!t || !d || !(hp > 0)) return;
+  inp.closest(".endurance").querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, hp);
+});
 
 $("#results").addEventListener("click", (e) => {
   const vb = e.target.closest(".vote-btn");

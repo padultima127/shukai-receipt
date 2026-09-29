@@ -279,3 +279,13 @@ button:disabled { opacity: .6; cursor: wait; }
 .tag.tag-author { border-color: var(--ok); }
 .constraints { margin: 6px 0; font-size: .82rem; }
 .constraints p { margin: 2px 0; }
+
+/* 耐久チェック */
+.endurance { margin-block: 8px; }
+.end-hp-label { display: flex; align-items: center; gap: 8px; margin-block: 6px; }
+.end-hp { width: 10em; font-variant-numeric: tabular-nums; }
+.table-wrap { overflow-x: auto; }
+.end-table { border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+.end-table th, .end-table td { padding: 4px 8px; border-bottom: 1px solid var(--line, #ddd); text-align: right; white-space: nowrap; }
+.end-table th:nth-child(2), .end-table td:nth-child(2) { text-align: left; }
+.end-table tr.ng td { color: var(--ng, #c0392b); font-weight: 600; }

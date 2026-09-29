@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 48,
+  "version": 49,
   "seed": true,
   "monsters": [
     {
@@ -3395,6 +3395,99 @@ window.PAD_SEED = {
         ],
         "dmgAbsorb": [
           6
+        ]
+      },
+      "damage": {
+        "source": {
+          "site": "ゲームウィズ",
+          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/444087",
+          "date": "2026-09-30"
+        },
+        "note": "先制行動と特定条件の攻撃のみ（通常攻撃は攻略サイトに記載がないため未計算）",
+        "floors": [
+          {
+            "floor": 1,
+            "hits": []
+          },
+          {
+            "floor": 2,
+            "hits": [
+              {
+                "label": "超根性発動時 現HP500%割合",
+                "ratio": 500
+              }
+            ],
+            "note": "リーダーチェンジ済みで2,050,000ダメージの行動あり"
+          },
+          {
+            "floor": 3,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 154000
+              }
+            ]
+          },
+          {
+            "floor": 4,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 550000
+              }
+            ]
+          },
+          {
+            "floor": 5,
+            "hits": [
+              {
+                "label": "先制（攻撃力2.5倍の敵）",
+                "dmg": 5000000
+              }
+            ],
+            "note": "ほかの2体は2,250,000"
+          },
+          {
+            "floor": 6,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 2300000
+              }
+            ]
+          },
+          {
+            "floor": 7,
+            "hits": [
+              {
+                "label": "先制（2体目）",
+                "dmg": 2350000
+              }
+            ]
+          },
+          {
+            "floor": 8,
+            "hits": [
+              {
+                "label": "超根性発動時",
+                "dmg": 3720000
+              }
+            ]
+          },
+          {
+            "floor": 9,
+            "hits": [
+              {
+                "label": "先制 現HP200%割合",
+                "ratio": 200
+              },
+              {
+                "label": "先制",
+                "dmg": 2375000
+              }
+            ],
+            "note": "以降4ターン毎に2,650,000。20ターン目以降は毎ターン25,000,000"
+          }
         ]
       }
     },
