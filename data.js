@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 37,
+  "version": 38,
   "seed": true,
   "monsters": [
     {
@@ -9558,7 +9558,7 @@ window.PAD_SEED = {
             },
             {
               "cap": "enhance",
-              "why": "主な役割は攻撃タイプエンハンス。全体の攻撃力デバフが来たら功で上書きする"
+              "why": "主な役割は攻撃タイプエンハンス（5ターン）をループさせること。全体の攻撃デバフが来たら功で上書きする"
             },
             {
               "cap": "enhanceNote",
@@ -9594,6 +9594,12 @@ window.PAD_SEED = {
               "cap": "altNote",
               "why": "代用するなら「スキルターンの短い覚醒無効回復キャラ」＋「クリアまで続く割合回復の武器」の組み合わせでもよい",
               "note": true
+            },
+            {
+              "cap": "haste",
+              "why": "変身前スキルのヘイスト（2ターン）で、1Fにキコルより先に功を使えるようにする（ほかの枠で同じ分を補えればOK）",
+              "minHaste": 2,
+              "fireAtFloor": 1
             }
           ]
         }
@@ -9609,6 +9615,11 @@ window.PAD_SEED = {
         {
           "type": "enhanceActive",
           "why": "攻撃タイプエンハンス中でないと、キコルのコンボ吸収無効とドロップ強化が働かない（この編成では両方必須）",
+          "source": "作者本人（@pad_ultima127）の説明"
+        },
+        {
+          "type": "order",
+          "why": "1Fでキコル本体のスキルより先に功を使い、以降も功のエンハンスを切らさずループさせる（そのための1Fのヘイスト）",
           "source": "作者本人（@pad_ultima127）の説明"
         }
       ]
