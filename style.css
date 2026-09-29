@@ -293,3 +293,11 @@ button:disabled { opacity: .6; cursor: wait; }
 /* 役割一覧（本体・武器） */
 .part-block { margin-top: 6px; padding-left: 8px; border-left: 3px solid var(--line); }
 .part-head { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+
+/* スキルターン（アイコン右上） */
+.icon .ct {
+  position: absolute; top: -5px; right: -7px; min-width: 16px; padding: 1px 3px; border-radius: 8px;
+  background: var(--text); color: var(--card); font-size: 10px; font-weight: 700; line-height: 1.2;
+  text-shadow: none; font-variant-numeric: tabular-nums; text-align: center;
+}
+.icon-assist .ct { top: -7px; right: -9px; font-size: 9px; }

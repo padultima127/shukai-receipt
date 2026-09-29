@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 55,
+  "version": 56,
   "seed": true,
   "monsters": [
     {
@@ -9901,8 +9901,10 @@ window.PAD_SEED = {
           "roles": [
             {
               "cap": "dmgAbsorbNull",
-              "why": "6Fのダメージ吸収を無効化",
-              "fireAtFloor": 6
+              "why": "6Fのダメージ吸収を無効化。2Fのアシスト無効より前の1Fで使い、3ターン後に発動する5ターンの吸収無効で6F（1Fから数えて8ターン目。2F突破時の1ターン経過を含む）をカバー",
+              "fireAtFloor": 1,
+              "activeAtTurn": 8,
+              "activeFloor": 6
             },
             {
               "cap": "skillBoost",

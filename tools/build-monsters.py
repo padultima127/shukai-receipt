@@ -238,6 +238,35 @@ def leader_numbers(ls):
     return f"{red:g}|{','.join(hp)}" if red or hp else ""
 
 
+def effect_durations(ids, skills):
+    """能力ごとの効果ターン "voidPierce:12,dmgAbsorbNull:5"（文単位で「◯ターンの間」を結びつける）"""
+    ids = ids if isinstance(ids, list) else [ids]
+    out = {}
+    for sid in ids:
+        s = skills.get(str(sid)) if sid else None
+        if not s:
+            continue
+        for sentence in s.get("description", "").replace("\r", "").replace("\n", "").split("。"):
+            m = re.search(r"(\d+)ターンの間", sentence)
+            if not m:
+                continue
+            for tag, pat in SKILL_TAGS:
+                if re.search(pat, sentence):
+                    out[tag] = max(out.get(tag, 0), int(m.group(1)))
+    return ",".join(f"{k}:{v}" for k, v in sorted(out.items()))
+
+
+def delayed_activation(ids, skills):
+    ids = ids if isinstance(ids, list) else [ids]
+    n = 0
+    for sid in ids:
+        s = skills.get(str(sid)) if sid else None
+        if s:
+            for x in re.findall(r"(\d+)ターン後に発動", s.get("description", "")):
+                n = max(n, int(x))
+    return n
+
+
 def main():
     monsters = fetch("monster_list_full.json")
     skills = fetch("skill_list.json")
@@ -271,11 +300,14 @@ def main():
             (m.get("overLimitParam") or {}).get("hp") or (m.get("maxParam") or {}).get("hp") or 0,
             f"{sum(3000 if a == 1 else -2500 if a == 65 else 0 for a in awakens)}:{awakens.count(46)}",
             leader_numbers(leaders.get(str(m.get("leaderSkill")))) if m.get("leaderSkill", 1) > 1 else "",
+            # 「【◯ターン後に発動】」の◯（遅れて発動するスキル。なければ0）
+            delayed_activation(m.get("skill"), skills),
+            effect_durations(m.get("skill"), skills),
         ])
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))

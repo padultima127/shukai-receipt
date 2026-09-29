@@ -416,7 +416,7 @@ function importantCaps(mem, team, dungeon) {
       if (r.note) reasons.set(r.cap, { why, weight: 0, note: true, byAuthor: true, part: sr.part });
       else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true, byAuthor: true, part: sr.part });
       else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true, byAuthor: true, part: sr.part });
-      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, mustBeBase: !!r.mustBeBase, part: sr.part, author: true, byAuthor: true });
+      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, activeAtTurn: r.activeAtTurn ?? null, activeFloor: r.activeFloor ?? null, mustBeBase: !!r.mustBeBase, part: sr.part, author: true, byAuthor: true });
     }
   }
   return reasons;
@@ -429,6 +429,21 @@ const ownedFamilies = () => new Set([...ownedNos()].map(familyOf));
 // 欠けている部品（本体 or アシスト）の代用候補を、重要能力をどれだけ守れるかで並べる
 // pool: "owned"（手持ちBOXから）/ "all"（図鑑全体から。手持ちを上に並べる）
 let currentDungeon = null;
+// 能力ごとの効果ターン（本体として使う変身キャラは変身前後の最大）。その能力の記載がなければ null
+function capDur(no, cap, asBase) {
+  const row = MDB.get(no);
+  if (!row) return null;
+  const rows = asBase && row[9] ? familyRows.get(row[9]) : [row];
+  let best = null;
+  for (const r of rows.filter(Boolean)) {
+    for (const kv of String(r[21] ?? "").split(",").filter(Boolean)) {
+      const [k, v] = kv.split(":");
+      if (k === cap) best = Math.max(best ?? 0, Number(v));
+    }
+  }
+  return best;
+}
+
 function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3 } = {}) {
   currentDungeon = db.dungeons.find((d) => d.id === team.dungeonId) ?? null;
   const baseNo = monster(mem.id)?.no;
@@ -476,7 +491,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const skillFree = part === "assist" && important.has("skillFree");
     const turnDiff = !skillFree && orig?.turn && cand.turn ? cand.turn - orig.turn : 0;
     const endorsedHit = endorsedFor(team, part === "base" ? baseNo : assistNo)?.nos.some((n) => familyOf(n) === familyOf(no));
-    if (!endorsedHit && Math.abs(turnDiff) > TURN_TOLERANCE) continue;
+    if (!endorsedHit && turnDiff > TURN_TOLERANCE) continue; // スキルターンが短いのは不利にならないので、重い場合だけ除外
     if (!endorsedHit && !kept.length && important.size) continue;
     const hasteDiff = !skillFree && orig?.haste ? cand.haste - orig.haste : 0;
     // 変身キャラ（本体として使う場合）は変身前後のうち長い方の効果ターン・大きい方の倍率
@@ -491,8 +506,11 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const [cDur, cMult] = skillNums(row);
     const durDiff = !skillFree && oDur && cDur ? cDur - oDur : 0;
     // 持続ターンの条件は、その役割を担っている部品（本体 or アシスト）を置き換える時だけ見る
-    const needDur = Math.max(0, ...[...important.values()].filter((v) => !v.part || v.part === part).map((v) => v.minDur ?? 0));
-    const durShort = needDur && cDur < needDur ? needDur : 0;
+    // 必要な持続は、その役割の能力そのものの効果ターンで比べる（別の効果の長いターン数に惑わされない）
+    const durRole = [...important].filter(([, v]) => (!v.part || v.part === part) && v.minDur).sort((a, b) => b[1].minDur - a[1].minDur)[0];
+    const needDur = durRole?.[1].minDur ?? 0;
+    const roleDur = durRole ? capDur(no, durRole[0], part === "base") ?? cDur : cDur;
+    const durShort = needDur && roleDur < needDur ? needDur : 0;
     // ヘイスト量と「◯Fで使えるか」（スキルターンが元より重いと、元と同じ階では溜まっていない）
     const partRoles = [...important.values()].filter((v) => !v.part || v.part === part);
     const needHaste = Math.max(0, ...partRoles.map((v) => v.minHaste ?? 0));
@@ -511,6 +529,20 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     if (lateFire) score -= 15;
     if (resetRisk) score -= 15;
     if (sbShort) score -= sbShort * 4;
+    // 「◯Fで使って、◯ターン目まで効果が必要」（遅れて発動するスキルも含む）: 使ったターンを1として数える
+    const activeEntry = [...important].find(([, v]) => (!v.part || v.part === part) && v.activeAtTurn);
+    const activeRole = activeEntry?.[1];
+    let activeShort = null;
+    if (activeRole) {
+      const dly = row[20] || 0;
+      const T = activeRole.activeAtTurn;
+      const dur = capDur(no, activeEntry[0], part === "base");
+      // 「◯Fで使って◯Fまで効果」は必須条件。その能力がない・効果が届かない候補は出さない（作者公認の代用は除く）
+      if (dur == null || !(1 + dly <= T && dly + dur >= T)) {
+        if (!endorsedHit) continue;
+        activeShort = { T, dly, dur: dur ?? 0, floor: activeRole.activeFloor, use: activeRole.fireAtFloor ?? 1 };
+      }
+    }
     // 作者がレシートで挙げている代用は最優先
     const endorsed = endorsedFor(team, part === "base" ? baseNo : assistNo);
     const isEndorsed = endorsed?.nos.some((n) => familyOf(n) === familyOf(no));
@@ -532,7 +564,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -761,6 +793,9 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const endorsedBadge = c.endorsed ? `<span class="st st-ok">作者公認の代用</span> ` : "";
     const hs = c.hasteShort ? `<span class="ng">✗ヘイスト${c.candHaste || 0}ターン（必要${c.hasteShort}ターン。足りない分をほかの枠で補う必要あり）</span>` : "";
     const late = c.lateFire ? `<span class="ng">✗スキル${c.candTurn}ターンで元（${c.origTurn}ターン）より重く、${c.lateFire}Fで使えない可能性</span>` : "";
+    const as = c.activeShort
+      ? `<span class="ng">✗${c.activeShort.use}Fで使うと${c.activeShort.floor ? `${c.activeShort.floor}F（` : ""}${c.activeShort.T}ターン目${c.activeShort.floor ? "）" : ""}に効果が残らない（${c.activeShort.dly ? `${c.activeShort.dly}ターン後に発動・` : ""}効果${c.activeShort.dur}ターン）</span>`
+      : "";
     const sb = c.sbShort ? `<span class="ng">✗パーティーのスキブが${c.sbShort}個減る（必要な階でスキルが溜まるか要確認）</span>` : "";
     const reset = c.resetRisk ? `<span class="ng">✗${c.resetRisk}Fのアシスト無効でスキルターンがリセットされ、間に合わない可能性</span>` : "";
     const short = c.durShort ? `<span class="ng">✗効果${c.cDur}ターンで、必要な${c.durShort}ターンに届かない</span>` : "";
@@ -780,7 +815,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
     return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, sa, short, hs, late, reset, sb, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
+      <div class="alt-caps">${[attr, fire, sa, as, short, hs, late, reset, sb, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
   });
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }
@@ -813,7 +848,7 @@ function renderImportantPart(list) {
   const entries = [...list].sort((a, b) => b[1].weight - a[1].weight);
   const major = entries.filter(([, v]) => v.weight >= MAJOR_WEIGHT);
   const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT && !v.teamWide && !v.optional && !v.note);
-  const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}${v.mustBeBase ? "（本体で持つ）" : ""}<small>・${esc(v.why)}</small></span>`).join("");
+  const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}${v.activeAtTurn ? `（${v.fireAtFloor ?? 1}Fで使い${v.activeFloor ? `${v.activeFloor}F＝` : ""}${v.activeAtTurn}ターン目まで効果）` : ""}${v.mustBeBase ? "（本体で持つ）" : ""}<small>・${esc(v.why)}</small></span>`).join("");
   const team = entries.filter(([, v]) => v.teamWide).map(([c, v]) => `<div class="sub-line muted">チーム全体で必要: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("")
     + entries.filter(([, v]) => v.optional).map(([c, v]) => `<div class="sub-line muted">条件付き: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("")
     + entries.filter(([, v]) => v.note).map(([, v]) => `<div class="sub-line"><span class="st st-ok">役割メモ</span> ${esc(v.why)}</div>`).join("");
@@ -1539,9 +1574,11 @@ function iconHTML(ref, { assist = false } = {}) {
   const name = row?.[1] ?? ref?.name ?? "";
   const main = ATTR_KEY[row?.[2] ?? ref?.attr] ?? "none";
   const sub = ATTR_KEY[row?.[3]];
-  return `<span class="icon ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}" aria-hidden="true">${esc(glyphOf(name))}${
+  // スキルの最短ターンを右下に表示（PDCのアイコンの代わりに一目で分かるように）
+  const ct = row?.[5] ? `<b class="ct">${row[5]}</b>` : "";
+  return `<span class="icon ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true">${esc(glyphOf(name))}${
     sub ? `<i class="sub a-${sub}"></i>` : ""
-  }</span>`;
+  }${ct}</span>`;
 }
 
 // ---------- 編成登録 ----------
