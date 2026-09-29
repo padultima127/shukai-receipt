@@ -183,10 +183,11 @@ ATTR_ID = {v: k for k, v in ATTR.items()}
 
 
 def endurance_numbers(ids, skills):
-    """耐久チェック用: "リジェネ%:毎ターン回復生成"。
+    """耐久チェック用: "リジェネ%:毎ターン回復生成:スキル軽減%"。
+    スキル軽減は「ダメージを◯%軽減」「半減」。%指定のない「軽減」は35%（パズドラの仕様、本人談）
     リジェネ = 「◯ターンの間…HPを◯%回復」の最大値。回復生成 = [回復]を生成/[回復]に変化"""
     ids = ids if isinstance(ids, list) else [ids]
-    regen, gen = 0, 0
+    regen, gen, red = 0, 0, 0
     for sid in ids:
         s = skills.get(str(sid)) if sid else None
         if not s:
@@ -197,7 +198,14 @@ def endurance_numbers(ids, skills):
                     regen = max(regen, float(n))
             if re.search(r"\[回復\][^。]*(生成|に変化)|回復ドロップ[^。]*生成", sentence):
                 gen = 1
-    return f"{regen:g}:{gen}"
+            if "ターンの間" in sentence:
+                if "ダメージを半減" in sentence:
+                    red = max(red, 50)
+                for n in re.findall(r"ダメージを([\d.]+)[%％]軽減", sentence):
+                    red = max(red, float(n))
+                if re.search(r"ダメージを軽減", sentence):
+                    red = max(red, 35)
+    return f"{regen:g}:{gen}:{red:g}"
 
 
 def leader_numbers(ls):

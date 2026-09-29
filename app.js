@@ -1104,6 +1104,22 @@ function enduranceSetup(t) {
   const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
   const genRows = (no) => (MDB.get(no)?.[9] ? familyRows.get(MDB.get(no)[9]) : [MDB.get(no)]).filter(Boolean);
   const healGen = everyTurn.some((no) => genRows(no).some((r) => String(r[16] ?? "").split(":")[1] === "1"));
+  // スキルの軽減: 同じ効果は上書きされるので一番大きい1つ。作者が「スキルは使わない」とした武器は除く
+  const unusedSkill = new Set((t.slotRoles ?? []).filter((sr) => sr.part === "assist" && sr.roles.some((r) => r.cap === "skillFree")).map((sr) => familyOf(sr.target)));
+  let skillRed = 0;
+  let skillRedFrom = "";
+  for (const m of mems) {
+    const cands = [...genRows(monster(m.id)?.no)];
+    const an = assistNoOf(m);
+    if (an && !unusedSkill.has(familyOf(an)) && MDB.get(an)) cands.push(MDB.get(an));
+    for (const r of cands) {
+      const v = Number(String(r[16] ?? "").split(":")[2]) || 0;
+      if (v > skillRed) {
+        skillRed = v;
+        skillRedFrom = r[1];
+      }
+    }
+  }
   let regen = 0;
   let regenFrom = "";
   for (const m of mems) {
@@ -1115,7 +1131,7 @@ function enduranceSetup(t) {
       }
     }
   }
-  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp };
+  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom };
 }
 
 function simulateEndurance(d, setup, maxHp) {
@@ -1143,6 +1159,13 @@ function simulateEndurance(d, setup, maxHp) {
 function renderEnduranceResult(t, d, maxHp) {
   const setup = enduranceSetup(t);
   const sim = simulateEndurance(d, setup, maxHp);
+  // スキルの軽減ありの場合（効果が最後まで続く前提）
+  const withSkill = setup.skillRed
+    ? simulateEndurance(d, { ...setup, reduce: 1 - (1 - setup.reduce) * (1 - setup.skillRed / 100) }, maxHp)
+    : null;
+  const skillLine = withSkill
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${esc(setup.skillRedFrom)}の${setup.skillRed}%、合計${Math.round((1 - (1 - setup.reduce) * (1 - setup.skillRed / 100)) * 1000) / 10}%）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>`
+    : "";
   const heal = setup.healGen
     ? "毎ターン使うスキルで回復ドロップを生成 → 毎ターンHP満タンとして計算"
     : setup.regen
@@ -1151,8 +1174,8 @@ function renderEnduranceResult(t, d, maxHp) {
   const verdict = sim.deadAt == null
     ? `<p class="ok"><strong>全フロア耐えられる計算です</strong></p>`
     : `<p class="ng"><strong>${sim.deadAt}Fで倒れる計算です</strong></p>`;
-  return `${verdict}
-    <p class="hint">軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提。スキルの軽減は入れていません）／${heal}</p>
+  return `${verdict}${skillLine}
+    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提。スキルの軽減は入れていません）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${sim.rows.map((r) => `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
