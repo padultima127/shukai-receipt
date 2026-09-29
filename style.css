@@ -277,3 +277,5 @@ button:disabled { opacity: .6; cursor: wait; }
 .votes { display: block; font-size: .75rem; color: var(--muted); margin-top: 2px; }
 .votes .link { font-size: .75rem; }
 .tag.tag-author { border-color: var(--ok); }
+.constraints { margin: 6px 0; font-size: .82rem; }
+.constraints p { margin: 2px 0; }

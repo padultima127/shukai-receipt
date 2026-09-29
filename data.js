@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 34,
+  "version": 35,
   "seed": true,
   "monsters": [
     {
@@ -9538,10 +9538,21 @@ window.PAD_SEED = {
             },
             {
               "cap": "haste",
-              "why": "1Fで使えるヘイスト（ほかの枠が持っていてもOK）",
-              "teamWide": true
+              "why": "キコルを1Fからクリアまで毎ターン使えるようにするため、1Fで使うヘイスト（同じ分をほかの枠で補えればOK）",
+              "teamWide": false,
+              "minHaste": 2,
+              "fireAtFloor": 1
             }
           ]
+        }
+      ],
+      "constraints": [
+        {
+          "type": "skillEveryTurn",
+          "target": 12930,
+          "from": 1,
+          "why": "キコルを1Fからクリアまで毎ターン使う（リーダー・フレンドの倍率と火力の前提）",
+          "source": "作者本人（@pad_ultima127）の説明"
         }
       ]
     },

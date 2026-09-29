@@ -357,7 +357,7 @@ function importantCaps(mem, team, dungeon) {
     for (const r of sr.roles) {
       const why = `${r.why}（${sr.source}）`;
       if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true });
-      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, part: sr.part, author: true });
+      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, part: sr.part, author: true });
     }
   }
   return reasons;
@@ -400,10 +400,18 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     // 持続ターンの条件は、その役割を担っている部品（本体 or アシスト）を置き換える時だけ見る
     const needDur = Math.max(0, ...[...important.values()].filter((v) => !v.part || v.part === part).map((v) => v.minDur ?? 0));
     const durShort = needDur && cDur < needDur ? needDur : 0;
+    // ヘイスト量と「◯Fで使えるか」（スキルターンが元より重いと、元と同じ階では溜まっていない）
+    const partRoles = [...important.values()].filter((v) => !v.part || v.part === part);
+    const needHaste = Math.max(0, ...partRoles.map((v) => v.minHaste ?? 0));
+    const hasteShort = needHaste && cand.haste < needHaste ? needHaste : 0;
+    const fireFloor = partRoles.find((v) => v.fireAtFloor)?.fireAtFloor ?? null;
+    const lateFire = fireFloor && orig?.turn && cand.turn > orig.turn ? fireFloor : 0;
     const multRatio = oMult > 1 && cMult > 0 ? cMult / oMult : null;
     let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2 - Math.max(0, -durDiff) * 1.5;
     if (multRatio) score += Math.max(-6, Math.min(3, Math.log2(multRatio) * 3));
     if (durShort) score -= 20;
+    if (hasteShort) score -= 15;
+    if (lateFire) score -= 15;
     // 作者がレシートで挙げている代用は最優先
     const endorsed = endorsedFor(team, part === "base" ? baseNo : assistNo);
     const isEndorsed = endorsed?.nos.some((n) => familyOf(n) === familyOf(no));
@@ -425,7 +433,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, hasteShort, candHaste: cand.haste, lateFire, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -652,6 +660,8 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
           : `<span class="ok">✓属性同じ（${esc(om)}${os ? "/" + esc(os) : ""}）</span>`;
     }
     const endorsedBadge = c.endorsed ? `<span class="st st-ok">作者公認の代用</span> ` : "";
+    const hs = c.hasteShort ? `<span class="ng">✗ヘイスト${c.candHaste || 0}ターン（必要${c.hasteShort}ターン。足りない分をほかの枠で補う必要あり）</span>` : "";
+    const late = c.lateFire ? `<span class="ng">✗スキル${c.candTurn}ターンで元（${c.origTurn}ターン）より重く、${c.lateFire}Fで使えない可能性</span>` : "";
     const short = c.durShort ? `<span class="ng">✗効果${c.cDur}ターンで、必要な${c.durShort}ターンに届かない</span>` : "";
     const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
     const mult = c.multRatio && Math.abs(c.multRatio - 1) > 0.05 ? `<span class="${c.multRatio < 1 ? "warnc" : "ok"}">攻撃倍率 ×${c.multRatio.toFixed(2)}</span>` : "";
@@ -669,7 +679,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
     return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, sa, short, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
+      <div class="alt-caps">${[attr, fire, sa, short, hs, late, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
   });
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }
@@ -679,7 +689,7 @@ function renderImportant(r) {
   const entries = [...r.important].sort((a, b) => b[1].weight - a[1].weight);
   const major = entries.filter(([, v]) => v.weight >= MAJOR_WEIGHT);
   const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT && !v.teamWide);
-  const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}<small>・${esc(v.why)}</small></span>`).join("");
+  const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}<small>・${esc(v.why)}</small></span>`).join("");
   const team = entries.filter(([, v]) => v.teamWide).map(([c, v]) => `<div class="sub-line muted">チーム全体で必要: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("");
   const rest = minor.length ? `<div class="sub-line muted">耐性など: ${minor.map(([c]) => esc(capLabel(c))).join("・")}</div>` : "";
   return `${chips ? `<div class="tags imp">${chips}</div>` : ""}${team}${rest}`;
@@ -830,6 +840,13 @@ function renderSource(t) {
     <p class="src-caution">参考にする前に必ずリンク先の元の内容を確認してください</p>`;
 }
 
+function renderConstraints(t) {
+  if (!t.constraints?.length) return "";
+  return `<div class="constraints">${t.constraints
+    .map((c) => `<p><span class="st st-ok">前提条件</span> ${esc(c.why)}${c.source ? `<small class="muted">（${esc(c.source)}）</small>` : ""}</p>`)
+    .join("")}</div>`;
+}
+
 function renderMembers(r) {
   if (!r.team.multi) return `<ul class="members">${r.members.map(renderMember).join("")}</ul>`;
   return ["A", "B"]
@@ -910,6 +927,7 @@ function renderResult(r, i, item) {
       ${staminaLine}
     </dl>
     ${warn}
+    ${renderConstraints(t)}
     ${renderMembers(r)}
     ${t.steps?.length ? `<details><summary>立ち回り</summary><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></details>` : ""}
     ${src}
