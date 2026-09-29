@@ -356,7 +356,9 @@ function importantCaps(mem, team, dungeon) {
     if (!hit) continue;
     for (const r of sr.roles) {
       const why = `${r.why}（${sr.source}）`;
-      if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true });
+      if (r.note) reasons.set(r.cap, { why, weight: 0, note: true });
+      else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true });
+      else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true });
       else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, part: sr.part, author: true });
     }
   }
@@ -385,7 +387,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     if (part === "base" && row[8]) continue;
     const cand = capsOfNo(no, part === "assist");
     const caps = part === "base" ? slotCaps(no, assistNo) : slotCaps(baseNo, no);
-    const keys = [...important.keys()];
+    const keys = [...important.keys()].filter((k) => !important.get(k).note);
     const kept = keys.filter((c) => caps.has(c));
     const lost = keys.filter((c) => !caps.has(c));
     const w = (list) => list.reduce((sum, c) => sum + important.get(c).weight, 0);
@@ -688,9 +690,11 @@ function renderImportant(r) {
   if (!r.important?.size) return "";
   const entries = [...r.important].sort((a, b) => b[1].weight - a[1].weight);
   const major = entries.filter(([, v]) => v.weight >= MAJOR_WEIGHT);
-  const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT && !v.teamWide);
+  const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT && !v.teamWide && !v.optional && !v.note);
   const chips = major.map(([c, v]) => `<span class="tag${v.author ? " tag-author" : ""}">${esc(capLabel(c))}${v.minDur ? `（${v.minDur}ターン以上）` : ""}${v.minHaste ? `（${v.minHaste}ターン以上・${v.fireAtFloor ?? 1}Fで使用）` : ""}<small>・${esc(v.why)}</small></span>`).join("");
-  const team = entries.filter(([, v]) => v.teamWide).map(([c, v]) => `<div class="sub-line muted">チーム全体で必要: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("");
+  const team = entries.filter(([, v]) => v.teamWide).map(([c, v]) => `<div class="sub-line muted">チーム全体で必要: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("")
+    + entries.filter(([, v]) => v.optional).map(([c, v]) => `<div class="sub-line muted">条件付き: ${esc(capLabel(c))} ・${esc(v.why)}</div>`).join("")
+    + entries.filter(([, v]) => v.note).map(([, v]) => `<div class="sub-line"><span class="st st-ok">役割メモ</span> ${esc(v.why)}</div>`).join("");
   const rest = minor.length ? `<div class="sub-line muted">耐性など: ${minor.map(([c]) => esc(capLabel(c))).join("・")}</div>` : "";
   return `${chips ? `<div class="tags imp">${chips}</div>` : ""}${team}${rest}`;
 }

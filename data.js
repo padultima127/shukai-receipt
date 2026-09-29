@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 35,
+  "version": 36,
   "seed": true,
   "monsters": [
     {
@@ -9529,7 +9529,8 @@ window.PAD_SEED = {
           "roles": [
             {
               "cap": "reduce",
-              "why": "3Fでリーダー・フレンドの軽減が剥がれた時のダメージを、HP倍率のないリーダースキルで受けるための軽減"
+              "why": "軽減はなくてもよい。ただし、軽減なし＋割合回復だけでダンジョン内の全ダメージを耐えられるかは要確認",
+              "optional": true
             },
             {
               "cap": "voidPierce",
@@ -9542,6 +9543,18 @@ window.PAD_SEED = {
               "teamWide": false,
               "minHaste": 2,
               "fireAtFloor": 1
+            }
+          ]
+        },
+        {
+          "target": 12960,
+          "part": "base",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "leaderSkill",
+              "why": "リーダーの一番の理由は、L字消しで入る固定2000万ダメージ",
+              "note": true
             }
           ]
         }
