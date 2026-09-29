@@ -325,6 +325,37 @@ function capsOfNo(no, asAssist) {
 }
 
 // 枠（本体＋アシスト）全体の能力
+// 暗闇・お邪魔・毒耐性の%（武器は覚醒アシスト持ちのときだけ）
+const RESIST_KEYS = ["darkResist", "jammerResist", "poisonResist"];
+function resistOf(no, asAssist) {
+  const row = MDB.get(no);
+  if (!row || (asAssist && !row[8])) return [0, 0, 0];
+  return String(row[14] ?? "0.0.0").split(".").map(Number);
+}
+// パーティー全体の耐性%（mem の part を candNo に差し替えた場合）
+function teamResist(team, mem, part, candNo) {
+  const total = [0, 0, 0];
+  for (const m of team.members.filter((x) => !team.multi || x.p === mem.p)) {
+    const b = m === mem && part === "base" ? candNo : monster(m.id)?.no;
+    const a = m === mem && part === "assist" ? candNo : assistNoOf(m);
+    [resistOf(b, false), a ? resistOf(a, true) : [0, 0, 0]].forEach((r) => r.forEach((v, i) => (total[i] += v)));
+  }
+  return total;
+}
+
+// パーティー全体のスキブ数（mem の part を candNo に差し替えた場合。candNo 省略で元の編成）
+function teamSkillBoost(team, mem, part, candNo) {
+  let n = 0;
+  for (const m of team.members.filter((x) => !team.multi || x.p === mem.p)) {
+    const b = candNo && m === mem && part === "base" ? candNo : monster(m.id)?.no;
+    const a = candNo && m === mem && part === "assist" ? candNo : assistNoOf(m);
+    n += MDB.get(b)?.[15] ?? 0;
+    const ar = a && MDB.get(a);
+    if (ar?.[8]) n += ar[15] ?? 0;
+  }
+  return n;
+}
+
 // 共鳴: 本体と武器の主属性が同じ、かつタイプが1つ以上一致
 function resonates(baseNo, assistNo) {
   const b = MDB.get(baseNo);
@@ -413,6 +444,24 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     if (part === "base" && row[8]) continue;
     const cand = capsOfNo(no, part === "assist");
     const caps = part === "base" ? slotCaps(no, assistNo) : slotCaps(baseNo, no);
+    // 耐性は「パーティー全体で100%あればよい」（作者談）。足りていればこの枠になくても保持扱い
+    const tr = teamResist(team, mem, part, no);
+    RESIST_KEYS.forEach((k, i) => {
+      if (!important.get(k)?.teamWide) return;
+      if (tr[i] >= 100) caps.add(k);
+      else caps.delete(k);
+    });
+    // スキブは「サノス等が必要な階で使えるだけ」が条件。元の編成の合計を下回らなければ保持扱い
+    let sbShort = 0;
+    if (important.get("skillBoost")?.byAuthor) {
+      const need = teamSkillBoost(team, mem);
+      const got = teamSkillBoost(team, mem, part, no);
+      if (got >= need) caps.add("skillBoost");
+      else {
+        caps.delete("skillBoost");
+        sbShort = need - got;
+      }
+    }
     const keys = [...important.keys()].filter((k) => !important.get(k).note);
     const kept = keys.filter((c) => caps.has(c));
     const lost = keys.filter((c) => !caps.has(c));
@@ -455,6 +504,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     if (hasteShort) score -= 15;
     if (lateFire) score -= 15;
     if (resetRisk) score -= 15;
+    if (sbShort) score -= sbShort * 4;
     // 作者がレシートで挙げている代用は最優先
     const endorsed = endorsedFor(team, part === "base" ? baseNo : assistNo);
     const isEndorsed = endorsed?.nos.some((n) => familyOf(n) === familyOf(no));
@@ -476,7 +526,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -705,6 +755,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const endorsedBadge = c.endorsed ? `<span class="st st-ok">作者公認の代用</span> ` : "";
     const hs = c.hasteShort ? `<span class="ng">✗ヘイスト${c.candHaste || 0}ターン（必要${c.hasteShort}ターン。足りない分をほかの枠で補う必要あり）</span>` : "";
     const late = c.lateFire ? `<span class="ng">✗スキル${c.candTurn}ターンで元（${c.origTurn}ターン）より重く、${c.lateFire}Fで使えない可能性</span>` : "";
+    const sb = c.sbShort ? `<span class="ng">✗パーティーのスキブが${c.sbShort}個減る（必要な階でスキルが溜まるか要確認）</span>` : "";
     const reset = c.resetRisk ? `<span class="ng">✗${c.resetRisk}Fのアシスト無効でスキルターンがリセットされ、間に合わない可能性</span>` : "";
     const short = c.durShort ? `<span class="ng">✗効果${c.cDur}ターンで、必要な${c.durShort}ターンに届かない</span>` : "";
     const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
@@ -723,7 +774,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
     return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, sa, short, hs, late, reset, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
+      <div class="alt-caps">${[attr, fire, sa, short, hs, late, reset, sb, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
   });
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }

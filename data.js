@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 47,
+  "version": 48,
   "seed": true,
   "monsters": [
     {
@@ -9552,6 +9552,26 @@ window.PAD_SEED = {
               "teamWide": false,
               "minHaste": 2,
               "fireAtFloor": 1
+            },
+            {
+              "cap": "lShape",
+              "why": "L字消し攻撃+は火力の補強になるのであると助かるが必須ではない",
+              "optional": true
+            },
+            {
+              "cap": "jammerResist",
+              "why": "お邪魔耐性は必須。ただしパーティー全体で100%あれば問題ない",
+              "teamWide": true
+            },
+            {
+              "cap": "hpAwkNote",
+              "why": "HP強化は耐久が足りていれば不要",
+              "note": true
+            },
+            {
+              "cap": "defZeroNote",
+              "why": "防御0は状態異常無効の敵に効かないので役割ではない",
+              "note": true
             }
           ]
         },
@@ -9644,8 +9664,14 @@ window.PAD_SEED = {
               "cap": "dropEnhance",
               "why": "覚醒のドロップ強化はおまけ（キコルのドロップ強化の処理時間を短縮）",
               "optional": true
+            },
+            {
+              "cap": "skillFree",
+              "why": "スキルは使わないので何でもよい。副属性変更（水）も関係ない",
+              "note": true
             }
-          ]
+          ],
+          "onlyListed": true
         },
         {
           "target": 6978,
@@ -9675,11 +9701,6 @@ window.PAD_SEED = {
               "teamWide": true
             },
             {
-              "cap": "jammerResist",
-              "why": "編成全体でお邪魔耐性を盛るため",
-              "teamWide": true
-            },
-            {
               "cap": "darkResist",
               "why": "編成全体で暗闇耐性を盛るため",
               "teamWide": true
@@ -9688,6 +9709,16 @@ window.PAD_SEED = {
               "cap": "dropEnhance",
               "why": "スキルのドロップ強化はおまけ",
               "optional": true
+            },
+            {
+              "cap": "teamHp",
+              "why": "チームHP強化は耐久が足りていれば不要",
+              "optional": true
+            },
+            {
+              "cap": "jammerResist",
+              "why": "毒・お邪魔・暗闇耐性をパーティー全体で盛る（全体で100%あれば問題ない）",
+              "teamWide": true
             }
           ]
         },
@@ -9728,6 +9759,20 @@ window.PAD_SEED = {
               "cap": "attrAbsorbNull",
               "why": "1Fから使ってクリアまで続く属性吸収無効（18ターン）",
               "minDur": 10
+            },
+            {
+              "cap": "cloudResist",
+              "why": "雲耐性で、L字（覚醒）がつながっているか確認しやすくする"
+            },
+            {
+              "cap": "skillBoost",
+              "why": "スキブはサノスを8Fで使うため＆初手で功などの武器を使えるようにするため",
+              "teamWide": true
+            },
+            {
+              "cap": "otherNote",
+              "why": "操作時間3倍・火列強化などその他の覚醒はおまけ",
+              "note": true
             }
           ]
         },

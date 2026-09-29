@@ -200,11 +200,16 @@ def main():
             skill_numbers(m.get("skill"), skills),
             # タイプ（共鳴判定用）。0 は空き枠の埋め値として扱う
             ".".join(str(t) for t in (m.get("types") or []) if t),
+            # 暗闇・お邪魔・毒耐性の%（通常20%、+は100%）。パーティー合計100%の判定用
+            ".".join(str(min(100, sum(20 if a == n else 100 if a == p else 0 for a in awakens)))
+                     for n, p in ((11, 68), (12, 69), (13, 70))),
+            # スキルブーストの数（スキブ+ は2）
+            sum(1 if a == 21 else 2 if a == 56 else 0 for a in awakens),
         ])
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))
