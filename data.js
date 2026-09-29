@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 45,
+  "version": 47,
   "seed": true,
   "monsters": [
     {
@@ -9763,6 +9763,34 @@ window.PAD_SEED = {
               "note": true
             }
           ]
+        },
+        {
+          "target": 10939,
+          "part": "assist",
+          "source": "作者本人（@pad_ultima127）の説明",
+          "roles": [
+            {
+              "cap": "teamHp",
+              "why": "チームHP強化×3で耐久を盛る（共鳴なしでも耐久が足りるなら不要）",
+              "optional": true
+            },
+            {
+              "cap": "resonance",
+              "why": "ミーメルと共鳴（主属性が同じ＋タイプが1つ以上一致）してHPを上乗せ（共鳴なしでも耐久が足りるなら不要）",
+              "optional": true
+            },
+            {
+              "cap": "dropEnhance",
+              "why": "ドロップ強化はおまけ",
+              "optional": true
+            },
+            {
+              "cap": "skillFree",
+              "why": "スキルは使わないので何でもよい",
+              "note": true
+            }
+          ],
+          "onlyListed": true
         }
       ],
       "constraints": [

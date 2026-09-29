@@ -74,7 +74,7 @@ AWAKEN_TAGS = {
     22: "row", 23: "row", 24: "row", 25: "row", 26: "row",
     116: "row", 117: "row", 118: "row", 119: "row", 120: "row",
     44: "guardBreak", 19: "fingers", 53: "fingers", 140: "timeResist",
-    21: "skillBoost", 56: "skillBoost", 131: "partBreak", 130: "aging",
+    21: "skillBoost", 56: "skillBoost", 46: "teamHp", 131: "partBreak", 130: "aging",
     45: "fixedDmgAwk", 50: "fixedDmgAwk",
 }
 
@@ -198,11 +198,13 @@ def main():
             ".".join(str(a) for a in awakens if a in DMG_AWAKENS),
             ".".join(str(a) for a in (m.get("superAwakens") or []) if a),
             skill_numbers(m.get("skill"), skills),
+            # タイプ（共鳴判定用）。0 は空き枠の埋め値として扱う
+            ".".join(str(t) for t in (m.get("types") or []) if t),
         ])
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))

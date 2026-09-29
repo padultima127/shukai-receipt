@@ -201,7 +201,7 @@ const CAP_LABEL = {
   orbChange: "ドロップ変換", boardRefresh: "陣", attrChange: "属性変化", transform: "変身", delayResist: "遅延耐性",
   sealResist: "封印耐性", levitate: "浮遊", assistVoidResist: "アシスト無効耐性", cloudResist: "雲耐性",
   tapeResist: "操作不可耐性", darkResist: "暗闇耐性", jammerResist: "お邪魔耐性", poisonResist: "毒耐性",
-  afternoonTea: "紅茶", bindResist: "バインド耐性", bindHealAwk: "バインド回復(覚醒)", dropEnhance: "ドロップ強化",
+  afternoonTea: "紅茶", bindResist: "バインド耐性", bindHealAwk: "バインド回復(覚醒)", dropEnhance: "ドロップ強化", teamHp: "チームHP強化", resonance: "共鳴",
   combo7: "7コンボ強化", combo10: "10コンボ強化", combo15: "15コンボ強化", lShape: "L字", tShape: "T字", cross: "十字",
   row: "列強化", guardBreak: "ガードブレイク", fingers: "操作時間延長", timeResist: "操作時間変更耐性",
   partBreak: "部位破壊", aging: "熟成", fixedDmgAwk: "追加攻撃", skillBoost: "スキブ", oneShotAssist: "使い切り", haste: "ヘイスト",
@@ -325,10 +325,21 @@ function capsOfNo(no, asAssist) {
 }
 
 // 枠（本体＋アシスト）全体の能力
+// 共鳴: 本体と武器の主属性が同じ、かつタイプが1つ以上一致
+function resonates(baseNo, assistNo) {
+  const b = MDB.get(baseNo);
+  const a = MDB.get(assistNo);
+  if (!b || !a || !b[2] || b[2] !== a[2]) return false;
+  const bt = new Set(String(b[13] ?? "").split(".").filter(Boolean));
+  return String(a[13] ?? "").split(".").some((t) => t && bt.has(t));
+}
+
 function slotCaps(baseNo, assistNo) {
   const b = baseNo ? capsOfNo(baseNo, false) : null;
   const a = assistNo ? capsOfNo(assistNo, true) : null;
-  return new Set([...(b?.all ?? []), ...(a?.all ?? [])]);
+  const caps = new Set([...(b?.all ?? []), ...(a?.all ?? [])]);
+  if (baseNo && assistNo && resonates(baseNo, assistNo)) caps.add("resonance");
+  return caps;
 }
 
 const dungeonGimmicks = (d) => {
@@ -362,12 +373,17 @@ function importantCaps(mem, team, dungeon) {
   for (const sr of team.slotRoles ?? []) {
     const hit = sr.part === "assist" ? familyOf(assistNoOf(mem)) === familyOf(sr.target) : familyOf(baseNo) === familyOf(sr.target);
     if (!hit) continue;
+    // 作者が「挙げた役割以外は不要」とした枠（スキルを使わない武器など）はギミックからの推定を捨てる
+    if (sr.onlyListed && sr.part === "assist") {
+      const baseAll = capsOfNo(baseNo, false)?.all ?? new Set();
+      for (const [k, v] of reasons) if (!v.byAuthor && !baseAll.has(k)) reasons.delete(k);
+    }
     for (const r of sr.roles) {
       const why = `${r.why}（${sr.source}）`;
-      if (r.note) reasons.set(r.cap, { why, weight: 0, note: true });
-      else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true });
-      else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true });
-      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, mustBeBase: !!r.mustBeBase, part: sr.part, author: true });
+      if (r.note) reasons.set(r.cap, { why, weight: 0, note: true, byAuthor: true });
+      else if (r.optional) reasons.set(r.cap, { why, weight: 4, optional: true, byAuthor: true });
+      else if (r.teamWide) reasons.set(r.cap, { why, weight: 3, teamWide: true, byAuthor: true });
+      else reasons.set(r.cap, { why, weight: 15, minDur: r.minDur ?? null, minHaste: r.minHaste ?? null, fireAtFloor: r.fireAtFloor ?? null, mustBeBase: !!r.mustBeBase, part: sr.part, author: true, byAuthor: true });
     }
   }
   return reasons;
@@ -401,11 +417,13 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const kept = keys.filter((c) => caps.has(c));
     const lost = keys.filter((c) => !caps.has(c));
     const w = (list) => list.reduce((sum, c) => sum + important.get(c).weight, 0);
-    const turnDiff = orig?.turn && cand.turn ? cand.turn - orig.turn : 0;
+    // スキルを使わない武器（作者が「スキルは何でもよい」とした枠）はターン・倍率を比べない
+    const skillFree = part === "assist" && important.has("skillFree");
+    const turnDiff = !skillFree && orig?.turn && cand.turn ? cand.turn - orig.turn : 0;
     const endorsedHit = endorsedFor(team, part === "base" ? baseNo : assistNo)?.nos.some((n) => familyOf(n) === familyOf(no));
     if (!endorsedHit && Math.abs(turnDiff) > TURN_TOLERANCE) continue;
     if (!endorsedHit && !kept.length && important.size) continue;
-    const hasteDiff = orig?.haste ? cand.haste - orig.haste : 0;
+    const hasteDiff = !skillFree && orig?.haste ? cand.haste - orig.haste : 0;
     // 変身キャラ（本体として使う場合）は変身前後のうち長い方の効果ターン・大きい方の倍率
     const skillNums = (r) => {
       const rows = part === "base" && r?.[9] ? familyRows.get(r[9]) : [r];
@@ -416,7 +434,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     };
     const [oDur, oMult] = skillNums(orig?.row);
     const [cDur, cMult] = skillNums(row);
-    const durDiff = oDur && cDur ? cDur - oDur : 0;
+    const durDiff = !skillFree && oDur && cDur ? cDur - oDur : 0;
     // 持続ターンの条件は、その役割を担っている部品（本体 or アシスト）を置き換える時だけ見る
     const needDur = Math.max(0, ...[...important.values()].filter((v) => !v.part || v.part === part).map((v) => v.minDur ?? 0));
     const durShort = needDur && cDur < needDur ? needDur : 0;
@@ -430,7 +448,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const avFloors = (typeof currentDungeon !== "undefined" && currentDungeon?.gimmickFloors?.assistVoid) || [];
     const resetRisk = part === "assist" && partRoles.some((v) => v.fireAtFloor && avFloors.some((f) => f < v.fireAtFloor))
       ? avFloors.filter((f) => partRoles.some((v) => v.fireAtFloor > f))[0] : 0;
-    const multRatio = oMult > 1 && cMult > 0 ? cMult / oMult : null;
+    const multRatio = !skillFree && oMult > 1 && cMult > 0 ? cMult / oMult : null;
     let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2 - Math.max(0, -durDiff) * 1.5;
     if (multRatio) score += Math.max(-6, Math.min(3, Math.log2(multRatio) * 3));
     if (durShort) score -= 20;
