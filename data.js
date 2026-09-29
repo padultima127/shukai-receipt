@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 44,
+  "version": 45,
   "seed": true,
   "monsters": [
     {
@@ -9743,8 +9743,9 @@ window.PAD_SEED = {
             },
             {
               "cap": "skillBoost",
-              "why": "スキブ覚醒（HPが足りていれば不要）",
-              "optional": true
+              "why": "スキブ覚醒（サノスを8Fで使えるだけのスキブが他で足りていれば不要）",
+              "optional": true,
+              "teamWide": true
             },
             {
               "cap": "hpUp",
