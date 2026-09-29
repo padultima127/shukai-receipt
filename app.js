@@ -1233,14 +1233,37 @@ function enduranceSetup(t) {
   for (const sr of t.slotRoles ?? []) {
     for (const r of sr.roles) if (r.cap === "gravity" && r.fireAtFloor) strip.set(r.fireAtFloor, MDB.get(sr.target)?.[1] ?? "");
   }
-  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip };
+  // 属性ダメージ軽減の覚醒（1個7%）。武器は覚醒アシストのときだけ
+  const awkAttr = Object.fromEntries(ATTRS5.map((a) => [a, 0]));
+  for (const m of mems) {
+    const rows = [MDB.get(monster(m.id)?.no)];
+    const a = MDB.get(assistNoOf(m));
+    if (a?.[8]) rows.push(a);
+    for (const r of rows.filter(Boolean)) {
+      String(r[22] || "0.0.0.0.0").split(".").forEach((n, i) => (awkAttr[ATTRS5[i]] += Number(n) * 7));
+    }
+  }
+  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr };
 }
 
+const ATTRS5 = ["火", "水", "木", "光", "闇"];
+// 潜在の属性軽減: 1枠で1%、「＋」は2枠で2.5%。n枠で出せる最大の%
+const latentPct = (slots) => Math.floor(slots / 2) * 2.5 + (slots % 2);
+const latentText = (slots) => {
+  const plus = Math.floor(slots / 2);
+  const one = slots % 2;
+  return [plus ? `属性軽減＋×${plus}` : "", one ? `属性軽減×${one}` : ""].filter(Boolean).join("・");
+};
+
 // skillRed: スキルの軽減%（0 ならなし）。LSの軽減が剥がれる攻撃（noLsReduce）にはスキルの軽減だけが乗る
-function simulateEndurance(d, setup, maxHp, skillRed = 0) {
+// latent: 潜在の属性軽減%（属性 → %）。属性軽減は覚醒と潜在の合計で、LS・スキルの軽減と掛け合わせる
+// 敵が数体のうち1体の攻撃（attrs が複数）は、一番軽減が少ない属性で計算する（どれが出ても耐えられるか）
+function simulateEndurance(d, setup, maxHp, skillRed = 0, latent = {}) {
+  const attrRed = (a) => (ATTRS5.includes(a) ? Math.min(100, (setup.awkAttr?.[a] ?? 0) + (latent[a] ?? 0)) : 0);
   let hp = maxHp;
   const rows = [];
   let deadAt = null;
+  let fail = null;
   for (const f of d.damage.floors) {
     // 階に入る前のターン終わりに回復（毎ターン回復生成なら満タン）
     hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
@@ -1257,42 +1280,76 @@ function simulateEndurance(d, setup, maxHp, skillRed = 0) {
         continue;
       }
       const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
-      const red = h.noLsReduce ? skillRed / 100 : 1 - (1 - setup.reduce) * (1 - skillRed / 100);
+      // 割合ダメージには属性軽減を乗せない（安全側）
+      const attrs = h.attrs ?? [];
+      const worst = h.ratio || !attrs.length ? null : attrs.reduce((w, a) => (attrRed(a) < attrRed(w) ? a : w), attrs[0]);
+      const ar = worst ? attrRed(worst) : 0;
+      const base = h.noLsReduce ? skillRed / 100 : 1 - (1 - setup.reduce) * (1 - skillRed / 100);
+      const red = 1 - (1 - base) * (1 - ar / 100);
       const taken = Math.round(raw * (1 - red));
       hp -= taken;
-      rows.push({ floor: f.floor, label: h.label, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
+      rows.push({ floor: f.floor, label: h.label, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
       if (hp <= 0) {
         deadAt = f.floor;
+        fail = { attrs: h.ratio ? [] : attrs };
         break;
       }
     }
     if (deadAt != null) break;
   }
-  return { rows, deadAt };
+  return { rows, deadAt, fail };
 }
 
-function renderEnduranceResult(t, d, maxHp) {
+// 倒れる場合に、何属性の軽減潜在を何枠ぶん振れば全フロア耐えられるか（少ない枠から順に試す）
+function suggestLatents(d, setup, maxHp, skillRed, latent0) {
+  const slots = Object.fromEntries(ATTRS5.map((a) => [a, 0]));
+  const current = () => Object.fromEntries(ATTRS5.map((a) => [a, (latent0[a] ?? 0) + latentPct(slots[a])]));
+  // パーティーの潜在枠は最大48（6体×8枠）
+  for (let i = 0; i <= 48; i++) {
+    const sim = simulateEndurance(d, setup, maxHp, skillRed, current());
+    if (sim.deadAt == null) return { ok: true, slots };
+    const cand = (sim.fail?.attrs ?? []).filter((a) => ATTRS5.includes(a));
+    if (!cand.length) return { ok: false, slots, floor: sim.deadAt, reason: "属性軽減が効かない攻撃（無属性・割合ダメージ）" };
+    // 敵が数体のうち1体の場合は、一番軽減が少ない属性に1枠足す
+    const cur = current();
+    const a = cand.reduce((w, x) => ((setup.awkAttr[x] ?? 0) + cur[x] < (setup.awkAttr[w] ?? 0) + cur[w] ? x : w), cand[0]);
+    slots[a]++;
+  }
+  return { ok: false, slots, reason: "パーティーの潜在枠（最大48枠）を全部属性軽減にしても足りない" };
+}
+
+function renderLatentAdvice(d, setup, maxHp, skillRed, latent, sim) {
+  if (sim.deadAt == null) return "";
+  const sg = suggestLatents(d, setup, maxHp, skillRed, latent);
+  const used = ATTRS5.filter((a) => sg.slots[a]);
+  if (!sg.ok) return `<p class="hint">属性軽減の潜在では足りません（${sg.floor ? `${sg.floor}Fの` : ""}${esc(sg.reason)}）。</p>`;
+  const total = used.reduce((n, a) => n + sg.slots[a], 0);
+  return `<p class="advice">潜在覚醒の枠が空いていれば: ${used.map((a) => `<strong>${a}</strong>の${latentText(sg.slots[a])}（${latentPct(sg.slots[a])}%・${sg.slots[a]}枠）`).join("、")}を振れば全フロア耐えられる計算です（合計${total}枠。パーティー全体で振り分けてOK）</p>`;
+}
+
+function renderEnduranceResult(t, d, maxHp, latent = {}) {
   const setup = enduranceSetup(t);
-  const sim = simulateEndurance(d, setup, maxHp);
+  const sim = simulateEndurance(d, setup, maxHp, 0, latent);
   // スキルの軽減ありの場合（効果が最後まで続く前提）
-  const withSkill = setup.skillRed
-    ? simulateEndurance(d, setup, maxHp, setup.skillRed)
-    : null;
+  const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
   const skillLine = withSkill
-    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${esc(setup.skillRedFrom)}の${setup.skillRed}%、合計${Math.round((1 - (1 - setup.reduce) * (1 - setup.skillRed / 100)) * 1000) / 10}%）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>`
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${esc(setup.skillRedFrom)}の${setup.skillRed}%、合計${Math.round((1 - (1 - setup.reduce) * (1 - setup.skillRed / 100)) * 1000) / 10}%）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
+       ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "スキルの軽減ありで、潜在覚醒の枠が空いていれば")}`
     : "";
   const heal = setup.healGen
     ? "毎ターン使うスキルで回復ドロップを生成 → 毎ターンHP満タンとして計算"
     : setup.regen
       ? `回復ドロップの毎ターン生成なし → リジェネ（${esc(setup.regenFrom)}の${setup.regen}%）で計算`
       : "回復ドロップの毎ターン生成・リジェネなし → 回復なしで計算";
+  const awk = ATTRS5.filter((a) => setup.awkAttr[a]).map((a) => `${a}${setup.awkAttr[a]}%`).join("・");
   const verdict = sim.deadAt == null
     ? `<p class="ok"><strong>全フロア耐えられる計算です</strong></p>`
     : `<p class="ng"><strong>${sim.deadAt}Fで倒れる計算です</strong></p>`;
-  return `${verdict}${skillLine}
-    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提。スキルの軽減は入れていません）／${heal}</p>
-    <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
-    ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="3">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
+  const attrCell = (r) => (r.worst ? `${esc(r.worst)}${r.attrs.length > 1 ? `<small class="muted">（${esc(r.attrs.join("・"))}のどれか）</small>` : ""}${r.ar ? `<small> −${r.ar}%</small>` : ""}` : r.attrs?.includes("無") ? "無" : "―");
+  return `${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}
+    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
+    <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
+    ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="4">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
 }
 
@@ -1300,9 +1357,12 @@ function renderEndurance(t, d) {
   if (!d?.damage?.floors?.length || t.multi) return "";
   const setup = enduranceSetup(t);
   const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
-  return `<details class="endurance"><summary>耐久チェック（試作）</summary>
+  return `<details class="endurance" data-team="${esc(t.id)}"><summary>耐久チェック（試作）</summary>
     <label class="end-hp-label">チームHP <input type="number" class="end-hp" data-team="${esc(t.id)}" min="1" step="1000" value="${setup.estHp}"></label>
     <p class="hint">初期値は推定です（最大HP＋297、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個。潜在・超覚醒・共鳴は未計算${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
+    <div class="end-lat"><span class="label">振っている潜在の属性軽減（パーティー合計%）</span>
+      ${ATTRS5.map((a) => `<label>${a}<input type="number" class="end-lat-in" data-attr="${a}" min="0" max="100" step="0.5" value="0">%</label>`).join("")}
+    </div>
     <div class="end-result">${renderEnduranceResult(t, d, setup.estHp)}</div>
     <p class="hint">敵の攻撃: <a href="${esc(d.damage.source.url)}" target="_blank" rel="noopener">${esc(d.damage.source.site)}</a>（${esc(d.damage.note)}）${notes ? `<br>${notes}` : ""}</p>
   </details>`;
@@ -2144,13 +2204,14 @@ async function loadVotes(teamId) {
 
 // 耐久チェック: HPを書き換えたら再計算
 $("#results").addEventListener("input", (e) => {
-  const inp = e.target.closest(".end-hp");
-  if (!inp) return;
-  const t = db.teams.find((x) => x.id === inp.dataset.team);
+  const box = e.target.closest(".endurance");
+  if (!box || !e.target.matches(".end-hp, .end-lat-in")) return;
+  const t = db.teams.find((x) => x.id === box.dataset.team);
   const d = t && db.dungeons.find((x) => x.id === t.dungeonId);
-  const hp = Number(inp.value);
+  const hp = Number(box.querySelector(".end-hp").value);
   if (!t || !d || !(hp > 0)) return;
-  inp.closest(".endurance").querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, hp);
+  const latent = Object.fromEntries([...box.querySelectorAll(".end-lat-in")].map((i) => [i.dataset.attr, Math.max(0, Number(i.value) || 0)]));
+  box.querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, hp, latent);
 });
 
 $("#results").addEventListener("click", (e) => {

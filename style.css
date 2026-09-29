@@ -301,3 +301,8 @@ button:disabled { opacity: .6; cursor: wait; }
   text-shadow: none; font-variant-numeric: tabular-nums; text-align: center;
 }
 .icon-assist .ct { top: -7px; right: -9px; font-size: 9px; }
+.end-lat { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; margin-block: 6px; }
+.end-lat .label { width: 100%; font-size: 12px; color: var(--muted); }
+.end-lat label { display: inline-flex; align-items: center; gap: 4px; }
+.end-lat input { width: 4.5em; font-variant-numeric: tabular-nums; }
+.endurance .advice { padding: 6px 10px; border-radius: 8px; background: var(--accent-soft); }

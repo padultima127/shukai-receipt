@@ -343,12 +343,14 @@ def main():
             # 「【◯ターン後に発動】」の◯（遅れて発動するスキル。なければ0）
             delayed_activation(m.get("skill"), skills),
             effect_durations(m.get("skill"), skills),
+            # 属性ダメージ軽減の覚醒の数（火.水.木.光.闇、1個7%）
+            ".".join(str(awakens.count(a)) for a in (4, 5, 6, 7, 8)) if any(a in awakens for a in (4, 5, 6, 7, 8)) else "",
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))

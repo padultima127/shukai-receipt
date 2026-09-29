@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 56,
+  "version": 58,
   "seed": true,
   "monsters": [
     {
@@ -3407,7 +3407,7 @@ window.PAD_SEED = {
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/444087",
           "date": "2026-09-30"
         },
-        "note": "先制行動と超根性発動時の攻撃のみ。味方の攻撃→敵の攻撃の順なので、ワンパンする階は先制以外受けない前提（通常攻撃は数えない）",
+        "note": "先制行動と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提。敵の属性はゲームウィズの敵アイコン（図鑑No.）から判定",
         "floors": [
           {
             "floor": 1,
@@ -3419,7 +3419,11 @@ window.PAD_SEED = {
               {
                 "label": "超根性発動時 現HP500%割合",
                 "ratio": 500,
-                "kind": "superResolve"
+                "kind": "superResolve",
+                "attrs": [
+                  "水",
+                  "木"
+                ]
               }
             ],
             "note": "リーダーチェンジ済みで2,050,000ダメージの行動あり／2F突破時にLSの軽減が剥がれ、1ターン経過扱いになる（効果ターンのあるスキル・「◯ターン後に発動」も1ターン進む。@pad_ultima127 の説明）",
@@ -3432,36 +3436,78 @@ window.PAD_SEED = {
                 "label": "先制（マイクロ）",
                 "dmg": 154000,
                 "noLsReduce": true,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "火",
+                  "水",
+                  "木",
+                  "光",
+                  "闇"
+                ]
               }
             ],
-            "note": "2F突破時にLSの軽減が剥がれ、その状態で受ける（ゲームウィズ「リーダースキル無しで154,000ダメージ」）"
+            "note": "2F突破時にLSの軽減が剥がれ、その状態で受ける（ゲームウィズ「リーダースキル無しで154,000ダメージ」）／敵は5体のうち1体（火・水・木・光・闇のどれか）"
           },
           {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "先制（レッドクレブリン）",
                 "dmg": 550000,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "先制（グリーンクレブリン）",
+                "dmg": 550000,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              },
+              {
+                "label": "先制（ブルー／イエロージェルン）",
+                "dmg": 550000,
+                "kind": "preemptive",
+                "attrs": [
+                  "水",
+                  "光"
+                ]
               }
-            ]
+            ],
+            "note": "敵3体がそれぞれ550,000の先制（合計1,650,000）。クレブリン2体は必ず出現、ジェルンは水か光のどちらか"
           },
           {
             "floor": 5,
             "hits": [
               {
-                "label": "先制（14コンボ吸収の敵）",
+                "label": "先制（テュオレ）",
                 "dmg": 2250000,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "光"
+                ]
               },
               {
-                "label": "初回行動時（攻撃力2.5倍の敵）",
+                "label": "初回行動時（プリシラ・攻撃力2.5倍）",
                 "dmg": 5000000,
-                "kind": "turn"
+                "kind": "turn",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "初回行動時（カティア）",
+                "dmg": 2250000,
+                "kind": "turn",
+                "attrs": [
+                  "闇"
+                ]
               }
             ],
-            "note": "出る敵は3体のうち1体。2,250,000の先制は1体だけ（ほかは先制でダメージなし、または初回行動時）"
+            "note": "敵は3体のうち1体（プリシラ＝火、テュオレ＝光、カティア＝闇）。先制でダメージがあるのはテュオレだけ"
           },
           {
             "floor": 6,
@@ -3469,9 +3515,15 @@ window.PAD_SEED = {
               {
                 "label": "先制",
                 "dmg": 2300000,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "火",
+                  "水",
+                  "木"
+                ]
               }
-            ]
+            ],
+            "note": "敵は3体のうち1体（火・水・木）"
           },
           {
             "floor": 7,
@@ -3479,9 +3531,14 @@ window.PAD_SEED = {
               {
                 "label": "先制（2体目）",
                 "dmg": 2350000,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "火",
+                  "水"
+                ]
               }
-            ]
+            ],
+            "note": "2体目がミネルヴァ（火）かネプチューン（水）のとき。バステトなら先制ダメージなし"
           },
           {
             "floor": 8,
@@ -3489,7 +3546,10 @@ window.PAD_SEED = {
               {
                 "label": "超根性発動時",
                 "dmg": 3720000,
-                "kind": "superResolve"
+                "kind": "superResolve",
+                "attrs": [
+                  "火"
+                ]
               }
             ]
           },
@@ -3499,12 +3559,18 @@ window.PAD_SEED = {
               {
                 "label": "先制 現HP200%割合",
                 "ratio": 200,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
               },
               {
                 "label": "先制",
                 "dmg": 2375000,
-                "kind": "preemptive"
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
               }
             ],
             "note": "以降4ターン毎に2,650,000。20ターン目以降は毎ターン25,000,000"
