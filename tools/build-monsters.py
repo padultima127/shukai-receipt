@@ -105,15 +105,20 @@ def skill_info(ids, skills):
         for tag, pat in SKILL_TAGS:
             if re.search(pat, text):
                 tags.add(tag)
-        # エンハンスの種類: 全体 / 個別（自分） / タイプ / 属性（どれが条件になるかで代用できるかが変わる）
-        if re.search(r"全員の攻撃力", text):
-            tags.add("enhanceAll")
-        if re.search(r"自分の攻撃力|自身の攻撃力", text):
-            tags.add("enhanceSelf")
-        for tname in re.findall(r"\[(\S+?)タイプ\]の攻撃力", text):
+        # エンハンスは2種類（本人の説明）:
+        #   全体エンハンス = タイプ・属性・覚醒数を基準にするもの
+        #   個別エンハンス = 自分・特定の位置（右隣・リーダー等）・味方全員（「全員の攻撃力」）
+        # 条件付きスキル用に、全体エンハンスはどのタイプ/属性かも残す
+        types = re.findall(r"\[(\S+?)タイプ\][^。]*?攻撃力", text)
+        attrs = re.findall(r"\[?([火水木光闇])\]?属性の攻撃力", text)
+        if types or attrs or re.search(r"覚醒[^。]*数に応じて[^。]*攻撃力|覚醒[^。]*1個につき[^。]*攻撃力", text):
+            tags.add("enhanceZentai")
+        for tname in types:
             tags.add("enhanceType:" + tname)
-        for aname in re.findall(r"\[?([火水木光闇])\]?属性の攻撃力", text):
+        for aname in attrs:
             tags.add("enhanceAttr:" + aname)
+        if re.search(r"(自分|自身|全員|右隣|左隣|リーダー|助っ人|サブ)[^。]{0,6}の攻撃力", text):
+            tags.add("enhanceKobetsu")
         for other, n in HASTE.findall(text):
             tags.add(f"h{n}")
         # スキルで付与される覚醒（例: [浮遊]を付与）は覚醒の能力として扱う

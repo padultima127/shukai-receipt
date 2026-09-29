@@ -212,10 +212,10 @@ const KEY_SKILL_CAPS = new Set(["voidPierce", "dmgAbsorbNull", "attrAbsorbNull",
   "fixedDmg", "lockRelease", "haste"]);
 const TURN_TOLERANCE = 5;
 const MAJOR_WEIGHT = 5; // これ以上の重みの能力を「重要」として目立たせる（未満は耐性など） // スキルターンのずれの許容（本人指定: 3〜5ターンなら可、ずれは表示）
-CAP_LABEL.enhanceAll = "全体エンハンス";
-CAP_LABEL.enhanceSelf = "個別エンハンス（自分）";
+CAP_LABEL.enhanceZentai = "全体エンハンス";
+CAP_LABEL.enhanceKobetsu = "個別エンハンス";
 const capLabel = (c) =>
-  CAP_LABEL[c] ?? (c.startsWith("enhanceType:") ? `${c.slice(12)}タイプエンハンス` : c.startsWith("enhanceAttr:") ? `${c.slice(12)}属性エンハンス` : c);
+  CAP_LABEL[c] ?? (c.startsWith("enhanceType:") ? `全体エンハンス（${c.slice(12)}タイプ）` : c.startsWith("enhanceAttr:") ? `全体エンハンス（${c.slice(12)}属性）` : c);
 
 // ---------- 火力覚醒 ----------
 // 覚醒番号 → [種類, 倍率]（padmdb の覚醒データの damage_multiplier など。条件付きの倍率は条件を満たした時の値）
