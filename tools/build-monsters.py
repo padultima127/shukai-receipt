@@ -267,6 +267,46 @@ def delayed_activation(ids, skills):
     return n
 
 
+# アップデートで変わったら編成に影響する項目（行のインデックス → 表示名）
+TRACKED = {5: "スキルターン", 6: "スキルの能力", 7: "覚醒", 12: "スキルの効果ターン・倍率", 21: "能力ごとの効果ターン", 17: "最大HP", 19: "リーダースキル"}
+
+
+def record_changes(rows, updated):
+    """前回の monsters-db.js と比べて、変わったキャラを monsters-changes.js に追記する（ゲームのアップデート対応）"""
+    root = Path(__file__).resolve().parent.parent
+    prev_file = root / "monsters-db.js"
+    log_file = root / "monsters-changes.js"
+    if not prev_file.exists():
+        return
+    text = prev_file.read_text(encoding="utf-8")
+    prev = {r[0]: r for r in json.loads(text[text.index("rows: ") + 6 : text.rindex(" };")])}
+    log = []
+    if log_file.exists():
+        t = log_file.read_text(encoding="utf-8")
+        log = json.loads(t[t.index("=") + 1 : t.rindex(";")])
+    date = str(updated)[:10]
+    added = 0
+    for r in rows:
+        old = prev.get(r[0])
+        if not old:
+            continue
+        for i, label in TRACKED.items():
+            a = old[i] if i < len(old) else None
+            b = r[i] if i < len(r) else None
+            # 新しく増やした列（前回は存在しない）は変更として数えない
+            if i >= len(old) or a == b:
+                continue
+            log.append({"no": r[0], "date": date, "field": label, "before": a, "after": b})
+            added += 1
+    log = log[-3000:]
+    log_file.write_text(
+        "// 自動生成: tools/build-monsters.py。アップデートでスキルターンなどが変わったキャラの履歴\n"
+        "window.PAD_MONSTER_CHANGES = " + json.dumps(log, ensure_ascii=False, separators=(",", ":")) + ";\n",
+        encoding="utf-8",
+    )
+    print(f"変更: {added}件（履歴 {len(log)}件）")
+
+
 def main():
     monsters = fetch("monster_list_full.json")
     skills = fetch("skill_list.json")
@@ -304,6 +344,7 @@ def main():
             delayed_activation(m.get("skill"), skills),
             effect_durations(m.get("skill"), skills),
         ])
+    record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"

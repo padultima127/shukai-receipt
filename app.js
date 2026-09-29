@@ -856,6 +856,39 @@ function renderImportantPart(list) {
   return `${chips ? `<div class="tags imp">${chips}</div>` : ""}${team}${rest}`;
 }
 
+// ---------- アップデートによる変更 ----------
+const MONSTER_CHANGES = window.PAD_MONSTER_CHANGES ?? [];
+function tagDiff(before, after) {
+  const a = new Set(String(before ?? "").split(",").filter(Boolean));
+  const b = new Set(String(after ?? "").split(",").filter(Boolean));
+  const label = (t) => (/^h\d+$/.test(t) ? `ヘイスト${t.slice(1)}` : capLabel(t.replace(/^grant:/, "")));
+  const add = [...b].filter((t) => !a.has(t)).map(label);
+  const del = [...a].filter((t) => !b.has(t)).map(label);
+  return [add.length ? `追加: ${add.join("・")}` : "", del.length ? `削除: ${del.join("・")}` : ""].filter(Boolean).join("／") || "内容が変更";
+}
+function describeChange(c) {
+  if (c.field === "スキルターン") return `スキルターン ${c.before}→${c.after}`;
+  if (c.field === "最大HP") return `最大HP ${Number(c.before).toLocaleString("ja-JP")}→${Number(c.after).toLocaleString("ja-JP")}`;
+  if (c.field === "スキルの能力" || c.field === "覚醒") return `${c.field}（${tagDiff(c.before, c.after)}）`;
+  return `${c.field}が変更`;
+}
+// 編成の投稿日より後に、その枠（本体・変身前後・アシスト）に入った変更
+function changesSince(mem, since) {
+  const nos = new Set();
+  const base = monster(mem.id)?.no;
+  if (base) (MDB.get(base)?.[9] ? familyRows.get(MDB.get(base)[9]) : [MDB.get(base)]).filter(Boolean).forEach((r) => nos.add(r[0]));
+  const an = assistNoOf(mem);
+  if (an) nos.add(an);
+  return MONSTER_CHANGES.filter((c) => nos.has(c.no) && (!since || c.date >= since));
+}
+function renderChanges(mem, team) {
+  const list = changesSince(mem, team.sourceDate);
+  if (!list.length) return "";
+  return `<div class="sub-line changed"><span class="st st-ng">投稿後にアップデート</span> ${list
+    .map((c) => `${esc(MDB.get(c.no)?.[1] ?? "")}: ${esc(describeChange(c))}（${esc(c.date)}）`)
+    .join("／")}。役割や立ち回りが変わっていないか確認してください</div>`;
+}
+
 function renderMember(r) {
   if (r.status === "free") {
     return `<li class="mem mem-free"><span class="role">サブ</span>
@@ -882,7 +915,7 @@ function renderMember(r) {
   return `<li class="mem mem-${r.status}">
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
     <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}
-      ${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
+      ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
   </li>`;
 }
 

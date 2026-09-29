@@ -1,0 +1,38 @@
+# 図鑑データ（monsters-db.js）を毎日 padmdb の公開JSONから作り直す。
+# アップデートでスキルターンなどが変わったキャラは monsters-changes.js に履歴が残り、
+# 投稿日より後に変わったキャラがいる編成には注意が表示される。
+name: 図鑑データの更新
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # 毎日 6:00（日本時間）
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-monsters
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 図鑑データを作り直す
+        run: python3 tools/build-monsters.py
+      - name: 変わっていればコミット
+        run: |
+          if git diff --quiet -- monsters-db.js monsters-changes.js; then
+            echo "変更なし"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add monsters-db.js monsters-changes.js
+          git commit -m "図鑑データを更新（padmdb）"
+          git push
