@@ -1,0 +1,76 @@
+rules_version = '2';
+// パズドラ周回編成ナビの Firestore セキュリティルール
+// - 閲覧: 承認済み（approved）の編成は誰でも読める。承認待ちは本人と管理者だけ
+// - 登録: Googleログイン必須。必ず承認待ちで作られ、1分に1件まで、項目と文字数をチェック
+// - 承認・却下・削除: 管理者だけ（本人は自分の承認待ちを取り消せる）
+// - 通報: ログインしていれば送れる。読めるのは管理者だけ
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 管理者のメールアドレス（firebase-config.js の PAD_ADMIN_EMAILS と揃える）
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.token.email_verified == true
+        && request.auth.token.email in ['amr.ultima127@gmail.com'];
+    }
+    function signedIn() {
+      return request.auth != null;
+    }
+    function shortStr(v, max) {
+      return v is string && v.size() <= max;
+    }
+    // 登録内容の形式チェック（キーの種類・サイズ）
+    function validTeam(d) {
+      return d.keys().hasOnly(['id', 'userAdded', 'dungeonId', 'title', 'timeSec', 'turns', 'yields', 'members',
+          'steps', 'source', 'author', 'sourceDate', 'metrics', 'plus891Choice', 'newDungeon',
+          'status', 'ownerUid', 'ownerName', 'createdAt'])
+        && shortStr(d.title, 80)
+        && shortStr(d.dungeonId, 60)
+        && d.timeSec is number && d.timeSec > 0 && d.timeSec < 36000
+        && d.members is list && d.members.size() >= 1 && d.members.size() <= 12
+        && (!('steps' in d) || (d.steps is list && d.steps.size() <= 60))
+        && (!('source' in d) || shortStr(d.source, 300))
+        && (!('ownerName' in d) || shortStr(d.ownerName, 60));
+    }
+    // 連投制限: 前回の登録から60秒以上あいていること（初回はOK）
+    function notTooFast(uid) {
+      let before = get(/databases/$(database)/documents/users/$(uid));
+      return !exists(/databases/$(database)/documents/users/$(uid))
+        || before.data.lastSubmitAt < request.time - duration.value(60, 's');
+    }
+
+    match /teams/{id} {
+      allow read: if resource.data.status == 'approved'
+        || (signedIn() && resource.data.ownerUid == request.auth.uid)
+        || isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.status == 'pending'
+        && request.resource.data.ownerUid == request.auth.uid
+        && request.resource.data.id == id
+        && validTeam(request.resource.data)
+        && notTooFast(request.auth.uid)
+        && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.lastSubmitAt == request.time;
+      // 承認・却下は管理者だけ（中身は変えずに status と reviewedAt だけ）
+      allow update: if isAdmin()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt'])
+        && request.resource.data.status in ['approved', 'rejected', 'pending'];
+      allow delete: if isAdmin()
+        || (signedIn() && resource.data.ownerUid == request.auth.uid && resource.data.status == 'pending');
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['lastSubmitAt'])
+        && request.resource.data.lastSubmitAt == request.time;
+    }
+
+    match /reports/{id} {
+      allow read, delete: if isAdmin();
+      allow create: if signedIn()
+        && request.resource.data.keys().hasOnly(['teamId', 'reason', 'reporterUid', 'createdAt'])
+        && request.resource.data.reporterUid == request.auth.uid
+        && shortStr(request.resource.data.reason, 500)
+        && request.resource.data.createdAt == request.time;
+    }
+  }
+}

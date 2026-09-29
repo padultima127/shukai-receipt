@@ -1,0 +1,1862 @@
+"use strict";
+
+const DATA_KEY = "pad-farming:data";
+const BOX_KEY = "pad-farming:box";
+// ロード・リザルト画面などダンジョン外で1周ごとにかかる秒数
+const RUN_OVERHEAD_SEC = 20;
+// 経験値効率で並べるモード → evaluate() の値の名前
+const EXP_MODES = { expHour: "expPerHour", expStamina: "expPerStamina" };
+const MODE_WEIGHTS = {
+  ease: { speed: 0.25, ease: 0.75 },
+  balance: { speed: 0.5, ease: 0.5 },
+  speed: { speed: 0.8, ease: 0.2 },
+};
+// 楽さの内訳の重み（合計1）。クリアターン・レシートの長さ・複雑さ・+891必須かどうか
+const EASE_WEIGHTS = { turns: 0.3, length: 0.3, complexity: 0.25, plus891: 0.15 };
+const PENALTY_MISSING = 35; // 代用も見つからない枠1つあたり
+const PENALTY_SUBSTITUTE = 5;
+const SUB_SLOTS = 4; // パズドラの編成は リーダー1 + サブ4 + フレンド1 の6体 // 代用で埋めた枠1つあたり（火力・耐久が落ちる想定）
+
+// ---------- 保存 ----------
+function loadJSON(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+function saveJSON(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {
+    /* 保存できない環境でも動作は続ける */
+  }
+}
+
+// 旧バージョンの架空サンプルが保存されていたら実データの初期データに置き換える
+let db = loadJSON(DATA_KEY, null);
+if (!db || db.sample) db = structuredClone(window.PAD_SEED);
+else if ((db.version ?? 0) < window.PAD_SEED.version) {
+  // 初期データが更新されていたら、同じidは上書き・新しいidは追加（自分で取り込んだデータは残す）
+  for (const k of ["monsters", "items", "dungeons", "teams"]) {
+    for (const rec of window.PAD_SEED[k]) {
+      const i = db[k].findIndex((x) => x.id === rec.id);
+      if (i >= 0) db[k][i] = structuredClone(rec);
+      else db[k].push(structuredClone(rec));
+    }
+  }
+  // 初期データ側で統合・削除したダンジョンは消し、そこにあった編成は統合先へ移す
+  const removed = new Set(window.PAD_SEED.removed?.dungeons ?? []);
+  db.dungeons = db.dungeons.filter((d) => !removed.has(d.id));
+  const removedTeams = new Set(window.PAD_SEED.removed?.teams ?? []);
+  db.teams = db.teams.filter((t) => !removedTeams.has(t.id));
+  for (const t of db.teams) {
+    if (!removed.has(t.dungeonId)) continue;
+    const seedTeam = window.PAD_SEED.teams.find((x) => x.id === t.id);
+    if (seedTeam) t.dungeonId = seedTeam.dungeonId;
+  }
+  db.version = window.PAD_SEED.version;
+  saveJSON(DATA_KEY, db);
+}
+let box = new Set(loadJSON(BOX_KEY, []));
+let mode = "balance";
+let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョンで探す)
+const SEARCH_TYPES = {
+  item: { label: "集めたい素材", placeholder: "例: スパノエ、プラス", noun: "素材" },
+  dungeon: { label: "周回したいダンジョン", placeholder: "例: 万寿、ノエル大集合", noun: "ダンジョン" },
+};
+
+// 図鑑（monsters-db.js）: No → [No, 名前, 主属性, 副属性, アシスト可]
+const MDB_ROWS = window.PAD_MONSTER_DB?.rows ?? [];
+const MDB = new Map(MDB_ROWS.map((r) => [r[0], r]));
+const parseNo = (s) => {
+  const m = String(s).trim().match(/^(?:no\.?\s*)?(\d{1,5})$/i);
+  return m ? Number(m[1]) : null;
+};
+
+// No. か名前で図鑑を引く。名前は完全一致を優先
+function lookupMonster(query) {
+  const no = parseNo(query);
+  if (no != null) return MDB.get(no) ?? null;
+  const q = String(query).trim();
+  return MDB_ROWS.find((r) => r[1] === q) ?? null;
+}
+
+function searchMonsterDB(query, limit = 20) {
+  const no = parseNo(query);
+  if (no != null) return MDB.has(no) ? [MDB.get(no)] : [];
+  const n = norm(query);
+  if (!n) return [];
+  const hits = [];
+  // 新しいモンスターほど周回で使われやすいので、No.の大きい順に出す
+  for (let i = MDB_ROWS.length - 1; i >= 0 && hits.length < limit; i--) {
+    if (norm(MDB_ROWS[i][1]).includes(n)) hits.push(MDB_ROWS[i]);
+  }
+  return hits;
+}
+
+const padmdbUrl = (no) => `https://padmdb.rainbowsite.net/monster/${no}`;
+
+// 変身前後は同じキャラとして扱う（図鑑の変身グループ番号。変身しないキャラはNo.そのもの）
+const familyOf = (no) => (no && MDB.get(no)?.[9]) || no;
+const sameChara = (a, b) => a && b && familyOf(a) === familyOf(b);
+
+const byId = (list, id) => list.find((x) => x.id === id);
+const monster = (id) => byId(db.monsters, id);
+const esc = (s) =>
+  String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+const $ = (sel) => document.querySelector(sel);
+
+function persist() {
+  easeRangeCache = null;
+  // 共有データ（shared: true）は公開ページの共有DBから毎回読み込むので、ブラウザには保存しない
+  saveJSON(DATA_KEY, { ...db, teams: db.teams.filter((t) => !t.shared), dungeons: db.dungeons.filter((d) => !d.shared) });
+}
+
+// ---------- 検索 ----------
+// よく使われる略称 → 正式名。データ側の aliases（取り込み時の「別名:」）と併用される
+const BUILTIN_ALIASES = {
+  スパノエ: "スーパーノエルドラゴン",
+  スーパーノエル: "スーパーノエルドラゴン",
+};
+
+// ひらがな→カタカナ、全角英数→半角、空白・中黒除去、小文字化
+function norm(s) {
+  return String(s ?? "")
+    .normalize("NFKC")
+    .replace(/[ぁ-ゖ]/g, (c) => String.fromCharCode(c.charCodeAt(0) + 0x60))
+    .replace(/[\s・]/g, "")
+    .toLowerCase();
+}
+
+function canonicalName(q) {
+  const n = norm(q);
+  const hit = Object.entries(BUILTIN_ALIASES).find(([a]) => norm(a) === n);
+  return hit ? hit[1] : q.trim();
+}
+
+const namesOf = (rec) => [rec.name, ...(rec.aliases ?? [])].map(norm);
+const exactMatches = (list, q) => list.filter((r) => namesOf(r).includes(norm(q)));
+const partialMatches = (list, q) => list.filter((r) => namesOf(r).some((x) => x.includes(norm(q))));
+function matchRecords(list, q) {
+  const exact = exactMatches(list, q);
+  return exact.length ? exact : partialMatches(list, q);
+}
+
+// 入力文字列を、選択中の検索種別（ダンジョン or 素材）で解決する
+// canonical: 略称を正式名に直したもの（未登録時の案内に使う）
+function resolveQuery(q, type) {
+  q = q.trim();
+  const canonical = canonicalName(q);
+  const none = { dungeons: [], item: null, canonical };
+  if (!q) return none;
+  // 完全一致を優先し、なければ部分一致
+  for (const match of [exactMatches, partialMatches]) {
+    for (const key of new Set([q, canonical])) {
+      if (type === "dungeon") {
+        const dungeons = match(db.dungeons, key);
+        if (dungeons.length) return { dungeons, item: null, canonical };
+      } else {
+        const item = match(db.items, key)[0];
+        if (item) {
+          const dungeons = db.dungeons.filter((d) => d.drops.some((x) => x.itemId === item.id));
+          return { dungeons, item, canonical };
+        }
+      }
+    }
+  }
+  return none;
+}
+
+// 枠ごとの所持状況と代用候補
+// ---------- 代用検索（スキル・覚醒の能力ベース） ----------
+const GIMMICK_LABEL = {
+  dmgVoid: "ダメージ無効", dmgAbsorb: "ダメージ吸収", attrAbsorb: "属性吸収", comboAbsorb: "コンボ吸収",
+  resolve: "根性・超根性", assistVoid: "アシスト無効", skillSeal: "スキル封印", awakenVoid: "覚醒無効",
+  board54: "5×4盤面", roulette: "ルーレット", cloud: "雲", tape: "操作不可", skillDelay: "スキル遅延",
+  weakenAwaken: "弱体化目覚め", healDown: "回復力低下", defenseUp: "防御力増加", lock: "ロック",
+  bomb: "爆弾", spike: "トゲ", poison: "毒・猛毒", jammer: "お邪魔", comboDown: "コンボ減少",
+  unerasable: "消せないドロップ", atkDown: "攻撃力デバフ", buffClear: "スキル効果解除",
+  bigHit: "大ダメージ・割合ダメージ", darkness: "暗闇", damageCap: "ダメージ上限変更",
+  maxHpDown: "最大HP減少", timeDown: "操作時間減少", bind: "バインド", shield: "シールド",
+};
+// ギミック → 対策になる能力
+const GIMMICK_COUNTERS = {
+  dmgVoid: ["voidPierce", "voidPierceAwk"], dmgAbsorb: ["dmgAbsorbNull"], attrAbsorb: ["attrAbsorbNull"],
+  comboAbsorb: ["comboAbsorbNull", "comboAdd"], assistVoid: ["levitate", "assistVoidResist"],
+  skillSeal: ["sealResist"], awakenVoid: ["awakenHeal"], board54: ["board76", "board65"],
+  skillDelay: ["delayResist"], weakenAwaken: ["dropEnhance"], cloud: ["cloudResist"], tape: ["tapeResist"],
+  darkness: ["darkResist"], jammer: ["jammerResist", "afternoonTea"], poison: ["poisonResist", "afternoonTea"],
+  lock: ["lockRelease"], bind: ["bindResist", "bindHeal", "bindHealAwk"], comboDown: ["comboAdd"],
+  timeDown: ["fingers", "timeResist"], bigHit: ["reduce", "hpUp"], maxHpDown: ["hpUp"],
+  healDown: ["heal", "regen"], damageCap: ["capUp"], defenseUp: ["guardBreak"], resolve: ["fixedDmg", "gravity"],
+};
+const CAP_LABEL = {
+  voidPierce: "無効貫通", voidPierceAwk: "無効貫通(覚醒)", dmgAbsorbNull: "ダメージ吸収無効", attrAbsorbNull: "属性吸収無効",
+  comboAbsorbNull: "コンボ吸収無効", board76: "7×6化", board65: "6×5化", delay: "遅延", reduce: "軽減", hpUp: "HP倍率",
+  heal: "回復", regen: "リジェネ", enhance: "エンハンス", capUp: "上限解放", comboAdd: "コンボ加算", noSkyfall: "落ちコンなし",
+  lockRelease: "ロック解除", awakenHeal: "覚醒無効回復", bindHeal: "バインド回復", gravity: "割合ダメージ", fixedDmg: "固定ダメージ",
+  orbChange: "ドロップ変換", boardRefresh: "陣", attrChange: "属性変化", transform: "変身", delayResist: "遅延耐性",
+  sealResist: "封印耐性", levitate: "浮遊", assistVoidResist: "アシスト無効耐性", cloudResist: "雲耐性",
+  tapeResist: "操作不可耐性", darkResist: "暗闇耐性", jammerResist: "お邪魔耐性", poisonResist: "毒耐性",
+  afternoonTea: "紅茶", bindResist: "バインド耐性", bindHealAwk: "バインド回復(覚醒)", dropEnhance: "ドロップ強化",
+  combo7: "7コンボ強化", combo10: "10コンボ強化", combo15: "15コンボ強化", lShape: "L字", tShape: "T字", cross: "十字",
+  row: "列強化", guardBreak: "ガードブレイク", fingers: "操作時間延長", timeResist: "操作時間変更耐性",
+  partBreak: "部位破壊", aging: "熟成", fixedDmgAwk: "追加攻撃", skillBoost: "スキブ", oneShotAssist: "使い切り", haste: "ヘイスト",
+};
+// 編成内でこの枠しか持っていなければ重要とみなすスキル能力
+const KEY_SKILL_CAPS = new Set(["voidPierce", "dmgAbsorbNull", "attrAbsorbNull", "comboAbsorbNull", "board76", "board65",
+  "awakenHeal", "bindHeal", "reduce", "hpUp", "enhance", "capUp", "comboAdd", "noSkyfall", "delay", "gravity",
+  "fixedDmg", "lockRelease", "haste"]);
+const TURN_TOLERANCE = 5;
+const MAJOR_WEIGHT = 5; // これ以上の重みの能力を「重要」として目立たせる（未満は耐性など） // スキルターンのずれの許容（本人指定: 3〜5ターンなら可、ずれは表示）
+const capLabel = (c) => CAP_LABEL[c] ?? c;
+
+// ---------- 火力覚醒 ----------
+// 覚醒番号 → [種類, 倍率]（padmdb の覚醒データの damage_multiplier など。条件付きの倍率は条件を満たした時の値）
+// 種類 "stat" は条件なしで常にかかる全パラメータ系
+const DMG_AWK = {
+  27: ["2way", 2.2], 96: ["2way", 4.84], 43: ["c7", 2], 107: ["c7", 4], 61: ["c10", 5], 111: ["c10", 25], 144: ["c15", 100],
+  60: ["L", 2.2], 108: ["L", 4.84], 59: ["healL", 3], 126: ["T", 8], 78: ["cross", 3], 110: ["cross", 9],
+  48: ["vp", 3.5], 109: ["vp", 12.25], 79: ["col3", 3.5], 112: ["col3", 12.25], 80: ["col4", 4.5], 113: ["col4", 20.25],
+  81: ["col5", 5], 114: ["col5", 25], 82: ["link", 12], 57: ["hpHigh", 10], 58: ["hpLow", 10],
+  73: ["attrCombo", 1.3], 74: ["attrCombo", 1.3], 75: ["attrCombo", 1.3], 76: ["attrCombo", 1.3], 77: ["attrCombo", 1.3],
+  121: ["attrCombo", 1.6], 122: ["attrCombo", 1.6], 123: ["attrCombo", 1.6], 124: ["attrCombo", 1.6], 125: ["attrCombo", 1.6],
+  22: ["row", 1.3], 23: ["row", 1.3], 24: ["row", 1.3], 25: ["row", 1.3], 26: ["row", 1.3],
+  116: ["row", 1.9], 117: ["row", 1.9], 118: ["row", 1.9], 119: ["row", 1.9], 120: ["row", 1.9],
+  44: ["gb", 3], 133: ["dual", 50], 134: ["dual", 50], 135: ["dual", 50], 141: ["multi", 50],
+  71: ["jammerKago", 10], 72: ["poisonKago", 10], 128: ["kago", 5], 129: ["kago", 5],
+  31: ["killer", 5], 32: ["killer", 5], 33: ["killer", 5], 34: ["killer", 5], 35: ["killer", 5], 36: ["killer", 5], 37: ["killer", 5], 38: ["killer", 5],
+  127: ["stat", 1.5], 142: ["stat", 1.8], 138: ["stat", 3], 139: ["stat", 3], 145: ["stat", 1.5], 146: ["stat", 1.5], 147: ["stat", 1.5],
+};
+const DMG_LABEL = {
+  "2way": "2体攻撃", c7: "7コンボ強化", c10: "10コンボ強化", c15: "15コンボ強化", L: "L字", healL: "回復L字", T: "T字",
+  cross: "十字", vp: "無効貫通", col3: "3色", col4: "4色", col5: "5色", link: "超つなげ", hpHigh: "HP50%以上",
+  hpLow: "HP50%以下", attrCombo: "属性コンボ強化", row: "列強化", gb: "ガードブレイク", dual: "2属性同時", multi: "達人多色",
+  jammerKago: "お邪魔の加護", poisonKago: "毒の加護", kago: "陰陽の加護", killer: "キラー", stat: "全パラ系",
+};
+
+// 本体の火力覚醒を種類ごとの倍率にまとめる（同じ種類は掛け算）
+function firepowerOf(no) {
+  const out = {};
+  for (const id of String(MDB.get(no)?.[10] ?? "").split(".").filter(Boolean)) {
+    const [type, mult] = DMG_AWK[id] ?? [];
+    if (type) out[type] = (out[type] ?? 1) * mult;
+  }
+  return out;
+}
+
+// 元のキャラが持つ火力覚醒の条件で比べる（元が組んでいた消し方を代用でも組む想定）
+function compareFirepower(origNo, candNo) {
+  const o = firepowerOf(origNo);
+  const c = firepowerOf(candNo);
+  const types = Object.keys(o).filter((t) => t !== "stat");
+  const prod = (f) => types.reduce((x, t) => x * (f[t] ?? 1), 1) * (f.stat ?? 1);
+  const orig = prod(o);
+  const cand = prod(c);
+  const lost = types.filter((t) => (c[t] ?? 1) < o[t]);
+  return { orig, cand, ratio: orig ? cand / orig : 1, lost };
+}
+
+const fmtMult = (x) => (x >= 100 ? Math.round(x).toLocaleString() : x >= 10 ? x.toFixed(0) : x.toFixed(1)) + "倍";
+
+const assistNoOf = (mem) => Number(String(mem.assist ?? "").match(/No\.?\s*(\d+)/)?.[1]) || null;
+
+// 図鑑1体分の能力。アシストとして付ける場合、覚醒は武器（覚醒アシスト持ち）のときだけ本体に付く
+function capsOfNo(no, asAssist) {
+  const row = MDB.get(no);
+  if (!row) return null;
+  const skill = new Set(), awk = new Set();
+  let haste = 0;
+  for (const t of (row[6] ?? "").split(",").filter(Boolean)) {
+    if (/^h\d+$/.test(t)) haste = Math.max(haste, Number(t.slice(1)));
+    else if (t.startsWith("grant:")) awk.add(t.slice(6)); // スキルで付与される覚醒
+    else skill.add(t);
+  }
+  if (haste) skill.add("haste");
+  if (!asAssist || row[8]) for (const t of (row[7] ?? "").split(",").filter(Boolean)) awk.add(t);
+  return { skill, awk, all: new Set([...skill, ...awk]), turn: row[5] || 0, haste, row };
+}
+
+// 枠（本体＋アシスト）全体の能力
+function slotCaps(baseNo, assistNo) {
+  const b = baseNo ? capsOfNo(baseNo, false) : null;
+  const a = assistNo ? capsOfNo(assistNo, true) : null;
+  return new Set([...(b?.all ?? []), ...(a?.all ?? [])]);
+}
+
+const dungeonGimmicks = (d) => {
+  const g = d.gimmicks;
+  if (!g) return [];
+  return [...g.all.map((k) => ({ key: k, sure: true })), ...g.partial.map((p) => ({ key: p.key, sure: false, sites: p.sites }))];
+};
+
+// 枠が失うと困る能力とその理由
+function importantCaps(mem, team, dungeon) {
+  const baseNo = monster(mem.id)?.no;
+  const mine = slotCaps(baseNo, assistNoOf(mem));
+  // 重み: スキルによるギミック対策10、編成内でこの枠だけのスキル8、覚醒の耐性など3。
+  // 片方のサイトにしか載っていないギミックへの対策は半分
+  const skillCaps = new Set([...(capsOfNo(baseNo, false)?.skill ?? []), ...(capsOfNo(assistNoOf(mem), true)?.skill ?? [])]);
+  const reasons = new Map();
+  const put = (c, why, weight) => {
+    if (!reasons.has(c) || reasons.get(c).weight < weight) reasons.set(c, { why, weight });
+  };
+  for (const g of dungeonGimmicks(dungeon)) {
+    for (const c of GIMMICK_COUNTERS[g.key] ?? []) {
+      if (!mine.has(c)) continue;
+      const w = (skillCaps.has(c) ? 10 : 3) * (g.sure ? 1 : 0.5);
+      put(c, `${GIMMICK_LABEL[g.key]}対策${g.sure ? "" : `（${g.sites.join("・")}のみ記載）`}`, w);
+    }
+  }
+  const others = team.members.filter((m) => m !== mem && (!team.multi || m.p === mem.p));
+  const otherCaps = new Set(others.flatMap((m) => [...slotCaps(monster(m.id)?.no, assistNoOf(m))]));
+  for (const c of mine) if (KEY_SKILL_CAPS.has(c) && !otherCaps.has(c)) put(c, "編成内でこの枠だけ", 8);
+  return reasons;
+}
+
+const ownedNos = () => new Set(db.monsters.filter((m) => m.no && box.has(m.id)).map((m) => m.no));
+// 所持判定用: 変身前後どちらを持っていても所持扱い
+const ownedFamilies = () => new Set([...ownedNos()].map(familyOf));
+
+// 欠けている部品（本体 or アシスト）の代用候補を、重要能力をどれだけ守れるかで並べる
+// pool: "owned"（手持ちBOXから）/ "all"（図鑑全体から。手持ちを上に並べる）
+function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3 } = {}) {
+  const baseNo = monster(mem.id)?.no;
+  const assistNo = assistNoOf(mem);
+  const orig = capsOfNo(part === "base" ? baseNo : assistNo, part === "assist");
+  const used = new Set(team.members.flatMap((m) => [monster(m.id)?.no, assistNoOf(m)]).filter(Boolean).map(familyOf));
+  const owned = ownedFamilies();
+  const out = [];
+  const nos = pool === "all" ? MDB_ROWS.map((r) => r[0]) : ownedNos();
+  for (const no of nos) {
+    if (used.has(familyOf(no))) continue;
+    const row = MDB.get(no);
+    if (!row || (part === "assist" && !row[4])) continue;
+    // 本体の代用に装備（覚醒アシスト持ちの武器）は使えない
+    if (part === "base" && row[8]) continue;
+    const cand = capsOfNo(no, part === "assist");
+    const caps = part === "base" ? slotCaps(no, assistNo) : slotCaps(baseNo, no);
+    const keys = [...important.keys()];
+    const kept = keys.filter((c) => caps.has(c));
+    const lost = keys.filter((c) => !caps.has(c));
+    const w = (list) => list.reduce((sum, c) => sum + important.get(c).weight, 0);
+    const turnDiff = orig?.turn && cand.turn ? cand.turn - orig.turn : 0;
+    if (Math.abs(turnDiff) > TURN_TOLERANCE) continue;
+    if (!kept.length && important.size) continue;
+    const hasteDiff = orig?.haste ? cand.haste - orig.haste : 0;
+    let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2;
+    let attr = null;
+    let fire = null;
+    if (part === "base" && orig?.row) {
+      // 本体は属性（主・副）と火力覚醒の倍率も比べる
+      attr = { main: [orig.row[2], row[2]], sub: [orig.row[3], row[3]] };
+      if (row[2] !== orig.row[2]) score -= 15;
+      if (row[3] !== orig.row[3]) score -= 3;
+      fire = compareFirepower(baseNo, no);
+      score += Math.max(-12, Math.min(4, Math.log2(fire.ratio) * 3));
+    } else if (orig?.row && row[2] === orig.row[2]) {
+      score += 3;
+    }
+    const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
+    const isOwned = owned.has(familyOf(no));
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, score, owned: isOwned, attr, fire });
+  }
+  // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
+  const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
+  return out.sort((a, b) => rank(b) - rank(a)).slice(0, limit);
+}
+
+// 枠ごとの所持状況と代用候補
+function analyzeMember(mem, team, boxActive, dungeon) {
+  const m = monster(mem.id);
+  const base = {
+    mem, m, need: [], subs: [], teamId: team.id, idx: team.members.indexOf(mem),
+    important: dungeon ? importantCaps(mem, team, dungeon) : new Map(),
+  };
+  if (mem.role === "F") return { ...base, status: "friend" };
+  if (!boxActive) return { ...base, status: "unknown" };
+  const assistNo = assistNoOf(mem);
+  const families = ownedFamilies();
+  const baseOk = box.has(mem.id) || (m?.no && families.has(familyOf(m.no)));
+  const assistOk = !assistNo || families.has(familyOf(assistNo));
+  if (baseOk && assistOk) return { ...base, status: "owned" };
+  const r = { ...base, baseOk, assistOk, status: "missing", alt: {} };
+  if (mem.role === "L" && !baseOk) return { ...r, leaderLock: true };
+  if (!m?.no) return { ...r, noData: true };
+  if (!baseOk) r.alt.base = findSubstitutes("base", mem, base.important, team);
+  if (!assistOk) r.alt.assist = findSubstitutes("assist", mem, base.important, team);
+  const best = [r.alt.base?.[0], r.alt.assist?.[0]];
+  const need = [!baseOk, !assistOk];
+  const covered = need.every((n, i) => !n || best[i]);
+  if (covered) r.status = need.some((n, i) => n && best[i].lostMajor.length) ? "partial" : "substitute";
+  return r;
+}
+
+// 1人分の編成を L → S → F の順に並べ、サブが4体未満なら「自由枠」で埋める
+function arrangeSide(list, team, boxActive, p, dungeon) {
+  const order = { L: 0, S: 1, F: 2 };
+  const sorted = [...list].sort((a, b) => order[a.role] - order[b.role]);
+  const members = sorted.map((mem) => analyzeMember(mem, team, boxActive, dungeon));
+  const subCount = sorted.filter((m) => m.role === "S").length;
+  const free = Array.from({ length: Math.max(0, SUB_SLOTS - subCount) }, () => ({
+    mem: { role: "S", p }, m: null, need: [], subs: [], status: "free",
+  }));
+  const friendAt = members.findIndex((r) => r.mem.role === "F");
+  members.splice(friendAt === -1 ? members.length : friendAt, 0, ...free);
+  return members;
+}
+
+// レシートの複雑さ: パズル指定・注意書きが多いほど、分岐があると高く、「ずらし」が多いほど低い
+// 分岐は数ではなく「あるかないか」だけを見る（ある場合は一律で加算）
+const BRANCH_PENALTY = 3;
+const complexityOf = (m) => Math.max(0, m.puzzle + (m.branch > 0 ? BRANCH_PENALTY : 0) + m.caution * 0.5 - m.zurashi * 0.5);
+
+// 全編成の指標の最小〜最大（楽さを0〜1に正規化するため）。データが変わったら作り直す
+let easeRangeCache = null;
+function easeRanges() {
+  if (easeRangeCache) return easeRangeCache;
+  const withM = db.teams.filter((t) => t.metrics);
+  const range = (vals) => ({ min: Math.min(...vals), max: Math.max(...vals) });
+  const turns = withM.map((t) => t.turns).filter(Boolean).sort((a, b) => a - b);
+  easeRangeCache = {
+    turns: range(turns),
+    turnsMedian: turns[Math.floor(turns.length / 2)] ?? 25,
+    length: range(withM.map((t) => t.metrics.chars)),
+    complexity: range(withM.map((t) => complexityOf(t.metrics))),
+  };
+  return easeRangeCache;
+}
+const norm01 = (v, { min, max }) => (max > min ? Math.min(1, Math.max(0, (v - min) / (max - min))) : 0.5);
+
+// 楽さ（0〜100）とその内訳。metrics がない編成（攻略サイト由来）は従来の★と安定率で出す
+function easeOf(team) {
+  const m = team.metrics;
+  if (!m) return { score: ((team.ease - 1) / 4) * 60 + team.stability * 0.4, legacy: true };
+  const R = easeRanges();
+  const parts = {
+    turns: norm01(team.turns ?? R.turnsMedian, R.turns),
+    length: norm01(m.chars, R.length),
+    complexity: norm01(complexityOf(m), R.complexity),
+    plus891: m.plus891,
+  };
+  const burden = Object.entries(EASE_WEIGHTS).reduce((sum, [k, w]) => sum + w * parts[k], 0);
+  return { score: (1 - burden) * 100, parts };
+}
+
+function evaluate(team, dungeon, item, boxActive) {
+  // マルチは プレイヤーA / B がそれぞれ リーダー1 + サブ4（フレンド枠なし）
+  const sides = team.multi ? ["A", "B"] : [null];
+  const members = sides.flatMap((p) =>
+    arrangeSide(p ? team.members.filter((m) => m.p === p) : team.members, team, boxActive, p, dungeon)
+  );
+  // 部位破壊の数などで編成ごとに報酬が違う場合は team.yields を優先
+  const rate = !item
+    ? 1
+    : team.yields?.[item.id] ?? dungeon.drops.filter((d) => d.itemId === item.id).reduce((s, d) => s + d.rate, 0);
+  const runSec = team.timeSec + RUN_OVERHEAD_SEC;
+  const perHour = (3600 / runSec) * rate;
+  const staminaPer = rate > 0 ? dungeon.stamina / rate : Infinity;
+  // 経験値効率（ランク経験値）。編成ごとの値があればそちらを優先。スタミナ未登録なら出さない
+  const expPerRun = team.yields?.exp ?? dungeon.drops.find((d) => d.itemId === "exp")?.rate ?? 0;
+  const expPerHour = expPerRun ? (3600 / runSec) * expPerRun : null;
+  const expPerStamina = expPerRun && dungeon.stamina > 0 ? expPerRun / dungeon.stamina : null;
+  // マルチは自分が担当する側だけ揃えばよいので、足りない枠が少ない側で数える
+  const count = (status, p) => members.filter((r) => r.status === status && (!p || r.mem.p === p)).length;
+  const side = team.multi ? (count("missing", "A") <= count("missing", "B") ? "A" : "B") : null;
+  const missing = count("missing", side);
+  const substituted = count("substitute", side) + count("partial", side);
+  const ease = easeOf(team);
+  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, missing, substituted, easeScore: ease.score, ease };
+}
+
+function search() {
+  const q = $("#q").value;
+  const { dungeons, item, canonical } = resolveQuery(q, searchType);
+  const boxActive = box.size > 0;
+  const ownedOnly = $("#owned-only").checked;
+  const out = $("#results");
+
+  if (!q.trim()) {
+    out.innerHTML = `<p class="empty">${SEARCH_TYPES[searchType].noun}名を入力してください。</p>`;
+    return;
+  }
+
+  let rows = dungeons.flatMap((d) =>
+    db.teams.filter((t) => t.dungeonId === d.id).map((t) => evaluate(t, d, item, boxActive))
+  );
+  const total = rows.length;
+  if (!total) {
+    const isDungeon = searchType === "dungeon";
+    const target = item ? item.name : dungeons.length ? dungeons[0].name : canonical;
+    const alias = norm(target) !== norm(q) ? `（「${esc(q)}」→「${esc(target)}」）` : "";
+    const found = item || dungeons.length;
+    const other = resolveQuery(q, isDungeon ? "item" : "dungeon");
+    const otherNoun = isDungeon ? "素材" : "ダンジョン";
+    // 検索種別を間違えただけなら、切り替えだけ案内する
+    if (!found && (other.item || other.dungeons.length)) {
+      out.innerHTML = `<div class="card unregistered">
+        <p>「${esc(q)}」という${SEARCH_TYPES[searchType].noun}は見つかりません。${otherNoun}として登録されています。</p>
+        <button class="primary" id="switch-type">${otherNoun}で探す</button>
+      </div>`;
+      $("#switch-type").addEventListener("click", () => {
+        setSearchType(isDungeon ? "item" : "dungeon");
+        search();
+      });
+      return;
+    }
+    out.innerHTML = `<div class="card unregistered">
+      <p><strong>${esc(target)}</strong>${alias} の周回編成はまだ登録されていません。</p>
+      <p class="hint">攻略サイトやXで見つけた編成を取り込むと、ここに最適順で表示されます。</p>
+      <button class="primary" id="go-register">この${SEARCH_TYPES[searchType].noun}の編成を登録する</button>
+    </div>`;
+    $("#go-register").addEventListener("click", () =>
+      openRegister(isDungeon ? { dungeon: target } : { item: target, alias: alias ? q.trim() : "" })
+    );
+    return;
+  }
+  if (ownedOnly && boxActive) rows = rows.filter((r) => r.missing === 0);
+
+  const maxPerHour = Math.max(...rows.map((r) => r.perHour), 1e-9);
+  const penalty = (r) => r.missing * PENALTY_MISSING + r.substituted * PENALTY_SUBSTITUTE;
+  for (const r of rows) r.speedScore = (r.perHour / maxPerHour) * 100;
+  const expKey = EXP_MODES[mode];
+  if (expKey) {
+    // 経験値効率順: 一番効率のいい編成を100点。データがない編成は最後に回す
+    const max = Math.max(...rows.map((r) => r[expKey] ?? 0), 1e-9);
+    for (const r of rows) r.score = r[expKey] == null ? null : (r[expKey] / max) * 100 - penalty(r);
+    rows.sort((a, b) => (b.score ?? -Infinity) - (a.score ?? -Infinity));
+  } else {
+    const w = MODE_WEIGHTS[mode];
+    for (const r of rows) r.score = r.speedScore * w.speed + r.easeScore * w.ease - penalty(r);
+    rows.sort((a, b) => b.score - a.score);
+  }
+
+  const head =
+    (item
+      ? `<p class="summary">「${esc(item.name)}」が出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件</p>`
+      : `<p class="summary">編成 ${rows.length}件</p>`) +
+    `<p class="caution">⚠️ 編成・アシスト・立ち回りは要約や読み取りのため、誤りや省略があるかもしれません。参考にするときは<strong>必ず各編成の「元のポスト／元の記事」のリンク先を確認</strong>してください。</p>`;
+  const boxNote = boxActive
+    ? ""
+    : `<p class="note">手持ちBOXが未登録なので、所持チェックはしていません。「手持ちBOX」タブで登録すると代用を自動で探します。</p>`;
+
+  if (!rows.length) {
+    out.innerHTML =
+      head +
+      `<p class="empty">手持ちだけで組める編成がありません（全${total}件）。チェックを外すと、足りないモンスターと代用候補を確認できます。</p>`;
+    return;
+  }
+  out.innerHTML = head + boxNote + rows.map((r, i) => renderResult(r, i, item)).join("");
+}
+
+// ---------- 描画 ----------
+const ROLE_LABEL = { L: "リーダー", F: "フレンド", S: "サブ" };
+
+function noLabel(m) {
+  if (m?.no) return `<a class="no" href="${padmdbUrl(m.no)}" target="_blank" rel="noopener">No.${m.no}</a>`;
+  if (m?.noUncertain) return `<span class="no" title="${esc(m.noUncertain)}">No.未確定</span>`;
+  return "";
+}
+
+function renderAlt(label, list, { pool = "owned" } = {}) {
+  if (!list) return "";
+  if (!list.length) return `<div class="sub-line">${label}の代用: ${pool === "all" ? "条件に合う候補なし" : "手持ちに候補なし"}</div>`;
+  const items = list.map((c) => {
+    const minorLost = c.lost.filter((k) => !c.lostMajor.includes(k));
+    const kept = c.keptMajor.map((k) => `<span class="ok">✓${esc(capLabel(k))}</span>`).join(" ");
+    const lost = [
+      ...c.lostMajor.map((k) => `<span class="ng">✗${esc(capLabel(k))}がなくなる</span>`),
+      ...(minorLost.length ? [`<span class="warnc">耐性など: ${esc(minorLost.map(capLabel).join("・"))}がなくなる</span>`] : []),
+    ].join(" ");
+    const turn = c.turnDiff ? `<span class="warnc">△スキルが${Math.abs(c.turnDiff)}ターン${c.turnDiff > 0 ? "長い" : "短い"}</span>` : "";
+    const haste = c.hasteDiff ? `<span class="warnc">△ヘイストが${Math.abs(c.hasteDiff)}ターン${c.hasteDiff > 0 ? "多い" : "少ない"}</span>` : "";
+    let attr = "";
+    if (c.attr) {
+      const [om, cm] = c.attr.main;
+      const [os, cs] = c.attr.sub;
+      attr = om !== cm
+        ? `<span class="ng">✗主属性が違う（${esc(om || "なし")}→${esc(cm || "なし")}）</span>`
+        : os !== cs
+          ? `<span class="warnc">△副属性が違う（${esc(os || "なし")}→${esc(cs || "なし")}）</span>`
+          : `<span class="ok">✓属性同じ（${esc(om)}${os ? "/" + esc(os) : ""}）</span>`;
+    }
+    let fire = "";
+    if (c.fire && c.fire.orig > 1) {
+      const cls = c.fire.ratio >= 0.99 ? "ok" : c.fire.ratio >= 0.5 ? "warnc" : "ng";
+      const lost = c.fire.lost.length ? `、${c.fire.lost.map((t) => DMG_LABEL[t] ?? t).join("・")}が弱い` : "";
+      fire = `<span class="${cls}">火力覚醒 ${fmtMult(c.fire.orig)}→${fmtMult(c.fire.cand)}${lost}</span>`;
+    }
+    const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
+    return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
+      <div class="alt-caps">${[attr, fire, kept, lost, turn, haste].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div></li>`;
+  });
+  return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
+}
+
+function renderImportant(r) {
+  if (!r.important?.size) return "";
+  const entries = [...r.important].sort((a, b) => b[1].weight - a[1].weight);
+  const major = entries.filter(([, v]) => v.weight >= MAJOR_WEIGHT);
+  const minor = entries.filter(([, v]) => v.weight < MAJOR_WEIGHT);
+  const chips = major.map(([c, v]) => `<span class="tag">${esc(capLabel(c))}<small>・${esc(v.why)}</small></span>`).join("");
+  const rest = minor.length ? `<div class="sub-line muted">耐性など: ${minor.map(([c]) => esc(capLabel(c))).join("・")}</div>` : "";
+  return `${chips ? `<div class="tags imp">${chips}</div>` : ""}${rest}`;
+}
+
+function renderMember(r) {
+  if (r.status === "free") {
+    return `<li class="mem mem-free"><span class="role">サブ</span>
+      <div class="mem-main"><span class="mname muted">自由枠</span><div class="sub-line muted">元の編成で指定なし。好きなモンスターでOK</div></div></li>`;
+  }
+  const name = r.m ? r.m.name : `不明(${r.mem.id})`;
+  const assistNo = assistNoOf(r.mem);
+  const icons = `<span class="mem-icons">${iconHTML(r.m)}${assistNo ? iconHTML(assistNo, { assist: true }) : ""}</span>`;
+  const assistMissing = r.status !== "owned" && r.assistOk === false;
+  const assist = r.mem.assist
+    ? `<div class="sub-line muted">アシスト: ${esc(r.mem.assist)}${assistMissing ? ` <span class="st st-ng">未所持</span>` : ""}</div>`
+    : "";
+  let status = "";
+  let extra = "";
+  if (r.status === "friend") status = `<span class="st st-friend">フレンドから借りる</span>`;
+  if (r.status === "owned") status = `<span class="st st-ok">所持</span>`;
+  if (["missing", "substitute", "partial"].includes(r.status)) {
+    const label = { missing: "未所持", substitute: "未所持 → 代用あり", partial: "未所持 → 条件付きで代用" }[r.status];
+    status = `<span class="st ${r.status === "missing" ? "st-ng" : "st-sub"}">${r.baseOk === false ? label : "本体は所持"}</span>`;
+    if (r.leaderLock) extra = `<div class="sub-line">リーダーはリーダースキルが変わるため代用しません</div>`;
+    else if (r.noData) extra = `<div class="sub-line">図鑑No.がないため代用を探せません</div>`;
+    else extra = renderAlt("本体", r.alt?.base) + renderAlt("アシスト", r.alt?.assist);
+  }
+  return `<li class="mem mem-${r.status}">
+    <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
+    <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}
+      ${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
+  </li>`;
+}
+
+// 図鑑全体から代用を探すボタン。リーダー・フレンドは本体を変えるとリーダースキルが変わるので武器（アシスト）だけ
+function altButton(r) {
+  if (r.idx < 0 || !r.m?.no) return "";
+  const weaponOnly = r.mem.role !== "S";
+  if (weaponOnly && !assistNoOf(r.mem)) return "";
+  const label = weaponOnly ? "武器の代用を探す" : "代用を探す";
+  return `<div class="alt-search"><button type="button" class="alt-btn" data-team="${esc(r.teamId)}" data-idx="${r.idx}" data-label="${label}">${label}</button><div class="alt-out"></div></div>`;
+}
+
+function searchAltFor(teamId, idx) {
+  const team = db.teams.find((t) => t.id === teamId);
+  const mem = team?.members[idx];
+  if (!mem) return "";
+  const dungeon = db.dungeons.find((d) => d.id === team.dungeonId);
+  const important = importantCaps(mem, team, dungeon);
+  const note = box.size
+    ? `<p class="hint">図鑑全体から探しています。手持ちBOXにいるキャラを上に表示します。</p>`
+    : `<p class="hint">図鑑全体から探しています。手持ちBOXを登録すると、持っているキャラが上に並びます。</p>`;
+  const opts = { pool: "all", limit: 5 };
+  const baseList = mem.role === "S" ? findSubstitutes("base", mem, important, team, opts) : null;
+  const assistList = assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, opts) : null;
+  const weaponNote = mem.role !== "S" ? `<p class="hint">リーダー・フレンドはリーダースキルが変わるため、武器（アシスト）の代用だけを探します。</p>` : "";
+  return note + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "");
+}
+
+// ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）
+function renderGimmicks(d) {
+  const g = d.gimmicks;
+  if (!g) return "";
+  const sure = g.all.map((k) => `<span class="tag">${esc(GIMMICK_LABEL[k] ?? k)}</span>`).join("");
+  const partial = g.partial.map((p) => `<span class="tag partial">${esc(GIMMICK_LABEL[p.key] ?? p.key)}<small>（${esc(p.sites.join("・"))}のみ）</small></span>`).join("");
+  const src = g.sources.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.site)}</a>（${esc(s.date)}）`).join("・");
+  const notes = g.notes?.length ? `<ul class="gnotes">${g.notes.map((n) => `<li>${esc(n)}</li>`).join("")}</ul>` : "";
+  const none = !g.all.length && !g.partial.length ? `<p class="hint">両サイトともギミックなし</p>` : "";
+  return `<details class="gimmicks"><summary>ギミック（${g.sources.length}サイトで確認）</summary>
+    ${none}${sure ? `<div class="tags">${sure}</div>` : ""}${partial ? `<p class="hint">サイトによって記載が違うもの</p><div class="tags">${partial}</div>` : ""}
+    ${notes}<p class="hint">出典: ${src}</p></details>`;
+}
+
+function formatTime(sec) {
+  return sec >= 60 ? `${Math.floor(sec / 60)}分${String(Math.round(sec % 60)).padStart(2, "0")}秒` : `${sec}秒`;
+}
+
+// 経験値など桁の大きい数を「2.2億」のように縮める
+function formatCount(n) {
+  if (n >= 1e8) return `${(n / 1e8).toFixed(1)}億`;
+  if (n >= 1e4) return `${(n / 1e4).toFixed(1)}万`;
+  return n.toFixed(1);
+}
+
+function bar(label, value) {
+  const v = Math.max(0, Math.min(100, value));
+  return `<div class="bar"><span>${label}</span><div class="track"><div class="fill" style="width:${v}%"></div></div><b>${Math.round(v)}</b></div>`;
+}
+
+const SITE_NAMES = {
+  "gamewith.jp": "ゲームウィズ",
+  "game8.jp": "ゲームエイト",
+  "kamigame.jp": "神ゲー攻略",
+  "altema.jp": "アルテマ",
+  "appmedia.jp": "AppMedia",
+};
+
+// 出典URLから投稿者（X）やサイト名を割り出す。team.author があればそちらを優先
+function sourceInfo(t) {
+  let url;
+  try {
+    url = new URL(t.source);
+  } catch {
+    return t.source ? { label: t.source } : null;
+  }
+  const host = url.hostname.replace(/^www\./, "");
+  if (host === "x.com" || host === "twitter.com") {
+    const handle = url.pathname.split("/")[1];
+    return {
+      label: t.author?.name || `@${handle}`,
+      handle: `@${handle}`,
+      profileUrl: `https://x.com/${handle}`,
+      postUrl: `https://x.com${url.pathname}`,
+      postLabel: "元のポスト",
+    };
+  }
+  const site = Object.entries(SITE_NAMES).find(([d]) => host === d || host.endsWith(`.${d}`));
+  return {
+    label: t.author?.name || (site ? site[1] : host),
+    profileUrl: t.author?.url || `${url.protocol}//${url.host}/`,
+    postUrl: url.href,
+    postLabel: "元の記事",
+  };
+}
+
+function reportButton(t) {
+  return shared.mode === "firebase" && t.shared && t.status === "approved"
+    ? ` <button type="button" class="link report-btn" data-report="${esc(t.id)}">問題を報告</button>`
+    : "";
+}
+
+function renderSource(t) {
+  const info = sourceInfo(t);
+  if (!info) return "";
+  const date = t.sourceDate ? `<span class="muted">${esc(t.sourceDate)}</span>` : "";
+  if (!info.postUrl) return `<p class="src">参考: ${esc(info.label)} ${date}</p>`;
+  const handle = info.handle && info.handle !== info.label ? `<span class="muted">${esc(info.handle)}</span>` : "";
+  return `<p class="src">参考:
+    <a href="${esc(info.profileUrl)}" target="_blank" rel="noopener"><strong>${esc(info.label)}</strong></a> ${handle}
+    ・<a href="${esc(info.postUrl)}" target="_blank" rel="noopener">${info.postLabel}</a> ${date}</p>
+    <p class="src-caution">参考にする前に必ずリンク先の元の内容を確認してください</p>`;
+}
+
+function renderMembers(r) {
+  if (!r.team.multi) return `<ul class="members">${r.members.map(renderMember).join("")}</ul>`;
+  return ["A", "B"]
+    .map((p) => {
+      const mine = r.side === p && box.size > 0 ? `<span class="st st-ok">手持ちで組みやすい側</span>` : "";
+      return `<p class="side-head">マルチ${p} ${mine}</p>
+        <ul class="members">${r.members.filter((x) => x.mem.p === p).map(renderMember).join("")}</ul>`;
+    })
+    .join("");
+}
+
+function plus891Label(m) {
+  if (m.plus891Text === "required") return "必須";
+  if (m.plus891Text === "not-required") return "不要";
+  if (m.plus891 >= 0.99) return "全員";
+  if (m.plus891 > 0) return `一部（${Math.round(m.plus891 * 6)}体）`;
+  return "なし";
+}
+
+function renderEaseStats(m) {
+  return `<div><dt>レシート</dt><dd>${m.chars}字</dd></div>
+    <div><dt>パズル指定</dt><dd>${m.puzzle}</dd></div>
+    <div><dt>分岐</dt><dd>${m.branch > 0 ? "あり" : "なし"}</dd></div>
+    <div><dt>ずらし</dt><dd>${m.zurashi}</dd></div>
+    <div><dt>+891</dt><dd>${plus891Label(m)}</dd></div>`;
+}
+
+// 楽さの内訳（楽なほど棒が長い）
+function renderEaseBreakdown(p) {
+  const label = { turns: "クリアターン", length: "レシートの長さ", complexity: "複雑さ", plus891: "+891" };
+  return `<details class="ease-detail"><summary>楽さの内訳</summary>
+    ${Object.keys(EASE_WEIGHTS).map((k) => bar(label[k], (1 - p[k]) * 100)).join("")}
+    <p class="hint">バーが長いほど楽。重み: クリアターン30%・レシートの長さ30%・複雑さ25%・+891 15%</p></details>`;
+}
+
+function renderResult(r, i, item) {
+  const t = r.team;
+  const unit = item ? `${esc(item.name)} / 時` : "周 / 時";
+  const est = (key) => (t.estimated?.includes(key) ? `<span class="est">推定</span>` : "");
+  const dropEst = item && r.dungeon.drops.some((d) => d.itemId === item.id && d.estimated)
+    ? `<span class="est">推定</span>`
+    : item && r.dungeon.drops.some((d) => d.itemId === item.id && d.countUnknown)
+      ? `<span class="est" title="攻略サイトには出現の記載のみで個数が書かれていないため、1体として計算">個数不明（1体で計算）</span>`
+    : item && r.dungeon.drops.some((d) => d.itemId === item.id && d.siteSource)
+      ? (() => { const d = r.dungeon.drops.find((x) => x.itemId === item.id); return `<span class="est">${esc(d.siteSource.join("・"))}記載${d.note ? `（${esc(d.note)}）` : ""}</span>`; })()
+    : item && !r.team.yields?.[item.id] && r.dungeon.drops.some((d) => d.itemId === item.id && d.observed)
+      ? `<span class="est" title="${esc(r.dungeon.rewardNote ?? "")}">1周分の実績</span>`
+      : "";
+  let staminaLine = "";
+  if (item && r.dungeon.stamina > 0 && r.rate > 0) {
+    staminaLine = r.staminaPer >= 1
+      ? `<div><dt>1個あたりスタミナ</dt><dd>${r.staminaPer.toFixed(0)}${dropEst}</dd></div>`
+      : `<div><dt>スタミナ1あたり</dt><dd>${formatCount(r.rate / r.dungeon.stamina)}個${dropEst}</dd></div>`;
+  }
+  const warn = r.missing
+    ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
+    : "";
+  const src = renderSource(t) + reportButton(t);
+  return `<article class="result ${i === 0 ? "best" : ""}">
+    <div class="res-head">
+      <span class="rank">${i + 1}</span>
+      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? `<span class="badge badge-mine">自分で登録</span>` : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p>${renderGimmicks(r.dungeon)}</div>
+      <span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>
+    </div>
+    <div class="bars">${bar("速さ", r.speedScore)}${bar("楽さ", r.easeScore)}</div>
+    ${r.ease.legacy ? "" : renderEaseBreakdown(r.ease.parts)}
+    <dl class="stats">
+      <div><dt>1周</dt><dd>${formatTime(t.timeSec)}${est("timeSec")}</dd></div>
+      <div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
+      <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>
+      ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
+      <div><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
+      ${r.ease.legacy
+        ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>
+           <div><dt>楽さ</dt><dd>${"★".repeat(t.ease)}${"☆".repeat(5 - t.ease)}${est("ease")}</dd></div>`
+        : renderEaseStats(t.metrics)}
+      ${staminaLine}
+    </dl>
+    ${warn}
+    ${renderMembers(r)}
+    ${t.steps?.length ? `<details><summary>立ち回り</summary><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></details>` : ""}
+    ${src}
+  </article>`;
+}
+
+// ---------- BOX ----------
+function renderBox() {
+  const f = $("#box-filter").value.trim();
+  const list = db.monsters.filter((m) => !f || m.name.includes(f) || m.tags.some((t) => t.includes(f)));
+  $("#box-list").innerHTML = list
+    .map(
+      (m) => `<label class="box-item ${box.has(m.id) ? "on" : ""}">
+      <input type="checkbox" data-id="${esc(m.id)}" ${box.has(m.id) ? "checked" : ""}>
+      ${iconHTML(m)}
+      <span class="mname">${esc(m.name)}</span>${noLabel(m)}
+      <span class="tags">${m.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</span>
+    </label>`
+    )
+    .join("");
+  $("#box-count").textContent = `${box.size} / ${db.monsters.length}体 所持`;
+}
+
+function renderMdbResults() {
+  const el = $("#mdb-results");
+  const q = $("#mdb-q").value;
+  const hits = searchMonsterDB(q);
+  el.innerHTML = hits
+    .map((r) => {
+      const owned = db.monsters.some((m) => m.no === r[0] && box.has(m.id));
+      return `<li data-no="${r[0]}">${iconHTML(r[0])}${esc(r[1])}
+        <small>No.${r[0]}${r[4] ? "・アシスト可" : ""}${owned ? "・所持済み" : ""}</small></li>`;
+    })
+    .join("");
+  el.hidden = !q.trim() || !hits.length;
+}
+
+function saveBox() {
+  saveJSON(BOX_KEY, [...box]);
+  renderBox();
+}
+
+// ---------- データ管理 ----------
+function nextId(prefix, list) {
+  let n = list.length + 1;
+  while (list.some((x) => x.id === `${prefix}${n}`)) n++;
+  return `${prefix}${n}`;
+}
+
+function findOrCreateMonster(nameOrNo, tags = []) {
+  const row = lookupMonster(nameOrNo);
+  let m = row
+    ? db.monsters.find((x) => x.no === row[0]) ?? db.monsters.find((x) => !x.no && x.name === row[1])
+    : db.monsters.find((x) => x.name === nameOrNo.trim());
+  if (!m) {
+    m = row
+      ? { id: `n${row[0]}`, no: row[0], name: row[1], attr: row[2], tags: [] }
+      : { id: nextId("m", db.monsters), name: nameOrNo.trim(), attr: "", tags: [] };
+    db.monsters.push(m);
+  } else if (row && !m.no) {
+    Object.assign(m, { no: row[0], name: row[1], attr: row[2] });
+  }
+  for (const t of tags) if (!m.tags.includes(t)) m.tags.push(t);
+  return m;
+}
+
+function findOrCreateItem(name) {
+  name = canonicalName(name);
+  let it = matchRecords(db.items, name).find((x) => namesOf(x).includes(norm(name)));
+  if (!it) {
+    it = { id: nextId("i", db.items), name, category: "", aliases: [] };
+    db.items.push(it);
+  }
+  return it;
+}
+
+// ---------- 重複チェック ----------
+// 編成の中身（役割ごとの本体No.＋アシストNo.）。サブの並び順は問わない
+function teamSignature(members) {
+  return members
+    .map((m) => `${m.role}${m.p ?? ""}:${familyOf(monster(m.id)?.no) ?? m.id}+${familyOf(assistNoOf(m)) ?? ""}`)
+    .sort()
+    .join("|");
+}
+
+// 参考元URLの比較用（Xはポストの番号、それ以外はクエリを外したURL）
+function sourceKey(url) {
+  const u = String(url ?? "").trim();
+  if (!u) return "";
+  const x = u.match(/(?:x|twitter)\.com\/[^/]+\/status\/(\d+)/);
+  return x ? `x:${x[1]}` : u.replace(/[?#].*$/, "").replace(/\/$/, "");
+}
+
+// 同じダンジョンで同じ編成、または同じ参考元の編成がすでにあれば返す
+function findDuplicateTeam({ dungeonId, members, source, excludeId }) {
+  const sig = teamSignature(members);
+  const src = sourceKey(source);
+  for (const t of db.teams) {
+    if (t.id === excludeId) continue;
+    if (dungeonId && t.dungeonId === dungeonId && teamSignature(t.members) === sig) return { team: t, reason: "同じダンジョンで同じ編成" };
+    if (src && sourceKey(t.source) === src) return { team: t, reason: "同じ参考元" };
+  }
+  return null;
+}
+
+function duplicateMessage(dup) {
+  const d = db.dungeons.find((x) => x.id === dup.team.dungeonId);
+  return `すでに登録されています（${dup.reason}）: 「${dup.team.title}」${d ? `／${d.name}` : ""}。新規登録はしませんでした。`;
+}
+
+// 「キー: 値」形式の編成テキストを1件取り込む
+function importText(text) {
+  const t = { members: [], steps: [] };
+  let dungeonName = "";
+  let stamina = 0;
+  const drops = [];
+  const aliases = [];
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    const mm = line.match(/^([^:：]+)[:：]\s*(.*)$/);
+    if (!mm) continue;
+    const key = mm[1].trim();
+    const val = mm[2].trim();
+    if (/^[LFS]$/i.test(key)) {
+      const [body, assistStr] = val.split(/[@＠]/);
+      const [, name, tagStr] = body.match(/^(.*?)\s*(?:[\[［](.*)[\]］])?$/);
+      const tags = tagStr ? tagStr.split(/[,、，]/).map((s) => s.trim()).filter(Boolean) : [];
+      const assist = assistStr?.trim();
+      if (name.trim()) t.members.push({ name: name.trim(), role: key.toUpperCase(), need: tags, assist });
+    } else if (key === "ダンジョン") dungeonName = val;
+    else if (key === "素材") {
+      const [, name, pct] = val.match(/^(.*?)\s*(?:([\d.]+)\s*%)?$/);
+      drops.push({ name: name.trim(), rate: pct ? Number(pct) / 100 : 1 });
+    } else if (key === "別名") aliases.push(...val.split(/[,、，]/).map((s) => s.trim()).filter(Boolean));
+    else if (key === "スタミナ") stamina = Number(val.replace(/\D/g, "")) || 0;
+    else if (key === "タイトル") t.title = val;
+    else if (key === "時間") t.timeSec = Number(val.replace(/[^\d.]/g, ""));
+    else if (key === "楽さ") t.ease = Math.min(5, Math.max(1, Number(val) || 3));
+    else if (key === "安定") t.stability = Math.min(100, Math.max(0, Number(val.replace(/[^\d.]/g, "")) || 80));
+    else if (key === "手順") t.steps.push(...val.split(/[\/／]/).map((s) => s.trim()).filter(Boolean));
+    else if (key === "出典") t.source = val;
+    else if (key === "作者") t.authorName = val;
+  }
+  if (!dungeonName) throw new Error("「ダンジョン:」の行がありません");
+  if (!t.timeSec) throw new Error("「時間:」の行がありません");
+  const cnt = (role) => t.members.filter((m) => m.role === role).length;
+  if (cnt("L") !== 1) throw new Error("「L:」（リーダー）は1行だけ書いてください");
+  if (cnt("F") > 1) throw new Error("「F:」（フレンド）は1行までです");
+  if (cnt("S") > SUB_SLOTS) throw new Error(`「S:」（サブ）は${SUB_SLOTS}行までです（今${cnt("S")}行）`);
+
+  const members = t.members.map(({ name, role, need, assist }) => {
+    const mem = { id: findOrCreateMonster(name, need).id, role, need };
+    if (assist) {
+      const row = lookupMonster(assist);
+      mem.assist = row ? `${row[1]} No.${row[0]}` : assist;
+    }
+    return mem;
+  });
+
+  const dup = findDuplicateTeam({
+    dungeonId: db.dungeons.find((x) => x.name === dungeonName)?.id,
+    members,
+    source: t.source,
+  });
+  if (dup) throw new Error(duplicateMessage(dup));
+
+  let d = db.dungeons.find((x) => x.name === dungeonName);
+  if (!d) {
+    d = { id: nextId("d", db.dungeons), name: dungeonName, stamina, battles: 0, drops: [] };
+    db.dungeons.push(d);
+  }
+  if (stamina) d.stamina = stamina;
+  drops.forEach((drop, i) => {
+    const it = findOrCreateItem(drop.name);
+    // 「別名:」は最初の素材に付ける
+    if (i === 0) {
+      it.aliases ??= [];
+      for (const a of aliases) if (norm(a) !== norm(it.name) && !it.aliases.includes(a)) it.aliases.push(a);
+    }
+    const existing = d.drops.find((x) => x.itemId === it.id);
+    if (existing) existing.rate = drop.rate;
+    else d.drops.push({ itemId: it.id, rate: drop.rate });
+  });
+  db.teams.push({
+    id: nextId("t", db.teams),
+    dungeonId: d.id,
+    title: t.title || `${dungeonName} 編成`,
+    timeSec: t.timeSec,
+    ease: t.ease ?? 3,
+    stability: t.stability ?? 80,
+    members,
+    steps: t.steps,
+    source: t.source || "",
+    ...(t.authorName ? { author: { name: t.authorName } } : {}),
+  });
+  persist();
+  return d.name;
+}
+
+// 未登録の素材/ダンジョンから、テンプレを埋めた状態で取り込み画面を開く
+function openRegister({ item, dungeon, alias }) {
+  const lines = [
+    `ダンジョン: ${dungeon ?? ""}`,
+    `素材: ${item ?? ""} `,
+    ...(alias ? [`別名: ${alias}`] : []),
+    "スタミナ: ",
+    "タイトル: ",
+    "時間: 秒",
+    "楽さ: 3",
+    "安定: 90",
+    "L: ",
+    "S: ",
+    "S: ",
+    "S: ",
+    "S: ",
+    "F: ",
+    "手順: ",
+    "出典: ",
+    "作者: ",
+  ];
+  $("#text-import").value = lines.join("\n");
+  document.querySelector('.tab[data-tab="data"]').click();
+  $("#text-import").focus();
+}
+
+// JSONを取り込み。同じidは上書き、新しいidは追加
+function importJSON(obj) {
+  const keys = ["monsters", "items", "dungeons", "teams"];
+  if (!keys.some((k) => Array.isArray(obj[k]))) throw new Error("monsters / items / dungeons / teams のいずれかが必要です");
+  const counts = {};
+  for (const k of keys) {
+    for (const rec of obj[k] ?? []) {
+      if (!rec.id) continue;
+      const i = db[k].findIndex((x) => x.id === rec.id);
+      if (i >= 0) db[k][i] = rec;
+      else db[k].push(rec);
+      counts[k] = (counts[k] ?? 0) + 1;
+    }
+  }
+  persist();
+  return counts;
+}
+
+function renderData() {
+  $("#sample-banner").hidden = !db.seed;
+  $("#data-summary").innerHTML = `<p>モンスター ${db.monsters.length} / 素材 ${db.items.length} / ダンジョン ${db.dungeons.length} / 編成 ${db.teams.length}</p>`;
+  renderSuggestions();
+}
+
+// 候補リスト：1つのダンジョン/素材につき1行。略称で入力しても正式名の行が出る
+let suggestIndex = -1;
+
+function suggestionsFor(q) {
+  const list = searchType === "dungeon" ? db.dungeons : db.items;
+  if (!q.trim()) return list;
+  const n = norm(canonicalName(q));
+  const raw = norm(q);
+  return list.filter((r) => namesOf(r).some((x) => x.includes(raw) || x.includes(n)));
+}
+
+function renderSuggestions() {
+  const el = $("#q-suggest");
+  if (document.activeElement !== $("#q")) {
+    el.hidden = true;
+    return;
+  }
+  const hits = suggestionsFor($("#q").value);
+  suggestIndex = Math.min(suggestIndex, hits.length - 1);
+  el.innerHTML = hits
+    .map((r, i) => {
+      const aka = r.aliases?.length ? `<small>${r.aliases.map(esc).join("・")}</small>` : "";
+      return `<li role="option" data-name="${esc(r.name)}" class="${i === suggestIndex ? "active" : ""}">${esc(r.name)}${aka}</li>`;
+    })
+    .join("");
+  el.hidden = hits.length === 0;
+  $("#q").setAttribute("aria-expanded", String(!el.hidden));
+}
+
+function pickSuggestion(name) {
+  $("#q").value = name;
+  $("#q-suggest").hidden = true;
+  suggestIndex = -1;
+  search();
+}
+
+// ---------- アイコン（自作。公式イラストは使わない） ----------
+const ATTR_KEY = { 火: "fire", 水: "water", 木: "wood", 光: "light", 闇: "dark" };
+
+// 名前から1文字: 【】［］「」の飾りを外し、「・」の後ろ（キャラ名）の先頭を使う
+function glyphOf(name) {
+  const plain = String(name ?? "").replace(/[【［「\[].*?[】］」\]]/g, "").trim();
+  const part = plain.split(/[・＆&＝=]/).map((x) => x.trim()).filter(Boolean);
+  // 「完全卍解・日番谷」のように前が肩書きなら後ろ、「リルトット・ランパード」のようなフルネームなら前
+  const before = plain.split("・")[0];
+  const titled = plain.includes("・") && /[\u4e00-\u9fff\u3041-\u3096]/.test(before);
+  const pick = titled ? part[part.length - 1] : part[0];
+  return (pick || plain || "?").replace(/^[のはがを]/, "").charAt(0) || "?";
+}
+
+// no か monster から宝珠アイコンを作る。assist=true で小さい四角
+function iconHTML(ref, { assist = false } = {}) {
+  const row = typeof ref === "number" ? MDB.get(ref) : ref?.no ? MDB.get(ref.no) : null;
+  const name = row?.[1] ?? ref?.name ?? "";
+  const main = ATTR_KEY[row?.[2] ?? ref?.attr] ?? "none";
+  const sub = ATTR_KEY[row?.[3]];
+  return `<span class="icon ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}" aria-hidden="true">${esc(glyphOf(name))}${
+    sub ? `<i class="sub a-${sub}"></i>` : ""
+  }</span>`;
+}
+
+// ---------- 編成登録 ----------
+const REG_ROLES = ["L", "S", "S", "S", "S", "F"];
+let regEditingId = null;
+
+// 入力欄に図鑑の候補リストを付ける（assistOnly: アシスト可のものだけ）
+function attachMonsterSuggest(input, { assistOnly = false, onPick } = {}) {
+  const wrap = input.parentElement;
+  const list = document.createElement("ul");
+  list.className = "suggest";
+  list.hidden = true;
+  wrap.appendChild(list);
+  const show = () => {
+    const hits = searchMonsterDB(input.value, 30).filter((r) => !assistOnly || r[4]).slice(0, 8);
+    list.innerHTML = hits
+      .map((r) => `<li data-no="${r[0]}">${iconHTML(r[0], { assist: assistOnly })}<span>${esc(r[1])}<small>No.${r[0]}</small></span></li>`)
+      .join("");
+    list.hidden = !input.value.trim() || !hits.length;
+  };
+  input.addEventListener("input", () => {
+    delete input.dataset.no;
+    show();
+    onPick?.();
+  });
+  input.addEventListener("focus", show);
+  input.addEventListener("blur", () => setTimeout(() => (list.hidden = true), 150));
+  list.addEventListener("mousedown", (e) => {
+    const li = e.target.closest("li");
+    if (!li) return;
+    e.preventDefault();
+    setSlotValue(input, Number(li.dataset.no));
+    list.hidden = true;
+    onPick?.();
+  });
+}
+
+function setSlotValue(input, no) {
+  const row = MDB.get(no);
+  input.value = row ? row[1] : "";
+  if (row) input.dataset.no = String(no);
+  else delete input.dataset.no;
+}
+
+// 入力欄の値を図鑑No.に解決（候補から選んでいなくても No. か正式名なら通す）
+function resolveSlot(input) {
+  if (input.dataset.no) return Number(input.dataset.no);
+  if (!input.value.trim()) return null;
+  const row = lookupMonster(input.value);
+  return row ? row[0] : NaN;
+}
+
+function renderRegSlots() {
+  const label = { L: "リーダー", S: "サブ", F: "フレンド" };
+  $("#reg-slots").innerHTML = REG_ROLES.map(
+    (role, i) => `<li class="reg-slot">
+      <span class="role">${label[role]}</span>
+      <span class="reg-preview" id="reg-prev-${i}">${iconHTML(null)}</span>
+      <div class="suggest-wrap"><input id="reg-m-${i}" placeholder="${role === "S" ? "モンスター（空欄なら自由枠）" : "モンスター"}" autocomplete="off" aria-label="${label[role]}のモンスター"></div>
+      <div class="suggest-wrap"><input id="reg-a-${i}" placeholder="アシスト（任意）" autocomplete="off" aria-label="${label[role]}のアシスト"></div>
+    </li>`
+  ).join("");
+  REG_ROLES.forEach((_, i) => {
+    const update = () => updateSlotPreview(i);
+    attachMonsterSuggest($(`#reg-m-${i}`), { onPick: update });
+    attachMonsterSuggest($(`#reg-a-${i}`), { assistOnly: true, onPick: update });
+  });
+}
+
+function updateSlotPreview(i) {
+  const m = resolveSlot($(`#reg-m-${i}`));
+  const a = resolveSlot($(`#reg-a-${i}`));
+  $(`#reg-prev-${i}`).innerHTML = (Number.isFinite(m) ? iconHTML(m) : iconHTML(null)) + (Number.isFinite(a) ? iconHTML(a, { assist: true }) : "");
+}
+
+function renderRegDungeons(selected) {
+  $("#reg-dungeon").innerHTML =
+    db.dungeons.map((d) => `<option value="${esc(d.id)}">${esc(d.name)}</option>`).join("") +
+    `<option value="__new">＋ 新しいダンジョン…</option>`;
+  // 指定がなければ最初のダンジョン（「新しいダンジョン」は明示的に選んだときだけ）
+  $("#reg-dungeon").value = selected && selected !== "__new" ? selected : db.dungeons[0]?.id ?? "__new";
+  if (selected === "__new") $("#reg-dungeon").value = "__new";
+  $("#reg-new-dungeon").hidden = $("#reg-dungeon").value !== "__new";
+}
+
+// 立ち回りの文章から楽さの指標を出す（tools/receipt-metrics.py と同じ考え方）
+function metricsFromText(text, plus891Choice) {
+  const lines = text.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+  const all = lines.join("\n");
+  const count = (re) => (all.match(re) ?? []).length;
+  const plus891 = { required: 1, some: 0.5, "not-required": 0 }[plus891Choice] ?? 0;
+  return {
+    chars: lines.reduce((n, l) => n + l.replace(/\s/g, "").length, 0),
+    puzzle: count(/L字|T字|十字|光T|光L|[水火木光闇]L|way|列|盤面\s*\d+\s*[cC]|\+?\s*\d\s*[cC](?![a-z])|コンボ|全力|回復\s*[4４]|[4４]つ消し|[4４]消し/g),
+    branch: count(/乱入|分岐|場合|通常|\bor\b/g),
+    caution: count(/⚠|注意|耐久|ルーレット|ルレ|タゲ|ターゲット|順番/g),
+    zurashi: count(/ずらし|ズラし|ズラシ/g),
+    plus891,
+    plus891Text: plus891Choice === "required" || plus891Choice === "not-required" ? plus891Choice : null,
+  };
+}
+
+function regMessage(text, ok) {
+  $("#reg-msg").className = `msg ${ok ? "ok" : "err"}`;
+  $("#reg-msg").textContent = text;
+}
+
+function clearRegForm() {
+  regEditingId = null;
+  $("#reg-form").reset();
+  REG_ROLES.forEach((_, i) => {
+    delete $(`#reg-m-${i}`).dataset.no;
+    delete $(`#reg-a-${i}`).dataset.no;
+    updateSlotPreview(i);
+  });
+  renderRegDungeons();
+  $("#reg-heading").textContent = "編成を登録";
+  $("#reg-submit").textContent = "登録する";
+}
+
+async function saveRegForm() {
+  // ダンジョン
+  let dungeonId = $("#reg-dungeon").value;
+  if (dungeonId === "__new") {
+    const name = $("#reg-dungeon-name").value.trim();
+    if (!name) return regMessage("新しいダンジョン名を入力してください。", false);
+  }
+  const min = Number($("#reg-min").value || 0);
+  const sec = Number($("#reg-sec").value || 0);
+  const timeSec = Math.round(min * 60 + sec);
+  if (!timeSec) return regMessage("1周のタイムを入力してください。", false);
+
+  // モンスター
+  const members = [];
+  for (let i = 0; i < REG_ROLES.length; i++) {
+    const m = resolveSlot($(`#reg-m-${i}`));
+    const a = resolveSlot($(`#reg-a-${i}`));
+    const label = ["リーダー", "サブ1", "サブ2", "サブ3", "サブ4", "フレンド"][i];
+    if (Number.isNaN(m)) return regMessage(`${label}の「${$(`#reg-m-${i}`).value}」が図鑑で見つかりません。候補から選ぶか図鑑No.を入力してください。`, false);
+    if (Number.isNaN(a)) return regMessage(`${label}のアシスト「${$(`#reg-a-${i}`).value}」が図鑑で見つかりません。`, false);
+    if (m == null) {
+      if (REG_ROLES[i] === "L") return regMessage("リーダーを入力してください。", false);
+      if (a != null) return regMessage(`${label}はアシストだけ入っています。モンスターも入力してください。`, false);
+      continue;
+    }
+    const mem = { id: findOrCreateMonster(String(m)).id, role: REG_ROLES[i] };
+    if (a != null) mem.assist = `${MDB.get(a)[1]} No.${a}`;
+    members.push(mem);
+  }
+
+  const newName = $("#reg-dungeon-name").value.trim();
+  let newDungeon = null;
+  const dup = findDuplicateTeam({
+    dungeonId: dungeonId === "__new" ? db.dungeons.find((d) => norm(d.name) === norm(newName))?.id : dungeonId,
+    members,
+    source: $("#reg-src").value,
+    excludeId: regEditingId,
+  });
+  if (dup) return regMessage(regEditingId ? duplicateMessage(dup).replace("新規登録はしませんでした", "更新はしませんでした") : duplicateMessage(dup), false);
+
+  if (dungeonId === "__new") {
+    const name = newName;
+    const existing = db.dungeons.find((d) => norm(d.name) === norm(name));
+    if (existing) dungeonId = existing.id;
+    else {
+      dungeonId = `ud${Date.now()}`;
+      newDungeon = { id: dungeonId, name, aliases: [], stamina: Number($("#reg-stamina").value || 0), battles: 0, drops: [], userAdded: true };
+      db.dungeons.push(newDungeon);
+    }
+  }
+  const dungeon = db.dungeons.find((d) => d.id === dungeonId);
+
+  // 報酬: ダンジョンに素材がなければ追加、編成ごとの値は yields に
+  const yields = {};
+  for (const [inputId, itemId] of [["#reg-plus", "plus"], ["#reg-exp", "exp"]]) {
+    const v = Number($(inputId).value || 0);
+    if (!v || !db.items.some((it) => it.id === itemId)) continue;
+    yields[itemId] = v;
+    if (!dungeon.drops.some((d) => d.itemId === itemId)) dungeon.drops.push({ itemId, rate: v });
+  }
+
+  const stepsText = $("#reg-steps").value;
+  const turns = Number($("#reg-turns").value || 0) || undefined;
+  const team = {
+    id: regEditingId ?? `u${Date.now()}`,
+    userAdded: true,
+    dungeonId,
+    title: $("#reg-title").value.trim() || `${dungeon.name} 編成`,
+    timeSec,
+    ...(turns ? { turns } : {}),
+    ...(Object.keys(yields).length ? { yields } : {}),
+    members,
+    steps: stepsText.split(/\r?\n/).map((l) => l.trim()).filter(Boolean),
+    source: $("#reg-src").value.trim(),
+    ...($("#reg-author").value.trim() ? { author: { name: $("#reg-author").value.trim() } } : {}),
+    sourceDate: new Date().toISOString().slice(0, 10),
+    metrics: metricsFromText(stepsText, $("#reg-891").value),
+    plus891Choice: $("#reg-891").value,
+  };
+  const verb = regEditingId ? "更新" : "登録";
+  const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
+  let where = "local";
+  if (shared.mode === "firebase") {
+    if (!shared.fb.user) return regMessage("共有登録にはGoogleでログインしてください（上の「Googleでログイン」）。", false);
+    $("#reg-submit").disabled = true;
+    try {
+      await shared.fb.submit({ ...toSharedTeam(team), ...(newDungeon ? { newDungeon: toSharedDungeon(newDungeon) } : {}) });
+      where = "pending";
+    } catch (e) {
+      $("#reg-submit").disabled = false;
+      const tooFast = e?.code === "permission-denied";
+      return regMessage(tooFast ? "登録できませんでした。連続登録は1分に1件までです。少し待ってからもう一度試してください。" : `登録に失敗しました（${e?.message ?? e}）。`, false);
+    }
+    $("#reg-submit").disabled = false;
+    if (newDungeon) db.dungeons = db.dungeons.filter((d) => d.id !== newDungeon.id);
+    persist();
+    clearRegForm();
+    renderRegList();
+    return regMessage(`「${team.title}」を承認待ちで登録しました。管理者が確認して承認すると、他の人の編成検索にも表示されます。`, true);
+  } else if (shared.db && shared.canWrite !== false) {
+    $("#reg-submit").disabled = true;
+    try {
+      if (newDungeon) await shared.db.doc(`dungeons/${newDungeon.id}`).set(toSharedDungeon(newDungeon));
+      await shared.db.doc(`teams/${team.id}`).set(toSharedTeam(team));
+      where = "shared";
+    } catch (e) {
+      // 書き込み権限がない（外部の閲覧者など）→ このブラウザにだけ保存
+      if (e?.code === "invalid_argument") shared.canWrite = false;
+      else if (editingShared) {
+        $("#reg-submit").disabled = false;
+        return regMessage("共有データへの保存に失敗しました。時間をおいてもう一度試してください。", false);
+      }
+    } finally {
+      $("#reg-submit").disabled = false;
+    }
+  }
+  if (where === "shared") {
+    team.shared = true;
+    if (newDungeon) newDungeon.shared = true;
+  }
+  const i = db.teams.findIndex((t) => t.id === team.id);
+  if (i >= 0) db.teams[i] = team;
+  else db.teams.push(team);
+  persist();
+  renderData();
+  clearRegForm();
+  renderRegList();
+  regMessage(
+    where === "shared"
+      ? `「${team.title}」を${verb}しました。他の人の編成検索にも「${dungeon.name}」で表示されます。`
+      : `「${team.title}」を${verb}しました（このブラウザにだけ保存。他の人には表示されません）。`,
+    true
+  );
+}
+
+// ---------- 共有データ（公開ページの共有DB） ----------
+// 作成者（と招待された編集者）が登録した編成を、ページを開いた全員の検索に出す。
+// ローカル（localhost）や共有DBが使えない閲覧では何もしない
+const shared = { db: null, canWrite: null, teams: [], dungeons: [] };
+
+// 共有DBに保存する形: モンスターは図鑑No.で持つ（閲覧者ごとの内部idに依存しない）
+function toSharedTeam(t) {
+  const { shared: _s, ...rest } = t;
+  return {
+    ...rest,
+    members: t.members.map((m) => ({ no: monster(m.id)?.no ?? null, name: monster(m.id)?.name ?? "", role: m.role, ...(m.p ? { p: m.p } : {}), ...(m.assist ? { assist: m.assist } : {}) })),
+  };
+}
+function toSharedDungeon(d) {
+  const { shared: _s, ...rest } = d;
+  return rest;
+}
+function fromSharedTeam(doc) {
+  return {
+    ...doc,
+    shared: true,
+    userAdded: true,
+    members: (doc.members ?? []).map((m) => ({
+      id: findOrCreateMonster(m.no ? String(m.no) : m.name || "?").id,
+      role: m.role,
+      ...(m.p ? { p: m.p } : {}),
+      ...(m.assist ? { assist: m.assist } : {}),
+    })),
+  };
+}
+
+function applyShared() {
+  const embedded = shared.teams.filter((t) => t.newDungeon && !shared.dungeons.some((d) => d.id === t.newDungeon.id)).map((t) => t.newDungeon);
+  const sharedDungeons = [...shared.dungeons, ...embedded].filter((d, i, a) => a.findIndex((x) => x.id === d.id) === i);
+  db.dungeons = [...db.dungeons.filter((d) => !d.shared), ...sharedDungeons.map((d) => ({ ...d, shared: true }))];
+  const localIds = new Set(db.teams.filter((t) => !t.shared).map((t) => t.id));
+  db.teams = [...db.teams.filter((t) => !t.shared), ...shared.teams.filter((t) => !localIds.has(t.id)).map(fromSharedTeam)];
+  easeRangeCache = null;
+  renderData();
+  if (!$("#tab-register").hidden) {
+    renderRegDungeons($("#reg-dungeon").value);
+    renderRegList();
+  }
+  if (!$("#tab-search").hidden && $("#q").value.trim() && $("#results").children.length) search();
+}
+
+async function initShared() {
+  if (window.PAD_FIREBASE) {
+    shared.mode = "firebase";
+    shared.fb = window.PAD_FIREBASE;
+    shared.canWrite = true;
+    shared.fb.onAuth.push(() => {
+      updateRegMode();
+      renderAdminPanel();
+    });
+    shared.fb.watchTeams((teams) => {
+      shared.teams = teams;
+      applyShared();
+    });
+    updateRegMode();
+    return;
+  }
+  const use = window.claude?.use;
+  if (!use) return;
+  const [dbApi, user] = await Promise.all([use("db"), use("user")]);
+  if (!dbApi) return;
+  shared.db = dbApi;
+  shared.canWrite = user?.can ? await user.can("data.write") : null;
+  updateRegMode();
+  const watch = (name) =>
+    dbApi.collection(name).onSnapshot(
+      (snap) => {
+        shared[name] = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+        applyShared();
+      },
+      () => {}
+    );
+  watch("dungeons");
+  watch("teams");
+}
+
+// 管理者パネル（承認待ち・通報）
+let adminUnsubs = [];
+function renderAdminPanel() {
+  const panel = $("#admin-panel");
+  adminUnsubs.forEach((u) => u?.());
+  adminUnsubs = [];
+  if (shared.mode !== "firebase" || !shared.fb.isAdmin) {
+    panel.hidden = true;
+    return;
+  }
+  panel.hidden = false;
+  adminUnsubs.push(
+    shared.fb.watchPending((list) => {
+      $("#admin-pending").innerHTML = list.length
+        ? `<ul class="reg-list">${list
+            .map((t) => `<li><div class="reg-info"><strong>${esc(t.title)}</strong>
+              <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ ${formatTime(t.timeSec)} ・ 登録者 ${esc(t.ownerName ?? "")}</span>
+              ${t.source ? `<a href="${esc(t.source)}" target="_blank" rel="noopener">参考元</a>` : ""}
+              <span class="muted">${esc((t.members ?? []).map((m) => m.name).join(" / "))}</span></div>
+              <div class="row"><button type="button" class="primary" data-approve="${esc(t.id)}">承認して公開</button>
+              <button type="button" data-reject="${esc(t.id)}">却下</button>
+              <button type="button" class="danger" data-purge="${esc(t.id)}">削除</button></div></li>`)
+            .join("")}</ul>`
+        : `<p class="hint">承認待ちはありません。</p>`;
+    })
+  );
+  adminUnsubs.push(
+    shared.fb.watchReports((list) => {
+      $("#admin-reports").innerHTML = list.length
+        ? `<ul class="reg-list">${list
+            .map((r) => `<li><div class="reg-info"><strong>${esc(db.teams.find((t) => t.id === r.teamId)?.title ?? r.teamId)}</strong>
+              <span class="muted">${esc(r.reason)}</span></div>
+              <div class="row"><button type="button" data-hide="${esc(r.teamId)}">編成を非公開にする</button>
+              <button type="button" data-resolve="${esc(r.id)}">対応済みにする</button></div></li>`)
+            .join("")}</ul>`
+        : `<p class="hint">通報はありません。</p>`;
+    })
+  );
+}
+
+function updateRegMode() {
+  const el = $("#reg-mode");
+  if (!el) return;
+  const authBox = $("#reg-auth");
+  if (shared.mode === "firebase") {
+    const u = shared.fb.user;
+    el.textContent = "登録した編成は管理者の確認後に公開され、他の人の編成検索にも表示されます（Googleログインが必要です）。";
+    el.className = "note";
+    authBox.hidden = false;
+    authBox.innerHTML = u
+      ? `<span class="muted">ログイン中: ${esc(u.displayName || u.email || "")}${shared.fb.isAdmin ? "（管理者）" : ""}</span> <button type="button" id="fb-signout">ログアウト</button>`
+      : `<button type="button" class="primary" id="fb-signin">Googleでログイン</button>`;
+    return;
+  }
+  if (shared.db && shared.canWrite !== false) {
+    el.textContent = "登録した編成は、このページを開いた他の人の編成検索にも表示されます。";
+    el.className = "note";
+  } else if (shared.db) {
+    el.textContent = "このページでは共有の登録ができないため、登録した編成はこのブラウザにだけ保存されます（他の人には表示されません）。";
+    el.className = "note";
+  } else {
+    el.textContent = "登録した編成はこのブラウザに保存され、編成検索に並びます。";
+    el.className = "hint";
+  }
+}
+
+function loadIntoRegForm(id) {
+  const t = db.teams.find((x) => x.id === id);
+  if (!t) return;
+  clearRegForm();
+  regEditingId = t.id;
+  renderRegDungeons(t.dungeonId);
+  $("#reg-title").value = t.title;
+  $("#reg-min").value = Math.floor(t.timeSec / 60);
+  $("#reg-sec").value = t.timeSec % 60;
+  $("#reg-turns").value = t.turns ?? "";
+  $("#reg-plus").value = t.yields?.plus ?? "";
+  $("#reg-exp").value = t.yields?.exp ?? "";
+  $("#reg-891").value = t.plus891Choice ?? "";
+  const order = { L: 0, S: 1, F: 2 };
+  const sorted = [...t.members].sort((a, b) => order[a.role] - order[b.role]);
+  const slots = { L: [0], S: [1, 2, 3, 4], F: [5] };
+  for (const mem of sorted) {
+    const i = slots[mem.role].shift();
+    if (i == null) continue;
+    const no = monster(mem.id)?.no;
+    if (no) setSlotValue($(`#reg-m-${i}`), no);
+    const a = assistNoOf(mem);
+    if (a) setSlotValue($(`#reg-a-${i}`), a);
+    updateSlotPreview(i);
+  }
+  $("#reg-steps").value = (t.steps ?? []).join("\n");
+  $("#reg-src").value = t.source ?? "";
+  $("#reg-author").value = t.author?.name ?? "";
+  $("#reg-heading").textContent = "編成を編集";
+  $("#reg-submit").textContent = "更新する";
+  $("#reg-form").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+let regDeleteArmed = null;
+function renderRegList() {
+  const mine = db.teams.filter((t) => t.userAdded);
+  $("#reg-list-title").textContent = shared.db ? "登録された編成" : "自分で登録した編成";
+  $("#reg-list").innerHTML = mine.length
+    ? `<ul class="reg-list">${mine
+        .map((t) => {
+          const d = db.dungeons.find((x) => x.id === t.dungeonId);
+          const icons = t.members.map((m) => iconHTML(monster(m.id))).join("");
+          const canEdit = !t.shared || (shared.mode === "firebase" ? t.status === "pending" && t.ownerUid === shared.fb.user?.uid : shared.canWrite !== false);
+          const badge = !t.shared
+            ? `<span class="badge badge-local">このブラウザのみ</span>`
+            : t.status === "pending"
+              ? `<span class="badge badge-pending">承認待ち</span>`
+              : t.status === "rejected"
+                ? `<span class="badge badge-local">非公開</span>`
+                : `<span class="badge">公開中</span>`;
+          const buttons = canEdit
+            ? `<div class="row"><button type="button" data-edit="${esc(t.id)}">編集</button>
+               <button type="button" class="danger" data-del="${esc(t.id)}">${regDeleteArmed === t.id ? "もう一度押すと削除" : "削除"}</button></div>`
+            : "";
+          return `<li><div class="reg-icons">${icons}</div>
+            <div class="reg-info"><strong>${badge}${esc(t.title)}</strong><span class="muted">${esc(d?.name ?? "")} ・ ${formatTime(t.timeSec)}</span></div>
+            ${buttons}</li>`;
+        })
+        .join("")}</ul>`
+    : `<p class="hint">まだありません。上のフォームから登録できます。</p>`;
+}
+
+// ---------- イベント ----------
+document.querySelectorAll(".tab").forEach((b) =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === b));
+    document.querySelectorAll(".panel").forEach((p) => (p.hidden = p.id !== `tab-${b.dataset.tab}`));
+    if (b.dataset.tab === "box") renderBox();
+    if (b.dataset.tab === "register") {
+      renderRegDungeons($("#reg-dungeon").value);
+      renderRegList();
+    }
+  })
+);
+
+function setSearchType(type) {
+  searchType = type;
+  const t = SEARCH_TYPES[type];
+  document.querySelectorAll("#search-type button").forEach((x) => x.classList.toggle("active", x.dataset.type === type));
+  $("#q-label").textContent = t.label;
+  $("#q").placeholder = t.placeholder;
+  renderSuggestions();
+}
+
+document.querySelectorAll("#search-type button").forEach((b) =>
+  b.addEventListener("click", () => {
+    if (b.dataset.type === searchType) return;
+    setSearchType(b.dataset.type);
+    $("#q").value = "";
+    $("#results").innerHTML = "";
+    $("#q").focus();
+  })
+);
+
+document.querySelectorAll("#mode button").forEach((b) =>
+  b.addEventListener("click", () => {
+    mode = b.dataset.mode;
+    document.querySelectorAll("#mode button").forEach((x) => x.classList.toggle("active", x === b));
+    if ($("#q").value.trim()) search();
+  })
+);
+
+$("#run").addEventListener("click", search);
+$("#results").addEventListener("click", (e) => {
+  const rep = e.target.closest(".report-btn");
+  if (rep) {
+    if (!shared.fb.user) return window.alert?.("報告にはGoogleログインが必要です（編成登録タブからログインできます）");
+    const reason = window.prompt?.("問題の内容を書いてください（誤り・無断転載・荒らしなど）");
+    if (reason) shared.fb.report(rep.dataset.report, reason).then(() => (rep.textContent = "報告しました"));
+    return;
+  }
+  const btn = e.target.closest(".alt-btn");
+  if (!btn) return;
+  const out = btn.nextElementSibling;
+  if (out.innerHTML) {
+    out.innerHTML = "";
+    btn.textContent = btn.dataset.label;
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = "探しています…";
+  // 図鑑1.4万体を調べるので、表示を更新してから計算する
+  setTimeout(() => {
+    out.innerHTML = searchAltFor(btn.dataset.team, Number(btn.dataset.idx));
+    btn.disabled = false;
+    btn.textContent = "代用候補を閉じる";
+  }, 20);
+});
+$("#q").addEventListener("input", () => {
+  suggestIndex = -1;
+  renderSuggestions();
+});
+$("#q").addEventListener("focus", renderSuggestions);
+$("#q").addEventListener("blur", () => setTimeout(renderSuggestions, 150));
+$("#q").addEventListener("keydown", (e) => {
+  const items = [...document.querySelectorAll("#q-suggest li")];
+  const open = !$("#q-suggest").hidden && items.length;
+  if (open && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
+    e.preventDefault();
+    suggestIndex = (suggestIndex + (e.key === "ArrowDown" ? 1 : -1) + items.length) % items.length;
+    renderSuggestions();
+  } else if (e.key === "Escape") {
+    $("#q-suggest").hidden = true;
+  } else if (e.key === "Enter" && !e.isComposing) {
+    if (open && suggestIndex >= 0) pickSuggestion(items[suggestIndex].dataset.name);
+    else {
+      $("#q-suggest").hidden = true;
+      search();
+    }
+  }
+});
+$("#q-suggest").addEventListener("mousedown", (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+  e.preventDefault();
+  pickSuggestion(li.dataset.name);
+});
+$("#owned-only").addEventListener("change", () => $("#q").value.trim() && search());
+
+$("#box-filter").addEventListener("input", renderBox);
+$("#mdb-q").addEventListener("input", renderMdbResults);
+$("#mdb-q").addEventListener("blur", () => setTimeout(() => ($("#mdb-results").hidden = true), 150));
+$("#mdb-results").addEventListener("mousedown", (e) => {
+  const li = e.target.closest("li");
+  if (!li) return;
+  e.preventDefault();
+  const m = findOrCreateMonster(li.dataset.no);
+  box.add(m.id);
+  persist();
+  saveBox();
+  $("#mdb-q").value = "";
+  $("#mdb-results").hidden = true;
+});
+$(".mdb-credit").textContent = MDB_ROWS.length
+  ? `図鑑データ: みんなで作るパズドラモンスターデータベース（${MDB_ROWS.length}体、${window.PAD_MONSTER_DB.updated}時点）`
+  : "図鑑データが読み込めていません";
+$("#box-list").addEventListener("change", (e) => {
+  const id = e.target.dataset.id;
+  if (!id) return;
+  e.target.checked ? box.add(id) : box.delete(id);
+  saveBox();
+});
+$("#box-all").addEventListener("click", () => {
+  db.monsters.forEach((m) => box.add(m.id));
+  saveBox();
+});
+$("#box-none").addEventListener("click", () => {
+  box.clear();
+  saveBox();
+});
+
+$("#text-import-run").addEventListener("click", () => {
+  const msg = $("#text-import-msg");
+  try {
+    const name = importText($("#text-import").value);
+    msg.className = "msg ok";
+    msg.textContent = `「${name}」に編成を追加しました。`;
+    $("#text-import").value = "";
+    renderData();
+  } catch (err) {
+    msg.className = "msg err";
+    msg.textContent = err.message;
+  }
+});
+
+$("#json-file").addEventListener("change", async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const msg = $("#json-msg");
+  try {
+    const counts = importJSON(JSON.parse(await file.text()));
+    msg.className = "msg ok";
+    msg.textContent = `取り込み完了: ${Object.entries(counts).map(([k, v]) => `${k} ${v}件`).join(" / ") || "0件"}`;
+    renderData();
+  } catch (err) {
+    msg.className = "msg err";
+    msg.textContent = `取り込み失敗: ${err.message}`;
+  }
+  e.target.value = "";
+});
+
+// 公開ページではファイルのダウンロードができないので、クリップボードへのコピーで書き出す
+$("#json-export").addEventListener("click", async () => {
+  const json = JSON.stringify(db, null, 2);
+  const msg = $("#json-msg");
+  try {
+    await navigator.clipboard.writeText(json);
+    msg.className = "msg ok";
+    msg.textContent = "データをクリップボードにコピーしました。メモ帳などに貼り付けて .json で保存してください。";
+  } catch {
+    const box = $("#json-out");
+    box.hidden = false;
+    box.value = json;
+    box.select();
+    msg.className = "msg";
+    msg.textContent = "自動でコピーできなかったので、下の枠の中身を選択してコピーしてください。";
+  }
+});
+
+// confirm() が使えない環境があるので、確認はボタンを2回押す形にする
+let resetArmed = null;
+$("#reset").addEventListener("click", () => {
+  const btn = $("#reset");
+  if (!resetArmed) {
+    btn.textContent = "もう一度押すと初期データに戻します";
+    resetArmed = setTimeout(() => {
+      btn.textContent = "初期データに戻す";
+      resetArmed = null;
+    }, 4000);
+    return;
+  }
+  clearTimeout(resetArmed);
+  resetArmed = null;
+  btn.textContent = "初期データに戻す";
+  db = structuredClone(window.PAD_SEED);
+  persist();
+  renderData();
+  $("#results").innerHTML = "";
+  $("#json-msg").className = "msg ok";
+  $("#json-msg").textContent = "初期データに戻しました。";
+});
+
+renderRegSlots();
+renderRegDungeons();
+$("#reg-auth").addEventListener("click", (e) => {
+  if (e.target.id === "fb-signin") shared.fb.signIn().catch((err) => regMessage(`ログインできませんでした（${err.message}）`, false));
+  if (e.target.id === "fb-signout") shared.fb.signOut();
+});
+$("#admin-panel").addEventListener("click", async (e) => {
+  const b = e.target.closest("button");
+  if (!b) return;
+  try {
+    if (b.dataset.approve) await shared.fb.setStatus(b.dataset.approve, "approved");
+    if (b.dataset.reject) await shared.fb.setStatus(b.dataset.reject, "rejected");
+    if (b.dataset.purge) await shared.fb.remove(b.dataset.purge);
+    if (b.dataset.hide) await shared.fb.setStatus(b.dataset.hide, "rejected");
+    if (b.dataset.resolve) await shared.fb.resolveReport(b.dataset.resolve);
+  } catch (err) {
+    alert?.(`操作に失敗しました: ${err.message}`);
+  }
+});
+updateRegMode();
+initShared();
+$("#reg-dungeon").addEventListener("change", () => ($("#reg-new-dungeon").hidden = $("#reg-dungeon").value !== "__new"));
+$("#reg-form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  saveRegForm();
+});
+$("#reg-reset").addEventListener("click", () => {
+  clearRegForm();
+  $("#reg-msg").textContent = "";
+});
+$("#reg-list").addEventListener("click", async (e) => {
+  const edit = e.target.closest("[data-edit]");
+  if (edit) return loadIntoRegForm(edit.dataset.edit);
+  const del = e.target.closest("[data-del]");
+  if (!del) return;
+  const id = del.dataset.del;
+  if (regDeleteArmed !== id) {
+    regDeleteArmed = id;
+    renderRegList();
+    setTimeout(() => {
+      if (regDeleteArmed === id) {
+        regDeleteArmed = null;
+        renderRegList();
+      }
+    }, 4000);
+    return;
+  }
+  regDeleteArmed = null;
+  const target = db.teams.find((t) => t.id === id);
+  if (target?.shared) {
+    try {
+      if (shared.mode === "firebase") await shared.fb.remove(id);
+      else await shared.db.doc(`teams/${id}`).delete();
+    } catch {
+      return regMessage("共有データから削除できませんでした（削除できるのは作成者と編集者だけです）。", false);
+    }
+  }
+  db.teams = db.teams.filter((t) => t.id !== id);
+  persist();
+  renderData();
+  renderRegList();
+  regMessage("編成を削除しました。", true);
+});
+
+renderData();

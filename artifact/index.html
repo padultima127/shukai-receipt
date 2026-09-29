@@ -1,0 +1,196 @@
+<title>パズドラ周回編成ナビ</title>
+<link rel="stylesheet" href="style.css">
+<header>
+    <h1>パズドラ周回編成ナビ <span class="beta">β版</span></h1>
+    <nav>
+      <button class="tab active" data-tab="search">編成検索</button>
+      <button class="tab" data-tab="box">手持ちBOX</button>
+      <button class="tab" data-tab="register">編成登録</button>
+      <button class="tab" data-tab="data">データ管理</button>
+    </nav>
+  </header>
+
+  <div class="banner beta-banner">β版です。データの誤り・不具合・掲載取り下げのご連絡は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> / <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> まで。</div>
+  <div id="sample-banner" class="banner" hidden>
+    初期データは攻略サイト（出典リンク付き）の実在編成です。<strong>「推定」</strong>が付いた値は出典に記載がないため仮の値です。
+  </div>
+
+  <main>
+    <!-- 編成検索 -->
+    <section id="tab-search" class="panel">
+      <div class="card">
+        <div class="seg seg-wide" id="search-type">
+          <button data-type="item" class="active">素材で探す</button>
+          <button data-type="dungeon">ダンジョンで探す</button>
+        </div>
+        <label for="q" id="q-label">集めたい素材</label>
+        <div class="suggest-wrap">
+          <input id="q" placeholder="例: スパノエ、プラス" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="q-suggest">
+          <ul id="q-suggest" class="suggest" role="listbox" hidden></ul>
+        </div>
+
+        <div class="row">
+          <span class="label">重視するもの</span>
+          <div class="seg" id="mode">
+            <button data-mode="ease">楽さ</button>
+            <button data-mode="balance" class="active">バランス</button>
+            <button data-mode="speed">速さ</button>
+            <button data-mode="expHour">経験値/時</button>
+            <button data-mode="expStamina">経験値/スタミナ</button>
+          </div>
+        </div>
+        <label class="check"><input type="checkbox" id="owned-only"> 手持ちで組める編成だけ表示（代用込み）</label>
+        <button id="run" class="primary">最適編成を探す</button>
+      </div>
+      <div id="results"></div>
+    </section>
+
+    <!-- 手持ちBOX -->
+    <section id="tab-box" class="panel" hidden>
+      <div class="card">
+        <label for="mdb-q">図鑑から追加（No.か名前）</label>
+        <div class="suggest-wrap">
+          <input id="mdb-q" placeholder="例: 14098、ダイアモス" autocomplete="off">
+          <ul id="mdb-results" class="suggest" hidden></ul>
+        </div>
+        <p class="hint mdb-credit"></p>
+      </div>
+      <div class="card">
+        <p class="hint">持っているモンスターにチェック。ブラウザに保存されます。</p>
+        <input id="box-filter" placeholder="名前・タグで絞り込み">
+        <div class="row">
+          <button id="box-all">全部チェック</button>
+          <button id="box-none">全部外す</button>
+          <span id="box-count" class="muted"></span>
+        </div>
+      </div>
+      <div id="box-list" class="box-grid"></div>
+    </section>
+
+    <!-- 編成登録 -->
+    <section id="tab-register" class="panel" hidden>
+      <form id="reg-form" class="card" novalidate>
+        <h2 id="reg-heading">編成を登録</h2>
+        <p id="reg-mode" class="hint">登録した編成はこのブラウザに保存され、編成検索に並びます。</p>
+        <p class="hint">モンスターは図鑑No.か名前で入力して候補から選んでください。<span class="req">必須</span>はダンジョン・1周のタイム・リーダーだけです。</p>
+
+        <div class="form-grid">
+          <label for="reg-dungeon">ダンジョン<span class="req">必須</span></label>
+          <select id="reg-dungeon"></select>
+          <div id="reg-new-dungeon" class="form-row" hidden>
+            <input id="reg-dungeon-name" placeholder="新しいダンジョン名（例: 霧雨の魔王【超重力】）" autocomplete="off">
+            <input id="reg-stamina" type="number" min="0" inputmode="numeric" placeholder="スタミナ">
+          </div>
+
+          <label for="reg-title">編成の名前</label>
+          <input id="reg-title" placeholder="例: ダイン×ダイアモス 全部位破壊" autocomplete="off">
+
+          <label>1周のタイム<span class="req">必須</span></label>
+          <div class="form-row">
+            <input id="reg-min" type="number" min="0" inputmode="numeric" placeholder="分"><span class="unit">分</span>
+            <input id="reg-sec" type="number" min="0" max="59" step="0.1" inputmode="decimal" placeholder="秒"><span class="unit">秒</span>
+          </div>
+
+          <label for="reg-turns">クリアターン<span class="opt">任意</span></label>
+          <div class="form-row">
+            <input id="reg-turns" type="number" min="1" inputmode="numeric" placeholder="例: 23"><span class="unit">ターン</span>
+          </div>
+
+          <label>1周の報酬<span class="opt">任意</span></label>
+          <div class="form-row">
+            <input id="reg-plus" type="number" min="0" inputmode="numeric" placeholder="+ポイント">
+            <input id="reg-exp" type="number" min="0" inputmode="numeric" placeholder="経験値">
+          </div>
+
+          <label for="reg-891">+891</label>
+          <select id="reg-891">
+            <option value="">分からない</option>
+            <option value="required">必須</option>
+            <option value="some">一部だけ</option>
+            <option value="not-required">不要（+297でOK）</option>
+          </select>
+        </div>
+
+        <h3 class="form-sub">モンスターとアシスト</h3>
+        <ol id="reg-slots" class="reg-slots"></ol>
+
+        <label for="reg-steps">立ち回り（1行に1つ）</label>
+        <textarea id="reg-steps" rows="8" placeholder="1F: ダイアモス変身、ダイン変身、日番谷
+2F: イズナ、日番谷、ダイアモス（光L字×2）"></textarea>
+
+        <div class="form-grid">
+          <label for="reg-src">参考元のURL</label>
+          <input id="reg-src" type="url" placeholder="https://x.com/..." autocomplete="off">
+          <label for="reg-author">参考元の名前</label>
+          <input id="reg-author" placeholder="例: 前歯ニキ" autocomplete="off">
+        </div>
+
+        <div class="row">
+          <button type="submit" class="primary" id="reg-submit">登録する</button>
+          <button type="button" id="reg-reset">入力をクリア</button>
+        </div>
+        <p id="reg-msg" class="msg" role="status"></p>
+      </form>
+
+      <div class="card">
+        <h2 id="reg-list-title">自分で登録した編成</h2>
+        <div id="reg-list"></div>
+      </div>
+    </section>
+
+    <!-- データ管理 -->
+    <section id="tab-data" class="panel" hidden>
+      <div class="card">
+        <h2>編成テキストを取り込む</h2>
+        <p class="hint">ツイートや攻略メモの編成をこの形式に整えて貼り付け。未登録のモンスター・ダンジョン・素材は自動で追加されます。「別名:」に略称を書いておくと略称でも検索できます。モンスターは名前の代わりに図鑑No.でもOK（正式名・属性が自動で入ります）。アシストは「@」の後ろに書きます。編成は L(リーダー)・S(サブ)×4・F(フレンド) の6体。書かなかったサブ枠は「自由枠」として扱います。</p>
+        <textarea id="text-import" rows="15" placeholder="ダンジョン: ○○ダンジョン
+素材: スーパーノエルドラゴン 60%
+別名: スパノエ, スーパーノエル
+スタミナ: 30
+タイトル: 光ワンパン編成
+時間: 60秒
+楽さ: 4
+安定: 95
+L: ダイン [光リーダー]
+S: 14068 @14039
+S: 貫通の剣士 [ダメージ無効貫通]
+S: 変換の巫女 [エンハンス]
+S: 盾の守護者 [ダメージ軽減]
+F: 光輝の聖騎士
+手順: 陣 → 光を消すだけ
+出典: https://x.com/...
+作者: 前歯ニキ"></textarea>
+        <button id="text-import-run" class="primary">取り込む</button>
+        <p id="text-import-msg" class="msg"></p>
+      </div>
+
+      <div class="card">
+        <h2>JSONで入出力</h2>
+        <p class="hint">収集したデータをまとめてJSONで取り込み（同じidは上書き）。バックアップや共有には「データをコピー」を使ってください。</p>
+        <div class="row">
+          <input type="file" id="json-file" accept=".json,application/json">
+          <button id="json-export">データをコピー</button>
+          <button id="reset" class="danger">初期データに戻す</button>
+        </div>
+        <p id="json-msg" class="msg"></p>
+        <textarea id="json-out" rows="6" readonly hidden></textarea>
+      </div>
+
+      <div class="card">
+        <h2>登録済みデータ</h2>
+        <div id="data-summary"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p><strong>非公式のファンツールです。</strong>ガンホー・オンライン・エンターテイメント株式会社とは関係ありません。非商用で運営しています。</p>
+    <p>掲載している編成・立ち回りの権利は、各編成の「参考元」に記載した作者にあります。内容は要約のため、参考にするときは必ずリンク先の元の投稿を確認してください。</p>
+    <p>編成の掲載取り下げ・修正のご希望は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> または <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> までご連絡ください。確認後すぐに対応します。</p>
+    <p class="muted">図鑑データ: <a href="https://padmdb.rainbowsite.net/" target="_blank" rel="noopener">みんなで作るパズドラモンスターデータベース</a> ／ ギミック: 各攻略サイト（出典は各ダンジョンに記載）</p>
+    <p class="muted">© GungHo Online Entertainment Inc. All Rights Reserved.</p>
+  </footer>
+
+  <script src="monsters-db.js"></script>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
