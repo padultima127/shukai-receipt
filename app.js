@@ -1134,7 +1134,8 @@ function enduranceSetup(t) {
   return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom };
 }
 
-function simulateEndurance(d, setup, maxHp) {
+// skillRed: スキルの軽減%（0 ならなし）。LSの軽減が剥がれる攻撃（noLsReduce）にはスキルの軽減だけが乗る
+function simulateEndurance(d, setup, maxHp, skillRed = 0) {
   let hp = maxHp;
   const rows = [];
   let deadAt = null;
@@ -1143,9 +1144,10 @@ function simulateEndurance(d, setup, maxHp) {
     hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
     for (const h of f.hits) {
       const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
-      const taken = Math.round(raw * (1 - setup.reduce));
+      const red = h.noLsReduce ? skillRed / 100 : 1 - (1 - setup.reduce) * (1 - skillRed / 100);
+      const taken = Math.round(raw * (1 - red));
       hp -= taken;
-      rows.push({ floor: f.floor, label: h.label, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
+      rows.push({ floor: f.floor, label: h.label, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
       if (hp <= 0) {
         deadAt = f.floor;
         break;
@@ -1161,7 +1163,7 @@ function renderEnduranceResult(t, d, maxHp) {
   const sim = simulateEndurance(d, setup, maxHp);
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed
-    ? simulateEndurance(d, { ...setup, reduce: 1 - (1 - setup.reduce) * (1 - setup.skillRed / 100) }, maxHp)
+    ? simulateEndurance(d, setup, maxHp, setup.skillRed)
     : null;
   const skillLine = withSkill
     ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${esc(setup.skillRedFrom)}の${setup.skillRed}%、合計${Math.round((1 - (1 - setup.reduce) * (1 - setup.skillRed / 100)) * 1000) / 10}%）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>`
@@ -1177,7 +1179,7 @@ function renderEnduranceResult(t, d, maxHp) {
   return `${verdict}${skillLine}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提。スキルの軽減は入れていません）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
-    ${sim.rows.map((r) => `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
+    ${sim.rows.map((r) => `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
 }
 
