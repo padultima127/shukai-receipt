@@ -1327,6 +1327,20 @@ function renderLatentAdvice(d, setup, maxHp, skillRed, latent, sim) {
   return `<p class="advice">潜在覚醒の枠が空いていれば: ${used.map((a) => `<strong>${a}</strong>の${latentText(sg.slots[a])}（${latentPct(sg.slots[a])}%・${sg.slots[a]}枠）`).join("、")}を振れば全フロア耐えられる計算です（合計${total}枠。パーティー全体で振り分けてOK）</p>`;
 }
 
+// 全フロア耐えるのに必要な最低HP（二分探索）。無理な場合は null
+function requiredHp(d, setup, skillRed, latent) {
+  const ok = (hp) => simulateEndurance(d, setup, hp, skillRed, latent).deadAt == null;
+  let hi = 1e8;
+  if (!ok(hi)) return null;
+  let lo = 1;
+  while (hi - lo > 500) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (ok(mid)) hi = mid;
+    else lo = mid;
+  }
+  return Math.ceil(hi / 1000) * 1000;
+}
+
 function renderEnduranceResult(t, d, maxHp, latent = {}) {
   const setup = enduranceSetup(t);
   const sim = simulateEndurance(d, setup, maxHp, 0, latent);
@@ -1346,7 +1360,12 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
     ? `<p class="ok"><strong>全フロア耐えられる計算です</strong></p>`
     : `<p class="ng"><strong>${sim.deadAt}Fで倒れる計算です</strong></p>`;
   const attrCell = (r) => (r.worst ? `${esc(r.worst)}${r.attrs.length > 1 ? `<small class="muted">（${esc(r.attrs.join("・"))}のどれか）</small>` : ""}${r.ar ? `<small> −${r.ar}%</small>` : ""}` : r.attrs?.includes("無") ? "無" : "―");
-  return `${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}
+  const need0 = requiredHp(d, setup, 0, latent);
+  const need1 = setup.skillRed ? requiredHp(d, setup, setup.skillRed, latent) : null;
+  const fmt = (n) => (n == null ? "―（HPでは耐えられない）" : `${n.toLocaleString("ja-JP")}`);
+  const need = `<p class="need">全フロア耐えるのに必要なHP: スキルの軽減なし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／あり <strong>${fmt(need1)}</strong>` : ""}
+    <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
+  return `${need}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="4">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}

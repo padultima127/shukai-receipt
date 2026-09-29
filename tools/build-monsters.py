@@ -315,7 +315,10 @@ def main():
     groups = transform_groups(monsters, skills)
     rows = []
     for no, m in sorted(monsters.items(), key=lambda kv: int(kv[0])):
-        attrs = m.get("attributes") or []
+        attrs = list(m.get("attributes") or [])
+        # 一部の敵専用キャラは [0, 属性, 0] と1つずれて登録されている（例: 新百式5Fのプリシラ・テュオレ・カティア）
+        if attrs and not attrs[0] and len(attrs) > 1 and attrs[1]:
+            attrs = [attrs[1]] + attrs[2:]
         main_attr = ATTR.get(attrs[0] if attrs else None, "")
         sub_attr = ATTR.get(attrs[1] if len(attrs) > 1 else None, "")
         awakens = [a for a in (m.get("awakens") or []) if a] + [a for a in (m.get("superAwakens") or []) if a][:0]
