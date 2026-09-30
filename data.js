@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 73,
+  "version": 75,
   "seed": true,
   "monsters": [
     {
@@ -1876,6 +1876,9 @@ window.PAD_SEED = {
             "hits": [],
             "enemyAttrs": [
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "火"
             ]
           },
           {
@@ -1976,6 +1979,10 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [],
             "enemyAttrs": [
+              "光",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
               "光",
               "闇"
             ]
@@ -2084,6 +2091,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "木"
+            ],
+            "enemyAttrsAfter": [
               "木"
             ]
           }
@@ -2454,6 +2464,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
             ]
           },
           {
@@ -2571,13 +2584,16 @@ window.PAD_SEED = {
                 "dmg": 22018000,
                 "kind": "superResolve",
                 "attrs": [
-                  "闇"
+                  "水"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "闇"
+            ],
+            "enemyAttrsAfter": [
+              "水"
             ],
             "parts": true
           }
@@ -2745,6 +2761,11 @@ window.PAD_SEED = {
               "木",
               "水"
             ],
+            "enemyAttrsAfter": [
+              "木",
+              "水",
+              "闇"
+            ],
             "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
           },
           {
@@ -2790,6 +2811,10 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "木",
+              "水"
+            ],
+            "enemyAttrsAfter": [
               "木",
               "水"
             ],
@@ -2888,6 +2913,10 @@ window.PAD_SEED = {
               "光",
               "闇"
             ],
+            "enemyAttrsAfter": [
+              "光",
+              "闇"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -2906,13 +2935,16 @@ window.PAD_SEED = {
                 "dmg": 8500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木"
+                  "水"
                 ],
                 "threshold": 40
               }
             ],
             "enemyAttrs": [
               "木"
+            ],
+            "enemyAttrsAfter": [
+              "水"
             ]
           },
           {
@@ -2956,13 +2988,16 @@ window.PAD_SEED = {
                 "dmg": 8600000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "木"
                 ],
                 "threshold": 30
               }
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "木"
             ]
           },
           {
@@ -3021,13 +3056,16 @@ window.PAD_SEED = {
                 "dmg": 7000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "木"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "木"
             ],
             "parts": true
           }
@@ -3247,6 +3285,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "水"
             ]
           },
           {
@@ -3349,13 +3390,17 @@ window.PAD_SEED = {
                 "dmg": 8484000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "火"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "水",
+              "火"
             ]
           },
           {
@@ -3383,6 +3428,7 @@ window.PAD_SEED = {
                 "kind": "preemptive",
                 "attrs": [
                   "木",
+                  "水",
                   "火"
                 ]
               },
@@ -3391,8 +3437,9 @@ window.PAD_SEED = {
                 "dmg": 16160000,
                 "kind": "superResolve",
                 "attrs": [
+                  "光",
                   "木",
-                  "火"
+                  "水"
                 ],
                 "threshold": 50
               }
@@ -3401,6 +3448,11 @@ window.PAD_SEED = {
               "木",
               "水",
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "光",
+              "水",
+              "闇"
             ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -3449,6 +3501,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "光"
+            ],
+            "enemyAttrsAfter": [
               "光"
             ],
             "parts": true,
@@ -3626,8 +3681,8 @@ window.PAD_SEED = {
                 "dmg": 6510000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木",
-                  "火"
+                  "光",
+                  "木"
                 ],
                 "threshold": 50
               }
@@ -3635,6 +3690,10 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "木",
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "光",
+              "木"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -3696,13 +3755,16 @@ window.PAD_SEED = {
                 "dmg": 7000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "火"
+                  "闇"
                 ],
                 "threshold": 40
               }
             ],
             "enemyAttrs": [
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
             ]
           },
           {
@@ -3787,13 +3849,16 @@ window.PAD_SEED = {
                 "dmg": 7800000,
                 "kind": "superResolve",
                 "attrs": [
-                  "闇"
+                  "火"
                 ],
                 "threshold": 40
               }
             ],
             "enemyAttrs": [
               "闇"
+            ],
+            "enemyAttrsAfter": [
+              "火"
             ]
           },
           {
@@ -3818,6 +3883,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "光"
             ],
             "awaken": [
               {
@@ -3861,13 +3929,16 @@ window.PAD_SEED = {
                 "dmg": 2000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "火"
+                  "木"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "木"
             ],
             "parts": true
           }
@@ -4287,13 +4358,16 @@ window.PAD_SEED = {
                 "dmg": 25000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木"
+                  "水"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "木"
+            ],
+            "enemyAttrsAfter": [
+              "水"
             ],
             "parts": true
           }
@@ -4720,6 +4794,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "光"
             ]
           },
           {
@@ -4773,6 +4850,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "水"
             ]
           },
           {
@@ -4789,6 +4869,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "木"
             ]
           },
           {
@@ -4893,13 +4976,16 @@ window.PAD_SEED = {
                 "dmg": 16000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "光"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "光"
             ]
           },
           {
@@ -4917,13 +5003,16 @@ window.PAD_SEED = {
                 "dmg": 2460000,
                 "kind": "superResolve",
                 "attrs": [
-                  "闇"
+                  "光"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "闇"
+            ],
+            "enemyAttrsAfter": [
+              "光"
             ],
             "awaken": [
               {
@@ -4978,13 +5067,16 @@ window.PAD_SEED = {
                 "dmg": 4230000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光"
+                  "木"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "木"
             ]
           },
           {
@@ -5019,13 +5111,16 @@ window.PAD_SEED = {
                 "dmg": 19200000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光"
+                  "闇"
                 ],
                 "threshold": 70
               }
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
             ]
           }
         ]
@@ -5218,6 +5313,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "闇"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
             ]
           },
           {
@@ -5236,13 +5334,16 @@ window.PAD_SEED = {
                 "dmg": 20000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光"
+                  "闇"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "光"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
             ]
           },
           {
@@ -5305,7 +5406,7 @@ window.PAD_SEED = {
                 "dmg": 27500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光",
+                  "火",
                   "闇"
                 ],
                 "threshold": 50
@@ -5313,6 +5414,10 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "光",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "火",
               "闇"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
@@ -5371,6 +5476,9 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
             ]
           },
           {
@@ -5395,6 +5503,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "闇"
+            ],
+            "enemyAttrsAfter": [
               "闇"
             ]
           },
@@ -5496,13 +5607,16 @@ window.PAD_SEED = {
                 "dmg": 40500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "闇"
+                  "火"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "闇"
+            ],
+            "enemyAttrsAfter": [
+              "火"
             ]
           }
         ]
@@ -5728,6 +5842,10 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "光",
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "光",
+              "火"
             ]
           },
           {
@@ -5815,6 +5933,10 @@ window.PAD_SEED = {
               "光",
               "火"
             ],
+            "enemyAttrsAfter": [
+              "光",
+              "火"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -5859,13 +5981,16 @@ window.PAD_SEED = {
                 "dmg": 8000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "光"
                 ],
                 "threshold": 50
               }
             ],
             "enemyAttrs": [
               "水"
+            ],
+            "enemyAttrsAfter": [
+              "光"
             ]
           },
           {
@@ -5881,6 +6006,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "光"
+            ],
+            "enemyAttrsAfter": [
               "光"
             ]
           },
@@ -5943,8 +6071,7 @@ window.PAD_SEED = {
                 "dmg": 7500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光",
-                  "火"
+                  "光"
                 ],
                 "threshold": 40
               }
@@ -5952,6 +6079,9 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "光",
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "光"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -6133,6 +6263,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "火"
+            ],
+            "enemyAttrsAfter": [
               "火"
             ]
           }
@@ -6333,6 +6466,11 @@ window.PAD_SEED = {
               "木",
               "水",
               "火"
+            ],
+            "enemyAttrsAfter": [
+              "木",
+              "水",
+              "火"
             ]
           },
           {
@@ -6497,6 +6635,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "火"
+            ],
+            "enemyAttrsAfter": [
               "火"
             ]
           },
@@ -6886,6 +7027,10 @@ window.PAD_SEED = {
               "木",
               "水"
             ],
+            "enemyAttrsAfter": [
+              "光",
+              "木"
+            ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -6918,6 +7063,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "水"
+            ],
+            "enemyAttrsAfter": [
               "水"
             ]
           },
@@ -6953,6 +7101,9 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "水"
+            ],
+            "enemyAttrsAfter": [
               "水"
             ]
           }

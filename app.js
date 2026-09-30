@@ -1554,6 +1554,9 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   // 条件（敵の属性）は使った時点で判定。満たすと効果も効果ターンも◯倍（日番谷など）
   // 条件判定に使う敵の属性: その階に出る可能性のある敵全員（ダメージのない敵も含む）。なければ攻撃の属性から
   const floorAttrMap = Object.fromEntries(d.damage.floors.map((f) => [f.floor, f.enemyAttrs?.length ? f.enemyAttrs : [...new Set(f.hits.flatMap((h) => h.attrs ?? []))]]));
+  // 超根性を持つ敵は、超根性の後（グラビティで剥がした場合も）副属性に変わる（本人談）。その階の最初の攻撃より後のターンは変化後の属性
+  const floorAttrAfter = Object.fromEntries(d.damage.floors.filter((f) => f.enemyAttrsAfter?.length).map((f) => [f.floor, f.enemyAttrsAfter]));
+  const floorAttrAt = (floor, tn) => (floorAttrAfter[floor] && firstTurn[floor] != null && tn > firstTurn[floor] ? floorAttrAfter[floor] : floorAttrMap[floor] ?? []);
   // スキルを使ったターン（その階の1ターン目＋レシートの何ターン目か）
   const startOf = (r) => (firstTurn[r.floor] == null ? null : firstTurn[r.floor] + (r.ti ?? 0));
   const activeAt = (r, tn, dur = r.dur) => startOf(r) != null && startOf(r) <= tn && tn <= startOf(r) + dur - 1;
@@ -1561,7 +1564,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     if (!r.cond) return false;
     const at = startOf(r);
     const e = (setup.enemyAttr ?? []).filter((x) => activeAt(x, at) && x.order < r.order).sort((a, b) => b.order - a.order)[0];
-    const fa = e ? [e.attr] : floorAttrMap[r.floor] ?? [];
+    const fa = e ? [e.attr] : floorAttrAt(r.floor, at);
     return fa.length > 0 && fa.every((a) => a === r.cond.attr);
   };
   const durOf = (r) => (condMet(r) ? r.dur * r.cond.v : r.dur);

@@ -25,15 +25,26 @@ ATTR = {1: "火", 2: "水", 3: "木", 4: "光", 5: "闇"}
 BASE = "https://xn--0ck4aw2h.gamewith.jp/article/show/"
 
 
-def attr_of(no):
+def attrs_of(no):
     m = MONS.get(str(no))
     if not m:
-        return None
+        return []
     a = list(m.get("attributes") or [])
     # 一部の敵専用キャラは [0, 属性, 0] と1つずれている
     if a and not a[0] and len(a) > 1 and a[1]:
         a = a[1:]
-    return ATTR.get(a[0] if a else None)
+    return [ATTR.get(x) for x in a[:2] if ATTR.get(x)]
+
+
+def attr_of(no):
+    a = attrs_of(no)
+    return a[0] if a else None
+
+
+def sub_attr_of(no):
+    """超根性の後は副属性に変わる（本人談）。副属性がなければ主属性のまま"""
+    a = attrs_of(no)
+    return a[1] if len(a) > 1 else (a[0] if a else None)
 
 
 def fetch(n):
@@ -103,7 +114,7 @@ def awaken_of(text):
     return [{"names": list(dict.fromkeys(re.findall(r"\[([^\]]+)\]", m.group(1)))), "dur": int(m.group(2))} for m in re.finditer(r"((?:\[[^\]]+\]\s*)+)目覚め\s*[:：]\s*(\d+)ターン", pre)]
 
 
-def hits_of(text, attrs, threshold):
+def hits_of(text, attrs, threshold, sub_attrs=None):
     hits = []
     for marker, body in sections(text):
         body = re.sub(r"[（(][^）)]*?(?:以降|次回|次ターン)[^）)]*[）)]", "", body)  # 「（※以降、◯ダメージ）」は予告なので除く
@@ -116,13 +127,15 @@ def hits_of(text, attrs, threshold):
             kind, label = "turn", "初回行動時"
         else:
             continue
+        # 超根性発動時の攻撃は、属性が副属性に変わった後
+        at = sub_attrs if kind == "superResolve" and sub_attrs else attrs
         for m in RATIO.finditer(body):
-            h = {"label": f"{label} 現HP{m.group(1)}%割合", "ratio": int(m.group(1)), "kind": kind, "attrs": attrs}
+            h = {"label": f"{label} 現HP{m.group(1)}%割合", "ratio": int(m.group(1)), "kind": kind, "attrs": at}
             if kind == "superResolve":
                 h["threshold"] = threshold
             hits.append(h)
         for m in DMG.finditer(body):
-            h = {"label": label, "dmg": int(m.group(1).replace(",", "")), "kind": kind, "attrs": attrs}
+            h = {"label": label, "dmg": int(m.group(1).replace(",", "")), "kind": kind, "attrs": at}
             if kind == "superResolve":
                 h["threshold"] = threshold
             hits.append(h)
@@ -159,8 +172,12 @@ def parse(html):
         variants = []
         for no, vt in split_variants(text, enemy_nos[0] if enemy_nos else None):
             attrs = [a for a in [attr_of(no)] if a] if no else []
-            variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50), "awaken": awaken_of(vt)})
-        cur["rows"].append({"mandatory": "必ず出現" in raw_hp + text, "variants": variants, "attrs": sorted({a for n in enemy_nos for a in [attr_of(n)] if a}), "parts": "部位" in raw_hp or bool(re.search(r"防御[:：]\s*[\d.]+[兆億]?\s*(?!HP)[^\s\d:：]+[:：]\s*[\d.]+[兆億]", raw_hp))})
+            subs = [a for a in [sub_attr_of(no)] if a] if no else []
+            variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50, subs), "awaken": awaken_of(vt), "resolve": "超根性" in vt, "sub": subs})
+        cur["rows"].append({"mandatory": "必ず出現" in raw_hp + text, "variants": variants, "attrs": sorted({a for n in enemy_nos for a in [attr_of(n)] if a}),
+                            # 超根性の後の属性（超根性持ちは副属性に、それ以外はそのまま）
+                            "attrsAfter": sorted({a for v in variants for a in (v["sub"] if v["resolve"] else [attr_of(v["no"])] if v["no"] else []) if a} or {a for n in enemy_nos for a in [attr_of(n)] if a}),
+                            "parts": "部位" in raw_hp or bool(re.search(r"防御[:：]\s*[\d.]+[兆億]?\s*(?!HP)[^\s\d:：]+[:：]\s*[\d.]+[兆億]", raw_hp))})
     return floors
 
 
@@ -183,8 +200,10 @@ def build(floors):
         for r in rows:
             best = max(r["variants"], key=pre_total)
             same = [v for v in r["variants"] if pre_total(v) == pre_total(best)]
-            attrs = sorted({a for v in same for h in v["hits"] for a in h["attrs"]} | {a for v in same for a in [attr_of(v["no"])] if a})
-            hits = [{**h, "attrs": attrs or h["attrs"]} for h in best["hits"]]
+            attrs = sorted({a for v in same for h in v["hits"] if h["kind"] != "superResolve" for a in h["attrs"]} | {a for v in same for a in [attr_of(v["no"])] if a})
+            sr_attrs = sorted({a for v in same for hh in v["hits"] if hh["kind"] == "superResolve" for a in hh["attrs"]})
+            # 超根性発動時の攻撃は超根性後（副属性）の属性のまま。それ以外は候補の敵の属性をまとめる
+            hits = [{**h, "attrs": (sr_attrs or h["attrs"]) if h["kind"] == "superResolve" else (attrs or h["attrs"])} for h in best["hits"]]
             picked.append({"mandatory": r["mandatory"], "hits": hits, "total": pre_total(best), "alt": len(r["variants"]) > 1, "awaken": best["awaken"]})
             # 行に攻撃がなくても属性だけは持っておく（同ダメージの候補の属性まとめ用）
             if not hits:
@@ -207,6 +226,8 @@ def build(floors):
         floor = {"floor": n, "hits": hits}
         # その階に出る可能性のある敵全員の属性（「敵が◯属性の時」の条件判定用。ダメージのない敵も含む）
         floor["enemyAttrs"] = sorted({a for r in rows for a in r.get("attrs", [])})
+        if any(v["resolve"] for r in rows for v in r["variants"]):
+            floor["enemyAttrsAfter"] = sorted({a for r in rows for a in r.get("attrsAfter", [])})
         # 部位がある階（部位破壊ボーナスの判定用）
         if any(r.get("parts") for r in rows):
             floor["parts"] = True
