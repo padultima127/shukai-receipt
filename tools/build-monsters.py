@@ -271,8 +271,8 @@ def gravity_pct(ids, skills):
     return g
 
 
-# 自分の全パラメータを掛ける覚醒（HP推定用）。138 アシスト共鳴・139 自力は条件付き
-STAT_MULT_AWAKENS = {127, 138, 139, 142, 146, 147}
+# 自分の全パラメータを掛ける覚醒（HP推定用）。138 アシスト共鳴・139 自力・128/129 加護は条件付き、63 スキルボイスは素のステータスだけ
+STAT_MULT_AWAKENS = {63, 127, 128, 129, 138, 139, 142, 146, 147}
 
 
 def delayed_activation(ids, skills):

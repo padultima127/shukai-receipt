@@ -1178,6 +1178,9 @@ function enduranceSetup(t) {
   let teamHp = 0;
   let unknown = 0;
   const detail = [];
+  // バッジ（team.badge.hp: チームHP%、badge.targetNos があればそのキャラだけ）
+  const badge = t.badge ?? null;
+  const dungeonKago = db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
   for (const m of mems) {
     const no = monster(m.id)?.no;
     const row = MDB.get(no);
@@ -1193,6 +1196,9 @@ function enduranceSetup(t) {
     const canLimitBreak = row[17] > hp99;
     const lv = row[9] ? b.lv ?? 110 : canLimitBreak ? 120 : 99;
     let hp = lv >= 120 ? row[17] + hp99 * 0.1 : lv >= 110 ? row[17] : hp99;
+    // スキルボイスは素のステータスだけに1.1倍（＋値・潜在には乗らない）
+    const ownAwk = String(row[25] ?? "").split(".").filter(Boolean).map(Number);
+    hp *= 1.1 ** ownAwk.filter((a) => a === 63).length;
     // ＋値: HP・攻撃・回復に均等に振る前提（＋3でHP＋1）。HP＋1につき10（＋297 → 990、＋891 → 2970）。全パラ系の倍率はこの分にも乗る
     hp += Math.round((b.plus ?? 297) / 3) * 10;
     hp += flat;
@@ -1207,7 +1213,7 @@ function enduranceSetup(t) {
     // 潜在のHP（HP強化1.5%/枠、＋4.5%、＋＋10%）
     hp *= 1 + (b.latentHp ?? 0) / 100;
     // 全パラ系の覚醒（通常覚醒・選んだ超覚醒・シンクロ覚醒）。アシスト共鳴は主属性とタイプが一致したときだけ、自力はアシストなしのときだけ
-    const ids = [...String(row[25] ?? "").split(".").filter(Boolean).map(Number)];
+    const ids = ownAwk.filter((a) => a !== 63);
     if (b.super) ids.push(b.super);
     if (row[26] && b.synchro !== false) ids.push(row[26]);
     const mults = [];
@@ -1216,6 +1222,9 @@ function enduranceSetup(t) {
       if (!v) continue;
       if (id === 138 && !(an && resonates(no, an))) continue;
       if (id === 139 && an) continue;
+      // 陽・陰の加護: ダンジョンに対応する加護があるときだけ、そのキャラのHPが加護1つにつき2倍
+      if (id === 128 && dungeonKago !== "陽") continue;
+      if (id === 129 && dungeonKago !== "陰") continue;
       hp *= v;
       mults.push(`${STAT_NAME[id]}×${v}`);
     }
@@ -1223,10 +1232,16 @@ function enduranceSetup(t) {
     // ＋値のHP1あたりのHP（10 × 潜在 × 全パラ系 × LS）。チームHP強化は最後に掛ける
     const perPlus = 10 * (1 + (b.latentHp ?? 0) / 100) * mults.reduce((x, t) => x * Number(t.split("×")[1]), 1) * lsm;
     const hpPlus = Math.min(297, Math.round((b.plus ?? 297) / 3));
-    detail.push({ name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build, perPlus, hpPlus });
+    detail.push({ no, name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build, perPlus, hpPlus });
     total += Math.max(1, hp) * lsm;
   }
-  total = Math.round(total * (1 + 0.05 * teamHp));
+  total = total * (1 + 0.05 * teamHp);
+  if (badge?.hp) {
+    // 全体に効くバッジはチームHPに掛ける。コラボバッジなど対象キャラ限定はそのキャラのHPだけ
+    if (!badge.targetNos) total *= 1 + badge.hp / 100;
+    else total += detail.filter((x) => badge.targetNos.includes(x.no)).reduce((n, x) => n + x.hp * (1 + 0.05 * teamHp) * (badge.hp / 100), 0);
+  }
+  total = Math.round(total);
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
   // 回復: 毎ターン使うスキルが回復ドロップを生成するか
   const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
@@ -1290,15 +1305,15 @@ function enduranceSetup(t) {
       else awkAttr[a] += v;
     }
   }
-  const teamHpMult = 1 + 0.05 * teamHp;
+  const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { reductions, hpUps, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { badge, reductions, hpUps, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
 // 全パラメータを掛ける覚醒（127 全パラ強化、142 全パラ強化＋、138 アシスト共鳴、139 自力、146/147 ソウル）
-const STAT_MULT = { 127: 1.5, 142: 1.8, 138: 3, 139: 3, 146: 1.5, 147: 1.5 };
-const STAT_NAME = { 127: "全パラ強化", 142: "全パラ強化＋", 138: "アシスト共鳴", 139: "自力", 146: "勇気のソウル", 147: "幸運のソウル" };
+const STAT_MULT = { 127: 1.5, 142: 1.8, 138: 3, 139: 3, 146: 1.5, 147: 1.5, 128: 2, 129: 2 };
+const STAT_NAME = { 127: "全パラ強化", 142: "全パラ強化＋", 138: "アシスト共鳴", 139: "自力", 146: "勇気のソウル", 147: "幸運のソウル", 128: "陽の加護", 129: "陰の加護" };
 // 潜在の属性軽減: 1枠で1%、「＋」は2枠で2.5%。n枠で出せる最大の%
 const latentPct = (slots) => Math.floor(slots / 2) * 2.5 + (slots % 2);
 const latentText = (slots) => {
@@ -1523,7 +1538,7 @@ function renderEndurance(t, d) {
   const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
   return `<details class="endurance" data-team="${esc(t.id)}"><summary>耐久チェック（試作）</summary>
     <label class="end-hp-label">チームHP <input type="number" class="end-hp" data-team="${esc(t.id)}" min="1" step="1000" value="${setup.estHp}"></label>
-    <p class="hint">初期値は推定です（最大HP＋297、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個。潜在・超覚醒・共鳴は未計算${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
+    <p class="hint">初期値は推定です（レシートのレベル・＋値・超覚醒・潜在、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個${setup.badge?.hp ? `、バッジ「${esc(setup.badge.name)}」HP${setup.badge.hp}%` : ""}${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
     <div class="end-lat"><span class="label">振っている潜在の属性軽減（パーティー合計%）</span>
       ${ATTRS5.map((a) => `<label>${a}<input type="number" class="end-lat-in" data-attr="${a}" min="0" max="100" step="0.5" value="0">%</label>`).join("")}
     </div>
