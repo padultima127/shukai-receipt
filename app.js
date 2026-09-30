@@ -1234,19 +1234,23 @@ function enduranceSetup(t) {
   const healGen = everyTurn.some((no) => genRows(no).some((r) => String(r[16] ?? "").split(":")[1] === "1"));
   // スキルの軽減: 同じ効果は上書きされるので一番大きい1つ。作者が「スキルは使わない」とした武器は除く
   const unusedSkill = new Set((t.slotRoles ?? []).filter((sr) => sr.part === "assist" && sr.roles.some((r) => r.cap === "skillFree")).map((sr) => familyOf(sr.target)));
+  // スキルの軽減: 効果ターンの間だけ効く。使う階はレシート（receiptUses）に書かれていればその階、なければ1F
   let skillRed = 0;
   let skillRedFrom = "";
+  const reductions = [];
+  const useFloorOf = (no) => {
+    const floors = Object.entries(t.receiptUses ?? {}).filter(([, nos]) => nos.includes(no)).map(([f]) => Number(f));
+    return floors.length ? Math.min(...floors) : 1;
+  };
   for (const m of mems) {
     const cands = [...genRows(monster(m.id)?.no)];
     const an = assistNoOf(m);
     if (an && !unusedSkill.has(familyOf(an)) && MDB.get(an)) cands.push(MDB.get(an));
     for (const r of cands) {
       const v = Number(String(r[16] ?? "").split(":")[2]) || 0;
-      // クリアまで続く軽減だけ数える（1〜2ターンの軽減は計算に入れない）。
-      // マイクロ（LSの軽減が剥がれる）で1ターン経過扱いになる階があれば、その分も効果ターンを消費する
-      const dur = capDur(r[0], "reduce", false) ?? 0;
-      const passTurns = db.dungeons.find((x) => x.id === t.dungeonId)?.gimmickFloors?.turnPass?.length ?? 0;
-      if (t.turns && dur < t.turns + passTurns) continue;
+      if (!v) continue;
+      const dur = capDur(r[0], "reduce", false) ?? 1;
+      reductions.push({ red: v, dur, name: r[1], floor: useFloorOf(r[0]) });
       if (v > skillRed) {
         skillRed = v;
         skillRedFrom = r[1];
@@ -1288,7 +1292,7 @@ function enduranceSetup(t) {
   }
   const teamHpMult = 1 + 0.05 * teamHp;
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { reductions, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1303,53 +1307,73 @@ const latentText = (slots) => {
   return [plus ? `属性軽減＋×${plus}` : "", one ? `属性軽減×${one}` : ""].filter(Boolean).join("・");
 };
 
-// skillRed: スキルの軽減%（0 ならなし）。LSの軽減が剥がれる攻撃（noLsReduce）にはスキルの軽減だけが乗る
+// useSkill（旧 skillRed）: 0 ならスキルの軽減なし、0以外なら各スキルの軽減を効果ターンの間だけ乗せる
+// ターンの数え方: 先制は前の階の最後のターンの敵の行動扱い。超根性を剥がさない階は2ターン。突破時の1ターン経過（マイクロ）で1ターン進む
+// 同じ効果は上書きされるので、そのターンに効いている軽減のうち最後に使ったものだけ（同じ階なら大きい方）
 // latent: 潜在の属性軽減%（属性 → %）。属性軽減は覚醒と潜在の合計で、LS・スキルの軽減と掛け合わせる
 // 敵が数体のうち1体の攻撃（attrs が複数）は、一番軽減が少ない属性で計算する（どれが出ても耐えられるか）
-function simulateEndurance(d, setup, maxHp, skillRed = 0, latent = {}) {
+function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   const attrRed = (a) => (ATTRS5.includes(a) ? Math.min(100, (setup.awkAttr?.[a] ?? 0) + (latent[a] ?? 0)) : 0);
   let hp = maxHp;
   const rows = [];
   let deadAt = null;
   let fail = null;
+  let turn = 0;
+  const firstTurn = {};
+  const skillAt = (tn) => {
+    if (!useSkill) return 0;
+    const active = (setup.reductions ?? []).filter((r) => firstTurn[r.floor] != null && firstTurn[r.floor] <= tn && tn <= firstTurn[r.floor] + r.dur - 1);
+    if (!active.length) return 0;
+    const lastFloor = Math.max(...active.map((r) => r.floor));
+    return Math.max(...active.filter((r) => r.floor === lastFloor).map((r) => r.red));
+  };
+  const stripBy = (f, h) => {
+    const used = (setup.uses?.[f.floor] ?? []).map((n) => MDB.get(n)).filter((r) => r?.[23]);
+    const remain = used.reduce((x, r) => x * (1 - r[23] / 100), 1);
+    return setup.strip?.get(f.floor) ?? (used.length && remain <= (h.threshold ?? 50) / 100 ? used.map((r) => r[1]).join("・") : null);
+  };
+  const hit = (f, h, tn) => {
+    const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
+    // 割合ダメージには属性軽減を乗せない（安全側）
+    const attrs = h.attrs ?? [];
+    const worst = h.ratio || !attrs.length ? null : attrs.reduce((w, a) => (attrRed(a) < attrRed(w) ? a : w), attrs[0]);
+    const ar = worst ? attrRed(worst) : 0;
+    const sk = skillAt(tn);
+    // マイクロ後（noLsReduce）はLSの軽減だけ剥がれ、スキルの軽減は効果ターンが残っていれば効く
+    const base = h.noLsReduce ? sk / 100 : 1 - (1 - setup.reduce) * (1 - sk / 100);
+    const red = 1 - (1 - base) * (1 - ar / 100);
+    const taken = Math.round(raw * (1 - red));
+    hp -= taken;
+    rows.push({ floor: f.floor, label: h.label, turn: tn, sk, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
+    if (hp <= 0) {
+      deadAt = f.floor;
+      fail = { attrs: h.ratio ? [] : attrs };
+    }
+    return hp > 0;
+  };
   for (const f of d.damage.floors) {
-    // 階に入る前のターン終わりに回復（毎ターン回復生成なら満タン）
-    hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
-    for (const h of f.hits) {
-      // 味方の攻撃→敵の攻撃の順なので、ワンパンした階は先制以外受けない
-      //   turn: 通常攻撃・初回行動時の攻撃（ワンパン前提なので数えない）
-      //   superResolve: 超根性発動時の攻撃（その階で超根性を剥がしてワンパンするなら来ない）
-      if (h.kind === "turn") {
-        rows.push({ floor: f.floor, label: h.label, skipped: "ワンパンする前提なので受けない（1ターンで倒せないと受ける）" });
-        continue;
-      }
-      if (h.kind === "superResolve") {
-        // レシートでその階に使うと明記されたグラビティ（部位以外）で、敵の残りHPが超根性の割合以下になるなら剥がしている
-        const used = (setup.uses?.[f.floor] ?? []).map((n) => MDB.get(n)).filter((r) => r?.[23]);
-        const remain = used.reduce((x, r) => x * (1 - r[23] / 100), 1);
-        const by = setup.strip?.get(f.floor) ?? (used.length && remain <= (h.threshold ?? 50) / 100 ? used.map((r) => r[1]).join("・") : null);
-        if (by) {
-          rows.push({ floor: f.floor, label: h.label, skipped: `${by}で超根性を剥がしてワンパンするため受けない` });
-          continue;
+    // 到着時の先制（前の階の最後のターンの敵の行動）
+    for (const h of f.hits.filter((x) => x.kind !== "turn" && x.kind !== "superResolve")) if (!hit(f, h, turn)) return { rows, deadAt, fail };
+    for (const h of f.hits.filter((x) => x.kind === "turn")) {
+      rows.push({ floor: f.floor, label: h.label, skipped: "ワンパンする前提なので受けない（1ターンで倒せないと受ける）" });
+    }
+    const sr = f.hits.filter((x) => x.kind === "superResolve");
+    const stripped = sr.length ? stripBy(f, sr[0]) : null;
+    const turns = sr.length && !stripped ? 2 : 1;
+    for (let i = 0; i < turns; i++) {
+      turn++;
+      if (i === 0) firstTurn[f.floor] = turn;
+      // 味方のターン: 回復（毎ターン回復生成なら満タン、なければリジェネ）
+      hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
+      if (i === 0) {
+        for (const h of sr) {
+          if (stripped) rows.push({ floor: f.floor, label: h.label, skipped: `${stripped}で超根性を剥がしてワンパンするため受けない` });
+          else if (!hit(f, h, turn)) return { rows, deadAt, fail };
         }
       }
-      const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
-      // 割合ダメージには属性軽減を乗せない（安全側）
-      const attrs = h.attrs ?? [];
-      const worst = h.ratio || !attrs.length ? null : attrs.reduce((w, a) => (attrRed(a) < attrRed(w) ? a : w), attrs[0]);
-      const ar = worst ? attrRed(worst) : 0;
-      const base = h.noLsReduce ? skillRed / 100 : 1 - (1 - setup.reduce) * (1 - skillRed / 100);
-      const red = 1 - (1 - base) * (1 - ar / 100);
-      const taken = Math.round(raw * (1 - red));
-      hp -= taken;
-      rows.push({ floor: f.floor, label: h.label, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
-      if (hp <= 0) {
-        deadAt = f.floor;
-        fail = { attrs: h.ratio ? [] : attrs };
-        break;
-      }
     }
-    if (deadAt != null) break;
+    // 突破時の1ターン経過（マイクロ）
+    if (f.turnPassOnClear) turn++;
   }
   return { rows, deadAt, fail };
 }
@@ -1456,7 +1480,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
   const skillLine = withSkill
-    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${esc(setup.skillRedFrom)}の${setup.skillRed}%、合計${Math.round((1 - (1 - setup.reduce) * (1 - setup.skillRed / 100)) * 1000) / 10}%）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${setup.reductions.map((r) => `${esc(r.name)}の${r.red}%・${r.dur}ターン・${r.floor}Fで使用`).join("／")}）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
        ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "スキルの軽減ありで、潜在覚醒の枠が空いていれば")}`
     : "";
   const heal = setup.healGen
@@ -1476,9 +1500,9 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
   const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルの軽減なしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "スキルの軽減ありで、") : "");
   return `${need}${autoNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
-    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
-    <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
-    ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="4">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
+    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果ターンの間だけ乗せています（使う階はレシートに書かれていればその階、なければ1F）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表は${withSkill ? "スキルの軽減あり" : "スキルの軽減なし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
+    <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
+    ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
 }
 

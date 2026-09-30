@@ -12,6 +12,7 @@
   能力タグはカンマ区切り。ヘイストは "h2"（2ターン溜まる）のように数値付き
 """
 import json
+import os
 import re
 import urllib.request
 from pathlib import Path
@@ -28,7 +29,7 @@ SKILL_TAGS = [
     ("board76", r"7×6"),
     ("board65", r"6×5マス"),
     ("delay", r"敵の行動を\d+ターン遅らせ"),
-    ("reduce", r"受けるダメージを[^。]*(軽減|半減|激減)|ダメージを\d+%軽減"),
+    ("reduce", r"受けるダメージを[^。]*(軽減|半減|激減)|ダメージを\d+[%％]軽減|ダメージを半減"),
     ("hpUp", r"最大HP[^。]*倍|HPが[\d.]+倍"),
     ("heal", r"HPを[^。]*回復|HP全回復|HPを全回復"),
     ("regen", r"毎ターン[^。]*回復|\d+ターンの間[^。]*HPを[\d.]+[%％]回復"),
@@ -293,6 +294,10 @@ def record_changes(rows, updated):
     prev_file = root / "monsters-db.js"
     log_file = root / "monsters-changes.js"
     if not prev_file.exists():
+        return
+    # 抽出ロジックを変えたとき（ゲームのアップデートではない差分）は SKIP_CHANGES=1 で実行して履歴に残さない
+    if os.environ.get("SKIP_CHANGES"):
+        print("変更履歴: 記録しない（SKIP_CHANGES）")
         return
     text = prev_file.read_text(encoding="utf-8")
     prev = {r[0]: r for r in json.loads(text[text.index("rows: ") + 6 : text.rindex(" };")])}
