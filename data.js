@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 67,
+  "version": 68,
   "seed": true,
   "monsters": [
     {
@@ -6681,6 +6681,230 @@ window.PAD_SEED = {
           14098,
           14074
         ]
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -6743,6 +6967,238 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.83,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -6805,6 +7261,238 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.67,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -6866,6 +7554,232 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7010,6 +7924,260 @@ window.PAD_SEED = {
         "zurashi": 2,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7074,6 +8242,544 @@ window.PAD_SEED = {
         "zurashi": 2,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7135,6 +8841,274 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "base"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "base"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7261,6 +9235,248 @@ window.PAD_SEED = {
         "zurashi": 3,
         "plus891": 0.83,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7326,6 +9542,356 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7901,6 +10467,228 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -7962,6 +10750,320 @@ window.PAD_SEED = {
         "zurashi": 8,
         "plus891": 0.67,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8276,6 +11378,22 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": "not-required"
+      },
+      "receiptCalls": {
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8399,6 +11517,306 @@ window.PAD_SEED = {
         "zurashi": 2,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "base"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "base"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8463,6 +11881,104 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": "not-required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8588,6 +12104,296 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": "required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "base"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8649,6 +12455,264 @@ window.PAD_SEED = {
         "zurashi": 7,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8713,6 +12777,230 @@ window.PAD_SEED = {
       },
       "yields": {
         "exp": 441000000
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8776,6 +13064,650 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8836,7 +13768,289 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "turns": 26
+      "turns": 26,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
+      }
     },
     {
       "id": "taiju-heartia-frst",
@@ -8900,6 +14114,294 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "16": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -8964,6 +14466,178 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": "required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -9028,6 +14702,134 @@ window.PAD_SEED = {
       },
       "yields": {
         "exp": 308700000
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -9091,6 +14893,120 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -9155,6 +15071,114 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": "required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -9240,7 +15264,185 @@ window.PAD_SEED = {
           "nos": [],
           "text": "カフェクラウディア装備の代わりに5ターン継続の属性吸収無効武器（3Fエルゲヌビで追加1コンボが必要）"
         }
-      ]
+      ],
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-hitsugaya-yamajun",
@@ -9457,6 +15659,132 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.75,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -9580,6 +15908,152 @@ window.PAD_SEED = {
         "zurashi": 8,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -9765,6 +16239,224 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10016,6 +16708,236 @@ window.PAD_SEED = {
         "zurashi": 16,
         "plus891": 0.16666666666666666,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10079,6 +17001,50 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.33,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10142,6 +17108,128 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0.6666666666666666,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10205,6 +17293,70 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10268,6 +17420,146 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0.83,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10331,6 +17623,118 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0.6666666666666666,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10394,6 +17798,62 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "base"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10709,6 +18169,254 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10835,6 +18543,136 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -10961,6 +18799,214 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": "not-required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11027,6 +19073,174 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.5,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11154,6 +19368,174 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.16666666666666666,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "assist"
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11281,6 +19663,142 @@ window.PAD_SEED = {
         "zurashi": 7,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "14": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11344,6 +19862,52 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11407,6 +19971,92 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11565,6 +20215,150 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.6666666666666666,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11628,6 +20422,214 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.8333333333333334,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11755,6 +20757,50 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.8333333333333334,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -11853,7 +20899,225 @@ window.PAD_SEED = {
           ],
           "text": "アレキサンダー装備の代わりにチームHPと水木光闇ドロ強付きの武器（ハロウィンパイモン装備等）"
         }
-      ]
+      ],
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
+      }
     },
     {
       "id": "sun-dain-ana",
@@ -12044,6 +21308,136 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.5,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "15": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -12107,6 +21501,146 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -12265,6 +21799,106 @@ window.PAD_SEED = {
         "8": [
           6978
         ]
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "base"
+          },
+          {
+            "mi": 5,
+            "part": "base"
+          },
+          {
+            "mi": 0,
+            "part": "base"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -12405,6 +22039,70 @@ window.PAD_SEED = {
           9927,
           9927
         ]
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "assist"
+          }
+        ]
       }
     },
     {
@@ -12503,6 +22201,122 @@ window.PAD_SEED = {
       "badge": {
         "name": "モンスター強化【L字消し攻撃】",
         "hp": 5
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -12951,6 +22765,80 @@ window.PAD_SEED = {
         "8": [
           6978
         ]
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -13049,7 +22937,65 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "receiptUses": {}
+      "receiptUses": {},
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ]
+      }
     },
     {
       "id": "hyaku-bazzb-totakke",
@@ -13143,6 +23089,38 @@ window.PAD_SEED = {
         "8": [
           6978
         ]
+      },
+      "receiptCalls": {
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          }
+        ]
       }
     },
     {
@@ -13206,6 +23184,88 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "assist"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -13269,6 +23329,58 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "2": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "assist"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -13332,6 +23444,70 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.3333333333333333,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "2": [
+          {
+            "mi": 1,
+            "part": "base"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -13471,6 +23647,118 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -13534,6 +23822,128 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "assist"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 3,
+            "part": "auto"
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto"
+          },
+          {
+            "mi": 4,
+            "part": "auto"
+          }
+        ]
       }
     },
     {
@@ -13596,6 +24006,86 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 2,
+            "part": "assist"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto"
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          },
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 0,
+            "part": "auto"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto"
+          },
+          {
+            "mi": 1,
+            "part": "auto"
+          }
+        ]
       }
     }
   ],

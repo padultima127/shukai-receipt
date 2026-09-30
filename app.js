@@ -1233,7 +1233,64 @@ function hpMultFor(row, ls) {
   return m;
 }
 
-function enduranceSetup(t, opts = {}) {
+// レシートの「誰のスキルを使ったか」（receiptCalls）から、本体と武器のどちらを使ったかを判定して receiptUses を作る。
+// 継承スキルの仕様（本人談）: 押すとまず武器（武器のターン分溜まっていれば）。本体＋武器の合計分溜まっていれば両方。
+// 武器だけ使った後は、ターン経過やヘイストで本体のターン分溜まった時だけ本体を使ったとみなす。
+// 溜まり: 最初はパーティーのスキブ、1ターンごとに＋1、ほかのキャラのヘイスト（自分以外が◯ターン溜まる）で＋◯
+function resolveReceiptUses(t) {
+  if (!t.receiptCalls) return null;
+  const sb = teamSkillBoost(t, t.members[0]);
+  const st = t.members.map((m) => {
+    const b = MDB.get(monster(m.id)?.no);
+    const a = MDB.get(assistNoOf(m));
+    return { b, a, charge: sb, phase: a ? "assist" : "base" };
+  });
+  const hasteOf = (row) => Math.max(0, ...String(row?.[6] ?? "").split(",").map((x) => (/^h\d+$/.test(x) ? Number(x.slice(1)) : 0)));
+  const fire = (mi, rows) => {
+    for (const r of rows) {
+      const h = hasteOf(r);
+      if (h) st.forEach((x, j) => j !== mi && (x.charge += h));
+    }
+  };
+  const uses = {};
+  let first = true;
+  for (const [fl, calls] of Object.entries(t.receiptCalls).sort((a, b) => Number(a[0]) - Number(b[0]))) {
+    // 同じキャラが何回出てくるかで、その階のターン数を見積もる
+    const seen = new Map();
+    const withTurn = calls.map((c) => {
+      const k = seen.get(c.mi) ?? 0;
+      seen.set(c.mi, k + 1);
+      return { ...c, turn: k };
+    });
+    const turns = Math.max(1, ...seen.values());
+    for (let tn = 0; tn < turns; tn++) {
+      if (!first) st.forEach((x) => x.charge++);
+      first = false;
+      for (const c of withTurn.filter((c) => c.turn === tn)) {
+        const x = st[c.mi];
+        if (!x?.b) continue;
+        const aCT = x.a?.[5] || 0;
+        const bCT = x.b[5] || 0;
+        let used;
+        if (c.part === "assist" && x.a) used = [x.a];
+        else if (!x.a) used = [x.b];
+        else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
+        else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : [x.a];
+        else used = [x.b];
+        // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
+        x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
+        x.charge = 0;
+        fire(c.mi, used);
+        (uses[fl] ??= []).push(...used.map((r) => r[0]));
+      }
+    }
+  }
+  return uses;
+}
+
+function enduranceSetup(t0, opts = {}) {
+  // 手で登録した receiptUses があればそれ、なければレシートの呼び出しから判定
+  const t = t0.receiptUses || !t0.receiptCalls ? t0 : { ...t0, receiptUses: resolveReceiptUses(t0) };
   const mems = t.members.filter((m) => m.role !== "free");
   const leader = mems.find((m) => m.role === "L");
   const friend = mems.find((m) => m.role === "F");
