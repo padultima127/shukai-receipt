@@ -1233,6 +1233,23 @@ function hpMultFor(row, ls) {
   return m;
 }
 
+// 進化スキル（スキルが進化）: k回目に使った時の段階の値に差し替えた行を返す。最後の段階はそのまま繰り返す
+function stageRow(no, k) {
+  const row = MDB.get(no);
+  if (!row?.[29]) return row;
+  const stages = String(row[29]).split("‖");
+  const [ct, endu, durs, attrs, haste, grav] = stages[Math.min(k, stages.length - 1)].split("~");
+  const r = [...row];
+  r[5] = Number(ct) || row[5];
+  r[16] = endu;
+  r[21] = durs.replace(/;/g, ",");
+  r[28] = attrs.replace(/\^/g, "|");
+  r[6] = String(row[6] ?? "").split(",").filter((x) => !/^h\d+$/.test(x)).concat(Number(haste) ? [`h${haste}`] : []).join(",");
+  r[23] = Number(grav) || 0;
+  r.stage = Math.min(k, stages.length - 1) + 1;
+  return r;
+}
+
 // レシートの「誰のスキルを使ったか」（receiptCalls）から、本体と武器のどちらを使ったかを判定して receiptUses を作る。
 // 継承スキルの仕様（本人談）: 押すとまず武器（武器のターン分溜まっていれば）。本体＋武器の合計分溜まっていれば両方。
 // 武器だけ使った後は、ターン経過やヘイストで本体のターン分溜まった時だけ本体を使ったとみなす。
@@ -1241,9 +1258,9 @@ function resolveReceiptUses(t) {
   if (!t.receiptCalls) return null;
   const sb = teamSkillBoost(t, t.members[0]);
   const st = t.members.map((m) => {
-    const b = MDB.get(monster(m.id)?.no);
-    const a = MDB.get(assistNoOf(m));
-    return { b, a, charge: sb, phase: a ? "assist" : "base" };
+    const bNo = monster(m.id)?.no;
+    const aNo = assistNoOf(m);
+    return { bNo, aNo, bUse: 0, aUse: 0, charge: sb, phase: aNo ? "assist" : "base" };
   });
   const hasteOf = (row) => Math.max(0, ...String(row?.[6] ?? "").split(",").map((x) => (/^h\d+$/.test(x) ? Number(x.slice(1)) : 0)));
   const fire = (mi, rows) => {
@@ -1268,6 +1285,9 @@ function resolveReceiptUses(t) {
       first = false;
       for (const c of withTurn.filter((c) => c.turn === tn)) {
         const x = st[c.mi];
+        // 進化スキルは使った回数で段階が変わる（スキルターンも段階ごと）
+        x.b = stageRow(x.bNo, x.bUse);
+        x.a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
         if (!x?.b) continue;
         const aCT = x.a?.[5] || 0;
         const bCT = x.b[5] || 0;
@@ -1280,6 +1300,8 @@ function resolveReceiptUses(t) {
         // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
         x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
         x.charge = 0;
+        if (used.includes(x.a)) x.aUse++;
+        if (used.includes(x.b)) x.bUse++;
         fire(c.mi, used);
         ((uses[fl] ??= [])[tn] ??= []).push(...used.map((r) => r[0]));
       }
@@ -1434,14 +1456,25 @@ function enduranceSetup(t0, opts = {}) {
     turns.forEach((nos, ti) => nos.forEach((no, idx) => useList.push({ fl, ti, idx, no })));
   }
   {
-    useList.forEach(({ fl, ti, idx, no }) => {
-      const r = MDB.get(no);
+    const useCount = new Map();
+    useList
+      .sort((a, b) => Number(a.fl) - Number(b.fl) || a.ti - b.ti || a.idx - b.idx)
+      .forEach(({ fl, ti, idx, no }) => {
+      // 進化スキルは何回目に使ったかで段階を選ぶ
+      const k = useCount.get(no) ?? 0;
+      useCount.set(no, k + 1);
+      const r = stageRow(no, k);
+      // その段階の能力ごとの効果ターン
+      const sdur = (cap) => {
+        const kv = String(r?.[21] ?? "").split(",").find((x) => x.startsWith(cap + ":"));
+        return kv ? Number(kv.split(":")[1]) : null;
+      };
       if (!r) return;
       const [, , red, hpm] = String(r[16] ?? "").split(":").map(Number);
       const order = Number(fl) * 1000 + ti * 50 + idx;
       if (red) {
         const awC = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
-        reductions.push({ red, dur: capDur(no, "reduce", false) ?? 1, name: r[1], floor: Number(fl), ti, order, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
+        reductions.push({ red, dur: sdur("reduce") ?? 1, name: r[1], floor: Number(fl), ti, order, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
         if (red > skillRed) {
           skillRed = red;
           skillRedFrom = r[1];
@@ -1452,7 +1485,7 @@ function enduranceSetup(t0, opts = {}) {
       // ドロップ目覚めが条件の効果（「[◯目覚め]発動中、…」）
       const awCond = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
       const awFor = (eff) => (awCond && awCond[2].split("+").includes(eff) ? awCond[1] : null);
-      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), ti, order, cond: ac["条件"] ?? null, awaken: awFor("hp") });
+      if (hpm) hpUps.push({ mult: hpm, dur: sdur("hpUp") ?? 1, name: r[1], floor: Number(fl), ti, order, cond: ac["条件"] ?? null, awaken: awFor("hp") });
       // ドロップ目覚めを付けるスキル
       const awGive = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め付与:"))?.split(":");
       if (awGive) awakenGrants.push({ name: r[1], names: awGive[1].split(","), dur: Number(awGive[2]) || 1, floor: Number(fl), ti, order });

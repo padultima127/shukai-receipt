@@ -196,7 +196,7 @@ def endurance_numbers(ids, skills):
             continue
         for sentence in s.get("description", "").replace("\r", "").replace("\n", "").split("。"):
             if "ターンの間" in sentence:
-                for n in re.findall(r"HPを([\d.]+)[%％]回復", sentence):
+                for n in re.findall(r"HP[をが]([\d.]+)[%％]回復", sentence):
                     regen = max(regen, float(n))
             if re.search(r"\[回復\][^。]*(生成|に変化)|回復ドロップ[^。]*生成", sentence):
                 gen = 1
@@ -319,6 +319,28 @@ def attr_changes(ids, skills):
     return "|".join(parts)
 
 
+def evolve_stages(ids, skills):
+    """進化スキル（スキルが進化）の段階ごとの値。1段階目 → 2段階目…（最後の段階はそのまま繰り返す）
+    段階ごとに "CT~リジェネ:生成:軽減:最大HP~能力別ターン~属性変更~ヘイスト~グラビティ" を ‖ でつなぐ"""
+    ids = [i for i in (ids if isinstance(ids, list) else [ids]) if i]
+    if len(ids) < 2:
+        return ""
+    out = []
+    for sid in ids:
+        s = skills.get(str(sid)) or {}
+        text = s.get("description", "")
+        haste = max([int(n) for _, n in HASTE.findall(text)] or [0])
+        out.append("~".join([
+            str(s.get("minTurn") or 0),
+            endurance_numbers([sid], skills),
+            effect_durations([sid], skills).replace(",", ";"),
+            attr_changes([sid], skills).replace("|", "^"),
+            str(haste),
+            str(gravity_pct([sid], skills)),
+        ]))
+    return "‖".join(out)
+
+
 def delayed_activation(ids, skills):
     ids = ids if isinstance(ids, list) else [ids]
     n = 0
@@ -423,12 +445,13 @@ def main():
             # 通常覚醒の全リスト（表示用）
             ".".join(str(a) for a in awakens),
             attr_changes(m.get("skill"), skills),
+            evolve_stages(m.get("skill"), skills),
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更, 進化スキルの段階]\n"
         f"// 更新: {updated}\n"
         "window.PAD_AWAKEN_NAMES = " + json.dumps({k: v["name"] for k, v in AWAKENS.items() if k.isdigit()}, ensure_ascii=False, separators=(",", ":")) + ";\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
