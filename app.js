@@ -1240,17 +1240,21 @@ function enduranceSetup(t, opts = {}) {
   const lsL = lsNumbers(monster(leader?.id)?.no);
   const lsF = lsNumbers(monster(friend?.id)?.no);
   // HP推定: 最大HP（限界突破値）＋297の990、HP覚醒、LSのHP倍率、チームHP強化（5%/個）
-  let total = 0;
-  let teamHp = 0;
-  let unknown = 0;
-  const detail = [];
   // バッジ（team.badge.hp: チームHP%、badge.targetNos があればそのキャラだけ）
   const badge = t.badge ?? null;
   // 加護: 耐久チェックでユーザーが選んだもの（なし/陽/陰）。未選択ならダンジョンのデータ
   const dungeonKago = opts.kago !== undefined ? opts.kago || null : db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
-  for (const m of mems) {
+  // 属性変更スキル（自分の属性が◯属性に変化）で主属性が変わった時のHPも出せるように、関数にしておく
+  const teamHpWith = (overrides = new Map()) => {
+  let total = 0;
+  let teamHp = 0;
+  let unknown = 0;
+  const detail = [];
+  for (const [mi, m] of mems.entries()) {
     const no = monster(m.id)?.no;
-    const row = MDB.get(no);
+    const row0 = MDB.get(no);
+    // 主属性の上書き（アシスト共鳴・アシストボーナス・LSの属性HP倍率の判定に使う）
+    const row = row0 && overrides.has(mi) ? Object.assign([...row0], { 2: overrides.get(mi) }) : row0;
     if (!row) {
       unknown++;
       continue;
@@ -1289,7 +1293,7 @@ function enduranceSetup(t, opts = {}) {
     for (const id of ids) {
       const v = STAT_MULT[id];
       if (!v) continue;
-      if (id === 138 && !(an && resonates(no, an))) continue;
+      if (id === 138 && !(an && a && a[2] === row[2] && String(a[13] ?? "").split(".").some((x) => x && String(row[13] ?? "").split(".").includes(x)))) continue;
       if (id === 139 && an) continue;
       // 陽・陰の加護: ダンジョンに対応する加護があるときだけ、そのキャラのHPが加護1つにつき2倍
       if (id === 128 && dungeonKago !== "陽") continue;
@@ -1311,6 +1315,9 @@ function enduranceSetup(t, opts = {}) {
     else total += detail.filter((x) => badge.targetNos.includes(x.no)).reduce((n, x) => n + x.hp * (1 + 0.05 * teamHp) * (badge.hp / 100), 0);
   }
   total = Math.round(total);
+  return { total, teamHp, unknown, detail };
+  };
+  const { total, teamHp, unknown, detail } = teamHpWith();
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
   // 回復: 毎ターン使うスキルが回復ドロップを生成するか
   const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
@@ -1324,6 +1331,8 @@ function enduranceSetup(t, opts = {}) {
   let skillRedFrom = "";
   const reductions = [];
   const hpUps = [];
+  const selfAttr = [];
+  const enemyAttr = [];
   for (const [fl, nos] of Object.entries(t.receiptUses ?? {})) {
     nos.forEach((no, idx) => {
       const r = MDB.get(no);
@@ -1337,10 +1346,21 @@ function enduranceSetup(t, opts = {}) {
           skillRedFrom = r[1];
         }
       }
-      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), order });
+      // 属性変更・条件（「敵が◯属性の時、効果が◯倍」）
+      const ac = Object.fromEntries(String(r[28] ?? "").split("|").filter(Boolean).map((x) => { const [k, at, v] = x.split(":"); return [k, { attr: at, v: Number(v) }]; }));
+      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), order, cond: ac["条件"] ?? null });
+      if (ac["自分"]) {
+        // スキルの持ち主（本体、または武器を付けた本体）の主属性が変わる
+        const mi = mems.findIndex((m) => monster(m.id)?.no === no || familyOf(monster(m.id)?.no) === familyOf(no) || assistNoOf(m) === no);
+        if (mi >= 0) {
+          const ratio = teamHpWith(new Map([[mi, ac["自分"].attr]])).total / Math.max(1, teamHpWith().total);
+          selfAttr.push({ name: r[1], member: mi, attr: ac["自分"].attr, dur: ac["自分"].v || 99, floor: Number(fl), order, ratio });
+        }
+      }
+      if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), order });
     });
   }
-  if (!skillRed && hpUps.length) skillRed = 1; // HPアップだけでも「スキルあり」の計算をする
+  if (!skillRed && (hpUps.length || selfAttr.length || enemyAttr.length)) skillRed = 1; // HPアップや属性変更だけでも「レシートどおり」の計算をする
   let regen = 0;
   let regenFrom = "";
   for (const m of mems) {
@@ -1376,7 +1396,7 @@ function enduranceSetup(t, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { badge, reductions, hpUps, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { badge, reductions, hpUps, selfAttr, enemyAttr, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1413,8 +1433,26 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   // 最大HPアップ: かかった時は今のHPも同じ倍率で増え、切れた時は新しい最大HPで頭打ち
   let hpMult = 1;
   const maxAt = () => maxHp * hpMult;
+  // 敵の属性変更（その間は敵の属性が変わる）
+  const enemyAttrAt = (tn, attrs) => {
+    const e = useSkill ? lastActive(setup.enemyAttr, tn) : null;
+    return e ? [e.attr] : attrs;
+  };
+  let floorAttrs = [];
   const updateHpMult = (tn) => {
-    const m = useSkill ? lastActive(setup.hpUps, tn)?.mult ?? 1 : 1;
+    const up = useSkill ? lastActive(setup.hpUps, tn) : null;
+    // 「敵が◯属性の時、効果が◯倍」: その階の敵がすべてその属性なら倍率の効果を倍にする
+    const fa = enemyAttrAt(tn, floorAttrs);
+    const condOk = up?.cond && fa.length && fa.every((a) => a === up.cond.attr);
+    let m = up ? (condOk ? up.mult * up.cond.v : up.mult) : 1;
+    // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
+    if (useSkill) {
+      const byMember = new Map();
+      for (const x of (setup.selfAttr ?? []).filter((x) => firstTurn[x.floor] != null && firstTurn[x.floor] <= tn && tn <= firstTurn[x.floor] + x.dur - 1)) {
+        if (!byMember.has(x.member) || byMember.get(x.member).order < x.order) byMember.set(x.member, x);
+      }
+      for (const x of byMember.values()) m *= x.ratio;
+    }
     if (m !== hpMult) {
       hp = m > hpMult ? (hp * m) / hpMult : Math.min(hp, maxHp * m);
       hpMult = m;
@@ -1429,7 +1467,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     updateHpMult(tn);
     const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
     // 割合ダメージには属性軽減を乗せない（安全側）
-    const attrs = h.attrs ?? [];
+    const attrs = enemyAttrAt(tn, h.attrs ?? []);
     const worst = h.ratio || !attrs.length ? null : attrs.reduce((w, a) => (attrRed(a) < attrRed(w) ? a : w), attrs[0]);
     const ar = worst ? attrRed(worst) : 0;
     const sk = skillAt(tn);
@@ -1446,6 +1484,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     return hp > 0;
   };
   for (const f of d.damage.floors) {
+    floorAttrs = [...new Set(f.hits.flatMap((h) => h.attrs ?? []))];
     // 到着時の先制（前の階の最後のターンの敵の行動）
     for (const h of f.hits.filter((x) => x.kind !== "turn" && x.kind !== "superResolve")) if (!hit(f, h, turn)) return { rows, deadAt, fail };
     for (const h of f.hits.filter((x) => x.kind === "turn")) {
@@ -1575,7 +1614,12 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
   const skillLine = withSkill
-    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`), ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍`)].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[
+        ...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`),
+        ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍${r.cond ? `（敵が${r.cond.attr}属性なら効果${r.cond.v}倍）` : ""}`),
+        ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
+        ...setup.enemyAttr.map((r) => `${esc(r.name)}で敵を${r.attr}属性に変化`),
+      ].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
        ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "レシートどおりのスキルで、潜在覚醒の枠が空いていれば")}`
     : "";
   const heal = setup.healGen

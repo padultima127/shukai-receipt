@@ -276,6 +276,22 @@ def gravity_pct(ids, skills):
 STAT_MULT_AWAKENS = {63, 127, 128, 129, 138, 139, 142, 146, 147}
 
 
+def attr_changes(ids, skills):
+    """属性変更スキル: "自分:属性:ターン|敵:属性:ターン|条件:属性:倍"（ターン0＝その階の間ずっと）
+    自分の属性変更 → アシスト共鳴などの判定が変わる。敵の属性変更 → 属性軽減が変わる。
+    条件 → 「敵が◯属性の時、効果が◯倍」（日番谷の最大HPアップなど）"""
+    ids = ids if isinstance(ids, list) else [ids]
+    text = "".join((skills.get(str(i)) or {}).get("description", "") for i in ids if i).replace("\r", "").replace("\n", "")
+    parts = []
+    if m := re.search(r"(?:(\d+)ターンの間、)?自分の属性が([火水木光闇])属性に変化", text):
+        parts.append(f"自分:{m.group(2)}:{m.group(1) or 0}")
+    if m := re.search(r"(?:(\d+)ターンの間、)?敵全体が([火水木光闇])属性に変化", text):
+        parts.append(f"敵:{m.group(2)}:{m.group(1) or 0}")
+    if m := re.search(r"敵が([火水木光闇])属性の時、効果が([\d.]+)倍", text):
+        parts.append(f"条件:{m.group(1)}:{m.group(2)}")
+    return "|".join(parts)
+
+
 def delayed_activation(ids, skills):
     ids = ids if isinstance(ids, list) else [ids]
     n = 0
@@ -379,12 +395,13 @@ def main():
             (m.get("synchroAwaken") or {}).get("awaken") or 0,
             # 通常覚醒の全リスト（表示用）
             ".".join(str(a) for a in awakens),
+            attr_changes(m.get("skill"), skills),
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更]\n"
         f"// 更新: {updated}\n"
         "window.PAD_AWAKEN_NAMES = " + json.dumps({k: v["name"] for k, v in AWAKENS.items() if k.isdigit()}, ensure_ascii=False, separators=(",", ":")) + ";\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
