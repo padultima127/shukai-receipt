@@ -58,7 +58,8 @@ SKILL_TAGS = [
 HASTE = re.compile(r"(自分以外の)?スキルが(\d+)ターン溜まる")
 GRANT = re.compile(r"((?:\[[^\]]+\])+)を付与")
 # 覚醒の名前 → 番号（padmdb の画面データから抜き出した表。スキルで付与される覚醒の判定に使う）
-AWAKEN_BY_NAME = {v["name"]: int(k) for k, v in json.load(open(Path(__file__).with_name("awakens.json"), encoding="utf-8")).items() if k.isdigit()}
+AWAKENS = json.load(open(Path(__file__).with_name("awakens.json"), encoding="utf-8"))
+AWAKEN_BY_NAME = {v["name"]: int(k) for k, v in AWAKENS.items() if k.isdigit()}
 
 # 覚醒番号 → 能力タグ（padmdbの覚醒番号。名前はツール内の awakens 表と同じ）
 AWAKEN_TAGS = {
@@ -376,13 +377,16 @@ def main():
             (m.get("maxParam") or {}).get("hp") or 0,
             ".".join(str(a) for a in awakens if a in STAT_MULT_AWAKENS),
             (m.get("synchroAwaken") or {}).get("awaken") or 0,
+            # 通常覚醒の全リスト（表示用）
+            ".".join(str(a) for a in awakens),
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒]\n"
         f"// 更新: {updated}\n"
+        "window.PAD_AWAKEN_NAMES = " + json.dumps({k: v["name"] for k, v in AWAKENS.items() if k.isdigit()}, ensure_ascii=False, separators=(",", ":")) + ";\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))
         + " };\n",

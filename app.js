@@ -856,6 +856,50 @@ function renderImportantPart(list) {
   return `${chips ? `<div class="tags imp">${chips}</div>` : ""}${team}${rest}`;
 }
 
+// ---------- 覚醒アイコン ----------
+// 画像: 高画質覚醒スキル（@pad_awokenskill）様の画像を、yuunium 様の覚醒スキル性能作成補助ツール経由で表示
+const AWK_IMG_BASE = "https://yuunium.github.io/awokenskill/pic/";
+const AWK_IMG = {
+  1: "hp", 2: "att", 3: "rcv", 4: "barrier_fire", 5: "barrier_water", 6: "barrier_wood", 7: "barrier_light", 8: "barrier_dark",
+  9: "autorcv", 10: "bind", 11: "resist_blind", 12: "resist_jama", 13: "resist_doku", 14: "drop_fire", 15: "drop_water", 16: "drop_wood",
+  17: "drop_light", 18: "drop_dark", 19: "time", 20: "bindrcv", 21: "boost", 22: "row_fire", 23: "row_water", 24: "row_wood", 25: "row_light",
+  26: "row_dark", 27: "way", 28: "huin", 29: "drop_rcv", 30: "multi", 31: "killer_dragon", 32: "killer_god", 33: "killer_devil",
+  34: "killer_machine", 35: "killer_barance", 36: "killer_attack", 37: "killer_stamina", 38: "killer_rcv", 40: "killer_awoken",
+  43: "7c", 44: "guardbreak", 45: "bonusatt", 46: "team_hp", 47: "team_rcv", 48: "void", 49: "assist", 50: "bonusatt_p", 51: "charge",
+  52: "bind_p", 53: "time_p", 54: "resist_kumo", 55: "resist_tape", 56: "boost_p", 57: "50more", 58: "50less", 59: "rcvl", 60: "l",
+  61: "10c", 62: "combo", 63: "voice", 64: "dungeon_bonus", 65: "hp_m", 66: "att_m", 67: "rcv_m", 68: "resist_blind_p", 69: "resist_jama_p",
+  70: "resist_doku_p", 71: "fall_jama", 72: "fall_doku", 73: "combo_fire", 74: "combo_water", 75: "combo_wood", 76: "combo_light",
+  77: "combo_dark", 78: "cross", 79: "3color", 80: "4color", 81: "5color", 82: "100c", 83: "type_dragon", 84: "type_god", 85: "type_devil",
+  86: "type_machine", 87: "type_balance", 88: "type_att", 89: "type_stamina", 90: "type_rcv", 91: "sub_fire", 92: "sub_water",
+  93: "sub_wood", 94: "sub_light", 95: "sub_dark", 96: "way_p", 97: "charge_p", 98: "autorcv_p", 99: "drop_fire_p", 100: "drop_water_p",
+  101: "drop_wood_p", 102: "drop_light_p", 103: "drop_dark_p", 104: "drop_rcv_p", 105: "boost_m", 106: "levitate", 107: "7c_p", 108: "l_p",
+  109: "void_p", 110: "cross_p", 111: "10c_p", 112: "3color_p", 113: "4color_p", 114: "5color_p", 115: "bindrcv_p", 116: "row3_fire",
+  117: "row3_water", 118: "row3_wood", 119: "row3_light", 120: "row3_dark", 121: "combo_fire_p", 122: "combo_water_p", 123: "combo_wood_p",
+  124: "combo_light_p", 125: "combo_dark_p", 126: "t", 127: "all", 128: "yo", 129: "in", 130: "taru", 131: "parts_break", 132: "tea",
+  133: "double_firewater", 134: "double_waterwood", 135: "double_woodfire", 136: "resist_delay", 137: "drop_all", 138: "same_assist",
+  139: "my_power", 140: "resist_change_time", 142: "all_p", 143: "kasoku", 144: "15c", 148: "resist_assist",
+};
+const AWK_NAMES = window.PAD_AWAKEN_NAMES ?? {};
+function awkIcon(id, cls = "") {
+  const name = AWK_NAMES[id] ?? `覚醒${id}`;
+  const img = AWK_IMG[id];
+  return img
+    ? `<img class="awk ${cls}" src="${AWK_IMG_BASE}${img}.png" alt="${esc(name)}" title="${esc(name)}" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'awk-txt ${cls}',textContent:this.alt}))">`
+    : `<span class="awk-txt ${cls}" title="${esc(name)}">${esc(name)}</span>`;
+}
+// 本体の覚醒（＋選んだ超覚醒・シンクロ覚醒）。武器は覚醒アシストのときだけ小さく
+function renderAwakenings(mem) {
+  const row = MDB.get(monster(mem.id)?.no);
+  if (!row) return "";
+  const ids = String(row[27] ?? "").split(".").filter(Boolean).map(Number);
+  const sup = mem.build?.super ? `<span class="awk-sep">超</span>${awkIcon(mem.build.super, "awk-super")}` : "";
+  const syn = row[26] ? `<span class="awk-sep">シンクロ</span>${awkIcon(row[26], "awk-super")}` : "";
+  const a = MDB.get(assistNoOf(mem));
+  const aIds = a?.[8] ? String(a[27] ?? "").split(".").filter(Boolean).map(Number).filter((x) => x !== 49) : [];
+  const weapon = aIds.length ? `<div class="awk-row awk-weapon"><span class="awk-sep">武器</span>${aIds.map((x) => awkIcon(x)).join("")}</div>` : "";
+  return `<div class="awk-row">${ids.map((x) => awkIcon(x)).join("")}${sup}${syn}</div>${weapon}`;
+}
+
 // ---------- アップデートによる変更 ----------
 const MONSTER_CHANGES = window.PAD_MONSTER_CHANGES ?? [];
 function tagDiff(before, after) {
@@ -915,6 +959,7 @@ function renderMember(r) {
   return `<li class="mem mem-${r.status}">
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
     <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}
+      ${renderAwakenings(r.mem)}
       ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
   </li>`;
 }
