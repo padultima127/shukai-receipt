@@ -223,6 +223,9 @@ def leader_numbers(ls):
     red = 0.0
     if "ダメージを半減" in text:
         red = 50.0
+    # 「激減」は75%（本人談）
+    if "ダメージを激減" in text:
+        red = max(red, 75.0)
     for n in re.findall(r"ダメージを([\d.]+)[%％]軽減", text):
         red = max(red, float(n))
     hp = []
@@ -288,6 +291,11 @@ def attr_changes(ids, skills):
     parts = []
     if m := re.search(r"(?:(\d+)ターンの間、)?自分の属性が([火水木光闇])属性に変化", text):
         parts.append(f"自分:{m.group(2)}:{m.group(1) or 0}")
+    # 自分以外の味方の属性変更（右隣・左隣・両隣・味方全員・助っ人・リーダー）。LSの属性HP倍率や共鳴が変わる
+    for sentence in text.split("。"):
+        dur = (re.search(r"(\d+)ターンの間", sentence) or [None, 0])[1]
+        for m in re.finditer(r"(右隣|左隣|両隣|味方|助っ人|リーダー)が([火水木光闇])属性に変化", sentence):
+            parts.append(f"味方:{m.group(1)}:{m.group(2)}:{dur or 0}")
     if m := re.search(r"(?:(\d+)ターンの間、)?敵全体が([火水木光闇])属性に変化", text):
         parts.append(f"敵:{m.group(2)}:{m.group(1) or 0}")
     if m := re.search(r"敵が([火水木光闇])属性の時、効果が([\d.]+)倍", text):

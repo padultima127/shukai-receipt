@@ -1414,13 +1414,29 @@ function enduranceSetup(t0, opts = {}) {
       // ドロップ目覚めを付けるスキル
       const awGive = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め付与:"))?.split(":");
       if (awGive) awakenGrants.push({ name: r[1], names: awGive[1].split(","), dur: Number(awGive[2]) || 1, floor: Number(fl), order });
-      if (ac["自分"]) {
-        // スキルの持ち主（本体、または武器を付けた本体）の主属性が変わる
-        const mi = mems.findIndex((m) => monster(m.id)?.no === no || familyOf(monster(m.id)?.no) === familyOf(no) || assistNoOf(m) === no);
-        if (mi >= 0) {
-          const ratio = teamHpWith(new Map([[mi, ac["自分"].attr]])).total / Math.max(1, teamHpWith().total);
-          selfAttr.push({ name: r[1], member: mi, attr: ac["自分"].attr, dur: ac["自分"].v || 99, floor: Number(fl), order, ratio });
-        }
+      // 味方の属性変更: 自分／右隣／左隣／両隣／味方全員／助っ人／リーダー（並びは L・サブ1〜4・F）
+      const owner = mems.findIndex((m) => monster(m.id)?.no === no || familyOf(monster(m.id)?.no) === familyOf(no) || assistNoOf(m) === no);
+      const changes = [];
+      if (ac["自分"]) changes.push({ who: "自分", attr: ac["自分"].attr, dur: ac["自分"].v });
+      for (const tok of String(r[28] ?? "").split("|").filter((x) => x.startsWith("味方:"))) {
+        const [, who, attr, dur] = tok.split(":");
+        changes.push({ who, attr, dur: Number(dur) });
+      }
+      for (const ch of changes) {
+        if (owner < 0) continue;
+        const targets =
+          ch.who === "自分" ? [owner]
+          : ch.who === "右隣" ? [owner + 1]
+          : ch.who === "左隣" ? [owner - 1]
+          : ch.who === "両隣" ? [owner - 1, owner + 1]
+          : ch.who === "味方" ? mems.map((_, i) => i)
+          : ch.who === "助っ人" ? [mems.findIndex((m) => m.role === "F")]
+          : ch.who === "リーダー" ? [mems.findIndex((m) => m.role === "L")]
+          : [];
+        const valid = targets.filter((i) => i >= 0 && i < mems.length);
+        if (!valid.length) continue;
+        const ratio = teamHpWith(new Map(valid.map((i) => [i, ch.attr]))).total / Math.max(1, teamHpWith().total);
+        selfAttr.push({ name: r[1], member: valid.join(","), who: ch.who, attr: ch.attr, dur: ch.dur || 99, floor: Number(fl), order, ratio });
       }
       if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), order });
     });
@@ -1697,7 +1713,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
     ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[
         ...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`),
         ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍${r.cond ? `（敵が${r.cond.attr}属性なら効果${r.cond.v}倍）` : ""}`),
-        ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
+        ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.who === "自分" ? "" : r.who + "が"}${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
         ...setup.enemyAttr.map((r) => `${esc(r.name)}で敵を${r.attr}属性に変化`),
       ].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
        ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "レシートどおりのスキルで、潜在覚醒の枠が空いていれば")}`
