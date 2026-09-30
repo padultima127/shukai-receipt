@@ -160,7 +160,7 @@ def parse(html):
         for no, vt in split_variants(text, enemy_nos[0] if enemy_nos else None):
             attrs = [a for a in [attr_of(no)] if a] if no else []
             variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50), "awaken": awaken_of(vt)})
-        cur["rows"].append({"mandatory": "必ず出現" in raw_hp + text, "variants": variants})
+        cur["rows"].append({"mandatory": "必ず出現" in raw_hp + text, "variants": variants, "parts": "部位" in raw_hp or bool(re.search(r"防御[:：]\s*[\d.]+[兆億]?\s*(?!HP)[^\s\d:：]+[:：]\s*[\d.]+[兆億]", raw_hp))})
     return floors
 
 
@@ -205,6 +205,9 @@ def build(floors):
             note.append("いずれか1体出現の枠は先制ダメージが大きい方で計算")
         hits = [h for p in picked for h in p["hits"]]
         floor = {"floor": n, "hits": hits}
+        # 部位がある階（部位破壊ボーナスの判定用）
+        if any(r.get("parts") for r in rows):
+            floor["parts"] = True
         aw = [a for p in picked for a in p.get("awaken", [])]
         if aw:
             floor["awaken"] = aw

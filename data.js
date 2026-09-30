@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 68,
+  "version": 71,
   "seed": true,
   "monsters": [
     {
@@ -2464,7 +2464,8 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
-            ]
+            ],
+            "parts": true
           }
         ]
       }
@@ -2869,7 +2870,8 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
-            ]
+            ],
+            "parts": true
           }
         ]
       }
@@ -3239,6 +3241,7 @@ window.PAD_SEED = {
                 "threshold": 50
               }
             ],
+            "parts": true,
             "awaken": [
               {
                 "names": [
@@ -3614,7 +3617,8 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
-            ]
+            ],
+            "parts": true
           }
         ]
       }
@@ -3991,7 +3995,8 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
-            ]
+            ],
+            "parts": true
           }
         ]
       }

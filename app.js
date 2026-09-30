@@ -1303,7 +1303,9 @@ function enduranceSetup(t0, opts = {}) {
   const dungeonKago = opts.kago !== undefined ? opts.kago || null : db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
   // 属性変更スキル（自分の属性が◯属性に変化）で主属性が変わった時のHPも出せるように、関数にしておく
   // floor: 熟成（バトル5以降1.5倍、10以降2倍）の判定に使う階
-  const teamHpWith = (overrides = new Map(), floor = 1) => {
+  // parts: 部位を壊した後か（部位破壊ボーナス 1つにつき1.2倍、複数なら掛け算）
+  // keepRes: 属性を変えても共鳴の判定だけは元の属性のまま（共鳴が付いた分を切り分けるため）
+  const teamHpWith = (overrides = new Map(), floor = 1, parts = false, keepRes = false) => {
   let total = 0;
   let teamHp = 0;
   let unknown = 0;
@@ -1313,6 +1315,7 @@ function enduranceSetup(t0, opts = {}) {
     const row0 = MDB.get(no);
     // 主属性の上書き（アシスト共鳴・アシストボーナス・LSの属性HP倍率の判定に使う）
     const row = row0 && overrides.has(mi) ? Object.assign([...row0], { 2: overrides.get(mi) }) : row0;
+    const resRow = keepRes ? row0 : row;
     if (!row) {
       unknown++;
       continue;
@@ -1362,13 +1365,24 @@ function enduranceSetup(t0, opts = {}) {
       }
       const v = STAT_MULT[id];
       if (!v) continue;
-      if (id === 138 && !(an && a && a[2] === row[2] && String(a[13] ?? "").split(".").some((x) => x && String(row[13] ?? "").split(".").includes(x)))) continue;
+      if (id === 138 && !(an && a && a[2] === resRow[2] && String(a[13] ?? "").split(".").some((x) => x && String(resRow[13] ?? "").split(".").includes(x)))) continue;
       if (id === 139 && an) continue;
       // 陽・陰の加護: ダンジョンに対応する加護があるときだけ、そのキャラのHPが加護1つにつき2倍
       if (id === 128 && dungeonKago !== "陽") continue;
       if (id === 129 && dungeonKago !== "陰") continue;
       hp *= v;
       mults.push(`${STAT_NAME[id]}×${v}`);
+    }
+    // 部位破壊ボーナス（本体の通常覚醒・選んだ超覚醒・武器の覚醒）: 部位を壊した後、1つにつき1.2倍
+    if (parts) {
+      const pb =
+        String(row[27] ?? "").split(".").filter((x) => x === "131").length +
+        (b.super === 131 ? 1 : 0) +
+        (a?.[8] ? String(a[27] ?? "").split(".").filter((x) => x === "131").length : 0);
+      if (pb) {
+        hp *= 1.2 ** pb;
+        mults.push(`部位破壊ボーナス×${(1.2 ** pb).toFixed(2)}`);
+      }
     }
     const lsm = hpMultFor(row, lsL) * hpMultFor(row, lsF);
     // ＋値のHP1あたりのHP（10 × 潜在 × 全パラ系 × LS）。チームHP強化は最後に掛ける
@@ -1390,7 +1404,9 @@ function enduranceSetup(t0, opts = {}) {
   // 熟成で階ごとにチームHPが変わる割合（1〜4階を基準）
   const r5 = teamHpWith(new Map(), 5).total / Math.max(1, total);
   const r10 = teamHpWith(new Map(), 10).total / Math.max(1, total);
-  const floorRatio = (f) => (f >= 10 ? r10 : f >= 5 ? r5 : 1);
+  // 部位を壊した後の倍率（熟成と合わせた階ごと）
+  const rp = { 1: teamHpWith(new Map(), 1, true).total / Math.max(1, total), 5: teamHpWith(new Map(), 5, true).total / Math.max(1, total), 10: teamHpWith(new Map(), 10, true).total / Math.max(1, total) };
+  const floorRatio = (f, parts = false) => (parts ? rp[f >= 10 ? 10 : f >= 5 ? 5 : 1] : f >= 10 ? r10 : f >= 5 ? r5 : 1);
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
   // 回復: 毎ターン使うスキルが回復ドロップを生成するか
   const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
@@ -1451,8 +1467,12 @@ function enduranceSetup(t0, opts = {}) {
           : [];
         const valid = targets.filter((i) => i >= 0 && i < mems.length);
         if (!valid.length) continue;
-        const ratio = teamHpWith(new Map(valid.map((i) => [i, ch.attr]))).total / Math.max(1, teamHpWith().total);
-        selfAttr.push({ name: r[1], member: valid.join(","), who: ch.who, attr: ch.attr, dur: ch.dur || 99, floor: Number(fl), order, ratio });
+        const ov = new Map(valid.map((i) => [i, ch.attr]));
+        const withAll = teamHpWith(ov).total;
+        const ratio = withAll / Math.max(1, teamHpWith().total);
+        // 共鳴が付いた（外れた）ことによる分だけ。これが上がった時だけ今のHPも同じ割合で回復する（本人談）
+        const ratioRes = withAll / Math.max(1, teamHpWith(ov, 1, false, true).total);
+        selfAttr.push({ name: r[1], member: valid.join(","), who: ch.who, attr: ch.attr, dur: ch.dur || 99, floor: Number(fl), order, ratio, ratioRes });
       }
       if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), order });
     });
@@ -1493,7 +1513,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1542,8 +1562,17 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     return active.sort((a, b) => b.order - a.order)[0] ?? null;
   };
   const skillAt = (tn) => (useSkill ? lastActive(setup.reductions, tn)?.red ?? 0 : 0);
-  // 最大HPアップ: かかった時は今のHPも同じ倍率で増え、切れた時は新しい最大HPで頭打ち
+  // 最大HPの倍率（スキル・熟成・部位破壊ボーナス・属性変更）。切れて下がった時は新しい最大HPで頭打ち
   let hpMult = 1;
+  let resMult = 1;
+  // そのターンに効いている属性変更（同じ対象は最後に使ったもの）
+  const activeAttr = (tn) => {
+    const byMember = new Map();
+    for (const x of (setup.selfAttr ?? []).filter((x) => firstTurn[x.floor] != null && firstTurn[x.floor] <= tn && tn <= firstTurn[x.floor] + x.dur - 1)) {
+      if (!byMember.has(x.member) || byMember.get(x.member).order < x.order) byMember.set(x.member, x);
+    }
+    return byMember;
+  };
   const maxAt = () => maxHp * hpMult;
   // 敵の属性変更（その間は敵の属性が変わる）
   const enemyAttrAt = (tn, attrs) => {
@@ -1552,24 +1581,22 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   };
   let floorAttrs = [];
   let curFloor = 1;
+  let curParts = false;
   const updateHpMult = (tn) => {
     const up = useSkill ? lastActive(setup.hpUps, tn) : null;
     // 「敵が◯属性の時、効果が◯倍」: その階の敵がすべてその属性なら倍率の効果を倍にする
     let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
-    // 熟成（階が進むとチームHPが上がる）
-    m *= setup.floorRatio?.(curFloor) ?? 1;
+    // 熟成（階が進むとチームHPが上がる）と部位破壊ボーナス（部位のある階で、最初の攻撃の後）
+    m *= setup.floorRatio?.(curFloor, curParts && firstTurn[curFloor] != null && tn >= firstTurn[curFloor]) ?? 1;
     // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
-    if (useSkill) {
-      const byMember = new Map();
-      for (const x of (setup.selfAttr ?? []).filter((x) => firstTurn[x.floor] != null && firstTurn[x.floor] <= tn && tn <= firstTurn[x.floor] + x.dur - 1)) {
-        if (!byMember.has(x.member) || byMember.get(x.member).order < x.order) byMember.set(x.member, x);
-      }
-      for (const x of byMember.values()) m *= x.ratio;
-    }
-    if (m !== hpMult) {
-      hp = m > hpMult ? (hp * m) / hpMult : Math.min(hp, maxHp * m);
-      hpMult = m;
-    }
+    if (useSkill) for (const x of activeAttr(tn).values()) m *= x.ratio;
+    // 最大HPが変わっても今のHPはそのまま（熟成・部位破壊ボーナス・スキルの最大HPアップ）。
+    // 共鳴が未発動→発動に変わった時だけ、その分の割合で今のHPも回復する（本人談）
+    const res = useSkill ? [...activeAttr(tn).values()].reduce((x, e) => x * (e.ratioRes ?? 1), 1) : 1;
+    if (res > resMult) hp *= res / resMult;
+    resMult = res;
+    hpMult = m;
+    hp = Math.min(hp, maxHp * m);
   };
   const stripBy = (f, h) => {
     const used = (setup.uses?.[f.floor] ?? []).map((n) => MDB.get(n)).filter((r) => r?.[23]);
@@ -1599,6 +1626,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   for (const f of d.damage.floors) {
     floorAttrs = [...new Set(f.hits.flatMap((h) => h.attrs ?? []))];
     curFloor = f.floor;
+    curParts = !!f.parts;
     // 敵の先制で付くドロップ目覚め（着いた時から）
     for (const a of f.awaken ?? []) enemyAwaken.push({ names: a.names, dur: a.dur, from: turn + 1 });
     // 到着時の先制（前の階の最後のターンの敵の行動）
@@ -1776,6 +1804,7 @@ function renderEndurance(t, d) {
     </div>
     <p class="hint">初期値は推定です（レシートのレベル・＋値・超覚醒・潜在、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個${setup.badge?.hp ? `、バッジ「${esc(setup.badge.name)}」HP${setup.badge.hp}%` : ""}${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
     ${setup.r5 > 1.001 || setup.r10 > 1.001 ? `<p class="hint">熟成持ちがいるので、チームHPはバトル5〜9で×${setup.r5.toFixed(2)}、バトル10以降で×${setup.r10.toFixed(2)}になります（上の数値は1〜4階のHP）。</p>` : ""}
+    ${setup.rp[1] > 1.001 && d.damage.floors.some((f) => f.parts) ? `<p class="hint">部位破壊ボーナス持ちがいるので、部位のある階（${d.damage.floors.filter((f) => f.parts).map((f) => f.floor + "F").join("・")}）では部位を壊した後（最初の攻撃の後）にチームHPが上がる計算です（1〜4階の基準で×${setup.rp[1].toFixed(2)}）。</p>` : ""}
     <div class="end-lat"><span class="label">振っている潜在の属性軽減（パーティー合計%）</span>
       ${ATTRS5.map((a) => `<label>${a}<input type="number" class="end-lat-in" data-attr="${a}" min="0" max="100" step="0.5" value="0">%</label>`).join("")}
     </div>
