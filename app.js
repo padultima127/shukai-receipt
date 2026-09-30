@@ -900,6 +900,16 @@ function renderAwakenings(mem) {
   return `<div class="awk-row">${ids.map((x) => awkIcon(x)).join("")}${sup}${syn}</div>${weapon}`;
 }
 
+// 名前の横の「超覚醒一覧」: レシートで選ばれていない超覚醒も確認できる（選ばれているものは枠付き）
+function renderSuperList(mem) {
+  const row = MDB.get(monster(mem.id)?.no);
+  const ids = String(row?.[11] ?? "").split(".").filter(Boolean).map(Number);
+  if (!ids.length) return "";
+  return `<details class="awk-supers"><summary>超覚醒一覧（${ids.length}）</summary><div class="awk-row">${ids
+    .map((id) => awkIcon(id, id === mem.build?.super ? "awk-super" : ""))
+    .join("")}</div>${mem.build?.super ? `<small class="muted">枠付きがレシートで選ばれている超覚醒</small>` : `<small class="muted">レシートからは選んだ超覚醒が分かりません</small>`}</details>`;
+}
+
 // ---------- アップデートによる変更 ----------
 const MONSTER_CHANGES = window.PAD_MONSTER_CHANGES ?? [];
 function tagDiff(before, after) {
@@ -958,7 +968,7 @@ function renderMember(r) {
   }
   return `<li class="mem mem-${r.status}">
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
-    <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}
+    <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}${renderSuperList(r.mem)}
       ${renderAwakenings(r.mem)}
       ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
   </li>`;
@@ -2703,3 +2713,231 @@ $("#reg-list").addEventListener("click", async (e) => {
 });
 
 renderData();
+
+// ---------- 画像から自動入力（PDCのレシート＋クリア画像） ----------
+// 読み取りはブラウザ内（Tesseract.js）。画像はどこにも送らない
+let tesseractLoading = null;
+function loadTesseract() {
+  if (window.Tesseract) return Promise.resolve();
+  tesseractLoading ??= new Promise((ok, ng) => {
+    const s = document.createElement("script");
+    s.src = "https://cdn.jsdelivr.net/npm/tesseract.js@5.1.1/dist/tesseract.min.js";
+    s.onload = ok;
+    s.onerror = () => ng(new Error("読み取りライブラリを読み込めませんでした"));
+    document.head.appendChild(s);
+  });
+  return tesseractLoading;
+}
+
+// 小さい文字を読みやすくするため2倍に拡大して白黒寄りにする
+async function imageToCanvas(file, scale = 2) {
+  const bmp = await createImageBitmap(file);
+  const c = document.createElement("canvas");
+  c.width = bmp.width * scale;
+  c.height = bmp.height * scale;
+  const g = c.getContext("2d");
+  g.imageSmoothingQuality = "high";
+  g.drawImage(bmp, 0, 0, c.width, c.height);
+  // 白黒にしてコントラストを上げる。暗い画面（クリア画像）は白文字なので反転して黒文字にする
+  const img = g.getImageData(0, 0, c.width, c.height);
+  const px = img.data;
+  let sum = 0;
+  for (let i = 0; i < px.length; i += 4) sum += px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114;
+  const dark = sum / (px.length / 4) < 110;
+  // 白い背景（PDCのレシート）はそのまま読んだ方が正確
+  if (!dark) return c;
+  for (let i = 0; i < px.length; i += 4) {
+    let v = px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114;
+    if (dark) v = 255 - v;
+    v = Math.max(0, Math.min(255, (v - 128) * 1.6 + 128));
+    px[i] = px[i + 1] = px[i + 2] = v;
+  }
+  g.putImageData(img, 0, 0);
+  return c;
+}
+
+async function ocr(file, lang, onStep) {
+  // 小さい画像（横1000px未満）は3倍に拡大すると小さい文字が読める
+  const bmp = await createImageBitmap(file);
+  const canvas = await imageToCanvas(file, bmp.width < 1000 ? 3 : 2);
+  const { data } = await Tesseract.recognize(canvas, lang, {
+    logger: (m) => m.status === "recognizing text" && onStep?.(Math.round(m.progress * 100)),
+  });
+  return { ...data, imageWidth: canvas.width };
+}
+
+// 読み違えやすい文字を数字に（T→1、O→0 など）
+const OCR_DIGIT = { T: "1", I: "1", l: "1", "|": "1", i: "1", O: "0", o: "0", D: "0", Q: "0", S: "5", s: "5", B: "8", Z: "2", z: "2", G: "6", g: "9", q: "9", A: "4" };
+// 読み違えやすい数字どうし（3↔8 など）。図鑑にない番号のときに1文字ずつ入れ替えて探す
+const OCR_SWAP = { 3: "8", 8: "30", 1: "7", 7: "1", 0: "8", 5: "6", 6: "58", 9: "8" };
+function fixNo(raw, want) {
+  const ok = (n) => {
+    const r = MDB.get(n);
+    return r && (want === "assist" ? r[4] === 1 : want === "base" ? !r[8] : true);
+  };
+  // 前後に余計な文字が混ざることがあるので、4〜5桁の窓をいくつか試す
+  const wins = [...new Set([raw.length <= 5 ? raw : null, raw.slice(-5), raw.slice(0, 5), raw.slice(-4), raw.slice(0, 4)].filter((w) => w && w.length >= 3))];
+  const swaps = (w) =>
+    [...w].flatMap((c, i) => [...(OCR_SWAP[c] ?? "")].map((d) => w.slice(0, i) + d + w.slice(i + 1)));
+  // 長い窓（5桁）を先に、完全一致→1文字入れ替え→2文字入れ替えの順で試す
+  for (const len of [5, 4, 3]) {
+    const ws = wins.filter((w) => w.length === len);
+    for (const w of ws) if (ok(Number(w))) return Number(w);
+    for (const w of ws) for (const x of swaps(w)) if (ok(Number(x))) return Number(x);
+    for (const w of ws) for (const x of swaps(w)) for (const y of swaps(x)) if (ok(Number(y))) return Number(y);
+  }
+  return null;
+}
+
+// PDCのレシート: 「No12848」の位置から、上の段＝アシスト、下の段＝本体を6枠ずつ並べる
+function parsePdcNumbers(data) {
+  const hits = [];
+  for (const w of data.words ?? []) {
+    const m = w.text.match(/N[oO0]\.?(.{3,6})$/) ?? w.text.match(/N[oO0]\.?([\dTIl|OoDQSsBZzGgqA]{3,6})/);
+    if (!m) continue;
+    // 数字の後ろに付くゴミ文字（S や F など）は落とす。数字の途中の読み違えだけ直す
+    const core = m[1].replace(/[^\dTIl|iOoDQSsBZzGgqA]/g, "").replace(/[A-Za-z|]+$/, "");
+    const raw = core.replace(/[TIl|iOoDQSsBZzGgqA]/g, (c) => OCR_DIGIT[c]).slice(0, 6);
+    if (raw.length < 3) continue;
+    hits.push({ raw, x: (w.bbox.x0 + w.bbox.x1) / 2, y: (w.bbox.y0 + w.bbox.y1) / 2, lv: (w.text.match(/LV(\d{2,3})/i) ?? [])[1] });
+  }
+  if (!hits.length) return null;
+  // 行ごとにまとめる（y が近いもの）
+  hits.sort((a, b) => a.y - b.y);
+  const rows = [];
+  for (const h of hits) {
+    const r = rows.find((r) => Math.abs(r.y - h.y) < 60);
+    if (r) r.items.push(h);
+    else rows.push({ y: h.y, items: [h] });
+  }
+  const [top, bottom] = rows.length >= 2 ? [rows[0], rows[1]] : [null, rows[0]];
+  // 段が分かったので、上の段はアシストに付けられるもの、下の段は武器以外で番号を確かめる
+  for (const h of top?.items ?? []) h.no = fixNo(h.raw, "assist");
+  for (const h of bottom.items) h.no = fixNo(h.raw, "base");
+  if (top) top.items = top.items.filter((h) => h.no);
+  bottom.items = bottom.items.filter((h) => h.no);
+  const bases = bottom.items.sort((a, b) => a.x - b.x);
+  const width = data.imageWidth ?? Math.max(...hits.map((h) => h.x)) + 1;
+  const col = (x) => Math.min(5, Math.floor((x / width) * 6));
+  const slots = Array.from({ length: 6 }, () => ({}));
+  for (const b of bases) slots[bases.length === 6 ? bases.indexOf(b) : col(b.x)].base = b;
+  for (const a of top?.items ?? []) {
+    // アシストは真下の本体と同じ列
+    const near = bases.reduce((best, b) => (Math.abs(b.x - a.x) < Math.abs(best.x - a.x) ? b : best), bases[0]);
+    slots[slots.findIndex((s) => s.base === near)].assist = a;
+  }
+  return slots;
+}
+
+// PDCのレシートの立ち回り（「Created by PDC」より下の行）
+function parsePdcSteps(data) {
+  const lines = (data.text ?? "").split("\n").map((l) => l.trim());
+  const i = lines.findIndex((l) => /PDC|パズドラダメージ計算/.test(l));
+  // 日本語の文字の間に入る余計な空白を消す
+  const jp = /[^\x00-\x7F]/;
+  return (i >= 0 ? lines.slice(i + 1) : [])
+    .filter(Boolean)
+    .map((l) => l.replace(/ +/g, (sp, at, str) => (jp.test(str[at - 1] ?? "") || jp.test(str[at + sp.length] ?? "") ? "" : " ")))
+    // 「→」が「っ」「う」と読まれやすい（キャラ名の後ろに付くひらがなは矢印とみなす）
+    .map((l) => l.replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF)）])[っうぅ]{1,3}/g, "→"))
+    .join("\n");
+}
+
+function parseClear(data) {
+  const t = (data.text ?? "").replace(/[ 　]/g, "");
+  const num = (re) => Number(((t.match(re) ?? [])[1] ?? "").replace(/[,，]/g, "")) || null;
+  const tm = t.match(/タイム[:：]?(\d+)分([\d.]+)/);
+  const dungeon = [...db.dungeons]
+    .map((d) => ({ d, keys: [d.name, ...(d.aliases ?? [])].map((k) => k.replace(/[\s【】()（）]/g, "")).filter((k) => k.length >= 3) }))
+    .find(({ keys }) => keys.some((k) => t.replace(/[【】()（）]/g, "").includes(k)))?.d;
+  return {
+    min: tm ? Number(tm[1]) : null,
+    sec: tm ? Number(tm[2]) : null,
+    turns: num(/ターン[:：]?(\d+)/),
+    plus: num(/ポイント[:：]?([\d,，]+)/),
+    exp: num(/EXP[:：]?([\d,，]+)/i),
+    dungeon,
+  };
+}
+
+// 投稿のリンクから作者名（Xの埋め込み用の公開情報。JSONP）
+function fetchTweetAuthor(url) {
+  return new Promise((ok) => {
+    if (!/(x|twitter)\.com\/[^/]+\/status\/\d+/.test(url)) return ok(null);
+    const cb = `oembed${Date.now()}`;
+    const s = document.createElement("script");
+    window[cb] = (d) => {
+      ok(d?.author_name ?? null);
+      delete window[cb];
+      s.remove();
+    };
+    s.src = `https://publish.twitter.com/oembed?omit_script=1&url=${encodeURIComponent(url.replace("x.com", "twitter.com"))}&callback=${cb}`;
+    s.onerror = () => ok(null);
+    document.head.appendChild(s);
+    setTimeout(() => ok(null), 8000);
+  });
+}
+
+function setSlot(input, no) {
+  if (!no) return;
+  input.value = `${MDB.get(no)?.[1] ?? ""} No.${no}`;
+  input.dataset.no = String(no);
+}
+
+async function runRegOcr() {
+  const pdc = $("#reg-img-pdc").files[0];
+  const clear = $("#reg-img-clear").files[0];
+  const url = $("#reg-ocr-url").value.trim();
+  const msg = (t) => ($("#reg-ocr-msg").textContent = t);
+  if (!pdc && !clear) return msg("画像を選んでください。");
+  $("#reg-ocr-run").disabled = true;
+  const notes = [];
+  try {
+    msg("読み取りの準備中…（初回は数十秒かかります）");
+    await loadTesseract();
+    if (pdc) {
+      const d = await ocr(pdc, "jpn+eng", (p) => msg(`PDCのレシートを読み取り中… ${p}%`));
+      const slots = parsePdcNumbers(d);
+      if (slots) {
+        slots.forEach((s, i) => {
+          setSlot($(`#reg-m-${i}`), s.base?.no);
+          setSlot($(`#reg-a-${i}`), s.assist?.no);
+          updateSlotPreview(i);
+        });
+        notes.push(`モンスター${slots.filter((s) => s.base).length}体・アシスト${slots.filter((s) => s.assist).length}体`);
+      } else notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
+      const steps = parsePdcSteps(d);
+      if (steps) {
+        $("#reg-steps").value = steps;
+        notes.push("立ち回り");
+      }
+    }
+    if (clear) {
+      const c = parseClear(await ocr(clear, "jpn+eng", (p) => msg(`クリア画像を読み取り中… ${p}%`)));
+      if (c.min != null) {
+        $("#reg-min").value = c.min;
+        $("#reg-sec").value = c.sec;
+        notes.push("タイム");
+      }
+      if (c.turns) ($("#reg-turns").value = c.turns), notes.push("クリアターン");
+      if (c.plus) $("#reg-plus").value = c.plus;
+      if (c.exp) $("#reg-exp").value = c.exp;
+      if (c.plus || c.exp) notes.push("報酬");
+      if (c.dungeon) {
+        renderRegDungeons(c.dungeon.id);
+        notes.push(`ダンジョン（${c.dungeon.name}）`);
+      } else notes.push("ダンジョンは一覧から選んでください");
+    }
+    if (url) {
+      $("#reg-src").value = url;
+      const author = await fetchTweetAuthor(url);
+      if (author) ($("#reg-author").value = author), notes.push("作者");
+    }
+    msg(`読み取りました: ${notes.join("・")}。内容を確認してから登録してください。`);
+  } catch (e) {
+    msg(`読み取りに失敗しました: ${e.message}`);
+  } finally {
+    $("#reg-ocr-run").disabled = false;
+  }
+}
+$("#reg-ocr-run")?.addEventListener("click", runRegOcr);

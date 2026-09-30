@@ -80,6 +80,19 @@
         <h2 id="reg-heading">編成を登録</h2>
         <p id="reg-mode" class="hint">登録した編成はこのブラウザに保存され、編成検索に並びます。</p>
         <div id="reg-auth" class="row" hidden></div>
+        <fieldset class="ocr-box">
+          <legend>画像から自動入力（おすすめ）</legend>
+          <p class="hint">PDCのレシート画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・立ち回り・タイム・クリアターン・報酬を下のフォームに入れます。読み取りはこのブラウザの中だけで行い、画像はどこにも送信しません。読み違いがあるので、登録前に必ず確認してください。</p>
+          <div class="form-grid">
+            <label for="reg-img-pdc">PDCのレシート画像</label>
+            <input id="reg-img-pdc" type="file" accept="image/*">
+            <label for="reg-img-clear">クリア画像（プレイ履歴）</label>
+            <input id="reg-img-clear" type="file" accept="image/*">
+            <label for="reg-ocr-url">投稿のリンク（任意）</label>
+            <input id="reg-ocr-url" type="url" placeholder="https://x.com/.../status/..." autocomplete="off">
+          </div>
+          <div class="row"><button type="button" id="reg-ocr-run" class="primary">読み取る</button><span id="reg-ocr-msg" class="muted" role="status"></span></div>
+        </fieldset>
         <p class="hint">モンスターは図鑑No.か名前で入力して候補から選んでください。<span class="req">必須</span>はダンジョン・1周のタイム・リーダーだけです。</p>
 
         <div class="form-grid">

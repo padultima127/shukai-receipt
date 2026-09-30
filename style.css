@@ -314,3 +314,11 @@ button:disabled { opacity: .6; cursor: wait; }
 .awk-super { outline: 2px solid var(--accent); border-radius: 50%; }
 .awk-sep { font-size: 10px; color: var(--muted); margin-inline: 4px 2px; }
 .awk-txt { font-size: 10px; padding: 1px 4px; border: 1px solid var(--line); border-radius: 4px; color: var(--muted); }
+
+/* 画像から自動入力 */
+.ocr-box { border: 1px dashed var(--accent); border-radius: 10px; padding: 10px 12px; margin-block: 8px 12px; }
+.ocr-box legend { font-weight: 700; padding-inline: 4px; }
+.awk-supers { display: inline-block; margin-left: 6px; vertical-align: middle; }
+.awk-supers > summary { font-size: 11px; color: var(--accent); cursor: pointer; list-style: none; display: inline-block; padding: 1px 6px; border: 1px solid var(--accent); border-radius: 10px; }
+.awk-supers > summary::-webkit-details-marker { display: none; }
+.awk-supers[open] { display: block; margin: 4px 0 0; }
