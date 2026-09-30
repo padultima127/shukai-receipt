@@ -289,6 +289,22 @@ def attr_changes(ids, skills):
         parts.append(f"敵:{m.group(2)}:{m.group(1) or 0}")
     if m := re.search(r"敵が([火水木光闇])属性の時、効果が([\d.]+)倍", text):
         parts.append(f"条件:{m.group(1)}:{m.group(2)}")
+    # ドロップ目覚めが条件の効果: 「[火目覚め]発動中、◯ターンの間、受けるダメージを軽減」など（軽減 red・最大HP hp）
+    for sentence in text.split("。"):
+        if m := re.search(r"\[([^\]]+?)目覚め\]発動中", sentence):
+            eff = "+".join(k for k, pat in (("red", r"軽減|半減"), ("hp", r"最大HP")) if re.search(pat, sentence))
+            if eff:
+                parts.append(f"目覚め条件:{m.group(1)}:{eff}")
+    # ドロップ目覚めを付ける: 「◯ターンの間、[火][闇]が少し落ちやすくなる」「[強化ドロップ目覚め]が◯%落ちてくる」
+    names, dur = [], 0
+    for m in re.finditer(r"(\d+)ターンの間、((?:\[[^\]]+\])+)が(?:少し|かなり)?落ちやすくなる", text):
+        names += re.findall(r"\[([^\]]+)\]", m.group(2))
+        dur = max(dur, int(m.group(1)))
+    if m := re.search(r"(\d+)ターンの間、[^。]*\[強化ドロップ目覚め\]", text):
+        names.append("強化ドロップ")
+        dur = max(dur, int(m.group(1)))
+    if names:
+        parts.append(f"目覚め付与:{','.join(dict.fromkeys(names))}:{dur}")
     return "|".join(parts)
 
 

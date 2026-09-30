@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 66,
+  "version": 67,
   "seed": true,
   "monsters": [
     {
@@ -1891,6 +1891,14 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "awaken": [
+              {
+                "names": [
+                  "回復"
+                ],
+                "dur": 3
+              }
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -2677,6 +2685,15 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "回復",
+                  "猛毒"
+                ],
+                "dur": 1
+              }
             ]
           },
           {
@@ -3221,6 +3238,15 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "光",
+                  "回復"
+                ],
+                "dur": 10
+              }
             ]
           }
         ]
@@ -3543,6 +3569,15 @@ window.PAD_SEED = {
                 "attrs": [
                   "火"
                 ]
+              }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "火",
+                  "お邪魔"
+                ],
+                "dur": 5
               }
             ]
           },
@@ -3889,6 +3924,14 @@ window.PAD_SEED = {
                 "attrs": [
                   "木"
                 ]
+              }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "猛毒"
+                ],
+                "dur": 5
               }
             ]
           },
@@ -4543,6 +4586,15 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "毒",
+                  "お邪魔"
+                ],
+                "dur": 7
+              }
             ]
           },
           {
@@ -4990,6 +5042,20 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "お邪魔"
+                ],
+                "dur": 7
+              },
+              {
+                "names": [
+                  "毒"
+                ],
+                "dur": 7
+              }
             ]
           },
           {
@@ -5391,6 +5457,14 @@ window.PAD_SEED = {
                 "attrs": [
                   "光"
                 ]
+              }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "回復"
+                ],
+                "dur": 2
               }
             ]
           },
@@ -5911,6 +5985,15 @@ window.PAD_SEED = {
                   "火"
                 ],
                 "threshold": 50
+              }
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "毒",
+                  "お邪魔"
+                ],
+                "dur": 10
               }
             ]
           },

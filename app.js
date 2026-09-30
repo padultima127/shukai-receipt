@@ -1333,6 +1333,7 @@ function enduranceSetup(t, opts = {}) {
   const hpUps = [];
   const selfAttr = [];
   const enemyAttr = [];
+  const awakenGrants = [];
   for (const [fl, nos] of Object.entries(t.receiptUses ?? {})) {
     nos.forEach((no, idx) => {
       const r = MDB.get(no);
@@ -1340,7 +1341,8 @@ function enduranceSetup(t, opts = {}) {
       const [, , red, hpm] = String(r[16] ?? "").split(":").map(Number);
       const order = Number(fl) * 100 + idx;
       if (red) {
-        reductions.push({ red, dur: capDur(no, "reduce", false) ?? 1, name: r[1], floor: Number(fl), order });
+        const awC = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
+        reductions.push({ red, dur: capDur(no, "reduce", false) ?? 1, name: r[1], floor: Number(fl), order, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
         if (red > skillRed) {
           skillRed = red;
           skillRedFrom = r[1];
@@ -1348,7 +1350,13 @@ function enduranceSetup(t, opts = {}) {
       }
       // 属性変更・条件（「敵が◯属性の時、効果が◯倍」）
       const ac = Object.fromEntries(String(r[28] ?? "").split("|").filter(Boolean).map((x) => { const [k, at, v] = x.split(":"); return [k, { attr: at, v: Number(v) }]; }));
-      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), order, cond: ac["条件"] ?? null });
+      // ドロップ目覚めが条件の効果（「[◯目覚め]発動中、…」）
+      const awCond = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
+      const awFor = (eff) => (awCond && awCond[2].split("+").includes(eff) ? awCond[1] : null);
+      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), order, cond: ac["条件"] ?? null, awaken: awFor("hp") });
+      // ドロップ目覚めを付けるスキル
+      const awGive = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め付与:"))?.split(":");
+      if (awGive) awakenGrants.push({ name: r[1], names: awGive[1].split(","), dur: Number(awGive[2]) || 1, floor: Number(fl), order });
       if (ac["自分"]) {
         // スキルの持ち主（本体、または武器を付けた本体）の主属性が変わる
         const mi = mems.findIndex((m) => monster(m.id)?.no === no || familyOf(monster(m.id)?.no) === familyOf(no) || assistNoOf(m) === no);
@@ -1396,7 +1404,7 @@ function enduranceSetup(t, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { badge, reductions, hpUps, selfAttr, enemyAttr, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1424,9 +1432,24 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let fail = null;
   let turn = 0;
   const firstTurn = {};
-  // そのターンに効いている効果のうち、最後に使ったもの
+  // 条件（敵の属性）は使った時点で判定。満たすと効果も効果ターンも◯倍（日番谷など）
+  const floorAttrMap = Object.fromEntries(d.damage.floors.map((f) => [f.floor, [...new Set(f.hits.flatMap((h) => h.attrs ?? []))]]));
+  const condMet = (r) => {
+    if (!r.cond) return false;
+    const at = firstTurn[r.floor];
+    const e = (setup.enemyAttr ?? []).filter((x) => firstTurn[x.floor] != null && firstTurn[x.floor] <= at && at <= firstTurn[x.floor] + x.dur - 1 && (x.floor < r.floor || x.order < r.order)).sort((a, b) => b.order - a.order)[0];
+    const fa = e ? [e.attr] : floorAttrMap[r.floor] ?? [];
+    return fa.length > 0 && fa.every((a) => a === r.cond.attr);
+  };
+  const durOf = (r) => (condMet(r) ? r.dur * r.cond.v : r.dur);
+  // ドロップ目覚め: 味方のスキル（レシートの階から効果ターンの間）と、敵の先制（その階に着いた時から◯ターン）
+  const enemyAwaken = [];
+  const awakenAt = (name, tn) =>
+    (useSkill && (setup.awakenGrants ?? []).some((g) => g.names.includes(name) && firstTurn[g.floor] != null && firstTurn[g.floor] <= tn && tn <= firstTurn[g.floor] + g.dur - 1)) ||
+    enemyAwaken.some((g) => g.names.includes(name) && g.from <= tn && tn <= g.from + g.dur - 1);
+  // そのターンに効いている効果のうち、最後に使ったもの（目覚めが条件の効果は、目覚めが出ている時だけ）
   const lastActive = (list, tn) => {
-    const active = (list ?? []).filter((r) => firstTurn[r.floor] != null && firstTurn[r.floor] <= tn && tn <= firstTurn[r.floor] + r.dur - 1);
+    const active = (list ?? []).filter((r) => firstTurn[r.floor] != null && firstTurn[r.floor] <= tn && tn <= firstTurn[r.floor] + durOf(r) - 1 && (!r.awaken || awakenAt(r.awaken, tn)));
     return active.sort((a, b) => b.order - a.order)[0] ?? null;
   };
   const skillAt = (tn) => (useSkill ? lastActive(setup.reductions, tn)?.red ?? 0 : 0);
@@ -1442,9 +1465,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   const updateHpMult = (tn) => {
     const up = useSkill ? lastActive(setup.hpUps, tn) : null;
     // 「敵が◯属性の時、効果が◯倍」: その階の敵がすべてその属性なら倍率の効果を倍にする
-    const fa = enemyAttrAt(tn, floorAttrs);
-    const condOk = up?.cond && fa.length && fa.every((a) => a === up.cond.attr);
-    let m = up ? (condOk ? up.mult * up.cond.v : up.mult) : 1;
+    let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
     // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
     if (useSkill) {
       const byMember = new Map();
@@ -1485,6 +1506,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   };
   for (const f of d.damage.floors) {
     floorAttrs = [...new Set(f.hits.flatMap((h) => h.attrs ?? []))];
+    // 敵の先制で付くドロップ目覚め（着いた時から）
+    for (const a of f.awaken ?? []) enemyAwaken.push({ names: a.names, dur: a.dur, from: turn + 1 });
     // 到着時の先制（前の階の最後のターンの敵の行動）
     for (const h of f.hits.filter((x) => x.kind !== "turn" && x.kind !== "superResolve")) if (!hit(f, h, turn)) return { rows, deadAt, fail };
     for (const h of f.hits.filter((x) => x.kind === "turn")) {

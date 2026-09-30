@@ -45,17 +45,26 @@ def fetch(n):
 IMG_NO = re.compile(r"/(\d+)\.png")
 
 
+DROP_ICON = {"fire": "火", "water": "水", "tree": "木", "light": "光", "dark": "闇", "heart": "回復", "ojama": "お邪魔", "doku": "毒", "moudoku": "猛毒", "bomb": "爆弾"}
+
+
+def drop_mark(src):
+    m = re.search(r"/([a-z]+)\.png", src)
+    return f"[{DROP_ICON[m.group(1)]}]" if m and m.group(1) in DROP_ICON else ""
+
+
 def cell_text(td):
-    """画像は、敵アイコン（数字.png）→ @@E番号@@、それ以外は消す。改行を保つ"""
+    """画像は、敵アイコン（数字.png）→ @@E番号@@、ドロップアイコン → [火] など、それ以外は消す。改行を保つ"""
     for img in td.find_all("img"):
         src = img.get("data-original") or img.get("src") or ""
         m = IMG_NO.search(src)
-        img.replace_with(f"@@E{m.group(1)}@@" if m else "")
+        img.replace_with(f"@@E{m.group(1)}@@" if m else drop_mark(src))
     for br in td.find_all("br"):
         br.replace_with("\n")
     t = td.get_text("\n")
     # 本文中に文字として埋め込まれた <img ...> もある
     t = re.sub(r"<img[^>]*?/(\d+)\.png[^>]*>", r"@@E\1@@", t)
+    t = re.sub(r"<img[^>]*?/([a-z]+)\.png[^>]*>", lambda m: f"[{DROP_ICON[m.group(1)]}]" if m.group(1) in DROP_ICON else "", t)
     t = re.sub(r"<img[^>]*>", "", t)
     return re.sub(r"[ \t　]+", " ", t)
 
@@ -86,6 +95,12 @@ def sections(text):
     for i in range(1, len(parts), 2):
         out.append((parts[i], parts[i + 1] if i + 1 < len(parts) else ""))
     return out
+
+
+def awaken_of(text):
+    """先制の「[火]目覚め：◯ターン」（敵が付けるドロップ目覚め）"""
+    pre = sections(text)[0][1]
+    return [{"names": list(dict.fromkeys(re.findall(r"\[([^\]]+)\]", m.group(1)))), "dur": int(m.group(2))} for m in re.finditer(r"((?:\[[^\]]+\]\s*)+)目覚め\s*[:：]\s*(\d+)ターン", pre)]
 
 
 def hits_of(text, attrs, threshold):
@@ -144,7 +159,7 @@ def parse(html):
         variants = []
         for no, vt in split_variants(text, enemy_nos[0] if enemy_nos else None):
             attrs = [a for a in [attr_of(no)] if a] if no else []
-            variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50)})
+            variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50), "awaken": awaken_of(vt)})
         cur["rows"].append({"mandatory": "必ず出現" in raw_hp + text, "variants": variants})
     return floors
 
@@ -170,7 +185,7 @@ def build(floors):
             same = [v for v in r["variants"] if pre_total(v) == pre_total(best)]
             attrs = sorted({a for v in same for h in v["hits"] for a in h["attrs"]} | {a for v in same for a in [attr_of(v["no"])] if a})
             hits = [{**h, "attrs": attrs or h["attrs"]} for h in best["hits"]]
-            picked.append({"mandatory": r["mandatory"], "hits": hits, "total": pre_total(best), "alt": len(r["variants"]) > 1})
+            picked.append({"mandatory": r["mandatory"], "hits": hits, "total": pre_total(best), "alt": len(r["variants"]) > 1, "awaken": best["awaken"]})
             # 行に攻撃がなくても属性だけは持っておく（同ダメージの候補の属性まとめ用）
             if not hits:
                 picked[-1]["hits"] = []
@@ -190,6 +205,9 @@ def build(floors):
             note.append("いずれか1体出現の枠は先制ダメージが大きい方で計算")
         hits = [h for p in picked for h in p["hits"]]
         floor = {"floor": n, "hits": hits}
+        aw = [a for p in picked for a in p.get("awaken", [])]
+        if aw:
+            floor["awaken"] = aw
         if note:
             floor["note"] = "／".join(note)
         out.append(floor)
