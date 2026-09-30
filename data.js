@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 71,
+  "version": 72,
   "seed": true,
   "monsters": [
     {
@@ -1853,15 +1853,30 @@ window.PAD_SEED = {
           {
             "floor": 1,
             "hits": [],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
             "note": "敵は5種類のうち4体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 2,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ]
           },
           {
             "floor": 3,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "火"
+            ]
           },
           {
             "floor": 4,
@@ -1875,6 +1890,10 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -1891,6 +1910,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "水",
+              "闇"
+            ],
             "awaken": [
               {
                 "names": [
@@ -1904,6 +1927,11 @@ window.PAD_SEED = {
           {
             "floor": 6,
             "hits": [],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
             "note": "敵は3種類のうち2体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -1917,6 +1945,10 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
             ]
           },
           {
@@ -1933,11 +1965,20 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 9,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ]
           },
           {
             "floor": 10,
@@ -1950,6 +1991,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -1979,11 +2023,20 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
             ]
           },
           {
             "floor": 12,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "木",
+              "火"
+            ]
           },
           {
             "floor": 13,
@@ -2004,11 +2057,18 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木"
             ]
           },
           {
             "floor": 14,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "木"
+            ]
           },
           {
             "floor": 15,
@@ -2022,6 +2082,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           }
         ]
@@ -2228,7 +2291,10 @@ window.PAD_SEED = {
         "floors": [
           {
             "floor": 1,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "水"
+            ]
           },
           {
             "floor": 2,
@@ -2261,11 +2327,18 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
             "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
           },
           {
             "floor": 3,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "闇"
+            ]
           },
           {
             "floor": 4,
@@ -2286,6 +2359,9 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           },
           {
@@ -2299,6 +2375,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -2320,6 +2399,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -2341,11 +2423,21 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
             "floor": 8,
             "hits": [],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
             "note": "敵は5種類のうち4体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -2359,6 +2451,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -2372,6 +2467,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -2393,6 +2491,9 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
@@ -2408,6 +2509,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -2421,6 +2526,9 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
@@ -2442,6 +2550,9 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
@@ -2464,6 +2575,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ],
             "parts": true
           }
@@ -2627,6 +2741,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水"
+            ],
             "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
           },
           {
@@ -2640,6 +2758,12 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "闇"
             ]
           },
           {
@@ -2665,6 +2789,10 @@ window.PAD_SEED = {
                 "threshold": 30
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -2687,6 +2815,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "水"
+            ],
             "awaken": [
               {
                 "names": [
@@ -2708,6 +2840,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -2721,6 +2856,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -2746,6 +2884,10 @@ window.PAD_SEED = {
                 "threshold": 50
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -2768,6 +2910,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 40
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           },
           {
@@ -2789,6 +2934,10 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
             ]
           },
           {
@@ -2811,6 +2960,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 30
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -2840,6 +2992,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -2870,6 +3025,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ],
             "parts": true
           }
@@ -3027,6 +3185,11 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
             ]
           },
           {
@@ -3042,15 +3205,25 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 3,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "闇"
+            ]
           },
           {
             "floor": 4,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "水"
+            ]
           },
           {
             "floor": 5,
@@ -3071,6 +3244,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -3092,11 +3268,18 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
             ]
           },
           {
             "floor": 7,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "光"
+            ]
           },
           {
             "floor": 8,
@@ -3109,6 +3292,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -3132,6 +3318,10 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -3163,6 +3353,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -3176,6 +3369,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -3201,11 +3397,19 @@ window.PAD_SEED = {
                 "threshold": 50
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 13,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "光"
+            ]
           },
           {
             "floor": 14,
@@ -3218,6 +3422,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -3240,6 +3447,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ],
             "parts": true,
             "awaken": [
@@ -3403,6 +3613,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -3418,6 +3631,10 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "火"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -3448,6 +3665,11 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "火"
             ]
           },
           {
@@ -3478,6 +3700,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 40
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -3493,11 +3718,18 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 6,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "火"
+            ]
           },
           {
             "floor": 7,
@@ -3534,6 +3766,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -3556,11 +3791,18 @@ window.PAD_SEED = {
                 ],
                 "threshold": 40
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
             "floor": 9,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "木",
+              "火"
+            ]
           },
           {
             "floor": 10,
@@ -3573,6 +3815,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ],
             "awaken": [
               {
@@ -3595,6 +3840,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -3617,6 +3865,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ],
             "parts": true
           }
@@ -3764,7 +4015,10 @@ window.PAD_SEED = {
         "floors": [
           {
             "floor": 1,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "木"
+            ]
           },
           {
             "floor": 2,
@@ -3777,6 +4031,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -3798,6 +4055,9 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           },
           {
@@ -3819,6 +4079,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -3832,6 +4095,9 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           },
           {
@@ -3861,11 +4127,19 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
             ]
           },
           {
             "floor": 7,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "火"
+            ]
           },
           {
             "floor": 8,
@@ -3878,6 +4152,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -3899,6 +4176,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -3912,11 +4192,17 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           },
           {
             "floor": 11,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "火"
+            ]
           },
           {
             "floor": 12,
@@ -3929,6 +4215,9 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ],
             "awaken": [
               {
@@ -3952,6 +4241,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -3973,6 +4266,9 @@ window.PAD_SEED = {
                   "木"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ]
           },
           {
@@ -3995,6 +4291,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "木"
             ],
             "parts": true
           }
@@ -4418,6 +4717,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -4442,6 +4744,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "闇"
+            ],
             "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
           },
           {
@@ -4464,6 +4770,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -4477,6 +4786,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -4514,6 +4826,12 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "闇"
             ]
           },
           {
@@ -4551,6 +4869,12 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "闇"
             ]
           },
           {
@@ -4573,11 +4897,17 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
             "floor": 8,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "闇"
+            ]
           },
           {
             "floor": 9,
@@ -4591,6 +4921,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ],
             "awaken": [
               {
@@ -4614,6 +4947,10 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -4645,6 +4982,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -4658,6 +4998,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -4680,6 +5023,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 70
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           }
         ]
@@ -4869,6 +5215,9 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
@@ -4891,11 +5240,18 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
             "floor": 3,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ]
           },
           {
             "floor": 4,
@@ -4916,11 +5272,21 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
             "floor": 5,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ]
           },
           {
             "floor": 6,
@@ -4945,6 +5311,10 @@ window.PAD_SEED = {
                 "threshold": 50
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -4959,6 +5329,10 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "火"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -4976,6 +5350,11 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -4989,6 +5368,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -5011,6 +5393,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
@@ -5025,6 +5410,10 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火",
+              "闇"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -5047,6 +5436,10 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "闇"
             ],
             "awaken": [
               {
@@ -5082,6 +5475,9 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           },
           {
@@ -5104,6 +5500,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "闇"
             ]
           }
         ]
@@ -5325,6 +5724,10 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "火"
             ]
           },
           {
@@ -5340,6 +5743,11 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "水",
+              "火"
             ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -5362,6 +5770,13 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
             ]
           },
           {
@@ -5396,11 +5811,19 @@ window.PAD_SEED = {
                 "threshold": 40
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "火"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 5,
             "hits": [],
+            "enemyAttrs": [
+              "火",
+              "闇"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -5414,6 +5837,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -5437,6 +5863,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -5450,6 +5879,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -5463,6 +5895,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ],
             "awaken": [
               {
@@ -5514,6 +5949,10 @@ window.PAD_SEED = {
                 "threshold": 40
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "火"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -5527,6 +5966,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -5541,6 +5983,10 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
             ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -5563,6 +6009,9 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光"
             ]
           },
           {
@@ -5576,6 +6025,9 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -5679,6 +6131,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 60
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           }
         ]
@@ -5849,7 +6304,14 @@ window.PAD_SEED = {
         "floors": [
           {
             "floor": 1,
-            "hits": []
+            "hits": [],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ]
           },
           {
             "floor": 2,
@@ -5866,7 +6328,12 @@ window.PAD_SEED = {
               }
             ],
             "note": "リーダーチェンジ済みで2,050,000ダメージの行動あり／2F突破時にLSの軽減が剥がれ、1ターン経過扱いになる（効果ターンのあるスキル・「◯ターン後に発動」も1ターン進む。@pad_ultima127 の説明）",
-            "turnPassOnClear": true
+            "turnPassOnClear": true,
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ]
           },
           {
             "floor": 3,
@@ -5885,7 +6352,14 @@ window.PAD_SEED = {
                 ]
               }
             ],
-            "note": "2F突破時にLSの軽減が剥がれ、その状態で受ける（ゲームウィズ「リーダースキル無しで154,000ダメージ」）／敵は5体のうち1体（火・水・木・光・闇のどれか）"
+            "note": "2F突破時にLSの軽減が剥がれ、その状態で受ける（ゲームウィズ「リーダースキル無しで154,000ダメージ」）／敵は5体のうち1体（火・水・木・光・闇のどれか）",
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ]
           },
           {
             "floor": 4,
@@ -5916,7 +6390,13 @@ window.PAD_SEED = {
                 ]
               }
             ],
-            "note": "敵3体がそれぞれ550,000の先制（合計1,650,000）。クレブリン2体は必ず出現、ジェルンは水か光のどちらか"
+            "note": "敵3体がそれぞれ550,000の先制（合計1,650,000）。クレブリン2体は必ず出現、ジェルンは水か光のどちらか",
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火"
+            ]
           },
           {
             "floor": 5,
@@ -5946,7 +6426,12 @@ window.PAD_SEED = {
                 ]
               }
             ],
-            "note": "敵は3体のうち1体（プリシラ＝火、テュオレ＝光、カティア＝闇）。先制でダメージがあるのはテュオレだけ"
+            "note": "敵は3体のうち1体（プリシラ＝火、テュオレ＝光、カティア＝闇）。先制でダメージがあるのはテュオレだけ",
+            "enemyAttrs": [
+              "光",
+              "火",
+              "闇"
+            ]
           },
           {
             "floor": 6,
@@ -5962,7 +6447,12 @@ window.PAD_SEED = {
                 ]
               }
             ],
-            "note": "敵は3体のうち1体（火・水・木）"
+            "note": "敵は3体のうち1体（火・水・木）",
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ]
           },
           {
             "floor": 7,
@@ -5977,7 +6467,12 @@ window.PAD_SEED = {
                 ]
               }
             ],
-            "note": "2体目がミネルヴァ（火）かネプチューン（水）のとき。バステトなら先制ダメージなし"
+            "note": "2体目がミネルヴァ（火）かネプチューン（水）のとき。バステトなら先制ダメージなし",
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ]
           },
           {
             "floor": 8,
@@ -6000,6 +6495,9 @@ window.PAD_SEED = {
                 ],
                 "dur": 10
               }
+            ],
+            "enemyAttrs": [
+              "火"
             ]
           },
           {
@@ -6022,7 +6520,10 @@ window.PAD_SEED = {
                 ]
               }
             ],
-            "note": "以降4ターン毎に2,650,000。20ターン目以降は毎ターン25,000,000"
+            "note": "以降4ターン毎に2,650,000。20ターン目以降は毎ターン25,000,000",
+            "enemyAttrs": [
+              "火"
+            ]
           }
         ]
       },
@@ -6210,6 +6711,13 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
             "note": "敵は7種類のうち3体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -6225,6 +6733,11 @@ window.PAD_SEED = {
                   "火"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
             ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -6259,11 +6772,22 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
             "note": "敵は4種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 4,
             "hits": [],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
             "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
           },
           {
@@ -6301,6 +6825,13 @@ window.PAD_SEED = {
                   "光"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
             ]
           },
           {
@@ -6318,6 +6849,13 @@ window.PAD_SEED = {
                   "闇"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
             ],
             "note": "敵は5種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
@@ -6343,11 +6881,20 @@ window.PAD_SEED = {
                 ]
               }
             ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水"
+            ],
             "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
             "floor": 8,
             "hits": [],
+            "enemyAttrs": [
+              "水",
+              "火"
+            ],
             "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           },
           {
@@ -6369,6 +6916,9 @@ window.PAD_SEED = {
                   "水"
                 ]
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           },
           {
@@ -6401,6 +6951,9 @@ window.PAD_SEED = {
                 ],
                 "threshold": 50
               }
+            ],
+            "enemyAttrs": [
+              "水"
             ]
           }
         ]

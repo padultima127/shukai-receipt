@@ -1542,7 +1542,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let turn = 0;
   const firstTurn = {};
   // 条件（敵の属性）は使った時点で判定。満たすと効果も効果ターンも◯倍（日番谷など）
-  const floorAttrMap = Object.fromEntries(d.damage.floors.map((f) => [f.floor, [...new Set(f.hits.flatMap((h) => h.attrs ?? []))]]));
+  // 条件判定に使う敵の属性: その階に出る可能性のある敵全員（ダメージのない敵も含む）。なければ攻撃の属性から
+  const floorAttrMap = Object.fromEntries(d.damage.floors.map((f) => [f.floor, f.enemyAttrs?.length ? f.enemyAttrs : [...new Set(f.hits.flatMap((h) => h.attrs ?? []))]]));
   const condMet = (r) => {
     if (!r.cond) return false;
     const at = firstTurn[r.floor];
