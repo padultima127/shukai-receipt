@@ -81,6 +81,17 @@ service cloud.firestore {
       allow delete: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
     }
 
+    // 感想・要望: ログインなしでも送れる（文字数を制限）。読む・消すのは管理者だけ
+    match /feedback/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['text', 'uid', 'createdAt', 'contact'])
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 1000
+        && (!('contact' in request.resource.data) || shortStr(request.resource.data.contact, 60))
+        && request.resource.data.createdAt == request.time
+        && (request.resource.data.uid == null || (signedIn() && request.resource.data.uid == request.auth.uid));
+      allow read, delete: if isAdmin();
+    }
+
     match /reports/{id} {
       allow read, delete: if isAdmin();
       allow create: if signedIn()

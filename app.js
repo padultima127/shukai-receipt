@@ -1605,7 +1605,9 @@ function renderEndurance(t, d) {
   if (!d?.damage?.floors?.length || t.multi) return "";
   const setup = enduranceSetup(t);
   const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
+  const warn = `<p class="end-warn">⚠ この計算は攻略サイトのデータと推定値にもとづく<strong>目安</strong>で、間違っている可能性があります（敵の行動の抜け・条件の読み違い・HPの推定誤差など）。実際に挑む前にPDCやゲーム内で必ず確認してください。${d.damage.auto ? "このダンジョンの敵の攻撃は攻略サイトの表から自動で取り込んだもので、未確認です。" : ""}${t.members.some((m) => m.build) ? "" : "この編成はレシートの超覚醒・潜在・レベルが未登録のため、HPは低めに出ます。"}</p>`;
   return `<details class="endurance" data-team="${esc(t.id)}"><summary>耐久チェック（試作）</summary>
+    ${warn}
     <div class="end-hp-label">
       <label>チームHP <input type="number" class="end-hp" data-team="${esc(t.id)}" min="1" step="1000" value="${setup.estHp}"></label>
       <label>ダンジョンの加護 <select class="end-kago">
@@ -2299,6 +2301,17 @@ function renderAdminPanel() {
         : `<p class="hint">通報はありません。</p>`;
     })
   );
+  adminUnsubs.push(
+    shared.fb.watchFeedback((list) => {
+      $("#admin-feedback").innerHTML = list.length
+        ? `<ul class="reg-list">${list
+            .map((f) => `<li><div class="reg-info"><span>${esc(f.text)}</span>
+              <span class="muted">${f.contact ? `連絡先: ${esc(f.contact)} ・ ` : ""}${f.createdAt?.toDate ? esc(f.createdAt.toDate().toLocaleString("ja-JP")) : ""}</span></div>
+              <div class="row"><button type="button" data-fbdel="${esc(f.id)}">対応済みにする（削除）</button></div></li>`)
+            .join("")}</ul>`
+        : `<p class="hint">感想はまだありません。</p>`;
+    })
+  );
 }
 
 function updateRegMode() {
@@ -2701,6 +2714,7 @@ $("#admin-panel").addEventListener("click", async (e) => {
     if (b.dataset.purge) await shared.fb.remove(b.dataset.purge);
     if (b.dataset.hide) await shared.fb.setStatus(b.dataset.hide, "rejected");
     if (b.dataset.resolve) await shared.fb.resolveReport(b.dataset.resolve);
+    if (b.dataset.fbdel) await shared.fb.removeFeedback(b.dataset.fbdel);
   } catch (err) {
     alert?.(`操作に失敗しました: ${err.message}`);
   }
@@ -2979,3 +2993,20 @@ async function runRegOcr() {
   }
 }
 $("#reg-ocr-run")?.addEventListener("click", runRegOcr);
+
+// ---------- 感想・要望 ----------
+// Firebase が使える時だけ（claude.ai 版などでは非表示）
+$("#feedback").hidden = !window.PAD_FIREBASE;
+$("#fb-form")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const text = $("#fb-text").value.trim();
+  const msg = (t, ok) => ($("#fb-msg").className = `msg ${ok ? "ok" : "err"}`, ($("#fb-msg").textContent = t));
+  if (!text) return msg("感想を書いてください。", false);
+  try {
+    await shared.fb.sendFeedback(text, $("#fb-contact").value.trim());
+    $("#fb-text").value = "";
+    msg("送りました。ありがとうございます！", true);
+  } catch (err) {
+    msg(`送れませんでした: ${err.message}`, false);
+  }
+});

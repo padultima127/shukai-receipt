@@ -112,6 +112,22 @@
       const snap = await fs.collection("subVotes").where("teamId", "==", teamId).limit(500).get();
       return snap.docs.map((d) => d.data());
     },
+    // 感想・要望（ログインなしでも送れる。読めるのは管理者だけ）
+    sendFeedback(text, contact) {
+      const u = auth.currentUser;
+      const doc = { text: String(text).slice(0, 1000), uid: u?.uid ?? null, createdAt: ts() };
+      if (contact) doc.contact = String(contact).slice(0, 60);
+      return fs.collection("feedback").add(doc);
+    },
+    watchFeedback(cb) {
+      return fs.collection("feedback").orderBy("createdAt", "desc").limit(100).onSnapshot(
+        (snap) => cb(snap.docs.map((d) => ({ ...d.data(), id: d.id }))),
+        (e) => console.warn("feedback", e)
+      );
+    },
+    removeFeedback(id) {
+      return fs.collection("feedback").doc(id).delete();
+    },
     resolveReport(id) {
       return fs.collection("reports").doc(id).delete();
     },
