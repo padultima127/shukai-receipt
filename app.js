@@ -1488,7 +1488,7 @@ function renderEndurance(t, d) {
     <div class="end-lat"><span class="label">振っている潜在の属性軽減（パーティー合計%）</span>
       ${ATTRS5.map((a) => `<label>${a}<input type="number" class="end-lat-in" data-attr="${a}" min="0" max="100" step="0.5" value="0">%</label>`).join("")}
     </div>
-    <div class="end-result">${renderEnduranceResult(t, d, setup.estHp)}</div>
+    <div class="end-result" data-pending="1"><p class="hint">計算中…</p></div>
     <p class="hint">敵の攻撃: <a href="${esc(d.damage.source.url)}" target="_blank" rel="noopener">${esc(d.damage.source.site)}</a>（${esc(d.damage.note)}）${notes ? `<br>${notes}` : ""}</p>
   </details>`;
 }
@@ -2326,6 +2326,23 @@ async function loadVotes(teamId) {
     subVotes.set(k, cur);
   }
 }
+
+// 耐久チェックは開いたときに初めて計算する（属性不明の潜在の自動振り分けが重いため）
+$("#results").addEventListener(
+  "toggle",
+  (e) => {
+    const box = e.target;
+    if (!box.matches?.(".endurance") || !box.open) return;
+    const res = box.querySelector(".end-result");
+    if (!res?.dataset.pending) return;
+    delete res.dataset.pending;
+    const t = db.teams.find((x) => x.id === box.dataset.team);
+    const d = t && db.dungeons.find((x) => x.id === t.dungeonId);
+    if (!t || !d) return;
+    setTimeout(() => (res.innerHTML = renderEnduranceResult(t, d, Number(box.querySelector(".end-hp").value))), 0);
+  },
+  true
+);
 
 // 耐久チェック: HPを書き換えたら再計算
 $("#results").addEventListener("input", (e) => {
