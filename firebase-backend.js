@@ -98,11 +98,15 @@
       );
     },
     // 代用の評価。1人1候補につき1票（上書き）
-    vote({ teamId, baseNo, candFamily, ok }) {
+    // 「回れなかった」には理由（選択）と自由記述（任意）を付けられる
+    vote({ teamId, baseNo, candFamily, ok, reason, note }) {
       const u = auth.currentUser;
       if (!u) throw Object.assign(new Error("ログインしてください"), { code: "unauthenticated" });
       const id = `${teamId}_${baseNo}_${candFamily}_${u.uid}`.replace(/[^\w-]/g, "-");
-      return fs.collection("subVotes").doc(id).set({ teamId, baseNo, candFamily, ok: !!ok, uid: u.uid, at: ts() });
+      const doc = { teamId, baseNo, candFamily, ok: !!ok, uid: u.uid, at: ts() };
+      if (!ok && reason) doc.reason = String(reason).slice(0, 30);
+      if (!ok && note) doc.note = String(note).slice(0, 200);
+      return fs.collection("subVotes").doc(id).set(doc);
     },
     async getVotes(teamId) {
       const snap = await fs.collection("subVotes").where("teamId", "==", teamId).limit(500).get();

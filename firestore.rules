@@ -69,7 +69,9 @@ service cloud.firestore {
       allow read: if true;
       allow create, update: if signedIn()
         && id.matches('.*_' + request.auth.uid)
-        && request.resource.data.keys().hasOnly(['teamId', 'baseNo', 'candFamily', 'ok', 'uid', 'at'])
+        && request.resource.data.keys().hasOnly(['teamId', 'baseNo', 'candFamily', 'ok', 'uid', 'at', 'reason', 'note'])
+        && (!('reason' in request.resource.data) || shortStr(request.resource.data.reason, 30))
+        && (!('note' in request.resource.data) || shortStr(request.resource.data.note, 200))
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.ok is bool
         && shortStr(request.resource.data.teamId, 80)

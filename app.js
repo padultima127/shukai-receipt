@@ -300,6 +300,8 @@ function voteKey(teamId, mem, candNo) {
 function votesFor(teamId, mem, candNo) {
   return subVotes.get(voteKey(teamId, mem, candNo)) ?? { ok: 0, ng: 0 };
 }
+// 「回れなかった」の理由（任意）。代用の判定を直すときの手がかりにする
+const NG_REASONS = ["火力不足", "耐久不足", "スキルが間に合わない", "ギミック対策が足りない", "効果ターンが足りない", "パズル・操作が難しい", "その他"];
 
 const assistNoOf = (mem) => Number(String(mem.assist ?? "").match(/No\.?\s*(\d+)/)?.[1]) || null;
 
@@ -802,10 +804,19 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
     const mult = c.multRatio && Math.abs(c.multRatio - 1) > 0.05 ? `<span class="${c.multRatio < 1 ? "warnc" : "ok"}">攻撃倍率 ×${c.multRatio.toFixed(2)}</span>` : "";
     const sa = c.fire?.candSA && AWAKEN_NAME[c.fire.candSA] ? `<span class="muted">超覚醒: ${esc(AWAKEN_NAME[c.fire.candSA] ?? "")}を選ぶ想定</span>` : "";
+    const reasons = Object.entries(c.votes.reasons ?? {}).sort((a, b) => b[1] - a[1]);
+    const reasonLine = reasons.length || c.votes.notes?.length
+      ? `<div class="vote-reasons">回れなかった理由: ${reasons.map(([r, n]) => `${esc(r)}×${n}`).join("、")}${(c.votes.notes ?? []).map((t) => `<q>${esc(t)}</q>`).join("")}</div>`
+      : "";
     const votes = shared.mode === "firebase"
       ? `<span class="votes">使った人: 回れた ${c.votes.ok} / 回れなかった ${c.votes.ng}
          <button type="button" class="link vote-btn" data-cand="${c.no}" data-ok="1">回れた</button>
-         <button type="button" class="link vote-btn" data-cand="${c.no}" data-ok="0">回れなかった</button></span>`
+         <button type="button" class="link vote-ng-open" data-cand="${c.no}">回れなかった</button></span>
+         <form class="vote-ng-form" data-cand="${c.no}" hidden>
+           <label>理由 <select name="reason">${NG_REASONS.map((r) => `<option>${r}</option>`).join("")}</select></label>
+           <input name="note" maxlength="200" placeholder="くわしく（任意）例: 6Fで火力が足りずワンパンできない">
+           <button type="submit" class="link">送る</button>
+         </form>${reasonLine}`
       : "";
     let fire = "";
     if (c.fire && c.fire.orig > 1) {
@@ -2438,8 +2449,10 @@ async function loadVotes(teamId) {
   for (const k of [...subVotes.keys()]) if (k.startsWith(teamId + "|")) subVotes.delete(k);
   for (const v of list) {
     const k = `${v.teamId}|${v.baseNo}|${v.candFamily}`;
-    const cur = subVotes.get(k) ?? { ok: 0, ng: 0 };
+    const cur = subVotes.get(k) ?? { ok: 0, ng: 0, reasons: {}, notes: [] };
     v.ok ? cur.ok++ : cur.ng++;
+    if (!v.ok && v.reason) cur.reasons[v.reason] = (cur.reasons[v.reason] ?? 0) + 1;
+    if (!v.ok && v.note && cur.notes.length < 3) cur.notes.push(v.note);
     subVotes.set(k, cur);
   }
 }
@@ -2476,7 +2489,30 @@ $("#results").addEventListener("input", (e) => {
   box.querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, Number(box.querySelector(".end-hp").value), latent, kago);
 });
 
+// 「回れなかった」の理由フォーム
+$("#results").addEventListener("submit", (e) => {
+  const form = e.target.closest(".vote-ng-form");
+  if (!form) return;
+  e.preventDefault();
+  const box = form.closest(".alt-search");
+  const btn = box.querySelector(".alt-btn");
+  const team = db.teams.find((t) => t.id === btn.dataset.team);
+  const mem = team.members[Number(btn.dataset.idx)];
+  if (!shared.fb?.user) return window.alert?.("評価にはGoogleログインが必要です（編成登録タブからログインできます）");
+  shared.fb
+    .vote({ teamId: team.id, baseNo: monster(mem.id)?.no ?? 0, candFamily: familyOf(Number(form.dataset.cand)), ok: false, reason: form.reason.value, note: form.note.value.trim() })
+    .then(() => loadVotes(team.id))
+    .then(() => (box.querySelector(".alt-out").innerHTML = searchAltFor(team.id, Number(btn.dataset.idx))))
+    .catch((err) => window.alert?.(`評価できませんでした: ${err.message}`));
+});
+
 $("#results").addEventListener("click", (e) => {
+  const ngOpen = e.target.closest(".vote-ng-open");
+  if (ngOpen) {
+    const form = ngOpen.closest("li").querySelector(`.vote-ng-form[data-cand="${ngOpen.dataset.cand}"]`);
+    if (form) form.hidden = !form.hidden;
+    return;
+  }
   const vb = e.target.closest(".vote-btn");
   if (vb) {
     const box = vb.closest(".alt-search");
