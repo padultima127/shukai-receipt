@@ -1281,10 +1281,12 @@ function resolveReceiptUses(t) {
         x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
         x.charge = 0;
         fire(c.mi, used);
-        (uses[fl] ??= []).push(...used.map((r) => r[0]));
+        ((uses[fl] ??= [])[tn] ??= []).push(...used.map((r) => r[0]));
       }
     }
   }
+  // ターンごとの配列にそろえる（使っていないターンは空）
+  for (const fl of Object.keys(uses)) uses[fl] = Array.from(uses[fl], (x) => x ?? []);
   return uses;
 }
 
@@ -1423,15 +1425,23 @@ function enduranceSetup(t0, opts = {}) {
   const selfAttr = [];
   const enemyAttr = [];
   const awakenGrants = [];
-  for (const [fl, nos] of Object.entries(t.receiptUses ?? {})) {
-    nos.forEach((no, idx) => {
+  // receiptUses: 階 → [ターン1のNo., …] または [No., …]（ターンの指定なし＝その階の1ターン目）
+  const floorTurns = {};
+  const useList = [];
+  for (const [fl, v] of Object.entries(t.receiptUses ?? {})) {
+    const turns = Array.isArray(v[0]) ? v : [v];
+    floorTurns[fl] = turns.length;
+    turns.forEach((nos, ti) => nos.forEach((no, idx) => useList.push({ fl, ti, idx, no })));
+  }
+  {
+    useList.forEach(({ fl, ti, idx, no }) => {
       const r = MDB.get(no);
       if (!r) return;
       const [, , red, hpm] = String(r[16] ?? "").split(":").map(Number);
-      const order = Number(fl) * 100 + idx;
+      const order = Number(fl) * 1000 + ti * 50 + idx;
       if (red) {
         const awC = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
-        reductions.push({ red, dur: capDur(no, "reduce", false) ?? 1, name: r[1], floor: Number(fl), order, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
+        reductions.push({ red, dur: capDur(no, "reduce", false) ?? 1, name: r[1], floor: Number(fl), ti, order, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
         if (red > skillRed) {
           skillRed = red;
           skillRedFrom = r[1];
@@ -1442,10 +1452,10 @@ function enduranceSetup(t0, opts = {}) {
       // ドロップ目覚めが条件の効果（「[◯目覚め]発動中、…」）
       const awCond = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
       const awFor = (eff) => (awCond && awCond[2].split("+").includes(eff) ? awCond[1] : null);
-      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), order, cond: ac["条件"] ?? null, awaken: awFor("hp") });
+      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), ti, order, cond: ac["条件"] ?? null, awaken: awFor("hp") });
       // ドロップ目覚めを付けるスキル
       const awGive = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め付与:"))?.split(":");
-      if (awGive) awakenGrants.push({ name: r[1], names: awGive[1].split(","), dur: Number(awGive[2]) || 1, floor: Number(fl), order });
+      if (awGive) awakenGrants.push({ name: r[1], names: awGive[1].split(","), dur: Number(awGive[2]) || 1, floor: Number(fl), ti, order });
       // 味方の属性変更: 自分／右隣／左隣／両隣／味方全員／助っ人／リーダー（並びは L・サブ1〜4・F）
       const owner = mems.findIndex((m) => monster(m.id)?.no === no || familyOf(monster(m.id)?.no) === familyOf(no) || assistNoOf(m) === no);
       const changes = [];
@@ -1472,9 +1482,9 @@ function enduranceSetup(t0, opts = {}) {
         const ratio = withAll / Math.max(1, teamHpWith().total);
         // 共鳴が付いた（外れた）ことによる分だけ。これが上がった時だけ今のHPも同じ割合で回復する（本人談）
         const ratioRes = withAll / Math.max(1, teamHpWith(ov, 1, false, true).total);
-        selfAttr.push({ name: r[1], member: valid.join(","), who: ch.who, attr: ch.attr, dur: ch.dur || 99, floor: Number(fl), order, ratio, ratioRes });
+        selfAttr.push({ name: r[1], member: valid.join(","), who: ch.who, attr: ch.attr, dur: ch.dur || 99, floor: Number(fl), ti, order, ratio, ratioRes });
       }
-      if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), order });
+      if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), ti, order });
     });
   }
   if (!skillRed && (hpUps.length || selfAttr.length || enemyAttr.length)) skillRed = 1; // HPアップや属性変更だけでも「レシートどおり」の計算をする
@@ -1513,7 +1523,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1544,10 +1554,13 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   // 条件（敵の属性）は使った時点で判定。満たすと効果も効果ターンも◯倍（日番谷など）
   // 条件判定に使う敵の属性: その階に出る可能性のある敵全員（ダメージのない敵も含む）。なければ攻撃の属性から
   const floorAttrMap = Object.fromEntries(d.damage.floors.map((f) => [f.floor, f.enemyAttrs?.length ? f.enemyAttrs : [...new Set(f.hits.flatMap((h) => h.attrs ?? []))]]));
+  // スキルを使ったターン（その階の1ターン目＋レシートの何ターン目か）
+  const startOf = (r) => (firstTurn[r.floor] == null ? null : firstTurn[r.floor] + (r.ti ?? 0));
+  const activeAt = (r, tn, dur = r.dur) => startOf(r) != null && startOf(r) <= tn && tn <= startOf(r) + dur - 1;
   const condMet = (r) => {
     if (!r.cond) return false;
-    const at = firstTurn[r.floor];
-    const e = (setup.enemyAttr ?? []).filter((x) => firstTurn[x.floor] != null && firstTurn[x.floor] <= at && at <= firstTurn[x.floor] + x.dur - 1 && (x.floor < r.floor || x.order < r.order)).sort((a, b) => b.order - a.order)[0];
+    const at = startOf(r);
+    const e = (setup.enemyAttr ?? []).filter((x) => activeAt(x, at) && x.order < r.order).sort((a, b) => b.order - a.order)[0];
     const fa = e ? [e.attr] : floorAttrMap[r.floor] ?? [];
     return fa.length > 0 && fa.every((a) => a === r.cond.attr);
   };
@@ -1555,11 +1568,11 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   // ドロップ目覚め: 味方のスキル（レシートの階から効果ターンの間）と、敵の先制（その階に着いた時から◯ターン）
   const enemyAwaken = [];
   const awakenAt = (name, tn) =>
-    (useSkill && (setup.awakenGrants ?? []).some((g) => g.names.includes(name) && firstTurn[g.floor] != null && firstTurn[g.floor] <= tn && tn <= firstTurn[g.floor] + g.dur - 1)) ||
+    (useSkill && (setup.awakenGrants ?? []).some((g) => g.names.includes(name) && activeAt(g, tn))) ||
     enemyAwaken.some((g) => g.names.includes(name) && g.from <= tn && tn <= g.from + g.dur - 1);
   // そのターンに効いている効果のうち、最後に使ったもの（目覚めが条件の効果は、目覚めが出ている時だけ）
   const lastActive = (list, tn) => {
-    const active = (list ?? []).filter((r) => firstTurn[r.floor] != null && firstTurn[r.floor] <= tn && tn <= firstTurn[r.floor] + durOf(r) - 1 && (!r.awaken || awakenAt(r.awaken, tn)));
+    const active = (list ?? []).filter((r) => startOf(r) != null && activeAt(r, tn, durOf(r)) && (!r.awaken || awakenAt(r.awaken, tn)));
     return active.sort((a, b) => b.order - a.order)[0] ?? null;
   };
   const skillAt = (tn) => (useSkill ? lastActive(setup.reductions, tn)?.red ?? 0 : 0);
@@ -1569,7 +1582,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   // そのターンに効いている属性変更（同じ対象は最後に使ったもの）
   const activeAttr = (tn) => {
     const byMember = new Map();
-    for (const x of (setup.selfAttr ?? []).filter((x) => firstTurn[x.floor] != null && firstTurn[x.floor] <= tn && tn <= firstTurn[x.floor] + x.dur - 1)) {
+    for (const x of (setup.selfAttr ?? []).filter((x) => activeAt(x, tn))) {
       if (!byMember.has(x.member) || byMember.get(x.member).order < x.order) byMember.set(x.member, x);
     }
     return byMember;
@@ -1637,7 +1650,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     }
     const sr = f.hits.filter((x) => x.kind === "superResolve");
     const stripped = sr.length ? stripBy(f, sr[0]) : null;
-    const turns = sr.length && !stripped ? 2 : 1;
+    // その階のターン数: レシートに書かれたターン数（①②…）と、超根性を剥がさない場合の2ターンの大きい方
+    const turns = Math.max(setup.floorTurns?.[f.floor] ?? 1, sr.length && !stripped ? 2 : 1);
     for (let i = 0; i < turns; i++) {
       turn++;
       if (i === 0) firstTurn[f.floor] = turn;
