@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 75,
+  "version": 76,
   "seed": true,
   "monsters": [
     {
@@ -22558,10 +22558,19 @@ window.PAD_SEED = {
       },
       "receiptUses": {
         "1": [
-          7266
+          [
+            13002,
+            6010,
+            7266,
+            12960,
+            7265,
+            12930
+          ]
         ],
         "8": [
-          6978
+          [
+            6978
+          ]
         ]
       },
       "receiptCalls": {
@@ -22956,10 +22965,18 @@ window.PAD_SEED = {
       },
       "receiptUses": {
         "1": [
-          13980
+          [
+            5764,
+            13980,
+            12602,
+            14014,
+            12930
+          ]
         ],
         "8": [
-          13978
+          [
+            13978
+          ]
         ]
       },
       "badge": {
@@ -23524,10 +23541,19 @@ window.PAD_SEED = {
       ],
       "receiptUses": {
         "1": [
-          7266
+          [
+            12848,
+            7265,
+            13002,
+            12960,
+            12930,
+            7266
+          ]
         ],
         "8": [
-          6978
+          [
+            6978
+          ]
         ]
       },
       "receiptCalls": {
@@ -23701,7 +23727,6 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "receiptUses": {},
       "receiptCalls": {
         "1": [
           {
@@ -23848,10 +23873,17 @@ window.PAD_SEED = {
       },
       "receiptUses": {
         "1": [
-          13980
+          [
+            13980,
+            11938,
+            13584,
+            14078
+          ]
         ],
         "8": [
-          6978
+          [
+            6978
+          ]
         ]
       },
       "receiptCalls": {

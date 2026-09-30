@@ -1444,6 +1444,7 @@ function enduranceSetup(t0, opts = {}) {
   let skillRedFrom = "";
   const reductions = [];
   const hpUps = [];
+  const regens = [];
   const selfAttr = [];
   const enemyAttr = [];
   const awakenGrants = [];
@@ -1460,9 +1461,11 @@ function enduranceSetup(t0, opts = {}) {
     useList
       .sort((a, b) => Number(a.fl) - Number(b.fl) || a.ti - b.ti || a.idx - b.idx)
       .forEach(({ fl, ti, idx, no }) => {
-      // 進化スキルは何回目に使ったかで段階を選ぶ
-      const k = useCount.get(no) ?? 0;
-      useCount.set(no, k + 1);
+      // 進化スキルは何回目に使ったかで段階を選ぶ（同じキャラが複数いる時は、その数で割って1体ごとの回数にする）
+      const n = useCount.get(no) ?? 0;
+      useCount.set(no, n + 1);
+      const same = Math.max(1, mems.filter((m) => monster(m.id)?.no === no || assistNoOf(m) === no).length);
+      const k = Math.floor(n / same);
       const r = stageRow(no, k);
       // その段階の能力ごとの効果ターン
       const sdur = (cap) => {
@@ -1485,6 +1488,9 @@ function enduranceSetup(t0, opts = {}) {
       // ドロップ目覚めが条件の効果（「[◯目覚め]発動中、…」）
       const awCond = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
       const awFor = (eff) => (awCond && awCond[2].split("+").includes(eff) ? awCond[1] : null);
+      // リジェネ（◯ターンの間HPを◯%回復）: 軽減と同じく、レシートの使用から効果ターンの間。重なったら最後に使ったもの（本人談）
+      const rg = Number(String(r[16] ?? "").split(":")[0]) || 0;
+      if (rg) regens.push({ pct: rg, dur: sdur("regen") ?? 1, name: r[1], floor: Number(fl), ti, order });
       if (hpm) hpUps.push({ mult: hpm, dur: sdur("hpUp") ?? 1, name: r[1], floor: Number(fl), ti, order, cond: ac["条件"] ?? null, awaken: awFor("hp") });
       // ドロップ目覚めを付けるスキル
       const awGive = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め付与:"))?.split(":");
@@ -1520,18 +1526,7 @@ function enduranceSetup(t0, opts = {}) {
       if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), ti, order });
     });
   }
-  if (!skillRed && (hpUps.length || selfAttr.length || enemyAttr.length)) skillRed = 1; // HPアップや属性変更だけでも「レシートどおり」の計算をする
-  let regen = 0;
-  let regenFrom = "";
-  for (const m of mems) {
-    for (const r of [...genRows(monster(m.id)?.no), ...(assistNoOf(m) ? [MDB.get(assistNoOf(m))].filter(Boolean) : [])]) {
-      const v = Number(String(r[16] ?? "0").split(":")[0]) || 0;
-      if (v > regen) {
-        regen = v;
-        regenFrom = r[1];
-      }
-    }
-  }
+  if (!skillRed && (hpUps.length || selfAttr.length || enemyAttr.length || regens.length)) skillRed = 1; // HPアップや属性変更だけでも「レシートどおり」の計算をする
   // 超根性を割合ダメージで剥がしてワンパンする階（作者の役割: gravity を◯Fで使う）→ 超根性発動時の攻撃は来ない
   const strip = new Map();
   for (const sr of t.slotRoles ?? []) {
@@ -1556,7 +1551,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1693,7 +1688,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       if (i === 0) firstTurn[f.floor] = turn;
       updateHpMult(turn);
       // 味方のターン: 回復（毎ターン回復生成なら満タン、なければリジェネ）
-      hp = setup.healGen ? maxAt() : Math.min(maxAt(), hp + (maxAt() * setup.regen) / 100);
+      const rg = useSkill ? lastActive(setup.regens, turn)?.pct ?? 0 : 0;
+      hp = setup.healGen ? maxAt() : Math.min(maxAt(), hp + (maxAt() * rg) / 100);
       if (i === 0) {
         for (const h of sr) {
           if (stripped) rows.push({ floor: f.floor, label: h.label, skipped: `${stripped}で超根性を剥がしてワンパンするため受けない` });
@@ -1811,6 +1807,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const skillLine = withSkill
     ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[
         ...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`),
+        ...[...new Set(setup.regens.map((r) => `${esc(r.name)}のリジェネ${r.pct}%`))],
         ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍${r.cond ? `（敵が${r.cond.attr}属性なら効果${r.cond.v}倍）` : ""}`),
         ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.who === "自分" ? "" : r.who + "が"}${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
         ...setup.enemyAttr.map((r) => `${esc(r.name)}で敵を${r.attr}属性に変化`),
@@ -1819,8 +1816,8 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
     : "";
   const heal = setup.healGen
     ? "毎ターン使うスキルで回復ドロップを生成 → 毎ターンHP満タンとして計算"
-    : setup.regen
-      ? `回復ドロップの毎ターン生成なし → リジェネ（${esc(setup.regenFrom)}の${setup.regen}%）で計算`
+    : setup.regens.length
+      ? `回復ドロップの毎ターン生成なし → リジェネはレシートで使ったターンから効果ターンの間だけ（${[...new Set(setup.regens.map((r) => `${esc(r.name)}${r.pct}%・${r.dur}ターン`))].join("／")}。重なったら最後に使ったもの）`
       : "回復ドロップの毎ターン生成・リジェネなし → 回復なしで計算";
   const awk = ATTRS5.filter((a) => setup.awkAttr[a]).map((a) => `${a}${setup.awkAttr[a]}%`).join("・");
   const verdict = sim.deadAt == null
