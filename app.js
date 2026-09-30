@@ -1261,6 +1261,8 @@ function enduranceSetup(t, opts = {}) {
     teamHp += cnt;
     const an = assistNoOf(m);
     const a = MDB.get(an);
+    // アシストボーナス: 本体とアシストの主属性が同じなら、アシストのHP（Lv99最大＋297）の10%が本体に入る
+    if (a && a[2] && a[2] === row[2]) hp += ((a[24] || a[17] || 0) + 990) * 0.1;
     if (a?.[8]) {
       const [af, ac] = String(a[18] ?? "0:0").split(":").map(Number);
       hp += af;
