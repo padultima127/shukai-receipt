@@ -1234,29 +1234,29 @@ function enduranceSetup(t) {
   const healGen = everyTurn.some((no) => genRows(no).some((r) => String(r[16] ?? "").split(":")[1] === "1"));
   // スキルの軽減: 同じ効果は上書きされるので一番大きい1つ。作者が「スキルは使わない」とした武器は除く
   const unusedSkill = new Set((t.slotRoles ?? []).filter((sr) => sr.part === "assist" && sr.roles.some((r) => r.cap === "skillFree")).map((sr) => familyOf(sr.target)));
-  // スキルの軽減: 効果ターンの間だけ効く。使う階はレシート（receiptUses）に書かれていればその階、なければ1F
+  // スキルの軽減・最大HPアップ（本人指定）: レシートに使う階が書かれているものだけ、スキルに書かれたターン数の間だけ効く。
+  // 書かれていないものは使っていない扱い。重なった場合は最後に使ったもの（receiptUses の階が後、同じ階なら後ろに書いたもの）
   let skillRed = 0;
   let skillRedFrom = "";
   const reductions = [];
-  const useFloorOf = (no) => {
-    const floors = Object.entries(t.receiptUses ?? {}).filter(([, nos]) => nos.includes(no)).map(([f]) => Number(f));
-    return floors.length ? Math.min(...floors) : 1;
-  };
-  for (const m of mems) {
-    const cands = [...genRows(monster(m.id)?.no)];
-    const an = assistNoOf(m);
-    if (an && !unusedSkill.has(familyOf(an)) && MDB.get(an)) cands.push(MDB.get(an));
-    for (const r of cands) {
-      const v = Number(String(r[16] ?? "").split(":")[2]) || 0;
-      if (!v) continue;
-      const dur = capDur(r[0], "reduce", false) ?? 1;
-      reductions.push({ red: v, dur, name: r[1], floor: useFloorOf(r[0]) });
-      if (v > skillRed) {
-        skillRed = v;
-        skillRedFrom = r[1];
+  const hpUps = [];
+  for (const [fl, nos] of Object.entries(t.receiptUses ?? {})) {
+    nos.forEach((no, idx) => {
+      const r = MDB.get(no);
+      if (!r) return;
+      const [, , red, hpm] = String(r[16] ?? "").split(":").map(Number);
+      const order = Number(fl) * 100 + idx;
+      if (red) {
+        reductions.push({ red, dur: capDur(no, "reduce", false) ?? 1, name: r[1], floor: Number(fl), order });
+        if (red > skillRed) {
+          skillRed = red;
+          skillRedFrom = r[1];
+        }
       }
-    }
+      if (hpm) hpUps.push({ mult: hpm, dur: capDur(no, "hpUp", false) ?? 1, name: r[1], floor: Number(fl), order });
+    });
   }
+  if (!skillRed && hpUps.length) skillRed = 1; // HPアップだけでも「スキルあり」の計算をする
   let regen = 0;
   let regenFrom = "";
   for (const m of mems) {
@@ -1292,7 +1292,7 @@ function enduranceSetup(t) {
   }
   const teamHpMult = 1 + 0.05 * teamHp;
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { reductions, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { reductions, hpUps, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1320,12 +1320,21 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let fail = null;
   let turn = 0;
   const firstTurn = {};
-  const skillAt = (tn) => {
-    if (!useSkill) return 0;
-    const active = (setup.reductions ?? []).filter((r) => firstTurn[r.floor] != null && firstTurn[r.floor] <= tn && tn <= firstTurn[r.floor] + r.dur - 1);
-    if (!active.length) return 0;
-    const lastFloor = Math.max(...active.map((r) => r.floor));
-    return Math.max(...active.filter((r) => r.floor === lastFloor).map((r) => r.red));
+  // そのターンに効いている効果のうち、最後に使ったもの
+  const lastActive = (list, tn) => {
+    const active = (list ?? []).filter((r) => firstTurn[r.floor] != null && firstTurn[r.floor] <= tn && tn <= firstTurn[r.floor] + r.dur - 1);
+    return active.sort((a, b) => b.order - a.order)[0] ?? null;
+  };
+  const skillAt = (tn) => (useSkill ? lastActive(setup.reductions, tn)?.red ?? 0 : 0);
+  // 最大HPアップ: かかった時は今のHPも同じ倍率で増え、切れた時は新しい最大HPで頭打ち
+  let hpMult = 1;
+  const maxAt = () => maxHp * hpMult;
+  const updateHpMult = (tn) => {
+    const m = useSkill ? lastActive(setup.hpUps, tn)?.mult ?? 1 : 1;
+    if (m !== hpMult) {
+      hp = m > hpMult ? (hp * m) / hpMult : Math.min(hp, maxHp * m);
+      hpMult = m;
+    }
   };
   const stripBy = (f, h) => {
     const used = (setup.uses?.[f.floor] ?? []).map((n) => MDB.get(n)).filter((r) => r?.[23]);
@@ -1333,6 +1342,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     return setup.strip?.get(f.floor) ?? (used.length && remain <= (h.threshold ?? 50) / 100 ? used.map((r) => r[1]).join("・") : null);
   };
   const hit = (f, h, tn) => {
+    updateHpMult(tn);
     const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
     // 割合ダメージには属性軽減を乗せない（安全側）
     const attrs = h.attrs ?? [];
@@ -1344,7 +1354,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     const red = 1 - (1 - base) * (1 - ar / 100);
     const taken = Math.round(raw * (1 - red));
     hp -= taken;
-    rows.push({ floor: f.floor, label: h.label, turn: tn, sk, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
+    rows.push({ floor: f.floor, label: h.label, turn: tn, sk, hpMult, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
     if (hp <= 0) {
       deadAt = f.floor;
       fail = { attrs: h.ratio ? [] : attrs };
@@ -1363,8 +1373,9 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     for (let i = 0; i < turns; i++) {
       turn++;
       if (i === 0) firstTurn[f.floor] = turn;
+      updateHpMult(turn);
       // 味方のターン: 回復（毎ターン回復生成なら満タン、なければリジェネ）
-      hp = setup.healGen ? maxHp : Math.min(maxHp, hp + (maxHp * setup.regen) / 100);
+      hp = setup.healGen ? maxAt() : Math.min(maxAt(), hp + (maxAt() * setup.regen) / 100);
       if (i === 0) {
         for (const h of sr) {
           if (stripped) rows.push({ floor: f.floor, label: h.label, skipped: `${stripped}で超根性を剥がしてワンパンするため受けない` });
@@ -1480,8 +1491,8 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
   const skillLine = withSkill
-    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">スキルの軽減あり（${setup.reductions.map((r) => `${esc(r.name)}の${r.red}%・${r.dur}ターン・${r.floor}Fで使用`).join("／")}）なら: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
-       ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "スキルの軽減ありで、潜在覚醒の枠が空いていれば")}`
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`), ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍`)].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
+       ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "レシートどおりのスキルで、潜在覚醒の枠が空いていれば")}`
     : "";
   const heal = setup.healGen
     ? "毎ターン使うスキルで回復ドロップを生成 → 毎ターンHP満タンとして計算"
@@ -1496,11 +1507,11 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
   const need0 = requiredHp(d, setup, 0, latent);
   const need1 = setup.skillRed ? requiredHp(d, setup, setup.skillRed, latent) : null;
   const fmt = (n) => (n == null ? "―（HPでは耐えられない）" : `${n.toLocaleString("ja-JP")}`);
-  const need = `<p class="need">全フロア耐えるのに必要なHP: スキルの軽減なし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／あり <strong>${fmt(need1)}</strong>` : ""}
+  const need = `<p class="need">全フロア耐えるのに必要なHP: スキルなし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／レシートどおり <strong>${fmt(need1)}</strong>` : ""}
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
-  const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルの軽減なしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "スキルの軽減ありで、") : "");
+  const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルなしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "レシートどおりのスキルで、") : "");
   return `${need}${autoNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
-    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果ターンの間だけ乗せています（使う階はレシートに書かれていればその階、なければ1F）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表は${withSkill ? "スキルの軽減あり" : "スキルの軽減なし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
+    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
