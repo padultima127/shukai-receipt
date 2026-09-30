@@ -1218,7 +1218,10 @@ function enduranceSetup(t) {
       mults.push(`${STAT_NAME[id]}×${v}`);
     }
     const lsm = hpMultFor(row, lsL) * hpMultFor(row, lsF);
-    detail.push({ name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build });
+    // ＋値のHP1あたりのHP（10 × 潜在 × 全パラ系 × LS）。チームHP強化は最後に掛ける
+    const perPlus = 10 * (1 + (b.latentHp ?? 0) / 100) * mults.reduce((x, t) => x * Number(t.split("×")[1]), 1) * lsm;
+    const hpPlus = Math.min(297, Math.round((b.plus ?? 297) / 3));
+    detail.push({ name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build, perPlus, hpPlus });
     total += Math.max(1, hp) * lsm;
   }
   total = Math.round(total * (1 + 0.05 * teamHp));
@@ -1271,7 +1274,11 @@ function enduranceSetup(t) {
     for (const r of rows.filter(Boolean)) {
       String(r[22] || "0.0.0.0.0").split(".").forEach((n, i) => (awkAttr[ATTRS5[i]] += Number(n) * 7));
     }
+    // レシートで読み取った潜在の属性軽減（盾に＋＝属性軽減＋ 2.5%/2枠）
+    for (const [a, v] of Object.entries(m.build?.latentAttr ?? {})) awkAttr[a] += v;
   }
+  const teamHpMult = 1 + 0.05 * teamHp;
+  for (const x of detail) x.perPlus *= teamHpMult;
   return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
@@ -1356,6 +1363,30 @@ function suggestLatents(d, setup, maxHp, skillRed, latent0) {
   return { ok: false, slots, reason: "パーティーの潜在枠（最大48枠）を全部属性軽減にしても足りない" };
 }
 
+// 全員＋297で足りない場合の＋値の振り方: HP＋を上げると一番HPが伸びるキャラから順に（＋値の合計が最小になる）
+// HPの＋は1体あたり最大297（＋891 = HP・攻撃・回復に297ずつ）。攻撃・回復の＋は増やさない前提
+function plusAdvice(setup, maxHp, need) {
+  if (need == null || maxHp >= need) return null;
+  let deficit = need - maxHp;
+  const plan = [];
+  for (const x of [...setup.detail].sort((a, b) => b.perPlus - a.perPlus)) {
+    if (deficit <= 0) break;
+    const room = 297 - x.hpPlus;
+    if (room <= 0) continue;
+    const pts = Math.min(room, Math.ceil(deficit / x.perPlus));
+    deficit -= pts * x.perPlus;
+    plan.push({ name: x.name, from: x.hpPlus, to: x.hpPlus + pts });
+  }
+  return { ok: deficit <= 0, plan, extra: plan.reduce((n, p) => n + p.to - p.from, 0) };
+}
+
+function renderPlusAdvice(setup, maxHp, need, label = "") {
+  const pa = plusAdvice(setup, maxHp, need);
+  if (!pa) return "";
+  if (!pa.ok) return `<p class="hint">${label}全員のHPを＋297（合計＋891）まで上げても足りません。</p>`;
+  return `<p class="advice">${label}＋値で足りるようにするなら: ${pa.plan.map((p) => `<strong>${esc(p.name)}</strong>のHP＋を${p.from}→${p.to}（＋${p.from + 198}→＋${p.to + 198}）`).join("、")}（HPの＋を合計${pa.extra}上げる。攻撃・回復の＋はそのまま）</p>`;
+}
+
 function renderLatentAdvice(d, setup, maxHp, skillRed, latent, sim) {
   if (sim.deadAt == null) return "";
   const sg = suggestLatents(d, setup, maxHp, skillRed, latent);
@@ -1403,7 +1434,8 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
   const fmt = (n) => (n == null ? "―（HPでは耐えられない）" : `${n.toLocaleString("ja-JP")}`);
   const need = `<p class="need">全フロア耐えるのに必要なHP: スキルの軽減なし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／あり <strong>${fmt(need1)}</strong>` : ""}
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
-  return `${need}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}
+  const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルの軽減なしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "スキルの軽減ありで、") : "");
+  return `${need}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="4">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}

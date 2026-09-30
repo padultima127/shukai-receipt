@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 59,
+  "version": 60,
   "seed": true,
   "monsters": [
     {
@@ -9763,7 +9763,10 @@ window.PAD_SEED = {
           "assist": "全ての鬼を滅するために作った刀 No.12848",
           "build": {
             "lv": 120,
-            "super": 108
+            "super": 108,
+            "latentAttr": {
+              "木": 2.5
+            }
           }
         },
         {
@@ -9771,7 +9774,10 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "射止める銃士・リズレットのショコラ No.10939",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "latentAttr": {
+              "木": 10
+            }
           }
         },
         {
@@ -9780,7 +9786,10 @@ window.PAD_SEED = {
           "assist": "聖人会議長ラウフェイのカード No.12873",
           "build": {
             "lv": 120,
-            "super": 56
+            "super": 56,
+            "latentAttr": {
+              "木": 10
+            }
           }
         },
         {
@@ -9788,7 +9797,10 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ヴィーナスのブレスレット No.7544",
           "build": {
-            "lv": 120
+            "lv": 120,
+            "latentAttr": {
+              "木": 10
+            }
           }
         },
         {
@@ -9797,7 +9809,10 @@ window.PAD_SEED = {
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
             "lv": 120,
-            "super": 108
+            "super": 108,
+            "latentAttr": {
+              "木": 2.5
+            }
           }
         },
         {
@@ -9806,7 +9821,10 @@ window.PAD_SEED = {
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
             "lv": 120,
-            "super": 108
+            "super": 108,
+            "latentAttr": {
+              "木": 10
+            }
           }
         }
       ],
