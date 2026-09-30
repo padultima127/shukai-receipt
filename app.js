@@ -1631,12 +1631,13 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let floorAttrs = [];
   let curFloor = 1;
   let curParts = false;
-  const updateHpMult = (tn) => {
+  // playerPhase: 味方のターン（スキル・回復）。部位はそのターンの攻撃で壊すので、最初のターンの回復はまだ壊す前
+  const updateHpMult = (tn, playerPhase = false) => {
     const up = useSkill ? lastActive(setup.hpUps, tn) : null;
     // 「敵が◯属性の時、効果が◯倍」: その階の敵がすべてその属性なら倍率の効果を倍にする
     let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
     // 熟成（階が進むとチームHPが上がる）と部位破壊ボーナス（部位のある階で、最初の攻撃の後）
-    m *= setup.floorRatio?.(curFloor, curParts && firstTurn[curFloor] != null && tn >= firstTurn[curFloor]) ?? 1;
+    m *= setup.floorRatio?.(curFloor, curParts && firstTurn[curFloor] != null && (playerPhase ? tn > firstTurn[curFloor] : tn >= firstTurn[curFloor])) ?? 1;
     // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
     if (useSkill) for (const x of activeAttr(tn).values()) m *= x.ratio;
     // 最大HPが変わっても今のHPはそのまま（熟成・部位破壊ボーナス・スキルの最大HPアップ）。
@@ -1690,7 +1691,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     for (let i = 0; i < turns; i++) {
       turn++;
       if (i === 0) firstTurn[f.floor] = turn;
-      updateHpMult(turn);
+      updateHpMult(turn, true);
       // 味方のターン: 回復（毎ターン回復生成なら満タン、なければリジェネ）
       const rg = useSkill ? lastActive(setup.regens, turn)?.pct ?? 0 : 0;
       // 即時回復: このターンに使ったスキルの分（リジェネとは別枠で足す）
