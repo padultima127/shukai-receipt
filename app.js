@@ -1187,11 +1187,13 @@ function enduranceSetup(t) {
     }
     const b = m.build ?? {};
     const [flat, cnt] = String(row[18] ?? "0:0").split(":").map(Number);
-    // レベル: Lv99 → 最大HP、Lv110 → 限界突破値、Lv120 → Lv110 + Lv99最大HPの10%（レシートにない場合はLv110扱い）
+    // レベル: Lv99 → 最大HP、Lv110 → 限界突破値、Lv120 → Lv110 + Lv99最大HPの10%
+    // 変身しないキャラは常にLv120想定（限界突破できるキャラのみ）。変身キャラはレシートのレベル
     const hp99 = row[24] || row[17] || 0;
-    const lv = b.lv ?? 110;
+    const canLimitBreak = row[17] > hp99;
+    const lv = row[9] ? b.lv ?? 110 : canLimitBreak ? 120 : 99;
     let hp = lv >= 120 ? row[17] + hp99 * 0.1 : lv >= 110 ? row[17] : hp99;
-    // ＋値: HP・攻撃・回復に均等に振られている前提で、HP＋1につき10（＋297 → 990、＋891 → 2970）。全パラ系の倍率はこの分にも乗る
+    // ＋値: HP・攻撃・回復に均等に振る前提（＋3でHP＋1）。HP＋1につき10（＋297 → 990、＋891 → 2970）。全パラ系の倍率はこの分にも乗る
     hp += Math.round((b.plus ?? 297) / 3) * 10;
     hp += flat;
     teamHp += cnt;
@@ -1368,8 +1370,8 @@ function suggestLatents(d, setup, maxHp, skillRed, latent0) {
   return { ok: false, slots, reason: "パーティーの潜在枠（最大48枠）を全部属性軽減にしても足りない" };
 }
 
-// 全員＋297で足りない場合の＋値の振り方: HP＋を上げると一番HPが伸びるキャラから順に（＋値の合計が最小になる）
-// HPの＋は1体あたり最大297（＋891 = HP・攻撃・回復に297ずつ）。攻撃・回復の＋は増やさない前提
+// 全員＋297で足りない場合の＋値の振り方: ＋値を上げると一番HPが伸びるキャラから順に（＋値の合計が最小になる）
+// ＋300からは3ステータスに均等に振る前提（＋3ごとにHP＋1）。1体あたり最大＋891（HP＋297）
 function plusAdvice(setup, maxHp, need) {
   if (need == null || maxHp >= need) return null;
   let deficit = need - maxHp;
@@ -1380,7 +1382,7 @@ function plusAdvice(setup, maxHp, need) {
     if (room <= 0) continue;
     const pts = Math.min(room, Math.ceil(deficit / x.perPlus));
     deficit -= pts * x.perPlus;
-    plan.push({ name: x.name, from: x.hpPlus, to: x.hpPlus + pts });
+    plan.push({ name: x.name, from: x.hpPlus * 3, to: (x.hpPlus + pts) * 3 });
   }
   return { ok: deficit <= 0, plan, extra: plan.reduce((n, p) => n + p.to - p.from, 0) };
 }
@@ -1388,8 +1390,8 @@ function plusAdvice(setup, maxHp, need) {
 function renderPlusAdvice(setup, maxHp, need, label = "") {
   const pa = plusAdvice(setup, maxHp, need);
   if (!pa) return "";
-  if (!pa.ok) return `<p class="hint">${label}全員のHPを＋297（合計＋891）まで上げても足りません。</p>`;
-  return `<p class="advice">${label}＋値で足りるようにするなら: ${pa.plan.map((p) => `<strong>${esc(p.name)}</strong>のHP＋を${p.from}→${p.to}（＋${p.from + 198}→＋${p.to + 198}）`).join("、")}（HPの＋を合計${pa.extra}上げる。攻撃・回復の＋はそのまま）</p>`;
+  if (!pa.ok) return `<p class="hint">${label}全員を＋891まで上げても足りません。</p>`;
+  return `<p class="advice">${label}＋値で足りるようにするなら: ${pa.plan.map((p) => `<strong>${esc(p.name)}</strong>を＋${p.from}→＋${p.to}`).join("、")}（＋値を合計${pa.extra}上げる。3ステータスに均等に振る前提）</p>`;
 }
 
 function renderLatentAdvice(d, setup, maxHp, skillRed, latent, sim) {
