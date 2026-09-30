@@ -1242,9 +1242,11 @@ function enduranceSetup(t) {
     if (an && !unusedSkill.has(familyOf(an)) && MDB.get(an)) cands.push(MDB.get(an));
     for (const r of cands) {
       const v = Number(String(r[16] ?? "").split(":")[2]) || 0;
-      // クリアまで続く軽減だけ数える（1〜2ターンの軽減は計算に入れない）
+      // クリアまで続く軽減だけ数える（1〜2ターンの軽減は計算に入れない）。
+      // マイクロ（LSの軽減が剥がれる）で1ターン経過扱いになる階があれば、その分も効果ターンを消費する
       const dur = capDur(r[0], "reduce", false) ?? 0;
-      if (t.turns && dur < t.turns) continue;
+      const passTurns = db.dungeons.find((x) => x.id === t.dungeonId)?.gimmickFloors?.turnPass?.length ?? 0;
+      if (t.turns && dur < t.turns + passTurns) continue;
       if (v > skillRed) {
         skillRed = v;
         skillRedFrom = r[1];
