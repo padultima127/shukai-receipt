@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 60,
+  "version": 61,
   "seed": true,
   "monsters": [
     {
@@ -9765,7 +9765,7 @@ window.PAD_SEED = {
             "lv": 120,
             "super": 108,
             "latentAttr": {
-              "木": 2.5
+              "光": 2.5
             }
           }
         },
@@ -9776,7 +9776,7 @@ window.PAD_SEED = {
           "build": {
             "lv": 99,
             "latentAttr": {
-              "木": 10
+              "光": 10
             }
           }
         },
@@ -9788,7 +9788,7 @@ window.PAD_SEED = {
             "lv": 120,
             "super": 56,
             "latentAttr": {
-              "木": 10
+              "光": 10
             }
           }
         },
@@ -9799,7 +9799,7 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "latentAttr": {
-              "木": 10
+              "光": 10
             }
           }
         },
@@ -9811,7 +9811,7 @@ window.PAD_SEED = {
             "lv": 120,
             "super": 108,
             "latentAttr": {
-              "木": 2.5
+              "光": 2.5
             }
           }
         },
@@ -9823,7 +9823,7 @@ window.PAD_SEED = {
             "lv": 120,
             "super": 108,
             "latentAttr": {
-              "木": 10
+              "光": 10
             }
           }
         }
