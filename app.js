@@ -1302,7 +1302,8 @@ function enduranceSetup(t0, opts = {}) {
   // 加護: 耐久チェックでユーザーが選んだもの（なし/陽/陰）。未選択ならダンジョンのデータ
   const dungeonKago = opts.kago !== undefined ? opts.kago || null : db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
   // 属性変更スキル（自分の属性が◯属性に変化）で主属性が変わった時のHPも出せるように、関数にしておく
-  const teamHpWith = (overrides = new Map()) => {
+  // floor: 熟成（バトル5以降1.5倍、10以降2倍）の判定に使う階
+  const teamHpWith = (overrides = new Map(), floor = 1) => {
   let total = 0;
   let teamHp = 0;
   let unknown = 0;
@@ -1344,10 +1345,21 @@ function enduranceSetup(t0, opts = {}) {
     hp *= 1 + (b.latentHp ?? 0) / 100;
     // 全パラ系の覚醒（通常覚醒・選んだ超覚醒・シンクロ覚醒）。アシスト共鳴は主属性とタイプが一致したときだけ、自力はアシストなしのときだけ
     const ids = ownAwk.filter((a) => a !== 63);
+    // 武器（覚醒アシスト）の熟成も本体に付く
+    if (a?.[8]) ids.push(...String(a[25] ?? "").split(".").filter(Boolean).map(Number).filter((x) => x === 130));
     if (b.super) ids.push(b.super);
     if (row[26] && b.synchro !== false) ids.push(row[26]);
     const mults = [];
     for (const id of ids) {
+      // 熟成: バトル5以降1.5倍、10以降2倍（それより前の階は効かない）
+      if (id === 130) {
+        const v130 = floor >= 10 ? 2 : floor >= 5 ? 1.5 : 1;
+        if (v130 > 1) {
+          hp *= v130;
+          mults.push(`熟成×${v130}`);
+        }
+        continue;
+      }
       const v = STAT_MULT[id];
       if (!v) continue;
       if (id === 138 && !(an && a && a[2] === row[2] && String(a[13] ?? "").split(".").some((x) => x && String(row[13] ?? "").split(".").includes(x)))) continue;
@@ -1375,6 +1387,10 @@ function enduranceSetup(t0, opts = {}) {
   return { total, teamHp, unknown, detail };
   };
   const { total, teamHp, unknown, detail } = teamHpWith();
+  // 熟成で階ごとにチームHPが変わる割合（1〜4階を基準）
+  const r5 = teamHpWith(new Map(), 5).total / Math.max(1, total);
+  const r10 = teamHpWith(new Map(), 10).total / Math.max(1, total);
+  const floorRatio = (f) => (f >= 10 ? r10 : f >= 5 ? r5 : 1);
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
   // 回復: 毎ターン使うスキルが回復ドロップを生成するか
   const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
@@ -1477,7 +1493,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { floorRatio, r5, r10, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1535,10 +1551,13 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     return e ? [e.attr] : attrs;
   };
   let floorAttrs = [];
+  let curFloor = 1;
   const updateHpMult = (tn) => {
     const up = useSkill ? lastActive(setup.hpUps, tn) : null;
     // 「敵が◯属性の時、効果が◯倍」: その階の敵がすべてその属性なら倍率の効果を倍にする
     let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
+    // 熟成（階が進むとチームHPが上がる）
+    m *= setup.floorRatio?.(curFloor) ?? 1;
     // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
     if (useSkill) {
       const byMember = new Map();
@@ -1579,6 +1598,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   };
   for (const f of d.damage.floors) {
     floorAttrs = [...new Set(f.hits.flatMap((h) => h.attrs ?? []))];
+    curFloor = f.floor;
     // 敵の先制で付くドロップ目覚め（着いた時から）
     for (const a of f.awaken ?? []) enemyAwaken.push({ names: a.names, dur: a.dur, from: turn + 1 });
     // 到着時の先制（前の階の最後のターンの敵の行動）
@@ -1755,6 +1775,7 @@ function renderEndurance(t, d) {
       </select></label>
     </div>
     <p class="hint">初期値は推定です（レシートのレベル・＋値・超覚醒・潜在、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個${setup.badge?.hp ? `、バッジ「${esc(setup.badge.name)}」HP${setup.badge.hp}%` : ""}${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
+    ${setup.r5 > 1.001 || setup.r10 > 1.001 ? `<p class="hint">熟成持ちがいるので、チームHPはバトル5〜9で×${setup.r5.toFixed(2)}、バトル10以降で×${setup.r10.toFixed(2)}になります（上の数値は1〜4階のHP）。</p>` : ""}
     <div class="end-lat"><span class="label">振っている潜在の属性軽減（パーティー合計%）</span>
       ${ATTRS5.map((a) => `<label>${a}<input type="number" class="end-lat-in" data-attr="${a}" min="0" max="100" step="0.5" value="0">%</label>`).join("")}
     </div>
