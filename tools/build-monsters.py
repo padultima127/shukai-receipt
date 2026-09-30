@@ -256,6 +256,22 @@ def effect_durations(ids, skills):
     return ",".join(f"{k}:{v}" for k, v in sorted(out.items()))
 
 
+def gravity_pct(ids, skills):
+    """部位以外へのグラビティ（敵の残りHP/現HPを◯%減少）の1回あたりの最大%"""
+    ids = ids if isinstance(ids, list) else [ids]
+    g = 0
+    for sid in ids:
+        s = skills.get(str(sid)) if sid else None
+        if s:
+            for x in re.findall(r"(?<!部位の)(?:残りHP|現HP)[^。]{0,6}?(\d+)[%％]減少", s.get("description", "")):
+                g = max(g, int(x))
+    return g
+
+
+# 自分の全パラメータを掛ける覚醒（HP推定用）。138 アシスト共鳴・139 自力は条件付き
+STAT_MULT_AWAKENS = {127, 138, 139, 142, 146, 147}
+
+
 def delayed_activation(ids, skills):
     ids = ids if isinstance(ids, list) else [ids]
     n = 0
@@ -348,12 +364,17 @@ def main():
             effect_durations(m.get("skill"), skills),
             # 属性ダメージ軽減の覚醒の数（火.水.木.光.闇、1個7%）
             ".".join(str(awakens.count(a)) for a in (4, 5, 6, 7, 8)) if any(a in awakens for a in (4, 5, 6, 7, 8)) else "",
+            gravity_pct(m.get("skill"), skills),
+            # Lv99の最大HP（Lv120 = Lv110 + Lv99最大HPの10%）
+            (m.get("maxParam") or {}).get("hp") or 0,
+            ".".join(str(a) for a in awakens if a in STAT_MULT_AWAKENS),
+            (m.get("synchroAwaken") or {}).get("awaken") or 0,
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒]\n"
         f"// 更新: {updated}\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "
         + json.dumps(rows, ensure_ascii=False, separators=(",", ":"))

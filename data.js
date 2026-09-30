@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 58,
+  "version": 59,
   "seed": true,
   "monsters": [
     {
@@ -3423,7 +3423,8 @@ window.PAD_SEED = {
                 "attrs": [
                   "水",
                   "木"
-                ]
+                ],
+                "threshold": 50
               }
             ],
             "note": "リーダーチェンジ済みで2,050,000ダメージの行動あり／2F突破時にLSの軽減が剥がれ、1ターン経過扱いになる（効果ターンのあるスキル・「◯ターン後に発動」も1ターン進む。@pad_ultima127 の説明）",
@@ -3549,7 +3550,8 @@ window.PAD_SEED = {
                 "kind": "superResolve",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "threshold": 50
               }
             ]
           },
@@ -9436,32 +9438,56 @@ window.PAD_SEED = {
         {
           "id": "n12960",
           "role": "L",
-          "assist": "FS-1002 No.12961"
+          "assist": "FS-1002 No.12961",
+          "build": {
+            "lv": 120,
+            "super": 138,
+            "latentHp": 10
+          }
         },
         {
           "id": "n13074",
           "role": "S",
-          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265"
+          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n6978",
           "role": "S",
-          "assist": "イッポンカタナ No.6847"
+          "assist": "イッポンカタナ No.6847",
+          "build": {
+            "lv": 120,
+            "latentHp": 40
+          }
         },
         {
           "id": "n13003",
           "role": "S",
-          "assist": "EXディノイエロヘルムα No.11485"
+          "assist": "EXディノイエロヘルムα No.11485",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n12930",
           "role": "S",
-          "assist": "ミッキーマウス＆プルート No.6010"
+          "assist": "ミッキーマウス＆プルート No.6010",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         },
         {
           "id": "n12930",
           "role": "F",
-          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         }
       ],
       "steps": [
@@ -9482,6 +9508,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptUses": {
+        "8": [
+          6978
+        ]
       }
     },
     {
@@ -9498,32 +9529,61 @@ window.PAD_SEED = {
         {
           "id": "n13692",
           "role": "L",
-          "assist": "六人の少年少女のカード No.12149"
+          "assist": "六人の少年少女のカード No.12149",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142
+          }
         },
         {
           "id": "n9927",
           "role": "S",
-          "assist": "テミスの天秤 No.12244"
+          "assist": "テミスの天秤 No.12244",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127
+          }
         },
         {
           "id": "n9927",
           "role": "S",
-          "assist": "アレキサンダーの見聞録 No.8443"
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127
+          }
         },
         {
           "id": "n13681",
           "role": "S",
-          "assist": "陶芸部の女神・ヘスティアの学生証 No.7145"
+          "assist": "陶芸部の女神・ヘスティアの学生証 No.7145",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111
+          }
         },
         {
           "id": "n12853",
           "role": "S",
-          "assist": "月の守護妖魔・セレナディアの耳飾り No.13053"
+          "assist": "月の守護妖魔・セレナディアの耳飾り No.13053",
+          "build": {
+            "lv": 120,
+            "plus": 891
+          }
         },
         {
           "id": "n13681",
           "role": "F",
-          "assist": "虚栄の汰魔悟 No.13505"
+          "assist": "虚栄の汰魔悟 No.13505",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111
+          }
         }
       ],
       "steps": [
@@ -9583,7 +9643,17 @@ window.PAD_SEED = {
           ],
           "text": "虚栄の代わりに大王クロミ・ナツイグ・イシネフ（落ちコンあり）"
         }
-      ]
+      ],
+      "receiptUses": {
+        "2": [
+          9927,
+          9927
+        ],
+        "8": [
+          9927,
+          9927
+        ]
+      }
     },
     {
       "id": "hyaku-kikoru-mori",
@@ -9599,32 +9669,55 @@ window.PAD_SEED = {
         {
           "id": "n12930",
           "role": "L",
-          "assist": "ナラ＆クインアスラ No.13980"
+          "assist": "ナラ＆クインアスラ No.13980",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         },
         {
           "id": "n14014",
           "role": "S",
-          "assist": "聖片の花嫁・サフィーラの指輪 No.12602"
+          "assist": "聖片の花嫁・サフィーラの指輪 No.12602",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n13549",
           "role": "S",
-          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265"
+          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n13978",
           "role": "S",
-          "assist": "女神官の鎖帷子 No.12046"
+          "assist": "女神官の鎖帷子 No.12046",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n8928",
           "role": "S",
-          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584"
+          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
+          "build": {
+            "lv": 120,
+            "super": 128
+          }
         },
         {
           "id": "n12930",
           "role": "F",
-          "assist": "ファイズギア No.5764"
+          "assist": "ファイズギア No.5764",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         }
       ],
       "steps": [
@@ -9646,6 +9739,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptUses": {
+        "8": [
+          13978
+        ]
       }
     },
     {
@@ -9662,32 +9760,54 @@ window.PAD_SEED = {
         {
           "id": "n12960",
           "role": "L",
-          "assist": "全ての鬼を滅するために作った刀 No.12848"
+          "assist": "全ての鬼を滅するために作った刀 No.12848",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         },
         {
           "id": "n13003",
           "role": "S",
-          "assist": "射止める銃士・リズレットのショコラ No.10939"
+          "assist": "射止める銃士・リズレットのショコラ No.10939",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n13074",
           "role": "S",
-          "assist": "聖人会議長ラウフェイのカード No.12873"
+          "assist": "聖人会議長ラウフェイのカード No.12873",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n6978",
           "role": "S",
-          "assist": "ヴィーナスのブレスレット No.7544"
+          "assist": "ヴィーナスのブレスレット No.7544",
+          "build": {
+            "lv": 120
+          }
         },
         {
           "id": "n12930",
           "role": "S",
-          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         },
         {
           "id": "n12930",
           "role": "F",
-          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265"
+          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
+          "build": {
+            "lv": 120,
+            "super": 108
+          }
         }
       ],
       "steps": [
@@ -10046,7 +10166,12 @@ window.PAD_SEED = {
           "why": "1Fでキコル本体のスキルより先に功を使い、以降も功のエンハンスを切らさずループさせる（そのための1Fのヘイスト）",
           "source": "作者本人（@pad_ultima127）の説明"
         }
-      ]
+      ],
+      "receiptUses": {
+        "8": [
+          6978
+        ]
+      }
     },
     {
       "id": "hyaku-mastergundam-nanaminn",
@@ -10062,32 +10187,51 @@ window.PAD_SEED = {
         {
           "id": "n11149",
           "role": "L",
-          "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525"
+          "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n11149",
           "role": "S",
-          "assist": "ゼロの仮面 No.11377"
+          "assist": "ゼロの仮面 No.11377",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n11149",
           "role": "S",
-          "assist": "リチアの龍喚石 No.12714"
+          "assist": "リチアの龍喚石 No.12714",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n12530",
           "role": "S",
-          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451"
+          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451",
+          "build": {
+            "lv": 120
+          }
         },
         {
           "id": "n10935",
           "role": "S",
-          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938"
+          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n11149",
           "role": "F",
-          "assist": "黒薔薇の種子 No.12441"
+          "assist": "黒薔薇の種子 No.12441",
+          "build": {
+            "lv": 99
+          }
         }
       ],
       "steps": [
@@ -10109,7 +10253,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "receiptUses": {}
     },
     {
       "id": "hyaku-bazzb-totakke",
@@ -10124,32 +10269,56 @@ window.PAD_SEED = {
         {
           "id": "n14078",
           "role": "L",
-          "assist": "ナラ＆クインアスラ No.13980"
+          "assist": "ナラ＆クインアスラ No.13980",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 96
+          }
         },
         {
           "id": "n6978",
           "role": "S",
-          "assist": "料理部の新鋭・ハトホルの学生証 No.7142"
+          "assist": "料理部の新鋭・ハトホルの学生証 No.7142",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n10835",
           "role": "S",
-          "assist": "夢幻空間の名探偵・シェリング・フォードのカード No.5619"
+          "assist": "夢幻空間の名探偵・シェリング・フォードのカード No.5619",
+          "build": {
+            "lv": 120,
+            "super": 127
+          }
         },
         {
           "id": "n9912",
           "role": "S",
-          "assist": "アレキサンダーの見聞録 No.8443"
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 99
+          }
         },
         {
           "id": "n13536",
           "role": "S",
-          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584"
+          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
+          "build": {
+            "lv": 120,
+            "super": 56
+          }
         },
         {
           "id": "n14078",
           "role": "F",
-          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938"
+          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
+          "build": {
+            "lv": 120,
+            "super": 96
+          }
         }
       ],
       "steps": [
@@ -10171,6 +10340,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.16666666666666666,
         "plus891Text": null
+      },
+      "receiptUses": {
+        "8": [
+          6978
+        ]
       }
     },
     {

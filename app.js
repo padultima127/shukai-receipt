@@ -1177,6 +1177,7 @@ function enduranceSetup(t) {
   let total = 0;
   let teamHp = 0;
   let unknown = 0;
+  const detail = [];
   for (const m of mems) {
     const no = monster(m.id)?.no;
     const row = MDB.get(no);
@@ -1184,16 +1185,41 @@ function enduranceSetup(t) {
       unknown++;
       continue;
     }
+    const b = m.build ?? {};
     const [flat, cnt] = String(row[18] ?? "0:0").split(":").map(Number);
-    let hp = (row[17] || 0) + 990 + flat;
+    // レベル: Lv99 → 最大HP、Lv110 → 限界突破値、Lv120 → Lv110 + Lv99最大HPの10%（レシートにない場合はLv110扱い）
+    const hp99 = row[24] || row[17] || 0;
+    const lv = b.lv ?? 110;
+    let hp = lv >= 120 ? row[17] + hp99 * 0.1 : lv >= 110 ? row[17] : hp99;
+    // ＋値: HP・攻撃・回復に均等に振られている前提で、HP＋1につき10（＋297 → 990、＋891 → 2970）。全パラ系の倍率はこの分にも乗る
+    hp += Math.round((b.plus ?? 297) / 3) * 10;
+    hp += flat;
     teamHp += cnt;
-    const a = MDB.get(assistNoOf(m));
+    const an = assistNoOf(m);
+    const a = MDB.get(an);
     if (a?.[8]) {
       const [af, ac] = String(a[18] ?? "0:0").split(":").map(Number);
       hp += af;
       teamHp += ac;
     }
-    total += Math.max(1, hp) * hpMultFor(row, lsL) * hpMultFor(row, lsF);
+    // 潜在のHP（HP強化1.5%/枠、＋4.5%、＋＋10%）
+    hp *= 1 + (b.latentHp ?? 0) / 100;
+    // 全パラ系の覚醒（通常覚醒・選んだ超覚醒・シンクロ覚醒）。アシスト共鳴は主属性とタイプが一致したときだけ、自力はアシストなしのときだけ
+    const ids = [...String(row[25] ?? "").split(".").filter(Boolean).map(Number)];
+    if (b.super) ids.push(b.super);
+    if (row[26] && b.synchro !== false) ids.push(row[26]);
+    const mults = [];
+    for (const id of ids) {
+      const v = STAT_MULT[id];
+      if (!v) continue;
+      if (id === 138 && !(an && resonates(no, an))) continue;
+      if (id === 139 && an) continue;
+      hp *= v;
+      mults.push(`${STAT_NAME[id]}×${v}`);
+    }
+    const lsm = hpMultFor(row, lsL) * hpMultFor(row, lsF);
+    detail.push({ name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build });
+    total += Math.max(1, hp) * lsm;
   }
   total = Math.round(total * (1 + 0.05 * teamHp));
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
@@ -1211,6 +1237,9 @@ function enduranceSetup(t) {
     if (an && !unusedSkill.has(familyOf(an)) && MDB.get(an)) cands.push(MDB.get(an));
     for (const r of cands) {
       const v = Number(String(r[16] ?? "").split(":")[2]) || 0;
+      // クリアまで続く軽減だけ数える（1〜2ターンの軽減は計算に入れない）
+      const dur = capDur(r[0], "reduce", false) ?? 0;
+      if (t.turns && dur < t.turns) continue;
       if (v > skillRed) {
         skillRed = v;
         skillRedFrom = r[1];
@@ -1243,10 +1272,13 @@ function enduranceSetup(t) {
       String(r[22] || "0.0.0.0.0").split(".").forEach((n, i) => (awkAttr[ATTRS5[i]] += Number(n) * 7));
     }
   }
-  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr };
+  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
+// 全パラメータを掛ける覚醒（127 全パラ強化、142 全パラ強化＋、138 アシスト共鳴、139 自力、146/147 ソウル）
+const STAT_MULT = { 127: 1.5, 142: 1.8, 138: 3, 139: 3, 146: 1.5, 147: 1.5 };
+const STAT_NAME = { 127: "全パラ強化", 142: "全パラ強化＋", 138: "アシスト共鳴", 139: "自力", 146: "勇気のソウル", 147: "幸運のソウル" };
 // 潜在の属性軽減: 1枠で1%、「＋」は2枠で2.5%。n枠で出せる最大の%
 const latentPct = (slots) => Math.floor(slots / 2) * 2.5 + (slots % 2);
 const latentText = (slots) => {
@@ -1275,9 +1307,15 @@ function simulateEndurance(d, setup, maxHp, skillRed = 0, latent = {}) {
         rows.push({ floor: f.floor, label: h.label, skipped: "ワンパンする前提なので受けない（1ターンで倒せないと受ける）" });
         continue;
       }
-      if (h.kind === "superResolve" && setup.strip?.has(f.floor)) {
-        rows.push({ floor: f.floor, label: h.label, skipped: `${setup.strip.get(f.floor)}で超根性を剥がしてワンパンするため受けない` });
-        continue;
+      if (h.kind === "superResolve") {
+        // レシートでその階に使うと明記されたグラビティ（部位以外）で、敵の残りHPが超根性の割合以下になるなら剥がしている
+        const used = (setup.uses?.[f.floor] ?? []).map((n) => MDB.get(n)).filter((r) => r?.[23]);
+        const remain = used.reduce((x, r) => x * (1 - r[23] / 100), 1);
+        const by = setup.strip?.get(f.floor) ?? (used.length && remain <= (h.threshold ?? 50) / 100 ? used.map((r) => r[1]).join("・") : null);
+        if (by) {
+          rows.push({ floor: f.floor, label: h.label, skipped: `${by}で超根性を剥がしてワンパンするため受けない` });
+          continue;
+        }
       }
       const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
       // 割合ダメージには属性軽減を乗せない（安全側）
