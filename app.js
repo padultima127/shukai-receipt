@@ -1167,7 +1167,7 @@ function hpMultFor(row, ls) {
   return m;
 }
 
-function enduranceSetup(t) {
+function enduranceSetup(t, opts = {}) {
   const mems = t.members.filter((m) => m.role !== "free");
   const leader = mems.find((m) => m.role === "L");
   const friend = mems.find((m) => m.role === "F");
@@ -1180,7 +1180,8 @@ function enduranceSetup(t) {
   const detail = [];
   // バッジ（team.badge.hp: チームHP%、badge.targetNos があればそのキャラだけ）
   const badge = t.badge ?? null;
-  const dungeonKago = db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
+  // 加護: 耐久チェックでユーザーが選んだもの（なし/陽/陰）。未選択ならダンジョンのデータ
+  const dungeonKago = opts.kago !== undefined ? opts.kago || null : db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
   for (const m of mems) {
     const no = monster(m.id)?.no;
     const row = MDB.get(no);
@@ -1494,8 +1495,8 @@ function allocateAutoLatent(d, setup, skillRed) {
   return alloc;
 }
 
-function renderEnduranceResult(t, d, maxHp, latent = {}) {
-  const setup0 = enduranceSetup(t);
+function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
+  const setup0 = enduranceSetup(t, { kago });
   // 属性不明の潜在は、スキル軽減ありの想定（あれば）で一番効く属性に振って固定する
   const auto = allocateAutoLatent(d, setup0, setup0.skillRed);
   const setup = { ...setup0, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup0.awkAttr[a] + auto[a]])) };
@@ -1537,7 +1538,12 @@ function renderEndurance(t, d) {
   const setup = enduranceSetup(t);
   const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
   return `<details class="endurance" data-team="${esc(t.id)}"><summary>耐久チェック（試作）</summary>
-    <label class="end-hp-label">チームHP <input type="number" class="end-hp" data-team="${esc(t.id)}" min="1" step="1000" value="${setup.estHp}"></label>
+    <div class="end-hp-label">
+      <label>チームHP <input type="number" class="end-hp" data-team="${esc(t.id)}" min="1" step="1000" value="${setup.estHp}"></label>
+      <label>ダンジョンの加護 <select class="end-kago">
+        ${["", "陽", "陰"].map((k) => `<option value="${k}"${(d.kago ?? "") === k ? " selected" : ""}>${k ? `${k}の加護あり` : "なし"}</option>`).join("")}
+      </select></label>
+    </div>
     <p class="hint">初期値は推定です（レシートのレベル・＋値・超覚醒・潜在、HP覚醒、LSのHP倍率、チームHP強化${setup.teamHp}個${setup.badge?.hp ? `、バッジ「${esc(setup.badge.name)}」HP${setup.badge.hp}%` : ""}${setup.unknown ? `、図鑑にない${setup.unknown}体を除外` : ""}）。ゲーム内の実際のHPを入れると正確になります。</p>
     <div class="end-lat"><span class="label">振っている潜在の属性軽減（パーティー合計%）</span>
       ${ATTRS5.map((a) => `<label>${a}<input type="number" class="end-lat-in" data-attr="${a}" min="0" max="100" step="0.5" value="0">%</label>`).join("")}
@@ -2393,7 +2399,7 @@ $("#results").addEventListener(
     const t = db.teams.find((x) => x.id === box.dataset.team);
     const d = t && db.dungeons.find((x) => x.id === t.dungeonId);
     if (!t || !d) return;
-    setTimeout(() => (res.innerHTML = renderEnduranceResult(t, d, Number(box.querySelector(".end-hp").value))), 0);
+    setTimeout(() => (res.innerHTML = renderEnduranceResult(t, d, Number(box.querySelector(".end-hp").value), {}, box.querySelector(".end-kago").value)), 0);
   },
   true
 );
@@ -2401,13 +2407,16 @@ $("#results").addEventListener(
 // 耐久チェック: HPを書き換えたら再計算
 $("#results").addEventListener("input", (e) => {
   const box = e.target.closest(".endurance");
-  if (!box || !e.target.matches(".end-hp, .end-lat-in")) return;
+  if (!box || !e.target.matches(".end-hp, .end-lat-in, .end-kago")) return;
   const t = db.teams.find((x) => x.id === box.dataset.team);
   const d = t && db.dungeons.find((x) => x.id === t.dungeonId);
   const hp = Number(box.querySelector(".end-hp").value);
   if (!t || !d || !(hp > 0)) return;
   const latent = Object.fromEntries([...box.querySelectorAll(".end-lat-in")].map((i) => [i.dataset.attr, Math.max(0, Number(i.value) || 0)]));
-  box.querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, hp, latent);
+  const kago = box.querySelector(".end-kago").value;
+  // 加護を変えたら推定HPも変わるので入れ直す
+  if (e.target.matches(".end-kago")) box.querySelector(".end-hp").value = enduranceSetup(t, { kago }).estHp;
+  box.querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, Number(box.querySelector(".end-hp").value), latent, kago);
 });
 
 $("#results").addEventListener("click", (e) => {
