@@ -29,7 +29,7 @@ SKILL_TAGS = [
     ("board76", r"7×6"),
     ("board65", r"6×5マス"),
     ("delay", r"敵の行動を\d+ターン遅らせ"),
-    ("reduce", r"受けるダメージを[^。]*(軽減|半減|激減)|ダメージを\d+[%％]軽減|ダメージを半減"),
+    ("reduce", r"受けるダメージを[^。]*(軽減|半減|激減)|ダメージを\d+[%％]軽減|ダメージを(半減|激減)"),
     ("hpUp", r"最大HP[^。]*倍|HPが[\d.]+倍"),
     ("heal", r"HPを[^。]*回復|HP全回復|HPを全回復"),
     ("regen", r"毎ターン[^。]*回復|\d+ターンの間[^。]*HPを[\d.]+[%％]回復"),
@@ -207,6 +207,9 @@ def endurance_numbers(ids, skills):
                     red = max(red, float(n))
                 if re.search(r"ダメージを軽減", sentence):
                     red = max(red, 35)
+                # 「激減」は75%（本人談）
+                if re.search(r"ダメージを激減", sentence):
+                    red = max(red, 75)
                 for n in re.findall(r"最大HPが([\d.]+)倍", sentence):
                     hpm = max(hpm, float(n))
     return f"{regen:g}:{gen}:{red:g}:{hpm:g}"
@@ -292,7 +295,7 @@ def attr_changes(ids, skills):
     # ドロップ目覚めが条件の効果: 「[火目覚め]発動中、◯ターンの間、受けるダメージを軽減」など（軽減 red・最大HP hp）
     for sentence in text.split("。"):
         if m := re.search(r"\[([^\]]+?)目覚め\]発動中", sentence):
-            eff = "+".join(k for k, pat in (("red", r"軽減|半減"), ("hp", r"最大HP")) if re.search(pat, sentence))
+            eff = "+".join(k for k, pat in (("red", r"軽減|半減|激減"), ("hp", r"最大HP")) if re.search(pat, sentence))
             if eff:
                 parts.append(f"目覚め条件:{m.group(1)}:{eff}")
     # ドロップ目覚めを付ける: 「◯ターンの間、[火][闇]が少し落ちやすくなる」「[強化ドロップ目覚め]が◯%落ちてくる」
