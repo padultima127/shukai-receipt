@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 61,
+  "version": 62,
   "seed": true,
   "monsters": [
     {
@@ -10207,7 +10207,10 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "latentAttr": {
+              "auto": 2.5
+            }
           }
         },
         {
@@ -10215,7 +10218,10 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ゼロの仮面 No.11377",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "latentAttr": {
+              "auto": 5
+            }
           }
         },
         {
@@ -10223,7 +10229,10 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "リチアの龍喚石 No.12714",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "latentAttr": {
+              "auto": 2.5
+            }
           }
         },
         {
@@ -10240,7 +10249,10 @@ window.PAD_SEED = {
           "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
           "build": {
             "lv": 120,
-            "super": 56
+            "super": 56,
+            "latentAttr": {
+              "auto": 2.5
+            }
           }
         },
         {
@@ -10248,7 +10260,10 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "黒薔薇の種子 No.12441",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "latentAttr": {
+              "auto": 2.5
+            }
           }
         }
       ],

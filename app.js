@@ -1267,6 +1267,7 @@ function enduranceSetup(t) {
   }
   // 属性ダメージ軽減の覚醒（1個7%）。武器は覚醒アシストのときだけ
   const awkAttr = Object.fromEntries(ATTRS5.map((a) => [a, 0]));
+  let autoLatent = 0;
   for (const m of mems) {
     const rows = [MDB.get(monster(m.id)?.no)];
     const a = MDB.get(assistNoOf(m));
@@ -1275,11 +1276,15 @@ function enduranceSetup(t) {
       String(r[22] || "0.0.0.0.0").split(".").forEach((n, i) => (awkAttr[ATTRS5[i]] += Number(n) * 7));
     }
     // レシートで読み取った潜在の属性軽減（盾に＋＝属性軽減＋ 2.5%/2枠）
-    for (const [a, v] of Object.entries(m.build?.latentAttr ?? {})) awkAttr[a] += v;
+    // 属性が分からない属性軽減＋（auto）は、あとでダンジョンに合わせて一番効く属性へ自動で振る
+    for (const [a, v] of Object.entries(m.build?.latentAttr ?? {})) {
+      if (a === "auto") autoLatent += v;
+      else awkAttr[a] += v;
+    }
   }
   const teamHpMult = 1 + 0.05 * teamHp;
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
+  return { autoLatent, estHp: total, unknown, reduce, healGen, regen, regenFrom, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: t.receiptUses ?? {}, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1410,8 +1415,39 @@ function requiredHp(d, setup, skillRed, latent) {
   return Math.ceil(hi / 1000) * 1000;
 }
 
+// 属性が分からない属性軽減潜在（2.5%ずつ）を、必要HPが一番下がる属性へ1個ずつ振る
+function allocateAutoLatent(d, setup, skillRed) {
+  const units = Math.round((setup.autoLatent ?? 0) / 2.5);
+  const alloc = Object.fromEntries(ATTRS5.map((a) => [a, 0]));
+  if (!units) return alloc;
+  const score = (extra) => {
+    const s = { ...setup, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup.awkAttr[a] + extra[a]])) };
+    return requiredHp(d, s, skillRed, {}) ?? Infinity;
+  };
+  for (let i = 0; i < units; i++) {
+    let best = null;
+    let bestScore = Infinity;
+    for (const a of ATTRS5) {
+      const trial = { ...alloc, [a]: alloc[a] + 2.5 };
+      const sc = score(trial);
+      if (sc < bestScore) {
+        bestScore = sc;
+        best = a;
+      }
+    }
+    alloc[best ?? ATTRS5[0]] += 2.5;
+  }
+  return alloc;
+}
+
 function renderEnduranceResult(t, d, maxHp, latent = {}) {
-  const setup = enduranceSetup(t);
+  const setup0 = enduranceSetup(t);
+  // 属性不明の潜在は、スキル軽減ありの想定（あれば）で一番効く属性に振って固定する
+  const auto = allocateAutoLatent(d, setup0, setup0.skillRed);
+  const setup = { ...setup0, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup0.awkAttr[a] + auto[a]])) };
+  const autoNote = setup0.autoLatent
+    ? `<p class="hint">属性が判別できない属性軽減＋の潜在（合計${setup0.autoLatent}%）は、このダンジョンで一番効くように自動で振りました: ${ATTRS5.filter((a) => auto[a]).map((a) => `${a}${auto[a]}%`).join("・") || "どこに振っても変わらないため振り分けなし"}</p>`
+    : "";
   const sim = simulateEndurance(d, setup, maxHp, 0, latent);
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
@@ -1435,7 +1471,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}) {
   const need = `<p class="need">全フロア耐えるのに必要なHP: スキルの軽減なし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／あり <strong>${fmt(need1)}</strong>` : ""}
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
   const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルの軽減なしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "スキルの軽減ありで、") : "");
-  return `${need}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
+  return `${need}${autoNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減は効果が最後まで続く前提です。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表はスキルの軽減なし。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${sim.rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="4">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F</td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
