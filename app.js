@@ -410,6 +410,22 @@ function teamSkillBoost(team, mem, part, candNo) {
   return n;
 }
 
+// その覚醒を持てるか（通常覚醒・シンクロ覚醒・超覚醒の候補のどれか）
+function canHaveAwk(no, awk) {
+  const r = MDB.get(no);
+  if (!r) return false;
+  const has = (k) => String(r[k] ?? "").split(".").includes(String(awk));
+  return has(27) || r[26] === awk || has(11);
+}
+// 元の編成でその枠の共鳴（138）・自力（139）が発動しているか
+function statAwakenState(mem) {
+  const no = monster(mem.id)?.no;
+  const an = assistNoOf(mem);
+  const r = MDB.get(no);
+  if (!r) return {};
+  const has = (awk) => String(r[27] ?? "").split(".").includes(String(awk)) || r[26] === awk || mem.build?.super === awk;
+  return { resonance: has(138) && !!an && resonates(no, an), jiriki: has(139) && !an };
+}
 // 共鳴: 本体と武器の主属性が同じ、かつタイプが1つ以上一致
 function resonates(baseNo, assistNo) {
   const b = MDB.get(baseNo);
@@ -510,6 +526,8 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
   // 元の編成が武器のスキルを使っていて、元の本体が変身キャラでないなら、変身キャラは本体の代用にしない（作者談）
   const weaponUsed = assistNo && !(team.slotRoles ?? []).some((sr) => sr.part === "assist" && familyOf(sr.target) === familyOf(assistNo) && sr.roles.some((r) => r.cap === "skillFree"));
   const noTransform = part === "base" && weaponUsed && !MDB.get(baseNo)?.[9];
+  // 元の編成で共鳴・自力が発動している枠は、代用でも必ず同じように発動するものだけ（本人指定）
+  const statOn = statAwakenState(mem);
   for (const no of nos) {
     if (used.has(familyOf(no))) continue;
     const row = MDB.get(no);
@@ -517,6 +535,8 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     // 本体の代用に装備（覚醒アシスト持ちの武器）は使えない
     if (part === "base" && row[8]) continue;
     if (noTransform && row[9]) continue;
+    if (statOn.resonance && !(part === "base" ? canHaveAwk(no, 138) && resonates(no, assistNo) : resonates(baseNo, no))) continue;
+    if (statOn.jiriki && part === "base" && !canHaveAwk(no, 139)) continue;
     const cand = capsOfNo(no, part === "assist");
     const caps = part === "base" ? slotCaps(no, assistNo) : slotCaps(baseNo, no);
     // 耐性は「パーティー全体で100%あればよい」（作者談）。足りていればこの枠になくても保持扱い
@@ -1168,7 +1188,7 @@ function renderMember(r) {
   return `<li class="mem mem-${r.status}">
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
     <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}${renderSuperList(r)}
-      ${renderAwakenings(r.mem)}
+      ${renderAwakenings(r.mem)}${latentStripHTML(r.teamId, r.idx)}
       ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${assist}${extra}${altButton(r)}</div>
   </li>`;
 }
@@ -1214,6 +1234,14 @@ function searchAltFor(teamId, idx) {
 }
 
 // ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）
+// PDCレシートの潜在覚醒の欄（最大8枠）を切り抜いた画像
+function latentStripHTML(teamId, idx) {
+  const L = window.PAD_LATENTS;
+  const i = L?.index?.[`${teamId}:${idx}`];
+  if (i == null) return "";
+  const pos = `${((i % L.cols) / Math.max(1, L.cols - 1)) * 100}% ${(Math.floor(i / L.cols) / Math.max(1, L.rows - 1)) * 100}%`;
+  return `<div class="awk-row"><span class="awk-sep">潜在</span><span class="latent-strip" title="潜在覚醒（PDCレシートより）" style="background-image:url('latents.webp?v=${L.ver}');background-size:${L.cols * 100}% ${L.rows * 100}%;background-position:${pos}"></span></div>`;
+}
 // PDCで選んだバッジ（レシートのタイトルの左のアイコン。badges.webp から、画像から登録した編成は badgeIcon）
 function badgeIconHTML(t) {
   const B = window.PAD_BADGES;
@@ -1321,6 +1349,7 @@ const PDC_STATUS = {
   substitute: ["代用あり", "sub"], partial: ["条件付き代用", "sub"], free: ["自由枠", "free"],
 };
 function renderPdcSlot(x) {
+  const x0 = x;
   const role = ROLE_LABEL[x.mem.role] ?? x.mem.role;
   if (x.status === "free")
     return `<div class="pdc-slot pdc-free"><span class="pdc-role">サブ</span><div class="pdc-assist"></div><div class="pdc-base"><span class="pdc-empty">自由</span></div><span class="pdc-name muted">好きなキャラ</span></div>`;
@@ -1333,6 +1362,11 @@ function renderPdcSlot(x) {
     <div class="pdc-assist${assistNg ? " pdc-ng" : ""}">${an ? iconHTML(an) : `<span class="pdc-none">なし</span>`}</div>
     <div class="pdc-base${x.baseOk === false ? " pdc-ng" : ""}">${iconHTML(x.m)}</div>
     <span class="pdc-name">${esc(glyphName(name))}</span>
+    ${(() => {
+      const t = db.teams.find((x) => x.id === x0.teamId);
+      const lb = t ? memberLabels(t)[x.idx] : "";
+      return lb ? `<span class="pdc-label">${lb}</span>` : "";
+    })()}
     ${label ? `<span class="pdc-st pdc-st-${cls}">${label}</span>` : ""}
   </div>`;
 }
@@ -1340,7 +1374,29 @@ function renderPdcSlot(x) {
 function glyphName(name) {
   const n = String(name).replace(/【[^】]*】|［[^］]*］|\[[^\]]*\]/g, "");
   const parts = n.split(/[・]/).filter(Boolean);
-  return (parts.at(-1) ?? n).slice(0, 8);
+  // 「エルフリーデ VS フィアメル」のような名前は最初の語だけ
+  return (parts.at(-1) ?? n).split(/\s+|＆|&/).filter(Boolean)[0]?.slice(0, 10) ?? "";
+}
+// 同じキャラが複数いて、レシートで「ノアA」「ハデドラB」のように呼び分けている時は、左から A・B・C…（レシートの「左からA,B,C」の書き方に合わせる）
+const LABEL_CACHE = new Map();
+function memberLabels(t) {
+  if (LABEL_CACHE.has(t)) return LABEL_CACHE.get(t);
+  const text = [t.title, ...(t.steps ?? [])].join(" ");
+  const labels = t.members.map(() => "");
+  const byNo = new Map();
+  t.members.forEach((m, i) => {
+    const no = monster(m.id)?.no;
+    if (no) byNo.set(no, [...(byNo.get(no) ?? []), i]);
+  });
+  for (const [no, idx] of byNo) {
+    if (idx.length < 2) continue;
+    const short = glyphName(monster(t.members[idx[0]].id)?.name ?? "");
+    const keys = [short, ...(String(MDB.get(no)?.[1] ?? "").match(/[\u30A0-\u30FFー]{2,}/g) ?? [])].filter((k) => k.length >= 2);
+    if (!keys.some((k) => new RegExp(`${k}\\s*[A-DＡ-Ｄa-d]`).test(text))) continue;
+    idx.forEach((i, j) => (labels[i] = "ABCD"[j] ?? ""));
+  }
+  LABEL_CACHE.set(t, labels);
+  return labels;
 }
 function renderPdcRow(list) {
   return `<div class="pdc-row">${list.map(renderPdcSlot).join("")}</div>`;
@@ -1514,20 +1570,24 @@ function resolveReceiptUses(t) {
   let first = true;
   for (const [fl, calls] of Object.entries(t.receiptCalls).sort((a, b) => Number(a[0]) - Number(b[0]))) {
     // 同じキャラが何回出てくるかで、その階のターン数を見積もる
+    // 同じキャラが何回出てくるかで、その階のターン数を見積もる
+    // （レシートの区切りから読んだ c.turn も入っているが、編成によって良くも悪くもなるので調整が済むまで使わない）
     const seen = new Map();
     const withTurn = calls.map((c) => {
       const k = seen.get(c.mi) ?? 0;
       seen.set(c.mi, k + 1);
       return { ...c, turn: k };
     });
-    const turns = Math.max(1, ...seen.values());
+    const turns = Math.max(1, ...withTurn.map((c) => c.turn + 1));
     for (let tn = 0; tn < turns; tn++) {
       if (!first) st.forEach((x) => x.charge++);
       first = false;
       for (const c of withTurn.filter((c) => c.turn === tn)) {
         const x = st[c.mi];
         // 進化スキルは使った回数で段階が変わる（スキルターンも段階ごと）
-        x.b = stageRow(x.bNo, x.bUse);
+        // 変身キャラは変身前の姿で始まるので、最初に押した時は変身前のスキル（セイハーツの「自分以外2ターン」など）
+        const fam = MDB.get(x.bNo)?.[9];
+        x.b = x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam) ? MDB.get(fam) : stageRow(x.bNo, x.bUse);
         x.a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
         if (!x?.b) continue;
         const aCT = x.a?.[5] || 0;
@@ -1536,7 +1596,8 @@ function resolveReceiptUses(t) {
         if (c.part === "assist" && x.a) used = [x.a];
         else if (!x.a) used = [x.b];
         else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
-        else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : [x.a];
+        // 武器の番でも、武器のスキルターン分たまっていなければ武器は撃てないので本体（セッカ8Fなど）
+        else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : x.charge >= aCT ? [x.a] : [x.b];
         else used = [x.b];
         // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
         x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
@@ -2077,6 +2138,19 @@ function allocateAutoLatent(d, setup, skillRed) {
   return alloc;
 }
 
+// レシートで使ったスキルを「本体の名前」「本体の名前裏（アシストのスキル）」だけで並べる
+function usedSkillNames(t, setup) {
+  const used = new Set(Object.values(setup.uses ?? {}).flat());
+  const out = [];
+  for (const m of t.members) {
+    const no = monster(m.id)?.no;
+    const name = glyphName(monster(m.id)?.name ?? "");
+    const an = assistNoOf(m);
+    if (an && used.has(an) && !out.includes(`${name}裏`)) out.push(`${name}裏`);
+    if (no && used.has(no) && !out.includes(name)) out.push(name);
+  }
+  return out.length ? out.map(esc).join("・") : "スキルの使用なし";
+}
 function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const setup0 = enduranceSetup(t, { kago });
   // 属性不明の潜在は、スキル軽減ありの想定（あれば）で一番効く属性に振って固定する
@@ -2089,16 +2163,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
   const skillLine = withSkill
-    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[...new Set([
-        ...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`),
-        ...[...new Set(setup.regens.map((r) => `${esc(r.name)}のリジェネ${r.pct}%`))],
-        ...[...new Set(setup.instantHeals.map((r) => `${esc(r.name)}の回復${r.pct}%`))],
-        ...[...new Set(setup.healTurns.map((r) => `${esc(r.name)}の回復生成（使ったターンは全回復）`))],
-        ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍${r.cond ? `（敵が${r.cond.attr}属性なら効果${r.cond.v}倍）` : ""}`),
-        ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.who === "自分" ? "" : r.who + "が"}${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
-        ...setup.enemyAttr.map((r) => `${esc(r.name)}で敵を${r.attr}属性に変化`),
-        ...setup.vanishes.map((r) => `${esc(r.name)}が消えてアシストなしに（チームHP×${r.ratioAt[1].toFixed(2)}）`),
-      ])].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${usedSkillNames(t, setup)}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
        ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "レシートどおりのスキルで、潜在覚醒の枠が空いていれば")}`
     : "";
   const heal = setup.healGen

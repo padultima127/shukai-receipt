@@ -389,3 +389,6 @@ button:disabled { opacity: .6; cursor: wait; }
 /* PDCで選んだバッジ（ギミックの左） */
 .gim-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .pdc-badge { flex: none; width: 44px; height: 32px; border-radius: 6px; background-repeat: no-repeat; }
+
+.pdc-label { font-size: .7rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.latent-strip { display: inline-block; width: 150px; height: 50px; max-width: 100%; border-radius: 4px; background-repeat: no-repeat; }

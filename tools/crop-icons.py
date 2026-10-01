@@ -214,10 +214,41 @@ def main():
 
 
 BADGE_W, BADGE_H = 72, 52
+LAT_W, LAT_H = 150, 50
 
 
 def badge_box(region):
-    """タイトルの左のバッジ（色の付いた横長の札）の範囲。QRコードや文字は白黒なので色の濃さで見分ける"""
+    """タイトルの左のバッジ（色の付いた横長の札）の範囲。QRコードや文字は白黒なので色の濃さで見分ける。
+    色の付いた行のかたまりのうち一番下（編成のすぐ上）を高さとし、その中で左から続く列を幅とする"""
+    w, h = region.size
+    px = region.load()
+    colored = lambda x, y: (lambda c: max(c) - min(c) > 45)(px[x, y][:3])
+    lw = int(w * 0.65)
+    rows = [sum(colored(x, y) for x in range(lw)) for y in range(h)]
+    on = [r > lw * 0.15 for r in rows]
+    y1 = max((y for y in range(h) if on[y]), default=None)
+    if y1 is None:
+        return None
+    y0 = y1
+    while y0 - 1 >= 0 and (on[y0 - 1] or (y0 - 2 >= 0 and on[y0 - 2])):
+        y0 -= 1
+    bh = y1 - y0 + 1
+    cols = [sum(colored(x, y) for y in range(y0, y1 + 1)) for x in range(w)]
+    xs = [x for x in range(w) if cols[x] > bh * 0.3]
+    if not xs:
+        return None
+    x0 = xs[0]
+    x1 = x0
+    while x1 + 1 < w and cols[x1 + 1] > bh * 0.15:
+        x1 += 1
+    bw = x1 - x0 + 1
+    if bw < w * 0.15 or bh < 8 or not (0.9 < bw / bh < 2.6):
+        return None
+    return (x0, y0, x1 + 1, y1 + 1)
+
+
+def badge_box_old(region):
+    """最初の版: 左から続く色付きの列で探す（バッジが大きく写っている画像に強い）"""
     w, h = region.size
     px = region.load()
     colored = lambda x, y: (lambda c: max(c) - min(c) > 45)(px[x, y][:3])
@@ -225,7 +256,6 @@ def badge_box(region):
     xs = [x for x in range(w) if cols[x] > h * 0.25]
     if not xs:
         return None
-    # 左から続いている塊だけ（文字の色付き部分を拾わない）
     x0 = xs[0]
     x1 = x0
     while x1 + 1 < w and cols[x1 + 1] > h * 0.15:
@@ -244,6 +274,7 @@ def badge_box(region):
 def crop_badges(teams, ocr):
     """PDCで選んだバッジ（タイトルの左のアイコン）を編成ごとに切り抜いて badges.webp にまとめる"""
     found = {}
+    latents = {}
     for t in teams:
         m = re.search(r"status/(\d+)", t["source"])
         if not m or t["multi"]:
@@ -256,7 +287,7 @@ def crop_badges(teams, ocr):
         nth = 1 if "#" in t["source"] else 0
         if len(pdc) <= nth:
             continue
-        name, (assist_b, _, _, _) = pdc[nth]
+        name, (assist_b, base_b, _, _) = pdc[nth]
         path = image_path(name)
         if not path:
             continue
@@ -267,9 +298,16 @@ def crop_badges(teams, ocr):
             top = assist_b * H + cell * 0.04 - cell  # アシストの段の上端
             y0 = max(0, top - cell * 0.85)
             region = im.crop((0, int(y0), int(cell * 0.75), int(top)))
-            box = badge_box(region)
+            box = badge_box(region) or badge_box_old(region)
             if box:
                 found[t["id"]] = region.crop(box).resize((BADGE_W, BADGE_H), Image.LANCZOS)
+            # 潜在覚醒（アシストの段と本体の段の間、各枠の下側）。最大8枠が2段で並ぶ
+            base_top = base_b * H + cell * 0.04 - cell
+            for col, (bno, _) in enumerate(t["m"]):
+                if not bno:
+                    continue
+                strip = im.crop((int(col * cell + cell * 0.02), int(base_top - cell * 0.46), int((col + 1) * cell - cell * 0.02), int(base_top - cell * 0.01)))
+                latents[f'{t["id"]}:{col}'] = strip.resize((LAT_W, LAT_H), Image.LANCZOS)
     ids = sorted(found)
     cols = 16
     rows = max(1, (len(ids) + cols - 1) // cols)
@@ -282,6 +320,18 @@ def crop_badges(teams, ocr):
         f.write("// PDCで選んだバッジ（タイトルの左のアイコン）。badges.webp の何番目か（編成id）\nwindow.PAD_BADGES = { ver: %s, cols: %d, rows: %d, index: %s };\n"
                 % (json.dumps(ver), cols, rows, json.dumps({tid: i for i, tid in enumerate(ids)}, ensure_ascii=False)))
     print(f"バッジ {len(ids)}編成")
+    keys = sorted(latents)
+    lcols = 12
+    lrows = max(1, (len(keys) + lcols - 1) // lcols)
+    sheet = Image.new("RGB", (lcols * LAT_W, lrows * LAT_H), (40, 40, 48))
+    for i, k in enumerate(keys):
+        sheet.paste(latents[k], ((i % lcols) * LAT_W, (i // lcols) * LAT_H))
+    sheet.save(ROOT / "latents.webp", "WEBP", quality=80)
+    ver = hashlib.md5((ROOT / "latents.webp").read_bytes()).hexdigest()[:10]
+    with open(ROOT / "icons.js", "a", encoding="utf-8") as f:
+        f.write("// PDCレシートの潜在覚醒の欄（編成id:枠）。latents.webp の何番目か\nwindow.PAD_LATENTS = { ver: %s, cols: %d, rows: %d, index: %s };\n"
+                % (json.dumps(ver), lcols, lrows, json.dumps({k: i for i, k in enumerate(keys)}, ensure_ascii=False)))
+    print(f"潜在 {len(keys)}枠")
 
 
 if __name__ == "__main__":

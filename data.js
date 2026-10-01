@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 95,
+  "version": 96,
   "seed": true,
   "monsters": [
     {
@@ -9079,223 +9079,271 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "14": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "15": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       }
@@ -9391,231 +9439,281 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "15": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ]
       },
@@ -9702,231 +9800,282 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ],
         "14": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "15": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -10000,225 +10149,274 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ],
         "14": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "15": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       }
@@ -10382,253 +10580,312 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
-            "mi": 2,
-            "part": "auto"
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
-            "mi": 2,
-            "part": "auto"
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
-          }
-        ],
-        "13": [
+            "part": "auto",
+            "turn": 1
+          },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "14": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ],
         "15": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 7
           }
         ]
       },
@@ -10713,537 +10970,664 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "14": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ],
         "15": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           }
         ]
       },
@@ -11317,267 +11701,326 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "13": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "14": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "15": [
           {
             "mi": 2,
-            "part": "base"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "base"
+            "part": "assist",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "assist",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           }
         ]
       },
@@ -11736,241 +12179,295 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       },
@@ -12052,349 +12549,435 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "12": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       }
@@ -12482,7 +13065,164 @@ window.PAD_SEED = {
       "yields": {
         "exp": 157500000
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "fuun-multi-reinhard-v1",
@@ -12580,7 +13320,159 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "fuun-multi-reinhard-v2",
@@ -12677,7 +13569,147 @@ window.PAD_SEED = {
         "plus891": 1,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 6,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 9,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 7,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 8,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "tenkyu-dain-oreha-v2",
@@ -12872,6 +13904,148 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
       }
     },
     {
@@ -13016,221 +14190,269 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "14": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ]
       }
@@ -13307,313 +14529,385 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "13": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "15": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 7
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 7
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 8
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 8
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ]
       }
@@ -13979,15 +15273,18 @@ window.PAD_SEED = {
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       }
@@ -14059,6 +15356,302 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.4,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 6
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
       }
     },
     {
@@ -14126,299 +15719,368 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "base"
+            "part": "base",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "base"
+            "part": "base",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 6
           }
         ]
       },
@@ -14495,97 +16157,117 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -14666,7 +16348,288 @@ window.PAD_SEED = {
       "yields": {
         "exp": 323400000
       },
-      "fastMode": true
+      "fastMode": true,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 7
+          }
+        ]
+      }
     },
     {
       "id": "guren-shiva-underbar",
@@ -14732,289 +16695,355 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "base"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "9": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 8
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 8
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       }
@@ -15091,257 +17120,314 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "11": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ],
         "15": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ]
       },
@@ -15422,223 +17508,272 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "15": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ]
       }
@@ -15721,643 +17856,797 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "14": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -16438,281 +18727,344 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "11": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "15": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       }
@@ -16788,287 +19140,351 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "11": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "15": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "16": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       }
@@ -17140,171 +19556,210 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -17393,127 +19848,154 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -17605,113 +20087,141 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -17788,107 +20298,129 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "14": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "15": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ]
       },
@@ -17990,177 +20522,215 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ]
       },
@@ -18236,6 +20806,69 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
       }
     },
     {
@@ -18419,125 +21052,150 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       }
@@ -18616,6 +21274,157 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
       }
     },
     {
@@ -18688,145 +21497,175 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       }
@@ -18902,7 +21741,77 @@ window.PAD_SEED = {
         "plus891": 1,
         "plus891Text": "required"
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-ichigo-onsen",
@@ -19057,217 +21966,275 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
-            "mi": 4,
-            "part": "auto"
+            "mi": 0,
+            "part": "auto",
+            "turn": 3
           }
         ],
         "3": [
           {
-            "mi": 5,
-            "part": "auto"
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
-            "mi": 5,
-            "part": "auto"
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
-            "mi": 0,
-            "part": "auto"
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
-            "mi": 4,
-            "part": "auto"
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
-            "mi": 5,
-            "part": "auto"
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
-            "mi": 5,
-            "part": "auto"
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "9": [
           {
-            "mi": 0,
-            "part": "auto"
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 6
           }
         ]
       },
@@ -19344,7 +22311,35 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 1
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-challenge-rosetta-yamajun",
@@ -19414,7 +22409,56 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "mercury-mina-shion",
@@ -19550,229 +22594,280 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       }
@@ -19855,43 +22950,51 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       }
@@ -19974,121 +23077,146 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ]
       },
@@ -20168,63 +23296,75 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -20296,139 +23436,165 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "2": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "3": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -20500,111 +23666,135 @@ window.PAD_SEED = {
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -20684,55 +23874,66 @@ window.PAD_SEED = {
         "3": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "base"
+            "part": "base",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -20815,6 +24016,84 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.5,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "17": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
       }
     },
     {
@@ -20885,6 +24164,133 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
       }
     },
     {
@@ -20962,7 +24368,30 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-yamajun-11",
@@ -21034,7 +24463,80 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": "not-required"
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-nanaminn",
@@ -21114,247 +24616,302 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "13": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ]
       },
@@ -21426,7 +24983,23 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "venus-kaiju8-nanaminn",
@@ -21506,129 +25079,156 @@ window.PAD_SEED = {
         "3": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ]
       },
@@ -21704,7 +25304,23 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "venus-douma-nanaminn",
@@ -21788,207 +25404,252 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "7": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "13": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ]
       },
@@ -22075,167 +25736,202 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "12": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "13": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -22311,7 +26007,141 @@ window.PAD_SEED = {
         "plus891": 1,
         "plus891Text": null
       },
-      "fastMode": true
+      "fastMode": true,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "moon-gintoki-nanaminn",
@@ -22396,167 +26226,202 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 2
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "11": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -22635,6 +26500,277 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": "required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 5
+          }
+        ]
       }
     },
     {
@@ -22713,138 +26849,218 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "14": [
           {
-            "mi": 1,
-            "part": "auto"
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
           },
           {
-            "mi": 0,
-            "part": "auto"
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 3,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
-          },
-          {
-            "mi": 2,
-            "part": "auto"
-          },
-          {
-            "mi": 0,
-            "part": "auto"
-          },
-          {
-            "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       },
@@ -22924,45 +27140,53 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -23046,85 +27270,101 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ]
       },
@@ -23304,143 +27544,172 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "11": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "12": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           }
         ],
         "14": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 5
           }
         ]
       },
@@ -23516,207 +27785,251 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "9": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -23856,43 +28169,50 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ]
       }
@@ -24010,217 +28330,265 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "15": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 3
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 4
           }
         ]
       }
@@ -24291,6 +28659,136 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.8333333333333334,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
       }
     },
     {
@@ -24436,129 +28934,155 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "15": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ]
       }
@@ -24641,139 +29165,167 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 2
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "13": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "14": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -24962,99 +29514,119 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "base"
+            "part": "base",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "base"
+            "part": "base",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "base"
+            "part": "base",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -25203,63 +29775,76 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 1
           },
           {
             "mi": 0,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ]
       },
@@ -25374,115 +29959,139 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       }
@@ -25955,73 +30564,88 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -26128,57 +30752,68 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -26288,31 +30923,37 @@ window.PAD_SEED = {
         "6": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ]
       }
@@ -26395,81 +31036,96 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ]
       }
@@ -26556,51 +31212,61 @@ window.PAD_SEED = {
         "2": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -26684,63 +31350,75 @@ window.PAD_SEED = {
         "2": [
           {
             "mi": 1,
-            "part": "base"
+            "part": "base",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       }
@@ -26916,111 +31594,134 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -27116,121 +31817,146 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           }
         ],
         "7": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -27317,79 +32043,94 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
-            "part": "assist"
+            "part": "assist",
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 5,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto"
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -27484,69 +32225,76 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "assist",
-            "raw": "②アオト装備"
+            "turn": 1
           },
           {
-            "mi": 0,
+            "mi": 1,
             "part": "auto",
-            "raw": "→Zガンダムx2"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノア①"
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "assist",
-            "raw": "パイモン→ノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ノア②→"
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "raw": "→Zガンダム"
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "raw": "はラクスで返"
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "raw": "①ノア①"
-          },
-          {
-            "mi": 3,
-            "part": "auto",
-            "raw": "②ノア②→"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "→Zガンダムx2"
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "③ノア①"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "④ノア②→"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→Zガンダム"
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -27631,59 +32379,64 @@ window.PAD_SEED = {
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→Zガンダム→ノ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノア①"
+            "turn": 0
           }
         ],
         "2": [
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 2,
             "part": "auto",
-            "raw": "②ノア②→"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→Zガンダム"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "はラクスで返"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①ノア①"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②ノア②→"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "→Zガンダムx2"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ノア①"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "④ノア②→"
+            "turn": 3
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→Zガンダム"
+            "turn": 3
           }
         ]
       },
@@ -27764,33 +32517,33 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
-            "raw": "（ネレ、）"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "（ネレとマ"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "ネレ、a"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ネレ、d"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ネレ、a"
+            "turn": 0
           }
         ]
       },
@@ -27886,142 +32639,142 @@ window.PAD_SEED = {
           {
             "mi": 4,
             "part": "assist",
-            "raw": "Sキコル裏"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
             "part": "assist",
-            "raw": "①ゼルクレア裏→"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "→アルトゥラ裏→"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→キコル"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①キコル ②"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "②キコル→功"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→功"
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①キコル→ア"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→アルトゥラ"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ゼルクレア→キ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→キコル"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①キコル"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①キコル→ア"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→アルトゥラ ②"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②キコル"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①キコル→ゼ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ゼルクレア→功"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→功"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①キコル"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①キコル ②"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②キコル→ア"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→アルトゥラ"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "キコル→サ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→サノス"
+            "turn": 0
           }
         ]
       },
@@ -28094,91 +32847,96 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
-            "raw": "①マグナモン裏 "
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
             "part": "assist",
-            "raw": "①ザイン裏O"
+            "turn": 0
           }
         ],
         "3": [
           {
-            "mi": 0,
+            "mi": 4,
             "part": "auto",
-            "raw": "①リュグナー"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②ザイン→リ"
+            "turn": 1
           },
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
-            "raw": "→リュグナー"
+            "turn": 1
           }
         ],
         "4": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①マグナモン→リ"
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "raw": "→リュグナー O"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "リュグナー"
-          }
-        ],
-        "8": [
-          {
-            "mi": 2,
-            "part": "auto",
-            "raw": "（ザイン）→"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "（リュグナー）"
+            "turn": 1
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
-            "raw": "①リュグナー"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①マグナモン→リ"
+            "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 4,
             "part": "auto",
-            "raw": "→リュグナー"
+            "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
-            "raw": "①リュグナー→ク"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→クヴァール"
+            "turn": 0
           }
         ]
       },
@@ -28266,149 +33024,129 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
-            "mi": 1,
-            "part": "assist",
-            "raw": "ゼラ裏、"
-          },
-          {
-            "mi": 3,
-            "part": "assist",
-            "raw": "、カミーユ裏、"
-          },
-          {
-            "mi": 5,
-            "part": "assist",
-            "raw": "Fキコル裏、"
-          },
-          {
             "mi": 0,
             "part": "assist",
-            "raw": "Lキコル裏、"
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "raw": "、ゼラ、F"
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "raw": "Fキコル"
+            "turn": 0
           }
         ],
         "2": [
           {
-            "mi": 2,
+            "mi": 0,
             "part": "assist",
-            "raw": "プリム裏、"
+            "turn": 0
           },
           {
-            "mi": 0,
-            "part": "auto",
-            "raw": "、キコル"
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
           }
         ],
         "3": [
           {
-            "mi": 5,
-            "part": "auto",
-            "raw": "）キコル"
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "raw": "）ゼラ、キ"
-          },
-          {
             "mi": 0,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "キコル"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "キコル"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "キコル※は"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "）キコル、プ"
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "raw": "、プリム"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "）キコル、ゼ"
+            "turn": 0
           },
-          {
-            "mi": 1,
-            "part": "auto",
-            "raw": "、ゼラ"
-          }
-        ],
-        "8": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "キコル、カ"
+            "turn": 1
           },
           {
-            "mi": 3,
+            "mi": 5,
             "part": "auto",
-            "raw": "、カミーユ"
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
           }
         ],
         "9": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
-            "raw": "Fキコル"
+            "turn": 0
           }
         ],
         "10": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
-            "raw": "Lキコル、プ"
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "raw": "、プリム"
+            "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
-            "raw": "Fキコル、サ"
+            "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
-            "raw": "、サノス"
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -28497,82 +33235,82 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ゼラチェ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラチェルン、ゼ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "、ゼルクレア裏、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ゼラチェ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラチェルン"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
             "part": "assist",
-            "raw": "、テレシア裏"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ゼラチェ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラチェルン、ゼ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ゼルクレア"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ゼルクレア"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": " テレシア、ゼ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ゼラチェ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラチェルン、銀"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、サノス"
+            "turn": 0
           }
         ]
       },
@@ -28670,21 +33408,21 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、バンビエッタ、卵"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "ら卯ノ花ルー"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、サノス※順"
+            "turn": 0
           }
         ]
       },
@@ -28770,26 +33508,26 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
-            "raw": "ぐでたま、一"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "てバンビエッタでず"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ぐでたま上側"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、サノス＊順"
+            "turn": 0
           }
         ]
       }
@@ -28882,89 +33620,89 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
-            "raw": "：バズビーB裏"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "→リジェ・バロ裏→"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビーB→"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "：バズビーA裏"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビーB"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "：リジェ・バロx2"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "assist",
-            "raw": "→ジェレミア裏→"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビーB"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "：リジェ・バロ x"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": " ジェレミア"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①バズビー ②"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ジェレミア→バ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビー"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→リジェ・バロx2"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→バズビー"
+            "turn": 0
           }
         ]
       },
@@ -29044,99 +33782,99 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
-            "raw": "：バズビーB裏"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "assist",
-            "raw": "→日番谷裏→"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビーB→"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→バズビーA裏"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "：バズビーB"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "：リジェA裏"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→リジェB→"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "assist",
-            "raw": "→レオナ裏（"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "：リジェAB"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→バズビー"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": " レオナ→バ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビー（火"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "バズビー（火"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "：日番谷→バ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→バズビー"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "：リジェAB"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→バズビー"
+            "turn": 0
           }
         ]
       },
@@ -29221,157 +33959,157 @@ window.PAD_SEED = {
           {
             "mi": 0,
             "part": "assist",
-            "raw": "Lキコル裏"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
             "part": "assist",
-            "raw": "、鋼鐵塚裏、"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "assist",
-            "raw": "Lキコル裏）"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "assist",
-            "raw": "Fキコル裏"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、鋼鐵塚、キ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "キコル、ハ"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、鋼鐵塚、キ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "キコル"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "）キコルずら"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "）キコルで半"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "）キコル、鋼"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、鋼鐵塚"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "）キコルずら"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "）キコルずら"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "）キコルで半"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "）キコル、鋼"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、鋼鐵塚"
+            "turn": 2
           }
         ],
         "9": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "キコル、ハ"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル ※"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "）キコル"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "）鋼鐵塚、キ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "）キコル"
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ]
       },
@@ -29463,35 +34201,35 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
-            "raw": "ナハーデス裏 "
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
             "part": "assist",
-            "raw": "：ハーデス裏ウ"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 5,
             "part": "assist",
-            "raw": "ーレット注意"
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ハーデス"
+            "turn": 1
           }
         ],
         "12": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラハーデス"
+            "turn": 1
           }
         ]
       },
@@ -29590,274 +34328,274 @@ window.PAD_SEED = {
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→空"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "assist",
-            "raw": "→クーバンシェン装備"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA→"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→空"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ノアB"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①ノアA "
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②ノアA"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ナ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "assist",
-            "raw": "→アマージュ→ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ノアA"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 3
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 3
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアC"
+            "turn": 3
           }
         ],
         "9": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ノアC"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 3
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 3
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 3
           }
         ],
         "10": [
           {
             "mi": 5,
             "part": "assist",
-            "raw": "くゼウス/ヘ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ノアB"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "降ベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティアは途"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "⑤ノア"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 3,
             "part": "assist",
-            "raw": "①アマージュ→ノ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノア▶火"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "③ノア▶火"
+            "turn": 2
           }
         ]
       },
@@ -29954,279 +34692,279 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
-            "raw": "メタルスピカ装備"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→空"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "assist",
-            "raw": "→クーバンシェン装備"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA→"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→空"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルへヘ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "へヘスティア→ノ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ノアB"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①ノアA "
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②ノアA"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ナ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "assist",
-            "raw": "→アマージュ→ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ノアA"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 3
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 3
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアC"
+            "turn": 3
           }
         ],
         "9": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ノアC"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 3
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 3
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアB"
+            "turn": 3
           }
         ],
         "10": [
           {
             "mi": 5,
             "part": "assist",
-            "raw": "くゼウス/ヘ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ノアB"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア→ノ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノアA"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "降ベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ルヘスティアは途"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "⑤ノア"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 3,
             "part": "assist",
-            "raw": "①アマージュ→ノ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ノア▶火"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "③ノア▶火"
+            "turn": 2
           }
         ]
       },
@@ -30320,349 +35058,349 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノアa、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラクシュミルド"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ノアb、"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、スーリア、ノ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノアa、"
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ノアc、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": " ラクシュミルド"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ベ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、ベルヘス"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノアa、"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ノアb、"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ノアb、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ノアc、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラクシュミルド"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①ラクシュミルド"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、スーリア、ノ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノアa、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラクシュミルド"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラく"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②ノアa、"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "ノアC、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→ベルヘス"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア、ラ"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラクシュミルド"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノアCム"
+            "turn": 2
           }
         ],
         "7": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ラクシュミルド"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ノア、"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①スーリア、ノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ノア、 "
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "④ノア、"
+            "turn": 3
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "⑤ベルヘス"
+            "turn": 4
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア、ノ"
+            "turn": 4
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ノア、"
+            "turn": 4
           }
         ],
         "9": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①スーリア、ノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ノア、ラ"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラクシュミルド"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、火"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラクシュミルド"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノア、"
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ノア、"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②ノア、ベ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、ベルヘス"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア、"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②ノア、"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "③ラクシュミルド"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ノア、"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "④ラクシュミルド"
+            "turn": 3
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 3
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ノア、"
+            "turn": 3
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "⑤スーリア、ノ"
+            "turn": 4
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ノア、ベ"
+            "turn": 4
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、ベルヘス"
+            "turn": 4
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ルヘスティア、"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ノア、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラクシュミルド"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ミルドラ、ノ"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ノア、"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ノア、"
+            "turn": 2
           }
         ]
       },
@@ -30736,249 +35474,249 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "assist",
-            "raw": "①メタルスピカ装備"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": " ベルヘス"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノア B"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②ノアB②"
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ノアCO"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 4
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "→ノアC①"
+            "turn": 4
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ノアC②"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ノア A"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①ノアB①"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②ノアB②"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "→ノアC①"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "→アマテラス装備"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "（ナツ）"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアC②"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ナツ→ノ"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアA②"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 6
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ノアB①"
+            "turn": 6
           }
         ],
         "9": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①ノアB②"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②ノアC①"
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①ノアC②"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアA①"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①ナツ ▶"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ナツ→ノ"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノア A"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "④ナツ→F"
+            "turn": 3
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fベルヘス"
+            "turn": 3
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "⑤ノアBO"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①ノアB②"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "→ノアC①"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ナツ"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①ノアB②"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ノアC①"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ナツ▶火"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lベルヘス"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→ノアC②"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→ナツ▶火"
+            "turn": 2
           }
         ]
       },
@@ -31076,115 +35814,115 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
-            "raw": "クアンタ裏→"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "アテナ→Z"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→Zガンダム→A"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→クアンタ→ず"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "アテナ→Z"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→Zガンダム→A"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 1,
             "part": "assist",
-            "raw": "クアンタ裏→"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "アテナ→B"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→Zガンダム→A"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→クアンタ →"
+            "turn": 4
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→アテナ→ず"
+            "turn": 4
           }
         ],
         "9": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→Zガンダム→ "
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→クアンタ→ア"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→アテナ→ "
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→Zガンダム→ "
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→アテナ→ナ"
+            "turn": 2
           }
         ],
         "12": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "→クアンタ→ず"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②Zガンダム →"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "→アテナ→ず"
+            "turn": 2
           }
         ]
       },
@@ -31273,142 +36011,142 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
-            "raw": "岩泉（裏"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "assist",
-            "raw": "練ハーデス（裏"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "磨、"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "（岩泉、）"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→童磨、"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "童磨、 "
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "童磨、ハ"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "童磨、岩"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "、岩泉（裏"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "練ハーデス、童"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、童磨、"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→童磨、岩"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、岩泉、 "
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→童磨、"
+            "turn": 2
           }
         ],
         "9": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "童磨、ハ"
+            "turn": 0
           }
         ],
         "10": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "童磨、試"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "練ハーデス、"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "童磨、岩"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、岩泉、マ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "→童磨、 "
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "→童磨、岩"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、岩泉、"
+            "turn": 2
           }
         ],
         "12": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "童磨、ハ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "練ハーデス、"
+            "turn": 0
           }
         ]
       },
@@ -31507,50 +36245,50 @@ window.PAD_SEED = {
           {
             "mi": 4,
             "part": "assist",
-            "raw": "→エスカマリ武器"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "上カラット武器"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
             "part": "assist",
-            "raw": "→アルラウネ武器"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "→アグリゲート武器"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "assist",
-            "raw": "→リクウ武器"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
             "part": "assist",
-            "raw": " アルラウネ武器"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 1,
             "part": "assist",
-            "raw": " アグリゲート武器"
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ブカラット武器"
+            "turn": 1
           }
         ]
       },
@@ -31645,159 +36383,159 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
-            "raw": "右マグナモン、L"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lラインハルト"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 4,
             "part": "assist",
-            "raw": "左マグナモン裏、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ソフィセシ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "らゼウス）、"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "インハルト、（"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ラインハルト こ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "らラインハルト区別"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": " マグナモン、水"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①ラインハルト ②"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②マグナモン（ど"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 1,
             "part": "assist",
-            "raw": " ゼウス裏、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、ラインハルト"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "ラインハルト"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": " マグナモン"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": " ラインハルト"
+            "turn": 2
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": " マグナモン、ソ"
+            "turn": 3
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ソフィセシ"
+            "turn": 3
           }
         ],
         "9": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①ラインハルト ②"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②ラインハルト"
+            "turn": 1
           }
         ],
         "10": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": " ゼウス、ラ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、ラインハルト"
+            "turn": 0
           }
         ],
         "11": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "マグナモン、マ"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、マグナモン"
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①ラインハルト、（"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "らソフィセシ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": " ラインハルト"
+            "turn": 1
           }
         ]
       },
@@ -31889,214 +36627,214 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB上"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアC上"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "セイハーツ+1"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ+1"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": " セイハーツ+1"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラマモアD上"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ラマモアB、"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "セイハーツずら"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "セイハーツ、ラ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ラマモアC、"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラマモアD、"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ！列"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "④セイハーツずら"
+            "turn": 3
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": " ラマモアC、"
+            "turn": 4
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 4
           }
         ],
         "10": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ラマモアD、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "■セイハーツx2"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラマモアB上"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "⑦セイハーツずら"
+            "turn": 6
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ、ラ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ラマモア、セ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツ、ラ"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラマモア、セ"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 1
           }
         ]
       },
@@ -32177,204 +36915,204 @@ window.PAD_SEED = {
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ、F"
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "raw": "Fセイハーツ、ハ"
-          },
-          {
-            "mi": 4,
-            "part": "auto",
-            "raw": "、ハーティア、イ"
-          },
-          {
-            "mi": 2,
-            "part": "base",
-            "raw": "カミラ（表"
-          },
-          {
-            "mi": 1,
-            "part": "assist",
-            "raw": "、サレーネ（裏"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①ハーティア、F"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①ハーティア（ツ"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②カミラ、F"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 3
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "⑤ハーティア、F"
+            "turn": 4
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 4
           }
         ],
         "10": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②カミラ、F"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
+            "turn": 1
           }
         ],
         "11": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
-            "raw": "にセイハーツを打"
+            "turn": 0
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ、イ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、カミラ、サ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、サレーネ、L"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lセイハーツ"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ハーティア、F"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fセイハーツ"
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "raw": "セイハーツを打"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "にセイハーツを打"
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -32467,244 +37205,244 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB上"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアC上"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "セイハーツ＋1"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ+1"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "②セイハーツ+1"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラマモアD上"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②ラマモアB、"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "セイハーツずら"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "ラマモアC、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラマモアD、"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①セイハーツ ！"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": " セイハーツずら"
+            "turn": 3
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": " ラマモアC、"
+            "turn": 4
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 4
           }
         ],
         "10": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ラマモアD、"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB上"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "⑦セイハーツずら"
+            "turn": 6
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ、ラ"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ラマモア、セ"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツ、ラ"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラマモア、セ"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ、ラ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモア、セ"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツ、ラ"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモア"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "③セイハーツ、セ"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "のセイハーツでも"
+            "turn": 1
           }
         ]
       },
@@ -32793,239 +37531,239 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB上"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ、ロ"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ロベリール上、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ロベリール"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアA上"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ロベリール、セ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "③セイハーツずら"
+            "turn": 2
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラマモアB、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "①セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツずら"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ロベリール） "
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": " セイハーツずら"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②春姫上、"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "③セイハーツずら"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": " ラマモアA）"
+            "turn": 3
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "）セイハーツずら"
+            "turn": 3
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "でセイハーツ上に"
+            "turn": 4
           }
         ],
         "10": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": " 春姫）、"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "FラマモアA）"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ロベリール、セ"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツずら"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ●L"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "⑥セイハーツずら"
+            "turn": 5
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "⑦春姫上、"
+            "turn": 6
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 6
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "⑥春姫上、"
+            "turn": 5
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツでも"
+            "turn": 5
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①セイハーツ、ロ"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ロベリール、ラ"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB、"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②セイハーツ、ロ"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ロベリール、ラ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA、"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "、セイハーツ"
+            "turn": 1
           }
         ]
       },
@@ -33116,229 +37854,229 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "auto",
-            "raw": " クロトビ、炭"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ上、"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Fカフカ"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Fカフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ①、"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ②"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Lカフカ"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ①"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ②"
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Lカフカ ヨ"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ① "
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カフカレ/"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Lカフカ"
+            "turn": 1
           }
         ],
         "9": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Fカフカ上、"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、カフカレノ"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ①、"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Lカフカ→突"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Fカフカ上、"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、カフカレノ"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ①"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Lカフカ→突"
+            "turn": 3
           }
         ],
         "10": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ②"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Fカフカ、ク"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロトビ上、"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①カフカレノ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ①"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "③カフカレノ"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ②"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "⑤カフカレノ"
+            "turn": 4
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ①突"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①クロトビ、F"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Fカフカ （"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②カフカレノ"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カレノ②、"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "Lカフカ"
+            "turn": 1
           }
         ]
       },
@@ -33423,147 +38161,147 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カルキノス①、"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、オメガモンA上"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、スクルド上、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "オメガモンB上"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、オメガモンA①"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②オメガモンA②"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "スクルド、ど"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②オメガモン B"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "カルキノス②、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、オメガモンB②"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "スクルド、ど"
+            "turn": 0
           }
         ],
         "8": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、オメガモン A"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②カルキノス、オ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、オメガモン A"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "③スクルド、ど"
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、オメガモン B"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①オメガモンB②"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、カルキノスL消"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "⑤オメガモンA①"
+            "turn": 4
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、カルキノス"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①オメガモン①②"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②オメガモン②、"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "①オメガモン①②"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②オメガモン②、"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "③スクルド、ど"
+            "turn": 2
           }
         ]
       },
@@ -33838,234 +38576,234 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
-            "raw": "※キコルはど"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロノス上、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル上、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、アドネア、キ"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル上、"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "アドネア、ク"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロノス、L"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "（キコル）"
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①キコルなけ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "（キコル）"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①キコル"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②アドネア、キ"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①クロノス、キ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル（耐"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 1
           }
         ],
         "6": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "功、キ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①キコル"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②キコル"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "キコル"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①アドネア上、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロノス、1"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②キコル"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②キコル"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロノス溜ま"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "①キコル"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②キコル"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "③キコル"
+            "turn": 2
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "④キコル"
+            "turn": 3
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロノス、キ"
+            "turn": 4
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 4
           }
         ],
         "12": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、クロノス溜ま"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①アドネア上、"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "②キコル"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "③キコル"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "④キコル L"
+            "turn": 3
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、キコル）"
+            "turn": 4
           }
         ]
       },
@@ -34154,314 +38892,314 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB、"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアC上"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム 4"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "本レムルー"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "はレム必須"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ラマモアD、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム、 "
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②ラマモアB、"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム、 "
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "ラマモアC、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラマモアD、"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム、ラ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "①ラマモアB、"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム ！"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム打て"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、ラ"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ラマモアC、"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②ラマモアD、"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム、ラ"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアA "
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、ラ"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、ラ"
+            "turn": 3
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "、ラマモアC"
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム 最"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、ラ"
+            "turn": 1
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "、ラマモアD"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、ラ"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモアD"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ラマモアA、"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム ！"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "じレム"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 3
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム 3"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、ラ"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアD"
+            "turn": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "③ラマモアA、"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム ②"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "じレム"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 3
           }
         ]
       },
@@ -34546,74 +39284,74 @@ window.PAD_SEED = {
           {
             "mi": 0,
             "part": "assist",
-            "raw": "メタトロン武器"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "assist",
-            "raw": "▶無一郎＆甘"
+            "turn": 0
           }
         ],
         "2": [
           {
             "mi": 5,
             "part": "assist",
-            "raw": "）ジーニー武器"
+            "turn": 0
           }
         ],
         "3": [
           {
             "mi": 4,
             "part": "assist",
-            "raw": "ノルザ＆マ"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "assist",
-            "raw": "＆マール武器"
+            "turn": 0
           }
         ],
         "5": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "▶神楽"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "）ミヤ神楽"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ヤ神楽▶銀"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "）神楽▶1"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "▶ミヤ神楽"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "ヤ神楽▶銀"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "▶神楽"
+            "turn": 2
           }
         ]
       },
@@ -34702,239 +39440,239 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアA、"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "、ラマモアB上"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "ラマモアC、"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム 1"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "本レムルー"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "はレム必須"
+            "turn": 1
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラマモアは浮"
+            "turn": 1
           }
         ],
         "2": [
           {
             "mi": 3,
             "part": "auto",
-            "raw": "①ラマモア、レ"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "レレム"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 1
           }
         ],
         "3": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "ラマモア、L"
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 0
           }
         ],
         "4": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、●"
+            "turn": 0
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "②ラマモア、L"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 1
           }
         ],
         "5": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム、 "
+            "turn": 0
           }
         ],
         "6": [
           {
             "mi": 2,
             "part": "auto",
-            "raw": "ラマモア、レ"
+            "turn": 0
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "レレム"
+            "turn": 0
           }
         ],
         "7": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②ラマモア、L"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 1
           }
         ],
         "8": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           }
         ],
         "9": [
           {
             "mi": 4,
             "part": "auto",
-            "raw": "①ラマモア、ラ"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "、ラマモア、★"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 2
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "③ラマモア、★"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 2
           }
         ],
         "10": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "②ラマモア、L"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 1
           }
         ],
         "11": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム 3"
+            "turn": 0
           },
           {
             "mi": 4,
             "part": "auto",
-            "raw": "②ラマモア、★"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "レレム"
+            "turn": 1
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 2
           },
           {
             "mi": 1,
             "part": "auto",
-            "raw": "④ラマモア、★"
+            "turn": 3
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "レレム"
+            "turn": 3
           }
         ],
         "12": [
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 0
           },
           {
             "mi": 2,
             "part": "auto",
-            "raw": "②ラマモア、★"
+            "turn": 1
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 1
           },
           {
             "mi": 3,
             "part": "auto",
-            "raw": "③ラマモア、★"
+            "turn": 2
           },
           {
             "mi": 5,
             "part": "auto",
-            "raw": "Fレム"
+            "turn": 2
           },
           {
             "mi": 0,
             "part": "auto",
-            "raw": "Lレム"
+            "turn": 3
           }
         ]
       },

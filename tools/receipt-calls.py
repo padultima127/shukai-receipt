@@ -75,6 +75,9 @@ def keys_of(name):
     return [k for k in keys if len(k) >= 2]
 
 
+CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
+BRANCH = re.compile(r"^\s*(通常|乱入|[■●□○]|.{0,10}の(場合|とき|時)|[火水木光闇][アグリ色]?(の場合|なら))")
+TURN_END = re.compile(r"盤面\s*\d+\s*[cCｃ]|[+＋]?\s*\d\s*[cCｃ](?!(?![xX]\s*\d)[a-zA-Z])|ずらし|[0０]\s*[cCｃ]|全力|[LＬ]字|十字|列")
 FLOOR = re.compile(r"^[\s◆◇●■・•★☆【]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:)")
 
 
@@ -88,11 +91,23 @@ def parse_team(team, texts):
     calls = {}
     floor = None
     seen_order = {}
+    turn_base = 0  # その階で、この行より前に終わったターンの数（盤面◯c・ずらし・①②などで区切る）
     for line in texts[idx + 1:]:
         m = FLOOR.match(line)
         if m:
             floor = int(m.group(1))
             line = line[m.end():]
+            turn_base = 0
+        # 「通常」「乱入」「■の場合」などの分岐は、どちらか一方なので同じ階の最初のターンから数え直す
+        if BRANCH.match(line):
+            turn_base = 0
+        # ターンの区切り: パズル（盤面4c・+1c・ずらし・0c）でそのターンが終わる。①②…はそのターン番号
+        ends = []
+        for mm in TURN_END.finditer(line):
+            # 「1Cx3」「0c×2」は3ターン・2ターン
+            rep = re.match(r"\s*[xX×]\s*(\d)", line[mm.end():])
+            ends += [mm.end()] * (int(rep.group(1)) if rep else 1)
+        marks = [(mm.start(), CIRCLED.index(mm.group(0))) for mm in re.finditer("[" + CIRCLED + "]", line)]
         if floor is None or floor > 30:
             continue
         # 区切り（→ など）がOCRで消えることがあるので、行の中からキャラ名の出てくる位置を探す
@@ -140,7 +155,13 @@ def parse_team(team, texts):
                     n = seen_order.get(k, 0)
                     mi = same[n % len(same)]
                     seen_order[k] = n + 1
-            calls.setdefault(str(floor), []).append({"mi": mi, "part": part, "raw": line[max(0, st - 1):en + 2]})
+            turn = turn_base + sum(1 for e in ends if e <= st)
+            for pos, n in marks:
+                if pos <= st:
+                    turn = max(turn, n)
+            calls.setdefault(str(floor), []).append({"mi": mi, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2]})
+        if floor is not None:
+            turn_base += len(ends)
     return calls or None
 
 
