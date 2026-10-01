@@ -2110,7 +2110,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       const rg = useSkill ? lastActive(setup.regens, turn)?.pct ?? 0 : 0;
       // 即時回復: このターンに使ったスキルの分（リジェネとは別枠で足す）
       const inst = useSkill ? (setup.instantHeals ?? []).filter((x) => startOf(x) === turn).reduce((n, x) => n + x.pct, 0) : 0;
-      const fullHeal = useSkill && (setup.healTurns ?? []).some((x) => startOf(x) === turn);
+      // 回復ドロップを作るスキル（セイハーツなど）をその階で使っていれば、その階は毎ターン全回復（レシートの何ターン目かは当てにならないため。本人指定）
+      const fullHeal = useSkill && (setup.healTurns ?? []).some((x) => x.floor === curFloor);
       hp = setup.healGen || fullHeal ? maxAt() : Math.min(maxAt(), hp + (maxAt() * (rg + inst)) / 100);
       if (i === 0) {
         for (const h of sr) {

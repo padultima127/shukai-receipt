@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 97,
+  "version": 99,
   "seed": true,
   "monsters": [
     {
@@ -2599,12 +2599,12 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/562297",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/15528062.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
@@ -2618,33 +2618,41 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 2000000,
-                "kind": "preemptive",
-                "attrs": [
-                  "光",
-                  "闇"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 3500000,
                 "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
                 ],
-                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
+                "dmg": 2000000
+              },
+              {
+                "label": "先制",
+                "kind": "preemptive",
+                "attrs": [
+                  "光",
+                  "闇"
+                ],
+                "dmg": 3500000
               }
             ],
             "enemyAttrs": [
               "光",
               "闇"
             ],
-            "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
+            "note": "2体の組み合わせが2通り（光2,000,000＋闇3,500,000 か その逆）"
           },
           {
             "floor": 3,
-            "hits": [],
+            "hits": [
+              {
+                "label": "2ターン目",
+                "dmg": 10000000,
+                "kind": "turn",
+                "attrs": [
+                  "闇"
+                ]
+              }
+            ],
             "enemyAttrs": [
               "闇"
             ]
@@ -2654,19 +2662,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 10395000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
-              },
-              {
-                "label": "初回行動時",
-                "dmg": 10500000,
-                "kind": "turn",
-                "attrs": [
-                  "木"
-                ]
+                ],
+                "dmg": 10395000
               }
             ],
             "enemyAttrs": [
@@ -2678,31 +2678,36 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 10890000,
                 "kind": "preemptive",
                 "attrs": [
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 10890000
               }
             ],
             "enemyAttrs": [
+              "木",
               "水"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入（グレーシス）は先制10,000,000"
           },
           {
             "floor": 6,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 15000000,
                 "kind": "preemptive",
                 "attrs": [
-                  "火"
-                ]
+                  "火",
+                  "木"
+                ],
+                "dmg": 15000000
               },
               {
-                "label": "初回行動時",
-                "dmg": 14700000,
+                "label": "2ターン目",
+                "dmg": 15150000,
                 "kind": "turn",
                 "attrs": [
                   "火"
@@ -2710,27 +2715,30 @@ window.PAD_SEED = {
               }
             ],
             "enemyAttrs": [
+              "木",
               "火"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
           },
           {
             "floor": 7,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 5500000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 5500000
               },
               {
                 "label": "先制",
-                "dmg": 9900000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 9900000
               }
             ],
             "enemyAttrs": [
@@ -2746,19 +2754,18 @@ window.PAD_SEED = {
               "水",
               "火",
               "闇"
-            ],
-            "note": "敵は5種類のうち4体。先制ダメージが大きい組み合わせで計算（安全側）"
+            ]
           },
           {
             "floor": 9,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 16000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 16000000
               }
             ],
             "enemyAttrs": [
@@ -2766,15 +2773,24 @@ window.PAD_SEED = {
             ],
             "enemyAttrsAfter": [
               "闇"
-            ]
+            ],
+            "note": "超根性（固定値）の後の行動はダメージなし（無言殴りになる場合を除く）"
           },
           {
             "floor": 10,
             "hits": [
               {
                 "label": "先制 現HP350%割合",
-                "ratio": 350,
                 "kind": "preemptive",
+                "attrs": [
+                  "水"
+                ],
+                "ratio": 350
+              },
+              {
+                "label": "2ターン目",
+                "dmg": 18700000,
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2789,14 +2805,14 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 19000000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 19000000
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 2280000,
                 "kind": "turn",
                 "attrs": [
@@ -2813,30 +2829,30 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 19152000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木",
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 19152000
               }
             ],
             "enemyAttrs": [
               "木",
               "水"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 13,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 19950000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 19950000
               }
             ],
             "enemyAttrs": [
@@ -2848,14 +2864,15 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 10450000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 10450000,
+                "note": "既にアシスト無効の時は無言殴りで合計31,350,000"
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 18810000,
                 "kind": "turn",
                 "attrs": [
@@ -2872,20 +2889,22 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 21582000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 21582000,
+                "note": "既に6×5でスキルの盤面変化もない時は無言殴り"
               },
               {
                 "label": "超根性発動時",
                 "dmg": 22018000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "闇"
                 ],
-                "threshold": 50
+                "threshold": 50,
+                "note": "10ターン目以降は1.5倍で33,027,000"
               }
             ],
             "enemyAttrs": [
@@ -3038,33 +3057,33 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/545668",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/13993647.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 40000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木",
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 40000
               },
               {
                 "label": "先制",
-                "dmg": 70000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木",
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 70000
               }
             ],
             "enemyAttrs": [
@@ -3076,18 +3095,18 @@ window.PAD_SEED = {
               "水",
               "闇"
             ],
-            "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
+            "note": "2体の組み合わせが2通り"
           },
           {
             "floor": 2,
             "hits": [
               {
                 "label": "先制 現HP99%割合",
-                "ratio": 99,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "ratio": 99
               }
             ],
             "enemyAttrs": [
@@ -3102,22 +3121,23 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 5000000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木",
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 5000000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 5000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木",
-                  "水"
+                  "水",
+                  "木"
                 ],
-                "threshold": 30
+                "threshold": 30,
+                "note": "先制の敵攻撃力4倍が残っている1ターン目に発動すると20,000,000"
               }
             ],
             "enemyAttrs": [
@@ -3128,26 +3148,26 @@ window.PAD_SEED = {
               "木",
               "水"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 4,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 2250000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 2250000
               },
               {
                 "label": "先制",
-                "dmg": 2250000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 2250000
               }
             ],
             "enemyAttrs": [
@@ -3169,54 +3189,59 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6000000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 6000000
               }
             ],
             "enemyAttrs": [
               "水"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
           },
           {
             "floor": 6,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6000000,
                 "kind": "preemptive",
                 "attrs": [
+                  "水",
                   "光"
-                ]
+                ],
+                "dmg": 6000000
               }
             ],
             "enemyAttrs": [
-              "光"
-            ]
+              "光",
+              "水"
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
           },
           {
             "floor": 7,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
-                ]
+                ],
+                "dmg": 8000000
               },
               {
-                "label": "超根性発動時",
+                "label": "固定値超根性の後の行動（固定追撃で倒す前提なので受けない扱い）",
                 "dmg": 8800000,
-                "kind": "superResolve",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
-                ],
-                "threshold": 50
+                ]
               }
             ],
             "enemyAttrs": [
@@ -3227,25 +3252,25 @@ window.PAD_SEED = {
               "光",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 8,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8000000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 8000000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 8500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "水"
+                  "木"
                 ],
                 "threshold": 40
               }
@@ -3262,19 +3287,19 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 4200000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 4200000
               },
               {
                 "label": "先制",
-                "dmg": 4200000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 4200000
               }
             ],
             "enemyAttrs": [
@@ -3287,20 +3312,21 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制 現HP120%割合",
-                "ratio": 120,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "ratio": 120
               },
               {
                 "label": "超根性発動時",
                 "dmg": 8600000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木"
+                  "水"
                 ],
-                "threshold": 30
+                "threshold": 30,
+                "note": "先制の敵攻撃力3.5倍が残っている1ターン目に発動すると30,100,000"
               }
             ],
             "enemyAttrs": [
@@ -3315,20 +3341,19 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 9000000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 9000000
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 4590000,
                 "kind": "turn",
                 "attrs": [
                   "水"
-                ],
-                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
+                ]
               }
             ],
             "enemyAttrs": [
@@ -3340,14 +3365,14 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 10000000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 10000000
               },
               {
-                "label": "初回行動時",
+                "label": "1回目",
                 "dmg": 39000000,
                 "kind": "turn",
                 "attrs": [
@@ -3359,7 +3384,7 @@ window.PAD_SEED = {
                 "dmg": 7000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木"
+                  "水"
                 ],
                 "threshold": 50
               }
@@ -3502,39 +3527,39 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/574144",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/16911026.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 22500,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 22500
               },
               {
                 "label": "先制",
-                "dmg": 22500,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 22500
               },
               {
                 "label": "先制",
-                "dmg": 45000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 45000
               }
             ],
             "enemyAttrs": [
@@ -3548,19 +3573,19 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6120000,
                 "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
-                ]
+                ],
+                "dmg": 6120000
               }
             ],
             "enemyAttrs": [
               "光",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 3,
@@ -3574,18 +3599,19 @@ window.PAD_SEED = {
             "hits": [],
             "enemyAttrs": [
               "水"
-            ]
+            ],
+            "note": "先制はダメージなし（無言殴りになった時は7,200,000）"
           },
           {
             "floor": 5,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 7400000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 8000000
               },
               {
                 "label": "初回行動時",
@@ -3608,29 +3634,33 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 3780000,
                 "kind": "preemptive",
                 "attrs": [
-                  "光"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 3780000,
-                "kind": "preemptive",
-                "attrs": [
+                  "光",
                   "闇"
-                ]
+                ],
+                "dmg": 7650000
               }
             ],
             "enemyAttrs": [
               "光",
               "闇"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入なしは光3,780,000＋闇3,780,000"
           },
           {
             "floor": 7,
-            "hits": [],
+            "hits": [
+              {
+                "label": "1ターン目",
+                "dmg": 2000000,
+                "kind": "turn",
+                "attrs": [
+                  "光"
+                ]
+              }
+            ],
             "enemyAttrs": [
               "光"
             ]
@@ -3640,35 +3670,38 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8206275,
                 "kind": "preemptive",
                 "attrs": [
-                  "火"
-                ]
+                  "火",
+                  "光"
+                ],
+                "dmg": 8730000
               }
             ],
             "enemyAttrs": [
+              "光",
               "火"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入（レモック）は先制7,650,000"
           },
           {
             "floor": 9,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 9450000,
                 "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
-                ]
+                ],
+                "dmg": 9450000
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 10500000,
                 "kind": "turn",
                 "attrs": [
-                  "光",
                   "闇"
                 ]
               }
@@ -3677,35 +3710,34 @@ window.PAD_SEED = {
               "光",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 10,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 3780000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 3780000
               },
               {
                 "label": "先制",
-                "dmg": 7560000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 7560000
               },
               {
-                "label": "超根性発動時",
+                "label": "固定値超根性の後の行動（固定追撃で倒す前提なので受けない扱い）",
                 "dmg": 8484000,
-                "kind": "superResolve",
+                "kind": "turn",
                 "attrs": [
-                  "火"
-                ],
-                "threshold": 50
+                  "水"
+                ]
               }
             ],
             "enemyAttrs": [
@@ -3737,22 +3769,21 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 14400000,
                 "kind": "preemptive",
                 "attrs": [
+                  "火",
                   "木",
-                  "水",
-                  "火"
-                ]
+                  "水"
+                ],
+                "dmg": 14400000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 16160000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光",
-                  "木",
-                  "水"
+                  "火",
+                  "木"
                 ],
                 "threshold": 50
               }
@@ -3767,7 +3798,7 @@ window.PAD_SEED = {
               "水",
               "闇"
             ],
-            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 13,
@@ -3781,11 +3812,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 16200000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 16200000
               }
             ],
             "enemyAttrs": [
@@ -3810,7 +3841,8 @@ window.PAD_SEED = {
                 "attrs": [
                   "光"
                 ],
-                "threshold": 50
+                "threshold": 50,
+                "note": "部位を全部壊した後は1.3倍で26,000,000"
               }
             ],
             "enemyAttrs": [
@@ -3819,7 +3851,6 @@ window.PAD_SEED = {
             "enemyAttrsAfter": [
               "光"
             ],
-            "parts": true,
             "awaken": [
               {
                 "names": [
@@ -3828,7 +3859,8 @@ window.PAD_SEED = {
                 ],
                 "dur": 10
               }
-            ]
+            ],
+            "parts": true
           }
         ]
       }
@@ -3957,31 +3989,31 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/551905",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/14646821.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 54000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 54000
               },
               {
                 "label": "先制",
-                "dmg": 45000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 45000
               },
               {
                 "label": "初回行動時",
@@ -4000,14 +4032,13 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "超根性発動時",
+                "label": "固定値超根性の後の行動（固定追撃で倒す前提なので受けない扱い）",
                 "dmg": 6510000,
-                "kind": "superResolve",
+                "kind": "turn",
                 "attrs": [
-                  "光",
+                  "火",
                   "木"
-                ],
-                "threshold": 50
+                ]
               }
             ],
             "enemyAttrs": [
@@ -4018,34 +4049,34 @@ window.PAD_SEED = {
               "光",
               "木"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 3,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 1980000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 1980000
               },
               {
                 "label": "先制",
-                "dmg": 1980000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 1980000
               },
               {
                 "label": "先制",
-                "dmg": 1980000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 1980000
               }
             ],
             "enemyAttrs": [
@@ -4066,19 +4097,11 @@ window.PAD_SEED = {
                 ]
               },
               {
-                "label": "初回行動時",
-                "dmg": 25200000,
-                "kind": "turn",
-                "attrs": [
-                  "火"
-                ]
-              },
-              {
                 "label": "超根性発動時",
                 "dmg": 7000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "闇"
+                  "火"
                 ],
                 "threshold": 40
               }
@@ -4095,50 +4118,63 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6480000,
                 "kind": "preemptive",
                 "attrs": [
+                  "火",
                   "光",
                   "闇"
-                ]
+                ],
+                "dmg": 6750000
               }
             ],
             "enemyAttrs": [
               "光",
+              "火",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入なしは先制6,480,000"
           },
           {
             "floor": 6,
-            "hits": [],
+            "hits": [
+              {
+                "label": "先制",
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ],
+                "dmg": 6750000
+              }
+            ],
             "enemyAttrs": [
               "火"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入なしは先制ダメージなし"
           },
           {
             "floor": 7,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 2070000,
-                "kind": "preemptive",
-                "attrs": [
-                  "光"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 5300000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
                 ],
-                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
+                "dmg": 2070000
               },
               {
-                "label": "初回行動時",
-                "dmg": 4770000,
+                "label": "先制",
+                "kind": "preemptive",
+                "attrs": [
+                  "光"
+                ],
+                "dmg": 4770000
+              },
+              {
+                "label": "2ターン目",
+                "dmg": 5300000,
                 "kind": "turn",
                 "attrs": [
                   "光"
@@ -4154,18 +4190,18 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 7020000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 7020000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 7800000,
                 "kind": "superResolve",
                 "attrs": [
-                  "火"
+                  "闇"
                 ],
                 "threshold": 40
               }
@@ -4183,7 +4219,8 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "木",
               "火"
-            ]
+            ],
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 10,
@@ -4195,6 +4232,15 @@ window.PAD_SEED = {
                 "attrs": [
                   "火"
                 ]
+              },
+              {
+                "label": "超根性発動時",
+                "dmg": 9240000,
+                "kind": "superResolve",
+                "attrs": [
+                  "火"
+                ],
+                "threshold": 40
               }
             ],
             "enemyAttrs": [
@@ -4217,7 +4263,7 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 9000000,
                 "kind": "turn",
                 "attrs": [
@@ -4234,18 +4280,27 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 9000000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 9000000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 2000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "木"
+                  "火"
+                ],
+                "threshold": 50
+              },
+              {
+                "label": "超根性発動の次のターン（4.5倍）",
+                "dmg": 45900000,
+                "kind": "superResolve",
+                "attrs": [
+                  "火"
                 ],
                 "threshold": 50
               }
@@ -4403,12 +4458,12 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/564989",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/15930656.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
@@ -4422,11 +4477,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 10000000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 10000000
               }
             ],
             "enemyAttrs": [
@@ -4438,19 +4493,19 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 2500000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 2500000
               },
               {
                 "label": "先制",
-                "dmg": 8000000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 8000000
               }
             ],
             "enemyAttrs": [
@@ -4462,11 +4517,12 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 3300000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 3300000,
+                "note": "既にアシスト無効の時は無言殴りで合計14,300,000"
               },
               {
                 "label": "初回行動時",
@@ -4486,11 +4542,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 12000000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 12000000
               }
             ],
             "enemyAttrs": [
@@ -4502,27 +4558,27 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 4500000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 4500000
               },
               {
                 "label": "先制",
-                "dmg": 4500000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 4500000
               },
               {
                 "label": "先制",
-                "dmg": 4500000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 4500000
               }
             ],
             "enemyAttrs": [
@@ -4533,45 +4589,69 @@ window.PAD_SEED = {
           },
           {
             "floor": 7,
-            "hits": [],
+            "hits": [
+              {
+                "label": "先制",
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ],
+                "dmg": 3000000
+              },
+              {
+                "label": "固定値超根性の後の行動（固定追撃で倒す前提なので受けない扱い）",
+                "dmg": 135000000,
+                "kind": "turn",
+                "attrs": [
+                  "木"
+                ]
+              }
+            ],
             "enemyAttrs": [
+              "木",
               "火"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入（リータ）の時だけ先制ダメージあり"
           },
           {
             "floor": 8,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 15000000,
                 "kind": "preemptive",
                 "attrs": [
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 15000000
               }
             ],
             "enemyAttrs": [
+              "木",
               "水"
-            ]
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入（リータ）は先制3,000,000"
           },
           {
             "floor": 9,
             "hits": [
               {
                 "label": "先制 現HP350%割合",
-                "ratio": 350,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "ratio": 350
               },
               {
                 "label": "先制",
-                "dmg": 17000000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 17000000
               }
             ],
             "enemyAttrs": [
@@ -4583,11 +4663,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 17500000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 17500000
               }
             ],
             "enemyAttrs": [
@@ -4606,11 +4686,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 21000000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 21000000
               }
             ],
             "enemyAttrs": [
@@ -4630,33 +4710,33 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 22000000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木",
-                  "水"
-                ]
+                  "水",
+                  "木"
+                ],
+                "dmg": 22000000
               }
             ],
             "enemyAttrs": [
               "木",
               "水"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 14,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 22080000,
                 "kind": "preemptive",
                 "attrs": [
                   "木"
-                ]
+                ],
+                "dmg": 22080000
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 22560000,
                 "kind": "turn",
                 "attrs": [
@@ -4673,11 +4753,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 22500000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木"
-                ]
+                  "水"
+                ],
+                "dmg": 22500000
               },
               {
                 "label": "超根性発動時",
@@ -4686,11 +4766,13 @@ window.PAD_SEED = {
                 "attrs": [
                   "水"
                 ],
-                "threshold": 50
+                "threshold": 50,
+                "note": "10ターン目以降は1.5倍で37,500,000"
               }
             ],
             "enemyAttrs": [
-              "木"
+              "木",
+              "水"
             ],
             "enemyAttrsAfter": [
               "水"
@@ -5636,31 +5718,31 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/531389",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/12632603.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 37500,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 37500
               },
               {
                 "label": "先制",
-                "dmg": 37500,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 37500
               }
             ],
             "enemyAttrs": [
@@ -5675,20 +5757,21 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 4000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 4000000
               },
               {
                 "label": "超根性発動時",
-                "dmg": 20000000,
+                "dmg": 4000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "闇"
+                  "光"
                 ],
-                "threshold": 50
+                "threshold": 40,
+                "note": "先制の敵攻撃力5倍が残っている1ターン目に発動すると20,000,000"
               }
             ],
             "enemyAttrs": [
@@ -5711,19 +5794,19 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 1000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 1000000
               },
               {
                 "label": "先制",
-                "dmg": 3100000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 3100000
               }
             ],
             "enemyAttrs": [
@@ -5746,22 +5829,23 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 5500000,
                 "kind": "preemptive",
                 "attrs": [
-                  "光",
-                  "闇"
-                ]
+                  "闇",
+                  "光"
+                ],
+                "dmg": 5500000
               },
               {
                 "label": "超根性発動時",
-                "dmg": 27500000,
+                "dmg": 5500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "火",
-                  "闇"
+                  "闇",
+                  "光"
                 ],
-                "threshold": 50
+                "threshold": 40,
+                "note": "先制の敵攻撃力5倍が残っている1ターン目に発動すると27,500,000"
               }
             ],
             "enemyAttrs": [
@@ -5772,39 +5856,20 @@ window.PAD_SEED = {
               "火",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 7,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6000000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木",
-                  "火"
-                ]
-              }
-            ],
-            "enemyAttrs": [
-              "木",
-              "火"
-            ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
-          },
-          {
-            "floor": 8,
-            "hits": [
-              {
-                "label": "先制",
-                "dmg": 6000000,
-                "kind": "preemptive",
-                "attrs": [
-                  "木",
                   "水",
-                  "火"
-                ]
+                  "火",
+                  "木"
+                ],
+                "dmg": 6000000
               }
             ],
             "enemyAttrs": [
@@ -5812,18 +5877,41 @@ window.PAD_SEED = {
               "水",
               "火"
             ],
-            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
+          },
+          {
+            "floor": 8,
+            "hits": [
+              {
+                "label": "先制",
+                "kind": "preemptive",
+                "attrs": [
+                  "水",
+                  "火",
+                  "木"
+                ],
+                "dmg": 6000000
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
           },
           {
             "floor": 9,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 2000000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 2000000
               }
             ],
             "enemyAttrs": [
@@ -5838,11 +5926,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 200000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 200000
               },
               {
                 "label": "超根性発動時",
@@ -5866,38 +5954,31 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8100000,
                 "kind": "preemptive",
                 "attrs": [
-                  "火",
-                  "闇"
-                ]
+                  "闇",
+                  "火"
+                ],
+                "dmg": 8100000
               }
             ],
             "enemyAttrs": [
               "火",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 12,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8200000,
                 "kind": "preemptive",
                 "attrs": [
-                  "木"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 8200000,
-                "kind": "preemptive",
-                "attrs": [
+                  "木",
                   "闇"
-                ]
+                ],
+                "dmg": 8200000
               }
             ],
             "enemyAttrs": [
@@ -5917,21 +5998,22 @@ window.PAD_SEED = {
                 ],
                 "dur": 7
               }
-            ]
+            ],
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 13,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8200000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 8200000
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 8364000,
                 "kind": "turn",
                 "attrs": [
@@ -5948,20 +6030,20 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8820000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 8820000
               },
               {
-                "label": "超根性発動時",
+                "label": "超根性発動の次のターン（4.5倍）",
                 "dmg": 40500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "火"
+                  "闇"
                 ],
-                "threshold": 50
+                "threshold": 60
               }
             ],
             "enemyAttrs": [
@@ -6169,31 +6251,39 @@ window.PAD_SEED = {
       "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
       "damage": {
         "source": {
-          "site": "ゲームウィズ",
-          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/542373",
+          "site": "ぜいんちゅんち・ぜいんち",
+          "url": "https://zeinchu.livedoor.blog/archives/13737706.html",
           "date": "2026-10-01"
         },
-        "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "auto": false,
+        "note": "ぜいんちゅんち・ぜいんち（@Zee_ikusane）さんの敵行動の表から、先制・超根性発動時などのダメージを取り込み（許可済み）。数値は実測が中心で、一部はPDCや他サイトからの引用。特殊な条件のダメージは備考欄に書かれていないこともあるので目安として。初回行動はワンパン前提で受けない扱い。最新の情報は元の記事（更新内容は記事に追記されます）を確認してください",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 37500,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 37500
               },
               {
                 "label": "先制",
-                "dmg": 44730,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 45000
+              },
+              {
+                "label": "先制 現HP99%割合",
+                "kind": "preemptive",
+                "attrs": [
+                  "光"
+                ],
+                "ratio": 99
               }
             ],
             "enemyAttrs": [
@@ -6210,13 +6300,13 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 4500000,
                 "kind": "preemptive",
                 "attrs": [
-                  "光",
+                  "火",
                   "水",
-                  "火"
-                ]
+                  "光"
+                ],
+                "dmg": 4500000
               }
             ],
             "enemyAttrs": [
@@ -6224,26 +6314,26 @@ window.PAD_SEED = {
               "水",
               "火"
             ],
-            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 3,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 2500000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 2500000
               },
               {
                 "label": "先制",
-                "dmg": 2500000,
                 "kind": "preemptive",
                 "attrs": [
                   "闇"
-                ]
+                ],
+                "dmg": 2500000
               }
             ],
             "enemyAttrs": [
@@ -6259,31 +6349,23 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 5000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光",
                   "火"
-                ]
-              },
-              {
-                "label": "初回行動時",
-                "dmg": 20000000,
-                "kind": "turn",
-                "attrs": [
-                  "光",
-                  "火"
-                ]
+                ],
+                "dmg": 5000000
               },
               {
                 "label": "超根性発動時",
-                "dmg": 20000000,
+                "dmg": 5000000,
                 "kind": "superResolve",
                 "attrs": [
                   "光",
                   "火"
                 ],
-                "threshold": 40
+                "threshold": 40,
+                "note": "先制の敵攻撃力4倍が残っている1ターン目に発動すると20,000,000"
               }
             ],
             "enemyAttrs": [
@@ -6294,51 +6376,65 @@ window.PAD_SEED = {
               "光",
               "火"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 5,
-            "hits": [],
+            "hits": [
+              {
+                "label": "先制",
+                "kind": "preemptive",
+                "attrs": [
+                  "火",
+                  "闇"
+                ],
+                "dmg": 6000000
+              }
+            ],
             "enemyAttrs": [
               "火",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
           },
           {
             "floor": 6,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6000000,
                 "kind": "preemptive",
                 "attrs": [
+                  "火",
                   "光"
-                ]
+                ],
+                "dmg": 6000000
               }
             ],
             "enemyAttrs": [
-              "光"
+              "光",
+              "火"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "parts": true,
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）"
           },
           {
             "floor": 7,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 1600000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 2000000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 8000000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光"
+                  "水"
                 ],
                 "threshold": 50
               }
@@ -6355,11 +6451,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 8000000
               }
             ],
             "enemyAttrs": [
@@ -6374,11 +6470,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 200000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 200000
               }
             ],
             "enemyAttrs": [
@@ -6398,31 +6494,23 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 7500000,
                 "kind": "preemptive",
                 "attrs": [
                   "光",
                   "火"
-                ]
-              },
-              {
-                "label": "初回行動時",
-                "dmg": 15000000,
-                "kind": "turn",
-                "attrs": [
-                  "光",
-                  "火"
                 ],
-                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
+                "dmg": 7500000
               },
               {
                 "label": "超根性発動時",
                 "dmg": 7500000,
                 "kind": "superResolve",
                 "attrs": [
-                  "光"
+                  "光",
+                  "火"
                 ],
-                "threshold": 40
+                "threshold": 40,
+                "note": "先制の敵攻撃力4倍が残っている1ターン目に発動すると30,000,000"
               }
             ],
             "enemyAttrs": [
@@ -6432,18 +6520,18 @@ window.PAD_SEED = {
             "enemyAttrsAfter": [
               "光"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 11,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 8200000,
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
+                ],
+                "dmg": 8200000
               }
             ],
             "enemyAttrs": [
@@ -6467,21 +6555,21 @@ window.PAD_SEED = {
               "光",
               "闇"
             ],
-            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+            "note": "ランダムで1体出現。ダメージが大きい方で計算（属性は候補すべて）"
           },
           {
             "floor": 13,
             "hits": [
               {
                 "label": "先制",
-                "dmg": 9000000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "dmg": 9000000
               },
               {
-                "label": "初回行動時",
+                "label": "1ターン目",
                 "dmg": 20000000,
                 "kind": "turn",
                 "attrs": [
@@ -6498,8 +6586,16 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 4500000,
                 "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ],
+                "dmg": 5000000
+              },
+              {
+                "label": "1ターン目",
+                "dmg": 6000000,
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -6514,11 +6610,11 @@ window.PAD_SEED = {
             "hits": [
               {
                 "label": "先制",
-                "dmg": 6506000,
                 "kind": "preemptive",
                 "attrs": [
                   "火"
-                ]
+                ],
+                "dmg": 6000000
               },
               {
                 "label": "超根性発動時",
@@ -6530,32 +6626,12 @@ window.PAD_SEED = {
                 "threshold": 60
               },
               {
-                "label": "超根性発動時",
+                "label": "超根性発動の次のターン（4.5倍）",
                 "dmg": 45000000,
                 "kind": "superResolve",
                 "attrs": [
                   "火"
                 ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 9600000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
-                "note": "表には4件のダメージ（敵1体につき1回として最大の値）",
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 10000000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
-                "note": "表には4件のダメージ（敵1体につき1回として最大の値）",
                 "threshold": 60
               }
             ],
