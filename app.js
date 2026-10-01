@@ -401,7 +401,10 @@ function teamResist(team, mem, part, candNo) {
 function teamSkillBoost(team, mem, part, candNo) {
   let n = 0;
   for (const m of team.members.filter((x) => !team.multi || x.p === mem.p)) {
-    const b = candNo && m === mem && part === "base" ? candNo : monster(m.id)?.no;
+    const b0 = candNo && m === mem && part === "base" ? candNo : monster(m.id)?.no;
+    // スキブはダンジョン潜入時に効くので、変身キャラは変身前の姿の覚醒で数える
+    const fam = MDB.get(b0)?.[9];
+    const b = fam && fam !== b0 && MDB.get(fam) ? fam : b0;
     const a = candNo && m === mem && part === "assist" ? candNo : assistNoOf(m);
     n += MDB.get(b)?.[15] ?? 0;
     const ar = a && MDB.get(a);
