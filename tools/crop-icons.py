@@ -48,8 +48,13 @@ def load_ocr():
     return ocr
 
 
+MANUAL = ROOT / "manual-icons"  # 管理者が送ったPDCのスクショ（アイコンがないキャラの補充用。git には入れない）
+
+
 def image_path(name):
-    """原寸があればそれ、なければ以前取得した画像"""
+    """原寸があればそれ、なければ以前取得した画像。管理者のスクショも"""
+    if (MANUAL / name).exists():
+        return MANUAL / name
     p = SCRATCH / "orig" / name
     if p.exists():
         return p
@@ -138,18 +143,27 @@ def main():
                     continue  # その枠に別のキャラのNo.が書いてある（編成の順番がレシートと違う）
                 offer(no, path, box_of(col, row_b * H, W), "pos")
 
+    # 管理者のスクショ（manual-icons/）をOCRして、文字の No. の位置から切り抜く
+    manual = sorted(p for p in MANUAL.glob("*") if p.suffix.lower() in (".png", ".jpg", ".jpeg", ".webp"))
+    if manual:
+        res = json.loads(subprocess.run(["swift", str(ROOT / "tools" / "ocr.swift"), *map(str, manual)], capture_output=True, text=True, check=True).stdout)
+        for k, v in res.items():
+            ocr[os.path.basename(k)] = v
+        print(f"管理者のスクショ {len(manual)}枚")
+
     # 2. 文字のNo.の位置から（位置で取れなかったもの）
     for name, words in ocr.items():
         labels = labels_of(words)
-        if len(labels) < 4:
-            continue
         path = image_path(name)
+        if len(labels) < (1 if path and path.parent == MANUAL else 4):
+            continue
         if not path:
             continue
         with Image.open(path) as im:
             W, H = im.size
         for l in labels:
-            if l["no"] in wanted and (l["no"] not in best or best[l["no"]][3] != "pos"):
+            # 管理者のスクショは編成にいないキャラ（承認済みの登録編成など）も受け付ける
+            if (l["no"] in wanted or path.parent == MANUAL) and (l["no"] not in best or best[l["no"]][3] != "pos"):
                 offer(l["no"], path, box_of(min(5, int(l["x"] * 6 + 0.02)), l["b"] * H, W), "label")
 
     OUT.mkdir(exist_ok=True)
