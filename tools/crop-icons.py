@@ -219,32 +219,39 @@ LAT_W, LAT_H = 150, 50
 
 def badge_box(region):
     """タイトルの左のバッジ（色の付いた横長の札）の範囲。QRコードや文字は白黒なので色の濃さで見分ける。
-    色の付いた行のかたまりのうち一番下（編成のすぐ上）を高さとし、その中で左から続く列を幅とする"""
+    色の付いた行のかたまりを下から順に見て、バッジらしい形（横長・ある程度の大きさ）の最初のものを使う
+    （一番下に編成のアイコンの端が写り込むことがあるため）"""
     w, h = region.size
     px = region.load()
     colored = lambda x, y: (lambda c: max(c) - min(c) > 45)(px[x, y][:3])
     lw = int(w * 0.65)
     rows = [sum(colored(x, y) for x in range(lw)) for y in range(h)]
     on = [r > lw * 0.15 for r in rows]
-    y1 = max((y for y in range(h) if on[y]), default=None)
-    if y1 is None:
-        return None
-    y0 = y1
-    while y0 - 1 >= 0 and (on[y0 - 1] or (y0 - 2 >= 0 and on[y0 - 2])):
-        y0 -= 1
-    bh = y1 - y0 + 1
-    cols = [sum(colored(x, y) for y in range(y0, y1 + 1)) for x in range(w)]
-    xs = [x for x in range(w) if cols[x] > bh * 0.3]
-    if not xs:
-        return None
-    x0 = xs[0]
-    x1 = x0
-    while x1 + 1 < w and cols[x1 + 1] > bh * 0.15:
-        x1 += 1
-    bw = x1 - x0 + 1
-    if bw < w * 0.15 or bh < 8 or not (0.9 < bw / bh < 2.6):
-        return None
-    return (x0, y0, x1 + 1, y1 + 1)
+    bands = []
+    y = h - 1
+    while y >= 0:
+        if not on[y]:
+            y -= 1
+            continue
+        y1 = y
+        while y - 1 >= 0 and (on[y - 1] or (y - 2 >= 0 and on[y - 2])):
+            y -= 1
+        bands.append((y, y1))
+        y -= 1
+    for y0, y1 in bands:
+        bh = y1 - y0 + 1
+        cols = [sum(colored(x, yy) for yy in range(y0, y1 + 1)) for x in range(w)]
+        xs = [x for x in range(w) if cols[x] > bh * 0.3]
+        if not xs:
+            continue
+        x0 = xs[0]
+        x1 = x0
+        while x1 + 1 < w and cols[x1 + 1] > bh * 0.15:
+            x1 += 1
+        bw = x1 - x0 + 1
+        if bw >= w * 0.15 and bh >= max(8, h * 0.15) and 0.9 < bw / bh < 2.6:
+            return (x0, y0, x1 + 1, y1 + 1)
+    return None
 
 
 def badge_box_old(region):
