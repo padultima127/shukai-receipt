@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 96,
+  "version": 97,
   "seed": true,
   "monsters": [
     {
@@ -9362,7 +9362,16 @@ window.PAD_SEED = {
           "assist": "チューリップの標本 No.12447",
           "build": {
             "lv": 99,
-            "plus": 891
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              22,
+              22,
+              22,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9371,8 +9380,13 @@ window.PAD_SEED = {
           "assist": "無一郎と蜜璃の鎹鴉 No.12817",
           "build": {
             "lv": 120,
-            "plus": 297,
-            "super": 128
+            "plus": 891,
+            "super": 128,
+            "latents": [
+              56,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9382,7 +9396,15 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 138
+            "super": 138,
+            "latents": [
+              6,
+              6,
+              6,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9391,7 +9413,14 @@ window.PAD_SEED = {
           "assist": "ユラの封呪符 No.14139",
           "build": {
             "lv": 99,
-            "plus": 891
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              53,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9400,7 +9429,16 @@ window.PAD_SEED = {
           "assist": "ヘッドマウントディスプレイ No.13081",
           "build": {
             "lv": 99,
-            "plus": 891
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              22,
+              22,
+              22,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9409,7 +9447,16 @@ window.PAD_SEED = {
           "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947",
           "build": {
             "lv": 99,
-            "plus": 891
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              22,
+              22,
+              22,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -9717,7 +9764,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 103
     },
     {
       "id": "kirisame-dain-nanaminn",
@@ -9730,15 +9778,35 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              29,
+              6,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14010",
           "role": "S",
           "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9746,8 +9814,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "平次のバイク No.12368",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              29,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9755,8 +9831,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "無一郎と蜜璃の鎹鴉 No.12817",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              6,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
@@ -9764,14 +9850,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              48,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "豊臣秀吉おさるのもんきち No.13024"
+          "assist": "豊臣秀吉おさるのもんきち No.13024",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -10079,7 +10183,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 104
     },
     {
       "id": "kirisame-heartia-370id",
@@ -10437,38 +10542,97 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561"
+          "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              39
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "グレた元サッカー部員・真田幸村の学生証 No.12359"
+          "assist": "グレた元サッカー部員・真田幸村の学生証 No.12359",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14135",
           "role": "S",
-          "assist": "ロザリンのティーセット No.13857"
+          "assist": "ロザリンのティーセット No.13857",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              39
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11327",
           "role": "S",
           "assist": "Dフェニックスの起動キー No.14136",
           "build": {
-            "super": 126,
-            "superOnly": true
+            "lv": 120,
+            "plus": 297,
+            "super": 128,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              6,
+              10
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12853",
           "role": "F",
-          "assist": "古城の女主神・カーリーのキャンディ No.7991"
+          "assist": "古城の女主神・カーリーのキャンディ No.7991",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              56,
+              44
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -10510,7 +10674,8 @@ window.PAD_SEED = {
           ],
           "text": "真田武器の代わりにシュタルク装備（スキルLv1）"
         }
-      ]
+      ],
+      "badgeId": 103
     },
     {
       "id": "kirisame-heartia-eriryuu",
@@ -10523,36 +10688,108 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              22,
+              9,
+              9
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13341",
           "role": "S",
           "assist": "骨棍棒 No.11756",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "南魔王パイモンのカード No.12477"
+          "assist": "南魔王パイモンのカード No.12477",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              20,
+              9,
+              20
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "勇気のデジメンタル No.13088"
+          "assist": "勇気のデジメンタル No.13088",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              20,
+              9,
+              20
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13094",
           "role": "S",
-          "assist": "想海の師弟愛・ノルザ＆マールのショコラ No.13388"
+          "assist": "想海の師弟愛・ノルザ＆マールのショコラ No.13388",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 108,
+            "latents": [
+              56,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14005",
           "role": "F",
-          "assist": "炎獄竜ヒノカグツチのカード No.11897"
+          "assist": "炎獄竜ヒノカグツチのカード No.11897",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              42,
+              6,
+              42
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -10889,7 +11126,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 103
     },
     {
       "id": "kirisame-hinata-nanaminn",
@@ -11644,36 +11882,106 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              32,
+              32,
+              29,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14010",
           "role": "S",
           "assist": "水ヨーヨーの女神・ミネルヴァの常夏ジュース No.12770",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13998",
           "role": "S",
-          "assist": "プリシラ・バーリエル No.13341"
+          "assist": "プリシラ・バーリエル No.13341",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14005",
           "role": "S",
-          "assist": "創造神・アトゥムの首飾り No.13282"
+          "assist": "創造神・アトゥムの首飾り No.13282",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658"
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "甘味の撫子・クシナダヒメのショコラ No.8369"
+          "assist": "甘味の撫子・クシナダヒメのショコラ No.8369",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -12024,7 +12332,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 103
     },
     {
       "id": "kirisame-heartia-furuki",
@@ -12040,15 +12349,38 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              9,
+              9,
+              9
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13826",
           "role": "S",
           "assist": "無一郎と蜜璃の鎹鴉 No.12817",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -12056,27 +12388,67 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527",
           "build": {
+            "lv": 120,
+            "plus": 660,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561"
+          "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              39
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "勇気のデジメンタル No.13088"
+          "assist": "勇気のデジメンタル No.13088",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              20,
+              20,
+              20
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14005",
           "role": "F",
           "assist": "水ヨーヨーの女神・ミネルヴァの常夏ジュース No.12770",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -12101,7 +12473,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "fuun-dain-nanaminn",
@@ -12487,20 +12860,53 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              22,
+              22,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "極醒の幻術神・オーディンのティアラ No.7638"
+          "assist": "極醒の幻術神・オーディンのティアラ No.7638",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              30,
+              30,
+              16
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12903",
           "role": "S",
           "assist": "ポチャッコのアイスクリーム No.11654",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -12508,19 +12914,54 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ビクトリーランサー No.11344",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              16,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658"
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              5,
+              5,
+              16
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "武田信玄の櫛 No.9991"
+          "assist": "武田信玄の櫛 No.9991",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              36,
+              5
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -12980,7 +13421,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "fuun-challenge-fern",
@@ -12993,15 +13435,36 @@ window.PAD_SEED = {
         {
           "id": "n13416",
           "role": "L",
-          "assist": "ヴィルヘルムの剣 No.13340"
+          "assist": "ヴィルヘルムの剣 No.13340",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13426",
           "role": "S",
           "assist": "パック No.13306",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -13009,8 +13472,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 137,
-            "superOnly": true
+            "latents": [
+              29,
+              29,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
@@ -13018,8 +13489,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ミルコのヒーロースーツ No.11061",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              44,
+              44,
+              44,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -13027,8 +13507,19 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "リズレットのビターチョコ No.10932",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 137,
-            "superOnly": true
+            "latents": [
+              5,
+              12,
+              12,
+              12,
+              12,
+              12,
+              16
+            ],
+            "fromQr": true
           }
         },
         {
@@ -13036,8 +13527,15 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "遊びの空間・ジントニックの宝杯 No.13291",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -13222,7 +13720,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 86
     },
     {
       "id": "fuun-multi-reinhard-v1",
@@ -15001,22 +15500,57 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "グリーフシード No.13890",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              17
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14149",
           "role": "S",
-          "assist": "イルミナのお手製クッキー No.13853"
+          "assist": "イルミナのお手製クッキー No.13853",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14149",
           "role": "S",
           "assist": "炎翔神・ミニほるすのノート No.13535",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -15024,19 +15558,58 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "戦馬の支援機・スティード No.11458",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              48,
+              12,
+              18
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13581",
           "role": "S",
-          "assist": "鎌鼬の式札 No.10047"
+          "assist": "鎌鼬の式札 No.10047",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              14,
+              15,
+              16,
+              12,
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13904",
           "role": "F",
-          "assist": "神罰の審理者・ミニめたとろんのノート No.13542"
+          "assist": "神罰の審理者・ミニめたとろんのノート No.13542",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -15059,7 +15632,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "badgeId": 110
     },
     {
       "id": "guren-unicus-schwarze",
@@ -15074,22 +15648,57 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "グリーフシード No.13890",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              17
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14149",
           "role": "S",
-          "assist": "イルミナのお手製クッキー No.13853"
+          "assist": "イルミナのお手製クッキー No.13853",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14149",
           "role": "S",
           "assist": "炎翔神・ミニほるすのノート No.13535",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -15097,19 +15706,58 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "戦馬の支援機・スティード No.11458",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              48,
+              12,
+              18
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13581",
           "role": "S",
-          "assist": "鎌鼬の式札 No.10047"
+          "assist": "鎌鼬の式札 No.10047",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              14,
+              15,
+              16,
+              12,
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13904",
           "role": "F",
-          "assist": "神罰の審理者・ミニめたとろんのノート No.13542"
+          "assist": "神罰の審理者・ミニめたとろんのノート No.13542",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              14,
+              15,
+              16,
+              17,
+              18,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -15133,7 +15781,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "badgeId": 110
     },
     {
       "id": "tenkyu-challenge-dain-malabolo",
@@ -15211,40 +15860,99 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "戦馬の支援機・スティード No.11458"
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "深愛の新郎・明智光秀の指輪 No.7397"
+          "assist": "深愛の新郎・明智光秀の指輪 No.7397",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14028",
           "role": "S",
           "assist": "一文字 No.14089",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14063",
           "role": "S",
-          "assist": "シャオチューフの酒壺 No.12618"
+          "assist": "シャオチューフの酒壺 No.12618",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14016",
           "role": "S",
           "assist": "無一郎と蜜璃の鎹鴉 No.12817",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "聖天龍のソウル No.11576"
+          "assist": "聖天龍のソウル No.11576",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -15287,7 +15995,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 104
     },
     {
       "id": "guren-dain-run-v2",
@@ -16100,36 +16809,112 @@ window.PAD_SEED = {
         {
           "id": "hitsugaya",
           "role": "L",
-          "assist": "ウッソ・エヴィン No.12186"
+          "assist": "ウッソ・エヴィン No.12186",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              23,
+              23,
+              19
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "izuna",
           "role": "S",
-          "assist": "遊びの空間・クロトビの宝杯 No.13290"
+          "assist": "遊びの空間・クロトビの宝杯 No.13290",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 137,
+            "latents": [
+              12,
+              19,
+              56
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n7327",
           "role": "S",
-          "assist": "ナツル＆ミリアのティアラ No.11329"
+          "assist": "ナツル＆ミリアのティアラ No.11329",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              23,
+              19
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13866",
           "role": "S",
           "assist": "ヤマトのデジヴァイス No.11725",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "izuna",
           "role": "S",
-          "assist": "死天龍・アークヴェルザのブレスレット No.11213"
+          "assist": "死天龍・アークヴェルザのブレスレット No.11213",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 137,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              23,
+              19
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "hitsugaya",
           "role": "F",
-          "assist": "バレンタインの星海神・アンドロメダのショコラ No.8382"
+          "assist": "バレンタインの星海神・アンドロメダのショコラ No.8382",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              23,
+              23,
+              19
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -16271,7 +17056,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 105
     },
     {
       "id": "guren-dain-run-v1",
@@ -16284,29 +17070,75 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13550",
           "role": "S",
           "assist": "千本桜 No.14066",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12377",
           "role": "S",
-          "assist": "神威の衣装 No.13723"
+          "assist": "神威の衣装 No.13723",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              12,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n2390",
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 70,
-            "superOnly": true
+            "latents": [
+              60,
+              60,
+              60,
+              60
+            ],
+            "fromQr": true
           }
         },
         {
@@ -16314,14 +17146,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "滅却師の弓 No.14039",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "雷神の玉 No.12407"
+          "assist": "雷神の玉 No.12407",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -16629,7 +17482,8 @@ window.PAD_SEED = {
             "turn": 7
           }
         ]
-      }
+      },
+      "badgeId": 104
     },
     {
       "id": "guren-shiva-underbar",
@@ -16642,32 +17496,113 @@ window.PAD_SEED = {
         {
           "id": "n13916",
           "role": "L",
-          "assist": "科学部の怪異・ユラの弁当箱 No.13617"
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14080",
           "role": "S",
-          "assist": "ひとり読書の地王神・クロノスの弁当箱 No.13619"
+          "assist": "ひとり読書の地王神・クロノスの弁当箱 No.13619",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13998",
           "role": "S",
-          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265"
+          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "織姫のヘアピン No.14029"
+          "assist": "織姫のヘアピン No.14029",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              30,
+              30,
+              14
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604"
+          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              30,
+              30,
+              16
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604"
+          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              30,
+              30,
+              16
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -17046,7 +17981,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "taiju-dain-matsu-v1",
@@ -17444,40 +18380,106 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "Bros No.13200"
+          "assist": "Bros No.13200",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              29,
+              29,
+              29,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11371",
           "role": "S",
           "assist": "雷神の玉 No.12407",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              5,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265"
+          "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13708",
           "role": "S",
           "assist": "魔導書ネクロノミコン No.12980",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              29,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -17776,7 +18778,8 @@ window.PAD_SEED = {
             "turn": 4
           }
         ]
-      }
+      },
+      "badgeId": 104
     },
     {
       "id": "taiju-suzaku-nanaminn",
@@ -19083,36 +20086,95 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              34,
+              22
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "勇気のデジメンタル No.13088"
+          "assist": "勇気のデジメンタル No.13088",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              34,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12946",
           "role": "S",
           "assist": "冨岡義勇の日輪刀 No.10857",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "izuna",
           "role": "S",
-          "assist": "清らかな花嫁・ハクの指輪 No.13815"
+          "assist": "清らかな花嫁・ハクの指輪 No.13815",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 137,
+            "latents": [
+              56,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "勇気のデジメンタル No.13088"
+          "assist": "勇気のデジメンタル No.13088",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "Dフェニックスの起動キー No.14136"
+          "assist": "Dフェニックスの起動キー No.14136",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              34,
+              28
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -19487,7 +20549,8 @@ window.PAD_SEED = {
             "turn": 5
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "taiju-suzaku-matsu",
@@ -19776,15 +20839,36 @@ window.PAD_SEED = {
         {
           "id": "n13929",
           "role": "L",
-          "assist": "イルミナのお手製クッキー No.13853"
+          "assist": "イルミナのお手製クッキー No.13853",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13828",
           "role": "S",
           "assist": "黒薔薇の標本 No.12440",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 132,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -19792,8 +20876,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "科学部の怪異・ユラの弁当箱 No.13617",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -19801,8 +20894,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "九兵衛の刀 No.13711",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
@@ -19810,14 +20913,38 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ネモフィラの種子 No.13751",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13929",
           "role": "F",
-          "assist": "ファスカのティーセット No.13847"
+          "assist": "ファスカのティーセット No.13847",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -19999,7 +21126,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "taiju-rose-nekomaru",
@@ -20015,15 +21143,36 @@ window.PAD_SEED = {
         {
           "id": "n13967",
           "role": "L",
-          "assist": "ダリアの球根 No.9979"
+          "assist": "ダリアの球根 No.9979",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              29,
+              29,
+              15
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13838",
           "role": "S",
           "assist": "グリーフシード No.13890",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -20031,8 +21180,19 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "希望のデジメンタル No.13105",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 132,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              29,
+              16
+            ],
+            "fromQr": true
           }
         },
         {
@@ -20040,8 +21200,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "炎翔神・ミニほるすのノート No.13535",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
@@ -20049,8 +21218,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -20058,8 +21236,17 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "イルミナの魔導書 No.7178",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -20225,7 +21412,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 41
     },
     {
       "id": "taiju-tanjiro-nanaminn",
@@ -20437,40 +21625,99 @@ window.PAD_SEED = {
         {
           "id": "n13916",
           "role": "L",
-          "assist": "科学部の怪異・ユラの弁当箱 No.13617"
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13998",
           "role": "S",
           "assist": "謎の幼獣 No.12915",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              6,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13116",
           "role": "S",
           "assist": "クラウディアの掃除機 No.13851",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              5,
+              5
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -20734,7 +21981,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 103
     },
     {
       "id": "jupiter-hitsugaya-yamajun",
@@ -20751,40 +21999,108 @@ window.PAD_SEED = {
         {
           "id": "hitsugaya",
           "role": "L",
-          "assist": "袖白雪 No.14052"
+          "assist": "袖白雪 No.14052",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              6,
+              6,
+              10
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13116",
           "role": "S",
           "assist": "ロボット研究部・メノアの学生証 No.12357",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14095",
           "role": "S",
-          "assist": "メニットのおみくじ道具 No.10873"
+          "assist": "メニットのおみくじ道具 No.10873",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              29,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14028",
           "role": "S",
           "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14107",
           "role": "S",
-          "assist": "スペード龍・スペディオルのトランプ No.14108"
+          "assist": "スペード龍・スペディオルのトランプ No.14108",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              6,
+              6,
+              6,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14107",
           "role": "F",
-          "assist": "スペード龍・スペディオルのトランプ No.14108"
+          "assist": "スペード龍・スペディオルのトランプ No.14108",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              6,
+              6,
+              29
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -20869,7 +22185,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 7
     },
     {
       "id": "jupiter-bambi-onsen",
@@ -21211,15 +22528,33 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "ハート龍・セイハーツのトランプ No.14111"
+          "assist": "ハート龍・セイハーツのトランプ No.14111",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13998",
           "role": "S",
           "assist": "謎の幼獣 No.12915",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -21227,8 +22562,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "エリカの占星器 No.5561",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              62
+            ],
+            "fromQr": true
           }
         },
         {
@@ -21236,8 +22580,13 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "轟天の幻龍王・ゼローグ∞ -CORE-のブローチ No.7630",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -21245,14 +22594,27 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "終焉の親子神・ロキ＆フェンリルのブレスレット No.13764",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -21425,7 +22787,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "jupiter-heartia-momiji",
@@ -21441,36 +22804,107 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              29,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13998",
           "role": "S",
           "assist": "陶砲の聖炉神・ヘスティア No.5058",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n6669",
           "role": "S",
-          "assist": "キング・オブ・ハートの紋章 No.11129"
+          "assist": "キング・オブ・ハートの紋章 No.11129",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 111,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "謎の幼獣 No.12915"
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              5,
+              5,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              5,
+              5,
+              29
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -21668,7 +23102,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "jupiter-gintoki-yamajun",
@@ -21683,8 +23118,18 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "チューリップの球根 No.12448",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
@@ -21692,32 +23137,85 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "緋天龍のソウル No.11573",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              6,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13085",
           "role": "S",
-          "assist": "勇気のデジメンタル No.13088"
+          "assist": "勇気のデジメンタル No.13088",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              55
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13193",
           "role": "S",
-          "assist": "エンデヴァー人形 No.13185"
+          "assist": "エンデヴァー人形 No.13185",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              30,
+              30,
+              12,
+              16
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13681",
           "role": "S",
-          "assist": "謎の幼獣 No.12915"
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              12,
+              12,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13681",
           "role": "F",
           "assist": "渋谷凛のCD No.13570",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              48
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -21811,7 +23309,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "jupiter-ichigo-onsen",
@@ -21901,15 +23400,35 @@ window.PAD_SEED = {
         {
           "id": "n12439",
           "role": "L",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              29,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12298",
           "role": "S",
           "assist": "始祖リリンのカード No.11856",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              30,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
@@ -21917,8 +23436,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "黒薔薇の種子 No.12441",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -21926,19 +23455,53 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "カルトの扇子 No.10899",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              1
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12439",
           "role": "S",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              15,
+              29,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "F",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              22,
+              22,
+              22
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -22238,7 +23801,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 61
     },
     {
       "id": "jupiter-reinhard-yamajun",
@@ -22254,40 +23818,109 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              30,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13116",
           "role": "S",
           "assist": "オーディン＆フリッグの聖装神器 No.13153",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "ヴィルヘルムの剣 No.13340"
+          "assist": "ヴィルヘルムの剣 No.13340",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12907",
           "role": "S",
           "assist": "聖夜の聖装斧姫・ミリーのスノードーム No.13162",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              44,
+              44,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "オメガブレード No.13142"
+          "assist": "オメガブレード No.13142",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              29,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -22339,7 +23972,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 7
     },
     {
       "id": "jupiter-challenge-rosetta-yamajun",
@@ -22352,40 +23986,106 @@ window.PAD_SEED = {
         {
           "id": "n12439",
           "role": "L",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              30,
+              30,
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12450",
           "role": "S",
           "assist": "黒薔薇の種子 No.12441",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11666",
           "role": "S",
-          "assist": "ブルーロックの単行本5巻【凪 誠士郎】 No.11979"
+          "assist": "ブルーロックの単行本5巻【凪 誠士郎】 No.11979",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              55
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12270",
           "role": "S",
           "assist": "サノス【コミックカバー・2】 No.9116",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              54,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12439",
           "role": "S",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              30,
+              29,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "F",
-          "assist": "永久竜カナンのカード No.11872"
+          "assist": "永久竜カナンのカード No.11872",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              29,
+              22,
+              22
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -22458,7 +24158,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 2
     },
     {
       "id": "mercury-mina-shion",
@@ -22537,36 +24238,108 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658"
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14048",
           "role": "S",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              9,
+              8,
+              11,
+              10
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14063",
           "role": "S",
-          "assist": "タマゾーX命天龍・ゼルクレアのスクロール No.13959"
+          "assist": "タマゾーX命天龍・ゼルクレアのスクロール No.13959",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              4,
+              42,
+              42,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14088",
           "role": "S",
           "assist": "星砕の凶兆龍・ゼンチョウガのブレスレット No.11550",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "diamos",
           "role": "S",
-          "assist": "張り切る守護神・アテナのショコラ No.13404"
+          "assist": "張り切る守護神・アテナのショコラ No.13404",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "照れ屋な癒し手・アリナのショコラ No.13398"
+          "assist": "照れ屋な癒し手・アリナのショコラ No.13398",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -22870,7 +24643,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "mercury-dain-cclemon",
@@ -22885,15 +24659,36 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "極醒の黄龍契士・シルヴィのブレスレット No.13910"
+          "assist": "極醒の黄龍契士・シルヴィのブレスレット No.13910",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14028",
           "role": "S",
           "assist": "竜神ヒスイのカード No.11880",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              41,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -22901,28 +24696,70 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "張り切る守護神・アテナのショコラ No.13404",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14038",
           "role": "S",
-          "assist": "ケリ姫＆飛行士の写真 No.11866"
+          "assist": "ケリ姫＆飛行士の写真 No.11866",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14055",
           "role": "S",
           "assist": "ドーナ＆ヴェロアのハピネスドール No.13805",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "逆撫 No.14064"
+          "assist": "逆撫 No.14064",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -22997,7 +24834,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 104
     },
     {
       "id": "mercury-gintoki-tension",
@@ -23012,15 +24850,39 @@ window.PAD_SEED = {
         {
           "id": "n13681",
           "role": "L",
-          "assist": "全ての鬼を滅するために作った刀 No.12848"
+          "assist": "全ての鬼を滅するために作った刀 No.12848",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              12,
+              12,
+              12,
+              15,
+              29,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13692",
           "role": "S",
           "assist": "法陣 No.11705",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 137,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              15,
+              29,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -23028,8 +24890,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "教師ミオンのサポート龍・ストラ No.13606",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -23037,19 +24907,53 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "フチャの式札 No.7783",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n9731",
           "role": "S",
-          "assist": "護霊筆の玄武・メイメイのカード No.12793"
+          "assist": "護霊筆の玄武・メイメイのカード No.12793",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              15,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13681",
           "role": "F",
-          "assist": "たまのネジ No.13717"
+          "assist": "たまのネジ No.13717",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              12,
+              12,
+              12,
+              15,
+              4,
+              4
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -23220,7 +25124,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 42
     },
     {
       "id": "mercury-gintoki-mori",
@@ -23813,20 +25718,50 @@ window.PAD_SEED = {
         {
           "id": "n12439",
           "role": "L",
-          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451"
+          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              11
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "S",
-          "assist": "双頭犬の支援機・オルトス No.11460"
+          "assist": "双頭犬の支援機・オルトス No.11460",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14088",
           "role": "S",
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              6,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -23834,19 +25769,51 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ポチャッコのアイスクリーム No.11654",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13840",
           "role": "S",
-          "assist": "呪水剣・カレドヴールフ No.5064"
+          "assist": "呪水剣・カレドヴールフ No.5064",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "F",
-          "assist": "栗花落カナヲの日輪刀 No.10859"
+          "assist": "栗花落カナヲの日輪刀 No.10859",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              12,
+              11
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -23937,7 +25904,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 61
     },
     {
       "id": "venus-seiheart-yamajun-shimamura",
@@ -23953,15 +25921,34 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "ヘッドマウントディスプレイ No.13081"
+          "assist": "ヘッドマウントディスプレイ No.13081",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              30,
+              30,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13998",
           "role": "S",
           "assist": "Dフェニックスの起動キー No.14136",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -23969,8 +25956,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ゾッダ虫 No.13334",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -23978,8 +25972,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "カルーアミルク側仕えのメイド牛 No.12579",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -23987,14 +25989,31 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "謎の幼獣 No.12915",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              56,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "ハート龍・セイハーツのトランプ No.14111"
+          "assist": "ハート龍・セイハーツのトランプ No.14111",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -24094,7 +26113,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "venus-seiheart-yamajun-zurashi",
@@ -24110,15 +26130,36 @@ window.PAD_SEED = {
         {
           "id": "n13916",
           "role": "L",
-          "assist": "科学部の怪異・ユラの弁当箱 No.13617"
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              42,
+              42,
+              6,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13999",
           "role": "S",
           "assist": "ゾッダ虫 No.13334",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              6,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -24126,24 +26167,69 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              6,
+              6,
+              6,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "謎の幼獣 No.12915"
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              9,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604"
+          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              9,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -24291,7 +26377,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "venus-reinhard-yamajun-10",
@@ -24307,29 +26394,73 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "ラジョアの大筆 No.6866"
+          "assist": "ラジョアの大筆 No.6866",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              10,
+              10,
+              12,
+              12,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11714",
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              12,
+              31,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "オールマイトねつけ No.13183"
+          "assist": "オールマイトねつけ No.13183",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              31,
+              31,
+              31,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12907",
           "role": "S",
           "assist": "謎の幼獣 No.12915",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -24337,14 +26468,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "Gファルコン No.12195",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "アグリゲートの天弓 No.11555"
+          "assist": "アグリゲートの天弓 No.11555",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              12,
+              12,
+              10
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -24391,7 +26543,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "venus-reinhard-yamajun-11",
@@ -24407,40 +26560,101 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11714",
           "role": "S",
           "assist": "ガルルキャノン No.13145",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "オールマイトねつけ No.13183"
+          "assist": "オールマイトねつけ No.13183",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13141",
           "role": "S",
           "assist": "聖天龍のソウル No.11576",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              41,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12550",
           "role": "S",
-          "assist": "大輔のD-3 No.13087"
+          "assist": "大輔のD-3 No.13087",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              56,
+              44
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -24536,7 +26750,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "venus-reinhard-nanaminn",
@@ -24552,29 +26767,68 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "ラジョアの大筆 No.6866"
+          "assist": "ラジョアの大筆 No.6866",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12903",
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              44
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "ミルコのヒーロースーツ No.11061"
+          "assist": "ミルコのヒーロースーツ No.11061",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13349",
           "role": "S",
           "assist": "ヴィルヘルムの剣 No.13340",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -24582,14 +26836,36 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "スザクの騎士証 No.11383",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "オールマイトねつけ No.13183"
+          "assist": "オールマイトねつけ No.13183",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -24915,7 +27191,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "venus-reinhard-yamajun-rabiril",
@@ -24931,36 +27208,106 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11714",
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "オールマイトねつけ No.13183"
+          "assist": "オールマイトねつけ No.13183",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13339",
           "role": "S",
-          "assist": "稽古のご飯 No.12821"
+          "assist": "稽古のご飯 No.12821",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 111,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12558",
           "role": "S",
-          "assist": "誠実のデジメンタル No.13121"
+          "assist": "誠実のデジメンタル No.13121",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -24999,7 +27346,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "venus-kaiju8-nanaminn",
@@ -25015,29 +27363,66 @@ window.PAD_SEED = {
         {
           "id": "n12914",
           "role": "L",
-          "assist": "紅翼龍・ボルフィードのブレスレット No.10502"
+          "assist": "紅翼龍・ボルフィードのブレスレット No.10502",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12808",
           "role": "S",
           "assist": "屋台巡りの魔帽子・ランヴィ＆オム No.12736",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12536",
           "role": "S",
-          "assist": "月光 【額当】 No.11493"
+          "assist": "月光 【額当】 No.11493",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              4,
+              4,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12903",
           "role": "S",
           "assist": "防衛隊のスーツ No.12904",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              56,
+              44
+            ],
+            "fromQr": true
           }
         },
         {
@@ -25045,14 +27430,31 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "GS-3305 No.12921",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12914",
           "role": "F",
-          "assist": "紅翼龍・ボルフィードのブレスレット No.10502"
+          "assist": "紅翼龍・ボルフィードのブレスレット No.10502",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -25232,7 +27634,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 43
     },
     {
       "id": "venus-reinhard-yamajun-final",
@@ -25248,40 +27651,106 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11714",
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "オールマイトねつけ No.13183"
+          "assist": "オールマイトねつけ No.13183",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13339",
           "role": "S",
           "assist": "謎の幼獣 No.12915",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12558",
           "role": "S",
-          "assist": "誠実のデジメンタル No.13121"
+          "assist": "誠実のデジメンタル No.13121",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -25320,7 +27789,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "venus-douma-nanaminn",
@@ -25671,29 +28141,64 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "曲刃剣・コピス No.4235"
+          "assist": "曲刃剣・コピス No.4235",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12907",
           "role": "S",
           "assist": "ゾッダ虫 No.13334",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "双児機・メタルカストルのブレスレット No.10664"
+          "assist": "双児機・メタルカストルのブレスレット No.10664",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11714",
           "role": "S",
           "assist": "謎の幼獣 No.12915",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              41,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -25701,14 +28206,34 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "極醒の日龍喚士・カンナのティアラ No.7654",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "キャプテン・マーベル【クラシックカバー】 No.6916"
+          "assist": "キャプテン・マーベル【クラシックカバー】 No.6916",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              60,
+              60,
+              60,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -25935,7 +28460,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "moon-shiva-yamajun",
@@ -25951,15 +28477,37 @@ window.PAD_SEED = {
         {
           "id": "n13916",
           "role": "L",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              4,
+              4,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13999",
           "role": "S",
           "assist": "ひとり読書の地王神・クロノスの弁当箱 No.13619",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              4,
+              4,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
@@ -25967,24 +28515,69 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              6,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "科学部の怪異・ユラの弁当箱 No.13617"
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              6,
+              6,
+              6,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604"
+          "assist": "放課後の寄り道・ユリシャ＆アリーシアの弁当箱 No.13604",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "謎の幼獣 No.12915"
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -26141,7 +28734,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "moon-gintoki-nanaminn",
@@ -26159,8 +28753,16 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "デジタルアートチョコ No.13395",
           "build": {
+            "lv": 120,
+            "plus": 726,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -26168,36 +28770,80 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "シュタルクの斧 No.13420",
           "build": {
+            "lv": 120,
+            "plus": 726,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              56,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13419",
           "role": "S",
-          "assist": "勇気のデジメンタル No.13088"
+          "assist": "勇気のデジメンタル No.13088",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              38,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13676",
           "role": "S",
           "assist": "勇気のデジメンタル No.13088",
           "build": {
+            "lv": 120,
+            "plus": 726,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              12,
+              14,
+              42,
+              42,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13681",
           "role": "S",
-          "assist": "無一郎と蜜璃の鎹鴉 No.12817"
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 726,
+            "super": 142,
+            "latents": [
+              58,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13681",
           "role": "F",
           "assist": "ワルりんの宝杯 No.10955",
           "build": {
+            "lv": 120,
+            "plus": 726,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -26425,7 +29071,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "moon-rosetta-kuma",
@@ -26441,20 +29088,57 @@ window.PAD_SEED = {
         {
           "id": "n12439",
           "role": "L",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "S",
-          "assist": "ベルモットのバイク No.12405"
+          "assist": "ベルモットのバイク No.12405",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              16,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12907",
           "role": "S",
           "assist": "ネレ専従の謎獣 No.12531",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -26462,8 +29146,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "星砕の凶兆龍・ゼンチョウガのブレスレット No.11550",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
@@ -26471,14 +29164,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "冥境の黒熾龍・ゴウテンの櫛 No.10305",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12439",
           "role": "F",
-          "assist": "ヒトヨタケの標本 No.13738"
+          "assist": "ヒトヨタケの標本 No.13738",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              30,
+              32
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -26771,7 +29485,8 @@ window.PAD_SEED = {
             "turn": 5
           }
         ]
-      }
+      },
+      "badgeId": 43
     },
     {
       "id": "moon-gintoki-runriri",
@@ -26789,8 +29504,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "エンデヴァー人形 No.13185",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              48
+            ],
+            "fromQr": true
           }
         },
         {
@@ -26798,33 +29519,82 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              56,
+              30
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13419",
           "role": "S",
-          "assist": "謎の幼獣 No.12915"
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              30,
+              30,
+              30,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13676",
           "role": "S",
           "assist": "シュタルクの斧 No.13420",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              30,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13681",
           "role": "S",
-          "assist": "無一郎と蜜璃の鎹鴉 No.12817"
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              58,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13681",
           "role": "F",
-          "assist": "アレキサンダーの見聞録 No.8443"
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              28,
+              28,
+              12,
+              12,
+              4
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -27064,7 +29834,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 97
     },
     {
       "id": "moon-reinhard-nekomaru",
@@ -27080,40 +29851,109 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "リーベの龍喚石 No.8856"
+          "assist": "リーベの龍喚石 No.8856",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              28,
+              28,
+              14
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13141",
           "role": "S",
           "assist": "迎春の扇子と和傘 No.12104",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              28,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "ミルコのヒーロースーツ No.11061"
+          "assist": "ミルコのヒーロースーツ No.11061",
+          "build": {
+            "lv": 99,
+            "plus": 390,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13337",
           "role": "S",
           "assist": "第1部隊章 No.12935",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              56,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13199",
           "role": "S",
-          "assist": "宇髄の額当て No.12815"
+          "assist": "宇髄の額当て No.12815",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "神刀・天極星黄龍 No.5632"
+          "assist": "神刀・天極星黄龍 No.5632",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              28,
+              28,
+              14
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -27190,7 +30030,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "moon-arkvelza-nekomaru",
@@ -27206,15 +30047,36 @@ window.PAD_SEED = {
         {
           "id": "n13484",
           "role": "L",
-          "assist": "アレキサンダーの見聞録 No.8443"
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              42,
+              42,
+              1
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13076",
           "role": "S",
           "assist": "ジェントルの紅茶 No.13224",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -27222,8 +30084,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "グラントリノのマント No.11052",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -27231,19 +30102,54 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "日向のユニフォーム No.12280",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              58,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13484",
           "role": "S",
-          "assist": "仮装祭の後援・ねねのキャンディ No.7977"
+          "assist": "仮装祭の後援・ねねのキャンディ No.7977",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              42,
+              42,
+              1
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13484",
           "role": "F",
-          "assist": "至福の魔女・ポンノのショコラ No.8384"
+          "assist": "至福の魔女・ポンノのショコラ No.8384",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -27368,7 +30274,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 43
     },
     {
       "id": "moon-multi-danna",
@@ -27480,20 +30387,56 @@ window.PAD_SEED = {
         {
           "id": "n12439",
           "role": "L",
-          "assist": "無聖人ニコラスのカード No.12458"
+          "assist": "無聖人ニコラスのカード No.12458",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              14,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "S",
-          "assist": "ハクの誓いのチョーカー No.11323"
+          "assist": "ハクの誓いのチョーカー No.11323",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13149",
           "role": "S",
           "assist": "不死川実弥の日輪刀 No.12827",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -27501,8 +30444,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "戦馬の支援機・スティード No.11458",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 132,
-            "superOnly": true
+            "latents": [
+              32,
+              28,
+              14,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -27510,14 +30463,33 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "SW-2033 No.12926",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              60,
+              44,
+              44,
+              44
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13323",
           "role": "F",
-          "assist": "遊びの空間・ジントニックの宝杯 No.13291"
+          "assist": "遊びの空間・ジントニックの宝杯 No.13291",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              55,
+              18,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -27713,7 +30685,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 43
     },
     {
       "id": "sun-imperial-nanaminn",
@@ -27729,36 +30702,102 @@ window.PAD_SEED = {
         {
           "id": "n13072",
           "role": "L",
-          "assist": "黒鉄の銀機士・クラウディアのブレスレット No.12127"
+          "assist": "黒鉄の銀機士・クラウディアのブレスレット No.12127",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              28,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13196",
           "role": "S",
-          "assist": "無一郎と蜜璃の鎹鴉 No.12817"
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13085",
           "role": "S",
-          "assist": "大輔のD-3 No.13087"
+          "assist": "大輔のD-3 No.13087",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              55,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13094",
           "role": "S",
           "assist": "パック No.13306",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              54,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13072",
           "role": "S",
-          "assist": "ロズワール邸メイド服 No.13308"
+          "assist": "ロズワール邸メイド服 No.13308",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              38
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13072",
           "role": "F",
-          "assist": "空のデジヴァイス No.11736"
+          "assist": "空のデジヴァイス No.11736",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -28033,7 +31072,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 44
     },
     {
       "id": "sun-dain-kinoko",
@@ -28113,36 +31153,106 @@ window.PAD_SEED = {
         {
           "id": "n14035",
           "role": "L",
-          "assist": "ハクのペット飼育道具 No.12569"
+          "assist": "ハクのペット飼育道具 No.12569",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              23,
+              23,
+              23
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13737",
           "role": "S",
-          "assist": "タマゾーX死天龍・アークヴェルザのスクロール No.13960"
+          "assist": "タマゾーX死天龍・アークヴェルザのスクロール No.13960",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              55
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "アスキンの腕輪 No.14087"
+          "assist": "アスキンの腕輪 No.14087",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              5,
+              23
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13972",
           "role": "S",
           "assist": "科学部の怪異・ユラの弁当箱 No.13617",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              23
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14070",
           "role": "S",
-          "assist": "ペルセポネ側仕えのニュンペー No.12571"
+          "assist": "ペルセポネ側仕えのニュンペー No.12571",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              4,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14043",
           "role": "F",
-          "assist": "京極の絆創膏 No.13779"
+          "assist": "京極の絆創膏 No.13779",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              23,
+              23,
+              23,
+              23
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -28215,7 +31325,8 @@ window.PAD_SEED = {
             "turn": 2
           }
         ]
-      }
+      },
+      "badgeId": 98
     },
     {
       "id": "sun-elfriede-agepan",
@@ -28233,8 +31344,15 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "山本のユニフォーム No.12327",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -28242,8 +31360,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "端居の筆龍楽士・ミナカの常夏ジュース No.14013",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              56,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
@@ -28251,24 +31375,69 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "灼魔鍵の装具・灼火の魔法書 No.7234",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13483",
           "role": "S",
-          "assist": "アレキサンダーの見聞録 No.8443"
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "ハート龍・セイハーツのトランプ No.14111"
+          "assist": "ハート龍・セイハーツのトランプ No.14111",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              28,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "ハート龍・セイハーツのトランプ No.14111"
+          "assist": "ハート龍・セイハーツのトランプ No.14111",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              28,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -28591,7 +31760,8 @@ window.PAD_SEED = {
             "turn": 4
           }
         ]
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "sun-dain-ana",
@@ -28607,36 +31777,93 @@ window.PAD_SEED = {
         {
           "id": "n14097",
           "role": "L",
-          "assist": "戦馬の支援機・スティード No.11458"
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13415",
           "role": "S",
-          "assist": "ダインの豪斧ダイヤアクス No.14099"
+          "assist": "ダインの豪斧ダイヤアクス No.14099",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14037",
           "role": "S",
-          "assist": "ケリ姫＆飛行士の写真 No.11866"
+          "assist": "ケリ姫＆飛行士の写真 No.11866",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n13483",
           "role": "S",
-          "assist": "謎の幼獣 No.12915"
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13950",
           "role": "S",
           "assist": "デュークカノン No.9309",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14112",
           "role": "F",
-          "assist": "ダイヤ龍・ダイアモスのトランプ No.14114"
+          "assist": "ダイヤ龍・ダイアモスのトランプ No.14114",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -28789,7 +32016,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 104
     },
     {
       "id": "sun-reinhard-hani",
@@ -28805,20 +32033,54 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "オールマイトねつけ No.13183"
+          "assist": "オールマイトねつけ No.13183",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              28,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13326",
           "role": "S",
-          "assist": "召雷剣【麒麟帝】 No.4141"
+          "assist": "召雷剣【麒麟帝】 No.4141",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13403",
           "role": "S",
           "assist": "張り切る守護神・アテナのショコラ No.13404",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              14,
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -28826,8 +32088,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "張り切る守護神・アテナのショコラ No.13404",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 137,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              28,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
@@ -28835,14 +32107,33 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "竈門禰豆子の竹筒 No.10854",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "ローレンスの閃甲盾 No.9376"
+          "assist": "ローレンスの閃甲盾 No.9376",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              28,
+              28,
+              28,
+              14,
+              15
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -28866,7 +32157,8 @@ window.PAD_SEED = {
         "plus891": 1,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "sun-dain-yomogi",
@@ -29101,20 +32393,50 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "リーベの龍喚石 No.8856"
+          "assist": "リーベの龍喚石 No.8856",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13416",
           "role": "S",
-          "assist": "フェルンの髪飾り No.13408"
+          "assist": "フェルンの髪飾り No.13408",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13403",
           "role": "S",
           "assist": "張り切る守護神・アテナのショコラ No.13404",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29122,8 +32444,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "張り切る守護神・アテナのショコラ No.13404",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29131,14 +32463,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "古城の幻想・龍喚士ソニア＝グランのキャンディ No.7984",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              56,
+              44
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "神刀・天極星黄龍 No.5632"
+          "assist": "神刀・天極星黄龍 No.5632",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -29329,7 +32679,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "sun-rosetta-reall",
@@ -29345,36 +32696,106 @@ window.PAD_SEED = {
         {
           "id": "n12439",
           "role": "L",
-          "assist": "ハクの誓いのチョーカー No.11323"
+          "assist": "ハクの誓いのチョーカー No.11323",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              28,
+              28
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12439",
           "role": "S",
-          "assist": "永久竜カナンのカード No.11872"
+          "assist": "永久竜カナンのカード No.11872",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              28,
+              28,
+              28,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13149",
           "role": "S",
-          "assist": "シャッコウモンの翼 No.13083"
+          "assist": "シャッコウモンの翼 No.13083",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127,
+            "latents": [
+              28,
+              28,
+              28,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13353",
           "role": "S",
-          "assist": "科学部の怪異・ユラの弁当箱 No.13617"
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12907",
           "role": "S",
           "assist": "悪戯霊・ロキ＝ウィルドのブレスレット No.13062",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              60,
+              60,
+              60,
+              60
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13323",
           "role": "F",
-          "assist": "遊びの空間・ジントニックの宝杯 No.13291"
+          "assist": "遊びの空間・ジントニックの宝杯 No.13291",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              55,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -29398,7 +32819,8 @@ window.PAD_SEED = {
         "plus891": 1,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 43
     },
     {
       "id": "hyaku-kikoru-nanaminn",
@@ -29417,8 +32839,13 @@ window.PAD_SEED = {
           "assist": "FS-1002 No.12961",
           "build": {
             "lv": 120,
+            "plus": 297,
             "super": 138,
-            "latentHp": 10
+            "latents": [
+              42,
+              47
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29427,7 +32854,15 @@ window.PAD_SEED = {
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
             "lv": 120,
-            "super": 56
+            "plus": 297,
+            "super": 56,
+            "latents": [
+              5,
+              5,
+              5,
+              5
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29436,8 +32871,15 @@ window.PAD_SEED = {
           "assist": "イッポンカタナ No.6847",
           "build": {
             "lv": 120,
-            "latentHp": 40,
-            "super": 52
+            "plus": 297,
+            "super": 52,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29445,7 +32887,11 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "EXディノイエロヘルムα No.11485",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29454,7 +32900,10 @@ window.PAD_SEED = {
           "assist": "ミッキーマウス＆プルート No.6010",
           "build": {
             "lv": 120,
-            "super": 108
+            "plus": 297,
+            "super": 108,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29463,7 +32912,12 @@ window.PAD_SEED = {
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
             "lv": 120,
-            "super": 108
+            "plus": 297,
+            "super": 108,
+            "latents": [
+              56
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -29630,7 +33084,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 44
     },
     {
       "id": "hyaku-kagura-ktz",
@@ -29650,7 +33105,11 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 142
+            "super": 142,
+            "latents": [
+              47
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29660,7 +33119,9 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 127
+            "super": 127,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29670,7 +33131,9 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 127
+            "super": 127,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29680,7 +33143,11 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 111
+            "super": 111,
+            "latents": [
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29689,7 +33156,12 @@ window.PAD_SEED = {
           "assist": "月の守護妖魔・セレナディアの耳飾り No.13053",
           "build": {
             "lv": 120,
-            "plus": 891
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29699,7 +33171,9 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 111
+            "super": 111,
+            "latents": [],
+            "fromQr": true
           }
         }
       ],
@@ -29848,7 +33322,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 46
     },
     {
       "id": "hyaku-kikoru-mori",
@@ -29867,7 +33342,12 @@ window.PAD_SEED = {
           "assist": "ナラ＆クインアスラ No.13980",
           "build": {
             "lv": 120,
-            "super": 108
+            "plus": 300,
+            "super": 108,
+            "latents": [
+              47
+            ],
+            "fromQr": true
           }
         },
         {
@@ -29876,7 +33356,10 @@ window.PAD_SEED = {
           "assist": "聖片の花嫁・サフィーラの指輪 No.12602",
           "build": {
             "lv": 120,
-            "super": 56
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29884,7 +33367,11 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29893,7 +33380,10 @@ window.PAD_SEED = {
           "assist": "女神官の鎖帷子 No.12046",
           "build": {
             "lv": 120,
-            "super": 56
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29902,7 +33392,10 @@ window.PAD_SEED = {
           "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
           "build": {
             "lv": 120,
-            "super": 128
+            "plus": 297,
+            "super": 128,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -29911,7 +33404,12 @@ window.PAD_SEED = {
           "assist": "ファイズギア No.5764",
           "build": {
             "lv": 120,
-            "super": 108
+            "plus": 300,
+            "super": 108,
+            "latents": [
+              56
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -30094,7 +33592,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 86
     },
     {
       "id": "hyaku-kikoru-ultima",
@@ -30113,10 +33612,13 @@ window.PAD_SEED = {
           "assist": "全ての鬼を滅するために作った刀 No.12848",
           "build": {
             "lv": 120,
+            "plus": 300,
             "super": 108,
-            "latentAttr": {
-              "光": 2.5
-            }
+            "latents": [
+              47,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30125,9 +33627,15 @@ window.PAD_SEED = {
           "assist": "射止める銃士・リズレットのショコラ No.10939",
           "build": {
             "lv": 99,
-            "latentAttr": {
-              "光": 10
-            }
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30136,10 +33644,15 @@ window.PAD_SEED = {
           "assist": "聖人会議長ラウフェイのカード No.12873",
           "build": {
             "lv": 120,
+            "plus": 297,
             "super": 56,
-            "latentAttr": {
-              "光": 10
-            }
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30148,10 +33661,15 @@ window.PAD_SEED = {
           "assist": "ヴィーナスのブレスレット No.7544",
           "build": {
             "lv": 120,
-            "latentAttr": {
-              "光": 10
-            },
-            "super": 52
+            "plus": 297,
+            "super": 52,
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30160,10 +33678,13 @@ window.PAD_SEED = {
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
             "lv": 120,
+            "plus": 300,
             "super": 108,
-            "latentAttr": {
-              "光": 2.5
-            }
+            "latents": [
+              56,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30172,10 +33693,15 @@ window.PAD_SEED = {
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
             "lv": 120,
+            "plus": 300,
             "super": 108,
-            "latentAttr": {
-              "光": 10
-            }
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -30649,7 +34175,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 44
     },
     {
       "id": "hyaku-mastergundam-nanaminn",
@@ -30668,9 +34195,13 @@ window.PAD_SEED = {
           "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525",
           "build": {
             "lv": 99,
-            "latentAttr": {
-              "auto": 2.5
-            }
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              35,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30679,9 +34210,15 @@ window.PAD_SEED = {
           "assist": "ゼロの仮面 No.11377",
           "build": {
             "lv": 99,
-            "latentAttr": {
-              "auto": 5
-            }
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              28,
+              28,
+              6,
+              10
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30690,9 +34227,13 @@ window.PAD_SEED = {
           "assist": "リチアの龍喚石 No.12714",
           "build": {
             "lv": 99,
-            "latentAttr": {
-              "auto": 2.5
-            }
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              34,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30701,7 +34242,13 @@ window.PAD_SEED = {
           "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451",
           "build": {
             "lv": 120,
-            "super": 109
+            "plus": 300,
+            "super": 109,
+            "latents": [
+              54,
+              5
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30710,10 +34257,13 @@ window.PAD_SEED = {
           "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
           "build": {
             "lv": 120,
+            "plus": 300,
             "super": 56,
-            "latentAttr": {
-              "auto": 2.5
-            }
+            "latents": [
+              56,
+              28
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30722,9 +34272,13 @@ window.PAD_SEED = {
           "assist": "黒薔薇の種子 No.12441",
           "build": {
             "lv": 99,
-            "latentAttr": {
-              "auto": 2.5
-            }
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              28,
+              34
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -30817,7 +34371,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "hyaku-bazzb-totakke",
@@ -30836,7 +34391,12 @@ window.PAD_SEED = {
           "build": {
             "lv": 120,
             "plus": 891,
-            "super": 96
+            "super": 96,
+            "latents": [
+              47,
+              43
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30845,7 +34405,10 @@ window.PAD_SEED = {
           "assist": "料理部の新鋭・ハトホルの学生証 No.7142",
           "build": {
             "lv": 120,
-            "super": 56
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -30854,7 +34417,12 @@ window.PAD_SEED = {
           "assist": "夢幻空間の名探偵・シェリング・フォードのカード No.5619",
           "build": {
             "lv": 120,
-            "super": 127
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30862,7 +34430,11 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "アレキサンダーの見聞録 No.8443",
           "build": {
-            "lv": 99
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -30871,7 +34443,10 @@ window.PAD_SEED = {
           "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
           "build": {
             "lv": 120,
-            "super": 56
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -30880,7 +34455,10 @@ window.PAD_SEED = {
           "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
           "build": {
             "lv": 120,
-            "super": 96
+            "plus": 297,
+            "super": 96,
+            "latents": [],
+            "fromQr": true
           }
         }
       ],
@@ -30956,7 +34534,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "senju-seiheart-kasajizo",
@@ -30972,15 +34551,30 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "ローネのトロンボーン No.8042"
+          "assist": "ローネのトロンボーン No.8042",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              35
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13569",
           "role": "S",
           "assist": "冥境の黒熾龍・ゴウテンの櫛 No.10305",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -30988,28 +34582,56 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "おでん漫遊記 No.9205",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              54,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11545",
           "role": "S",
-          "assist": "[うつつの華模様]塩見周子 No.14167"
+          "assist": "[うつつの華模様]塩見周子 No.14167",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              54
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12582",
           "role": "S",
           "assist": "アジサイの標本 No.7328",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "ロザリンのティーセット No.13857"
+          "assist": "ロザリンのティーセット No.13857",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              39
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -31128,7 +34750,8 @@ window.PAD_SEED = {
             "turn": 1
           }
         ]
-      }
+      },
+      "badgeId": 18
     },
     {
       "id": "senju-gintoki-nanaminn",
@@ -31144,29 +34767,61 @@ window.PAD_SEED = {
         {
           "id": "n13681",
           "role": "L",
-          "assist": "キャプテンカツーラ＆ティーチ衣装の写真 No.13679"
+          "assist": "キャプテンカツーラ＆ティーチ衣装の写真 No.13679",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 111,
+            "latents": [
+              47,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12847",
           "role": "S",
           "assist": "ラクシュミー＆パールヴァティーの絵馬 No.13250",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 52,
-            "superOnly": true
+            "latents": [
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n6978",
           "role": "S",
-          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 52,
+            "latents": [
+              29,
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n8327",
           "role": "S",
           "assist": "想星の健勇者・フェルルのショコラ No.13393",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              54
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31174,8 +34829,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "水柱・冨岡義勇 No.6549",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              29,
+              29,
+              29
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31183,8 +34845,14 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "虚栄の汰魔悟 No.13505",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              46,
+              4
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -31270,7 +34938,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "senju-gintoki-yp",
@@ -31286,29 +34955,53 @@ window.PAD_SEED = {
         {
           "id": "n13681",
           "role": "L",
-          "assist": "[うつつの華模様]塩見周子 No.14167"
+          "assist": "[うつつの華模様]塩見周子 No.14167",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13596",
           "role": "S",
           "assist": "ダインの豪斧ダイヤアクス No.14099",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              48
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13846",
           "role": "S",
-          "assist": "バフォメットのカード No.13936"
+          "assist": "バフォメットのカード No.13936",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n8304",
           "role": "S",
           "assist": "夏祭りの思い出・ラビリル＆ルゥの常夏ジュース No.14004",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -31316,14 +35009,24 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 52,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
           "id": "n13681",
           "role": "F",
-          "assist": "戦馬の支援機・スティード No.11458"
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -31421,7 +35124,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 7
     },
     {
       "id": "senju-bambi-shion",
@@ -31530,20 +35234,47 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "命天龍・ゼルクレアの首飾り No.11211"
+          "assist": "命天龍・ゼルクレアの首飾り No.11211",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              39
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13403",
           "role": "S",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11340",
           "role": "S",
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              47
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31551,8 +35282,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "聖夜の聖装斧姫・ミリーのスノードーム No.13162",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              47
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31560,14 +35298,34 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              47
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "命天龍のソウル No.11578"
+          "assist": "命天龍のソウル No.11578",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              10,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -31725,7 +35483,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "senju-zenitsu-yu",
@@ -31743,8 +35502,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "ウルヴァリン【コミックカバー・2】 No.9114",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              47,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31752,8 +35517,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "メタルドラゴンの宝杯 No.12616",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 96,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              6,
+              4,
+              10
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31761,8 +35535,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "冥境の黒熾龍・ゴウテンの櫛 No.10305",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31770,8 +35553,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "流華龍の神器・カヌー No.10554",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31779,8 +35571,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 52,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31788,8 +35589,17 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "雷神の玉 No.12407",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 96,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              10,
+              6
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -31960,7 +35770,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "senju-douma-nanaminn",
@@ -31975,15 +35786,32 @@ window.PAD_SEED = {
       "members": [
         {
           "id": "n12832",
-          "role": "L"
+          "role": "L",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              35,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6978",
           "role": "S",
           "assist": "凶禍龍・アマージュ No.7549",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -31991,8 +35819,11 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 28,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -32000,8 +35831,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32009,13 +35847,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ソー＆ザ・マイティ・ソー【コラボカバー・1】 No.11528",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              5,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12832",
-          "role": "F"
+          "role": "F",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              20,
+              20,
+              20
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -32134,7 +35991,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinbanju-zgundam-kasajizo",
@@ -32152,8 +36010,15 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "夏フェスのHEARTS・エキドナ -SARA-のうちわ No.10383",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 107,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              16
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32161,8 +36026,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "キング・オブ・ハートの紋章 No.11129",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 107,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              8
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32170,8 +36042,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "法陣 No.11705",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              41,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32179,8 +36057,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "水咎刀士アオトのカード No.11903",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              41,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32188,14 +36072,33 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "プー【フォト】 No.11795",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 107,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11180",
           "role": "F",
-          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              54,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -32298,7 +36201,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinbanju-zgundam-kasajizo-2",
@@ -32314,15 +36218,30 @@ window.PAD_SEED = {
         {
           "id": "n12235",
           "role": "L",
-          "assist": "アムロ・レイ No.9724"
+          "assist": "アムロ・レイ No.9724",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 107,
+            "latents": [
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n10938",
           "role": "S",
           "assist": "法陣 No.11705",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              41,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32330,28 +36249,67 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "水咎刀士アオトのカード No.11903",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              41,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12235",
           "role": "S",
-          "assist": "ポチャッコのアイスクリーム No.11654"
+          "assist": "ポチャッコのアイスクリーム No.11654",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 107,
+            "latents": [
+              4,
+              4,
+              12,
+              16,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12235",
           "role": "S",
           "assist": "キング・オブ・ハートの紋章 No.11129",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 107,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              12,
+              12,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11180",
           "role": "F",
-          "assist": "破壊されたポスト No.11295"
+          "assist": "破壊されたポスト No.11295",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              54,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -32440,7 +36398,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinbanju-mastergundam-nanaminn",
@@ -32456,25 +36415,70 @@ window.PAD_SEED = {
         {
           "id": "n11149",
           "role": "L",
-          "assist": "黒薔薇の種子 No.12441"
+          "assist": "黒薔薇の種子 No.12441",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11149",
           "role": "S",
-          "assist": "双頭犬の支援機・オルトス No.11460"
+          "assist": "双頭犬の支援機・オルトス No.11460",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11149",
           "role": "S",
-          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451"
+          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              31,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12530",
           "role": "S",
           "assist": "バリアブルロッドライフル No.11147",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 109,
-            "superOnly": true
+            "latents": [
+              54,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32482,14 +36486,33 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "聖片の花嫁・サフィーラの指輪 No.12602",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11149",
           "role": "F",
-          "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525"
+          "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              31,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -32547,7 +36570,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 44
     },
     {
       "id": "shinbanju-kikoru-yu",
@@ -32565,8 +36589,16 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "Ax-0112 No.12931",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              8,
+              8,
+              8,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32574,8 +36606,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "流華龍の神器・カヌー No.10554",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32583,8 +36623,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "破毒の孔雀王・ユリシャのブローチ No.9402",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              5,
+              5,
+              5,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32592,8 +36641,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "聖祭の慈愛神・ヴィーナスのスノードーム No.8170",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 52,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32601,8 +36659,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              8,
+              8,
+              8,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32610,8 +36676,14 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "シャオチューフの酒壺 No.12618",
           "build": {
+            "lv": 110,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              55,
+              8
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -32778,7 +36850,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 44
     },
     {
       "id": "shinbanju-ryugner-yu",
@@ -32794,32 +36867,96 @@ window.PAD_SEED = {
         {
           "id": "n13442",
           "role": "L",
-          "assist": "ワルりんの悪果実 No.9617"
+          "assist": "ワルりんの悪果実 No.9617",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13074",
           "role": "S",
-          "assist": "法陣 No.11705"
+          "assist": "法陣 No.11705",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [
+              58,
+              30
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13444",
           "role": "S",
-          "assist": "宇髄の額当て No.12815"
+          "assist": "宇髄の額当て No.12815",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 137,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13440",
           "role": "S",
-          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 110,
+            "latents": [
+              4,
+              41
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13442",
           "role": "S",
-          "assist": "堕姫の帯 No.10826"
+          "assist": "堕姫の帯 No.10826",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13442",
           "role": "F",
-          "assist": "ハクの誓いのチョーカー No.11323"
+          "assist": "ハクの誓いのチョーカー No.11323",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 110,
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -32940,7 +37077,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "shinbanju-kikoru-yp",
@@ -32958,8 +37096,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "学園の放送部・セイレーン＆リリスの弁当箱 No.13601",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              56,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32967,8 +37111,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "全ての鬼を滅するために作った刀 No.12848",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              31,
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -32976,27 +37126,56 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "キャプテン・マーベル＆ミズ・マーベル 【コラボカバー・1】 No.10710",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n9732",
           "role": "S",
-          "assist": "ポチャッコのアイスクリーム No.11654"
+          "assist": "ポチャッコのアイスクリーム No.11654",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n6978",
           "role": "S",
-          "assist": "高垣楓のCD No.13578"
+          "assist": "高垣楓のCD No.13578",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 52,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n12930",
           "role": "F",
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              8,
+              8
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -33150,7 +37329,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 86
     },
     {
       "id": "shinbanju-gintoki-amakura",
@@ -33166,15 +37346,33 @@ window.PAD_SEED = {
         {
           "id": "n13681",
           "role": "L",
-          "assist": "ワルりんのカード No.12344"
+          "assist": "ワルりんのカード No.12344",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n11210",
           "role": "S",
           "assist": "フチャの式札 No.7783",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33182,8 +37380,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "全ての鬼を滅するために作った刀 No.12848",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33191,8 +37396,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "暗殺道具 No.10225",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33200,14 +37411,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "アレキサンダーの見聞録 No.8443",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 52,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13681",
           "role": "F",
-          "assist": "虚栄の汰魔悟 No.13505"
+          "assist": "虚栄の汰魔悟 No.13505",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              4
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -33314,7 +37543,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 43
     },
     {
       "id": "shinbanju-bambi-macaron",
@@ -33332,8 +37562,15 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "天王寺松右衛門 No.12809",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33341,8 +37578,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ユーハバッハのマント No.14031",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33350,8 +37594,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "極醒の秘術神・オーディンのティアラ No.7637",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33359,8 +37612,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "シャオチューフの酒壺 No.12618",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33368,8 +37627,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "アレキサンダーの見聞録 No.8443",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 52,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33377,8 +37643,15 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "黒尾のユニフォーム No.12303",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -33426,7 +37699,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 7
     },
     {
       "id": "shinbanju-bambi-macaron-2",
@@ -33444,8 +37718,15 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "リクウの宝杯 No.12675",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33453,8 +37734,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "虚栄の汰魔悟 No.13505",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 128,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33462,24 +37750,68 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ヴァーチェの天空刃 No.11516",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n5286",
           "role": "S",
-          "assist": "全ての鬼を滅するために作った刀 No.12848"
+          "assist": "全ての鬼を滅するために作った刀 No.12848",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              55
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6978",
           "role": "S",
-          "assist": "アレキサンダーの見聞録 No.8443"
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 52,
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14072",
           "role": "F",
-          "assist": "ユラの封呪符 No.14139"
+          "assist": "ユラの封呪符 No.14139",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -33530,7 +37862,8 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      }
+      },
+      "badgeId": 46
     },
     {
       "id": "shinbanju-bazzb-payato",
@@ -33548,8 +37881,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "神才マクスウェルのカード No.12460",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 96,
-            "superOnly": true
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33557,24 +37896,43 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "鳳凰機・Gフェニックスのスクロール No.14133",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14080",
           "role": "S",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13999",
           "role": "S",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33582,8 +37940,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "端居の筆龍楽士・ミナカの常夏ジュース No.14013",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              12,
+              56,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33591,8 +37956,14 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "虚栄の汰魔悟 No.13505",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 142,
-            "superOnly": true
+            "latents": [
+              12,
+              12
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -33706,7 +38077,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 46
     },
     {
       "id": "shinbanju-bazzb-payato-2",
@@ -33722,25 +38094,71 @@ window.PAD_SEED = {
         {
           "id": "n14078",
           "role": "L",
-          "assist": "#UNICUS 夢見りあむのCD No.14151"
+          "assist": "#UNICUS 夢見りあむのCD No.14151",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14080",
           "role": "S",
-          "assist": "豪鬼の大念珠 No.5092"
+          "assist": "豪鬼の大念珠 No.5092",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14080",
           "role": "S",
-          "assist": "フローディアのリースロッド No.13166"
+          "assist": "フローディアのリースロッド No.13166",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n7712",
           "role": "S",
           "assist": "ペニー・パーカー【コミックカバー・1】 No.6943",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 54,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
           }
         },
         {
@@ -33748,14 +38166,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 52,
-            "superOnly": true
+            "latents": [
+              58
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14078",
           "role": "F",
-          "assist": "[うつつの華模様]塩見周子 No.14167"
+          "assist": "[うつつの華模様]塩見周子 No.14167",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -33878,7 +38314,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-kikoru-yp",
@@ -33894,43 +38331,85 @@ window.PAD_SEED = {
         {
           "id": "n12930",
           "role": "L",
-          "assist": "鬼蜘蛛の式札 No.6679"
+          "assist": "鬼蜘蛛の式札 No.6679",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 108,
+            "latents": [
+              6,
+              6,
+              4,
+              4
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n9927",
           "role": "S",
           "assist": "カルキノス【索敵モード】 No.12250",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
           "id": "n9927",
           "role": "S",
-          "assist": "風雪魔獣・スノーティアの耳飾り No.13489"
+          "assist": "風雪魔獣・スノーティアの耳飾り No.13489",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              58
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n2314",
           "role": "S",
           "assist": "夕凪の魔女・ドーナの常夏ジュース No.14015",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
           "id": "n12847",
           "role": "S",
-          "assist": "アジサイの標本 No.7328"
+          "assist": "アジサイの標本 No.7328",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n12930",
           "role": "F",
           "assist": "Ax-0112 No.12931",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              4,
+              4
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -34113,7 +38592,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 86
     },
     {
       "id": "kyouchou-omegamon-tapioka",
@@ -34131,27 +38611,52 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "謀略の狂戦士・ロキのカード No.11935",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 96,
-            "superOnly": true
+            "latents": [
+              41,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n10112",
           "role": "S",
-          "assist": "ヒカリのデジヴァイス No.11732"
+          "assist": "ヒカリのデジヴァイス No.11732",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n9806",
           "role": "S",
-          "assist": "アームズシーカー No.11216"
+          "assist": "アームズシーカー No.11216",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n9927",
           "role": "S",
           "assist": "ジンオウガ＆オウガネコ No.2342",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -34159,8 +38664,11 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "フルーツ＆ドラゴンズ No.11011",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
@@ -34168,8 +38676,14 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "双児機・メタルカストルのブレスレット No.10664",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 96,
-            "superOnly": true
+            "latents": [
+              46,
+              26
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -34238,7 +38752,8 @@ window.PAD_SEED = {
         "sure": true,
         "sureNote": "部位破壊5で凶玉確定（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-varenoa-kasajizo-1228",
@@ -34256,8 +38771,16 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "ヴェルドラのマント No.11236",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 61,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -34265,8 +38788,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "織姫の櫛 No.11201",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -34274,22 +38805,50 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "深遠の万寿龍・クーバンシェンの首飾り No.11205",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11734",
           "role": "S",
-          "assist": "凶禍龍・アマージュ No.7549"
+          "assist": "凶禍龍・アマージュ No.7549",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              32,
+              32,
+              32,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n10938",
           "role": "S",
           "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -34297,8 +38856,14 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "パンプキンヘッドゼウス No.11590",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              54,
+              32
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -34602,7 +39167,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-varenoa-kasajizo-0130",
@@ -34620,8 +39186,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "織姫の櫛 No.11201",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              54,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -34629,8 +39201,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "乙女機・メタルスピカの首飾り No.10159",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -34638,22 +39218,50 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "深遠の万寿龍・クーバンシェンの首飾り No.11205",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11734",
           "role": "S",
-          "assist": "凶禍龍・アマージュ No.7549"
+          "assist": "凶禍龍・アマージュ No.7549",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              32,
+              32,
+              32,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n10938",
           "role": "S",
           "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -34661,8 +39269,14 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "パンプキンヘッドゼウス No.11590",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [
+              54,
+              32
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -34972,7 +39586,8 @@ window.PAD_SEED = {
         "can": true,
         "note": "メタルスピカ装備をカノのぬいぐるみで代用すると部位ドロ率-10%（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-varenoa-nanaminn",
@@ -34988,15 +39603,31 @@ window.PAD_SEED = {
         {
           "id": "n10934",
           "role": "L",
-          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              55,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n10938",
           "role": "S",
           "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              4,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35004,8 +39635,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "太一のデジヴァイス No.11721",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              4,
+              4,
+              6,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35013,22 +39652,46 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "チャコルの魔帽子・ランヴィ No.7183",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              4,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n11862",
           "role": "S",
-          "assist": "炎獄竜ヒノカグツチのカード No.11897"
+          "assist": "炎獄竜ヒノカグツチのカード No.11897",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 61,
+            "latents": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12023",
           "role": "F",
           "assist": "織姫の櫛 No.11201",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 61,
-            "superOnly": true
+            "latents": [
+              6,
+              41
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -35404,7 +40067,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-varenoa-kasajizo-natsu",
@@ -35742,8 +40406,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "製菓の守護神・アテナのショコラ No.12165",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              54,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35751,8 +40421,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "機敏の療龍喚士・ハイレン No.10282",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35760,8 +40436,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ミーティア No.11181",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35769,8 +40453,16 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35778,14 +40470,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "リーチェの冥魔帽子・フロウ No.6161",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              58,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12235",
           "role": "F",
-          "assist": "アグリゲートの天弓 No.11555"
+          "assist": "アグリゲートの天弓 No.11555",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 107,
+            "latents": [
+              32,
+              32,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -35930,7 +40640,8 @@ window.PAD_SEED = {
         "can": true,
         "note": "部位破壊ボーナス5個搭載（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 44
     },
     {
       "id": "kyouchou-douma-nanaminn",
@@ -35946,15 +40657,27 @@ window.PAD_SEED = {
         {
           "id": "n12832",
           "role": "L",
-          "assist": "天王寺松右衛門 No.12809"
+          "assist": "天王寺松右衛門 No.12809",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n12306",
           "role": "S",
           "assist": "夏休みの再会・バーバラ＆ジュリのうちわ No.7593",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35962,8 +40685,13 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 59,
-            "superOnly": true
+            "latents": [
+              54
+            ],
+            "fromQr": true
           }
         },
         {
@@ -35971,19 +40699,36 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "雷神の玉 No.12407",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 127,
-            "superOnly": true
+            "latents": [],
+            "fromQr": true
           }
         },
         {
           "id": "n10112",
           "role": "S",
-          "assist": "アルトゥラの壊れた手枷 No.12716"
+          "assist": "アルトゥラの壊れた手枷 No.12716",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
         },
         {
           "id": "n12832",
           "role": "F",
-          "assist": "ワルりんのカード No.12344"
+          "assist": "ワルりんのカード No.12344",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -36155,7 +40900,8 @@ window.PAD_SEED = {
         "sure": true,
         "sureNote": "部位確定ドロップ（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-tanjiro-kazu",
@@ -36173,8 +40919,14 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "リクウの宝杯 No.12675",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              6,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36182,22 +40934,41 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n8370",
           "role": "S",
-          "assist": "仮装祭の精霊・アルラウネのキャンディ No.7968"
+          "assist": "仮装祭の精霊・アルラウネのキャンディ No.7968",
+          "build": {
+            "lv": 1,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              39
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6546",
           "role": "S",
           "assist": "バレンタインの深蒼姫・カラットのショコラ No.8370",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36205,8 +40976,13 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              58
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36214,8 +40990,16 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "彦星の櫛 No.11202",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              6,
+              6,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -36297,7 +41081,8 @@ window.PAD_SEED = {
         "sure": true,
         "sureNote": "部位破壊5・たぶん確定（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "kyouchou-reinhard-rei",
@@ -36313,15 +41098,31 @@ window.PAD_SEED = {
         {
           "id": "n13326",
           "role": "L",
-          "assist": "ヴィルヘルムの剣 No.13340"
+          "assist": "ヴィルヘルムの剣 No.13340",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              20,
+              36
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13168",
           "role": "S",
           "assist": "六人の少年少女のカード No.12149",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36329,8 +41130,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ミナカの宝杯 No.12612",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 129,
-            "superOnly": true
+            "latents": [
+              42,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36338,8 +41145,14 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ショートのコスチュームγ No.13197",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              42,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36347,14 +41160,30 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ガルルキャノン No.13145",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              4,
+              41
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13326",
           "role": "F",
-          "assist": "命天龍・ゼルクレアの首飾り No.11211"
+          "assist": "命天龍・ゼルクレアの首飾り No.11211",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              20,
+              39
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -36542,7 +41371,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinokuchou-seihearts-matsuda-19",
@@ -36558,15 +41388,35 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "緋天龍のソウル No.11573"
+          "assist": "緋天龍のソウル No.11573",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              35,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
           "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36574,8 +41424,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36583,8 +41443,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ギルドからの依頼書 No.12079",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36592,14 +41462,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "炎翔神・ミニほるすのノート No.13535",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006"
+          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -36838,7 +41729,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 103
     },
     {
       "id": "shinokuchou-seihearts-sigu",
@@ -36854,15 +41746,33 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "転寝の魔帽子・コーザ No.5773"
+          "assist": "転寝の魔帽子・コーザ No.5773",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              35,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13836",
           "role": "S",
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -36870,24 +41780,70 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ヴァーチェの天空刃 No.11516",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              31,
+              31,
+              31,
+              15,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12977",
           "role": "S",
-          "assist": "清らかな花嫁・ハクの指輪 No.13815"
+          "assist": "清らかな花嫁・ハクの指輪 No.13815",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14101",
           "role": "S",
-          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              29,
+              29,
+              29,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "転寝の魔帽子・コーザ No.5773"
+          "assist": "転寝の魔帽子・コーザ No.5773",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              31,
+              31,
+              31,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -37120,7 +42076,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "部位確定（投稿者談）"
-      }
+      },
+      "badgeId": 103
     },
     {
       "id": "shinokuchou-seihearts-matsuda-21",
@@ -37136,15 +42093,36 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "吉書始の女神・ネヴァンのかるた札 No.13269"
+          "assist": "吉書始の女神・ネヴァンのかるた札 No.13269",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              35,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
           "assist": "ステイタスの用紙 No.12024",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -37152,8 +42130,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -37161,8 +42149,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ギルドからの依頼書 No.12079",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -37170,14 +42168,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "宿木の大樹霊王・アドネアの首飾り No.13819",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "現世の赤龍喚士・ミニそにあのノート No.13541"
+          "assist": "現世の赤龍喚士・ミニそにあのノート No.13541",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -37449,7 +42468,8 @@ window.PAD_SEED = {
       "partBreak": {
         "note": "アグリのコアを割るなら3パン（レシートより）"
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 103
     },
     {
       "id": "shinokuchou-seihearts-matsuda-15",
@@ -37465,15 +42485,35 @@ window.PAD_SEED = {
         {
           "id": "n14110",
           "role": "L",
-          "assist": "ハート龍・セイハーツのトランプ No.14111"
+          "assist": "ハート龍・セイハーツのトランプ No.14111",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              35,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
           "assist": "ソロモンの指輪 No.12592",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -37481,28 +42521,68 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ギルドからの依頼書 No.12079",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12058",
           "role": "S",
-          "assist": "帝丹高校2年・毛利蘭 No.12388"
+          "assist": "帝丹高校2年・毛利蘭 No.12388",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12753",
           "role": "S",
           "assist": "ポピーの種子 No.13747",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              56,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "ハート龍・セイハーツのトランプ No.14111"
+          "assist": "ハート龍・セイハーツのトランプ No.14111",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -37772,7 +42852,8 @@ window.PAD_SEED = {
         "sure": true,
         "sureNote": "部位確定（投稿者談）"
       },
-      "fastMode": true
+      "fastMode": true,
+      "badgeId": 103
     },
     {
       "id": "shinokuchou-kafka-matsuda",
@@ -37788,29 +42869,74 @@ window.PAD_SEED = {
         {
           "id": "n12914",
           "role": "L",
-          "assist": "紅翼龍・ボルフィードのブレスレット No.10502"
+          "assist": "紅翼龍・ボルフィードのブレスレット No.10502",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              35
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12808",
           "role": "S",
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12536",
           "role": "S",
-          "assist": "アレスのブレスレット No.8883"
+          "assist": "アレスのブレスレット No.8883",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12903",
           "role": "S",
           "assist": "伊織のD-3 No.13100",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              44,
+              44,
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
@@ -37818,14 +42944,38 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              32,
+              32
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12914",
           "role": "F",
-          "assist": "紅翼龍・ボルフィードのブレスレット No.10502"
+          "assist": "紅翼龍・ボルフィードのブレスレット No.10502",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -38080,7 +43230,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinokuchou-douma-matsuda",
@@ -38096,15 +43247,16 @@ window.PAD_SEED = {
         {
           "id": "n12832",
           "role": "L",
-          "assist": "ゼウスの仕掛け絵本 No.12011"
-        },
-        {
-          "id": "n11714",
-          "role": "S",
-          "assist": "蒼天龍のソウル No.11574",
+          "assist": "ゼウスの仕掛け絵本 No.12011",
           "build": {
-            "super": 131,
-            "superOnly": true
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              35,
+              60
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38112,8 +43264,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "蒼天龍のソウル No.11574",
           "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11714",
+          "role": "S",
+          "assist": "蒼天龍のソウル No.11574",
+          "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38121,19 +43300,49 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ギルドからの依頼書 No.12079",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              54,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n12807",
           "role": "S",
-          "assist": "マスク・ド・サンドの宝杯 No.12667"
+          "assist": "マスク・ド・サンドの宝杯 No.12667",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12832",
           "role": "F",
-          "assist": "ゼウスの仕掛け絵本 No.12011"
+          "assist": "ゼウスの仕掛け絵本 No.12011",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              60,
+              60,
+              60,
+              60
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -38310,7 +43519,8 @@ window.PAD_SEED = {
         "sure": true,
         "sureNote": "部位確定（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinokuchou-kikoru-lancelot",
@@ -38418,15 +43628,32 @@ window.PAD_SEED = {
         {
           "id": "n13193",
           "role": "L",
-          "assist": "アルの剣 No.13344"
+          "assist": "アルの剣 No.13344",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              35,
+              10
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n10938",
           "role": "S",
           "assist": "遊びの空間・ジントニックの宝杯 No.13291",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38434,8 +43661,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ギルドからの依頼書 No.12079",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38443,8 +43680,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "伊織のD-3 No.13100",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 106,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38452,14 +43699,35 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ゼウスの仕掛け絵本 No.12011",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 131,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13193",
           "role": "F",
-          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -38487,7 +43755,8 @@ window.PAD_SEED = {
         "sure": true,
         "sureNote": "全部位破壊確定（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 7
     },
     {
       "id": "shinokuchou-kikoru-matsuda",
@@ -38505,8 +43774,15 @@ window.PAD_SEED = {
           "role": "L",
           "assist": "グリーフシード No.13890",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 108,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              47
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38514,8 +43790,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "オールマイトのレアカード No.13179",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 130,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38523,8 +43809,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "秘術神・ミニおーでぃんのノート No.13533",
           "build": {
+            "lv": 120,
+            "plus": 300,
             "super": 56,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38532,22 +43828,53 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "Ax-0112 No.12931",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              4,
+              4
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13817",
           "role": "S",
-          "assist": "道化焔竜オズ No.13931"
+          "assist": "道化焔竜オズ No.13931",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12930",
           "role": "F",
           "assist": "Ax-0112 No.12931",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 138,
-            "superOnly": true
+            "latents": [
+              56,
+              12,
+              12
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -38807,7 +44134,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "shinokuchou-rem-matsuda-19",
@@ -38822,15 +44150,36 @@ window.PAD_SEED = {
         {
           "id": "n13320",
           "role": "L",
-          "assist": "結晶石 No.13318"
+          "assist": "結晶石 No.13318",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              35,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
           "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38838,8 +44187,18 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ギルドからの依頼書 No.12079",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38847,8 +44206,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "脱出用ゴーレム No.13437",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -38856,14 +44222,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ステイタスの用紙 No.12024",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13320",
           "role": "F",
-          "assist": "結晶石 No.13318"
+          "assist": "結晶石 No.13318",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -39207,7 +44591,8 @@ window.PAD_SEED = {
         "can": true,
         "note": "12Fで部位を壊す手順あり。オチコンで本体を半分削ると部位1つ壊せない（レシートより）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 9
     },
     {
       "id": "shinokuchou-gintoki-junyama",
@@ -39223,30 +44608,85 @@ window.PAD_SEED = {
         {
           "id": "n13681",
           "role": "L",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              47,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13681",
           "role": "S",
-          "assist": "無一郎と蜜璃の鎹鴉 No.12817"
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13193",
           "role": "S",
-          "assist": "大輔のD-3 No.13087"
+          "assist": "大輔のD-3 No.13087",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              20,
+              20,
+              20
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13193",
           "role": "S",
-          "assist": "大輔のD-3 No.13087"
+          "assist": "大輔のD-3 No.13087",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              20,
+              20,
+              20
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n13676",
           "role": "S",
           "assist": "想海の師弟愛・ノルザ＆マールのショコラ No.13388",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 111,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -39254,8 +44694,18 @@ window.PAD_SEED = {
           "role": "F",
           "assist": "ジーニー【フォト】 No.11807",
           "build": {
+            "lv": 120,
+            "plus": 297,
             "super": 137,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              6,
+              6
+            ],
+            "fromQr": true
           }
         }
       ],
@@ -39355,7 +44805,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 46
     },
     {
       "id": "shinokuchou-rem-matsuda-20",
@@ -39371,15 +44822,35 @@ window.PAD_SEED = {
         {
           "id": "n13320",
           "role": "L",
-          "assist": "メニットのおみくじ道具 No.10873"
+          "assist": "メニットのおみくじ道具 No.10873",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              35,
+              10
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
           "assist": "交通誘導の魔帽子・スモック＆フーリオ No.13597",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -39387,8 +44858,17 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "脱出用ゴーレム No.13437",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              42,
+              42,
+              12,
+              12,
+              31
+            ],
+            "fromQr": true
           }
         },
         {
@@ -39396,8 +44876,15 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "恋する紫果精・グレーシスのショコラ No.12168",
           "build": {
+            "lv": 120,
+            "plus": 891,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
@@ -39405,14 +44892,32 @@ window.PAD_SEED = {
           "role": "S",
           "assist": "ステイタスの用紙 No.12024",
           "build": {
+            "lv": 120,
+            "plus": 528,
             "super": 64,
-            "superOnly": true
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
           }
         },
         {
           "id": "n13320",
           "role": "F",
-          "assist": "結晶石 No.13318"
+          "assist": "結晶石 No.13318",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -39680,7 +45185,8 @@ window.PAD_SEED = {
         "can": true,
         "note": "12Fはアグリの色ごとに部位2個破壊の手順あり（レシートより）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "badgeId": 9
     }
   ],
   "removed": {

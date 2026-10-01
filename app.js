@@ -120,7 +120,43 @@ let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョン�
 const SEARCH_TYPES = {
   item: { label: "集めたい素材", placeholder: "例: スパノエ、プラス", noun: "素材" },
   dungeon: { label: "周回したいダンジョン", placeholder: "例: 万寿、ノエル大集合", noun: "ダンジョン" },
+  leader: { label: "リーダー・フレンドのモンスター", placeholder: "例: 14098、ダイン、キコル", noun: "モンスター" },
 };
+
+// リーダー・フレンドで探す: 入力（図鑑No.か名前）に合うモンスターの No.（変身前後も同じキャラとして含める）
+function leaderNosFor(q) {
+  const raw = q.trim();
+  if (!raw) return new Set();
+  const famOf = (no) => MDB.get(no)?.[9] || no;
+  const used = new Map(); // 編成のリーダー・フレンドに使われているキャラ（変身グループ → No.）
+  for (const t of db.teams) for (const m of t.members) if (m.role === "L" || m.role === "F") {
+    const no = monster(m.id)?.no;
+    if (no) used.set(famOf(no), no);
+  }
+  const num = Number(raw.replace(/^No\.?\s*/i, ""));
+  const out = new Set();
+  if (Number.isInteger(num) && num > 0) {
+    out.add(famOf(num));
+  } else {
+    const n = norm(raw);
+    for (const [fam, no] of used) {
+      const names = [MDB.get(no)?.[1], ...(familyRows.get(fam) ?? []).map((r) => r[1])].filter(Boolean).map(norm);
+      if (names.some((x) => x.includes(n))) out.add(fam);
+    }
+  }
+  return out;
+}
+// 候補: 編成でリーダー・フレンドに使われているキャラ
+function leaderSuggestions() {
+  const famOf = (no) => MDB.get(no)?.[9] || no;
+  const seen = new Map();
+  for (const t of db.teams) for (const m of t.members) if (m.role === "L" || m.role === "F") {
+    const no = monster(m.id)?.no;
+    if (!no || seen.has(famOf(no))) continue;
+    seen.set(famOf(no), { name: MDB.get(no)?.[1] ?? monster(m.id)?.name ?? String(no), aliases: [`No.${no}`] });
+  }
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name, "ja"));
+}
 
 // 図鑑（monsters-db.js）: No → [No, 名前, 主属性, 副属性, アシスト可]
 const MDB_ROWS = window.PAD_MONSTER_DB?.rows ?? [];
@@ -858,7 +894,12 @@ function evaluate(team, dungeon, item, boxActive) {
 
 function search() {
   const q = $("#q").value;
-  const { dungeons, item, canonical } = resolveQuery(q, searchType);
+  let { dungeons, item, canonical } = searchType === "leader" ? { dungeons: [], item: null, canonical: q } : resolveQuery(q, searchType);
+  // リーダー・フレンドで探す: そのキャラがリーダーかフレンドの編成（ダンジョンはまたがる）
+  const leaderFams = searchType === "leader" ? leaderNosFor(q) : null;
+  const famOf = (no) => MDB.get(no)?.[9] || no;
+  const leaderHit = (t) => t.members.some((m) => (m.role === "L" || m.role === "F") && leaderFams.has(famOf(monster(m.id)?.no)));
+  if (leaderFams) dungeons = db.dungeons.filter((d) => db.teams.some((t) => t.dungeonId === d.id && leaderHit(t)));
   const boxActive = box.size > 0;
   // 部位破壊のあるダンジョンが対象の時だけ「部位ドロップ確定だけ」のチェックを出す
   const hasParts = dungeons.some((d) => d.parts);
@@ -873,9 +914,13 @@ function search() {
 
   let rows = dungeons.flatMap((d) =>
     // 高速モードONのみ・OFFのみの時は、その条件のタイムがある編成だけ
-    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null).map((t) => evaluate(t, d, item, boxActive))
+    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null && (!leaderFams || leaderHit(t))).map((t) => evaluate(t, d, item, boxActive))
   );
   const total = rows.length;
+  if (!total && leaderFams) {
+    out.innerHTML = `<div class="card unregistered"><p>「${esc(q)}」がリーダーかフレンドの編成は見つかりませんでした。図鑑No.か名前の一部で探せます（候補はリーダー・フレンドに使われているキャラだけ）。</p></div>`;
+    return;
+  }
   if (!total) {
     const isDungeon = searchType === "dungeon";
     const target = item ? item.name : dungeons.length ? dungeons[0].name : canonical;
@@ -937,7 +982,9 @@ function search() {
   const head =
     (item
       ? `<p class="summary">「${esc(item.name)}」が出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件</p>`
-      : `<p class="summary">編成 ${rows.length}件</p>`) +
+      : leaderFams
+        ? `<p class="summary">「${esc(q)}」がリーダーかフレンドの編成 ${rows.length}件（${new Set(rows.map((r) => r.dungeon.id)).size}ダンジョン）</p>`
+        : `<p class="summary">編成 ${rows.length}件</p>`) +
     `<p class="caution">⚠️ 編成・アシスト・立ち回りは要約や読み取りのため、誤りや省略があるかもしれません。参考にするときは<strong>必ず各編成の「元のポスト／元の記事」のリンク先を確認</strong>してください。</p>`;
 
   if (!rows.length) {
@@ -2471,7 +2518,7 @@ function sortedDungeons(list = db.dungeons) {
 }
 
 function suggestionsFor(q) {
-  const list = searchType === "dungeon" ? sortedDungeons() : db.items;
+  const list = searchType === "dungeon" ? sortedDungeons() : searchType === "leader" ? leaderSuggestions() : db.items;
   if (!q.trim()) return list;
   const n = norm(canonicalName(q));
   const raw = norm(q);
@@ -3132,7 +3179,7 @@ document.querySelectorAll(".tab").forEach((b) =>
 function updateModeLabels() {
   const b1 = $('#mode [data-mode="expHour"]');
   const b2 = $('#mode [data-mode="perRun"]');
-  if (searchType === "dungeon") {
+  if (searchType === "dungeon" || searchType === "leader") {
     b1.textContent = "経験値/時";
     b2.textContent = "経験値/周";
   } else {
@@ -3771,7 +3818,7 @@ const PDC_LATENT = {
   20: "HP＋", 21: "攻撃力＋", 22: "回復力＋", 23: "操作時間延長＋",
   28: "火軽減＋", 29: "水軽減＋", 30: "木軽減＋", 31: "光軽減＋", 32: "闇軽減＋",
   34: "属性吸収貫通", 35: "リーダーチェンジ耐性", 36: "毒目覚め耐性", 38: "消せないドロップ回復", 39: "ルーレット回復",
-  41: "ダメージ上限解放（4倍）", 42: "HP＋＋", 47: "リーダーチェンジ耐性（上限値アップ版）", 48: "消せないドロップ回復（上限値アップ版）", 62: "防御力無視（上限値アップ版）", 43: "攻撃力＋＋", 44: "回復力＋＋", 54: "スキルブースト＋＋", 55: "アシスト無効解除", 56: "アシスト無効解除（上限値アップ版）", 58: "毒目覚め耐性", 60: "部位破壊ボーナス",
+  41: "ダメージ上限解放（4倍）", 42: "HP＋＋", 47: "リーダーチェンジ耐性（上限値アップ版）", 48: "消せないドロップ回復（上限値アップ版）", 62: "防御力無視（上限値アップ版）", 43: "攻撃力＋＋", 44: "回復力＋＋", 53: "スキルブースト＋＋", 54: "スキルブースト＋＋（上限値アップ版）", 55: "アシスト無効解除", 56: "アシスト無効解除（上限値アップ版）", 58: "毒目覚め耐性", 60: "部位破壊ボーナス",
 };
 // QRコードの潜在から、耐久チェックに使うHP%と属性軽減%（HP強化1.5%・＋4.5%・＋＋10%、属性軽減1%・＋2.5%）
 function latentFromCodes(codes = []) {
