@@ -2901,7 +2901,9 @@ function loadIntoRegForm(id) {
 
 let regDeleteArmed = null;
 function renderRegList() {
-  const mine = db.teams.filter((t) => t.userAdded);
+  // Firebase 版は自分（ログイン中のアカウント）が登録したものだけ。他の人の公開済み編成は編成検索に出る
+  const uid = shared.mode === "firebase" ? shared.fb.user?.uid : null;
+  const mine = db.teams.filter((t) => t.userAdded && (shared.mode !== "firebase" || !t.shared || (uid && t.ownerUid === uid)));
   $("#reg-list-title").textContent = shared.db ? "登録された編成" : "自分で登録した編成";
   $("#reg-list").innerHTML = mine.length
     ? `<ul class="reg-list">${mine
