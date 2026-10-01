@@ -10,6 +10,7 @@
 出力: icons/<図鑑No.>.webp（作業用）と、まとめた icons.webp・icons.js（window.PAD_ICONS）
 """
 import glob
+import hashlib
 import json
 import os
 import re
@@ -48,7 +49,8 @@ def load_ocr():
     return ocr
 
 
-MANUAL = ROOT / "manual-icons"  # 管理者が送ったPDCのスクショ（アイコンがないキャラの補充用。git には入れない）
+# 管理者が置いたPDCのスクショ（アイコンがないキャラの補充用。git には入れない）。本人の置き場所はデスクトップの「PDCアイコン保管場所」
+MANUAL = Path(os.environ.get("PAD_MANUAL_ICONS", Path.home() / "Desktop" / "PDCアイコン保管場所"))
 
 
 def image_path(name):
@@ -198,9 +200,11 @@ def main():
         with Image.open(OUT / f"{no}.webp") as im:
             sheet.paste(im.resize((TILE, TILE), Image.LANCZOS), ((i % COLS) * TILE, (i // COLS) * TILE))
     sheet.save(ROOT / "icons.webp", "WEBP", quality=82)
+    # ver: 画像の中身から作る番号。画像が変わったらURLも変わるので、古い画像がキャッシュで使われない
+    ver = hashlib.md5((ROOT / "icons.webp").read_bytes()).hexdigest()[:10]
     (ROOT / "icons.js").write_text(
-        "// PDCレシート画像から切り抜いたアイコン（tools/crop-icons.py）。icons.webp の何番目か\nwindow.PAD_ICONS = { cols: %d, tile: %d, rows: %d, index: %s };\n"
-        % (COLS, TILE, rows, json.dumps({no: i for i, no in enumerate(nos)})),
+        "// PDCレシート画像から切り抜いたアイコン（tools/crop-icons.py）。icons.webp の何番目か\nwindow.PAD_ICONS = { ver: %s, cols: %d, tile: %d, rows: %d, index: %s };\n"
+        % (json.dumps(ver), COLS, TILE, rows, json.dumps({no: i for i, no in enumerate(nos)})),
         encoding="utf-8",
     )
     pos = sum(1 for v in best.values() if v[3] == "pos")

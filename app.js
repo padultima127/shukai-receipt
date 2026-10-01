@@ -2433,9 +2433,10 @@ function iconHTML(ref, { assist = false } = {}) {
   if (sharedIcon)
     return `<span class="icon icon-img icon-own ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true" style="background-image:url('${sharedIcon}');background-size:cover;background-position:center">${ct}</span>`;
   if (pi != null) {
-    const { cols, rows } = window.PAD_ICONS;
+    const { cols, rows, ver } = window.PAD_ICONS;
     const pos = `${((pi % cols) / Math.max(1, cols - 1)) * 100}% ${(Math.floor(pi / cols) / Math.max(1, rows - 1)) * 100}%`;
-    return `<span class="icon icon-img ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true" style="background-size:${cols * 100}% ${rows * 100}%;background-position:${pos}">${ct}</span>`;
+    // 画像のURLに icons.js と同じ番号を付ける（並び順の表と画像がずれないように）
+    return `<span class="icon icon-img ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true" style="background-image:url('icons.webp?v=${ver ?? ""}');background-size:${cols * 100}% ${rows * 100}%;background-position:${pos}">${ct}</span>`;
   }
   return `<span class="icon ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true">${esc(glyphOf(name))}${
     sub ? `<i class="sub a-${sub}"></i>` : ""
