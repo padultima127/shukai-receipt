@@ -710,10 +710,10 @@ function partBreakInfo(t, d) {
   const can = pb.can === true ? "部位破壊できる" : pb.can === false ? "部位破壊しない" : "部位破壊の記載なし";
   let drop;
   if (pb.can === false) drop = "";
-  else if (pb.sure) drop = `${d.parts.item}は確定ドロップ（${pb.sureNote ?? "投稿者談"}）`;
+  else if (pb.sure) drop = `${d.parts.item}は確定ドロップ（${(pb.sureNote ?? "投稿者談").replace(/（(.*?)）/g, "・$1")}）`;
   else {
     const lo = rate(bonus.min), hi = rate(bonus.max);
-    drop = `${d.parts.item}のドロップ率 推定${lo === hi ? `${lo}%` : `${lo}〜${hi}%（超覚醒次第）`}（部位破壊ボーナス${formatDungeonBonus(bonus).replace("（超覚醒次第）", "")}）`;
+    drop = `${pb.can ? "" : "壊せた場合の"}${d.parts.item}のドロップ率 推定${lo === hi ? `${lo}%` : `${lo}〜${hi}%（超覚醒次第）`}（部位破壊ボーナス${formatDungeonBonus(bonus).replace("（超覚醒次第）", "")}）`;
   }
   return { can, drop, note: pb.note ?? "" };
 }
