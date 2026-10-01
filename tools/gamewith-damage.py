@@ -134,8 +134,12 @@ def hits_of(text, attrs, threshold, sub_attrs=None):
             if kind == "superResolve":
                 h["threshold"] = threshold
             hits.append(h)
-        for m in DMG.finditer(body):
-            h = {"label": label, "dmg": int(m.group(1).replace(",", "")), "kind": kind, "attrs": at}
+        # 先制・超根性発動時の攻撃は敵1体につき1回（同じ欄にダメージが複数並んでいても一番大きい1回だけ。本人談）
+        dmgs = [int(m.group(1).replace(",", "")) for m in DMG.finditer(body)]
+        if dmgs:
+            h = {"label": label, "dmg": max(dmgs), "kind": kind, "attrs": at}
+            if len(dmgs) > 1:
+                h["note"] = f"表には{len(dmgs)}件のダメージ（敵1体につき1回として最大の値）"
             if kind == "superResolve":
                 h["threshold"] = threshold
             hits.append(h)

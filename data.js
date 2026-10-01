@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 78,
+  "version": 79,
   "seed": true,
   "monsters": [
     {
@@ -2325,16 +2325,8 @@ window.PAD_SEED = {
                 "attrs": [
                   "光",
                   "闇"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 3500000,
-                "kind": "preemptive",
-                "attrs": [
-                  "光",
-                  "闇"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               }
             ],
             "enemyAttrs": [
@@ -3017,15 +3009,8 @@ window.PAD_SEED = {
                 "kind": "turn",
                 "attrs": [
                   "水"
-                ]
-              },
-              {
-                "label": "初回行動時",
-                "dmg": 4590000,
-                "kind": "turn",
-                "attrs": [
-                  "水"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               }
             ],
             "enemyAttrs": [
@@ -3806,19 +3791,12 @@ window.PAD_SEED = {
               },
               {
                 "label": "先制",
-                "dmg": 4770000,
-                "kind": "preemptive",
-                "attrs": [
-                  "光"
-                ]
-              },
-              {
-                "label": "先制",
                 "dmg": 5300000,
                 "kind": "preemptive",
                 "attrs": [
                   "光"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               },
               {
                 "label": "初回行動時",
@@ -6055,16 +6033,8 @@ window.PAD_SEED = {
                 "attrs": [
                   "光",
                   "火"
-                ]
-              },
-              {
-                "label": "初回行動時",
-                "dmg": 15000000,
-                "kind": "turn",
-                "attrs": [
-                  "光",
-                  "火"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               },
               {
                 "label": "超根性発動時",
@@ -6191,56 +6161,12 @@ window.PAD_SEED = {
               },
               {
                 "label": "超根性発動時",
-                "dmg": 9000000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 9200000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 9400000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
                 "dmg": 9600000,
                 "kind": "superResolve",
                 "attrs": [
                   "火"
                 ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 9400000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 9800000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
+                "note": "表には4件のダメージ（敵1体につき1回として最大の値）",
                 "threshold": 60
               },
               {
@@ -6250,15 +6176,7 @@ window.PAD_SEED = {
                 "attrs": [
                   "火"
                 ],
-                "threshold": 60
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 9600000,
-                "kind": "superResolve",
-                "attrs": [
-                  "火"
-                ],
+                "note": "表には4件のダメージ（敵1体につき1回として最大の値）",
                 "threshold": 60
               }
             ],
@@ -6896,21 +6814,13 @@ window.PAD_SEED = {
               },
               {
                 "label": "初回行動時",
-                "dmg": 1287500,
-                "kind": "turn",
-                "attrs": [
-                  "光",
-                  "闇"
-                ]
-              },
-              {
-                "label": "初回行動時",
                 "dmg": 2575000,
                 "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               }
             ],
             "enemyAttrs": [
@@ -7008,18 +6918,11 @@ window.PAD_SEED = {
                 "dmg": 1450000,
                 "kind": "preemptive",
                 "attrs": [
+                  "光",
                   "木",
                   "水"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 1450000,
-                "kind": "preemptive",
-                "attrs": [
-                  "木",
-                  "水"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               }
             ],
             "enemyAttrs": [
@@ -7051,15 +6954,8 @@ window.PAD_SEED = {
                 "kind": "preemptive",
                 "attrs": [
                   "水"
-                ]
-              },
-              {
-                "label": "先制",
-                "dmg": 1600000,
-                "kind": "preemptive",
-                "attrs": [
-                  "水"
-                ]
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
               }
             ],
             "enemyAttrs": [
@@ -7079,15 +6975,7 @@ window.PAD_SEED = {
                 "attrs": [
                   "水"
                 ],
-                "threshold": 50
-              },
-              {
-                "label": "超根性発動時",
-                "dmg": 1700000,
-                "kind": "superResolve",
-                "attrs": [
-                  "水"
-                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）",
                 "threshold": 50
               },
               {
