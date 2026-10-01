@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 93,
+  "version": 94,
   "seed": true,
   "monsters": [
     {
@@ -15346,7 +15346,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "taiju-dain-nanaminn",
@@ -32100,7 +32101,8 @@ window.PAD_SEED = {
             "raw": "、セイハーツ"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "shinokuchou-seihearts-sigu",
