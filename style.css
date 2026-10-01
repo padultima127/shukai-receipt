@@ -117,6 +117,9 @@ button.danger { color: var(--ng); }
 .best .rank { background: var(--accent); color: #fff; }
 .score { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
 .score small { font-size: .7rem; margin-left: 2px; }
+.score-col { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex: none; }
+.part-rate { font-size: .66rem; color: var(--muted); white-space: nowrap; }
+.part-rate b { margin-left: 4px; font-size: .8rem; color: var(--text); }
 .bars { margin: 10px 0 4px; display: grid; gap: 4px; }
 .bar { display: flex; align-items: center; gap: 8px; font-size: .8rem; }
 .bar span { width: 2.5em; color: var(--muted); }
@@ -228,7 +231,7 @@ a.no:hover { text-decoration: underline; }
 }
 .icon-assist { width: 24px; height: 24px; border-radius: 6px; font-size: .72rem; margin-left: -12px; margin-top: 18px; border: 2px solid var(--card); }
 .icon-assist .sub { display: none; }
-.icon.icon-img { background-image: url("icons.webp"); background-repeat: no-repeat; color: transparent; border-radius: 8px; text-shadow: none; }
+.icon.icon-img { background-image: url("icons.webp?v=20261001b"); background-repeat: no-repeat; color: transparent; border-radius: 8px; text-shadow: none; }
 .icon-img .ct { color: #fff; }
 .a-fire { --c: var(--a-fire); } .a-water { --c: var(--a-water); } .a-wood { --c: var(--a-wood); }
 .a-light { --c: var(--a-light); } .a-dark { --c: var(--a-dark); } .a-none { --c: var(--a-none); }

@@ -6,7 +6,7 @@ const BOX_KEY = "pad-farming:box";
 const RUN_OVERHEAD_SEC = 20;
 // 経験値効率で並べるモード → evaluate() の値の名前
 // 効率順のモード。素材で探す時は探している素材の効率、ダンジョンで探す時は経験値の効率で並べる
-const EXP_MODES = { expHour: "effPerHour", expStamina: "effPerStamina" };
+const EXP_MODES = { expHour: "effPerHour", perRun: "effPerRun" };
 const MODE_WEIGHTS = {
   ease: { speed: 0.25, ease: 0.75 },
   balance: { speed: 0.5, ease: 0.5 },
@@ -52,6 +52,9 @@ else if ((db.version ?? 0) < window.PAD_SEED.version) {
   db.dungeons = db.dungeons.filter((d) => !removed.has(d.id));
   const removedTeams = new Set(window.PAD_SEED.removed?.teams ?? []);
   db.teams = db.teams.filter((t) => !removedTeams.has(t.id));
+  // 初期データ側でまとめた素材（6枠潜在など）は消す
+  const removedItems = new Set(window.PAD_SEED.removed?.items ?? []);
+  db.items = db.items.filter((x) => !removedItems.has(x.id));
   for (const t of db.teams) {
     if (!removed.has(t.dungeonId)) continue;
     const seedTeam = window.PAD_SEED.teams.find((x) => x.id === t.id);
@@ -700,6 +703,21 @@ function awakeningCountOf(t, awk) {
 const formatDungeonBonus = ({ min, max }) => (min === max ? `${min}個` : `${min}〜${max}個（超覚醒次第）`);
 // 部位破壊: ダンジョンに parts がある時だけ。可否・確定はレシートや投稿の記載（team.partBreak）、
 // 確定の記載がなければドロップ率を推定（基本50%＋部位破壊ボーナス1つにつき10%。基本の値は「ボーナス5個で確定」の投稿からの推定）
+// 点数の下に出す「部位破壊した場合のドロップ率」（部位のあるダンジョンだけ）
+function partRateBadge(t, d) {
+  if (!d?.parts) return "";
+  const text = [t.title, ...(t.steps ?? [])].join(" ");
+  const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { sure: true } : {});
+  if (pb.can === false) return "";
+  let v;
+  if (pb.sure) v = "確定";
+  else {
+    const b = awakeningCountOf(t, 131);
+    const lo = Math.min(100, d.parts.baseRate + 10 * b.min), hi = Math.min(100, d.parts.baseRate + 10 * b.max);
+    v = `推定${lo === hi ? lo : `${lo}〜${hi}`}%`;
+  }
+  return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : "（基本50%＋部位破壊ボーナス1つにつき10%で推定）"}">部位ドロップ<b>${v}</b></span>`;
+}
 function partBreakInfo(t, d) {
   if (!d?.parts) return null;
   // 登録データがなければ、立ち回り・タイトルの文から読み取る（画像から登録した編成など）
@@ -741,7 +759,7 @@ function evaluate(team, dungeon, item, boxActive) {
   const missing = count("missing", side);
   const substituted = count("substitute", side) + count("partial", side);
   const ease = easeOf(team);
-  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
+  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, expPerRun: expPerRun || null, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
 }
 
 function search() {
@@ -797,7 +815,8 @@ function search() {
   // 効率の対象: 素材で探す→その素材、ダンジョンで探す→経験値
   for (const r of rows) {
     r.effPerHour = item ? r.perHour : r.expPerHour;
-    r.effPerStamina = item ? (r.dungeon.stamina > 0 && r.rate > 0 ? r.rate / r.dungeon.stamina : null) : r.expPerStamina;
+    // 1周あたり（素材で探す→その素材の数、ダンジョンで探す→経験値）
+    r.effPerRun = item ? (r.rate > 0 ? r.rate : null) : r.expPerRun;
   }
   const expKey = EXP_MODES[mode];
   if (expKey) {
@@ -1299,10 +1318,8 @@ function renderResult(r, i, item) {
       : "";
   let staminaLine = "";
   if (item && r.dungeon.stamina > 0 && r.rate > 0) {
-    const hl = mode === "expStamina" ? "hl" : "";
-    staminaLine = r.staminaPer >= 1
-      ? `<div class="${hl}"><dt>1個あたりスタミナ</dt><dd>${r.staminaPer.toFixed(0)}${dropEst}</dd></div>`
-      : `<div class="${hl}"><dt>スタミナ1あたり</dt><dd>${formatCount(r.rate / r.dungeon.stamina)}個${dropEst}</dd></div>`;
+    const hl = mode === "perRun" ? "hl" : "";
+    staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}個${dropEst}</dd></div>`;
   }
   const warn = r.missing
     ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
@@ -1312,7 +1329,7 @@ function renderResult(r, i, item) {
     <div class="res-head">
       <span class="rank">${i + 1}</span>
       <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? `<span class="badge badge-mine">自分で登録</span>` : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p>${renderGimmicks(r.dungeon)}</div>
-      <span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>
+      <div class="score-col"><span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
     <div class="bars">${bar("速さ", r.speedScore)}${bar("楽さ", r.easeScore)}</div>
@@ -1320,7 +1337,7 @@ function renderResult(r, i, item) {
     <dl class="stats">
       <div><dt>1周</dt><dd>${formatTime(t.timeSec)}${est("timeSec")}</dd></div>
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
-      <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>`}
+      <div class="${mode === "perRun" ? "hl" : ""}"><dt>経験値/周</dt><dd>${r.expPerRun == null ? "―" : formatCount(r.expPerRun)}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
       ${(() => {
         const pi = partBreakInfo(t, r.dungeon);
@@ -2881,13 +2898,13 @@ document.querySelectorAll(".tab").forEach((b) =>
 
 function updateModeLabels() {
   const b1 = $('#mode [data-mode="expHour"]');
-  const b2 = $('#mode [data-mode="expStamina"]');
+  const b2 = $('#mode [data-mode="perRun"]');
   if (searchType === "dungeon") {
     b1.textContent = "経験値/時";
-    b2.textContent = "経験値/スタミナ";
+    b2.textContent = "経験値/周";
   } else {
     b1.textContent = "素材/時";
-    b2.textContent = "素材/スタミナ";
+    b2.textContent = "素材/周";
   }
 }
 
