@@ -673,26 +673,50 @@ function easeOf(team) {
 // ダンジョンボーナス（覚醒No.64）の数: 本体の通常覚醒・シンクロ覚醒・選んだ超覚醒、覚醒アシストの武器の覚醒から数える。
 // 超覚醒が分からない枠で、超覚醒の候補にダンボがあるときは max だけ増える（「◯〜◯個」表示）
 function dungeonBonusOf(t) {
-  const count = (row, k) => String(row?.[k] ?? "").split(".").filter((x) => x === "64").length;
+  return awakeningCountOf(t, 64);
+}
+// 覚醒の数（本体の通常覚醒・シンクロ覚醒・選んだ超覚醒、覚醒アシストの武器）。超覚醒が不明で候補にある枠は max だけ増える
+function awakeningCountOf(t, awk) {
+  const key = String(awk);
+  const count = (row, k) => String(row?.[k] ?? "").split(".").filter((x) => x === key).length;
   let min = 0;
   let max = 0;
   for (const m of t.members) {
     if (m.role === "free") continue;
     const row = MDB.get(monster(m.id)?.no);
     if (!row) continue;
-    let n = count(row, 27) + (row[26] === 64 && m.build?.synchro !== false ? 1 : 0);
+    let n = count(row, 27) + (row[26] === awk && m.build?.synchro !== false ? 1 : 0);
     const an = assistNoOf(m);
     const a = an ? MDB.get(an) : null;
     if (a?.[8]) n += count(a, 27);
     min += n;
     max += n;
     if (m.build?.super != null) {
-      if (m.build.super === 64) (min += 1), (max += 1);
-    } else if (String(row[11] ?? "").split(".").includes("64")) max += 1;
+      if (m.build.super === awk) (min += 1), (max += 1);
+    } else if (String(row[11] ?? "").split(".").includes(key)) max += 1;
   }
   return { min, max };
 }
 const formatDungeonBonus = ({ min, max }) => (min === max ? `${min}個` : `${min}〜${max}個（超覚醒次第）`);
+// 部位破壊: ダンジョンに parts がある時だけ。可否・確定はレシートや投稿の記載（team.partBreak）、
+// 確定の記載がなければドロップ率を推定（基本50%＋部位破壊ボーナス1つにつき10%。基本の値は「ボーナス5個で確定」の投稿からの推定）
+function partBreakInfo(t, d) {
+  if (!d?.parts) return null;
+  // 登録データがなければ、立ち回り・タイトルの文から読み取る（画像から登録した編成など）
+  const text = [t.title, ...(t.steps ?? [])].join(" ");
+  const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { can: true, sure: true, sureNote: "レシートの記載より" } : /部位/.test(text) ? { can: true } : {});
+  const bonus = awakeningCountOf(t, 131);
+  const rate = (n) => Math.min(100, d.parts.baseRate + 10 * n);
+  const can = pb.can === true ? "部位破壊できる" : pb.can === false ? "部位破壊しない" : "部位破壊の記載なし";
+  let drop;
+  if (pb.can === false) drop = "";
+  else if (pb.sure) drop = `${d.parts.item}は確定ドロップ（${pb.sureNote ?? "投稿者談"}）`;
+  else {
+    const lo = rate(bonus.min), hi = rate(bonus.max);
+    drop = `${d.parts.item}のドロップ率 推定${lo === hi ? `${lo}%` : `${lo}〜${hi}%（超覚醒次第）`}（部位破壊ボーナス${formatDungeonBonus(bonus).replace("（超覚醒次第）", "")}）`;
+  }
+  return { can, drop, note: pb.note ?? "" };
+}
 
 function evaluate(team, dungeon, item, boxActive) {
   // マルチは プレイヤーA / B がそれぞれ リーダー1 + サブ4（フレンド枠なし）
@@ -1264,6 +1288,10 @@ function renderResult(r, i, item) {
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
       <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
+      ${(() => {
+        const pi = partBreakInfo(t, r.dungeon);
+        return pi ? `<div class="wide"><dt>部位破壊</dt><dd>${esc(pi.can)}${pi.drop ? `・${esc(pi.drop)}` : ""}${pi.note ? `<br><small class="muted">${esc(pi.note)}</small>` : ""}</dd></div>` : "";
+      })()}
       <div class="${mode === "dbonus" ? "hl" : ""}"><dt>ダンジョンボーナス</dt><dd>${formatDungeonBonus(r.dbonus ?? dungeonBonusOf(t))}</dd></div>
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy

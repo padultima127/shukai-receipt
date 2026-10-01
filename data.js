@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 86,
+  "version": 87,
   "seed": true,
   "monsters": [
     {
@@ -8107,6 +8107,11 @@ window.PAD_SEED = {
             ]
           }
         ]
+      },
+      "parts": {
+        "item": "凶玉",
+        "baseRate": 50,
+        "note": "ボスの部位破壊で凶玉（最大2個）。部位破壊ボーナス1つにつきドロップ率+10%（ゲームエイト）。基本のドロップ率50%は投稿からの推定"
       }
     },
     {
@@ -8590,6 +8595,11 @@ window.PAD_SEED = {
             "note": "敵は5種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           }
         ]
+      },
+      "parts": {
+        "item": "アグリゲートの希石",
+        "baseRate": 50,
+        "note": "ボスの部位破壊で希石（0〜4個、ボスと同じ属性）。部位破壊ボーナス1つにつきドロップ率+10%（ゲームエイト）。基本のドロップ率50%は投稿からの推定。リーダーの「タマゴと部位破壊素材のドロップ率」アップは未計算"
       }
     }
   ],
@@ -28308,6 +28318,11 @@ window.PAD_SEED = {
             "raw": "ラハーデス"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位破壊5で凶玉確定（投稿者談）"
       }
     },
     {
@@ -28648,6 +28663,9 @@ window.PAD_SEED = {
             "raw": "③ノア▶火"
           }
         ]
+      },
+      "partBreak": {
+        "can": true
       }
     },
     {
@@ -28993,6 +29011,10 @@ window.PAD_SEED = {
             "raw": "③ノア▶火"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "note": "メタルスピカ装備をカノのぬいぐるみで代用すると部位ドロ率-10%（投稿者談）"
       }
     },
     {
@@ -29723,6 +29745,10 @@ window.PAD_SEED = {
             "raw": "→ナツ▶火"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "note": "盤面のドロ強次第では部位破壊しきれない場合あり。部位破壊する場合はノアの豆を閉じない（投稿者談）"
       }
     },
     {
@@ -29904,6 +29930,10 @@ window.PAD_SEED = {
             "raw": "→アテナ→ず"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊ボーナス5個搭載（投稿者談）"
       }
     },
     {
@@ -30111,6 +30141,11 @@ window.PAD_SEED = {
             "raw": "練ハーデス、"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位確定ドロップ（投稿者談）"
       }
     },
     {
@@ -30227,6 +30262,11 @@ window.PAD_SEED = {
             "raw": "ブカラット武器"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位破壊5・たぶん確定（投稿者談）"
       }
     },
     {
@@ -30452,6 +30492,9 @@ window.PAD_SEED = {
             "raw": " ラインハルト"
           }
         ]
+      },
+      "partBreak": {
+        "can": true
       }
     },
     {
@@ -31024,6 +31067,11 @@ window.PAD_SEED = {
             "raw": "にセイハーツを打"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位確定（投稿者談）"
       }
     },
     {
@@ -31349,6 +31397,9 @@ window.PAD_SEED = {
             "raw": "のセイハーツでも"
           }
         ]
+      },
+      "partBreak": {
+        "note": "アグリのコアを割るなら3パン（レシートより）"
       }
     },
     {
@@ -31662,6 +31713,11 @@ window.PAD_SEED = {
             "raw": "、セイハーツ"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位確定（投稿者談）"
       }
     },
     {
@@ -32169,6 +32225,11 @@ window.PAD_SEED = {
             "raw": "③スクルド、ど"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位確定（投稿者談）"
       }
     },
     {
@@ -32232,6 +32293,10 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "note": "12Fで部位2個破壊（レシートより）"
       }
     },
     {
@@ -32295,6 +32360,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "全部位破壊確定（投稿者談）"
       }
     },
     {
@@ -32989,6 +33059,10 @@ window.PAD_SEED = {
             "raw": "Lレム"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "note": "12Fで部位を壊す手順あり。オチコンで本体を半分削ると部位1つ壊せない（レシートより）"
       }
     },
     {
@@ -33448,6 +33522,10 @@ window.PAD_SEED = {
             "raw": "Lレム"
           }
         ]
+      },
+      "partBreak": {
+        "can": true,
+        "note": "12Fはアグリの色ごとに部位2個破壊の手順あり（レシートより）"
       }
     }
   ],

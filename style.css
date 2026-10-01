@@ -271,6 +271,8 @@ button:disabled { opacity: .6; cursor: wait; }
 #mode { flex-wrap: wrap; }
 #mode button { flex: 1 1 auto; white-space: nowrap; }
 .stats .hl dt, .stats .hl dd { color: var(--accent); }
+.stats .wide { flex-basis: 100%; }
+.stats .wide dd { font-weight: 500; }
 .alt-search { margin-top: 4px; }
 .alt-btn { font-size: .78rem; padding: 3px 10px; border-color: var(--accent); color: var(--accent); background: transparent; }
 .alt-out .hint { margin: 4px 0 0; font-size: .75rem; }
