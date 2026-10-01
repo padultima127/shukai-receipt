@@ -650,6 +650,30 @@ function easeOf(team) {
   return { score: (1 - burden) * 100, parts };
 }
 
+// ダンジョンボーナス（覚醒No.64）の数: 本体の通常覚醒・シンクロ覚醒・選んだ超覚醒、覚醒アシストの武器の覚醒から数える。
+// 超覚醒が分からない枠で、超覚醒の候補にダンボがあるときは max だけ増える（「◯〜◯個」表示）
+function dungeonBonusOf(t) {
+  const count = (row, k) => String(row?.[k] ?? "").split(".").filter((x) => x === "64").length;
+  let min = 0;
+  let max = 0;
+  for (const m of t.members) {
+    if (m.role === "free") continue;
+    const row = MDB.get(monster(m.id)?.no);
+    if (!row) continue;
+    let n = count(row, 27) + (row[26] === 64 && m.build?.synchro !== false ? 1 : 0);
+    const an = assistNoOf(m);
+    const a = an ? MDB.get(an) : null;
+    if (a?.[8]) n += count(a, 27);
+    min += n;
+    max += n;
+    if (m.build?.super != null) {
+      if (m.build.super === 64) (min += 1), (max += 1);
+    } else if (String(row[11] ?? "").split(".").includes("64")) max += 1;
+  }
+  return { min, max };
+}
+const formatDungeonBonus = ({ min, max }) => (min === max ? `${min}個` : `${min}〜${max}個（超覚醒次第）`);
+
 function evaluate(team, dungeon, item, boxActive) {
   // マルチは プレイヤーA / B がそれぞれ リーダー1 + サブ4（フレンド枠なし）
   const sides = team.multi ? ["A", "B"] : [null];
@@ -673,7 +697,7 @@ function evaluate(team, dungeon, item, boxActive) {
   const missing = count("missing", side);
   const substituted = count("substitute", side) + count("partial", side);
   const ease = easeOf(team);
-  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, missing, substituted, easeScore: ease.score, ease };
+  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
 }
 
 function search() {
@@ -737,6 +761,11 @@ function search() {
     const max = Math.max(...rows.map((r) => r[expKey] ?? 0), 1e-9);
     for (const r of rows) r.score = r[expKey] == null ? null : (r[expKey] / max) * 100 - penalty(r);
     rows.sort((a, b) => (b.score ?? -Infinity) - (a.score ?? -Infinity));
+  } else if (mode === "dbonus") {
+    // ダンボ数順: 確定している数が多い順、同じならバランスの点数順
+    const w = MODE_WEIGHTS.balance;
+    for (const r of rows) r.score = r.speedScore * w.speed + r.easeScore * w.ease - penalty(r);
+    rows.sort((a, b) => b.dbonus.min - a.dbonus.min || b.dbonus.max - a.dbonus.max || b.score - a.score);
   } else {
     const w = MODE_WEIGHTS[mode];
     for (const r of rows) r.score = r.speedScore * w.speed + r.easeScore * w.ease - penalty(r);
@@ -1190,7 +1219,7 @@ function renderResult(r, i, item) {
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
       <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
-      <div><dt>ダンジョンボーナス</dt><dd>${t.dungeonBonus != null ? `${t.dungeonBonus}個` : `<span class="muted">記載なし</span>`}</dd></div>
+      <div class="${mode === "dbonus" ? "hl" : ""}"><dt>ダンジョンボーナス</dt><dd>${formatDungeonBonus(r.dbonus ?? dungeonBonusOf(t))}</dd></div>
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>
@@ -1431,7 +1460,7 @@ function enduranceSetup(t0, opts = {}) {
     // ＋値のHP1あたりのHP（10 × 潜在 × 全パラ系 × LS）。チームHP強化は最後に掛ける
     const perPlus = 10 * (1 + (b.latentHp ?? 0) / 100) * mults.reduce((x, t) => x * Number(t.split("×")[1]), 1) * lsm;
     const hpPlus = Math.min(297, Math.round((b.plus ?? 297) / 3));
-    detail.push({ no, name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build, perPlus, hpPlus });
+    detail.push({ no, name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build && !m.build.superOnly, perPlus, hpPlus });
     total += Math.max(1, hp) * lsm;
   }
   total = total * (1 + 0.05 * teamHp);
@@ -1588,7 +1617,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build && !m.build.superOnly) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1887,7 +1916,7 @@ function renderEndurance(t, d) {
   if (!d?.damage?.floors?.length || t.multi) return "";
   const setup = enduranceSetup(t);
   const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
-  const warn = `<p class="end-warn">⚠ この計算は攻略サイトのデータと推定値にもとづく<strong>目安</strong>で、間違っている可能性があります（敵の行動の抜け・条件の読み違い・HPの推定誤差など）。実際に挑む前にPDCやゲーム内で必ず確認してください。${d.damage.auto ? "このダンジョンの敵の攻撃は攻略サイトの表から自動で取り込んだもので、未確認です。" : ""}${t.members.some((m) => m.build) ? "" : "この編成はレシートの超覚醒・潜在・レベルが未登録のため、HPは低めに出ます。"}</p>`;
+  const warn = `<p class="end-warn">⚠ この計算は攻略サイトのデータと推定値にもとづく<strong>目安</strong>で、間違っている可能性があります（敵の行動の抜け・条件の読み違い・HPの推定誤差など）。実際に挑む前にPDCやゲーム内で必ず確認してください。${d.damage.auto ? "このダンジョンの敵の攻撃は攻略サイトの表から自動で取り込んだもので、未確認です。" : ""}${t.members.some((m) => m.build && !m.build.superOnly) ? "" : "この編成はレシートの超覚醒・潜在・レベルが未登録のため、HPは低めに出ます。"}</p>`;
   return `<details class="endurance" data-team="${esc(t.id)}"><summary>耐久チェック（試作）</summary>
     ${warn}
     <div class="end-hp-label">

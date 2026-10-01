@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 85,
+  "version": 86,
   "seed": true,
   "monsters": [
     {
@@ -30473,22 +30473,38 @@ window.PAD_SEED = {
         {
           "id": "n6412",
           "role": "S",
-          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ギルドからの依頼書 No.12079"
+          "assist": "ギルドからの依頼書 No.12079",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "炎翔神・ミニほるすのノート No.13535"
+          "assist": "炎翔神・ミニほるすのノート No.13535",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n14110",
@@ -30731,8 +30747,7 @@ window.PAD_SEED = {
             "raw": "、セイハーツ"
           }
         ]
-      },
-      "dungeonBonus": 19
+      }
     },
     {
       "id": "shinokuchou-seihearts-sigu",
@@ -30753,12 +30768,20 @@ window.PAD_SEED = {
         {
           "id": "n13836",
           "role": "S",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n9365",
           "role": "S",
-          "assist": "ヴァーチェの天空刃 No.11516"
+          "assist": "ヴァーチェの天空刃 No.11516",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n12977",
@@ -31001,8 +31024,7 @@ window.PAD_SEED = {
             "raw": "にセイハーツを打"
           }
         ]
-      },
-      "dungeonBonus": 15
+      }
     },
     {
       "id": "shinokuchou-seihearts-matsuda-21",
@@ -31023,22 +31045,38 @@ window.PAD_SEED = {
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ステイタスの用紙 No.12024"
+          "assist": "ステイタスの用紙 No.12024",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ギルドからの依頼書 No.12079"
+          "assist": "ギルドからの依頼書 No.12079",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "宿木の大樹霊王・アドネアの首飾り No.13819"
+          "assist": "宿木の大樹霊王・アドネアの首飾り No.13819",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n14110",
@@ -31311,8 +31349,7 @@ window.PAD_SEED = {
             "raw": "のセイハーツでも"
           }
         ]
-      },
-      "dungeonBonus": 21
+      }
     },
     {
       "id": "shinokuchou-seihearts-matsuda-15",
@@ -31333,12 +31370,20 @@ window.PAD_SEED = {
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ソロモンの指輪 No.12592"
+          "assist": "ソロモンの指輪 No.12592",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ギルドからの依頼書 No.12079"
+          "assist": "ギルドからの依頼書 No.12079",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n12058",
@@ -31617,8 +31662,7 @@ window.PAD_SEED = {
             "raw": "、セイハーツ"
           }
         ]
-      },
-      "dungeonBonus": 15
+      }
     },
     {
       "id": "shinokuchou-kafka-matsuda",
@@ -32125,8 +32169,7 @@ window.PAD_SEED = {
             "raw": "③スクルド、ど"
           }
         ]
-      },
-      "dungeonBonus": 4
+      }
     },
     {
       "id": "shinokuchou-kikoru-lancelot",
@@ -32252,8 +32295,7 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      },
-      "dungeonBonus": 3
+      }
     },
     {
       "id": "shinokuchou-kikoru-matsuda",
@@ -32572,22 +32614,38 @@ window.PAD_SEED = {
         {
           "id": "n6412",
           "role": "S",
-          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ギルドからの依頼書 No.12079"
+          "assist": "ギルドからの依頼書 No.12079",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "脱出用ゴーレム No.13437"
+          "assist": "脱出用ゴーレム No.13437",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ステイタスの用紙 No.12024"
+          "assist": "ステイタスの用紙 No.12024",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n13320",
@@ -32931,8 +32989,7 @@ window.PAD_SEED = {
             "raw": "Lレム"
           }
         ]
-      },
-      "dungeonBonus": 19
+      }
     },
     {
       "id": "shinokuchou-gintoki-junyama",
@@ -33092,22 +33149,38 @@ window.PAD_SEED = {
         {
           "id": "n6412",
           "role": "S",
-          "assist": "交通誘導の魔帽子・スモック＆フーリオ No.13597"
+          "assist": "交通誘導の魔帽子・スモック＆フーリオ No.13597",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "脱出用ゴーレム No.13437"
+          "assist": "脱出用ゴーレム No.13437",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "恋する紫果精・グレーシスのショコラ No.12168"
+          "assist": "恋する紫果精・グレーシスのショコラ No.12168",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n6412",
           "role": "S",
-          "assist": "ステイタスの用紙 No.12024"
+          "assist": "ステイタスの用紙 No.12024",
+          "build": {
+            "super": 64,
+            "superOnly": true
+          }
         },
         {
           "id": "n13320",
@@ -33375,8 +33448,7 @@ window.PAD_SEED = {
             "raw": "Lレム"
           }
         ]
-      },
-      "dungeonBonus": 20
+      }
     }
   ],
   "removed": {
