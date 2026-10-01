@@ -207,9 +207,81 @@ def main():
         % (json.dumps(ver), COLS, TILE, rows, json.dumps({no: i for i, no in enumerate(nos)})),
         encoding="utf-8",
     )
+    crop_badges(teams, ocr)
     pos = sum(1 for v in best.values() if v[3] == "pos")
     print(f"切り抜き {len(best)}体（位置で {pos}・文字で {len(best) - pos}）／編成に出てくる {len(wanted)}体（なし {len(wanted - set(best))}体）")
     print("なし:", sorted(wanted - set(best)))
+
+
+BADGE_W, BADGE_H = 72, 52
+
+
+def badge_box(region):
+    """タイトルの左のバッジ（色の付いた横長の札）の範囲。QRコードや文字は白黒なので色の濃さで見分ける"""
+    w, h = region.size
+    px = region.load()
+    colored = lambda x, y: (lambda c: max(c) - min(c) > 45)(px[x, y][:3])
+    cols = [sum(colored(x, y) for y in range(h)) for x in range(w)]
+    xs = [x for x in range(w) if cols[x] > h * 0.25]
+    if not xs:
+        return None
+    # 左から続いている塊だけ（文字の色付き部分を拾わない）
+    x0 = xs[0]
+    x1 = x0
+    while x1 + 1 < w and cols[x1 + 1] > h * 0.15:
+        x1 += 1
+    rows = [sum(colored(x, y) for x in range(x0, x1 + 1)) for y in range(h)]
+    ys = [y for y in range(h) if rows[y] > (x1 - x0 + 1) * 0.25]
+    if not ys:
+        return None
+    y0, y1 = ys[0], ys[-1]
+    bw, bh = x1 - x0 + 1, y1 - y0 + 1
+    if bw < w * 0.2 or bh < h * 0.2 or not (0.9 < bw / bh < 2.6):
+        return None
+    return (x0, y0, x1 + 1, y1 + 1)
+
+
+def crop_badges(teams, ocr):
+    """PDCで選んだバッジ（タイトルの左のアイコン）を編成ごとに切り抜いて badges.webp にまとめる"""
+    found = {}
+    for t in teams:
+        m = re.search(r"status/(\d+)", t["source"])
+        if not m or t["multi"]:
+            continue
+        pdc = []
+        for name in sorted(n for n in ocr if n.startswith(m.group(1) + "_")):
+            labels = labels_of(ocr[name])
+            if len(labels) >= 4 and (rows := rows_of(labels)):
+                pdc.append((name, rows))
+        nth = 1 if "#" in t["source"] else 0
+        if len(pdc) <= nth:
+            continue
+        name, (assist_b, _, _, _) = pdc[nth]
+        path = image_path(name)
+        if not path:
+            continue
+        with Image.open(path) as im:
+            im = im.convert("RGB")
+            W, H = im.size
+            cell = W / 6
+            top = assist_b * H + cell * 0.04 - cell  # アシストの段の上端
+            y0 = max(0, top - cell * 0.85)
+            region = im.crop((0, int(y0), int(cell * 0.75), int(top)))
+            box = badge_box(region)
+            if box:
+                found[t["id"]] = region.crop(box).resize((BADGE_W, BADGE_H), Image.LANCZOS)
+    ids = sorted(found)
+    cols = 16
+    rows = max(1, (len(ids) + cols - 1) // cols)
+    sheet = Image.new("RGB", (cols * BADGE_W, rows * BADGE_H), (40, 40, 48))
+    for i, tid in enumerate(ids):
+        sheet.paste(found[tid], ((i % cols) * BADGE_W, (i // cols) * BADGE_H))
+    sheet.save(ROOT / "badges.webp", "WEBP", quality=85)
+    ver = hashlib.md5((ROOT / "badges.webp").read_bytes()).hexdigest()[:10]
+    with open(ROOT / "icons.js", "a", encoding="utf-8") as f:
+        f.write("// PDCで選んだバッジ（タイトルの左のアイコン）。badges.webp の何番目か（編成id）\nwindow.PAD_BADGES = { ver: %s, cols: %d, rows: %d, index: %s };\n"
+                % (json.dumps(ver), cols, rows, json.dumps({tid: i for i, tid in enumerate(ids)}, ensure_ascii=False)))
+    print(f"バッジ {len(ids)}編成")
 
 
 if __name__ == "__main__":

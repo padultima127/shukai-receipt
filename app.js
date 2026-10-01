@@ -75,6 +75,8 @@ const SHARED_ICONS = {};
 let regIcons = {};
 // 画像から読み取った超覚醒 { 枠の番号: { no: 本体No., super: 覚醒No.（0＝なし） } }
 let regSupers = {};
+// 画像から読み取ったバッジ（data URL）
+let regBadge = null;
 // レシートから分からない超覚醒を、見る人が超覚醒一覧から選んだもの（このブラウザだけに保存）。{ "編成id:枠": 覚醒No. }
 const SUPER_PICK_KEY = "pad-farming-super-picks";
 let superPicks = loadJSON(SUPER_PICK_KEY, {});
@@ -1212,6 +1214,17 @@ function searchAltFor(teamId, idx) {
 }
 
 // ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）
+// PDCで選んだバッジ（レシートのタイトルの左のアイコン。badges.webp から、画像から登録した編成は badgeIcon）
+function badgeIconHTML(t) {
+  const B = window.PAD_BADGES;
+  const i = B?.index?.[t.id];
+  if (i != null) {
+    const pos = `${((i % B.cols) / Math.max(1, B.cols - 1)) * 100}% ${(Math.floor(i / B.cols) / Math.max(1, B.rows - 1)) * 100}%`;
+    return `<span class="pdc-badge" title="PDCで選んだバッジ" style="background-image:url('badges.webp?v=${B.ver}');background-size:${B.cols * 100}% ${B.rows * 100}%;background-position:${pos}"></span>`;
+  }
+  if (t.badgeIcon && /^data:image\/webp;base64,/.test(t.badgeIcon)) return `<span class="pdc-badge" title="PDCで選んだバッジ" style="background-image:url('${t.badgeIcon}');background-size:cover"></span>`;
+  return "";
+}
 function renderGimmicks(d) {
   const g = d.gimmicks;
   if (!g) return "";
@@ -1395,7 +1408,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p>${renderGimmicks(r.dungeon)}</div>
+      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div></div>
       <div class="score-col"><span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
@@ -2564,6 +2577,7 @@ function clearRegForm() {
   $("#reg-ocr-msg").textContent = "";
   regIcons = {};
   regSupers = {};
+  regBadge = null;
 }
 
 async function saveRegForm() {
@@ -2657,6 +2671,7 @@ async function saveRegForm() {
   const icons = {};
   for (const [i, no, part] of slotNos) if (no && regIcons[i]?.[part] && window.PAD_ICONS?.index?.[no] == null) icons[no] = regIcons[i][part];
   if (Object.keys(icons).length) team.icons = icons;
+  if (regBadge) team.badgeIcon = regBadge;
   const verb = regEditingId ? "更新" : "登録";
   const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
   let where = "local";
@@ -3544,6 +3559,36 @@ async function readRegSupers(data, slots) {
   return out;
 }
 
+// PDCで選んだバッジ（タイトルの左の色付きの札）を切り抜く（tools/crop-icons.py の crop_badges と同じ考え方）
+function cropRegBadge(data, slots) {
+  const src = data.canvas;
+  const a = slots.find((x) => x.assist?.y1 != null)?.assist;
+  if (!src || !a) return null;
+  const cell = src.width / 6;
+  const top = a.y1 + cell * 0.04 - cell;
+  const y0 = Math.max(0, top - cell * 0.85);
+  const w = Math.round(cell * 0.75), h = Math.round(top - y0);
+  if (h < 10) return null;
+  const px = pixels(src, 0, y0, w, h, w, h);
+  const colored = (x, y) => { const i = (y * w + x) * 4; return Math.max(px[i], px[i + 1], px[i + 2]) - Math.min(px[i], px[i + 1], px[i + 2]) > 45; };
+  const cols = Array.from({ length: w }, (_, x) => { let n = 0; for (let y = 0; y < h; y++) n += colored(x, y); return n; });
+  let x0 = cols.findIndex((n) => n > h * 0.25);
+  if (x0 < 0) return null;
+  let x1 = x0;
+  while (x1 + 1 < w && cols[x1 + 1] > h * 0.15) x1++;
+  const rows = Array.from({ length: h }, (_, y) => { let n = 0; for (let x = x0; x <= x1; x++) n += colored(x, y); return n; });
+  const ys = rows.map((n, y) => (n > (x1 - x0 + 1) * 0.25 ? y : -1)).filter((y) => y >= 0);
+  if (!ys.length) return null;
+  const by0 = ys[0], by1 = ys.at(-1), bw = x1 - x0 + 1, bh = by1 - by0 + 1;
+  if (bw < w * 0.2 || bh < h * 0.2 || !(bw / bh > 0.9 && bw / bh < 2.6)) return null;
+  const c = document.createElement("canvas");
+  c.width = 72;
+  c.height = 52;
+  c.getContext("2d").drawImage(src, x0, y0 + by0, bw, bh, 0, 0, 72, 52);
+  const url = c.toDataURL("image/webp", 0.85);
+  return url.startsWith("data:image/webp") && url.length < 20000 ? url : null;
+}
+
 // PDCのレシート画像（OCRに使ったキャンバス）から、各枠の本体・アシストのアイコンを64pxで切り抜く
 // 横6枠・文字「No.◯◯◯◯◯」の下端を枠の下端とする（tools/crop-icons.py と同じ考え方）
 function cropRegIcons(data, slots) {
@@ -3593,6 +3638,7 @@ async function runRegOcr() {
         notes.push(`モンスター${slots.filter((s) => s.base).length}体・アシスト${slots.filter((s) => s.assist).length}体`);
         // キャラのアイコンを切り抜いて、編成と一緒に保存する（画像そのものは保存しない）
         regIcons = cropRegIcons(d, slots);
+        regBadge = cropRegBadge(d, slots);
         msg("超覚醒を読み取り中…");
         try {
           regSupers = await readRegSupers(d, slots);
