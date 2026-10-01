@@ -1655,9 +1655,46 @@ function resolveReceiptUses(t) {
       if (h) st.forEach((x, j) => j !== mi && (x.charge += h));
     }
   };
+  // 敵の先制のスキル遅延（その階に着いた時）: 遅延ターン−潜在の遅延耐性の数だけ溜まりが減る（0より下にはならない＝本来のスキルターン以上は必要にならない。本人指定）
+  const dungeon = db.dungeons.find((x) => x.id === t.dungeonId);
+  const delayAt = Object.fromEntries((dungeon?.damage?.floors ?? []).filter((f) => f.delay).map((f) => [f.floor, f.delay]));
+  const delayed = (mi, dl) => {
+    const m = t.members[mi];
+    const role = m.role === "L" || m.role === "F" ? "lf" : "sub";
+    if (dl.target !== "all" && dl.target !== role) return 0;
+    const x = st[mi];
+    const bRow = x.bUse === 0 && MDB.get(MDB.get(x.bNo)?.[9]) ? MDB.get(MDB.get(x.bNo)[9]) : MDB.get(x.bNo);
+    const aRow = x.aNo ? MDB.get(x.aNo) : null;
+    // 覚醒のスキル遅延耐性（136）は1個で潜在の遅延耐性2つ分（本人談）。本体（超覚醒も）と、覚醒アシストの武器
+    const awkN = (r) => String(r?.[27] ?? "").split(".").filter((x) => x === "136").length;
+    const awk = awkN(bRow) + (m.build?.super === 136 ? 1 : 0) + (aRow?.[8] ? awkN(aRow) : 0);
+    const lat = (m.build?.latents ?? []).filter((c) => c === 12).length;
+    return Math.max(0, dl.turns - lat - awk * 2);
+  };
+  const applyDelay = (fl) => {
+    const dl = delayAt[fl];
+    if (!dl) return;
+    st.forEach((x, mi) => {
+      const n = delayed(mi, dl);
+      if (!n) return;
+      // 溜まりは最大（本体＋武器のスキルターン）までしか貯まらないので、そこから減らす
+      const b = stageRow(x.bNo, x.bUse);
+      const a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
+      const cap = (b?.[5] || 0) + (x.phase === "assist" ? a?.[5] || 0 : 0);
+      x.charge = Math.max(0, Math.min(x.charge, cap || x.charge) - n);
+    });
+  };
   const uses = {};
   let first = true;
+  let prevFl = 0;
   for (const [fl, calls] of Object.entries(t.receiptCalls).sort((a, b) => Number(a[0]) - Number(b[0]))) {
+    // レシートに書かれていない階（スキルを使わず1ターンで抜けた階）も、1ターン経過と先制の遅延を入れる
+    for (let f = prevFl + 1; f < Number(fl); f++) {
+      if (!first) st.forEach((x) => x.charge++);
+      first = false;
+      applyDelay(f);
+    }
+    prevFl = Number(fl);
     // 同じキャラが何回出てくるかで、その階のターン数を見積もる
     // 同じキャラが何回出てくるかで、その階のターン数を見積もる
     // （レシートの区切りから読んだ c.turn も入っているが、編成によって良くも悪くもなるので調整が済むまで使わない）
@@ -1671,6 +1708,7 @@ function resolveReceiptUses(t) {
     for (let tn = 0; tn < turns; tn++) {
       if (!first) st.forEach((x) => x.charge++);
       first = false;
+      if (tn === 0) applyDelay(Number(fl));
       for (const c of withTurn.filter((c) => c.turn === tn)) {
         const x = st[c.mi];
         // 進化スキルは使った回数で段階が変わる（スキルターンも段階ごと）

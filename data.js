@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 100,
+  "version": 101,
   "seed": true,
   "monsters": [
     {
@@ -2611,7 +2611,11 @@ window.PAD_SEED = {
             "hits": [],
             "enemyAttrs": [
               "水"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -2671,7 +2675,11 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "木"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 5,
@@ -3095,7 +3103,11 @@ window.PAD_SEED = {
               "水",
               "闇"
             ],
-            "note": "2体の組み合わせが2通り"
+            "note": "2体の組み合わせが2通り",
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -3305,7 +3317,11 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "光",
               "闇"
-            ]
+            ],
+            "delay": {
+              "turns": 5,
+              "target": "sub"
+            }
           },
           {
             "floor": 10,
@@ -3566,7 +3582,11 @@ window.PAD_SEED = {
               "木",
               "水",
               "火"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -3600,7 +3620,11 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "水"
             ],
-            "note": "先制はダメージなし（無言殴りになった時は7,200,000）"
+            "note": "先制はダメージなし（無言殴りになった時は7,200,000）",
+            "delay": {
+              "turns": 5,
+              "target": "lf"
+            }
           },
           {
             "floor": 5,
@@ -4026,7 +4050,11 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "火"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -4151,7 +4179,11 @@ window.PAD_SEED = {
               "火"
             ],
             "parts": true,
-            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入なしは先制ダメージなし"
+            "note": "乱入のあるバトルは、乱入あり・なしのうち先制ダメージが大きい方で計算（属性は両方の候補）。乱入なしは先制ダメージなし",
+            "delay": {
+              "turns": 5,
+              "target": "all"
+            }
           },
           {
             "floor": 7,
@@ -4470,7 +4502,11 @@ window.PAD_SEED = {
             "hits": [],
             "enemyAttrs": [
               "木"
-            ]
+            ],
+            "delay": {
+              "turns": 5,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -4672,7 +4708,11 @@ window.PAD_SEED = {
             ],
             "enemyAttrs": [
               "木"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 11,
@@ -5750,7 +5790,11 @@ window.PAD_SEED = {
             ],
             "enemyAttrsAfter": [
               "闇"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -5787,7 +5831,11 @@ window.PAD_SEED = {
             "enemyAttrs": [
               "光",
               "闇"
-            ]
+            ],
+            "delay": {
+              "turns": 3,
+              "target": "all"
+            }
           },
           {
             "floor": 4,
@@ -6293,7 +6341,11 @@ window.PAD_SEED = {
             "enemyAttrsAfter": [
               "光",
               "火"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 2,
@@ -6463,7 +6515,11 @@ window.PAD_SEED = {
             ],
             "enemyAttrsAfter": [
               "光"
-            ]
+            ],
+            "delay": {
+              "turns": 4,
+              "target": "all"
+            }
           },
           {
             "floor": 9,
