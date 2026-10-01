@@ -703,6 +703,14 @@ function awakeningCountOf(t, awk) {
 const formatDungeonBonus = ({ min, max }) => (min === max ? `${min}個` : `${min}〜${max}個（超覚醒次第）`);
 // 部位破壊: ダンジョンに parts がある時だけ。可否・確定はレシートや投稿の記載（team.partBreak）、
 // 確定の記載がなければドロップ率を推定（基本50%＋部位破壊ボーナス1つにつき10%。基本の値は「ボーナス5個で確定」の投稿からの推定）
+// 部位ドロップが確定か（投稿・レシートに確定の記載、または推定が超覚醒に関係なく100%）
+function partDropSure(t, d) {
+  if (!d?.parts) return false;
+  const text = [t.title, ...(t.steps ?? [])].join(" ");
+  const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { sure: true } : {});
+  if (pb.can === false) return false;
+  return !!pb.sure || d.parts.baseRate + 10 * awakeningCountOf(t, 131).min >= 100;
+}
 // 点数の下に出す「部位破壊した場合のドロップ率」（部位のあるダンジョンだけ）
 function partRateBadge(t, d) {
   if (!d?.parts) return "";
@@ -767,6 +775,10 @@ function search() {
   const { dungeons, item, canonical } = resolveQuery(q, searchType);
   const boxActive = box.size > 0;
   const ownedOnly = $("#owned-only").checked;
+  // 部位破壊のあるダンジョンが対象の時だけ「部位ドロップ確定だけ」のチェックを出す
+  const hasParts = dungeons.some((d) => d.parts);
+  $("#parts-only-wrap").hidden = !hasParts;
+  const partsOnly = hasParts && $("#parts-only").checked;
   const out = $("#results");
 
   if (!q.trim()) {
@@ -808,6 +820,7 @@ function search() {
     return;
   }
   if (ownedOnly && boxActive) rows = rows.filter((r) => r.missing === 0);
+  if (partsOnly) rows = rows.filter((r) => partDropSure(r.team, r.dungeon));
 
   const maxPerHour = Math.max(...rows.map((r) => r.perHour), 1e-9);
   const penalty = (r) => r.missing * PENALTY_MISSING + r.substituted * PENALTY_SUBSTITUTE;
@@ -3089,6 +3102,7 @@ $("#q-suggest").addEventListener("mousedown", (e) => {
   pickSuggestion(li.dataset.name);
 });
 $("#owned-only").addEventListener("change", () => $("#q").value.trim() && search());
+$("#parts-only").addEventListener("change", () => $("#q").value.trim() && search());
 
 $("#box-filter").addEventListener("input", renderBox);
 $("#mdb-q").addEventListener("input", renderMdbResults);
