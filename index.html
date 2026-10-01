@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261001164238">
+  <link rel="stylesheet" href="style.css?v=20261001164637">
 </head>
 <body>
   <header>
@@ -46,6 +46,14 @@
             <button data-mode="expHour">素材/時</button>
             <button data-mode="perRun">素材/周</button>
             <button data-mode="dbonus">ダンボ数</button>
+          </div>
+        </div>
+        <div class="row">
+          <span class="label">高速モード</span>
+          <div class="seg" id="fast-filter">
+            <button data-fast="all" class="active">どちらも</button>
+            <button data-fast="on">ONのみ</button>
+            <button data-fast="off">OFFのみ</button>
           </div>
         </div>
         <label class="check"><input type="checkbox" id="owned-only"> 手持ちで組める編成だけ表示（代用込み）</label>
@@ -117,6 +125,13 @@
             <input id="reg-min" type="number" min="0" inputmode="numeric" placeholder="分"><span class="unit">分</span>
             <input id="reg-sec" type="number" min="0" max="59" step="0.1" inputmode="decimal" placeholder="秒"><span class="unit">秒</span>
           </div>
+
+          <label for="reg-fast">高速モード<span class="req">必須</span></label>
+          <select id="reg-fast">
+            <option value="">選んでください</option>
+            <option value="on">ON（高速モードで周回）</option>
+            <option value="off">OFF</option>
+          </select>
 
           <label for="reg-turns">クリアターン<span class="opt">任意</span></label>
           <div class="form-row">
@@ -248,12 +263,12 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261001164238"></script>
-  <script src="firebase-backend.js?v=20261001164238"></script>
-  <script src="icons.js?v=20261001164238"></script>
-  <script src="monsters-db.js?v=20261001164238"></script>
-  <script src="monsters-changes.js?v=20261001164238"></script>
-  <script src="data.js?v=20261001164238"></script>
-  <script src="app.js?v=20261001164238"></script>
+  <script src="firebase-config.js?v=20261001164637"></script>
+  <script src="firebase-backend.js?v=20261001164637"></script>
+  <script src="icons.js?v=20261001164637"></script>
+  <script src="monsters-db.js?v=20261001164637"></script>
+  <script src="monsters-changes.js?v=20261001164637"></script>
+  <script src="data.js?v=20261001164637"></script>
+  <script src="app.js?v=20261001164637"></script>
 </body>
 </html>

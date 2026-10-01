@@ -92,6 +92,7 @@ applySuperPicks();
 // 耐久チェックで「レシートのビルドが分かっている」とみなすか（超覚醒だけ分かった・自分で選んだだけの枠は含めない）
 const isFullBuild = (b) => !!b && !b.superOnly && !b.userPicked;
 let mode = "balance";
+let fastFilter = "all"; // 高速モード: "all"（どちらも）| "on" | "off"
 let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョンで探す)
 const SEARCH_TYPES = {
   item: { label: "集めたい素材", placeholder: "例: スパノエ、プラス", noun: "素材" },
@@ -860,6 +861,8 @@ function search() {
   }
   if (ownedOnly && boxActive) rows = rows.filter((r) => r.missing === 0);
   if (partsOnly) rows = rows.filter((r) => partDropSure(r.team, r.dungeon));
+  // 高速モード（ONのみ・OFFのみの時は、どちらか分からない編成は出さない）
+  if (fastFilter !== "all") rows = rows.filter((r) => r.team.fastMode === (fastFilter === "on"));
 
   const maxPerHour = Math.max(...rows.map((r) => r.perHour), 1e-9);
   const penalty = (r) => r.missing * PENALTY_MISSING + r.substituted * PENALTY_SUBSTITUTE;
@@ -1391,6 +1394,7 @@ function renderResult(r, i, item) {
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
       <div class="${mode === "perRun" ? "hl" : ""}"><dt>経験値/周</dt><dd>${r.expPerRun == null ? "―" : formatCount(r.expPerRun)}${r.lfm.exp !== 1 ? `<small class="muted">（L/F${multLabel(r.lfm.exp)}込み）</small>` : ""}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
+      <div><dt>高速モード</dt><dd>${t.fastMode === true ? "ON" : t.fastMode === false ? "OFF" : `<span class="muted">不明</span>`}</dd></div>
       ${(() => {
         const pi = partBreakInfo(t, r.dungeon);
         return pi ? `<div class="wide"><dt>部位破壊</dt><dd>${esc(pi.can)}${pi.drop ? `・${esc(pi.drop)}` : ""}${pi.note ? `<br><small class="muted">${esc(pi.note)}</small>` : ""}</dd></div>` : "";
@@ -2646,6 +2650,8 @@ async function saveRegForm() {
 
   const stepsText = $("#reg-steps").value;
   const turns = Number($("#reg-turns").value || 0) || undefined;
+  const fast = $("#reg-fast").value;
+  if (!fast) return regMessage("高速モードのON/OFFを選んでください。", false);
   const team = {
     id: regEditingId ?? `u${Date.now()}`,
     userAdded: true,
@@ -2653,6 +2659,7 @@ async function saveRegForm() {
     title: $("#reg-title").value.trim() || `${dungeon.name} 編成`,
     timeSec,
     ...(turns ? { turns } : {}),
+    fastMode: fast === "on",
     ...(Object.keys(yields).length ? { yields } : {}),
     members,
     steps: stepsText.split(/\r?\n/).map((l) => l.trim()).filter(Boolean),
@@ -2898,6 +2905,7 @@ function loadIntoRegForm(id) {
   $("#reg-min").value = Math.floor(t.timeSec / 60);
   $("#reg-sec").value = t.timeSec % 60;
   $("#reg-turns").value = t.turns ?? "";
+  $("#reg-fast").value = t.fastMode === true ? "on" : t.fastMode === false ? "off" : "";
   $("#reg-plus").value = t.yields?.plus ?? "";
   $("#reg-exp").value = t.yields?.exp ?? "";
   $("#reg-891").value = t.plus891Choice ?? "";
@@ -3160,6 +3168,13 @@ $("#q-suggest").addEventListener("mousedown", (e) => {
 });
 $("#owned-only").addEventListener("change", () => $("#q").value.trim() && search());
 $("#parts-only").addEventListener("change", () => $("#q").value.trim() && search());
+document.querySelectorAll("#fast-filter button").forEach((b) =>
+  b.addEventListener("click", () => {
+    fastFilter = b.dataset.fast;
+    document.querySelectorAll("#fast-filter button").forEach((x) => x.classList.toggle("active", x === b));
+    if ($("#q").value.trim()) search();
+  })
+);
 
 $("#box-filter").addEventListener("input", renderBox);
 $("#mdb-q").addEventListener("input", renderMdbResults);

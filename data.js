@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 92,
+  "version": 93,
   "seed": true,
   "monsters": [
     {
@@ -8817,7 +8817,8 @@ window.PAD_SEED = {
         "全15フロア。各フロアの詳細は出典を確認"
       ],
       "source": "https://kamigame.jp/puzzle-dragons/%E3%83%80%E3%83%B3%E3%82%B8%E3%83%A7%E3%83%B3/%E3%83%86%E3%82%AF%E3%83%8B%E3%82%AB%E3%83%AB%E3%83%80%E3%83%B3%E3%82%B8%E3%83%A7%E3%83%B3/%E6%B0%B8%E5%88%BB%E3%81%AE%E4%B8%87%E9%BE%8D-%E3%82%AB%E3%82%A4%E3%83%89%E3%82%A6%E3%83%91%E3%83%BC%E3%83%86%E3%82%A3.html",
-      "sourceDate": "2024-07-08"
+      "sourceDate": "2024-07-08",
+      "fastMode": false
     },
     {
       "id": "plus-cyclops",
@@ -9619,7 +9620,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "kirisame-dain-nanaminn",
@@ -9929,7 +9931,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kirisame-heartia-370id",
@@ -10630,7 +10633,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "kirisame-hinata-nanaminn",
@@ -11244,7 +11248,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kirisame-heartia-underbar",
@@ -11577,7 +11582,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kirisame-heartia-furuki",
@@ -11969,7 +11975,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "fuun-heartia-yu",
@@ -12476,7 +12483,8 @@ window.PAD_SEED = {
       },
       "yields": {
         "exp": 157500000
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "fuun-multi-reinhard-v1",
@@ -12573,7 +12581,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "fuun-multi-reinhard-v2",
@@ -12669,7 +12678,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "tenkyu-dain-oreha-v2",
@@ -14413,7 +14423,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "guren-hitsugaya-jones",
@@ -14579,7 +14590,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "guren-dain-run-v1",
@@ -14655,7 +14667,8 @@ window.PAD_SEED = {
       },
       "yields": {
         "exp": 323400000
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "guren-shiva-underbar",
@@ -16348,7 +16361,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "taiju-dain-matsu-final",
@@ -17294,7 +17308,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "taiju-challenge-morgan",
@@ -17502,7 +17517,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "taiju-rose-nekomaru",
@@ -17699,7 +17715,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "taiju-tanjiro-nanaminn",
@@ -17875,7 +17892,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "jupiter-shiva-kasajizo",
@@ -18146,7 +18164,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "jupiter-hitsugaya-yamajun",
@@ -18331,7 +18350,8 @@ window.PAD_SEED = {
           "nos": [],
           "text": "ヒトヨタケの代わりに部位ボがある武器（最後の立ち回りが変わる）"
         }
-      ]
+      ],
+      "fastMode": true
     },
     {
       "id": "jupiter-shiva-pmaru",
@@ -18882,7 +18902,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": "required"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "jupiter-ichigo-onsen",
@@ -18958,7 +18979,8 @@ window.PAD_SEED = {
         "zurashi": 2,
         "plus891": 0,
         "plus891Text": "not-required"
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "jupiter-rosetta-rikopin",
@@ -19249,7 +19271,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "jupiter-reinhard-yamajun",
@@ -19321,7 +19344,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "jupiter-challenge-rosetta-yamajun",
@@ -19390,7 +19414,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "mercury-mina-shion",
@@ -19453,7 +19478,8 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "mercury-reinhard-mori",
@@ -20066,7 +20092,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "mercury-gintoki-mori",
@@ -20201,7 +20228,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "mercury-berger-ao-v2",
@@ -20404,7 +20432,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "mercury-berger-ao-v1",
@@ -20579,7 +20608,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "mercury-rosetta-dog",
@@ -20706,7 +20736,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-seiheart-yamajun-shimamura",
@@ -20931,7 +20962,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-reinhard-yamajun-11",
@@ -21002,7 +21034,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": "not-required"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-reinhard-nanaminn",
@@ -21325,7 +21358,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-reinhard-yamajun-rabiril",
@@ -21392,7 +21426,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-kaiju8-nanaminn",
@@ -21597,7 +21632,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-reinhard-yamajun-final",
@@ -21668,7 +21704,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-douma-nanaminn",
@@ -21955,7 +21992,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "venus-reinhard-mirei",
@@ -22201,7 +22239,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "moon-shiva-yamajun",
@@ -22272,7 +22311,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "moon-gintoki-nanaminn",
@@ -22520,7 +22560,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "moon-rosetta-kuma",
@@ -22807,7 +22848,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "moon-reinhard-nekomaru",
@@ -22924,7 +22966,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "moon-arkvelza-nekomaru",
@@ -23085,7 +23128,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "moon-multi-danna",
@@ -23180,7 +23224,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0.43,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "moon-rosetta-reall",
@@ -23399,7 +23444,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "sun-imperial-nanaminn",
@@ -23674,7 +23720,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "sun-dain-kinoko",
@@ -24321,7 +24368,8 @@ window.PAD_SEED = {
         "zurashi": 2,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "sun-dain-yomogi",
@@ -24729,7 +24777,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "sun-rosetta-reall",
@@ -24797,7 +24846,8 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": null
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "hyaku-kikoru-nanaminn",
@@ -25008,7 +25058,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "hyaku-kagura-ktz",
@@ -25212,7 +25263,8 @@ window.PAD_SEED = {
             "part": "assist"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "hyaku-kikoru-mori",
@@ -25973,7 +26025,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "hyaku-mastergundam-nanaminn",
@@ -26129,7 +26182,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "hyaku-bazzb-totakke",
@@ -26550,7 +26604,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "senju-gintoki-yp",
@@ -26781,7 +26836,8 @@ window.PAD_SEED = {
           "nos": [],
           "text": "メタトロン武器の代わりに消滅ヘイスト武器（泥強持ち推奨）"
         }
-      ]
+      ],
+      "fastMode": true
     },
     {
       "id": "senju-reinhard-nanaminn",
@@ -26968,7 +27024,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "senju-zenitsu-yu",
@@ -27177,7 +27234,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "senju-douma-nanaminn",
@@ -27335,7 +27393,8 @@ window.PAD_SEED = {
             "part": "auto"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-zgundam-kasajizo",
@@ -27491,7 +27550,8 @@ window.PAD_SEED = {
             "raw": "→Zガンダム"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-zgundam-kasajizo-2",
@@ -27627,7 +27687,8 @@ window.PAD_SEED = {
             "raw": "→Zガンダム"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-mastergundam-nanaminn",
@@ -27733,7 +27794,8 @@ window.PAD_SEED = {
             "raw": "→ネレ、a"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-kikoru-yu",
@@ -27963,7 +28025,8 @@ window.PAD_SEED = {
             "raw": "→サノス"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-ryugner-yu",
@@ -28119,7 +28182,8 @@ window.PAD_SEED = {
             "raw": "→クヴァール"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-kikoru-yp",
@@ -28348,7 +28412,8 @@ window.PAD_SEED = {
             "raw": "、サノス"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "shinbanju-gintoki-amakura",
@@ -28511,7 +28576,8 @@ window.PAD_SEED = {
             "raw": "、サノス"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinbanju-bambi-macaron",
@@ -28622,7 +28688,8 @@ window.PAD_SEED = {
             "raw": "、サノス※順"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "shinbanju-bambi-macaron-2",
@@ -28901,7 +28968,8 @@ window.PAD_SEED = {
             "raw": "→バズビー"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "shinbanju-bazzb-payato-2",
@@ -29072,7 +29140,8 @@ window.PAD_SEED = {
             "raw": "→バズビー"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "kyouchou-kikoru-yp",
@@ -29306,7 +29375,8 @@ window.PAD_SEED = {
             "raw": "、キコル"
           }
         ]
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "kyouchou-omegamon-tapioka",
@@ -29430,7 +29500,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "部位破壊5で凶玉確定（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-varenoa-kasajizo-1228",
@@ -29793,7 +29864,8 @@ window.PAD_SEED = {
       },
       "partBreak": {
         "can": true
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-varenoa-kasajizo-0130",
@@ -30162,7 +30234,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true,
         "note": "メタルスピカ装備をカノのぬいぐるみで代用すると部位ドロ率-10%（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-varenoa-nanaminn",
@@ -30593,7 +30666,8 @@ window.PAD_SEED = {
             "raw": "③ノア、"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-varenoa-kasajizo-natsu",
@@ -30912,7 +30986,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true,
         "note": "盤面のドロ強次第では部位破壊しきれない場合あり。部位破壊する場合はノアの豆を閉じない（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-varenoa-reall",
@@ -31117,7 +31192,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true,
         "note": "部位破壊ボーナス5個搭載（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-douma-nanaminn",
@@ -31341,7 +31417,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "部位確定ドロップ（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-tanjiro-kazu",
@@ -31482,7 +31559,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "部位破壊5・たぶん確定（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "kyouchou-reinhard-rei",
@@ -31726,7 +31804,8 @@ window.PAD_SEED = {
       },
       "partBreak": {
         "can": true
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-seihearts-matsuda-19",
@@ -32631,7 +32710,8 @@ window.PAD_SEED = {
       },
       "partBreak": {
         "note": "アグリのコアを割るなら3パン（レシートより）"
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "shinokuchou-seihearts-matsuda-15",
@@ -32953,7 +33033,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "部位確定（投稿者談）"
-      }
+      },
+      "fastMode": true
     },
     {
       "id": "shinokuchou-kafka-matsuda",
@@ -33260,7 +33341,8 @@ window.PAD_SEED = {
             "raw": "Lカフカ"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-douma-matsuda",
@@ -33489,7 +33571,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "部位確定（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-kikoru-lancelot",
@@ -33580,7 +33663,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true,
         "note": "12Fで部位2個破壊（レシートより）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-bakugo-matsuda",
@@ -33664,7 +33748,8 @@ window.PAD_SEED = {
         "can": true,
         "sure": true,
         "sureNote": "全部位破壊確定（投稿者談）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-kikoru-matsuda",
@@ -33983,7 +34068,8 @@ window.PAD_SEED = {
             "raw": "、キコル）"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-rem-matsuda-19",
@@ -34382,7 +34468,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true,
         "note": "12Fで部位を壊す手順あり。オチコンで本体を半分削ると部位1つ壊せない（レシートより）"
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-gintoki-junyama",
@@ -34529,7 +34616,8 @@ window.PAD_SEED = {
             "raw": "▶神楽"
           }
         ]
-      }
+      },
+      "fastMode": false
     },
     {
       "id": "shinokuchou-rem-matsuda-20",
@@ -34853,7 +34941,8 @@ window.PAD_SEED = {
       "partBreak": {
         "can": true,
         "note": "12Fはアグリの色ごとに部位2個破壊の手順あり（レシートより）"
-      }
+      },
+      "fastMode": false
     }
   ],
   "removed": {
