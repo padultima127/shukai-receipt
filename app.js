@@ -1300,7 +1300,14 @@ function resolveReceiptUses(t) {
         // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
         x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
         x.charge = 0;
-        if (used.includes(x.a)) x.aUse++;
+        if (used.includes(x.a)) {
+          x.aUse++;
+          // 使うと消える武器は、以降はアシストなし（次から本体だけ）
+          if (/(^|\|)消滅(\||$)/.test(String(x.a[28] ?? ""))) {
+            x.aNo = null;
+            x.phase = "base";
+          }
+        }
         if (used.includes(x.b)) x.bUse++;
         fire(c.mi, used);
         ((uses[fl] ??= [])[tn] ??= []).push(...used.map((r) => r[0]));
@@ -1329,7 +1336,8 @@ function enduranceSetup(t0, opts = {}) {
   // floor: 熟成（バトル5以降1.5倍、10以降2倍）の判定に使う階
   // parts: 部位を壊した後か（部位破壊ボーナス 1つにつき1.2倍、複数なら掛け算）
   // keepRes: 属性を変えても共鳴の判定だけは元の属性のまま（共鳴が付いた分を切り分けるため）
-  const teamHpWith = (overrides = new Map(), floor = 1, parts = false, keepRes = false) => {
+  // vanished: 使うと消える武器を使った枠 → 付与された覚醒（その枠はアシストなし扱いになり、自力が発動しうる）
+  const teamHpWith = (overrides = new Map(), floor = 1, parts = false, keepRes = false, vanished = new Map()) => {
   let total = 0;
   let teamHp = 0;
   let unknown = 0;
@@ -1359,8 +1367,9 @@ function enduranceSetup(t0, opts = {}) {
     hp += Math.round((b.plus ?? 297) / 3) * 10;
     hp += flat;
     teamHp += cnt;
-    const an = assistNoOf(m);
-    const a = MDB.get(an);
+    const gone = vanished.has(mi);
+    const an = gone ? null : assistNoOf(m);
+    const a = an ? MDB.get(an) : null;
     // アシストボーナス: 本体とアシストの主属性が同じなら、アシストのHP（Lv99最大＋297）の10%が本体に入る
     if (a && a[2] && a[2] === row[2]) hp += ((a[24] || a[17] || 0) + 990) * 0.1;
     if (a?.[8]) {
@@ -1372,6 +1381,8 @@ function enduranceSetup(t0, opts = {}) {
     hp *= 1 + (b.latentHp ?? 0) / 100;
     // 全パラ系の覚醒（通常覚醒・選んだ超覚醒・シンクロ覚醒）。アシスト共鳴は主属性とタイプが一致したときだけ、自力はアシストなしのときだけ
     const ids = ownAwk.filter((a) => a !== 63);
+    // 消える武器のスキルで付与された覚醒（熟成・全パラなど）
+    if (gone) ids.push(...vanished.get(mi));
     // 武器（覚醒アシスト）の熟成も本体に付く
     if (a?.[8]) ids.push(...String(a[25] ?? "").split(".").filter(Boolean).map(Number).filter((x) => x === 130));
     if (b.super) ids.push(b.super);
@@ -1445,6 +1456,7 @@ function enduranceSetup(t0, opts = {}) {
   const reductions = [];
   const hpUps = [];
   const regens = [];
+  const vanishes = [];
   const instantHeals = [];
   const selfAttr = [];
   const enemyAttr = [];
@@ -1527,10 +1539,20 @@ function enduranceSetup(t0, opts = {}) {
         const ratioRes = withAll / Math.max(1, teamHpWith(ov, 1, false, true).total);
         selfAttr.push({ name: r[1], member: valid.join(","), who: ch.who, attr: ch.attr, dur: ch.dur || 99, floor: Number(fl), ti, order, ratio, ratioRes });
       }
+      // 使うと消える武器: その枠はこのターン以降アシストなし（自力・付与覚醒・武器の覚醒やボーナスがなくなる）
+      if (/(^|\|)消滅(\||$)/.test(String(r[28] ?? ""))) {
+        const vmi = mems.findIndex((m) => assistNoOf(m) === no);
+        if (vmi >= 0 && !vanishes.some((v) => v.member === vmi)) {
+          const granted = (String(r[28]).split("|").find((x) => x.startsWith("付与:"))?.slice(3) ?? "").split(".").filter(Boolean).map(Number);
+          const vm = new Map([[vmi, granted]]);
+          const ratioAt = Object.fromEntries([1, 5, 10].map((f) => [f, teamHpWith(new Map(), f, false, false, vm).total / Math.max(1, teamHpWith(new Map(), f).total)]));
+          vanishes.push({ name: r[1], member: vmi, floor: Number(fl), ti, order, ratioAt });
+        }
+      }
       if (ac["敵"]) enemyAttr.push({ name: r[1], attr: ac["敵"].attr, dur: ac["敵"].v || 1, floor: Number(fl), ti, order });
     });
   }
-  if (!skillRed && (hpUps.length || selfAttr.length || enemyAttr.length || regens.length || instantHeals.length)) skillRed = 1; // HPアップや属性変更だけでも「レシートどおり」の計算をする
+  if (!skillRed && (hpUps.length || selfAttr.length || enemyAttr.length || regens.length || instantHeals.length || vanishes.length)) skillRed = 1; // HPアップや属性変更だけでも「レシートどおり」の計算をする
   // 超根性を割合ダメージで剥がしてワンパンする階（作者の役割: gravity を◯Fで使う）→ 超根性発動時の攻撃は来ない
   const strip = new Map();
   for (const sr of t.slotRoles ?? []) {
@@ -1555,7 +1577,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1640,6 +1662,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     m *= setup.floorRatio?.(curFloor, curParts && firstTurn[curFloor] != null && (playerPhase ? tn > firstTurn[curFloor] : tn >= firstTurn[curFloor])) ?? 1;
     // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
     if (useSkill) for (const x of activeAttr(tn).values()) m *= x.ratio;
+    // 消える武器を使った後（以降ずっと）。今のHPは変えない
+    if (useSkill) for (const v of setup.vanishes ?? []) if (startOf(v) != null && startOf(v) <= tn) m *= v.ratioAt[curFloor >= 10 ? 10 : curFloor >= 5 ? 5 : 1];
     // 最大HPが変わっても今のHPはそのまま（熟成・部位破壊ボーナス・スキルの最大HPアップ）。
     // 共鳴が未発動→発動に変わった時だけ、その分の割合で今のHPも回復する（本人談）
     const res = useSkill ? [...activeAttr(tn).values()].reduce((x, e) => x * (e.ratioRes ?? 1), 1) : 1;
@@ -1819,6 +1843,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
         ...setup.hpUps.map((r) => `${esc(r.name)}の最大HP${r.mult}倍${r.cond ? `（敵が${r.cond.attr}属性なら効果${r.cond.v}倍）` : ""}`),
         ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.who === "自分" ? "" : r.who + "が"}${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
         ...setup.enemyAttr.map((r) => `${esc(r.name)}で敵を${r.attr}属性に変化`),
+        ...setup.vanishes.map((r) => `${esc(r.name)}が消えてアシストなしに（チームHP×${r.ratioAt[1].toFixed(2)}）`),
       ].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
        ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "レシートどおりのスキルで、潜在覚醒の枠が空いていれば")}`
     : "";

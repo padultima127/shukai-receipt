@@ -322,6 +322,17 @@ def attr_changes(ids, skills):
         dur = max(dur, int(m.group(1)))
     if names:
         parts.append(f"目覚め付与:{','.join(dict.fromkeys(names))}:{dur}")
+    # 使うと消える武器（このアシストが消滅）と、スキルで付く覚醒（[熟成]を付与 など）
+    if "アシストが消滅" in text:
+        parts.append("消滅")
+    granted = []
+    for group in GRANT.findall(text):
+        for name in re.findall(r"\[([^\]]+)\]", group):
+            aid = AWAKEN_BY_NAME.get(name)
+            if aid:
+                granted.append(str(aid))
+    if granted:
+        parts.append("付与:" + ".".join(granted))
     return "|".join(parts)
 
 
