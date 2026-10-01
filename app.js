@@ -1246,15 +1246,16 @@ function glyphName(name) {
 function renderPdcRow(list) {
   return `<div class="pdc-row">${list.map(renderPdcSlot).join("")}</div>`;
 }
-function renderMembers(r) {
+// part: "row"（PDC風の横並び。カードの上の方）／"details"（キャラごとの詳細。下の方）
+function renderMembers(r, part) {
   const details = (list) =>
     `<details class="mem-details"><summary>キャラごとの詳細（覚醒・超覚醒・代用）</summary><ul class="members">${list.map(renderMember).join("")}</ul></details>`;
-  if (!r.team.multi) return renderPdcRow(r.members) + details(r.members);
+  if (!r.team.multi) return part === "row" ? renderPdcRow(r.members) : details(r.members);
   return ["A", "B"]
     .map((p) => {
       const mine = r.side === p && box.size > 0 ? `<span class="st st-ok">手持ちで組みやすい側</span>` : "";
       const list = r.members.filter((x) => x.mem.p === p);
-      return `<p class="side-head">マルチ${p} ${mine}</p>${renderPdcRow(list)}${details(list)}`;
+      return part === "row" ? `<p class="side-head">マルチ${p} ${mine}</p>${renderPdcRow(list)}` : details(list);
     })
     .join("");
 }
@@ -1313,6 +1314,7 @@ function renderResult(r, i, item) {
       <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? `<span class="badge badge-mine">自分で登録</span>` : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p>${renderGimmicks(r.dungeon)}</div>
       <span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>
     </div>
+    ${renderMembers(r, "row")}
     <div class="bars">${bar("速さ", r.speedScore)}${bar("楽さ", r.easeScore)}</div>
     ${r.ease.legacy ? "" : renderEaseBreakdown(r.ease.parts)}
     <dl class="stats">
@@ -1334,7 +1336,7 @@ function renderResult(r, i, item) {
     </dl>
     ${warn}
     ${renderConstraints(t)}
-    ${renderMembers(r)}
+    ${renderMembers(r, "details")}
     ${renderEndurance(t, r.dungeon)}
     ${t.steps?.length ? `<details><summary>立ち回り</summary><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></details>` : ""}
     ${src}
