@@ -2070,7 +2070,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     const at = startOf(r);
     const e = (setup.enemyAttr ?? []).filter((x) => activeAt(x, at) && x.order < r.order).sort((a, b) => b.order - a.order)[0];
     const fa = e ? [e.attr] : floorAttrAt(r.floor, at);
-    return fa.length > 0 && fa.every((a) => a === r.cond.attr);
+    // 敵に1体でもその属性がいれば条件を満たす（本人談。完全卍解・日番谷は木が1体でもいればHP2.2倍・4ターン）
+    return fa.some((a) => a === r.cond.attr);
   };
   const durOf = (r) => (condMet(r) ? r.dur * r.cond.v : r.dur);
   // ドロップ目覚め: 味方のスキル（レシートの階から効果ターンの間）と、敵の先制（その階に着いた時から◯ターン）
@@ -2107,7 +2108,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   // playerPhase: 味方のターン（スキル・回復）。部位はそのターンの攻撃で壊すので、最初のターンの回復はまだ壊す前
   const updateHpMult = (tn, playerPhase = false) => {
     const up = useSkill ? lastActive(setup.hpUps, tn) : null;
-    // 「敵が◯属性の時、効果が◯倍」: その階の敵がすべてその属性なら倍率の効果を倍にする
+    // 「敵が◯属性の時、効果が◯倍」: その階の敵に1体でもその属性がいれば倍率の効果を倍にする
     let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
     // 熟成（階が進むとチームHPが上がる）と部位破壊ボーナス（部位のある階で、最初の攻撃の後）
     m *= setup.floorRatio?.(curFloor, curParts && firstTurn[curFloor] != null && (playerPhase ? tn > firstTurn[curFloor] : tn >= firstTurn[curFloor])) ?? 1;
