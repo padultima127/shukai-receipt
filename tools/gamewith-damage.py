@@ -81,15 +81,16 @@ def cell_text(td):
 
 
 def split_variants(text, default_no):
-    """「@@E番号@@の先制行動」ごとに敵を分ける（いずれか出現・複数体をまとめた行）"""
+    """「@@E番号@@の先制行動」ごとに敵を分ける（いずれか出現・複数体をまとめた行）。
+    戻り値は (敵No., 文, 先制の表記があるか)"""
     marks = list(re.finditer(r"((?:@@E\d+@@\s*)+)の先制行動", text))
     if not marks:
-        return [(default_no, re.sub(r"@@E\d+@@", "", text))]
+        return [(default_no, re.sub(r"@@E\d+@@", "", text), "先制行動" in text)]
     out = []
     for i, m in enumerate(marks):
         no = int(re.findall(r"@@E(\d+)@@", m.group(1))[-1])
         end = marks[i + 1].start() if i + 1 < len(marks) else len(text)
-        out.append((no, re.sub(r"@@E\d+@@", "", text[m.end():end])))
+        out.append((no, re.sub(r"@@E\d+@@", "", text[m.end():end]), True))
     return out
 
 
@@ -114,13 +115,14 @@ def awaken_of(text):
     return [{"names": list(dict.fromkeys(re.findall(r"\[([^\]]+)\]", m.group(1)))), "dur": int(m.group(2))} for m in re.finditer(r"((?:\[[^\]]+\]\s*)+)目覚め\s*[:：]\s*(\d+)ターン", pre)]
 
 
-def hits_of(text, attrs, threshold, sub_attrs=None):
+def hits_of(text, attrs, threshold, sub_attrs=None, labeled=True):
     hits = []
     for marker, body in sections(text):
         body = re.sub(r"[（(][^）)]*?(?:以降|次回|次ターン)[^）)]*[）)]", "", body)  # 「（※以降、◯ダメージ）」は予告なので除く
         body = "\n".join(l for l in body.split("\n") if not l.strip().startswith("※"))  # 「※既にリダチェン時」など条件付きの注記は除く
         if marker is None:
-            kind, label = "preemptive", "先制"
+            # 「の先制行動」と書かれた敵だけが先制攻撃をする（本人談）。表記がない欄の最初のダメージは先制ではない
+            kind, label = ("preemptive", "先制") if labeled else ("turn", "行動（先制の表記なし）")
         elif "超根性" in marker and ("発動" in marker or "行動" in marker):
             kind, label = "superResolve", "超根性発動時"
         elif "初回" in marker or "初ターン" in marker or "1ターン目" in marker:
@@ -174,10 +176,10 @@ def parse(html):
         text = cell_text(text_td)
         thr = re.search(r"超根性[（(]HP(\d+)[%％]", text)
         variants = []
-        for no, vt in split_variants(text, enemy_nos[0] if enemy_nos else None):
+        for no, vt, labeled in split_variants(text, enemy_nos[0] if enemy_nos else None):
             attrs = [a for a in [attr_of(no)] if a] if no else []
             subs = [a for a in [sub_attr_of(no)] if a] if no else []
-            variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50, subs), "awaken": awaken_of(vt), "resolve": "超根性" in vt, "sub": subs})
+            variants.append({"no": no, "hits": hits_of(vt, attrs, int(thr.group(1)) if thr else 50, subs, labeled), "awaken": awaken_of(vt), "resolve": "超根性" in vt, "sub": subs})
         cur["rows"].append({"mandatory": "必ず出現" in raw_hp + text, "variants": variants, "attrs": sorted({a for n in enemy_nos for a in [attr_of(n)] if a}),
                             # 超根性の後の属性（超根性持ちは副属性に、それ以外はそのまま）
                             "attrsAfter": sorted({a for v in variants for a in (v["sub"] if v["resolve"] else [attr_of(v["no"])] if v["no"] else []) if a} or {a for n in enemy_nos for a in [attr_of(n)] if a}),

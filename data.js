@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 79,
+  "version": 80,
   "seed": true,
   "monsters": [
     {
@@ -1848,7 +1848,7 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -1885,9 +1885,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 120000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "木"
@@ -1904,9 +1904,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1472000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水",
                   "闇"
@@ -1941,9 +1941,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 350000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -1958,9 +1958,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 650000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水",
@@ -1991,9 +1991,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 710000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2007,25 +2007,25 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1520000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1512000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1520000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -2049,17 +2049,17 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 740000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 740000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -2297,7 +2297,7 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -2346,9 +2346,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 10395000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -2370,9 +2370,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 10890000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2386,9 +2386,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 15000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -2410,17 +2410,17 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 5500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 9900000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2446,9 +2446,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 16000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -2465,9 +2465,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制 現HP350%割合",
+                "label": "行動（先制の表記なし） 現HP350%割合",
                 "ratio": 350,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2481,9 +2481,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 19000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -2505,9 +2505,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 19152000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水"
@@ -2524,9 +2524,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 19950000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -2540,9 +2540,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 10450000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -2564,9 +2564,9 @@ window.PAD_SEED = {
             "floor": 15,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 21582000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -2725,7 +2725,7 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -2764,9 +2764,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "先制 現HP99%割合",
+                "label": "行動（先制の表記なし） 現HP99%割合",
                 "ratio": 99,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -2783,9 +2783,9 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 5000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水"
@@ -2816,17 +2816,17 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2250000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2250000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -2850,9 +2850,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2866,9 +2866,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -2882,9 +2882,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -2915,9 +2915,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -2943,17 +2943,17 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -2968,9 +2968,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制 現HP120%割合",
+                "label": "行動（先制の表記なし） 現HP120%割合",
                 "ratio": 120,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -2996,9 +2996,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 9000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -3021,9 +3021,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 10000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -3179,31 +3179,31 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 22500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 22500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 45000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -3219,9 +3219,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6120000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -3252,9 +3252,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 7400000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -3279,17 +3279,17 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3780000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3780000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -3311,9 +3311,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8206275,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -3327,9 +3327,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 9450000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -3355,17 +3355,17 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3780000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 7560000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -3408,9 +3408,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 14400000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水",
@@ -3452,9 +3452,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 16200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -3624,23 +3624,23 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 54000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 45000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -3686,25 +3686,25 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -3756,9 +3756,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6480000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -3782,17 +3782,17 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2070000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 5300000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ],
@@ -3815,9 +3815,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 7020000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -3895,9 +3895,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 9000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -4060,7 +4060,7 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -4073,9 +4073,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 10000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -4089,17 +4089,17 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -4113,9 +4113,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3300000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -4137,9 +4137,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 12000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -4153,25 +4153,25 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -4194,9 +4194,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 15000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -4210,17 +4210,17 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制 現HP350%割合",
+                "label": "行動（先制の表記なし） 現HP350%割合",
                 "ratio": 350,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 17000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -4234,9 +4234,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 17500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -4257,9 +4257,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 21000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -4281,9 +4281,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 22000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水"
@@ -4300,9 +4300,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 22080000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -4324,9 +4324,9 @@ window.PAD_SEED = {
             "floor": 15,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 22500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
@@ -4739,15 +4739,15 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 25350,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -4762,9 +4762,9 @@ window.PAD_SEED = {
                 "threshold": 5
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 25350,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -4809,9 +4809,9 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3890000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -4837,9 +4837,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3900000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -4856,33 +4856,33 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 975000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 975000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 975000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -4899,33 +4899,33 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 980000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 979983,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -4942,9 +4942,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -5006,9 +5006,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3735000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -5025,9 +5025,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4230000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5061,9 +5061,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4250000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5077,9 +5077,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5267,23 +5267,23 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 37500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 37500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -5300,9 +5300,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5336,17 +5336,17 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 3100000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5371,9 +5371,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 5500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -5404,9 +5404,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "火"
@@ -5423,9 +5423,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水",
@@ -5444,9 +5444,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -5463,9 +5463,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -5491,9 +5491,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8100000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火",
                   "闇"
@@ -5510,17 +5510,17 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -5549,9 +5549,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -5573,9 +5573,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8820000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -5795,23 +5795,23 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 37500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 44730,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -5830,9 +5830,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "水",
@@ -5851,17 +5851,17 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
@@ -5879,9 +5879,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 5000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "火"
@@ -5930,9 +5930,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5947,9 +5947,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1600000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -5975,9 +5975,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -5994,9 +5994,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -6018,9 +6018,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 7500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "火"
@@ -6059,9 +6059,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 8200000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
@@ -6094,9 +6094,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 9000000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -6118,9 +6118,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 4500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -6134,9 +6134,9 @@ window.PAD_SEED = {
             "floor": 15,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 6506000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
@@ -6736,31 +6736,31 @@ window.PAD_SEED = {
           "date": "2026-09-30"
         },
         "auto": true,
-        "note": "ゲームウィズの先制行動の表から自動で取り込み（要確認）。先制と超根性発動時の攻撃のみ。ワンパンする階は先制以外受けない前提",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 23100,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "闇"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 23100,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 23100,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "木",
@@ -6783,9 +6783,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 2500000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木",
                   "水",
@@ -6804,9 +6804,9 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 154500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "闇"
@@ -6845,33 +6845,33 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 33000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 33000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 33000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 33000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光"
                 ]
@@ -6889,9 +6889,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "先制 現HP500%割合",
+                "label": "行動（先制の表記なし） 現HP500%割合",
                 "ratio": 500,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "木",
@@ -6914,9 +6914,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1450000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "光",
                   "木",
@@ -6949,9 +6949,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "先制",
+                "label": "行動（先制の表記なし）",
                 "dmg": 1600000,
-                "kind": "preemptive",
+                "kind": "turn",
                 "attrs": [
                   "水"
                 ],
