@@ -1929,7 +1929,8 @@ function enduranceSetup(t0, opts = {}) {
       const order = Number(fl) * 1000 + ti * 50 + idx;
       if (red) {
         const awC = String(r[28] ?? "").split("|").find((x) => x.startsWith("目覚め条件:"))?.split(":");
-        reductions.push({ red, dur: sdur("reduce") ?? 1, name: r[1], floor: Number(fl), ti, order, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
+        const rc = String(r[28] ?? "").split("|").find((x) => x.startsWith("条件:"))?.split(":");
+        reductions.push({ red, dur: sdur("reduce") ?? 1, name: r[1], floor: Number(fl), ti, order, cond: rc ? { attr: rc[1], v: Number(rc[2]) } : null, awaken: awC && awC[2].split("+").includes("red") ? awC[1] : null });
         if (red > skillRed) {
           skillRed = red;
           skillRedFrom = r[1];
@@ -1942,7 +1943,7 @@ function enduranceSetup(t0, opts = {}) {
       const awFor = (eff) => (awCond && awCond[2].split("+").includes(eff) ? awCond[1] : null);
       // リジェネ（◯ターンの間HPを◯%回復）: 軽減と同じく、レシートの使用から効果ターンの間。重なったら最後に使ったもの（本人談）
       const rg = Number(String(r[16] ?? "").split(":")[0]) || 0;
-      if (rg) regens.push({ pct: rg, dur: sdur("regen") ?? 1, name: r[1], floor: Number(fl), ti, order });
+      if (rg) regens.push({ pct: rg, dur: sdur("regen") ?? 1, name: r[1], floor: Number(fl), ti, order, cond: ac["条件"] ?? null });
       // 即時回復（「◯ターンの間」がない「HPを◯%回復」「HPを全回復」）はリジェネとは別枠で、使ったターンに回復
       const inst = Number(String(r[16] ?? "").split(":")[4]) || 0;
       if (inst) instantHeals.push({ pct: inst, name: r[1], floor: Number(fl), ti, order });
@@ -2084,7 +2085,12 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     const active = (list ?? []).filter((r) => startOf(r) != null && activeAt(r, tn, durOf(r)) && (!r.awaken || awakenAt(r.awaken, tn)));
     return active.sort((a, b) => b.order - a.order)[0] ?? null;
   };
-  const skillAt = (tn) => (useSkill ? lastActive(setup.reductions, tn)?.red ?? 0 : 0);
+  // 「敵が◯属性の時、効果◯倍」は、敵に1体でもその属性がいれば数値も倍（軽減は100%まで）
+  const condVal = (r, v) => (r && condMet(r) ? v * r.cond.v : v);
+  const skillAt = (tn) => {
+    const r = useSkill ? lastActive(setup.reductions, tn) : null;
+    return r ? Math.min(100, condVal(r, r.red)) : 0;
+  };
   // 最大HPの倍率（スキル・熟成・部位破壊ボーナス・属性変更）。切れて下がった時は新しい最大HPで頭打ち
   let hpMult = 1;
   let resMult = 1;
@@ -2169,7 +2175,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       if (i === 0) firstTurn[f.floor] = turn;
       updateHpMult(turn, true);
       // 味方のターン: 回復（毎ターン回復生成なら満タン、なければリジェネ）
-      const rg = useSkill ? lastActive(setup.regens, turn)?.pct ?? 0 : 0;
+      const rgR = useSkill ? lastActive(setup.regens, turn) : null;
+      const rg = rgR ? condVal(rgR, rgR.pct) : 0;
       // 即時回復: このターンに使ったスキルの分（リジェネとは別枠で足す）
       const inst = useSkill ? (setup.instantHeals ?? []).filter((x) => startOf(x) === turn).reduce((n, x) => n + x.pct, 0) : 0;
       // 回復ドロップを作るスキル（セイハーツなど）をその階で使っていれば、その階は毎ターン全回復（レシートの何ターン目かは当てにならないため。本人指定）
