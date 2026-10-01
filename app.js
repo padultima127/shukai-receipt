@@ -1250,7 +1250,7 @@ function latentStripHTML(teamId, idx) {
 // PDCで選んだバッジ（レシートのタイトルの左のアイコン。badges.webp から、画像から登録した編成は badgeIcon）
 function badgeIconHTML(t) {
   const B = window.PAD_BADGES;
-  const i = B?.index?.[t.id];
+  const i = B?.index?.[t.id] ?? (t.badgeId != null ? B?.byId?.[t.badgeId] : null);
   if (i != null) {
     const pos = `${((i % B.cols) / Math.max(1, B.cols - 1)) * 100}% ${(Math.floor(i / B.cols) / Math.max(1, B.rows - 1)) * 100}%`;
     return `<span class="pdc-badge" title="PDCで選んだバッジ" style="background-image:url('badges.webp?v=${B.ver}');background-size:${B.cols * 100}% ${B.rows * 100}%;background-position:${pos}"></span>`;
@@ -2781,7 +2781,8 @@ async function saveRegForm() {
   const icons = {};
   for (const [i, no, part] of slotNos) if (no && regIcons[i]?.[part] && window.PAD_ICONS?.index?.[no] == null) icons[no] = regIcons[i][part];
   if (Object.keys(icons).length) team.icons = icons;
-  if (regBadge) team.badgeIcon = regBadge;
+  if (regQr?.badge) team.badgeId = regQr.badge;
+  if (regBadge && !(regQr?.badge && window.PAD_BADGES?.byId?.[regQr.badge] != null)) team.badgeIcon = regBadge;
   const verb = regEditingId ? "更新" : "登録";
   const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
   let where = "local";
@@ -3783,7 +3784,10 @@ function parsePdcQr(text) {
       latents: (m["2"] ?? "").match(/.{2}/g)?.map((x) => parseInt(x, 36)).filter((x) => x > 0) ?? [],
     }))
     .sort((a, b) => a.slot - b.slot);
-  return out.length && out.every((m) => MDB.get(m.no)) ? out : null;
+  if (!out.length || !out.every((m) => MDB.get(m.no))) return null;
+  // 先頭の「1,0]104}」の 104 がPDCで選んだバッジの番号
+  out.badge = Number(text.match(/^\d+,\d+\](\d+)\}/)?.[1]) || null;
+  return out;
 }
 async function readPdcQr(file) {
   await loadJsQR();

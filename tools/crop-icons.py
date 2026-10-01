@@ -335,9 +335,22 @@ def crop_badges(teams, ocr):
         sheet.paste(found[tid], ((i % cols) * BADGE_W, (i // cols) * BADGE_H))
     sheet.save(ROOT / "badges.webp", "WEBP", quality=85)
     ver = hashlib.md5((ROOT / "badges.webp").read_bytes()).hexdigest()[:10]
+    # PDCのQRコードの先頭「1,0]104}」の 104 がバッジの番号（同じ番号は同じバッジ）。番号 → badges.webp の何番目か
+    by_id = {}
+    qr_file = SCRATCH / "qr_all.txt"
+    if qr_file.exists():
+        for line in qr_file.read_text(encoding="utf-8").splitlines():
+            fname, _, q = line.partition(" ")
+            mm = re.match(r"\d+,\d+\](\d+)\}", q)
+            if not mm:
+                continue
+            tw = fname.split("_")[0]
+            for t in teams:
+                if tw in t["source"] and t["id"] in found and mm.group(1) not in by_id:
+                    by_id[mm.group(1)] = ids.index(t["id"])
     with open(ROOT / "icons.js", "a", encoding="utf-8") as f:
-        f.write("// PDCで選んだバッジ（タイトルの左のアイコン）。badges.webp の何番目か（編成id）\nwindow.PAD_BADGES = { ver: %s, cols: %d, rows: %d, index: %s };\n"
-                % (json.dumps(ver), cols, rows, json.dumps({tid: i for i, tid in enumerate(ids)}, ensure_ascii=False)))
+        f.write("// PDCで選んだバッジ（タイトルの左のアイコン）。badges.webp の何番目か（index: 編成id、byId: QRコードのバッジ番号）\nwindow.PAD_BADGES = { ver: %s, cols: %d, rows: %d, index: %s, byId: %s };\n"
+                % (json.dumps(ver), cols, rows, json.dumps({tid: i for i, tid in enumerate(ids)}, ensure_ascii=False), json.dumps(by_id)))
     print(f"バッジ {len(ids)}編成")
     keys = sorted(latents)
     lcols = 12
