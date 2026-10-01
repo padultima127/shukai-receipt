@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 101,
+  "version": 102,
   "seed": true,
   "monsters": [
     {
@@ -9220,6 +9220,16 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -9232,6 +9242,11 @@ window.PAD_SEED = {
           {
             "mi": 4,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -10040,6 +10055,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 3,
             "part": "assist",
             "turn": 0
@@ -10395,6 +10415,16 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "assist",
             "turn": 0
@@ -10412,6 +10442,13 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -10953,6 +10990,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 2,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 0
@@ -10963,8 +11005,13 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {
@@ -10973,19 +11020,19 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           }
         ],
         "2": [
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           },
@@ -11000,7 +11047,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -11012,14 +11059,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           }
         ],
         "5": [
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -11029,7 +11076,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 1
           }
@@ -11041,12 +11088,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           },
@@ -11056,14 +11103,14 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 1
           }
         ],
         "7": [
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           }
@@ -11075,12 +11122,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 1
           }
@@ -11092,12 +11139,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 1
           }
@@ -11109,14 +11156,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           }
@@ -11128,12 +11175,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 1
           },
@@ -11143,7 +11190,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 3
           }
@@ -11155,7 +11202,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           },
@@ -11165,17 +11212,17 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 2,
-            "part": "auto",
-            "turn": 2
-          },
-          {
             "mi": 3,
             "part": "auto",
             "turn": 2
           },
           {
             "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 3
           },
@@ -11190,19 +11237,19 @@ window.PAD_SEED = {
             "turn": 4
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 4
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 5
           }
         ],
         "15": [
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           },
@@ -11212,12 +11259,12 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 2
           },
@@ -11227,7 +11274,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 3
           },
@@ -11237,22 +11284,22 @@ window.PAD_SEED = {
             "turn": 4
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 4
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 5
           },
           {
-            "mi": 3,
+            "mi": 2,
             "part": "auto",
             "turn": 6
           },
           {
-            "mi": 2,
+            "mi": 3,
             "part": "auto",
             "turn": 7
           }
@@ -11362,6 +11409,11 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 4,
+            "part": "base",
             "turn": 3
           },
           {
@@ -12146,6 +12198,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
@@ -12173,6 +12230,11 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -12684,8 +12746,18 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
             "turn": 0
           },
           {
@@ -12696,6 +12768,11 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -13132,6 +13209,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "assist",
             "turn": 0
@@ -13139,6 +13221,11 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
             "turn": 0
           },
           {
@@ -13962,12 +14049,12 @@ window.PAD_SEED = {
           },
           {
             "mi": 6,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 7,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -13977,7 +14064,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 9,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -13987,7 +14074,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 8,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -14021,6 +14108,11 @@ window.PAD_SEED = {
           }
         ],
         "5": [
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 7,
             "part": "auto",
@@ -14211,12 +14303,12 @@ window.PAD_SEED = {
           },
           {
             "mi": 6,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 7,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -14226,7 +14318,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 8,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -14236,7 +14328,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 9,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -14270,6 +14362,11 @@ window.PAD_SEED = {
           }
         ],
         "5": [
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 7,
             "part": "auto",
@@ -14844,11 +14941,6 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 1
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
           }
         ],
         "4": [
@@ -15161,6 +15253,16 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "assist",
             "turn": 0
@@ -15168,6 +15270,11 @@ window.PAD_SEED = {
           {
             "mi": 0,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -16213,6 +16320,16 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 3,
             "part": "assist",
             "turn": 0
@@ -16562,6 +16679,21 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "base",
             "turn": 0
           },
@@ -17349,6 +17481,16 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 3,
             "part": "assist",
             "turn": 0
@@ -17783,6 +17925,16 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 1
@@ -18189,13 +18341,28 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -18205,7 +18372,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -18643,6 +18810,16 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -18665,6 +18842,11 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {
@@ -19047,6 +19229,11 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
+            "mi": 4,
+            "part": "base",
+            "turn": 1
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 1
@@ -19784,6 +19971,11 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -19863,13 +20055,28 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -19879,7 +20086,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -19894,11 +20101,6 @@ window.PAD_SEED = {
           }
         ],
         "2": [
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
           {
             "mi": 3,
             "part": "auto",
@@ -19952,11 +20154,6 @@ window.PAD_SEED = {
           }
         ],
         "6": [
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
           {
             "mi": 5,
             "part": "auto",
@@ -20024,11 +20221,6 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 1,
             "part": "auto",
             "turn": 1
@@ -20086,11 +20278,6 @@ window.PAD_SEED = {
           }
         ],
         "14": [
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
           {
             "mi": 0,
             "part": "auto",
@@ -20750,25 +20937,42 @@ window.PAD_SEED = {
         "plus891Text": "required"
       },
       "receiptCalls": {
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "1": [
           {
             "mi": 5,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -20799,6 +21003,11 @@ window.PAD_SEED = {
           {
             "mi": 4,
             "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "base",
             "turn": 1
           },
           {
@@ -20919,23 +21128,6 @@ window.PAD_SEED = {
           }
         ],
         "12": [
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
-        "13": [
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          },
           {
             "mi": 3,
             "part": "auto",
@@ -21108,8 +21300,18 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {
@@ -21138,7 +21340,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -21187,45 +21389,40 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 0
-          },
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 1
           }
         ],
         "8": [
           {
-            "mi": 4,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
         ],
         "10": [
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 3,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -21237,17 +21434,12 @@ window.PAD_SEED = {
         ],
         "13": [
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -21417,6 +21609,11 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 2
+          },
+          {
             "mi": 3,
             "part": "auto",
             "turn": 2
@@ -21526,11 +21723,6 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
           }
         ],
         "15": [
@@ -21618,6 +21810,11 @@ window.PAD_SEED = {
       },
       "receiptCalls": {
         "1": [
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 3,
             "part": "assist",
@@ -22261,7 +22458,17 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -23063,10 +23270,42 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "1": [
+        "5": [
           {
             "mi": 1,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "1": [
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -23117,23 +23356,6 @@ window.PAD_SEED = {
         "4": [
           {
             "mi": 5,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
-        "5": [
-          {
-            "mi": 1,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 0,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -24921,6 +25143,16 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "assist",
             "turn": 0
@@ -25151,9 +25383,19 @@ window.PAD_SEED = {
         ],
         "6": [
           {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
           }
         ],
         "7": [
@@ -25350,18 +25592,6 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
-        "3": [
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 4,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "5": [
           {
             "mi": 2,
@@ -25403,6 +25633,18 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -25476,6 +25718,16 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 0
@@ -25486,7 +25738,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -25496,7 +25748,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 3
           }
@@ -25508,7 +25760,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           }
@@ -25549,7 +25801,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -25583,7 +25835,7 @@ window.PAD_SEED = {
         ],
         "13": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -25593,7 +25845,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
@@ -25613,7 +25865,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -25623,7 +25875,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -25633,7 +25885,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
@@ -26210,6 +26462,13 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "17": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
         "9": [
           {
             "mi": 1,
@@ -26241,13 +26500,6 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 0
-          }
-        ],
-        "17": [
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 1
           }
         ]
       },
@@ -26818,6 +27070,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 3,
             "part": "assist",
             "turn": 0
@@ -27033,6 +27290,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "assist",
             "turn": 0
@@ -27048,7 +27310,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
@@ -27060,7 +27322,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
@@ -27072,22 +27334,22 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
             "part": "auto",
             "turn": 1
           }
@@ -27099,14 +27361,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "5": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -27116,12 +27378,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 1
           }
@@ -27133,17 +27395,17 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 2
           }
@@ -27155,7 +27417,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -27170,21 +27432,21 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           }
         ],
         "8": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
         ],
         "9": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -27204,7 +27466,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 1
           }
@@ -27216,14 +27478,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -27238,7 +27500,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -27248,7 +27510,7 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
@@ -27258,7 +27520,7 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           }
@@ -27270,12 +27532,12 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           }
@@ -27292,12 +27554,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -27307,7 +27569,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
@@ -27322,7 +27584,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           }
@@ -27469,6 +27731,13 @@ window.PAD_SEED = {
       },
       "fastMode": false,
       "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          }
+        ],
         "3": [
           {
             "mi": 4,
@@ -27615,6 +27884,13 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "base",
+            "turn": 0
+          }
+        ],
         "3": [
           {
             "mi": 3,
@@ -27912,6 +28188,13 @@ window.PAD_SEED = {
       },
       "fastMode": false,
       "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          }
+        ],
         "3": [
           {
             "mi": 4,
@@ -28010,6 +28293,16 @@ window.PAD_SEED = {
       },
       "receiptCalls": {
         "1": [
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 0,
             "part": "auto",
@@ -28396,10 +28689,37 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "1": [
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 3,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           },
           {
@@ -28502,23 +28822,6 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 1
-          }
-        ],
-        "10": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
           }
         ],
         "11": [
@@ -29040,6 +29343,11 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -29783,6 +30091,11 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -30969,51 +31282,51 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "2": [
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
         ],
         "3": [
           {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 4,
-            "part": "auto",
-            "turn": 2
-          }
-        ],
-        "4": [
-          {
             "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
             "part": "auto",
             "turn": 1
           }
         ],
         "5": [
           {
-            "mi": 4,
-            "part": "auto",
-            "turn": 1
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 1
-          },
-          {
             "mi": 0,
             "part": "auto",
             "turn": 1
@@ -31035,12 +31348,27 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
             "part": "auto",
             "turn": 1
           }
         ],
         "6": [
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 1
@@ -31052,53 +31380,53 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
-            "turn": 1
-          },
-          {
-            "mi": 5,
             "part": "auto",
             "turn": 1
           }
         ],
         "7": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
         ],
         "8": [
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 2
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 2
           }
         ],
         "9": [
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 1
           }
         ],
         "10": [
           {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
@@ -31110,80 +31438,65 @@ window.PAD_SEED = {
           },
           {
             "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 0,
             "part": "auto",
             "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
         ],
         "12": [
           {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "13": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "14": [
           {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 0,
             "part": "auto",
             "turn": 0
           }
         ],
         "15": [
           {
-            "mi": 4,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 0,
             "part": "auto",
             "turn": 0
@@ -31200,11 +31513,21 @@ window.PAD_SEED = {
           },
           {
             "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 1
           }
@@ -31636,6 +31959,16 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -31643,6 +31976,11 @@ window.PAD_SEED = {
           {
             "mi": 4,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           },
           {
@@ -31681,10 +32019,24 @@ window.PAD_SEED = {
             "turn": 2
           }
         ],
+        "2": [
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          }
+        ],
         "3": [
           {
             "mi": 2,
             "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -32662,13 +33014,28 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           }
         ],
@@ -33104,6 +33471,11 @@ window.PAD_SEED = {
       },
       "receiptCalls": {
         "1": [
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 4,
             "part": "base",
@@ -34443,6 +34815,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "assist",
             "turn": 0
@@ -35051,6 +35428,23 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 1
+          }
+        ],
         "8": [
           {
             "mi": 4,
@@ -35495,6 +35889,11 @@ window.PAD_SEED = {
           },
           {
             "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
@@ -35521,7 +35920,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
@@ -35533,21 +35932,21 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "4": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
         ],
         "5": [
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -35557,7 +35956,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
@@ -35569,12 +35968,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
@@ -35586,14 +35985,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "9": [
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -35610,7 +36009,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -35762,6 +36161,23 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "1": [
           {
             "mi": 1,
@@ -35857,23 +36273,6 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 1
-          }
-        ],
-        "7": [
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 1
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
           }
         ],
         "8": [
@@ -36036,6 +36435,11 @@ window.PAD_SEED = {
       },
       "receiptCalls": {
         "1": [
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
           {
             "mi": 0,
             "part": "auto",
@@ -36262,6 +36666,13 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "1": [
           {
             "mi": 3,
@@ -36329,13 +36740,6 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 3
-          }
-        ],
-        "3": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
           }
         ]
       },
@@ -36471,18 +36875,6 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "1": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "2": [
           {
             "mi": 1,
@@ -36533,6 +36925,18 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 3
+          }
+        ],
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -36674,6 +37078,13 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          }
+        ],
         "2": [
           {
             "mi": 3,
@@ -37118,6 +37529,23 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "1": [
           {
             "mi": 1,
@@ -37164,23 +37592,6 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 1
-          }
-        ],
-        "8": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
           }
         ],
         "9": [
@@ -37974,19 +38385,19 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "2": [
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "5": [
           {
             "mi": 5,
             "part": "auto",
             "turn": 0
           },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
           {
             "mi": 3,
             "part": "auto",
@@ -39857,6 +40268,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 0
@@ -39906,6 +40322,11 @@ window.PAD_SEED = {
           {
             "mi": 5,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           },
           {
@@ -40301,6 +40722,11 @@ window.PAD_SEED = {
         ],
         "2": [
           {
+            "mi": 1,
+            "part": "base",
+            "turn": 1
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 2
@@ -40309,6 +40735,11 @@ window.PAD_SEED = {
             "mi": 3,
             "part": "auto",
             "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 3
           },
           {
             "mi": 5,
@@ -40894,6 +41325,11 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           },
           {
@@ -42747,18 +43183,28 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {
@@ -42810,6 +43256,11 @@ window.PAD_SEED = {
         ],
         "5": [
           {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
@@ -42854,7 +43305,7 @@ window.PAD_SEED = {
         "9": [
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 1
           },
           {
@@ -42879,7 +43330,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 0,
-            "part": "auto",
+            "part": "assist",
             "turn": 4
           }
         ],
@@ -42923,7 +43374,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 6
           },
           {
@@ -42933,7 +43384,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 5
           },
           {
@@ -43151,7 +43602,17 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
             "turn": 0
           },
           {
@@ -43247,7 +43708,7 @@ window.PAD_SEED = {
         "9": [
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 1
           },
           {
@@ -43267,7 +43728,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 2
           },
           {
@@ -43304,7 +43765,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 1
           }
         ],
@@ -43517,7 +43978,12 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {
@@ -44046,12 +44512,12 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 5,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -44061,7 +44527,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -44167,7 +44633,7 @@ window.PAD_SEED = {
         "9": [
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -44243,7 +44709,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -44420,6 +44886,16 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
             "turn": 0
           },
           {
@@ -45089,6 +45565,16 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {

@@ -17,8 +17,8 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SCRATCH = Path("/private/tmp/claude-501/-Users-hm-Desktop-cloud/0eb1ef7d-c9ca-4c34-bba3-a2c311f021c1/scratchpad")
-MONS = json.load(open(SCRATCH / "monster_list_full.json"))
+# OCR結果などの作業データ（一時フォルダは消えることがあるので .work/ に退避したもの）
+SCRATCH = ROOT / ".work"
 
 
 def load_ocr():
@@ -110,6 +110,9 @@ def parse_team(team, texts):
         marks = [(mm.start(), CIRCLED.index(mm.group(0))) for mm in re.finditer("[" + CIRCLED + "]", line)]
         if floor is None or floor > 30:
             continue
+        # 「※盤面あればダイアモス不要」などの注意書きはスキルを使った記録ではない
+        if line.lstrip().startswith(("※", "＊", "*")) and re.search(r"不要|いらない|なしでも|省略", line):
+            continue
         # 区切り（→ など）がOCRで消えることがあるので、行の中からキャラ名の出てくる位置を探す
         found = []
         for i, ks in enumerate(mkeys):
@@ -139,9 +142,13 @@ def parse_team(team, texts):
         for st, en, i, k in picked:
             after = line[en:en + 3]
             before = line[max(0, st - 1):st]
-            if "変身" in line[en:en + 3] or "進化" in line[en:en + 3]:
+            # 「ダイン変身」「クチナ（変身）」は変身スキルを押したもの（本体）。「変身後」「進化後」はただの説明なので数えない
+            if re.match(r"\s*[（(]?(変身|進化)後", after):
                 continue
-            part = "assist" if k.startswith("@") or re.match(r"\s*[（(]?裏", after) else "base" if re.match(r"\s*[（(]?表", after) else "auto"
+            transform = bool(re.match(r"\s*[（(]?(変身|進化)", after))
+            # PDCではアシストが上・本体が下に並ぶので「ヘラ上」は武器、「ヘラ下」は本体（まつりーたさんのレシートなど）
+            part = ("assist" if k.startswith("@") or re.match(r"\s*[（(]?(裏|上)(?![か手])", after)
+                    else "base" if transform or re.match(r"\s*[（(]?(表|下)(?![か手])", after) else "auto")
             k = k.lstrip("@")
             same = [j for j, ks in enumerate(mkeys) if k in ks]
             mi = i

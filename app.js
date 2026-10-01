@@ -1640,6 +1640,7 @@ function stageRow(no, k) {
 // 継承スキルの仕様（本人談）: 押すとまず武器（武器のターン分溜まっていれば）。本体＋武器の合計分溜まっていれば両方。
 // 武器だけ使った後は、ターン経過やヘイストで本体のターン分溜まった時だけ本体を使ったとみなす。
 // 溜まり: 最初はパーティーのスキブ、1ターンごとに＋1、ほかのキャラのヘイスト（自分以外が◯ターン溜まる）で＋◯
+const receiptOrder = new Map();
 function resolveReceiptUses(t) {
   if (!t.receiptCalls) return null;
   const sb = teamSkillBoost(t, t.members[0]);
@@ -1685,6 +1686,8 @@ function resolveReceiptUses(t) {
     });
   };
   const uses = {};
+  // 表示用: レシートに書かれた順（ターンの見積もりで並びが変わらないように）
+  const order = {};
   let first = true;
   let prevFl = 0;
   for (const [fl, calls] of Object.entries(t.receiptCalls).sort((a, b) => Number(a[0]) - Number(b[0]))) {
@@ -1699,10 +1702,10 @@ function resolveReceiptUses(t) {
     // 同じキャラが何回出てくるかで、その階のターン数を見積もる
     // （レシートの区切りから読んだ c.turn も入っているが、編成によって良くも悪くもなるので調整が済むまで使わない）
     const seen = new Map();
-    const withTurn = calls.map((c) => {
+    const withTurn = calls.map((c, idx) => {
       const k = seen.get(c.mi) ?? 0;
       seen.set(c.mi, k + 1);
-      return { ...c, turn: k };
+      return { ...c, turn: k, idx };
     });
     const turns = Math.max(1, ...withTurn.map((c) => c.turn + 1));
     for (let tn = 0; tn < turns; tn++) {
@@ -1740,11 +1743,13 @@ function resolveReceiptUses(t) {
         if (used.includes(x.b)) x.bUse++;
         fire(c.mi, used);
         ((uses[fl] ??= [])[tn] ??= []).push(...used.map((r) => r[0]));
+        ((order[fl] ??= [])[c.idx] = used.map((r) => r[0]));
       }
     }
   }
   // ターンごとの配列にそろえる（使っていないターンは空）
   for (const fl of Object.keys(uses)) uses[fl] = Array.from(uses[fl], (x) => x ?? []);
+  receiptOrder.set(t.id, Object.fromEntries(Object.entries(order).map(([fl, v]) => [fl, v.filter(Boolean).flat()])));
   return uses;
 }
 
@@ -2335,8 +2340,10 @@ function usedSkillNames(t, setup) {
     if (an && !label.has(an)) label.set(an, `${name}裏`);
   }
   const out = [];
-  const floors = Object.keys(setup.uses ?? {}).sort((a, b) => Number(a) - Number(b));
-  for (const f of floors) for (const no of setup.uses[f]) {
+  const byOrder = receiptOrder.get(t.id);
+  const src = byOrder && Object.keys(byOrder).length ? byOrder : setup.uses ?? {};
+  const floors = Object.keys(src).sort((a, b) => Number(a) - Number(b));
+  for (const f of floors) for (const no of src[f]) {
     const l = label.get(no);
     if (l && !out.includes(l)) out.push(l);
   }
@@ -2356,6 +2363,17 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const origSim = pool.n1 + pool.n2 ? simulateEndurance(d, origSetup, maxHp, setup0.skillRed, latent) : null;
   const autoNote = pool.n1 + pool.n2 + (setup0.autoLatent ? 1 : 0)
     ? `<p class="advice">属性軽減の潜在は、ほかの潜在はそのままで属性だけ振り替えて、このダンジョンで一番効く形にして計算しています: ${newText || "どこに振っても変わらないため元のまま"}${origText ? `<br><small class="muted">レシートの振り方: ${origText}${origSim ? `（このままだと${setup0.skillRed ? "レシートどおりのスキルで" : ""}${origSim.deadAt == null ? "全フロア耐えられる" : `${origSim.deadAt}Fで倒れる`}計算）` : ""}</small>` : ""}${setup0.autoLatent ? `<br><small class="muted">属性が判別できない属性軽減＋（合計${setup0.autoLatent}%）も含めて振っています</small>` : ""}</p>`
+    : "";
+  // 敵の属性で効果が変わるスキルを、敵がランダム（どちらか出現・乱入）の階で使っている時は、どちらになるか分からないので耐えられる方（効果が倍の方）で計算（本人指定）
+  const ambiguous = [...new Map(
+    [...(setup.hpUps ?? []), ...(setup.regens ?? []), ...(setup.reductions ?? [])]
+      .filter((x) => x.cond)
+      .map((x) => [x, d.damage.floors.find((f) => f.floor === x.floor)])
+      .filter(([x, f]) => f && /ランダム|乱入|2通り|いずれか/.test(f.note ?? "") && (f.enemyAttrs ?? []).includes(x.cond.attr) && (f.enemyAttrs ?? []).some((a) => a !== x.cond.attr))
+      .map(([x, f]) => [`${f.floor}:${x.name}`, `${f.floor}F（${esc(x.name)}）`])
+  ).values()];
+  const ambNote = ambiguous.length
+    ? `<p class="hint">※ ${ambiguous.join("・")}: 敵がランダムに出るため、スキルの効果が倍になる属性の敵が出るか分かりません。耐えられる方（効果が倍になる方）で計算しています。</p>`
     : "";
   const sim = simulateEndurance(d, setup, maxHp, 0, latent);
   // スキルの軽減ありの場合（効果が最後まで続く前提）
@@ -2380,7 +2398,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const need = `<p class="need">全フロア耐えるのに必要なHP: スキルなし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／レシートどおり <strong>${fmt(need1)}</strong>` : ""}
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
   const plusLines = setup.skillRed ? renderHpBudget(setup, maxHp, need1, "レシートどおりのスキルで、") : renderHpBudget(setup, maxHp, need0, "スキルなしで、");
-  return `${need}${autoNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
+  return `${need}${autoNote}${ambNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計（割合ダメージにも乗せています）。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}

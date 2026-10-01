@@ -7,3 +7,4 @@ icons/
 __pycache__/
 manual-icons/
 .claude/
+.work/
