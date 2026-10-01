@@ -330,6 +330,10 @@ button:disabled { opacity: .6; cursor: wait; }
 .awk-supers > summary { font-size: 11px; color: var(--accent); cursor: pointer; list-style: none; display: inline-block; padding: 1px 6px; border: 1px solid var(--accent); border-radius: 10px; }
 .awk-supers > summary::-webkit-details-marker { display: none; }
 .awk-supers[open] { display: block; margin: 4px 0 0; }
+.awk-pick { padding: 1px; border: 1px solid transparent; border-radius: 6px; background: none; cursor: pointer; line-height: 0; }
+.awk-pick:hover { border-color: var(--line); }
+.awk-pick.on { border-color: var(--accent); background: var(--accent-soft); }
+.linkish { padding: 0; border: 0; background: none; color: var(--accent); font: inherit; text-decoration: underline; cursor: pointer; }
 .vote-ng-form { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-block: 4px; font-size: 12px; }
 .vote-ng-form input { flex: 1 1 200px; min-width: 0; }
 .vote-reasons { font-size: 12px; color: var(--muted); }

@@ -61,6 +61,26 @@ else if ((db.version ?? 0) < window.PAD_SEED.version) {
   saveJSON(DATA_KEY, db);
 }
 let box = new Set(loadJSON(BOX_KEY, []));
+// レシートから分からない超覚醒を、見る人が超覚醒一覧から選んだもの（このブラウザだけに保存）。{ "編成id:枠": 覚醒No. }
+const SUPER_PICK_KEY = "pad-farming-super-picks";
+let superPicks = loadJSON(SUPER_PICK_KEY, {});
+// 選んだ超覚醒を編成データに反映する（build.userPicked 付き。レシート由来の超覚醒は上書きしない）
+function applySuperPicks() {
+  for (const t of db.teams) {
+    t.members.forEach((m, i) => {
+      if (m.build?.userPicked) {
+        const { super: _s, userPicked: _u, ...rest } = m.build;
+        if (Object.keys(rest).length) m.build = rest;
+        else delete m.build;
+      }
+      const pick = superPicks[`${t.id}:${i}`];
+      if (pick != null && m.build?.super == null) m.build = { ...(m.build ?? {}), super: pick, userPicked: true };
+    });
+  }
+}
+applySuperPicks();
+// 耐久チェックで「レシートのビルドが分かっている」とみなすか（超覚醒だけ分かった・自分で選んだだけの枠は含めない）
+const isFullBuild = (b) => !!b && !b.superOnly && !b.userPicked;
 let mode = "balance";
 let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョンで探す)
 const SEARCH_TYPES = {
@@ -932,7 +952,7 @@ function renderAwakenings(mem) {
   const row = MDB.get(monster(mem.id)?.no);
   if (!row) return "";
   const ids = String(row[27] ?? "").split(".").filter(Boolean).map(Number);
-  const sup = mem.build?.super ? `<span class="awk-sep">超</span>${awkIcon(mem.build.super, "awk-super")}` : "";
+  const sup = mem.build?.super ? `<span class="awk-sep">${mem.build.userPicked ? "超（自分で選択）" : "超"}</span>${awkIcon(mem.build.super, "awk-super")}` : "";
   const syn = row[26] ? `<span class="awk-sep">シンクロ</span>${awkIcon(row[26], "awk-super")}` : "";
   const a = MDB.get(assistNoOf(mem));
   const aIds = a?.[8] ? String(a[27] ?? "").split(".").filter(Boolean).map(Number).filter((x) => x !== 49) : [];
@@ -941,14 +961,39 @@ function renderAwakenings(mem) {
 }
 
 // 名前の横の「超覚醒一覧」: レシートで選ばれていない超覚醒も確認できる（選ばれているものは枠付き）
-function renderSuperList(mem) {
+// レシートから分からない時は、一覧から選ぶとダンボ数・耐久チェックに反映される（このブラウザに保存）
+function renderSuperList(r) {
+  const mem = r.mem;
   const row = MDB.get(monster(mem.id)?.no);
   const ids = String(row?.[11] ?? "").split(".").filter(Boolean).map(Number);
   if (!ids.length) return "";
-  return `<details class="awk-supers"><summary>超覚醒一覧（${ids.length}）</summary><div class="awk-row">${ids
-    .map((id) => awkIcon(id, id === mem.build?.super ? "awk-super" : ""))
-    .join("")}</div>${mem.build?.super ? `<small class="muted">枠付きがレシートで選ばれている超覚醒</small>` : `<small class="muted">レシートからは選んだ超覚醒が分かりません</small>`}</details>`;
+  const fromReceipt = mem.build?.super != null && !mem.build.userPicked;
+  const key = `${r.teamId}:${r.idx}`;
+  if (fromReceipt)
+    return `<details class="awk-supers"><summary>超覚醒一覧（${ids.length}）</summary><div class="awk-row">${ids
+      .map((id) => awkIcon(id, id === mem.build.super ? "awk-super" : ""))
+      .join("")}</div><small class="muted">枠付きがレシートで選ばれている超覚醒</small></details>`;
+  const picked = mem.build?.userPicked ? mem.build.super : null;
+  return `<details class="awk-supers" data-super-key="${esc(key)}"><summary>超覚醒一覧（${ids.length}）${picked ? "・選択中" : ""}</summary><div class="awk-row">${ids
+    .map((id) => `<button type="button" class="awk-pick${id === picked ? " on" : ""}" data-pick-key="${esc(key)}" data-pick-super="${id}" aria-pressed="${id === picked}">${awkIcon(id, id === picked ? "awk-super" : "")}</button>`)
+    .join("")}</div><small class="muted">レシートからは選んだ超覚醒が分かりません。選ぶとダンボ数と耐久チェックに反映されます（このブラウザに保存）${picked ? ` ・ <button type="button" class="linkish" data-pick-key="${esc(key)}" data-pick-super="">選択を外す</button>` : ""}</small></details>`;
 }
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-pick-key]");
+  if (!b) return;
+  e.preventDefault();
+  const key = b.dataset.pickKey;
+  const id = Number(b.dataset.pickSuper);
+  if (!id || superPicks[key] === id) delete superPicks[key];
+  else superPicks[key] = id;
+  saveJSON(SUPER_PICK_KEY, superPicks);
+  applySuperPicks();
+  // 結果を描き直して、開いていた一覧はそのまま開いておく
+  const y = window.scrollY;
+  if ($("#results").children.length) search();
+  document.querySelectorAll(`details[data-super-key="${CSS.escape(key)}"]`).forEach((d) => (d.open = true));
+  window.scrollTo(0, y);
+});
 
 // ---------- アップデートによる変更 ----------
 const MONSTER_CHANGES = window.PAD_MONSTER_CHANGES ?? [];
@@ -1008,7 +1053,7 @@ function renderMember(r) {
   }
   return `<li class="mem mem-${r.status}">
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
-    <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}${renderSuperList(r.mem)}
+    <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}${renderSuperList(r)}
       ${renderAwakenings(r.mem)}
       ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
   </li>`;
@@ -1460,7 +1505,7 @@ function enduranceSetup(t0, opts = {}) {
     // ＋値のHP1あたりのHP（10 × 潜在 × 全パラ系 × LS）。チームHP強化は最後に掛ける
     const perPlus = 10 * (1 + (b.latentHp ?? 0) / 100) * mults.reduce((x, t) => x * Number(t.split("×")[1]), 1) * lsm;
     const hpPlus = Math.min(297, Math.round((b.plus ?? 297) / 3));
-    detail.push({ no, name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: !!m.build && !m.build.superOnly, perPlus, hpPlus });
+    detail.push({ no, name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: isFullBuild(m.build), perPlus, hpPlus });
     total += Math.max(1, hp) * lsm;
   }
   total = total * (1 + 0.05 * teamHp);
@@ -1617,7 +1662,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => m.build && !m.build.superOnly) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -1916,7 +1961,7 @@ function renderEndurance(t, d) {
   if (!d?.damage?.floors?.length || t.multi) return "";
   const setup = enduranceSetup(t);
   const notes = d.damage.floors.filter((f) => f.note).map((f) => `${f.floor}F: ${esc(f.note)}`).join("／");
-  const warn = `<p class="end-warn">⚠ この計算は攻略サイトのデータと推定値にもとづく<strong>目安</strong>で、間違っている可能性があります（敵の行動の抜け・条件の読み違い・HPの推定誤差など）。実際に挑む前にPDCやゲーム内で必ず確認してください。${d.damage.auto ? "このダンジョンの敵の攻撃は攻略サイトの表から自動で取り込んだもので、未確認です。" : ""}${t.members.some((m) => m.build && !m.build.superOnly) ? "" : "この編成はレシートの超覚醒・潜在・レベルが未登録のため、HPは低めに出ます。"}</p>`;
+  const warn = `<p class="end-warn">⚠ この計算は攻略サイトのデータと推定値にもとづく<strong>目安</strong>で、間違っている可能性があります（敵の行動の抜け・条件の読み違い・HPの推定誤差など）。実際に挑む前にPDCやゲーム内で必ず確認してください。${d.damage.auto ? "このダンジョンの敵の攻撃は攻略サイトの表から自動で取り込んだもので、未確認です。" : ""}${t.members.some((m) => isFullBuild(m.build)) ? "" : "この編成はレシートの超覚醒・潜在・レベルが未登録のため、HPは低めに出ます。"}</p>`;
   return `<details class="endurance" data-team="${esc(t.id)}"><summary>耐久チェック（試作）</summary>
     ${warn}
     <div class="end-hp-label">
@@ -2562,6 +2607,7 @@ function applyShared() {
   const localIds = new Set(db.teams.filter((t) => !t.shared).map((t) => t.id));
   db.teams = [...db.teams.filter((t) => !t.shared), ...shared.teams.filter((t) => !localIds.has(t.id)).map(fromSharedTeam)];
   easeRangeCache = null;
+  applySuperPicks();
   renderData();
   if (!$("#tab-register").hidden) {
     renderRegDungeons($("#reg-dungeon").value);
