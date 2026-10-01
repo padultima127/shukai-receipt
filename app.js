@@ -1400,7 +1400,7 @@ function renderResult(r, i, item) {
     ${renderConstraints(t)}
     ${renderMembers(r, "details")}
     ${renderEndurance(t, r.dungeon)}
-    ${t.steps?.length ? `<details><summary>立ち回り</summary><ol>${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ol></details>` : ""}
+    ${t.steps?.length ? `<details><summary>立ち回り</summary><ul class="steps">${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></details>` : ""}
     ${src}
   </article>`;
 }
