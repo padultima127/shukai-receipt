@@ -4,3 +4,4 @@ artifact/
 *.log
 _ocrtest/
 icons/
+__pycache__/
