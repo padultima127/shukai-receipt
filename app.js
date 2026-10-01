@@ -2336,6 +2336,14 @@ function iconHTML(ref, { assist = false } = {}) {
   const sub = ATTR_KEY[row?.[3]];
   // スキルの最短ターンを右下に表示（PDCのアイコンの代わりに一目で分かるように）
   const ct = row?.[5] ? `<b class="ct">${row[5]}</b>` : "";
+  // 投稿のPDCレシート画像から切り抜いたアイコン（icons.webp に1枚にまとめたもの）。なければ名前の1文字
+  const no = typeof ref === "number" ? ref : ref?.no;
+  const pi = window.PAD_ICONS?.index?.[no];
+  if (pi != null) {
+    const { cols, rows } = window.PAD_ICONS;
+    const pos = `${((pi % cols) / Math.max(1, cols - 1)) * 100}% ${(Math.floor(pi / cols) / Math.max(1, rows - 1)) * 100}%`;
+    return `<span class="icon icon-img ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true" style="background-size:${cols * 100}% ${rows * 100}%;background-position:${pos}">${ct}</span>`;
+  }
   return `<span class="icon ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true">${esc(glyphOf(name))}${
     sub ? `<i class="sub a-${sub}"></i>` : ""
   }${ct}</span>`;

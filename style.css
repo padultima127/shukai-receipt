@@ -228,6 +228,8 @@ a.no:hover { text-decoration: underline; }
 }
 .icon-assist { width: 24px; height: 24px; border-radius: 6px; font-size: .72rem; margin-left: -12px; margin-top: 18px; border: 2px solid var(--card); }
 .icon-assist .sub { display: none; }
+.icon.icon-img { background-image: url("icons.webp"); background-repeat: no-repeat; color: transparent; border-radius: 8px; text-shadow: none; }
+.icon-img .ct { color: #fff; }
 .a-fire { --c: var(--a-fire); } .a-water { --c: var(--a-water); } .a-wood { --c: var(--a-wood); }
 .a-light { --c: var(--a-light); } .a-dark { --c: var(--a-dark); } .a-none { --c: var(--a-none); }
 .mem-icons { display: inline-flex; align-items: flex-start; flex: none; }
