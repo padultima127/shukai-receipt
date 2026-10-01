@@ -1319,7 +1319,7 @@ function renderResult(r, i, item) {
   let staminaLine = "";
   if (item && r.dungeon.stamina > 0 && r.rate > 0) {
     const hl = mode === "perRun" ? "hl" : "";
-    staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}個${dropEst}</dd></div>`;
+    staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}${item.id === "coin" ? "" : "個"}${dropEst}</dd></div>`;
   }
   const warn = r.missing
     ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
