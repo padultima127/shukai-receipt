@@ -1190,6 +1190,7 @@ function renderResult(r, i, item) {
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
       <div class="${mode === "expStamina" ? "hl" : ""}"><dt>経験値/スタミナ</dt><dd>${r.expPerStamina == null ? "―（スタミナ未登録）" : formatCount(r.expPerStamina)}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
+      <div><dt>ダンジョンボーナス</dt><dd>${t.dungeonBonus != null ? `${t.dungeonBonus}個` : `<span class="muted">記載なし</span>`}</dd></div>
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>
@@ -2155,7 +2156,7 @@ let suggestIndex = -1;
 // ダンジョンの区分と並び（区分も中身も実装順）。ここにないダンジョン（登録で増えたもの）は「その他」の最後
 const DUNGEON_GROUPS = [
   ["未知の新星", ["banryu"]],
-  ["再臨の超星", ["hyakushiki", "senju", "shinbanju", "kyouchou"]],
+  ["再臨の超星", ["hyakushiki", "senju", "shinbanju", "kyouchou", "shinokuchou"]],
   ["守霊の天体", ["jupiter", "mercury", "venus", "moon", "sun"]],
   ["天空の儚域", ["fuun", "kirisame", "tenkyu"]],
   ["奈落の重界", ["guren", "taiju"]],
@@ -2353,6 +2354,9 @@ function clearRegForm() {
   renderRegDungeons();
   $("#reg-heading").textContent = "編成を登録";
   $("#reg-submit").textContent = "登録する";
+  // 登録は画像からだけ（読み取るまで入力欄は出さない）
+  $("#reg-fields").hidden = true;
+  $("#reg-ocr-msg").textContent = "";
 }
 
 async function saveRegForm() {
@@ -2683,6 +2687,7 @@ function loadIntoRegForm(id) {
   $("#reg-author").value = t.author?.name ?? "";
   $("#reg-heading").textContent = "編成を編集";
   $("#reg-submit").textContent = "更新する";
+  $("#reg-fields").hidden = false;
   $("#reg-form").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -3299,7 +3304,8 @@ async function runRegOcr() {
       const author = await fetchTweetAuthor(url);
       if (author) ($("#reg-author").value = author), notes.push("作者");
     }
-    msg(`読み取りました: ${notes.join("・")}。内容を確認してから登録してください。`);
+    msg(`読み取りました: ${notes.join("・")}。下の内容を確認してから登録してください。`);
+    $("#reg-fields").hidden = false;
   } catch (e) {
     msg(`読み取りに失敗しました: ${e.message}`);
   } finally {

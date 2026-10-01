@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 84,
+  "version": 85,
   "seed": true,
   "monsters": [
     {
@@ -1618,6 +1618,111 @@ window.PAD_SEED = {
       "no": 12016,
       "name": "聖夜の秘め事・セシリア＆ソフィ",
       "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n6412",
+      "no": 6412,
+      "name": "強欲の大罪龍王・ラマモア",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n13836",
+      "no": 13836,
+      "name": "お掃除メイド・サレーネ",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n9365",
+      "no": 9365,
+      "name": "清濁の双銃姫・カミラ",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12977",
+      "no": 12977,
+      "name": "双星の超越神・イズン＆イズーナ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n12058",
+      "no": 12058,
+      "name": "狐人の妖術師 サンジョウノ・春姫",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n12753",
+      "no": 12753,
+      "name": "甘い夏の思い出・ロベリール",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12249",
+      "no": 12249,
+      "name": "蟹機帝・カルキノス",
+      "attr": "木",
+      "tags": []
+    },
+    {
+      "id": "n12807",
+      "no": 12807,
+      "name": "未来の超越神・スクルド",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n11892",
+      "no": 11892,
+      "name": "光月天将『勾陣』恵爾須【デフォルメ】",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n7858",
+      "no": 7858,
+      "name": "水の大魔女ハローキティ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n12909",
+      "no": 12909,
+      "name": "四ノ宮キコル＆怪獣8号",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n13996",
+      "no": 13996,
+      "name": "L.L.＆C.C.",
+      "attr": "木",
+      "tags": []
+    },
+    {
+      "id": "n13933",
+      "no": 13933,
+      "name": "復讐の巨神クロノス",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n13817",
+      "no": 13817,
+      "name": "宿木の大樹霊王・アドネア",
+      "attr": "木",
+      "tags": []
+    },
+    {
+      "id": "n13320",
+      "no": 13320,
+      "name": "ナツキ・スバルの介添え人 レム",
+      "attr": "水",
       "tags": []
     }
   ],
@@ -8000,6 +8105,489 @@ window.PAD_SEED = {
                 "dur": 10
               }
             ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinokuchou",
+      "name": "伍窮の億兆龍【超高度/体力タイプ強化】",
+      "aliases": [
+        "新億兆",
+        "伍窮の億兆龍",
+        "新億兆チャレンジ",
+        "再臨の超星",
+        "超星"
+      ],
+      "stamina": 99,
+      "battles": 12,
+      "note": "再臨の超星【超重力】。超高度（回復力1/4）、体力タイプのHP1.5倍、リーダーチェンジあり。ボスのアグリゲートは5属性のいずれか",
+      "typeBoost": {
+        "types": [
+          2
+        ],
+        "hp": 1.5,
+        "label": "体力タイプ強化"
+      },
+      "drops": [
+        {
+          "itemId": "plus",
+          "rate": 5555
+        },
+        {
+          "itemId": "exp",
+          "rate": 100000000
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 3,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "kingdragon",
+          "rate": 10,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "goldtama",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "gimmicks": {
+        "all": [
+          "resolve",
+          "skillDelay",
+          "attrAbsorb",
+          "dmgAbsorb",
+          "dmgVoid",
+          "awakenVoid",
+          "assistVoid",
+          "damageCap",
+          "weakenAwaken",
+          "healDown",
+          "timeDown",
+          "atkDown",
+          "poison",
+          "jammer",
+          "board54",
+          "roulette",
+          "darkness",
+          "tape"
+        ],
+        "partial": [
+          {
+            "key": "bigHit",
+            "sites": [
+              "ゲームウィズ"
+            ]
+          },
+          {
+            "key": "spike",
+            "sites": [
+              "ゲームウィズ"
+            ]
+          },
+          {
+            "key": "cloud",
+            "sites": [
+              "ゲームウィズ"
+            ]
+          },
+          {
+            "key": "skillSeal",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "unerasable",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "bind",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "lock",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "shield",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "comboDown",
+            "sites": [
+              "ゲームエイト"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/476048",
+            "date": "2026-10-01"
+          },
+          {
+            "site": "ゲームエイト",
+            "url": "https://game8.jp/pazudora/656019",
+            "date": "2026-09-25"
+          }
+        ],
+        "notes": [
+          "リーダーチェンジ: 両サイトに記載",
+          "スーパーノエルはゲームウィズ×3、ゲームエイト×5",
+          "アグリゲートの希石は部位破壊でドロップ数が変わる（ボスと同じ属性のみ）",
+          "「ダンボ」はタマゴ・部位破壊素材のドロップ率を上げるダンジョンボーナス（リーダースキルなど）の数"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。経験値は攻略サイトの1億（プレイ履歴はボーナス込みで1億400万〜1億6900万）",
+      "damage": {
+        "source": {
+          "site": "ゲームウィズ",
+          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/476048",
+          "date": "2026-10-01"
+        },
+        "auto": true,
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "floors": [
+          {
+            "floor": 1,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 26800,
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 26800,
+                "kind": "preemptive",
+                "attrs": [
+                  "水"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 26800,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ]
+          },
+          {
+            "floor": 2,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 2142000,
+                "kind": "preemptive",
+                "attrs": [
+                  "光"
+                ]
+              },
+              {
+                "label": "超根性発動時",
+                "dmg": 2121000,
+                "kind": "superResolve",
+                "attrs": [
+                  "闇"
+                ],
+                "threshold": 50
+              }
+            ],
+            "enemyAttrs": [
+              "光"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
+            ]
+          },
+          {
+            "floor": 3,
+            "hits": [],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
+            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 4,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 1800000,
+                "kind": "preemptive",
+                "attrs": [
+                  "闇"
+                ]
+              },
+              {
+                "label": "超根性発動時",
+                "dmg": 2250000,
+                "kind": "superResolve",
+                "attrs": [
+                  "火"
+                ],
+                "threshold": 50
+              }
+            ],
+            "enemyAttrs": [
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "火"
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "毒"
+                ],
+                "dur": 5
+              }
+            ]
+          },
+          {
+            "floor": 5,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 630000,
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 630000,
+                "kind": "preemptive",
+                "attrs": [
+                  "水"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 630000,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 630000,
+                "kind": "preemptive",
+                "attrs": [
+                  "光",
+                  "闇"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
+            "note": "敵は5種類のうち4体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 6,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 3060000,
+                "kind": "preemptive",
+                "attrs": [
+                  "闇"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "水",
+              "火"
+            ],
+            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 7,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 315000,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              },
+              {
+                "label": "初回行動時",
+                "dmg": 9135000,
+                "kind": "turn",
+                "attrs": [
+                  "木"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木"
+            ],
+            "enemyAttrsAfter": [
+              "光"
+            ]
+          },
+          {
+            "floor": 8,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 2700000,
+                "kind": "preemptive",
+                "attrs": [
+                  "木",
+                  "水",
+                  "火"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
+            "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
+          },
+          {
+            "floor": 9,
+            "hits": [
+              {
+                "label": "超根性発動時",
+                "dmg": 3723000,
+                "kind": "superResolve",
+                "attrs": [
+                  "光"
+                ],
+                "threshold": 50
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
+            "enemyAttrsAfter": [
+              "光",
+              "火"
+            ],
+            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 10,
+            "hits": [
+              {
+                "label": "超根性発動時",
+                "dmg": 4050000,
+                "kind": "superResolve",
+                "attrs": [
+                  "木",
+                  "水"
+                ],
+                "threshold": 20
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "木",
+              "水"
+            ],
+            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 11,
+            "hits": [],
+            "enemyAttrs": [
+              "光"
+            ]
+          },
+          {
+            "floor": 12,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 3600000,
+                "kind": "preemptive",
+                "attrs": [
+                  "光",
+                  "木",
+                  "水",
+                  "火",
+                  "闇"
+                ]
+              },
+              {
+                "label": "超根性発動時",
+                "dmg": 13860000,
+                "kind": "superResolve",
+                "attrs": [
+                  "光",
+                  "木",
+                  "水",
+                  "火",
+                  "闇"
+                ],
+                "threshold": 50
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
+            "note": "敵は5種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
           }
         ]
       }
@@ -29865,6 +30453,2930 @@ window.PAD_SEED = {
           }
         ]
       }
+    },
+    {
+      "id": "shinokuchou-seihearts-matsuda-19",
+      "dungeonId": "shinokuchou",
+      "title": "セイハーツ ほぼずらし（ダンボ19）",
+      "timeSec": 510,
+      "turns": 28,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n14110",
+          "role": "L",
+          "assist": "緋天龍のソウル No.11573"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "炎翔神・ミニほるすのノート No.13535"
+        },
+        {
+          "id": "n14110",
+          "role": "F",
+          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006"
+        }
+      ],
+      "steps": [
+        "ダンボ19、ほぼずらし（プレイ履歴は8分29秒・28ターン）",
+        "8F（和＋雑魚）は列なしで1ターン耐久を忘れずに",
+        "LFセイハーツの武器は火付与7コンボ×2・スキブ合計5ならOK",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2093532569442844715",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-08-29",
+      "metrics": {
+        "chars": 457,
+        "puzzle": 4,
+        "branch": 1,
+        "caution": 1,
+        "zurashi": 13,
+        "plus891": 1,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアA、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB上"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアC上"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "セイハーツ+1"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ+1"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": " セイハーツ+1"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラマモアD上"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ラマモアB、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "セイハーツずら"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "セイハーツ、ラ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ラマモアC、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツずら"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラマモアD、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ！列"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "④セイハーツずら"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": " ラマモアC、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ラマモアD、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "■セイハーツx2"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラマモアB上"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "⑦セイハーツずら"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ、ラ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ラマモア、セ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツ、ラ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラマモア、セ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          }
+        ]
+      },
+      "dungeonBonus": 19
+    },
+    {
+      "id": "shinokuchou-seihearts-sigu",
+      "dungeonId": "shinokuchou",
+      "title": "セイハーツ 全ずらし（ダンボ15・部位確定）",
+      "timeSec": 502,
+      "turns": 27,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n14110",
+          "role": "L",
+          "assist": "転寝の魔帽子・コーザ No.5773"
+        },
+        {
+          "id": "n13836",
+          "role": "S",
+          "assist": "メタトロンのおせち料理 No.13244"
+        },
+        {
+          "id": "n9365",
+          "role": "S",
+          "assist": "ヴァーチェの天空刃 No.11516"
+        },
+        {
+          "id": "n12977",
+          "role": "S",
+          "assist": "清らかな花嫁・ハクの指輪 No.13815"
+        },
+        {
+          "id": "n14101",
+          "role": "S",
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+        },
+        {
+          "id": "n14110",
+          "role": "F",
+          "assist": "転寝の魔帽子・コーザ No.5773"
+        }
+      ],
+      "steps": [
+        "ダンボ15・部位確定の全ずらし（プレイ履歴は8分21秒・27ターン）",
+        "LFのセイハーツを交互に打つだけ。イズイズのヘイストがあっても気にせず交互でいける（順番を間違えると負ける）",
+        "軽減+潜在12・軽減1・軽減+3",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/sigu_83366/status/2093289248329978005",
+      "author": {
+        "name": "シグ"
+      },
+      "sourceDate": "2026-08-28",
+      "metrics": {
+        "chars": 419,
+        "puzzle": 0,
+        "branch": 1,
+        "caution": 1,
+        "zurashi": 0,
+        "plus891": 1,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ、ハ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ハーティア、イ"
+          },
+          {
+            "mi": 2,
+            "part": "base",
+            "raw": "カミラ（表"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "、サレーネ（裏"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①ハーティア、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①ハーティア（ツ"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②カミラ、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "⑤ハーティア、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②カミラ、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "にセイハーツを打"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ、イ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、カミラ、サ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、サレーネ、L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lセイハーツ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ハーティア、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fセイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "セイハーツを打"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "にセイハーツを打"
+          }
+        ]
+      },
+      "dungeonBonus": 15
+    },
+    {
+      "id": "shinokuchou-seihearts-matsuda-21",
+      "dungeonId": "shinokuchou",
+      "title": "セイハーツ×ラマモア（ダンボ21）",
+      "timeSec": 511,
+      "turns": 29,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n14110",
+          "role": "L",
+          "assist": "吉書始の女神・ネヴァンのかるた札 No.13269"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ステイタスの用紙 No.12024"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "宿木の大樹霊王・アドネアの首飾り No.13819"
+        },
+        {
+          "id": "n14110",
+          "role": "F",
+          "assist": "現世の赤龍喚士・ミニそにあのノート No.13541"
+        }
+      ],
+      "steps": [
+        "ダンボ21（これ以上はラマモアを変えないと盛れない）。高速モード8分30秒前後（プレイ履歴は8分31秒・29ターン）",
+        "11F・12Fは全て＋1コンボ。アグリのコアを割るなら3パン",
+        "8Fは列なしで1ターン耐久",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2093655160946065672",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-08-29",
+      "metrics": {
+        "chars": 522,
+        "puzzle": 6,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 14,
+        "plus891": 1,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアA、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB上"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアC上"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "セイハーツ＋1"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ+1"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "②セイハーツ+1"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラマモアD上"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①セイハーツずら"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ラマモアB、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "セイハーツずら"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "ラマモアC、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①セイハーツずら"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラマモアD、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①セイハーツ ！"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": " セイハーツずら"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": " ラマモアC、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ラマモアD、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB上"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "⑦セイハーツずら"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ、ラ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ラマモア、セ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツ、ラ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラマモア、セ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ、ラ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモア、セ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツ、ラ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモア"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "③セイハーツ、セ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "のセイハーツでも"
+          }
+        ]
+      },
+      "dungeonBonus": 21
+    },
+    {
+      "id": "shinokuchou-seihearts-matsuda-15",
+      "dungeonId": "shinokuchou",
+      "title": "セイハーツ×春姫 ほぼずらし（ダンボ15・部位確定）",
+      "timeSec": 498,
+      "turns": 26,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n14110",
+          "role": "L",
+          "assist": "ハート龍・セイハーツのトランプ No.14111"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ソロモンの指輪 No.12592"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079"
+        },
+        {
+          "id": "n12058",
+          "role": "S",
+          "assist": "帝丹高校2年・毛利蘭 No.12388"
+        },
+        {
+          "id": "n12753",
+          "role": "S",
+          "assist": "ポピーの種子 No.13747"
+        },
+        {
+          "id": "n14110",
+          "role": "F",
+          "assist": "ハート龍・セイハーツのトランプ No.14111"
+        }
+      ],
+      "steps": [
+        "ダンボ15・部位確定、高速モード8分18秒（26ターン）。卵率1.3×1.3",
+        "回復ギリギリなので、HPが低い時・回復を下げられた時は回復4つ消し",
+        "春姫・ロベリールも+891がベスト。リーダーの武器はバレンタインクヴィア、白いガンダム武器など",
+        "同じ編成の8/23の投稿（10分30秒）もあり",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2092195963951845681",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-08-25",
+      "metrics": {
+        "chars": 601,
+        "puzzle": 6,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 16,
+        "plus891": 0.67,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB上"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ、ロ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ロベリール上、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ロベリール"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツずら"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアA上"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ロベリール、セ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "③セイハーツずら"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラマモアB、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①セイハーツずら"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツずら"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ロベリール） "
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": " セイハーツずら"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②春姫上、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "③セイハーツずら"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": " ラマモアA）"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）セイハーツずら"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "でセイハーツ上に"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": " 春姫）、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "FラマモアA）"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ロベリール、セ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツずら"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ●L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "⑥セイハーツずら"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "⑦春姫上、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "⑥春姫上、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツでも"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①セイハーツ、ロ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ロベリール、ラ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②セイハーツ、ロ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ロベリール、ラ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、セイハーツ"
+          }
+        ]
+      },
+      "dungeonBonus": 15
+    },
+    {
+      "id": "shinokuchou-kafka-matsuda",
+      "dungeonId": "shinokuchou",
+      "title": "カフカ×炭治郎＆禰豆子（パズルほぼなし）",
+      "timeSec": 652,
+      "turns": 25,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n12914",
+          "role": "L",
+          "assist": "紅翼龍・ボルフィードのブレスレット No.10502"
+        },
+        {
+          "id": "n12808",
+          "role": "S",
+          "assist": "メタトロンのおせち料理 No.13244"
+        },
+        {
+          "id": "n12536",
+          "role": "S",
+          "assist": "アレスのブレスレット No.8883"
+        },
+        {
+          "id": "n12903",
+          "role": "S",
+          "assist": "伊織のD-3 No.13100"
+        },
+        {
+          "id": "n12808",
+          "role": "S",
+          "assist": "メタトロンのおせち料理 No.13244"
+        },
+        {
+          "id": "n12914",
+          "role": "F",
+          "assist": "紅翼龍・ボルフィードのブレスレット No.10502"
+        }
+      ],
+      "steps": [
+        "アシスト回復が要らないのでパズルらしいパズルがない（プレイ履歴は10分51秒・25ターン）",
+        "+297でOK、+891なら闇軽減潜在は不要かも（闇軽減はヨミ対策）",
+        "クロトビ武器・Fカフカ武器はスキルマ",
+        "2F以降は炭禰①②ループ。12Fは偏色ルーレット注意",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2008541441883336794",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-01-06",
+      "metrics": {
+        "chars": 439,
+        "puzzle": 5,
+        "branch": 0,
+        "caution": 3,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": " クロトビ、炭"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ上、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Fカフカ"
+          }
+        ],
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Fカフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ①、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ②"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Lカフカ"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ①"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ②"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Lカフカ ヨ"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ① "
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カフカレ/"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Lカフカ"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Fカフカ上、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ①、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Lカフカ→突"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Fカフカ上、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ①"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Lカフカ→突"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ②"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Fカフカ、ク"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロトビ上、"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ①"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "③カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ②"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "⑤カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ①突"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①クロトビ、F"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Fカフカ （"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②カフカレノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カレノ②、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "Lカフカ"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinokuchou-douma-matsuda",
+      "dungeonId": "shinokuchou",
+      "title": "童磨×オメガモン（ダンボ4・部位確定）",
+      "timeSec": 621,
+      "turns": 23,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n12832",
+          "role": "L",
+          "assist": "ゼウスの仕掛け絵本 No.12011"
+        },
+        {
+          "id": "n11714",
+          "role": "S",
+          "assist": "蒼天龍のソウル No.11574"
+        },
+        {
+          "id": "n11714",
+          "role": "S",
+          "assist": "蒼天龍のソウル No.11574"
+        },
+        {
+          "id": "n12249",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079"
+        },
+        {
+          "id": "n12807",
+          "role": "S",
+          "assist": "マスク・ド・サンドの宝杯 No.12667"
+        },
+        {
+          "id": "n12832",
+          "role": "F",
+          "assist": "ゼウスの仕掛け絵本 No.12011"
+        }
+      ],
+      "steps": [
+        "ダンボ4・部位確定（プレイ履歴は10分20秒・23ターン）",
+        "光軽減+潜在5個で耐える。+891なら必要な個数が減る",
+        "11Fは童磨で3ターン耐久",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2009631299246735599",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-01-09",
+      "metrics": {
+        "chars": 509,
+        "puzzle": 4,
+        "branch": 1,
+        "caution": 5,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カルキノス①、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、オメガモンA上"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、スクルド上、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "オメガモンB上"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、オメガモンA①"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②オメガモンA②"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "スクルド、ど"
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②オメガモン B"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "カルキノス②、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、オメガモンB②"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "スクルド、ど"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、オメガモン A"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②カルキノス、オ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、オメガモン A"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "③スクルド、ど"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、オメガモン B"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①オメガモンB②"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、カルキノスL消"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "⑤オメガモンA①"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、カルキノス"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①オメガモン①②"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②オメガモン②、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①オメガモン①②"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②オメガモン②、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "③スクルド、ど"
+          }
+        ]
+      },
+      "dungeonBonus": 4
+    },
+    {
+      "id": "shinokuchou-kikoru-lancelot",
+      "dungeonId": "shinokuchou",
+      "title": "キコル ほぼずらし",
+      "timeSec": 539,
+      "turns": 28,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n12960",
+          "role": "L",
+          "assist": "FS-1002 No.12961"
+        },
+        {
+          "id": "n11892",
+          "role": "S",
+          "assist": "星砕の凶兆龍・ゼンチョウガのブレスレット No.11550"
+        },
+        {
+          "id": "n7858",
+          "role": "S",
+          "assist": "不死川実弥の日輪刀 No.12827"
+        },
+        {
+          "id": "n12909",
+          "role": "S",
+          "assist": "友情のデジメンタル No.13117"
+        },
+        {
+          "id": "n12930",
+          "role": "S",
+          "assist": "Ax-0112 No.12931"
+        },
+        {
+          "id": "n12930",
+          "role": "F",
+          "assist": "Ax-0112 No.12931"
+        }
+      ],
+      "steps": [
+        "9分くらい（プレイ履歴は8分58秒・28ターン）。ボスが光だと11分前後（11分06秒・36ターン）",
+        "ゼンチョウガ武器はキティを進化させて最初のスキル回しを変えればサブマリモン武器で代用可（ダンボが1個減る）",
+        "12Fはボスの色で手順が変わる",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Lancelot414944/status/1992823773381493137",
+      "author": {
+        "name": "Lancelot"
+      },
+      "sourceDate": "2025-11-24",
+      "metrics": {
+        "chars": 544,
+        "puzzle": 4,
+        "branch": 3,
+        "caution": 3,
+        "zurashi": 0,
+        "plus891": 1,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "shinokuchou-bakugo-matsuda",
+      "dungeonId": "shinokuchou",
+      "title": "爆豪×バレノア 全部位破壊確定（ダンボ3）",
+      "timeSec": 593,
+      "turns": 22,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n13193",
+          "role": "L",
+          "assist": "アルの剣 No.13344"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "遊びの空間・ジントニックの宝杯 No.13291"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "伊織のD-3 No.13100"
+        },
+        {
+          "id": "n12156",
+          "role": "S",
+          "assist": "ゼウスの仕掛け絵本 No.12011"
+        },
+        {
+          "id": "n13193",
+          "role": "F",
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+        }
+      ],
+      "steps": [
+        "全部位破壊確定、ほぼずらしで9分台（プレイ履歴は9分52秒・22ターン）、おまけでダンボ3",
+        "本体の代用なし。ノアAの武器→L字付与武器（部位破壊2個減るので他で補う）、ノアCの武器→ケリ姫武器、アテナの武器→浮遊＋部位破壊武器",
+        "ルーレットの活用が苦手な人向けの手順・代用編成例も画像に掲載",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2020022130696679440",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-02-07",
+      "metrics": {
+        "chars": 922,
+        "puzzle": 15,
+        "branch": 0,
+        "caution": 5,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "dungeonBonus": 3
+    },
+    {
+      "id": "shinokuchou-kikoru-matsuda",
+      "dungeonId": "shinokuchou",
+      "title": "キコル（7分56秒）",
+      "timeSec": 477,
+      "turns": 24,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n12960",
+          "role": "L",
+          "assist": "グリーフシード No.13890"
+        },
+        {
+          "id": "n13996",
+          "role": "S",
+          "assist": "オールマイトのレアカード No.13179"
+        },
+        {
+          "id": "n13933",
+          "role": "S",
+          "assist": "秘術神・ミニおーでぃんのノート No.13533"
+        },
+        {
+          "id": "n12930",
+          "role": "S",
+          "assist": "Ax-0112 No.12931"
+        },
+        {
+          "id": "n13817",
+          "role": "S",
+          "assist": "道化焔竜オズ No.13931"
+        },
+        {
+          "id": "n12930",
+          "role": "F",
+          "assist": "Ax-0112 No.12931"
+        }
+      ],
+      "steps": [
+        "7分56秒（24ターン）。猛毒が落ちてこない",
+        "1Fのキコルはどちらを打ってもOK。11Fの棘は気にしなくていい",
+        "10Fでメタトロンが出た時は、11F・12Fでクロノスを溜まり次第打つ",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2081370466162536581",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-07-26",
+      "metrics": {
+        "chars": 562,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 2,
+        "zurashi": 0,
+        "plus891": 0.5,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "※キコルはど"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロノス上、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル上、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、アドネア、キ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル上、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "アドネア、ク"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロノス、L"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "（キコル）"
+          }
+        ],
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①キコルなけ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "（キコル）"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①キコル"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②アドネア、キ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①クロノス、キ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル（耐"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "功、キ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①キコル"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②キコル"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "キコル"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①アドネア上、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロノス、1"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②キコル"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②キコル"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロノス溜ま"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①キコル"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②キコル"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "③キコル"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "④キコル"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロノス、キ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、クロノス溜ま"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①アドネア上、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②キコル"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "③キコル"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "④キコル L"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、キコル）"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinokuchou-rem-matsuda-19",
+      "dungeonId": "shinokuchou",
+      "title": "レム×ラマモア 理想編成（ダンボ19）",
+      "timeSec": 630,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n13320",
+          "role": "L",
+          "assist": "結晶石 No.13318"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "聖祭の幸兎神・ラビリルのスノードーム No.12020"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "脱出用ゴーレム No.13437"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ステイタスの用紙 No.12024"
+        },
+        {
+          "id": "n13320",
+          "role": "F",
+          "assist": "結晶石 No.13318"
+        }
+      ],
+      "steps": [
+        "ダンボ19（LFで卵ドロ率1.69倍）、10分30秒くらい",
+        "LFのエミリア武器・ゼンゼ武器はほぼ必須。残りはダンボかドロ強を削れば代用可。ダンボを2個減らせば+891も最悪サボれる",
+        "アシストは全てスキルLv1（使うのはゼンゼ武器のみ）。★の場所はレム必須",
+        "3F・4Fで卵が落ちなかったらゴルたまは落ちない",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2040966064079798302",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-04-06",
+      "metrics": {
+        "chars": 643,
+        "puzzle": 3,
+        "branch": 1,
+        "caution": 2,
+        "zurashi": 0,
+        "plus891": 1,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアA、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアC上"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム 4"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "本レムルー"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "はレム必須"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ラマモアD、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアA、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム、 "
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ラマモアB、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム、 "
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "ラマモアC、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラマモアD、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム、ラ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA"
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ラマモアB、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム ！"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム打て"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、ラ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ラマモアC、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ラマモアD、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム、ラ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアA "
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、ラ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、ラ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ラマモアC"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム 最"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、ラ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラマモアD"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、ラ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモアD"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ラマモアA、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム ！"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "じレム"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム 3"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、ラ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアD"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ラマモアA、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム ②"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "じレム"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ]
+      },
+      "dungeonBonus": 19
+    },
+    {
+      "id": "shinokuchou-gintoki-junyama",
+      "dungeonId": "shinokuchou",
+      "title": "銀時 ほぼずらし（シールド破壊6）",
+      "timeSec": 524,
+      "turns": 20,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "メタトロンのおせち料理 No.13244"
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817"
+        },
+        {
+          "id": "n13193",
+          "role": "S",
+          "assist": "大輔のD-3 No.13087"
+        },
+        {
+          "id": "n13193",
+          "role": "S",
+          "assist": "大輔のD-3 No.13087"
+        },
+        {
+          "id": "n13676",
+          "role": "S",
+          "assist": "想海の師弟愛・ノルザ＆マールのショコラ No.13388"
+        },
+        {
+          "id": "n13692",
+          "role": "F",
+          "assist": "ジーニー【フォト】 No.11807"
+        }
+      ],
+      "steps": [
+        "8分台（プレイ履歴は8分43秒・20ターン）、ほぼずらし、シールド破壊6枚、4F超根性スキップ、全アグリ2パン",
+        "メタトロン出現時に確定で爆豪を使えば大輔2枚でなくても問題ないので代用も多そう",
+        "スキルを使う順番に注意（7F・11F）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/junyama_sub/status/2047596474650054903",
+      "author": {
+        "name": "ヤマジュン"
+      },
+      "sourceDate": "2026-04-24",
+      "metrics": {
+        "chars": 294,
+        "puzzle": 5,
+        "branch": 0,
+        "caution": 7,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "assist",
+            "raw": "メタトロン武器"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "▶無一郎＆甘"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "）ジーニー武器"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "ノルザ＆マ"
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "＆マール武器"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "▶神楽"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "）ミヤ神楽"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ヤ神楽▶銀"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "）神楽▶1"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "▶ミヤ神楽"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ヤ神楽▶銀"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "▶神楽"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinokuchou-rem-matsuda-20",
+      "dungeonId": "shinokuchou",
+      "title": "レム×ラマモアループ（ダンボ20）",
+      "timeSec": 641,
+      "turns": 24,
+      "yields": {
+        "exp": 100000000,
+        "plus": 5555
+      },
+      "members": [
+        {
+          "id": "n13320",
+          "role": "L",
+          "assist": "メニットのおみくじ道具 No.10873"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "交通誘導の魔帽子・スモック＆フーリオ No.13597"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "脱出用ゴーレム No.13437"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "恋する紫果精・グレーシスのショコラ No.12168"
+        },
+        {
+          "id": "n6412",
+          "role": "S",
+          "assist": "ステイタスの用紙 No.12024"
+        },
+        {
+          "id": "n13320",
+          "role": "F",
+          "assist": "結晶石 No.13318"
+        }
+      ],
+      "steps": [
+        "ダンボ20、10分40秒程度（プレイ履歴は10分41秒・24ターン）。全アグリ立ち回り固定",
+        "ドロ強の光・回復欠けが許容できるならオススメ。全員+891でOK",
+        "LFのレムは逆でも可（潜在も逆にする）。アシストは全てスキルLv1",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/matsuda____/status/2041305857871561140",
+      "author": {
+        "name": "まつりーた"
+      },
+      "sourceDate": "2026-04-07",
+      "metrics": {
+        "chars": 683,
+        "puzzle": 7,
+        "branch": 1,
+        "caution": 2,
+        "zurashi": 0,
+        "plus891": 1,
+        "plus891Text": "required"
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアA、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ラマモアB上"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラマモアC、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム 1"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "本レムルー"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "はレム必須"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラマモアは浮"
+          }
+        ],
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①ラマモア、レ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "レレム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ラマモア、L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、●"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②ラマモア、L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム、 "
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラマモア、レ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "レレム"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ラマモア、L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①ラマモア、ラ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ラマモア、★"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "③ラマモア、★"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ラマモア、L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム 3"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラマモア、★"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "レレム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "④ラマモア、★"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "レレム"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ラマモア、★"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "③ラマモア、★"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fレム"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lレム"
+          }
+        ]
+      },
+      "dungeonBonus": 20
     }
   ],
   "removed": {

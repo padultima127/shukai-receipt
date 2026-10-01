@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261001131016">
+  <link rel="stylesheet" href="style.css?v=20261001132607">
 </head>
 <body>
   <header>
@@ -81,8 +81,8 @@
         <p id="reg-mode" class="hint">登録した編成はこのブラウザに保存され、編成検索に並びます。</p>
         <div id="reg-auth" class="row" hidden></div>
         <fieldset class="ocr-box">
-          <legend>画像から自動入力（おすすめ）</legend>
-          <p class="hint">PDCのレシート画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・立ち回り・タイム・クリアターン・報酬を下のフォームに入れます。読み取りはこのブラウザの中だけで行い、画像はどこにも送信しません。読み違いがあるので、登録前に必ず確認してください。</p>
+          <legend>画像から登録</legend>
+          <p class="hint">PDCのレシート画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・立ち回り・タイム・クリアターン・報酬を読み取ります。読み取りはこのブラウザの中だけで行い、画像はどこにも送信しません。読み取った内容は下に表示されるので、読み違いを直してから登録してください。</p>
           <div class="form-grid">
             <label for="reg-img-pdc">PDCのレシート画像</label>
             <input id="reg-img-pdc" type="file" accept="image/*">
@@ -93,7 +93,9 @@
           </div>
           <div class="row"><button type="button" id="reg-ocr-run" class="primary">読み取る</button><span id="reg-ocr-msg" class="muted" role="status"></span></div>
         </fieldset>
-        <p class="hint">モンスターは図鑑No.か名前で入力して候補から選んでください。<span class="req">必須</span>はダンジョン・1周のタイム・リーダーだけです。</p>
+        <div id="reg-fields" hidden>
+        <h3 class="form-sub">読み取った内容の確認</h3>
+        <p class="hint">読み違いがあれば直してください。モンスターは図鑑No.か名前で入力して候補から選べます。<span class="req">必須</span>はダンジョン・1周のタイム・リーダーだけです。</p>
 
         <div class="form-grid">
           <label for="reg-dungeon">ダンジョン<span class="req">必須</span></label>
@@ -149,6 +151,7 @@
         <div class="row">
           <button type="submit" class="primary" id="reg-submit">登録する</button>
           <button type="button" id="reg-reset">入力をクリア</button>
+        </div>
         </div>
         <p id="reg-msg" class="msg" role="status"></p>
       </form>
@@ -241,11 +244,11 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261001131016"></script>
-  <script src="firebase-backend.js?v=20261001131016"></script>
-  <script src="monsters-db.js?v=20261001131016"></script>
-  <script src="monsters-changes.js?v=20261001131016"></script>
-  <script src="data.js?v=20261001131016"></script>
-  <script src="app.js?v=20261001131016"></script>
+  <script src="firebase-config.js?v=20261001132607"></script>
+  <script src="firebase-backend.js?v=20261001132607"></script>
+  <script src="monsters-db.js?v=20261001132607"></script>
+  <script src="monsters-changes.js?v=20261001132607"></script>
+  <script src="data.js?v=20261001132607"></script>
+  <script src="app.js?v=20261001132607"></script>
 </body>
 </html>

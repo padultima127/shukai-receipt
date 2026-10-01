@@ -75,7 +75,7 @@ def keys_of(name):
     return [k for k in keys if len(k) >= 2]
 
 
-FLOOR = re.compile(r"^[\s◆◇●■・•★☆]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:)")
+FLOOR = re.compile(r"^[\s◆◇●■・•★☆【]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:)")
 
 
 def parse_team(team, texts):
