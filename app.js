@@ -1193,7 +1193,7 @@ function renderMember(r) {
   return `<li class="mem mem-${r.status}">
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
     <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}${renderSuperList(r)}
-      ${renderAwakenings(r.mem)}${latentStripHTML(r.teamId, r.idx)}
+      ${renderAwakenings(r.mem)}${latentStripHTML(r.teamId, r.idx) || latentNamesHTML(r.mem)}
       ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${assist}${extra}${altButton(r)}</div>
   </li>`;
 }
@@ -1239,6 +1239,15 @@ function searchAltFor(teamId, idx) {
 }
 
 // ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）
+// QRコードから読んだ潜在覚醒を名前で並べる（PDCの画像を切り抜いていない編成用）
+function latentNamesHTML(mem) {
+  const codes = mem.build?.latents;
+  if (!codes?.length) return "";
+  const count = new Map();
+  for (const c of codes) count.set(c, (count.get(c) ?? 0) + 1);
+  const text = [...count].map(([c, n]) => `${PDC_LATENT[c] ?? `不明(${c})`}${n > 1 ? `×${n}` : ""}`).join("・");
+  return `<div class="awk-row"><span class="awk-sep">潜在</span><small>${esc(text)}</small></div>`;
+}
 // PDCレシートの潜在覚醒の欄（最大8枠）を切り抜いた画像
 function latentStripHTML(teamId, idx) {
   const L = window.PAD_LATENTS;
@@ -1660,7 +1669,9 @@ function enduranceSetup(t0, opts = {}) {
       unknown++;
       continue;
     }
-    const b = m.build ?? {};
+    const b0 = m.build ?? {};
+    // QRコードから読んだ潜在があれば、そこからHP%（手で登録した latentHp が優先）
+    const b = b0.latents && b0.latentHp == null ? { ...b0, latentHp: latentFromCodes(b0.latents).hp } : b0;
     const [flat, cnt] = String(row[18] ?? "0:0").split(":").map(Number);
     // レベル: Lv99 → 最大HP、Lv110 → 限界突破値、Lv120 → Lv110 + Lv99最大HPの10%
     // 変身しないキャラは常にLv120想定（限界突破できるキャラのみ）。変身キャラはレシートのレベル
@@ -1887,7 +1898,7 @@ function enduranceSetup(t0, opts = {}) {
     }
     // レシートで読み取った潜在の属性軽減（盾に＋＝属性軽減＋ 2.5%/2枠）
     // 属性が分からない属性軽減＋（auto）は、あとでダンジョンに合わせて一番効く属性へ自動で振る
-    for (const [a, v] of Object.entries(m.build?.latentAttr ?? {})) {
+    for (const [a, v] of Object.entries(m.build?.latentAttr ?? (m.build?.latents ? latentFromCodes(m.build.latents).attr : {}))) {
       if (a === "auto") autoLatent += v;
       else awkAttr[a] += v;
     }
@@ -3752,6 +3763,30 @@ function cropRegIcons(data, slots) {
   return out;
 }
 
+// PDCのQRコードの潜在覚醒の番号 → 種類（管理者に1つずつ確認して作っている対応表）
+// 強化（1枠）・＋（2枠）・＋＋（超限界突破キャラだけ）の3種類。毒目覚め耐性は変身キャラ用(36)と超限界突破キャラ用(58)で番号が違う
+const PDC_LATENT = {
+  1: "HP強化", 2: "回復力強化", 4: "神キラー", 5: "ドラゴンキラー", 6: "悪魔キラー", 8: "バランスキラー", 9: "攻撃キラー", 10: "体力キラー", 11: "回復キラー", 12: "スキル遅延耐性",
+  14: "火軽減", 15: "水軽減", 16: "木軽減", 17: "光軽減", 18: "闇軽減", 19: "操作時間延長",
+  20: "HP＋", 21: "攻撃力＋", 22: "回復力＋", 23: "操作時間延長＋",
+  28: "火軽減＋", 29: "水軽減＋", 30: "木軽減＋", 31: "光軽減＋", 32: "闇軽減＋",
+  34: "属性吸収貫通", 35: "リーダーチェンジ耐性", 36: "毒目覚め耐性", 38: "消せないドロップ回復", 39: "ルーレット回復",
+  41: "ダメージ上限解放（4倍）", 42: "HP＋＋", 47: "リーダーチェンジ耐性（上限値アップ版）", 48: "消せないドロップ回復（上限値アップ版）", 62: "防御力無視（上限値アップ版）", 43: "攻撃力＋＋", 44: "回復力＋＋", 54: "スキルブースト＋＋", 55: "アシスト無効解除", 56: "アシスト無効解除（上限値アップ版）", 58: "毒目覚め耐性", 60: "部位破壊ボーナス",
+};
+// QRコードの潜在から、耐久チェックに使うHP%と属性軽減%（HP強化1.5%・＋4.5%・＋＋10%、属性軽減1%・＋2.5%）
+function latentFromCodes(codes = []) {
+  const hpPct = { 1: 1.5, 20: 4.5, 42: 10 };
+  const attrBase = { 14: "火", 15: "水", 16: "木", 17: "光", 18: "闇" };
+  const attrPlus = { 28: "火", 29: "水", 30: "木", 31: "光", 32: "闇" };
+  let hp = 0;
+  const attr = {};
+  for (const c of codes) {
+    hp += hpPct[c] ?? 0;
+    if (attrBase[c]) attr[attrBase[c]] = (attr[attrBase[c]] ?? 0) + 1;
+    if (attrPlus[c]) attr[attrPlus[c]] = (attr[attrPlus[c]] ?? 0) + 2.5;
+  }
+  return { hp, attr };
+}
 // PDCのQRコード: 編成がそのまま入っている（枠ごとに 0:本体No. 9:アシストNo. 3:レベル 4/5/6:＋値(HP/攻撃/回復) 8:選んだ超覚醒 2:潜在（2文字ずつ）など、36進数）
 let jsqrPromise = null;
 function loadJsQR() {
