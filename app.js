@@ -702,7 +702,7 @@ function awakeningCountOf(t, awk) {
 }
 const formatDungeonBonus = ({ min, max }) => (min === max ? `${min}個` : `${min}〜${max}個（超覚醒次第）`);
 // 部位破壊: ダンジョンに parts がある時だけ。可否・確定はレシートや投稿の記載（team.partBreak）、
-// 確定の記載がなければドロップ率を推定（基本50%＋部位破壊ボーナス1つにつき10%。基本の値は「ボーナス5個で確定」の投稿からの推定）
+// 確定の記載がなければドロップ率を推定（ダンジョンの基本の率＋部位破壊ボーナス1つにつき10%。基本は新凶兆50%、それ以外は原則10%＝本人談）
 // 部位ドロップが確定か（投稿・レシートに確定の記載、または推定が超覚醒に関係なく100%）
 function partDropSure(t, d) {
   if (!d?.parts) return false;
@@ -724,7 +724,7 @@ function partRateBadge(t, d) {
     const lo = Math.min(100, d.parts.baseRate + 10 * b.min), hi = Math.min(100, d.parts.baseRate + 10 * b.max);
     v = `推定${lo === hi ? lo : `${lo}〜${hi}`}%`;
   }
-  return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : "（基本50%＋部位破壊ボーナス1つにつき10%で推定）"}">部位ドロップ<b>${v}</b></span>`;
+  return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : `（基本${d.parts.baseRate}%＋部位破壊ボーナス1つにつき10%で推定。リーダーのドロップ率アップは未計算）`}">部位ドロップ<b>${v}</b></span>`;
 }
 function partBreakInfo(t, d) {
   if (!d?.parts) return null;
