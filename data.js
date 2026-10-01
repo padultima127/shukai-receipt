@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 89,
+  "version": 90,
   "seed": true,
   "monsters": [
     {
@@ -1881,18 +1881,6 @@ window.PAD_SEED = {
       "aliases": []
     },
     {
-      "id": "capup",
-      "name": "ダメージ上限解放5倍たまドラ（旧4倍）",
-      "category": "潜在",
-      "aliases": [
-        "上限解放",
-        "ダメージ上限解放",
-        "上限解放潜在",
-        "上限解放5倍",
-        "潜在たまドラ☆ダメージ上限解放"
-      ]
-    },
-    {
       "id": "souso",
       "name": "創装の宝玉",
       "category": "進化",
@@ -1940,14 +1928,19 @@ window.PAD_SEED = {
         "お邪魔目覚め耐性",
         "属性吸収貫通",
         "スキルブースト++",
-        "スキブ++"
+        "スキブ++",
+        "ダメージ上限解放",
+        "上限解放",
+        "上限解放潜在",
+        "上限解放5倍",
+        "潜在たまドラ☆ダメージ上限解放"
       ],
       "includes": [
         "capup",
         "skbpp",
         "attrpierce"
       ],
-      "note": "リーダーチェンジ耐性・お邪魔目覚め耐性・属性吸収貫通・スキルブースト++などの6枠潜在をまとめたもの"
+      "note": "リーダーチェンジ耐性・お邪魔目覚め耐性・属性吸収貫通・スキルブースト++・ダメージ上限解放（5倍）などの6枠潜在をまとめたもの"
     },
     {
       "id": "rainbowmetal",
@@ -2479,13 +2472,8 @@ window.PAD_SEED = {
           ]
         },
         {
-          "itemId": "capup",
-          "rate": 3,
-          "observed": true
-        },
-        {
           "itemId": "sixslot",
-          "rate": 13,
+          "rate": 16,
           "siteSource": [
             "ゲームウィズ"
           ],
@@ -4972,13 +4960,8 @@ window.PAD_SEED = {
           ]
         },
         {
-          "itemId": "capup",
-          "rate": 1,
-          "observed": true
-        },
-        {
           "itemId": "sixslot",
-          "rate": 6,
+          "rate": 7,
           "observed": true
         },
         {
@@ -34812,7 +34795,8 @@ window.PAD_SEED = {
       "lchange",
       "jammerresist",
       "attrpierce",
-      "skbpp"
+      "skbpp",
+      "capup"
     ]
   }
 };
