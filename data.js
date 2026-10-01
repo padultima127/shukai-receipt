@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 77,
+  "version": 78,
   "seed": true,
   "monsters": [
     {
@@ -22574,6 +22574,13 @@ window.PAD_SEED = {
           [
             6978
           ]
+        ],
+        "9": [
+          [
+            12960,
+            13074,
+            12930
+          ]
         ]
       },
       "receiptCalls": {
@@ -23556,6 +23563,13 @@ window.PAD_SEED = {
         "8": [
           [
             6978
+          ]
+        ],
+        "9": [
+          [
+            12960,
+            13074,
+            12930
           ]
         ]
       },
