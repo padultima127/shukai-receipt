@@ -2849,6 +2849,7 @@ function applyShared() {
   easeRangeCache = null;
   for (const t of shared.teams) for (const [no, url] of Object.entries(t.icons ?? {})) if (/^data:image\/webp;base64,/.test(url)) SHARED_ICONS[no] = url;
   applySuperPicks();
+  if (!$("#admin-panel").hidden) renderNoIconList();
   renderData();
   if (!$("#tab-register").hidden) {
     renderRegDungeons($("#reg-dungeon").value);
@@ -2892,6 +2893,28 @@ async function initShared() {
   watch("teams");
 }
 
+// 管理者用: 編成に出てくるのにアイコン画像がないキャラの一覧
+function renderNoIconList() {
+  const el = $("#admin-noicon");
+  if (!el) return;
+  const need = new Map();
+  for (const t of db.teams) {
+    for (const m of t.members) {
+      for (const no of [monster(m.id)?.no, assistNoOf(m)]) {
+        if (!no || window.PAD_ICONS?.index?.[no] != null || SHARED_ICONS[no]) continue;
+        if (!need.has(no)) need.set(no, new Set());
+        need.get(no).add(t.title);
+      }
+    }
+  }
+  const list = [...need].sort((a, b) => a[0] - b[0]);
+  el.innerHTML = list.length
+    ? `<p class="muted">${list.length}体</p><ul class="reg-list">${list
+        .map(([no, ts]) => `<li><div class="reg-info"><strong>${esc(MDB.get(no)?.[1] ?? "不明")} <span class="muted">No.${no}</span></strong><span class="muted">${esc([...ts].slice(0, 2).join("／"))}${ts.size > 2 ? ` ほか${ts.size - 2}件` : ""}</span></div></li>`)
+        .join("")}</ul>`
+    : `<p class="hint">すべてのキャラに画像があります。</p>`;
+}
+
 // 管理者パネル（承認待ち・通報）
 let adminUnsubs = [];
 function renderAdminPanel() {
@@ -2908,6 +2931,7 @@ function renderAdminPanel() {
     return;
   }
   panel.hidden = false;
+  renderNoIconList();
   adminUnsubs.push(
     shared.fb.watchPending((list) => {
       $("#admin-pending").innerHTML = list.length
