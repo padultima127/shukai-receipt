@@ -75,7 +75,7 @@ def keys_of(name):
     return [k for k in keys if len(k) >= 2]
 
 
-FLOOR = re.compile(r"^\s*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:)")
+FLOOR = re.compile(r"^[\s◆◇●■・•★☆]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:)")
 
 
 def parse_team(team, texts):
@@ -155,6 +155,9 @@ def main():
         # 1つのツイートに2編成ある時（source に #ダンジョンid）は2枚目のレシート
         pdc = [t for k in sorted(ocr) if k.startswith(m.group(1)) for t in [lines_of(ocr[k])] if any("PDC" in l for l in t)]
         nth = 1 if "#" in team["source"] else 0
+        if nth == 0 and len(pdc) > 1:
+            # 立ち回りが書いてある画像（階の行が一番多いもの）
+            pdc.sort(key=lambda t: -sum(1 for l in t if FLOOR.match(l)))
         texts = pdc[nth] if len(pdc) > nth else []
         if not texts:
             continue

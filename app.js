@@ -156,12 +156,12 @@ function resolveQuery(q, type) {
   for (const match of [exactMatches, partialMatches]) {
     for (const key of new Set([q, canonical])) {
       if (type === "dungeon") {
-        const dungeons = match(db.dungeons, key);
+        const dungeons = sortedDungeons(match(db.dungeons, key));
         if (dungeons.length) return { dungeons, item: null, canonical };
       } else {
         const item = match(db.items, key)[0];
         if (item) {
-          const dungeons = db.dungeons.filter((d) => d.drops.some((x) => x.itemId === item.id));
+          const dungeons = sortedDungeons(db.dungeons.filter((d) => d.drops.some((x) => x.itemId === item.id)));
           return { dungeons, item, canonical };
         }
       }
@@ -2152,8 +2152,28 @@ function renderData() {
 // 候補リスト：1つのダンジョン/素材につき1行。略称で入力しても正式名の行が出る
 let suggestIndex = -1;
 
+// ダンジョンの区分と並び（区分も中身も実装順）。ここにないダンジョン（登録で増えたもの）は「その他」の最後
+const DUNGEON_GROUPS = [
+  ["未知の新星", ["banryu"]],
+  ["再臨の超星", ["hyakushiki", "senju", "shinbanju", "kyouchou"]],
+  ["守霊の天体", ["jupiter", "mercury", "venus", "moon", "sun"]],
+  ["天空の儚域", ["fuun", "kirisame", "tenkyu"]],
+  ["奈落の重界", ["guren", "taiju"]],
+  ["その他", ["noel", "plusparadise"]],
+];
+function dungeonGroup(d) {
+  const i = DUNGEON_GROUPS.findIndex(([, ids]) => ids.includes(d.id));
+  return i < 0 ? { gi: DUNGEON_GROUPS.length - 1, oi: 999, name: "その他" } : { gi: i, oi: DUNGEON_GROUPS[i][1].indexOf(d.id), name: DUNGEON_GROUPS[i][0] };
+}
+function sortedDungeons(list = db.dungeons) {
+  return [...list].sort((a, b) => {
+    const x = dungeonGroup(a), y = dungeonGroup(b);
+    return x.gi - y.gi || x.oi - y.oi;
+  });
+}
+
 function suggestionsFor(q) {
-  const list = searchType === "dungeon" ? db.dungeons : db.items;
+  const list = searchType === "dungeon" ? sortedDungeons() : db.items;
   if (!q.trim()) return list;
   const n = norm(canonicalName(q));
   const raw = norm(q);
@@ -2168,10 +2188,15 @@ function renderSuggestions() {
   }
   const hits = suggestionsFor($("#q").value);
   suggestIndex = Math.min(suggestIndex, hits.length - 1);
+  let lastGroup = null;
   el.innerHTML = hits
     .map((r, i) => {
       const aka = r.aliases?.length ? `<small>${r.aliases.map(esc).join("・")}</small>` : "";
-      return `<li role="option" data-name="${esc(r.name)}" class="${i === suggestIndex ? "active" : ""}">${esc(r.name)}${aka}</li>`;
+      // ダンジョンは区分ごとに見出しを入れる
+      const g = searchType === "dungeon" ? dungeonGroup(r).name : null;
+      const head = g && g !== lastGroup ? `<li class="suggest-group" role="presentation">${esc(g)}</li>` : "";
+      lastGroup = g;
+      return `${head}<li role="option" data-name="${esc(r.name)}" class="${i === suggestIndex ? "active" : ""}">${esc(r.name)}${aka}</li>`;
     })
     .join("");
   el.hidden = hits.length === 0;
@@ -2287,7 +2312,7 @@ function updateSlotPreview(i) {
 
 function renderRegDungeons(selected) {
   $("#reg-dungeon").innerHTML =
-    db.dungeons.map((d) => `<option value="${esc(d.id)}">${esc(d.name)}</option>`).join("") +
+    sortedDungeons().map((d) => `<option value="${esc(d.id)}">${esc(d.name)}</option>`).join("") +
     `<option value="__new">＋ 新しいダンジョン…</option>`;
   // 指定がなければ最初のダンジョン（「新しいダンジョン」は明示的に選んだときだけ）
   $("#reg-dungeon").value = selected && selected !== "__new" ? selected : db.dungeons[0]?.id ?? "__new";
@@ -2860,7 +2885,7 @@ $("#q").addEventListener("input", () => {
 $("#q").addEventListener("focus", renderSuggestions);
 $("#q").addEventListener("blur", () => setTimeout(renderSuggestions, 150));
 $("#q").addEventListener("keydown", (e) => {
-  const items = [...document.querySelectorAll("#q-suggest li")];
+  const items = [...document.querySelectorAll("#q-suggest li[data-name]")];
   const open = !$("#q-suggest").hidden && items.length;
   if (open && (e.key === "ArrowDown" || e.key === "ArrowUp")) {
     e.preventDefault();
@@ -2880,6 +2905,7 @@ $("#q-suggest").addEventListener("mousedown", (e) => {
   const li = e.target.closest("li");
   if (!li) return;
   e.preventDefault();
+  if (!li.dataset.name) return;
   pickSuggestion(li.dataset.name);
 });
 $("#owned-only").addEventListener("change", () => $("#q").value.trim() && search());

@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 83,
+  "version": 84,
   "seed": true,
   "monsters": [
     {
@@ -1520,6 +1520,104 @@ window.PAD_SEED = {
       "no": 2314,
       "name": "覚醒・ミニへらうるず↑↑",
       "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n10112",
+      "no": 10112,
+      "name": "冥界の超越神・ハーデス",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n9806",
+      "no": 9806,
+      "name": "烈煌戦機・ウルフデイトナ",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12023",
+      "no": 12023,
+      "name": "ベル・クラネル＆ヘスティア",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n11734",
+      "no": 11734,
+      "name": "武之内空＆ガルダモン",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n10934",
+      "no": 10934,
+      "name": "縁結びの占い師・スーリア",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n11862",
+      "no": 11862,
+      "name": "ラクシュミ＆ルドラ",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n11946",
+      "no": 11946,
+      "name": "火の滅竜魔導士・ナツ・ドラグニル",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12233",
+      "no": 12233,
+      "name": "ナイチンゲール",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12237",
+      "no": 12237,
+      "name": "ダブルオークアンタ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n12156",
+      "no": 12156,
+      "name": "製菓の守護神・アテナ",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12306",
+      "no": 12306,
+      "name": "岩泉 一",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n8370",
+      "no": 8370,
+      "name": "バレンタインの深蒼姫・カラットのショコラ",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n13168",
+      "no": 13168,
+      "name": "聖夜に轟く全能神・ゼウス",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12016",
+      "no": 12016,
+      "name": "聖夜の秘め事・セシリア＆ソフィ",
+      "attr": "光",
       "tags": []
     }
   ],
@@ -27517,6 +27615,2253 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "auto",
             "raw": "、キコル"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-omegamon-tapioka",
+      "dungeonId": "kyouchou",
+      "title": "オメガモン 部位破壊5（凶玉確定・9分前半）",
+      "timeSec": 535,
+      "turns": 24,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n11714",
+          "role": "L",
+          "assist": "謀略の狂戦士・ロキのカード No.11935"
+        },
+        {
+          "id": "n10112",
+          "role": "S",
+          "assist": "ヒカリのデジヴァイス No.11732"
+        },
+        {
+          "id": "n9806",
+          "role": "S",
+          "assist": "アームズシーカー No.11216"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "ジンオウガ＆オウガネコ No.2342"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "フルーツ＆ドラゴンズ No.11011"
+        },
+        {
+          "id": "n11714",
+          "role": "F",
+          "assist": "双児機・メタルカストルのブレスレット No.10664"
+        }
+      ],
+      "steps": [
+        "部位破壊5で凶玉確定ドロップ、9分台前半安定（プレイ履歴は8分55秒・24ターン）",
+        "基本は3色way+1コンボ。泥強/泥弱0で計算",
+        "メタルカストル武器に部位破壊が付いて編成難易度が低下、ハデドラはスキルマ対応",
+        "スキブ27。リーダー・ウルトナ・ハデドラの武器が溜まらないよう注意。ロキのカードは現状代用不可",
+        "リーダーのオメガモンに神キラーかバランスキラーを追加",
+        "11F突破時はHP注意",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/tapiokasan_pad/status/1869755560947794121",
+      "author": {
+        "name": "たぴおか"
+      },
+      "sourceDate": "2024-12-19",
+      "metrics": {
+        "chars": 340,
+        "puzzle": 12,
+        "branch": 2,
+        "caution": 5,
+        "zurashi": 3,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "ナハーデス裏 "
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "：ハーデス裏ウ"
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "ーレット注意"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ハーデス"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ラハーデス"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-varenoa-kasajizo-1228",
+      "dungeonId": "kyouchou",
+      "title": "バレノア 部位破壊対応（ボス以外3手ずらし）",
+      "timeSec": 623,
+      "turns": 26,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12023",
+          "role": "L",
+          "assist": "ヴェルドラのマント No.11236"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "織姫の櫛 No.11201"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "深遠の万寿龍・クーバンシェンの首飾り No.11205"
+        },
+        {
+          "id": "n11734",
+          "role": "S",
+          "assist": "凶禍龍・アマージュ No.7549"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938"
+        },
+        {
+          "id": "n12023",
+          "role": "F",
+          "assist": "パンプキンヘッドゼウス No.11590"
+        }
+      ],
+      "steps": [
+        "ボス以外は3手ずらしで駆け抜けられる。水ソフィもワンパン（プレイ履歴は10分23秒・26ターン）",
+        "ノアは左からA・B・C。ノアCは6Fで武器スキルを使うので温存",
+        "ボス以外は火分割配置",
+        "スキブ31・闇軽減+潜在×20・全員スキルマ。空に悪魔キラー1つ",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/kasajizo_pad/status/1873015490228166786",
+      "author": {
+        "name": "かさじぞう"
+      },
+      "sourceDate": "2024-12-28",
+      "metrics": {
+        "chars": 512,
+        "puzzle": 4,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→空"
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "→クーバンシェン装備"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA→"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→空"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ノアB"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①ノアA "
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②ノアA"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ナ"
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "→アマージュ→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ノアA"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアC"
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノアC"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "くゼウス/ヘ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノアB"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "降ベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティアは途"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "⑤ノア"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "①アマージュ→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノア▶火"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "③ノア▶火"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-varenoa-kasajizo-0130",
+      "dungeonId": "kyouchou",
+      "title": "バレノア 部位破壊対応（改良版）",
+      "timeSec": 622,
+      "turns": 26,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12023",
+          "role": "L",
+          "assist": "織姫の櫛 No.11201"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "乙女機・メタルスピカの首飾り No.10159"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "深遠の万寿龍・クーバンシェンの首飾り No.11205"
+        },
+        {
+          "id": "n11734",
+          "role": "S",
+          "assist": "凶禍龍・アマージュ No.7549"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938"
+        },
+        {
+          "id": "n12023",
+          "role": "F",
+          "assist": "パンプキンヘッドゼウス No.11590"
+        }
+      ],
+      "steps": [
+        "バレノア強化に合わせた微更新（プレイ履歴は10分22秒・26ターン）",
+        "ドロ強全色40%以上、部位破壊ボーナス装備を1つ採用、HP増加（ラーでトゲを触っても50%以上残る）",
+        "スキブ32・闇軽減+潜在×16・全員スキルマ",
+        "代用: 織姫装備→彦星装備、メタルスピカ装備→カノのぬいぐるみ（部位ドロ率-10%）、アマージュ→シーハルク装備",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/kasajizo_pad/status/1884956934841016620",
+      "author": {
+        "name": "かさじぞう"
+      },
+      "sourceDate": "2025-01-30",
+      "metrics": {
+        "chars": 517,
+        "puzzle": 5,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "メタルスピカ装備"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→空"
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "→クーバンシェン装備"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA→"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→空"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルへヘ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "へヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ノアB"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①ノアA "
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②ノアA"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ナ"
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "→アマージュ→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ノアA"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアC"
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノアC"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアB"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "くゼウス/ヘ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノアB"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノアA"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "降ベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ルヘスティアは途"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "⑤ノア"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "①アマージュ→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノア▶火"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "③ノア▶火"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-varenoa-nanaminn",
+      "dungeonId": "kyouchou",
+      "title": "バレノア ずらし（自軍ベルヘスティア0）",
+      "timeSec": 650,
+      "turns": 28,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n10934",
+          "role": "L",
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "FAIRY TAILのコラボ単行本【ナツ＆イグニール】 No.11938"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "太一のデジヴァイス No.11721"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "チャコルの魔帽子・ランヴィ No.7183"
+        },
+        {
+          "id": "n11862",
+          "role": "S",
+          "assist": "炎獄竜ヒノカグツチのカード No.11897"
+        },
+        {
+          "id": "n12023",
+          "role": "F",
+          "assist": "織姫の櫛 No.11201"
+        }
+      ],
+      "steps": [
+        "自軍ベルヘスティア0、全敵立ち回り共通、自力パズル0回（プレイ履歴は10分50秒・28ターン）",
+        "ベルヘスティアはバレスーリアで代用できるかも",
+        "チャコルはスキルLv最大。9Fは火6＋火L配置",
+        "経験値はプレイ履歴が2倍期間の値のため通常値で計算",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pad_nanaminn/status/1887041942778978417",
+      "author": {
+        "name": "七海黄猿"
+      },
+      "sourceDate": "2025-02-05",
+      "metrics": {
+        "chars": 360,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 2,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノアa、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ノアb、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、スーリア、ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノアa、"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "ノアc、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": " ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ベ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、ベルヘス"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノアa、"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ノアb、"
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ノアb、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ノアc、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、"
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、スーリア、ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノアa、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラく"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②ノアa、"
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "ノアC、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→ベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア、ラ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノアCム"
+          }
+        ],
+        "7": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ノア、"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①スーリア、ノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ノア、 "
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "④ノア、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "⑤ベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア、ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ノア、"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①スーリア、ノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ノア、ラ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、火"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノア、"
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノア、"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ノア、ベ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、ベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア、"
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "②ノア、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "③ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ノア、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "④ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ノア、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "⑤スーリア、ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ノア、ベ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、ベルヘス"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "ルヘスティア、"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノア、"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ラクシュミルド"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "ミルドラ、ノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ノア、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ノア、"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-varenoa-kasajizo-natsu",
+      "dungeonId": "kyouchou",
+      "title": "バレノア ナツ採用型（部位破壊2・9分台）",
+      "timeSec": 555,
+      "turns": 31,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12023",
+          "role": "L",
+          "assist": "織姫の櫛 No.11201"
+        },
+        {
+          "id": "n11946",
+          "role": "S",
+          "assist": "アマテラスの八咫鏡 No.10141"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "法陣 No.11705"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "乙女機・メタルスピカの首飾り No.10159"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "イナのリボン徽章 No.8649"
+        },
+        {
+          "id": "n12023",
+          "role": "F",
+          "assist": "織姫の櫛 No.11201"
+        }
+      ],
+      "steps": [
+        "部位破壊ボーナス2、9分台安定（プレイ履歴は9分15秒・9分44秒、31ターン）",
+        "部位破壊する場合はノアの豆を閉じない方がいい",
+        "ノアは左からA・B・C。4Fは必ずノアA",
+        "盤面のドロ強次第では部位破壊しきれない場合あり",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/kasajizo_pad/status/1889253557804954021",
+      "author": {
+        "name": "かさじぞう"
+      },
+      "sourceDate": "2025-02-11",
+      "metrics": {
+        "chars": 582,
+        "puzzle": 11,
+        "branch": 3,
+        "caution": 1,
+        "zurashi": 2,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "①メタルスピカ装備"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": " ベルヘス"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノア B"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ノアB②"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ノアCO"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "→ノアC①"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ノアC②"
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ノア A"
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①ノアB①"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ノアB②"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "→ノアC①"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "→アマテラス装備"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "（ナツ）"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアC②"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ナツ→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアA②"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ノアB①"
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①ノアB②"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ノアC①"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①ノアC②"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアA①"
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①ナツ ▶"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ナツ→ノ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノア A"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "④ナツ→F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fベルヘス"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "⑤ノアBO"
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①ノアB②"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ノアC①"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ナツ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "①ノアB②"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ノアC①"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ナツ▶火"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lベルヘス"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノアC②"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ナツ▶火"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-varenoa-reall",
+      "dungeonId": "kyouchou",
+      "title": "バレノア 部位破壊5（L字以外ずらしと0c）",
+      "timeSec": 599,
+      "turns": 26,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12233",
+          "role": "L",
+          "assist": "製菓の守護神・アテナのショコラ No.12165"
+        },
+        {
+          "id": "n12237",
+          "role": "S",
+          "assist": "機敏の療龍喚士・ハイレン No.10282"
+        },
+        {
+          "id": "n12156",
+          "role": "S",
+          "assist": "ミーティア No.11181"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "リーチェの冥魔帽子・フロウ No.6161"
+        },
+        {
+          "id": "n12235",
+          "role": "F",
+          "assist": "アグリゲートの天弓 No.11555"
+        }
+      ],
+      "steps": [
+        "部位破壊5個搭載、1周9分後半〜10分前半（プレイ履歴は9分59秒・26ターン）",
+        "L字パズル以外はずらしと0コンボのみ",
+        "+891と強化された光ハイレンを使う。本体・武器ともに代用なし（編成難易度は高め）",
+        "リーダーとフレンドの位置入れ替えは可能",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Pad_Reall/status/1946820419123814760",
+      "author": {
+        "name": "Re.all"
+      },
+      "sourceDate": "2025-07-20",
+      "metrics": {
+        "chars": 271,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 11,
+        "plus891": 1,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "クアンタ裏→"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "アテナ→Z"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→Zガンダム→A"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→クアンタ→ず"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "アテナ→Z"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→Zガンダム→A"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "クアンタ裏→"
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "アテナ→B"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→Zガンダム→A"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→クアンタ →"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→アテナ→ず"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→Zガンダム→ "
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→クアンタ→ア"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→アテナ→ "
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→Zガンダム→ "
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→アテナ→ナ"
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→クアンタ→ず"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②Zガンダム →"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→アテナ→ず"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-douma-nanaminn",
+      "dungeonId": "kyouchou",
+      "title": "童磨 水十字1コンボ（部位確ドロ・8分半）",
+      "timeSec": 513,
+      "turns": 21,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12832",
+          "role": "L",
+          "assist": "天王寺松右衛門 No.12809"
+        },
+        {
+          "id": "n12306",
+          "role": "S",
+          "assist": "夏休みの再会・バーバラ＆ジュリのうちわ No.7593"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "雷神の玉 No.12407"
+        },
+        {
+          "id": "n10112",
+          "role": "S",
+          "assist": "アルトゥラの壊れた手枷 No.12716"
+        },
+        {
+          "id": "n12832",
+          "role": "F",
+          "assist": "ワルりんのカード No.12344"
+        }
+      ],
+      "steps": [
+        "毎ターン水十字1コンボを組むだけで部位確定ドロップ、1周8分半くらい（プレイ履歴は8分33秒・21ターン）",
+        "ハデドラaはスキルLv1、ワルりん武器はスキルLv自由、他はスキルマ",
+        "3Fのアヌビスは+4コンボ",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pad_nanaminn/status/1958816109328576938",
+      "author": {
+        "name": "七海黄猿"
+      },
+      "sourceDate": "2025-08-22",
+      "metrics": {
+        "chars": 259,
+        "puzzle": 4,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "岩泉（裏"
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "練ハーデス（裏"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "磨、"
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "（岩泉、）"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→童磨、"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "童磨、 "
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "童磨、ハ"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "童磨、岩"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "、岩泉（裏"
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "練ハーデス、童"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、童磨、"
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→童磨、岩"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、岩泉、 "
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→童磨、"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "童磨、ハ"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "童磨、試"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "練ハーデス、"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "童磨、岩"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、岩泉、マ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→童磨、 "
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→童磨、岩"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、岩泉、"
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "童磨、ハ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "練ハーデス、"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-tanjiro-kazu",
+      "dungeonId": "kyouchou",
+      "title": "炭治郎＆禰豆子 落ちコンなし（部位破壊5・7分台後半）",
+      "timeSec": 471,
+      "turns": 17,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12808",
+          "role": "L",
+          "assist": "リクウの宝杯 No.12675"
+        },
+        {
+          "id": "n12729",
+          "role": "S",
+          "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561"
+        },
+        {
+          "id": "n8370",
+          "role": "S",
+          "assist": "仮装祭の精霊・アルラウネのキャンディ No.7968"
+        },
+        {
+          "id": "n6546",
+          "role": "S",
+          "assist": "バレンタインの深蒼姫・カラットのショコラ No.8370"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658"
+        },
+        {
+          "id": "n12808",
+          "role": "F",
+          "assist": "彦星の櫛 No.11202"
+        }
+      ],
+      "steps": [
+        "落ちコンなし、部位破壊5（たぶん確定）、1周7分台後半（プレイ履歴は7分50秒・17ターン）",
+        "L字以外ずらし。伊之助の上のカラット武器はスキルLv3、他はスキルマ",
+        "3F・8Fはフレンドの攻撃力減少の有無で分岐",
+        "12Fは両脇の木と合わせて12コンボで突破",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/p83496300/status/1963537473071444308",
+      "author": {
+        "name": "カズ"
+      },
+      "sourceDate": "2025-09-04",
+      "metrics": {
+        "chars": 373,
+        "puzzle": 3,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "→エスカマリ武器"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "上カラット武器"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "→アルラウネ武器"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "→アグリゲート武器"
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "raw": "→リクウ武器"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": " アルラウネ武器"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": " アグリゲート武器"
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ブカラット武器"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-reinhard-rei",
+      "dungeonId": "kyouchou",
+      "title": "ラインハルト 光列+1コンボ（シールド全スキップ・7分台）",
+      "timeSec": 469,
+      "turns": 18,
+      "yields": {
+        "exp": 81291189,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n13326",
+          "role": "L",
+          "assist": "ヴィルヘルムの剣 No.13340"
+        },
+        {
+          "id": "n13168",
+          "role": "S",
+          "assist": "六人の少年少女のカード No.12149"
+        },
+        {
+          "id": "n12016",
+          "role": "S",
+          "assist": "ミナカの宝杯 No.12612"
+        },
+        {
+          "id": "n13074",
+          "role": "S",
+          "assist": "ショートのコスチュームγ No.13197"
+        },
+        {
+          "id": "n13074",
+          "role": "S",
+          "assist": "ガルルキャノン No.13145"
+        },
+        {
+          "id": "n13326",
+          "role": "F",
+          "assist": "命天龍・ゼルクレアの首飾り No.11211"
+        }
+      ],
+      "steps": [
+        "7分台、シールド全スキップ、部位破壊対応（プレイ履歴は7分49秒・18ターン）",
+        "全階層で光列＋1コンボのみ。モンポも集まる",
+        "リーダーとフレンドは逆でもOK。ゼウス武器はスキルLv MAX、他の武器は1",
+        "経験値はプレイ履歴が経験値アップ込みの値のため通常値で計算",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/AyLz4_/status/2023740513354965409",
+      "author": {
+        "name": "れい"
+      },
+      "sourceDate": "2026-02-17",
+      "metrics": {
+        "chars": 325,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "右マグナモン、L"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lラインハルト"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "左マグナモン裏、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ソフィセシ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "らゼウス）、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "インハルト、（"
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ラインハルト こ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "らラインハルト区別"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": " マグナモン、水"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①ラインハルト ②"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②マグナモン（ど"
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": " ゼウス裏、"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、ラインハルト"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "ラインハルト"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": " マグナモン"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": " ラインハルト"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": " マグナモン、ソ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ソフィセシ"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①ラインハルト ②"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "②ラインハルト"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": " ゼウス、ラ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、ラインハルト"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "マグナモン、マ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、マグナモン"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①ラインハルト、（"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "らソフィセシ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": " ラインハルト"
           }
         ]
       }
