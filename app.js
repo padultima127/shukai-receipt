@@ -1311,6 +1311,20 @@ const BADGE_NAMES = {
   61: "星を紡ぐ精霊", 86: "L字消し攻撃", 97: "銀魂", 98: "2体攻撃強化", 103: "火列強化", 104: "T字消し攻撃", 105: "水コンボ強化",
   110: "アイドル",
 };
+// バッジのHPアップ（ゲームウィズのバッジ一覧の効果から）。全体: チームHP%、タイプ強化: そのタイプのキャラだけHP5%
+const BADGE_HP = { 2: 15, 86: 5, 98: 5, 104: 5 };
+const BADGE_TYPE = { 41: 5, 42: 4, 43: 7, 44: 8, 46: 6 }; // 神・ドラゴン・悪魔・マシン・攻撃（タイプ番号）
+const BADGE_TYPE_BY_NAME = { バランスタイプ強化: 1, 体力タイプ強化: 2, 回復タイプ強化: 3, ドラゴンタイプ強化: 4, 神タイプ強化: 5, 攻撃タイプ強化: 6, 悪魔タイプ強化: 7, マシンタイプ強化: 8 };
+function badgeEffectOf(t, mems) {
+  const id = t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
+  const name = badgeNameOf(t);
+  if (!name) return null;
+  if (BADGE_HP[id]) return { name, hp: BADGE_HP[id] };
+  const type = BADGE_TYPE[id] ?? BADGE_TYPE_BY_NAME[name];
+  if (type == null) return null;
+  const targetNos = mems.map((m) => monster(m.id)?.no).filter((no) => String(MDB.get(no)?.[13] ?? "").split(".").includes(String(type)));
+  return targetNos.length ? { name, hp: 5, targetNos } : null;
+}
 function badgeNameOf(t) {
   const id = t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
   return t.badgeName ?? (id != null ? BADGE_NAMES[id] : null) ?? null;
@@ -1706,7 +1720,7 @@ function enduranceSetup(t0, opts = {}) {
   const lsF = lsNumbers(monster(friend?.id)?.no);
   // HP推定: 最大HP（限界突破値）＋297の990、HP覚醒、LSのHP倍率、チームHP強化（5%/個）
   // バッジ（team.badge.hp: チームHP%、badge.targetNos があればそのキャラだけ）
-  const badge = t.badge ?? null;
+  const badge = t.badge ?? badgeEffectOf(t, mems);
   // 加護: 耐久チェックでユーザーが選んだもの（なし/陽/陰）。未選択ならダンジョンのデータ
   const dungeonKago = opts.kago !== undefined ? opts.kago || null : db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
   const dungeonBoost = db.dungeons.find((x) => x.id === t.dungeonId)?.typeBoost ?? null;
@@ -1950,6 +1964,7 @@ function enduranceSetup(t0, opts = {}) {
   // 属性ダメージ軽減の覚醒（1個7%）。武器は覚醒アシストのときだけ
   const awkAttr = Object.fromEntries(ATTRS5.map((a) => [a, 0]));
   let autoLatent = 0;
+  const latentPool = { n1: 0, n2: 0, orig: {} };
   for (const m of mems) {
     const rows = [MDB.get(monster(m.id)?.no)];
     const a = MDB.get(assistNoOf(m));
@@ -1959,14 +1974,22 @@ function enduranceSetup(t0, opts = {}) {
     }
     // レシートで読み取った潜在の属性軽減（盾に＋＝属性軽減＋ 2.5%/2枠）
     // 属性が分からない属性軽減＋（auto）は、あとでダンジョンに合わせて一番効く属性へ自動で振る
-    for (const [a, v] of Object.entries(m.build?.latentAttr ?? (m.build?.latents ? latentFromCodes(m.build.latents).attr : {}))) {
+    // レシート（QR）の属性軽減潜在は、他の潜在はそのままで属性だけ自由に振り替えられる扱い（本人指定）→ 数だけ数えて、あとで一番効く属性へ振る
+    if (!m.build?.latentAttr && m.build?.latents) {
+      const lc = latentFromCodes(m.build.latents);
+      latentPool.n1 += lc.n1;
+      latentPool.n2 += lc.n2;
+      for (const [a, v] of Object.entries(lc.attr)) latentPool.orig[a] = (latentPool.orig[a] ?? 0) + v;
+      continue;
+    }
+    for (const [a, v] of Object.entries(m.build?.latentAttr ?? {})) {
       if (a === "auto") autoLatent += v;
       else awkAttr[a] += v;
     }
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -2145,28 +2168,45 @@ function suggestLatents(d, setup, maxHp, skillRed, latent0) {
   return { ok: false, slots, reason: "パーティーの潜在枠（最大48枠）を全部属性軽減にしても足りない" };
 }
 
-// 全員＋297で足りない場合の＋値の振り方: ＋値を上げると一番HPが伸びるキャラから順に（＋値の合計が最小になる）
-// ＋300からは3ステータスに均等に振る前提（＋3ごとにHP＋1）。1体あたり最大＋891（HP＋297）
-function plusAdvice(setup, maxHp, need) {
-  if (need == null || maxHp >= need) return null;
-  let deficit = need - maxHp;
+// ＋値（＋297〜＋891）とチームHP強化の妥協ライン: 全員＋297でも足りるか、最低どこまで＋値を上げればいいか、
+// 全員＋891ならチームHP強化を何個減らせるか（＋300からは3ステータスに均等に振る前提で＋3ごとにHP＋1）
+function hpBudget(setup, maxHp, need) {
+  if (need == null) return null;
+  const xs = setup.detail;
+  const base297 = maxHp - xs.reduce((n, x) => n + (x.hpPlus - 99) * x.perPlus, 0);
+  const max891 = maxHp + xs.reduce((n, x) => n + (297 - x.hpPlus) * x.perPlus, 0);
+  // 最低限の＋値（全員＋297から、HPが伸びやすいキャラの順に上げる）
+  let deficit = need - base297;
   const plan = [];
-  for (const x of [...setup.detail].sort((a, b) => b.perPlus - a.perPlus)) {
-    if (deficit <= 0) break;
-    const room = 297 - x.hpPlus;
-    if (room <= 0) continue;
-    const pts = Math.min(room, Math.ceil(deficit / x.perPlus));
-    deficit -= pts * x.perPlus;
-    plan.push({ name: x.name, from: x.hpPlus * 3, to: (x.hpPlus + pts) * 3 });
+  if (deficit > 0) {
+    for (const x of [...xs].sort((a, b) => b.perPlus - a.perPlus)) {
+      if (deficit <= 0) break;
+      const pts = Math.min(198, Math.ceil(deficit / x.perPlus));
+      deficit -= pts * x.perPlus;
+      plan.push({ name: x.name, to: (99 + pts) * 3 });
+    }
   }
-  return { ok: deficit <= 0, plan, extra: plan.reduce((n, p) => n + p.to - p.from, 0) };
+  // チームHP強化を減らせる数（今の＋値のまま／全員＋891）
+  const tm = 1 + 0.05 * setup.teamHp;
+  const cut = (hp) => {
+    let k = 0;
+    while (k < setup.teamHp && (hp * (1 + 0.05 * (setup.teamHp - k - 1))) / tm >= need) k++;
+    return k;
+  };
+  return { need, base297, max891, minOk: deficit <= 0, plan, cutNow: maxHp >= need ? cut(maxHp) : null, cut891: max891 >= need ? cut(max891) : null };
 }
-
-function renderPlusAdvice(setup, maxHp, need, label = "") {
-  const pa = plusAdvice(setup, maxHp, need);
-  if (!pa) return "";
-  if (!pa.ok) return `<p class="hint">${label}全員を＋891まで上げても足りません。</p>`;
-  return `<p class="advice">${label}＋値で足りるようにするなら: ${pa.plan.map((p) => `<strong>${esc(p.name)}</strong>を＋${p.from}→＋${p.to}`).join("、")}（＋値を合計${pa.extra}上げる。3ステータスに均等に振る前提）</p>`;
+function renderHpBudget(setup, maxHp, need, label) {
+  const b = hpBudget(setup, maxHp, need);
+  if (!b) return "";
+  const lines = [];
+  if (!b.plan.length && b.minOk) lines.push("＋値は全員＋297でも足ります");
+  else if (b.minOk) lines.push(`＋値の最低ライン（全員＋297から、HPが伸びやすいキャラの順に）: ${b.plan.map((p) => `${esc(p.name)} ＋${p.to}`).join("、")}（ほかは＋297でOK）`);
+  else lines.push("全員＋891にしても足りません");
+  if (setup.teamHp) {
+    if (b.cutNow) lines.push(`今の＋値のままなら、チームHP強化を<strong>${b.cutNow}個</strong>減らしても耐えられます（${setup.teamHp}個→${setup.teamHp - b.cutNow}個）`);
+    if (b.cut891 != null && b.cut891 > (b.cutNow ?? 0)) lines.push(`全員＋891なら、チームHP強化を<strong>${b.cut891}個</strong>減らしても耐えられます（${setup.teamHp}個→${setup.teamHp - b.cut891}個）`);
+  }
+  return `<div class="advice"><p>${label}必要HP ${b.need.toLocaleString("ja-JP")}に対する＋値・チームHP強化の妥協ライン（全員＋297なら ${Math.round(b.base297).toLocaleString("ja-JP")}、全員＋891なら ${Math.round(b.max891).toLocaleString("ja-JP")}）</p><ul>${lines.map((l) => `<li>${l}</li>`).join("")}</ul></div>`;
 }
 
 function renderLatentAdvice(d, setup, maxHp, skillRed, latent, sim) {
@@ -2192,29 +2232,44 @@ function requiredHp(d, setup, skillRed, latent) {
   return Math.ceil(hi / 1000) * 1000;
 }
 
-// 属性が分からない属性軽減潜在（2.5%ずつ）を、必要HPが一番下がる属性へ1個ずつ振る
-function allocateAutoLatent(d, setup, skillRed) {
-  const units = Math.round((setup.autoLatent ?? 0) / 2.5);
+// 属性軽減の潜在（レシートの分＋属性が分からない分）を、必要HPが一番下がる属性へ1個ずつ振る（＋2.5%から先に、次に1%）
+// 差がない時は元の属性のまま。敵の攻撃に出てこない属性には振らない
+function allocateLatentPool(d, setup, skillRed) {
+  const pool = setup.latentPool ?? { n1: 0, n2: 0, orig: {} };
+  const units = [...Array(Math.round(pool.n2 + (setup.autoLatent ?? 0) / 2.5)).fill(2.5), ...Array(pool.n1).fill(1)];
   const alloc = Object.fromEntries(ATTRS5.map((a) => [a, 0]));
-  if (!units) return alloc;
-  const score = (extra) => {
-    const s = { ...setup, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup.awkAttr[a] + extra[a]])) };
-    return requiredHp(d, s, skillRed, {}) ?? Infinity;
+  const count = Object.fromEntries(ATTRS5.map((a) => [a, { n1: 0, n2: 0 }]));
+  if (!units.length) return { alloc, count };
+  const used = new Set(d.damage.floors.flatMap((f) => [...(f.enemyAttrs ?? []), ...f.hits.flatMap((h) => h.attrs ?? [])]).filter((a) => ATTRS5.includes(a)));
+  const cands = ATTRS5.filter((a) => used.has(a));
+  const cache = new Map();
+  const score = (al) => {
+    const key = ATTRS5.map((a) => al[a]).join(",");
+    if (!cache.has(key)) {
+      const s = { ...setup, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup.awkAttr[a] + al[a]])) };
+      cache.set(key, requiredHp(d, s, skillRed, {}) ?? Infinity);
+    }
+    return cache.get(key);
   };
-  for (let i = 0; i < units; i++) {
+  // 元の属性を優先する順（同点なら元の振り方に近い方）
+  const origLeft = { ...pool.orig };
+  for (const u of units) {
+    const pref = ATTRS5.filter((a) => (origLeft[a] ?? 0) >= u);
     let best = null;
     let bestScore = Infinity;
-    for (const a of ATTRS5) {
-      const trial = { ...alloc, [a]: alloc[a] + 2.5 };
-      const sc = score(trial);
+    for (const a of [...pref, ...cands.filter((x) => !pref.includes(x))]) {
+      const sc = score({ ...alloc, [a]: alloc[a] + u });
       if (sc < bestScore) {
         bestScore = sc;
         best = a;
       }
     }
-    alloc[best ?? ATTRS5[0]] += 2.5;
+    best ??= pref[0] ?? cands[0] ?? ATTRS5[0];
+    alloc[best] += u;
+    count[best][u === 1 ? "n1" : "n2"]++;
+    if ((origLeft[best] ?? 0) >= u) origLeft[best] -= u;
   }
-  return alloc;
+  return { alloc, count };
 }
 
 // レシートで使ったスキルを「本体の名前」「本体の名前裏（アシストのスキル）」だけで、最初に使った順に並べる
@@ -2244,10 +2299,17 @@ function usedSkillNames(t, setup) {
 function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const setup0 = enduranceSetup(t, { kago });
   // 属性不明の潜在は、スキル軽減ありの想定（あれば）で一番効く属性に振って固定する
-  const auto = allocateAutoLatent(d, setup0, setup0.skillRed);
+  const { alloc: auto, count: autoCount } = allocateLatentPool(d, setup0, setup0.skillRed);
   const setup = { ...setup0, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup0.awkAttr[a] + auto[a]])) };
-  const autoNote = setup0.autoLatent
-    ? `<p class="hint">属性が判別できない属性軽減＋の潜在（合計${setup0.autoLatent}%）は、このダンジョンで一番効くように自動で振りました: ${ATTRS5.filter((a) => auto[a]).map((a) => `${a}${auto[a]}%`).join("・") || "どこに振っても変わらないため振り分けなし"}</p>`
+  const pool = setup0.latentPool ?? { n1: 0, n2: 0, orig: {} };
+  const latName = (c) => [c.n2 ? `軽減＋×${c.n2}` : "", c.n1 ? `軽減×${c.n1}` : ""].filter(Boolean).join("・");
+  const origText = ATTRS5.filter((a) => pool.orig[a]).map((a) => `${a}${pool.orig[a]}%`).join("・");
+  const newText = ATTRS5.filter((a) => auto[a]).map((a) => `<strong>${a}</strong>${latName(autoCount[a])}（${auto[a]}%）`).join("・");
+  // 元の振り方のままの結果（比較用）
+  const origSetup = { ...setup0, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, setup0.awkAttr[a] + (pool.orig[a] ?? 0)])) };
+  const origSim = pool.n1 + pool.n2 ? simulateEndurance(d, origSetup, maxHp, setup0.skillRed, latent) : null;
+  const autoNote = pool.n1 + pool.n2 + (setup0.autoLatent ? 1 : 0)
+    ? `<p class="advice">属性軽減の潜在は、ほかの潜在はそのままで属性だけ振り替えて、このダンジョンで一番効く形にして計算しています: ${newText || "どこに振っても変わらないため元のまま"}${origText ? `<br><small class="muted">レシートの振り方: ${origText}${origSim ? `（このままだと${setup0.skillRed ? "レシートどおりのスキルで" : ""}${origSim.deadAt == null ? "全フロア耐えられる" : `${origSim.deadAt}Fで倒れる`}計算）` : ""}</small>` : ""}${setup0.autoLatent ? `<br><small class="muted">属性が判別できない属性軽減＋（合計${setup0.autoLatent}%）も含めて振っています</small>` : ""}</p>`
     : "";
   const sim = simulateEndurance(d, setup, maxHp, 0, latent);
   // スキルの軽減ありの場合（効果が最後まで続く前提）
@@ -2271,7 +2333,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const fmt = (n) => (n == null ? "―（HPでは耐えられない）" : `${n.toLocaleString("ja-JP")}`);
   const need = `<p class="need">全フロア耐えるのに必要なHP: スキルなし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／レシートどおり <strong>${fmt(need1)}</strong>` : ""}
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
-  const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルなしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "レシートどおりのスキルで、") : "");
+  const plusLines = setup.skillRed ? renderHpBudget(setup, maxHp, need1, "レシートどおりのスキルで、") : renderHpBudget(setup, maxHp, need0, "スキルなしで、");
   return `${need}${autoNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計（割合ダメージにも乗せています）。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
@@ -3848,7 +3910,9 @@ function latentFromCodes(codes = []) {
     if (attrBase[c]) attr[attrBase[c]] = (attr[attrBase[c]] ?? 0) + 1;
     if (attrPlus[c]) attr[attrPlus[c]] = (attr[attrPlus[c]] ?? 0) + 2.5;
   }
-  return { hp, attr };
+  const n1 = codes.filter((c) => attrBase[c]).length;
+  const n2 = codes.filter((c) => attrPlus[c]).length;
+  return { hp, attr, n1, n2 };
 }
 // PDCのQRコード: 編成がそのまま入っている（枠ごとに 0:本体No. 9:アシストNo. 3:レベル 4/5/6:＋値(HP/攻撃/回復) 8:選んだ超覚醒 2:潜在（2文字ずつ）など、36進数）
 let jsqrPromise = null;
