@@ -711,12 +711,22 @@ function entryDropBonus(no) {
   const text = entry[30] || row[30] || "";
   return Object.fromEntries(text.split(",").filter(Boolean).map((x) => { const [k, v] = x.split(":"); return [k, Number(v)]; }));
 }
+// リーダー×フレンドの潜入時倍率（掛け算）。{ egg, part, exp, coin }（なければ1）
+function lfMultipliers(t) {
+  const out = { egg: 1, part: 1, exp: 1, coin: 1 };
+  for (const m of t.members) {
+    if (m.role !== "L" && m.role !== "F") continue;
+    const b = entryDropBonus(monster(m.id)?.no);
+    for (const k of Object.keys(out)) if (b[k]) out[k] *= b[k];
+  }
+  return out;
+}
 // 部位ドロップ率（%）: (基本の率＋部位破壊ボーナス1つにつき10%) × リーダーの倍率 × フレンドの倍率（本人談）
 function partRate(t, d, bonusCount) {
-  const lf = t.members.filter((m) => m.role === "L" || m.role === "F").map((m) => entryDropBonus(monster(m.id)?.no).part ?? 1);
-  const mult = lf.reduce((x, v) => x * v, 1);
+  const mult = lfMultipliers(t).part;
   return { rate: Math.min(100, Math.round((d.parts.baseRate + 10 * bonusCount) * mult)), mult };
 }
+const multLabel = (m) => `×${+m.toFixed(2)}`;
 // 部位ドロップが確定か（投稿・レシートに確定の記載、または推定が超覚醒に関係なく100%）
 function partDropSure(t, d) {
   if (!d?.parts) return false;
@@ -735,9 +745,10 @@ function partRateBadge(t, d) {
   let multNote = "";
   if (pb.sure) v = "確定";
   else {
+    // 超覚醒は元のレシートのもの（分からない枠は部位破壊ボーナスにしていない扱い）
     const b = awakeningCountOf(t, 131);
-    const lo = partRate(t, d, b.min), hi = partRate(t, d, b.max);
-    v = `推定${lo.rate === hi.rate ? lo.rate : `${lo.rate}〜${hi.rate}`}%`;
+    const lo = partRate(t, d, b.min);
+    v = `推定${lo.rate}%`;
     multNote = lo.mult !== 1 ? `×リーダー・フレンドの倍率${+lo.mult.toFixed(2)}` : "";
   }
   return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : `（(基本${d.parts.baseRate}%＋部位破壊ボーナス1つにつき10%)${multNote}で推定）`}">部位ドロップ<b>${v}</b></span>`;
@@ -755,8 +766,8 @@ function partBreakInfo(t, d) {
   if (pb.can === false) drop = "";
   else if (pb.sure) drop = `${d.parts.item}は確定ドロップ（${(pb.sureNote ?? "投稿者談").replace(/（(.*?)）/g, "・$1")}）`;
   else {
-    const lo = rate(bonus.min), hi = rate(bonus.max);
-    drop = `${pb.can ? "" : "壊せた場合の"}${d.parts.item}のドロップ率 推定${lo === hi ? `${lo}%` : `${lo}〜${hi}%（超覚醒次第）`}（基本${d.parts.baseRate}%・部位破壊ボーナス${formatDungeonBonus(bonus).replace("（超覚醒次第）", "")}${mult !== 1 ? `・リーダー/フレンドで×${+mult.toFixed(2)}` : ""}）`;
+    const lo = rate(bonus.min);
+    drop = `${pb.can ? "" : "壊せた場合の"}${d.parts.item}のドロップ率 推定${lo}%（基本${d.parts.baseRate}%・部位破壊ボーナス${bonus.min}個${bonus.max > bonus.min ? "（超覚醒が分からない枠は部位破壊ボーナスなしで計算）" : ""}${mult !== 1 ? `・リーダー/フレンドで×${+mult.toFixed(2)}` : ""}）`;
   }
   return { can, drop, note: pb.note ?? "" };
 }
@@ -768,14 +779,18 @@ function evaluate(team, dungeon, item, boxActive) {
     arrangeSide(p ? team.members.filter((m) => m.p === p) : team.members, team, boxActive, p, dungeon)
   );
   // 部位破壊の数などで編成ごとに報酬が違う場合は team.yields を優先
+  // リーダー・フレンドの潜入時倍率（タマゴ＝モンスターのドロップ、コイン、ランク経験値）
+  const lfm = lfMultipliers(team);
+  const itemMult = !item ? 1 : item.id === "coin" ? lfm.coin : item.egg ? lfm.egg : 1;
   const rate = !item
     ? 1
-    : team.yields?.[item.id] ?? dungeon.drops.filter((d) => d.itemId === item.id).reduce((s, d) => s + d.rate, 0);
+    : (team.yields?.[item.id] ?? dungeon.drops.filter((d) => d.itemId === item.id).reduce((s, d) => s + d.rate, 0)) * itemMult;
   const runSec = team.timeSec + RUN_OVERHEAD_SEC;
   const perHour = (3600 / runSec) * rate;
   const staminaPer = rate > 0 ? dungeon.stamina / rate : Infinity;
   // 経験値効率（ランク経験値）。編成ごとの値があればそちらを優先。スタミナ未登録なら出さない
-  const expPerRun = team.yields?.exp ?? dungeon.drops.find((d) => d.itemId === "exp")?.rate ?? 0;
+  // ダンジョンの基本の経験値（攻略サイト）× リーダー・フレンドの倍率。プレイ履歴の値はイベントなどの倍率込みなので使わない
+  const expPerRun = (dungeon.drops.find((d) => d.itemId === "exp")?.rate ?? team.yields?.exp ?? 0) * lfm.exp;
   const expPerHour = expPerRun ? (3600 / runSec) * expPerRun : null;
   const expPerStamina = expPerRun && dungeon.stamina > 0 ? expPerRun / dungeon.stamina : null;
   // マルチは自分が担当する側だけ揃えばよいので、足りない枠が少ない側で数える
@@ -784,7 +799,7 @@ function evaluate(team, dungeon, item, boxActive) {
   const missing = count("missing", side);
   const substituted = count("substitute", side) + count("partial", side);
   const ease = easeOf(team);
-  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, expPerRun: expPerRun || null, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
+  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, expPerRun: expPerRun || null, lfm, itemMult, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
 }
 
 function search() {
@@ -1349,7 +1364,7 @@ function renderResult(r, i, item) {
   let staminaLine = "";
   if (item && r.dungeon.stamina > 0 && r.rate > 0) {
     const hl = mode === "perRun" ? "hl" : "";
-    staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}${item.id === "coin" ? "" : "個"}${dropEst}</dd></div>`;
+    staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}${item.id === "coin" ? "" : "個"}${r.itemMult !== 1 ? `<small class="muted">（L/F${item.id === "coin" ? "のコイン" : "のタマゴ"}${multLabel(r.itemMult)}込み）</small>` : ""}${dropEst}</dd></div>`;
   }
   const warn = r.missing
     ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
@@ -1367,7 +1382,7 @@ function renderResult(r, i, item) {
     <dl class="stats">
       <div><dt>1周</dt><dd>${formatTime(t.timeSec)}${est("timeSec")}</dd></div>
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
-      <div class="${mode === "perRun" ? "hl" : ""}"><dt>経験値/周</dt><dd>${r.expPerRun == null ? "―" : formatCount(r.expPerRun)}</dd></div>`}
+      <div class="${mode === "perRun" ? "hl" : ""}"><dt>経験値/周</dt><dd>${r.expPerRun == null ? "―" : formatCount(r.expPerRun)}${r.lfm.exp !== 1 ? `<small class="muted">（L/F${multLabel(r.lfm.exp)}込み）</small>` : ""}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
       ${(() => {
         const pi = partBreakInfo(t, r.dungeon);

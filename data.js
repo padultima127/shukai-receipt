@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 91,
+  "version": 92,
   "seed": true,
   "monsters": [
     {
@@ -1734,7 +1734,8 @@ window.PAD_SEED = {
       "aliases": [
         "スパノエ",
         "スーパーノエル"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "plus",
@@ -1765,7 +1766,8 @@ window.PAD_SEED = {
         "スキル遅延耐性",
         "遅延",
         "潜在たまドラ☆スキル遅延耐性"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "nijipii",
@@ -1773,7 +1775,8 @@ window.PAD_SEED = {
       "category": "強化",
       "aliases": [
         "虹ピィ"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "pii",
@@ -1786,13 +1789,15 @@ window.PAD_SEED = {
         "モクピィ",
         "ヒカピィ",
         "ヤミピィ"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "sagepii",
       "name": "サゲピィ",
       "category": "強化",
-      "aliases": []
+      "aliases": [],
+      "egg": true
     },
     {
       "id": "kingtama",
@@ -1800,7 +1805,8 @@ window.PAD_SEED = {
       "category": "強化",
       "aliases": [
         "キンたま"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "waku",
@@ -1809,13 +1815,15 @@ window.PAD_SEED = {
       "aliases": [
         "枠解放",
         "潜在たまドラ☆枠解放"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "puredra",
       "name": "ぷれドラ",
       "category": "強化",
-      "aliases": []
+      "aliases": [],
+      "egg": true
     },
     {
       "id": "kingdragon",
@@ -1830,7 +1838,8 @@ window.PAD_SEED = {
         "キングルビー",
         "キングエメラルド",
         "キングサファイア"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "latentpp",
@@ -1841,7 +1850,8 @@ window.PAD_SEED = {
         "攻撃強化++",
         "回復強化++",
         "強化++"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "latentp",
@@ -1854,7 +1864,8 @@ window.PAD_SEED = {
         "強化+",
         "全パラメータ強化+",
         "全パラ強化+"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "reducep",
@@ -1864,7 +1875,8 @@ window.PAD_SEED = {
         "軽減+",
         "軽減潜在",
         "色軽減"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "defignore",
@@ -1872,13 +1884,15 @@ window.PAD_SEED = {
       "category": "潜在",
       "aliases": [
         "防御力無視"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "tojitama",
       "name": "とじたまドラ",
       "category": "強化",
-      "aliases": []
+      "aliases": [],
+      "egg": true
     },
     {
       "id": "souso",
@@ -1896,7 +1910,8 @@ window.PAD_SEED = {
       "aliases": [
         "ドラゴンフルーツ",
         "ダイヤフルーツ"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "sanjin",
@@ -1904,7 +1919,8 @@ window.PAD_SEED = {
       "category": "進化",
       "aliases": [
         "三神面"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "kyodai",
@@ -1914,7 +1930,8 @@ window.PAD_SEED = {
         "巨大希石",
         "希石【巨大】",
         "巨大"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "sixslot",
@@ -1940,7 +1957,8 @@ window.PAD_SEED = {
         "skbpp",
         "attrpierce"
       ],
-      "note": "リーダーチェンジ耐性・お邪魔目覚め耐性・属性吸収貫通・スキルブースト++・ダメージ上限解放（5倍）などの6枠潜在をまとめたもの"
+      "note": "リーダーチェンジ耐性・お邪魔目覚め耐性・属性吸収貫通・スキルブースト++・ダメージ上限解放（5倍）などの6枠潜在をまとめたもの",
+      "egg": true
     },
     {
       "id": "rainbowmetal",
@@ -1949,7 +1967,8 @@ window.PAD_SEED = {
       "aliases": [
         "レインボーメタル",
         "虹メタ"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "killer",
@@ -1966,13 +1985,15 @@ window.PAD_SEED = {
         "攻撃キラー",
         "体力キラー",
         "回復キラー"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "modoritto",
       "name": "モドリット",
       "category": "強化",
-      "aliases": []
+      "aliases": [],
+      "egg": true
     },
     {
       "id": "tokudai",
@@ -1981,7 +2002,8 @@ window.PAD_SEED = {
       "aliases": [
         "特大希石",
         "希石【特大】"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "goldtama",
@@ -1989,7 +2011,8 @@ window.PAD_SEED = {
       "category": "強化",
       "aliases": [
         "ゴールドたまドラ"
-      ]
+      ],
+      "egg": true
     },
     {
       "id": "coin",
@@ -2065,6 +2088,13 @@ window.PAD_SEED = {
         {
           "itemId": "coin",
           "rate": 2500000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "exp",
+          "rate": 50000000,
           "siteSource": [
             "ゲームウィズ"
           ]
@@ -2454,7 +2484,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 220500000
+          "rate": 150000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "delay",
@@ -2888,7 +2921,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 149940000
+          "rate": 100000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "supernoel",
@@ -3360,7 +3396,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 235200000
+          "rate": 160000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "nijipii",
@@ -3812,7 +3851,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 161700000
+          "rate": 110000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "latentpp",
@@ -4240,7 +4282,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 220500000
+          "rate": 150000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "waku",
@@ -4676,7 +4721,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 68670000
+          "rate": 68000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "nijipii",
@@ -4809,7 +4857,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 157500000
+          "rate": 150000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "delay",
@@ -4950,7 +5001,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 183750000
+          "rate": 175000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "supernoel",
@@ -5433,7 +5487,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 210000000
+          "rate": 200000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "kingdragon",
@@ -5937,7 +5994,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 441000000
+          "rate": 300000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "pii",
@@ -6528,7 +6588,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 63003413
+          "rate": 60000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "supernoel",
@@ -6934,7 +6997,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 68302017
+          "rate": 65000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "delay",
@@ -7358,7 +7424,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 75121460
+          "rate": 75000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "supernoel",
@@ -7750,7 +7819,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 82917013
+          "rate": 77000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "supernoel",
@@ -8179,7 +8251,10 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 100000000
+          "rate": 100000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
         },
         {
           "itemId": "supernoel",
