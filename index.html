@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261001163334">
+  <link rel="stylesheet" href="style.css?v=20261001163824">
 </head>
 <body>
   <header>
@@ -85,6 +85,7 @@
         <div id="reg-auth" class="row" hidden></div>
         <fieldset class="ocr-box">
           <legend>画像から登録</legend>
+          <p class="note">できれば<strong>PDCのレシート画像とクリア画像（プレイ履歴）の両方</strong>を選んでください。PDCからはキャラ・アシスト・立ち回り・アイコン、クリア画像からはタイム・ターン・報酬・ダンジョンを読み取ります。片方だけでも登録できますが、足りない項目は手で入力することになります。</p>
           <p class="hint">PDCのレシート画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・立ち回り・タイム・クリアターン・報酬を読み取ります。読み取りはこのブラウザの中だけで行い、画像そのものは送信・保存しません（キャラのアイコン部分だけを切り抜いて、編成と一緒に保存します）。読み取った内容は下に表示されるので、読み違いを直してから登録してください。</p>
           <div class="form-grid">
             <label for="reg-img-pdc">PDCのレシート画像</label>
@@ -247,12 +248,12 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261001163334"></script>
-  <script src="firebase-backend.js?v=20261001163334"></script>
-  <script src="icons.js?v=20261001163334"></script>
-  <script src="monsters-db.js?v=20261001163334"></script>
-  <script src="monsters-changes.js?v=20261001163334"></script>
-  <script src="data.js?v=20261001163334"></script>
-  <script src="app.js?v=20261001163334"></script>
+  <script src="firebase-config.js?v=20261001163824"></script>
+  <script src="firebase-backend.js?v=20261001163824"></script>
+  <script src="icons.js?v=20261001163824"></script>
+  <script src="monsters-db.js?v=20261001163824"></script>
+  <script src="monsters-changes.js?v=20261001163824"></script>
+  <script src="data.js?v=20261001163824"></script>
+  <script src="app.js?v=20261001163824"></script>
 </body>
 </html>
