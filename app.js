@@ -1374,11 +1374,11 @@ function renderPdcSlot(x) {
   </div>`;
 }
 // 名前は短く（【】や「・」の前を落とす）
-function glyphName(name) {
+function glyphName(name, max = 10) {
   const n = String(name).replace(/【[^】]*】|［[^］]*］|\[[^\]]*\]/g, "");
   const parts = n.split(/[・]/).filter(Boolean);
   // 「エルフリーデ VS フィアメル」のような名前は最初の語だけ
-  return (parts.at(-1) ?? n).split(/\s+|＆|&/).filter(Boolean)[0]?.slice(0, 10) ?? "";
+  return (parts.at(-1) ?? n).split(/\s+|＆|&/).filter(Boolean)[0]?.slice(0, max) ?? "";
 }
 // 同じキャラが複数いて、レシートで「ノアA」「ハデドラB」のように呼び分けている時は、左から A・B・C…（レシートの「左からA,B,C」の書き方に合わせる）
 const LABEL_CACHE = new Map();
@@ -2141,16 +2141,27 @@ function allocateAutoLatent(d, setup, skillRed) {
   return alloc;
 }
 
-// レシートで使ったスキルを「本体の名前」「本体の名前裏（アシストのスキル）」だけで並べる
+// レシートで使ったスキルを「本体の名前」「本体の名前裏（アシストのスキル）」だけで、最初に使った順に並べる
 function usedSkillNames(t, setup) {
-  const used = new Set(Object.values(setup.uses ?? {}).flat());
-  const out = [];
-  for (const m of t.members) {
+  // 図鑑No. → 表示名（本体は変身前後どちらのNo.でも同じ名前）
+  const label = new Map();
+  const ab = memberLabels(t);
+  for (const [i, m] of t.members.entries()) {
     const no = monster(m.id)?.no;
-    const name = glyphName(monster(m.id)?.name ?? "");
+    const base = glyphName(monster(m.id)?.name ?? "", 14);
+    // 同じキャラの本体どうしは使用記録から区別できないので、本体は記号なし。武器（裏）はA・Bを付ける
+    const name = base + (ab[i] ?? "");
+    const fam = MDB.get(no)?.[9];
+    if (no) label.set(no, base);
+    if (fam) for (const r of familyRows.get(fam) ?? []) label.set(r[0], base);
     const an = assistNoOf(m);
-    if (an && used.has(an) && !out.includes(`${name}裏`)) out.push(`${name}裏`);
-    if (no && used.has(no) && !out.includes(name)) out.push(name);
+    if (an && !label.has(an)) label.set(an, `${name}裏`);
+  }
+  const out = [];
+  const floors = Object.keys(setup.uses ?? {}).sort((a, b) => Number(a) - Number(b));
+  for (const f of floors) for (const no of setup.uses[f]) {
+    const l = label.get(no);
+    if (l && !out.includes(l)) out.push(l);
   }
   return out.length ? out.map(esc).join("・") : "スキルの使用なし";
 }
