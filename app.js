@@ -77,6 +77,8 @@ let regIcons = {};
 let regSupers = {};
 // 画像から読み取ったバッジ（data URL）
 let regBadge = null;
+// PDCのQRコードから読み取った編成（枠ごとのレベル・＋値・超覚醒・潜在）
+let regQr = null;
 // レシートから分からない超覚醒を、見る人が超覚醒一覧から選んだもの（このブラウザだけに保存）。{ "編成id:枠": 覚醒No. }
 const SUPER_PICK_KEY = "pad-farming-super-picks";
 let superPicks = loadJSON(SUPER_PICK_KEY, {});
@@ -2641,6 +2643,19 @@ function regMessage(text, ok) {
   $("#reg-msg").textContent = text;
 }
 
+// 1周あたりのドロップの入力欄（素材と個数を3行まで）
+function renderDropRows(yields = {}) {
+  const el = $("#reg-drops");
+  if (!el) return;
+  const skip = new Set(["plus", "exp", "coin"]);
+  const items = db.items.filter((it) => !skip.has(it.id));
+  const have = Object.entries(yields ?? {}).filter(([k]) => !skip.has(k));
+  const rows = [...have, ...Array(Math.max(0, 3 - have.length)).fill(["", ""])].slice(0, Math.max(3, have.length));
+  el.innerHTML = rows
+    .map(([id, v]) => `<div class="form-row drop-row"><select><option value="">素材を選ぶ</option>${items.map((it) => `<option value="${esc(it.id)}"${it.id === id ? " selected" : ""}>${esc(it.name)}</option>`).join("")}</select><input type="number" min="0" step="0.1" inputmode="decimal" placeholder="個数" value="${esc(v)}"><span class="unit">個</span></div>`)
+    .join("");
+}
+
 function clearRegForm() {
   regEditingId = null;
   $("#reg-form").reset();
@@ -2658,6 +2673,8 @@ function clearRegForm() {
   regIcons = {};
   regSupers = {};
   regBadge = null;
+  regQr = null;
+  renderDropRows();
 }
 
 async function saveRegForm() {
@@ -2690,8 +2707,13 @@ async function saveRegForm() {
     const mem = { id: findOrCreateMonster(String(m)).id, role: REG_ROLES[i] };
     if (a != null) mem.assist = `${MDB.get(a)[1]} No.${a}`;
     slotNos.push([i, m, "base"], [i, a, "assist"]);
-    // PDCの画像から読み取った超覚醒（読み取った後に本体を変えていなければ）
-    if (regSupers[i] && regSupers[i].no === m) mem.build = { super: regSupers[i].super, superOnly: true };
+    // PDCのQRコードから読み取ったレベル・＋値・超覚醒・潜在（読み取った後に本体を変えていなければ）
+    const q = regQr?.[i];
+    if (q && q.no === m) {
+      mem.build = { lv: q.lv, plus: q.plus[0] + q.plus[1] + q.plus[2], super: q.super, latents: q.latents, fromQr: true };
+    }
+    // PDCの画像から読み取った超覚醒（QRが読めなかった時）
+    else if (regSupers[i] && regSupers[i].no === m) mem.build = { super: regSupers[i].super, superOnly: true };
     members.push(mem);
   }
 
@@ -2719,12 +2741,20 @@ async function saveRegForm() {
 
   // 報酬: ダンジョンに素材がなければ追加、編成ごとの値は yields に
   const yields = {};
-  for (const [inputId, itemId] of [["#reg-plus", "plus"], ["#reg-exp", "exp"]]) {
+  for (const [inputId, itemId] of [["#reg-plus", "plus"], ["#reg-exp", "exp"], ["#reg-coin", "coin"]]) {
     const v = Number($(inputId).value || 0);
     if (!v || !db.items.some((it) => it.id === itemId)) continue;
     yields[itemId] = v;
     if (!dungeon.drops.some((d) => d.itemId === itemId)) dungeon.drops.push({ itemId, rate: v });
   }
+  // 1周あたりのドロップ（クリア画像がない時などに手で入力）
+  document.querySelectorAll("#reg-drops .drop-row").forEach((row) => {
+    const itemId = row.querySelector("select").value;
+    const v = Number(row.querySelector("input").value || 0);
+    if (!itemId || !v) return;
+    yields[itemId] = (yields[itemId] ?? 0) + v;
+    if (!dungeon.drops.some((d) => d.itemId === itemId)) dungeon.drops.push({ itemId, rate: v });
+  });
 
   const stepsText = $("#reg-steps").value;
   const turns = Number($("#reg-turns").value || 0) || undefined;
@@ -3015,6 +3045,8 @@ function loadIntoRegForm(id) {
 
   $("#reg-plus").value = t.yields?.plus ?? "";
   $("#reg-exp").value = t.yields?.exp ?? "";
+  $("#reg-coin").value = t.yields?.coin ?? "";
+  renderDropRows(t.yields);
   $("#reg-891").value = t.plus891Choice ?? "";
   const order = { L: 0, S: 1, F: 2 };
   const sorted = [...t.members].sort((a, b) => order[a.role] - order[b.role]);
@@ -3566,6 +3598,7 @@ function parseClear(data) {
     turns: num(/ターン[:：]?(\d+)/),
     plus: num(/ポイント[:：]?([\d,，]+)/),
     exp: num(/EXP[:：]?([\d,，]+)/i),
+    coin: num(/コイン[:：]?([\d,，]+)/),
     dungeon,
   };
 }
@@ -3718,12 +3751,68 @@ function cropRegIcons(data, slots) {
   return out;
 }
 
+// PDCのQRコード: 編成がそのまま入っている（枠ごとに 0:本体No. 9:アシストNo. 3:レベル 4/5/6:＋値(HP/攻撃/回復) 8:選んだ超覚醒 2:潜在（2文字ずつ）など、36進数）
+let jsqrPromise = null;
+function loadJsQR() {
+  if (window.jsQR) return Promise.resolve();
+  return (jsqrPromise ??= new Promise((ok, ng) => {
+    const el = document.createElement("script");
+    el.src = "https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js";
+    el.onload = ok;
+    el.onerror = () => ng(new Error("QRコードの読み取りの準備に失敗しました"));
+    document.head.appendChild(el);
+  }));
+}
+function parsePdcQr(text) {
+  const i = text.indexOf("}");
+  if (i < 0 || !/^\d+,\d+\]/.test(text)) return null;
+  const mems = text
+    .slice(i + 1)
+    .split("}")
+    .map((part) => Object.fromEntries(part.split(",").filter((tok) => tok.length >= 2 && tok[0] === "0").map((tok) => [tok[1], tok.slice(2)])))
+    .filter((m) => m["0"]);
+  const n = (v) => (v == null || v === "" ? null : parseInt(v, 36));
+  const out = mems
+    .map((m) => ({
+      slot: n(m.f) ?? 0,
+      no: n(m["0"]),
+      assist: n(m["9"]) > 0 ? n(m["9"]) : null,
+      lv: n(m["3"]),
+      plus: [n(m["4"]) ?? 0, n(m["5"]) ?? 0, n(m["6"]) ?? 0],
+      super: n(m["8"]) > 0 ? n(m["8"]) : 0,
+      latents: (m["2"] ?? "").match(/.{2}/g)?.map((x) => parseInt(x, 36)).filter((x) => x > 0) ?? [],
+    }))
+    .sort((a, b) => a.slot - b.slot);
+  return out.length && out.every((m) => MDB.get(m.no)) ? out : null;
+}
+async function readPdcQr(file) {
+  await loadJsQR();
+  const bmp = await createImageBitmap(file);
+  // そのままの大きさ → QRがある上の方を2倍に拡大、の順に試す
+  const tries = [
+    [0, 0, bmp.width, bmp.height, 1],
+    [0, 0, bmp.width, Math.min(bmp.height, bmp.width * 1.2), 2],
+  ];
+  for (const [sx, sy, sw, sh, k] of tries) {
+    const c = document.createElement("canvas");
+    c.width = Math.round(sw * k);
+    c.height = Math.round(sh * k);
+    const g = c.getContext("2d", { willReadFrequently: true });
+    g.imageSmoothingEnabled = false;
+    g.drawImage(bmp, sx, sy, sw, sh, 0, 0, c.width, c.height);
+    const r = window.jsQR(g.getImageData(0, 0, c.width, c.height).data, c.width, c.height);
+    const parsed = r?.data ? parsePdcQr(r.data) : null;
+    if (parsed) return parsed;
+  }
+  return null;
+}
+
 async function runRegOcr() {
   const pdc = $("#reg-img-pdc").files[0];
   const clear = $("#reg-img-clear").files[0];
   const url = $("#reg-ocr-url").value.trim();
   const msg = (t) => ($("#reg-ocr-msg").textContent = t);
-  if (!pdc && !clear) return msg("画像を選んでください。");
+  if (!pdc) return msg("PDCのレシート画像は必須です。クリア画像（プレイ履歴）は、あれば一緒に選んでください。");
   if (clear && !$("#reg-ocr-fast").value) return msg("クリア画像の高速モード（ON/OFF）を選んでください。タイムをどちらの欄に入れるかに使います。");
   $("#reg-ocr-run").disabled = true;
   const notes = [];
@@ -3731,9 +3820,30 @@ async function runRegOcr() {
     msg("読み取りの準備中…（初回は数十秒かかります）");
     await loadTesseract();
     if (pdc) {
+      // まずQRコード（キャラ・アシスト・レベル・＋値・超覚醒・潜在がそのまま入っている）
+      msg("PDCのQRコードを読み取り中…");
+      let qr = null;
+      try {
+        qr = await readPdcQr(pdc);
+      } catch {
+        qr = null;
+      }
+      regQr = qr;
+      if (qr) {
+        qr.slice(0, 6).forEach((m, i) => {
+          setSlot($(`#reg-m-${i}`), m.no);
+          setSlot($(`#reg-a-${i}`), m.assist);
+          updateSlotPreview(i);
+        });
+        notes.push(`QRコードからモンスター${qr.length}体（レベル・＋値・超覚醒・潜在も）`);
+      }
       const d = await ocr(pdc, "jpn+eng", (p) => msg(`PDCのレシートを読み取り中… ${p}%`));
       const slots = parsePdcNumbers(d);
-      if (slots) {
+      if (slots && qr) {
+        // 切り抜き（アイコン・バッジ）用に位置だけ使う。キャラはQRの方が正確
+        regIcons = cropRegIcons(d, slots);
+        regBadge = cropRegBadge(d, slots);
+      } else if (slots) {
         slots.forEach((s, i) => {
           setSlot($(`#reg-m-${i}`), s.base?.no);
           setSlot($(`#reg-a-${i}`), s.assist?.no);
@@ -3745,13 +3855,13 @@ async function runRegOcr() {
         regBadge = cropRegBadge(d, slots);
         msg("超覚醒を読み取り中…");
         try {
-          regSupers = await readRegSupers(d, slots);
+          regSupers = qr ? {} : await readRegSupers(d, slots);
           const n = Object.values(regSupers).filter((x) => x.super).length;
           if (n) notes.push(`超覚醒${n}体`);
         } catch {
           regSupers = {};
         }
-      } else notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
+      } else if (!qr) notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
       const steps = parsePdcSteps(d);
       if (steps) {
         $("#reg-steps").value = steps;
@@ -3769,6 +3879,7 @@ async function runRegOcr() {
       if (c.turns) ($("#reg-turns").value = c.turns), notes.push("クリアターン");
       if (c.plus) $("#reg-plus").value = c.plus;
       if (c.exp) $("#reg-exp").value = c.exp;
+      if (c.coin) $("#reg-coin").value = c.coin;
       if (c.plus || c.exp) notes.push("報酬");
       if (c.dungeon) {
         renderRegDungeons(c.dungeon.id);
@@ -3789,6 +3900,7 @@ async function runRegOcr() {
   }
 }
 $("#reg-ocr-run")?.addEventListener("click", runRegOcr);
+renderDropRows();
 
 // ---------- 更新履歴 ----------
 // 一番新しい日だけ開いておく

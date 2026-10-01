@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261001192324">
+  <link rel="stylesheet" href="style.css?v=20261001202927">
 </head>
 <body>
   <header>
@@ -69,12 +69,12 @@
         <div id="reg-auth" class="row" hidden></div>
         <fieldset class="ocr-box">
           <legend>画像から登録</legend>
-          <p class="note">できれば<strong>PDCのレシート画像とクリア画像（プレイ履歴）の両方</strong>を選んでください。PDCからはキャラ・アシスト・立ち回り・アイコン、クリア画像からはタイム・ターン・報酬・ダンジョンを読み取ります。片方だけでも登録できますが、足りない項目は手で入力することになります。<strong>超覚醒はPDCのレシート画像からしか読み取れない</strong>ため、PDCがないと超覚醒は反映されません。</p>
+          <p class="note"><strong>PDCのレシート画像は必須</strong>です。QRコードが写っていれば、キャラ・アシスト・レベル・＋値・超覚醒・潜在をそのまま読み取ります（写っていない・読めない時は文字から読み取り）。<strong>クリア画像（プレイ履歴）はあれば</strong>選んでください。タイム・ターン・報酬・ダンジョンを読み取ります。ない場合は、1周のタイム・経験値・コイン・ドロップなどを下で手入力してください。</p>
           <p class="hint">PDCのレシート画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・立ち回り・タイム・クリアターン・報酬を読み取ります。読み取りはこのブラウザの中だけで行い、画像そのものは送信・保存しません（キャラのアイコン部分だけを切り抜いて、編成と一緒に保存します）。読み取った内容は下に表示されるので、読み違いを直してから登録してください。</p>
           <div class="form-grid">
-            <label for="reg-img-pdc">PDCのレシート画像</label>
+            <label for="reg-img-pdc">PDCのレシート画像<span class="req">必須</span></label>
             <input id="reg-img-pdc" type="file" accept="image/*">
-            <label for="reg-img-clear">クリア画像（プレイ履歴）</label>
+            <label for="reg-img-clear">クリア画像（プレイ履歴）<span class="opt">あれば</span></label>
             <input id="reg-img-clear" type="file" accept="image/*">
             <label for="reg-ocr-fast">クリア画像の高速モード</label>
             <select id="reg-ocr-fast">
@@ -126,7 +126,11 @@
           <div class="form-row">
             <input id="reg-plus" type="number" min="0" inputmode="numeric" placeholder="+ポイント">
             <input id="reg-exp" type="number" min="0" inputmode="numeric" placeholder="経験値">
+            <input id="reg-coin" type="number" min="0" inputmode="numeric" placeholder="コイン">
           </div>
+
+          <label>1周のドロップ<span class="opt">任意</span></label>
+          <div id="reg-drops" class="time-pair"></div>
 
           <label for="reg-891">+891</label>
           <select id="reg-891">
@@ -255,13 +259,13 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261001192324"></script>
-  <script src="firebase-backend.js?v=20261001192324"></script>
-  <script src="changelog.js?v=20261001192324"></script>
-  <script src="icons.js?v=20261001192324"></script>
-  <script src="monsters-db.js?v=20261001192324"></script>
-  <script src="monsters-changes.js?v=20261001192324"></script>
-  <script src="data.js?v=20261001192324"></script>
-  <script src="app.js?v=20261001192324"></script>
+  <script src="firebase-config.js?v=20261001202927"></script>
+  <script src="firebase-backend.js?v=20261001202927"></script>
+  <script src="changelog.js?v=20261001202927"></script>
+  <script src="icons.js?v=20261001202927"></script>
+  <script src="monsters-db.js?v=20261001202927"></script>
+  <script src="monsters-changes.js?v=20261001202927"></script>
+  <script src="data.js?v=20261001202927"></script>
+  <script src="app.js?v=20261001202927"></script>
 </body>
 </html>
