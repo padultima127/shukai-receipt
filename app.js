@@ -68,6 +68,8 @@ let box = new Set(loadJSON(BOX_KEY, []));
 const SHARED_ICONS = {};
 // 画像から登録した時に切り抜いたアイコン { 図鑑No.: data URL }
 let regIcons = {};
+// 画像から読み取った超覚醒 { 枠の番号: { no: 本体No., super: 覚醒No.（0＝なし） } }
+let regSupers = {};
 // レシートから分からない超覚醒を、見る人が超覚醒一覧から選んだもの（このブラウザだけに保存）。{ "編成id:枠": 覚醒No. }
 const SUPER_PICK_KEY = "pad-farming-super-picks";
 let superPicks = loadJSON(SUPER_PICK_KEY, {});
@@ -2573,6 +2575,7 @@ function clearRegForm() {
   $("#reg-fields").hidden = true;
   $("#reg-ocr-msg").textContent = "";
   regIcons = {};
+  regSupers = {};
 }
 
 async function saveRegForm() {
@@ -2602,6 +2605,8 @@ async function saveRegForm() {
     }
     const mem = { id: findOrCreateMonster(String(m)).id, role: REG_ROLES[i] };
     if (a != null) mem.assist = `${MDB.get(a)[1]} No.${a}`;
+    // PDCの画像から読み取った超覚醒（読み取った後に本体を変えていなければ）
+    if (regSupers[i] && regSupers[i].no === m) mem.build = { super: regSupers[i].super, superOnly: true };
     members.push(mem);
   }
 
@@ -2724,7 +2729,7 @@ function toSharedTeam(t) {
   const { shared: _s, ...rest } = t;
   return {
     ...rest,
-    members: t.members.map((m) => ({ no: monster(m.id)?.no ?? null, name: monster(m.id)?.name ?? "", role: m.role, ...(m.p ? { p: m.p } : {}), ...(m.assist ? { assist: m.assist } : {}) })),
+    members: t.members.map((m) => ({ no: monster(m.id)?.no ?? null, name: monster(m.id)?.name ?? "", role: m.role, ...(m.p ? { p: m.p } : {}), ...(m.assist ? { assist: m.assist } : {}), ...(m.build && !m.build.userPicked ? { build: m.build } : {}) })),
   };
 }
 function toSharedDungeon(d) {
@@ -2741,6 +2746,7 @@ function fromSharedTeam(doc) {
       role: m.role,
       ...(m.p ? { p: m.p } : {}),
       ...(m.assist ? { assist: m.assist } : {}),
+      ...(m.build ? { build: m.build } : {}),
     })),
   };
 }
@@ -3492,6 +3498,75 @@ function setSlot(input, no) {
   input.dataset.no = String(no);
 }
 
+// 本体アイコン右上の覚醒アイコンを、そのキャラの超覚醒・シンクロ覚醒の画像（高画質覚醒スキル様の画像）とずらしながら見比べる
+// （tools/read-supers.py と同じ。一番近いのが超覚醒ならそれ、シンクロ覚醒なら超覚醒なし＝0）
+const awkImgCache = new Map();
+function loadAwkImage(id) {
+  if (!AWK_IMG[id]) return Promise.resolve(null);
+  if (!awkImgCache.has(id))
+    awkImgCache.set(id, new Promise((ok) => {
+      const img = new Image();
+      img.crossOrigin = "anonymous";
+      img.onload = () => ok(img);
+      img.onerror = () => ok(null);
+      img.src = `${AWK_IMG_BASE}${AWK_IMG[id]}.png`;
+    }));
+  return awkImgCache.get(id);
+}
+function pixels(drawable, sx, sy, sw, sh, w, h, white = false) {
+  const c = document.createElement("canvas");
+  c.width = w;
+  c.height = h;
+  const g = c.getContext("2d", { willReadFrequently: true });
+  if (white) (g.fillStyle = "#fff"), g.fillRect(0, 0, w, h);
+  g.drawImage(drawable, sx, sy, sw, sh, 0, 0, w, h);
+  return g.getImageData(0, 0, w, h).data;
+}
+async function readRegSupers(data, slots) {
+  const src = data.canvas;
+  if (!src) return {};
+  const cell = src.width / 6;
+  const out = {};
+  for (const [col, sl] of slots.entries()) {
+    const b = sl.base;
+    const row = b?.no ? MDB.get(b.no) : null;
+    const supers = String(row?.[11] ?? "").split(".").filter(Boolean).map(Number);
+    if (!row || !supers.length || b.y1 == null) continue;
+    const synchro = row[26] || 0;
+    const top = b.y1 + cell * 0.04 - cell;
+    if (top < 0) continue;
+    const s = cell * 0.94, x0 = col * cell + cell * 0.03, y0 = top + cell * 0.03;
+    const RW = 84, RH = 112;
+    const region = pixels(src, x0 + s * 0.58, y0 + s * 0.18, s * 0.42, s * 0.56, RW, RH);
+    const scores = [];
+    for (const id of new Set([...supers, ...(synchro ? [synchro] : [])])) {
+      const img = await loadAwkImage(id);
+      if (!img) continue;
+      let best = Infinity;
+      for (const size of [46, 50, 54]) {
+        const t = pixels(img, 0, 0, img.width, img.height, size, size, true);
+        for (let oy = 0; oy + size <= RH; oy += 3)
+          for (let ox = 0; ox + size <= RW; ox += 3) {
+            let d = 0;
+            for (let y = 0; y < size; y++)
+              for (let x = 0; x < size; x++) {
+                const i = (y * size + x) * 4, j = ((oy + y) * RW + ox + x) * 4;
+                d += Math.abs(t[i] - region[j]) + Math.abs(t[i + 1] - region[j + 1]) + Math.abs(t[i + 2] - region[j + 2]);
+              }
+            d /= size * size * 3;
+            if (d < best) best = d;
+          }
+      }
+      scores.push([best, id]);
+    }
+    scores.sort((a, c) => a[0] - c[0]);
+    if (!scores.length) continue;
+    const [best, second] = [scores[0], scores[1] ?? [99]];
+    if (best[0] < 65 && second[0] - best[0] >= 8) out[col] = { no: b.no, super: supers.includes(best[1]) && best[1] !== synchro ? best[1] : 0 };
+  }
+  return out;
+}
+
 // PDCのレシート画像（OCRに使ったキャンバス）から、各枠の本体・アシストのアイコンを64pxで切り抜く
 // 横6枠・文字「No.◯◯◯◯◯」の下端を枠の下端とする（tools/crop-icons.py と同じ考え方）
 function cropRegIcons(data, slots) {
@@ -3540,6 +3615,14 @@ async function runRegOcr() {
         notes.push(`モンスター${slots.filter((s) => s.base).length}体・アシスト${slots.filter((s) => s.assist).length}体`);
         // キャラのアイコンを切り抜いて、編成と一緒に保存する（画像そのものは保存しない）
         regIcons = cropRegIcons(d, slots);
+        msg("超覚醒を読み取り中…");
+        try {
+          regSupers = await readRegSupers(d, slots);
+          const n = Object.values(regSupers).filter((x) => x.super).length;
+          if (n) notes.push(`超覚醒${n}体`);
+        } catch {
+          regSupers = {};
+        }
       } else notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
       const steps = parsePdcSteps(d);
       if (steps) {
