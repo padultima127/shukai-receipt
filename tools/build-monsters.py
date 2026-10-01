@@ -221,6 +221,20 @@ def endurance_numbers(ids, skills):
     return f"{regen:g}:{gen}:{red:g}:{hpm:g}:{inst:g}"
 
 
+DROP_KEYS = (("タマゴ", "egg"), ("部位破壊素材", "part"), ("ランク経験値", "exp"), ("コイン", "coin"))
+
+
+def drop_bonus(ls):
+    """「ダンジョン潜入時にリーダーの時、◯と◯のドロップ率が1.3倍」→ "egg:1.3,part:1.3"（変身キャラは変身前の形で潜入するので、そちらのLSで判定する）"""
+    text = re.sub(r"\s+", "", (ls or {}).get("description", ""))
+    out = {}
+    for m in re.finditer(r"ダンジョン潜入時にリーダーの時、([^。]*?)が([\d.]+)倍", text):
+        for word, key in DROP_KEYS:
+            if word in m.group(1):
+                out[key] = float(m.group(2))
+    return ",".join(f"{k}:{v:g}" for k, v in out.items())
+
+
 def leader_numbers(ls):
     """リーダースキルの軽減率とHP倍率。"軽減%|HP倍率の条件=倍率,..."（条件: all / t6 = 攻撃タイプ / a4 = 光属性）"""
     if not ls:
@@ -463,12 +477,14 @@ def main():
             ".".join(str(a) for a in awakens),
             attr_changes(m.get("skill"), skills),
             evolve_stages(m.get("skill"), skills),
+            # リーダーで潜入した時のドロップ倍率（タマゴ・部位破壊素材・ランク経験値・コイン）
+            drop_bonus(leaders.get(str(m.get("leaderSkill")))) if m.get("leaderSkill", 1) > 1 else "",
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更, 進化スキルの段階]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更, 進化スキルの段階, 潜入時ドロップ倍率]\n"
         f"// 更新: {updated}\n"
         "window.PAD_AWAKEN_NAMES = " + json.dumps({k: v["name"] for k, v in AWAKENS.items() if k.isdigit()}, ensure_ascii=False, separators=(",", ":")) + ";\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "

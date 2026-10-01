@@ -703,13 +703,27 @@ function awakeningCountOf(t, awk) {
 const formatDungeonBonus = ({ min, max }) => (min === max ? `${min}個` : `${min}〜${max}個（超覚醒次第）`);
 // 部位破壊: ダンジョンに parts がある時だけ。可否・確定はレシートや投稿の記載（team.partBreak）、
 // 確定の記載がなければドロップ率を推定（ダンジョンの基本の率＋部位破壊ボーナス1つにつき10%。基本は新凶兆50%、それ以外は原則10%＝本人談）
+// リーダー・フレンドで潜入した時のドロップ倍率（変身キャラは変身前の形で潜入するので、その形のLS）。{ egg, part, exp, coin }
+function entryDropBonus(no) {
+  const row = MDB.get(no);
+  if (!row) return {};
+  const entry = (row[9] && MDB.get(row[9])) || row;
+  const text = entry[30] || row[30] || "";
+  return Object.fromEntries(text.split(",").filter(Boolean).map((x) => { const [k, v] = x.split(":"); return [k, Number(v)]; }));
+}
+// 部位ドロップ率（%）: (基本の率＋部位破壊ボーナス1つにつき10%) × リーダーの倍率 × フレンドの倍率（本人談）
+function partRate(t, d, bonusCount) {
+  const lf = t.members.filter((m) => m.role === "L" || m.role === "F").map((m) => entryDropBonus(monster(m.id)?.no).part ?? 1);
+  const mult = lf.reduce((x, v) => x * v, 1);
+  return { rate: Math.min(100, Math.round((d.parts.baseRate + 10 * bonusCount) * mult)), mult };
+}
 // 部位ドロップが確定か（投稿・レシートに確定の記載、または推定が超覚醒に関係なく100%）
 function partDropSure(t, d) {
   if (!d?.parts) return false;
   const text = [t.title, ...(t.steps ?? [])].join(" ");
   const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { sure: true } : {});
   if (pb.can === false) return false;
-  return !!pb.sure || d.parts.baseRate + 10 * awakeningCountOf(t, 131).min >= 100;
+  return !!pb.sure || partRate(t, d, awakeningCountOf(t, 131).min).rate >= 100;
 }
 // 点数の下に出す「部位破壊した場合のドロップ率」（部位のあるダンジョンだけ）
 function partRateBadge(t, d) {
@@ -718,13 +732,15 @@ function partRateBadge(t, d) {
   const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { sure: true } : {});
   if (pb.can === false) return "";
   let v;
+  let multNote = "";
   if (pb.sure) v = "確定";
   else {
     const b = awakeningCountOf(t, 131);
-    const lo = Math.min(100, d.parts.baseRate + 10 * b.min), hi = Math.min(100, d.parts.baseRate + 10 * b.max);
-    v = `推定${lo === hi ? lo : `${lo}〜${hi}`}%`;
+    const lo = partRate(t, d, b.min), hi = partRate(t, d, b.max);
+    v = `推定${lo.rate === hi.rate ? lo.rate : `${lo.rate}〜${hi.rate}`}%`;
+    multNote = lo.mult !== 1 ? `×リーダー・フレンドの倍率${+lo.mult.toFixed(2)}` : "";
   }
-  return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : `（基本${d.parts.baseRate}%＋部位破壊ボーナス1つにつき10%で推定。リーダーのドロップ率アップは未計算）`}">部位ドロップ<b>${v}</b></span>`;
+  return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : `（(基本${d.parts.baseRate}%＋部位破壊ボーナス1つにつき10%)${multNote}で推定）`}">部位ドロップ<b>${v}</b></span>`;
 }
 function partBreakInfo(t, d) {
   if (!d?.parts) return null;
@@ -732,14 +748,15 @@ function partBreakInfo(t, d) {
   const text = [t.title, ...(t.steps ?? [])].join(" ");
   const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { can: true, sure: true, sureNote: "レシートの記載より" } : /部位/.test(text) ? { can: true } : {});
   const bonus = awakeningCountOf(t, 131);
-  const rate = (n) => Math.min(100, d.parts.baseRate + 10 * n);
+  const rate = (n) => partRate(t, d, n).rate;
+  const mult = partRate(t, d, 0).mult;
   const can = pb.can === true ? "部位破壊できる" : pb.can === false ? "部位破壊しない" : "部位破壊の記載なし";
   let drop;
   if (pb.can === false) drop = "";
   else if (pb.sure) drop = `${d.parts.item}は確定ドロップ（${(pb.sureNote ?? "投稿者談").replace(/（(.*?)）/g, "・$1")}）`;
   else {
     const lo = rate(bonus.min), hi = rate(bonus.max);
-    drop = `${pb.can ? "" : "壊せた場合の"}${d.parts.item}のドロップ率 推定${lo === hi ? `${lo}%` : `${lo}〜${hi}%（超覚醒次第）`}（部位破壊ボーナス${formatDungeonBonus(bonus).replace("（超覚醒次第）", "")}）`;
+    drop = `${pb.can ? "" : "壊せた場合の"}${d.parts.item}のドロップ率 推定${lo === hi ? `${lo}%` : `${lo}〜${hi}%（超覚醒次第）`}（基本${d.parts.baseRate}%・部位破壊ボーナス${formatDungeonBonus(bonus).replace("（超覚醒次第）", "")}${mult !== 1 ? `・リーダー/フレンドで×${+mult.toFixed(2)}` : ""}）`;
   }
   return { can, drop, note: pb.note ?? "" };
 }
