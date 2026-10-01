@@ -1309,7 +1309,7 @@ const BADGE_NAMES = {
   2: "HP強化＋", 7: "落ちコンなし", 9: "全体攻撃", 18: "バインド耐性",
   41: "神タイプ強化", 42: "ドラゴンタイプ強化", 43: "悪魔タイプ強化", 44: "マシンタイプ強化", 46: "攻撃タイプ強化",
   61: "星を紡ぐ精霊", 86: "L字消し攻撃", 97: "銀魂", 98: "2体攻撃強化", 103: "火列強化", 104: "T字消し攻撃", 105: "水コンボ強化",
-  110: "アイドルマスター",
+  110: "アイドル",
 };
 function badgeNameOf(t) {
   const id = t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
@@ -2112,7 +2112,8 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       const inst = useSkill ? (setup.instantHeals ?? []).filter((x) => startOf(x) === turn).reduce((n, x) => n + x.pct, 0) : 0;
       // 回復ドロップを作るスキル（セイハーツなど）をその階で使っていれば、その階は毎ターン全回復（レシートの何ターン目かは当てにならないため。本人指定）
       const fullHeal = useSkill && (setup.healTurns ?? []).some((x) => x.floor === curFloor);
-      hp = setup.healGen || fullHeal ? maxAt() : Math.min(maxAt(), hp + (maxAt() * (rg + inst)) / 100);
+      // 回復: 回復生成スキルを使った階は全回復。それ以外は%回復（リジェネ・即時回復）があればその分、なければ回復ドロップを組んで全回復（本人指定）
+      hp = setup.healGen || fullHeal || rg + inst <= 0 ? maxAt() : Math.min(maxAt(), hp + (maxAt() * (rg + inst)) / 100);
       if (i === 0) {
         for (const h of sr) {
           if (stripped) rows.push({ floor: f.floor, label: h.label, skipped: `${stripped}で超根性を剥がしてワンパンするため受けない` });
@@ -2258,8 +2259,8 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const heal = setup.healGen
     ? "毎ターン使うスキルで回復ドロップを生成 → 毎ターンHP満タンとして計算"
     : setup.regens.length
-      ? `回復ドロップの毎ターン生成なし → リジェネはレシートで使ったターンから効果ターンの間だけ（${[...new Set(setup.regens.map((r) => `${esc(r.name)}${r.pct}%・${r.dur}ターン`))].join("／")}。重なったら最後に使ったもの）`
-      : "回復ドロップの毎ターン生成・リジェネなし → 回復なしで計算";
+      ? `%回復（${[...new Set(setup.regens.map((r) => `${esc(r.name)}${r.pct}%・${r.dur}ターン`))].join("／")}）が効いているターンはその分だけ回復、それ以外のターンは回復ドロップを組んで全回復として計算（回復生成スキルを使った階は全回復）`
+      : "%回復スキルなし → 毎ターン回復ドロップを組んで全回復として計算（回復生成スキルを使った階も全回復）";
   const awk = ATTRS5.filter((a) => setup.awkAttr[a]).map((a) => `${a}${setup.awkAttr[a]}%`).join("・");
   const verdict = sim.deadAt == null
     ? `<p class="ok"><strong>全フロア耐えられる計算です</strong></p>`
