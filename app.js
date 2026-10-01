@@ -1840,7 +1840,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   // スキルの軽減ありの場合（効果が最後まで続く前提）
   const withSkill = setup.skillRed ? simulateEndurance(d, setup, maxHp, setup.skillRed, latent) : null;
   const skillLine = withSkill
-    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[
+    ? `<p class="${withSkill.deadAt == null ? "ok" : "ng"}">レシートどおりにスキルを使うと（${[...new Set([
         ...setup.reductions.map((r) => `${esc(r.name)}の軽減${r.red}%`),
         ...[...new Set(setup.regens.map((r) => `${esc(r.name)}のリジェネ${r.pct}%`))],
         ...[...new Set(setup.instantHeals.map((r) => `${esc(r.name)}の回復${r.pct}%`))],
@@ -1849,7 +1849,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
         ...setup.selfAttr.map((r) => `${esc(r.name)}で${r.who === "自分" ? "" : r.who + "が"}${r.attr}属性に変化（チームHP×${r.ratio.toFixed(2)}）`),
         ...setup.enemyAttr.map((r) => `${esc(r.name)}で敵を${r.attr}属性に変化`),
         ...setup.vanishes.map((r) => `${esc(r.name)}が消えてアシストなしに（チームHP×${r.ratioAt[1].toFixed(2)}）`),
-      ].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
+      ])].join("・")}）: ${withSkill.deadAt == null ? "全フロア耐えられる" : `${withSkill.deadAt}Fで倒れる`}計算です</p>
        ${renderLatentAdvice(d, setup, maxHp, setup.skillRed, latent, withSkill).replace("潜在覚醒の枠が空いていれば", "レシートどおりのスキルで、潜在覚醒の枠が空いていれば")}`
     : "";
   const heal = setup.healGen
