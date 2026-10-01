@@ -346,3 +346,28 @@ button:disabled { opacity: .6; cursor: wait; }
 .feedback { max-width: 960px; margin: 16px auto; }
 .feedback textarea { width: 100%; }
 .feedback .row input { flex: 1 1 200px; min-width: 0; }
+
+/* PDC風の横並び（上にアシスト、下に本体） */
+.pdc-row { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; margin: 10px 0 4px; }
+.pdc-slot { display: flex; flex-direction: column; align-items: center; gap: 3px; min-width: 0; padding: 6px 2px 5px; border-radius: 10px; background: var(--bg); }
+.pdc-role { font-size: .68rem; color: var(--muted); letter-spacing: .04em; }
+.pdc-assist, .pdc-base { position: relative; width: 100%; display: flex; justify-content: center; }
+.pdc-slot .icon { width: min(100%, 46px); height: auto; aspect-ratio: 1; margin: 0; font-size: 1rem; }
+.pdc-base .icon { width: min(100%, 64px); font-size: 1.3rem; }
+.pdc-assist::after { content: ""; position: absolute; bottom: -4px; left: 50%; border: 4px solid transparent; border-top-color: var(--muted); transform: translateX(-50%) translateY(100%); opacity: .5; }
+.pdc-none, .pdc-empty { display: grid; place-items: center; width: min(100%, 46px); aspect-ratio: 1; border: 1px dashed var(--line); border-radius: 8px; font-size: .68rem; color: var(--muted); }
+.pdc-empty { width: min(100%, 64px); font-size: .8rem; }
+.pdc-ng .icon { outline: 3px solid var(--ng); outline-offset: 1px; opacity: .75; }
+.pdc-name { max-width: 100%; font-size: .68rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pdc-st { font-size: .64rem; font-weight: 700; padding: 1px 6px; border-radius: 999px; white-space: nowrap; color: #fff; }
+.pdc-st-ok { background: var(--ok); }
+.pdc-st-ng { background: var(--ng); }
+.pdc-st-sub { background: var(--sub); }
+.pdc-st-friend { background: var(--friend); }
+.pdc-st-free { background: var(--muted); }
+.mem-details > summary { font-size: .82rem; color: var(--accent); cursor: pointer; margin: 4px 0; }
+@media (max-width: 480px) {
+  .pdc-row { gap: 3px; }
+  .pdc-slot { padding: 4px 1px; }
+  .pdc-name { display: none; }
+}

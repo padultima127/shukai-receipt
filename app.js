@@ -1079,7 +1079,7 @@ function renderMember(r) {
     <span class="role">${ROLE_LABEL[r.mem.role] ?? r.mem.role}</span>${icons}
     <div class="mem-main"><span class="mname">${esc(name)}</span>${noLabel(r.m)}${status}${renderSuperList(r)}
       ${renderAwakenings(r.mem)}
-      ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${renderImportant(r)}${assist}${extra}${altButton(r)}</div>
+      ${renderChanges(r.mem, db.teams.find((t) => t.id === r.teamId) ?? {})}${assist}${extra}${altButton(r)}</div>
   </li>`;
 }
 
@@ -1216,13 +1216,45 @@ function renderConstraints(t) {
     .join("")}</div>`;
 }
 
+// PDCのように横6枠で、上にアシスト・下に本体を大きく並べる（所持状況は色付きの札で一目で分かるように）
+const PDC_STATUS = {
+  owned: ["所持", "ok"], friend: ["フレンド", "friend"], missing: ["未所持", "ng"],
+  substitute: ["代用あり", "sub"], partial: ["条件付き代用", "sub"], free: ["自由枠", "free"],
+};
+function renderPdcSlot(x) {
+  const role = ROLE_LABEL[x.mem.role] ?? x.mem.role;
+  if (x.status === "free")
+    return `<div class="pdc-slot pdc-free"><span class="pdc-role">サブ</span><div class="pdc-assist"></div><div class="pdc-base"><span class="pdc-empty">自由</span></div><span class="pdc-name muted">好きなキャラ</span></div>`;
+  const an = assistNoOf(x.mem);
+  const [label, cls] = PDC_STATUS[x.status] ?? ["", ""];
+  const assistNg = x.status !== "owned" && x.assistOk === false;
+  const name = x.m?.name ?? "";
+  return `<div class="pdc-slot" title="${esc(name)}${x.mem.assist ? ` ／ アシスト: ${esc(x.mem.assist)}` : ""}">
+    <span class="pdc-role">${esc(role)}</span>
+    <div class="pdc-assist${assistNg ? " pdc-ng" : ""}">${an ? iconHTML(an) : `<span class="pdc-none">なし</span>`}</div>
+    <div class="pdc-base${x.baseOk === false ? " pdc-ng" : ""}">${iconHTML(x.m)}</div>
+    <span class="pdc-name">${esc(glyphName(name))}</span>
+    ${label ? `<span class="pdc-st pdc-st-${cls}">${label}</span>` : ""}
+  </div>`;
+}
+// 名前は短く（【】や「・」の前を落とす）
+function glyphName(name) {
+  const n = String(name).replace(/【[^】]*】|［[^］]*］|\[[^\]]*\]/g, "");
+  const parts = n.split(/[・]/).filter(Boolean);
+  return (parts.at(-1) ?? n).slice(0, 8);
+}
+function renderPdcRow(list) {
+  return `<div class="pdc-row">${list.map(renderPdcSlot).join("")}</div>`;
+}
 function renderMembers(r) {
-  if (!r.team.multi) return `<ul class="members">${r.members.map(renderMember).join("")}</ul>`;
+  const details = (list) =>
+    `<details class="mem-details"><summary>キャラごとの詳細（覚醒・超覚醒・代用）</summary><ul class="members">${list.map(renderMember).join("")}</ul></details>`;
+  if (!r.team.multi) return renderPdcRow(r.members) + details(r.members);
   return ["A", "B"]
     .map((p) => {
       const mine = r.side === p && box.size > 0 ? `<span class="st st-ok">手持ちで組みやすい側</span>` : "";
-      return `<p class="side-head">マルチ${p} ${mine}</p>
-        <ul class="members">${r.members.filter((x) => x.mem.p === p).map(renderMember).join("")}</ul>`;
+      const list = r.members.filter((x) => x.mem.p === p);
+      return `<p class="side-head">マルチ${p} ${mine}</p>${renderPdcRow(list)}${details(list)}`;
     })
     .join("");
 }
