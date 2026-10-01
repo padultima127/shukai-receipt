@@ -66,7 +66,8 @@ else if ((db.version ?? 0) < window.PAD_SEED.version) {
 let box = new Set(loadJSON(BOX_KEY, []));
 // 画像から登録された編成に付いているアイコン（承認済みの編成から集める）{ 図鑑No.: data URL }
 const SHARED_ICONS = {};
-// 画像から登録した時に切り抜いたアイコン { 図鑑No.: data URL }
+// 画像から登録した時に切り抜いたアイコン { 枠の番号: { base: data URL, assist: data URL } }
+// （OCRがNo.を読み違えても、登録時にその枠に入っているキャラのアイコンとして保存する）
 let regIcons = {};
 // 画像から読み取った超覚醒 { 枠の番号: { no: 本体No., super: 覚醒No.（0＝なし） } }
 let regSupers = {};
@@ -2592,6 +2593,7 @@ async function saveRegForm() {
 
   // モンスター
   const members = [];
+  const slotNos = []; // [枠, 図鑑No., "base"|"assist"]（アイコンの保存用）
   for (let i = 0; i < REG_ROLES.length; i++) {
     const m = resolveSlot($(`#reg-m-${i}`));
     const a = resolveSlot($(`#reg-a-${i}`));
@@ -2605,6 +2607,7 @@ async function saveRegForm() {
     }
     const mem = { id: findOrCreateMonster(String(m)).id, role: REG_ROLES[i] };
     if (a != null) mem.assist = `${MDB.get(a)[1]} No.${a}`;
+    slotNos.push([i, m, "base"], [i, a, "assist"]);
     // PDCの画像から読み取った超覚醒（読み取った後に本体を変えていなければ）
     if (regSupers[i] && regSupers[i].no === m) mem.build = { super: regSupers[i].super, superOnly: true };
     members.push(mem);
@@ -2659,9 +2662,9 @@ async function saveRegForm() {
     metrics: metricsFromText(stepsText, $("#reg-891").value),
     plus891Choice: $("#reg-891").value,
   };
-  // 画像から切り抜いたアイコン（この編成のキャラの分だけ、まだサイトにアイコンがないもの）
-  const iconNos = new Set(members.flatMap((m) => [monster(m.id)?.no, assistNoOf(m)]).filter(Boolean));
-  const icons = Object.fromEntries(Object.entries(regIcons).filter(([no]) => iconNos.has(Number(no)) && window.PAD_ICONS?.index?.[no] == null));
+  // 画像から切り抜いたアイコン（枠ごと。登録時にその枠に入っているキャラの分で、まだサイトにアイコンがないもの）
+  const icons = {};
+  for (const [i, no, part] of slotNos) if (no && regIcons[i]?.[part] && window.PAD_ICONS?.index?.[no] == null) icons[no] = regIcons[i][part];
   if (Object.keys(icons).length) team.icons = icons;
   const verb = regEditingId ? "更新" : "登録";
   const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
@@ -3574,8 +3577,8 @@ function cropRegIcons(data, slots) {
   if (!src) return {};
   const cell = src.width / 6;
   const out = {};
-  const cut = (hit, col) => {
-    if (!hit?.no || hit.y1 == null) return;
+  const cut = (hit, col, part) => {
+    if (!hit || hit.y1 == null) return;
     const bottom = hit.y1 + cell * 0.04;
     const top = bottom - cell;
     if (top < 0) return;
@@ -3583,11 +3586,11 @@ function cropRegIcons(data, slots) {
     c.width = c.height = 64;
     c.getContext("2d").drawImage(src, col * cell + cell * 0.03, top + cell * 0.03, cell * 0.94, cell * 0.94, 0, 0, 64, 64);
     const url = c.toDataURL("image/webp", 0.8);
-    if (url.startsWith("data:image/webp") && url.length < 20000) out[hit.no] = url;
+    if (url.startsWith("data:image/webp") && url.length < 20000) (out[col] ??= {})[part] = url;
   };
   slots.forEach((s, col) => {
-    cut(s.base, col);
-    cut(s.assist, col);
+    cut(s.base, col, "base");
+    cut(s.assist, col, "assist");
   });
   return out;
 }
