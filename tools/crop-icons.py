@@ -288,6 +288,8 @@ def crop_badges(teams, ocr):
         if len(pdc) <= nth:
             continue
         name, (assist_b, base_b, _, _) = pdc[nth]
+        # バッジは小さく写っていて読めないことがあるので、同じツイートの他のPDC画像でも探す（2編成のツイートは除く）
+        badge_imgs = [pdc[nth]] + ([p for i, p in enumerate(pdc) if i != nth] if "#" not in t["source"] and len(pdc) <= 3 else [])
         path = image_path(name)
         if not path:
             continue
@@ -297,10 +299,20 @@ def crop_badges(teams, ocr):
             cell = W / 6
             top = assist_b * H + cell * 0.04 - cell  # アシストの段の上端
             y0 = max(0, top - cell * 0.85)
-            region = im.crop((0, int(y0), int(cell * 0.75), int(top)))
-            box = badge_box(region) or badge_box_old(region)
-            if box:
-                found[t["id"]] = region.crop(box).resize((BADGE_W, BADGE_H), Image.LANCZOS)
+            for bname, (b_assist, _, _, _) in badge_imgs:
+                bpath = image_path(bname)
+                if not bpath:
+                    continue
+                with Image.open(bpath) as bim:
+                    bim = bim.convert("RGB")
+                    bW, bH = bim.size
+                    bcell = bW / 6
+                    btop = b_assist * bH + bcell * 0.04 - bcell
+                    region = bim.crop((0, int(max(0, btop - bcell * 0.85)), int(bcell * 0.75), int(btop)))
+                    box = badge_box(region) or badge_box_old(region)
+                    if box:
+                        found[t["id"]] = region.crop(box).resize((BADGE_W, BADGE_H), Image.LANCZOS)
+                        break
             # 潜在覚醒（アシストの段と本体の段の間、各枠の下側）。最大8枠が2段で並ぶ
             base_top = base_b * H + cell * 0.04 - cell
             for col, (bno, _) in enumerate(t["m"]):
