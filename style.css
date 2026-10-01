@@ -170,6 +170,13 @@ summary { cursor: pointer; color: var(--accent); }
 .seg-wide button { flex: 1; white-space: nowrap; padding: 8px 6px; }
 button.link { border: 0; background: none; padding: 0 0 0 6px; color: var(--accent); text-decoration: underline; cursor: pointer; font-size: inherit; }
 .suggest-wrap { position: relative; }
+#q { padding-right: 40px; }
+.input-clear {
+  position: absolute; right: 6px; top: 50%; transform: translateY(-50%);
+  width: 28px; height: 28px; border: 0; border-radius: 50%;
+  background: var(--line); color: var(--muted); font-size: 1.05rem; line-height: 1; cursor: pointer;
+}
+.input-clear:hover { color: var(--text); }
 .suggest {
   position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 10;
   list-style: none; margin: 0; padding: 4px; max-height: 260px; overflow-y: auto;

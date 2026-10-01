@@ -2235,6 +2235,7 @@ function renderSuggestions() {
 
 function pickSuggestion(name) {
   $("#q").value = name;
+  syncQClear();
   $("#q-suggest").hidden = true;
   suggestIndex = -1;
   search();
@@ -2789,6 +2790,7 @@ document.querySelectorAll("#search-type button").forEach((b) =>
     if (b.dataset.type === searchType) return;
     setSearchType(b.dataset.type);
     $("#q").value = "";
+    syncQClear();
     $("#results").innerHTML = "";
     $("#q").focus();
   })
@@ -2912,8 +2914,19 @@ $("#results").addEventListener("click", (e) => {
     btn.textContent = "代用候補を閉じる";
   }, 20);
 });
+// 入力を一括で消す×ボタン（文字がある時だけ表示）
+const syncQClear = () => ($("#q-clear").hidden = !$("#q").value);
 $("#q").addEventListener("input", () => {
   suggestIndex = -1;
+  syncQClear();
+  renderSuggestions();
+});
+$("#q-clear").addEventListener("mousedown", (e) => e.preventDefault());
+$("#q-clear").addEventListener("click", () => {
+  $("#q").value = "";
+  syncQClear();
+  suggestIndex = -1;
+  $("#q").focus();
   renderSuggestions();
 });
 $("#q").addEventListener("focus", renderSuggestions);
