@@ -1395,7 +1395,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? `<span class="badge badge-mine">自分で登録</span>` : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p>${renderGimmicks(r.dungeon)}</div>
+      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p>${renderGimmicks(r.dungeon)}</div>
       <div class="score-col"><span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
@@ -2918,10 +2918,15 @@ function loadIntoRegForm(id) {
 }
 
 let regDeleteArmed = null;
+// ログイン中の自分が登録した編成か（Firebase 版は登録したアカウント、それ以外はこのブラウザで登録したもの）
+function isMine(t) {
+  if (!t.userAdded) return false;
+  if (shared.mode !== "firebase" || !t.shared) return true;
+  return !!shared.fb.user && t.ownerUid === shared.fb.user.uid;
+}
 function renderRegList() {
   // Firebase 版は自分（ログイン中のアカウント）が登録したものだけ。他の人の公開済み編成は編成検索に出る
-  const uid = shared.mode === "firebase" ? shared.fb.user?.uid : null;
-  const mine = db.teams.filter((t) => t.userAdded && (shared.mode !== "firebase" || !t.shared || (uid && t.ownerUid === uid)));
+  const mine = db.teams.filter(isMine);
   $("#reg-list-title").textContent = shared.db ? "登録された編成" : "自分で登録した編成";
   $("#reg-list").innerHTML = mine.length
     ? `<ul class="reg-list">${mine
