@@ -1,7 +1,10 @@
 "use strict";
 
 const DATA_KEY = "pad-farming:data";
-const BOX_KEY = "pad-farming:box";
+const BOX_KEY = "pad-farming:box"; // 廃止した手持ちBOXの保存先（読み込み時に消す）
+try {
+  localStorage.removeItem(BOX_KEY);
+} catch {}
 // ロード・リザルト画面などダンジョン外で1周ごとにかかる秒数
 const RUN_OVERHEAD_SEC = 20;
 // 経験値効率で並べるモード → evaluate() の値の名前
@@ -63,7 +66,8 @@ else if ((db.version ?? 0) < window.PAD_SEED.version) {
   db.version = window.PAD_SEED.version;
   saveJSON(DATA_KEY, db);
 }
-let box = new Set(loadJSON(BOX_KEY, []));
+// 手持ちBOXは廃止（2026-10-01）。所持チェックまわりの処理は空のBOXとして動かす
+const box = new Set();
 // 画像から登録された編成に付いているアイコン（承認済みの編成から集める）{ 図鑑No.: data URL }
 const SHARED_ICONS = {};
 // 画像から登録した時に切り抜いたアイコン { 枠の番号: { base: data URL, assist: data URL } }
@@ -829,7 +833,6 @@ function search() {
   const q = $("#q").value;
   const { dungeons, item, canonical } = resolveQuery(q, searchType);
   const boxActive = box.size > 0;
-  const ownedOnly = $("#owned-only").checked;
   // 部位破壊のあるダンジョンが対象の時だけ「部位ドロップ確定だけ」のチェックを出す
   const hasParts = dungeons.some((d) => d.parts);
   $("#parts-only-wrap").hidden = !hasParts;
@@ -875,7 +878,6 @@ function search() {
     );
     return;
   }
-  if (ownedOnly && boxActive) rows = rows.filter((r) => r.missing === 0);
   if (partsOnly) rows = rows.filter((r) => partDropSure(r.team, r.dungeon));
 
 
@@ -910,17 +912,14 @@ function search() {
       ? `<p class="summary">「${esc(item.name)}」が出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件</p>`
       : `<p class="summary">編成 ${rows.length}件</p>`) +
     `<p class="caution">⚠️ 編成・アシスト・立ち回りは要約や読み取りのため、誤りや省略があるかもしれません。参考にするときは<strong>必ず各編成の「元のポスト／元の記事」のリンク先を確認</strong>してください。</p>`;
-  const boxNote = boxActive
-    ? ""
-    : `<p class="note">手持ちBOXが未登録なので、所持チェックはしていません。「手持ちBOX」タブで登録すると代用を自動で探します。</p>`;
 
   if (!rows.length) {
     out.innerHTML =
       head +
-      `<p class="empty">手持ちだけで組める編成がありません（全${total}件）。チェックを外すと、足りないモンスターと代用候補を確認できます。</p>`;
+      `<p class="empty">条件に合う編成がありません（全${total}件）。高速モードや部位ドロップの絞り込みを外してみてください。</p>`;
     return;
   }
-  out.innerHTML = head + boxNote + rows.map((r, i) => renderResult(r, i, item)).join("");
+  out.innerHTML = head + rows.map((r, i) => renderResult(r, i, item)).join("");
 }
 
 // ---------- 描画 ----------
@@ -1196,9 +1195,7 @@ function searchAltFor(teamId, idx) {
   if (!mem) return "";
   const dungeon = db.dungeons.find((d) => d.id === team.dungeonId);
   const important = importantCaps(mem, team, dungeon);
-  const note = box.size
-    ? `<p class="hint">図鑑全体から探しています。手持ちBOXにいるキャラを上に表示します。</p>`
-    : `<p class="hint">図鑑全体から探しています。手持ちBOXを登録すると、持っているキャラが上に並びます。</p>`;
+  const note = `<p class="hint">図鑑全体から探しています。</p>`;
   const opts = { pool: "all", limit: 5 };
   const ns = noSubstituteReason(team, mem);
   const baseList = mem.role === "S" && !ns ? findSubstitutes("base", mem, important, team, opts) : null;
@@ -2137,42 +2134,6 @@ function renderEndurance(t, d) {
   </details>`;
 }
 
-// ---------- BOX ----------
-function renderBox() {
-  const f = $("#box-filter").value.trim();
-  const list = db.monsters.filter((m) => !f || m.name.includes(f) || m.tags.some((t) => t.includes(f)));
-  $("#box-list").innerHTML = list
-    .map(
-      (m) => `<label class="box-item ${box.has(m.id) ? "on" : ""}">
-      <input type="checkbox" data-id="${esc(m.id)}" ${box.has(m.id) ? "checked" : ""}>
-      ${iconHTML(m)}
-      <span class="mname">${esc(m.name)}</span>${noLabel(m)}
-      <span class="tags">${m.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join("")}</span>
-    </label>`
-    )
-    .join("");
-  $("#box-count").textContent = `${box.size} / ${db.monsters.length}体 所持`;
-}
-
-function renderMdbResults() {
-  const el = $("#mdb-results");
-  const q = $("#mdb-q").value;
-  const hits = searchMonsterDB(q);
-  el.innerHTML = hits
-    .map((r) => {
-      const owned = db.monsters.some((m) => m.no === r[0] && box.has(m.id));
-      return `<li data-no="${r[0]}">${iconHTML(r[0])}${esc(r[1])}
-        <small>No.${r[0]}${r[4] ? "・アシスト可" : ""}${owned ? "・所持済み" : ""}</small></li>`;
-    })
-    .join("");
-  el.hidden = !q.trim() || !hits.length;
-}
-
-function saveBox() {
-  saveJSON(BOX_KEY, [...box]);
-  renderBox();
-}
-
 // ---------- データ管理 ----------
 function nextId(prefix, list) {
   let n = list.length + 1;
@@ -2992,7 +2953,6 @@ document.querySelectorAll(".tab").forEach((b) =>
   b.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === b));
     document.querySelectorAll(".panel").forEach((p) => (p.hidden = p.id !== `tab-${b.dataset.tab}`));
-    if (b.dataset.tab === "box") renderBox();
     if (b.dataset.tab === "register") {
       renderRegDungeons($("#reg-dungeon").value);
       renderRegList();
@@ -3192,7 +3152,6 @@ $("#q-suggest").addEventListener("mousedown", (e) => {
   if (!li.dataset.name) return;
   pickSuggestion(li.dataset.name);
 });
-$("#owned-only").addEventListener("change", () => $("#q").value.trim() && search());
 $("#parts-only").addEventListener("change", () => $("#q").value.trim() && search());
 document.querySelectorAll("#fast-filter button").forEach((b) =>
   b.addEventListener("click", () => {
@@ -3201,38 +3160,6 @@ document.querySelectorAll("#fast-filter button").forEach((b) =>
     if ($("#q").value.trim()) search();
   })
 );
-
-$("#box-filter").addEventListener("input", renderBox);
-$("#mdb-q").addEventListener("input", renderMdbResults);
-$("#mdb-q").addEventListener("blur", () => setTimeout(() => ($("#mdb-results").hidden = true), 150));
-$("#mdb-results").addEventListener("mousedown", (e) => {
-  const li = e.target.closest("li");
-  if (!li) return;
-  e.preventDefault();
-  const m = findOrCreateMonster(li.dataset.no);
-  box.add(m.id);
-  persist();
-  saveBox();
-  $("#mdb-q").value = "";
-  $("#mdb-results").hidden = true;
-});
-$(".mdb-credit").textContent = MDB_ROWS.length
-  ? `図鑑データ: みんなで作るパズドラモンスターデータベース（${MDB_ROWS.length}体、${window.PAD_MONSTER_DB.updated}時点）`
-  : "図鑑データが読み込めていません";
-$("#box-list").addEventListener("change", (e) => {
-  const id = e.target.dataset.id;
-  if (!id) return;
-  e.target.checked ? box.add(id) : box.delete(id);
-  saveBox();
-});
-$("#box-all").addEventListener("click", () => {
-  db.monsters.forEach((m) => box.add(m.id));
-  saveBox();
-});
-$("#box-none").addEventListener("click", () => {
-  box.clear();
-  saveBox();
-});
 
 $("#text-import-run").addEventListener("click", () => {
   const msg = $("#text-import-msg");
