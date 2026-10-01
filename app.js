@@ -64,6 +64,10 @@ else if ((db.version ?? 0) < window.PAD_SEED.version) {
   saveJSON(DATA_KEY, db);
 }
 let box = new Set(loadJSON(BOX_KEY, []));
+// 画像から登録された編成に付いているアイコン（承認済みの編成から集める）{ 図鑑No.: data URL }
+const SHARED_ICONS = {};
+// 画像から登録した時に切り抜いたアイコン { 図鑑No.: data URL }
+let regIcons = {};
 // レシートから分からない超覚醒を、見る人が超覚醒一覧から選んだもの（このブラウザだけに保存）。{ "編成id:枠": 覚醒No. }
 const SUPER_PICK_KEY = "pad-farming-super-picks";
 let superPicks = loadJSON(SUPER_PICK_KEY, {});
@@ -2435,6 +2439,10 @@ function iconHTML(ref, { assist = false } = {}) {
   // 投稿のPDCレシート画像から切り抜いたアイコン（icons.webp に1枚にまとめたもの）。なければ名前の1文字
   const no = typeof ref === "number" ? ref : ref?.no;
   const pi = window.PAD_ICONS?.index?.[no];
+  // 画像から登録された編成に付いていたアイコン
+  const sharedIcon = pi == null ? SHARED_ICONS[no] : null;
+  if (sharedIcon)
+    return `<span class="icon icon-img icon-own ${assist ? "icon-assist" : ""} a-${main}" title="${esc(name)}${row?.[5] ? `（スキル${row[5]}ターン）` : ""}" aria-hidden="true" style="background-image:url('${sharedIcon}');background-size:cover;background-position:center">${ct}</span>`;
   if (pi != null) {
     const { cols, rows } = window.PAD_ICONS;
     const pos = `${((pi % cols) / Math.max(1, cols - 1)) * 100}% ${(Math.floor(pi / cols) / Math.max(1, rows - 1)) * 100}%`;
@@ -2564,6 +2572,7 @@ function clearRegForm() {
   // 登録は画像からだけ（読み取るまで入力欄は出さない）
   $("#reg-fields").hidden = true;
   $("#reg-ocr-msg").textContent = "";
+  regIcons = {};
 }
 
 async function saveRegForm() {
@@ -2645,6 +2654,10 @@ async function saveRegForm() {
     metrics: metricsFromText(stepsText, $("#reg-891").value),
     plus891Choice: $("#reg-891").value,
   };
+  // 画像から切り抜いたアイコン（この編成のキャラの分だけ、まだサイトにアイコンがないもの）
+  const iconNos = new Set(members.flatMap((m) => [monster(m.id)?.no, assistNoOf(m)]).filter(Boolean));
+  const icons = Object.fromEntries(Object.entries(regIcons).filter(([no]) => iconNos.has(Number(no)) && window.PAD_ICONS?.index?.[no] == null));
+  if (Object.keys(icons).length) team.icons = icons;
   const verb = regEditingId ? "更新" : "登録";
   const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
   let where = "local";
@@ -2739,6 +2752,7 @@ function applyShared() {
   const localIds = new Set(db.teams.filter((t) => !t.shared).map((t) => t.id));
   db.teams = [...db.teams.filter((t) => !t.shared), ...shared.teams.filter((t) => !localIds.has(t.id)).map(fromSharedTeam)];
   easeRangeCache = null;
+  for (const t of shared.teams) for (const [no, url] of Object.entries(t.icons ?? {})) if (/^data:image\/webp;base64,/.test(url)) SHARED_ICONS[no] = url;
   applySuperPicks();
   renderData();
   if (!$("#tab-register").hidden) {
@@ -3357,7 +3371,7 @@ async function ocr(file, lang, onStep) {
   const { data } = await Tesseract.recognize(canvas, lang, {
     logger: (m) => m.status === "recognizing text" && onStep?.(Math.round(m.progress * 100)),
   });
-  return { ...data, imageWidth: canvas.width };
+  return { ...data, imageWidth: canvas.width, canvas };
 }
 
 // 読み違えやすい文字を数字に（T→1、O→0 など）
@@ -3393,7 +3407,7 @@ function parsePdcNumbers(data) {
     const core = m[1].replace(/[^\dTIl|iOoDQSsBZzGgqA]/g, "").replace(/[A-Za-z|]+$/, "");
     const raw = core.replace(/[TIl|iOoDQSsBZzGgqA]/g, (c) => OCR_DIGIT[c]).slice(0, 6);
     if (raw.length < 3) continue;
-    hits.push({ raw, x: (w.bbox.x0 + w.bbox.x1) / 2, y: (w.bbox.y0 + w.bbox.y1) / 2, lv: (w.text.match(/LV(\d{2,3})/i) ?? [])[1] });
+    hits.push({ raw, x: (w.bbox.x0 + w.bbox.x1) / 2, y: (w.bbox.y0 + w.bbox.y1) / 2, y1: w.bbox.y1, lv: (w.text.match(/LV(\d{2,3})/i) ?? [])[1] });
   }
   if (!hits.length) return null;
   // 行ごとにまとめる（y が近いもの）
@@ -3478,6 +3492,31 @@ function setSlot(input, no) {
   input.dataset.no = String(no);
 }
 
+// PDCのレシート画像（OCRに使ったキャンバス）から、各枠の本体・アシストのアイコンを64pxで切り抜く
+// 横6枠・文字「No.◯◯◯◯◯」の下端を枠の下端とする（tools/crop-icons.py と同じ考え方）
+function cropRegIcons(data, slots) {
+  const src = data.canvas;
+  if (!src) return {};
+  const cell = src.width / 6;
+  const out = {};
+  const cut = (hit, col) => {
+    if (!hit?.no || hit.y1 == null) return;
+    const bottom = hit.y1 + cell * 0.04;
+    const top = bottom - cell;
+    if (top < 0) return;
+    const c = document.createElement("canvas");
+    c.width = c.height = 64;
+    c.getContext("2d").drawImage(src, col * cell + cell * 0.03, top + cell * 0.03, cell * 0.94, cell * 0.94, 0, 0, 64, 64);
+    const url = c.toDataURL("image/webp", 0.8);
+    if (url.startsWith("data:image/webp") && url.length < 20000) out[hit.no] = url;
+  };
+  slots.forEach((s, col) => {
+    cut(s.base, col);
+    cut(s.assist, col);
+  });
+  return out;
+}
+
 async function runRegOcr() {
   const pdc = $("#reg-img-pdc").files[0];
   const clear = $("#reg-img-clear").files[0];
@@ -3499,6 +3538,8 @@ async function runRegOcr() {
           updateSlotPreview(i);
         });
         notes.push(`モンスター${slots.filter((s) => s.base).length}体・アシスト${slots.filter((s) => s.assist).length}体`);
+        // キャラのアイコンを切り抜いて、編成と一緒に保存する（画像そのものは保存しない）
+        regIcons = cropRegIcons(d, slots);
       } else notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
       const steps = parsePdcSteps(d);
       if (steps) {
