@@ -3707,6 +3707,17 @@ async function runRegOcr() {
 }
 $("#reg-ocr-run")?.addEventListener("click", runRegOcr);
 
+// ---------- 更新履歴 ----------
+// 一番新しい日だけ開いておく
+(() => {
+  const list = window.PAD_CHANGELOG ?? [];
+  const el = $("#changelog-list");
+  if (!el) return;
+  el.innerHTML = list
+    .map((d, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(d.date)}${i === 0 ? ' <span class="badge">最新</span>' : ""}</summary><ul>${d.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></details>`)
+    .join("");
+})();
+
 // ---------- 感想・要望 ----------
 // Firebase が使える時だけ（claude.ai 版などでは非表示）
 $("#feedback").hidden = !window.PAD_FIREBASE;

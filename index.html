@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261001165534">
+  <link rel="stylesheet" href="style.css?v=20261001170149">
 </head>
 <body>
   <header>
@@ -17,7 +17,7 @@
     </nav>
   </header>
 
-  <div class="banner beta-banner">β版です。データの誤り・不具合・掲載取り下げのご連絡は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> / <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> まで。</div>
+  <div class="banner beta-banner">β版です。データの誤り・不具合・掲載取り下げのご連絡は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> / <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> まで。 <a href="#changelog">更新履歴</a></div>
   <div id="sample-banner" class="banner" hidden>
     初期データは攻略サイト（出典リンク付き）の実在編成です。<strong>「推定」</strong>が付いた値は出典に記載がないため仮の値です。
   </div>
@@ -243,6 +243,11 @@ F: 光輝の聖騎士
     </section>
   </main>
 
+  <section class="card changelog" id="changelog">
+    <h2>更新履歴</h2>
+    <div id="changelog-list"></div>
+  </section>
+
   <section class="card feedback" id="feedback">
     <h2>感想・要望を送る</h2>
     <p class="hint">使ってみた感想、欲しい機能、データの間違いなど気軽にどうぞ（ログイン不要・1000字まで）。返信が欲しい場合はXのIDなど連絡先を書いてください（任意、管理者だけが見られます）。</p>
@@ -271,12 +276,13 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261001165534"></script>
-  <script src="firebase-backend.js?v=20261001165534"></script>
-  <script src="icons.js?v=20261001165534"></script>
-  <script src="monsters-db.js?v=20261001165534"></script>
-  <script src="monsters-changes.js?v=20261001165534"></script>
-  <script src="data.js?v=20261001165534"></script>
-  <script src="app.js?v=20261001165534"></script>
+  <script src="firebase-config.js?v=20261001170149"></script>
+  <script src="firebase-backend.js?v=20261001170149"></script>
+  <script src="changelog.js?v=20261001170149"></script>
+  <script src="icons.js?v=20261001170149"></script>
+  <script src="monsters-db.js?v=20261001170149"></script>
+  <script src="monsters-changes.js?v=20261001170149"></script>
+  <script src="data.js?v=20261001170149"></script>
+  <script src="app.js?v=20261001170149"></script>
 </body>
 </html>

@@ -381,3 +381,7 @@ button:disabled { opacity: .6; cursor: wait; }
 
 .time-pair { display: grid; gap: 6px; }
 .time-tag { min-width: 5em; font-weight: 600; }
+
+.changelog details { margin: 4px 0; }
+.changelog summary { cursor: pointer; font-weight: 600; }
+.changelog ul { margin: 6px 0 10px; padding-left: 1.2em; display: grid; gap: 4px; font-size: .88rem; }
