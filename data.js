@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 94,
+  "version": 95,
   "seed": true,
   "monsters": [
     {
@@ -2897,7 +2897,8 @@ window.PAD_SEED = {
             "parts": true
           }
         ]
-      }
+      },
+      "kago": "陽"
     },
     {
       "id": "fuun",
@@ -9313,8 +9314,7 @@ window.PAD_SEED = {
           "assist": "チューリップの標本 No.12447",
           "build": {
             "lv": 99,
-            "plus": 891,
-            "latentHp": 13.5
+            "plus": 891
           }
         },
         {
@@ -9323,7 +9323,7 @@ window.PAD_SEED = {
           "assist": "無一郎と蜜璃の鎹鴉 No.12817",
           "build": {
             "lv": 120,
-            "plus": 891,
+            "plus": 297,
             "super": 128
           }
         },
@@ -9343,7 +9343,7 @@ window.PAD_SEED = {
           "assist": "ユラの封呪符 No.14139",
           "build": {
             "lv": 99,
-            "plus": 300
+            "plus": 891
           }
         },
         {
@@ -9352,8 +9352,7 @@ window.PAD_SEED = {
           "assist": "ヘッドマウントディスプレイ No.13081",
           "build": {
             "lv": 99,
-            "plus": 891,
-            "latentHp": 13.5
+            "plus": 891
           }
         },
         {
@@ -9362,8 +9361,7 @@ window.PAD_SEED = {
           "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947",
           "build": {
             "lv": 99,
-            "plus": 891,
-            "latentHp": 13.5
+            "plus": 891
           }
         }
       ],
