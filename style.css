@@ -378,3 +378,6 @@ button:disabled { opacity: .6; cursor: wait; }
 
 /* 立ち回り: 番号を付けない（階の数字と紛らわしいため） */
 .steps { list-style: none; padding-left: 4px; margin: 6px 0; display: grid; gap: 4px; }
+
+.time-pair { display: grid; gap: 6px; }
+.time-tag { min-width: 5em; font-weight: 600; }

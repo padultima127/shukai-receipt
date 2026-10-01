@@ -93,6 +93,21 @@ applySuperPicks();
 const isFullBuild = (b) => !!b && !b.superOnly && !b.userPicked;
 let mode = "balance";
 let fastFilter = "all"; // 高速モード: "all"（どちらも）| "on" | "off"
+// 編成のタイム。times があれば高速ON/OFFそれぞれ、なければ fastMode と timeSec から（不明は any）
+function teamTimes(t) {
+  if (t.times) return { on: t.times.on ?? null, off: t.times.off ?? null, any: null };
+  if (t.fastMode === true) return { on: t.timeSec, off: null, any: null };
+  if (t.fastMode === false) return { on: null, off: t.timeSec, any: null };
+  return { on: null, off: null, any: t.timeSec };
+}
+// 検索の条件で使うタイム: ONのみ→ON、OFFのみ→OFF、どちらも→速い方（その条件のタイムがなければ null）
+function effTime(t, f = fastFilter) {
+  const tt = teamTimes(t);
+  if (f === "on") return tt.on;
+  if (f === "off") return tt.off;
+  const v = [tt.on, tt.off, tt.any].filter((x) => x != null);
+  return v.length ? Math.min(...v) : t.timeSec;
+}
 let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョンで探す)
 const SEARCH_TYPES = {
   item: { label: "集めたい素材", placeholder: "例: スパノエ、プラス", noun: "素材" },
@@ -793,7 +808,7 @@ function evaluate(team, dungeon, item, boxActive) {
   const rate = !item
     ? 1
     : (team.yields?.[item.id] ?? dungeon.drops.filter((d) => d.itemId === item.id).reduce((s, d) => s + d.rate, 0)) * itemMult;
-  const runSec = team.timeSec + RUN_OVERHEAD_SEC;
+  const runSec = effTime(team) + RUN_OVERHEAD_SEC;
   const perHour = (3600 / runSec) * rate;
   const staminaPer = rate > 0 ? dungeon.stamina / rate : Infinity;
   // 経験値効率（ランク経験値）。編成ごとの値があればそちらを優先。スタミナ未登録なら出さない
@@ -827,7 +842,8 @@ function search() {
   }
 
   let rows = dungeons.flatMap((d) =>
-    db.teams.filter((t) => t.dungeonId === d.id).map((t) => evaluate(t, d, item, boxActive))
+    // 高速モードONのみ・OFFのみの時は、その条件のタイムがある編成だけ
+    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null).map((t) => evaluate(t, d, item, boxActive))
   );
   const total = rows.length;
   if (!total) {
@@ -861,8 +877,7 @@ function search() {
   }
   if (ownedOnly && boxActive) rows = rows.filter((r) => r.missing === 0);
   if (partsOnly) rows = rows.filter((r) => partDropSure(r.team, r.dungeon));
-  // 高速モード（ONのみ・OFFのみの時は、どちらか分からない編成は出さない）
-  if (fastFilter !== "all") rows = rows.filter((r) => r.team.fastMode === (fastFilter === "on"));
+
 
   const maxPerHour = Math.max(...rows.map((r) => r.perHour), 1e-9);
   const penalty = (r) => r.missing * PENALTY_MISSING + r.substituted * PENALTY_SUBSTITUTE;
@@ -1390,11 +1405,17 @@ function renderResult(r, i, item) {
     <div class="bars">${bar("速さ", r.speedScore)}${bar("楽さ", r.easeScore)}</div>
     ${r.ease.legacy ? "" : renderEaseBreakdown(r.ease.parts)}
     <dl class="stats">
-      <div><dt>1周</dt><dd>${formatTime(t.timeSec)}${est("timeSec")}</dd></div>
+      <div><dt>1周</dt><dd>${formatTime(effTime(t))}${est("timeSec")}${(() => {
+        const tt = teamTimes(t);
+        return tt.on != null && tt.off != null ? `<small class="muted">（高速ON ${formatTime(tt.on)} ／ OFF ${formatTime(tt.off)}）</small>` : "";
+      })()}</dd></div>
       ${item ? "" : `<div class="${mode === "expHour" ? "hl" : ""}"><dt>経験値/時</dt><dd>${r.expPerHour == null ? "―" : formatCount(r.expPerHour)}</dd></div>
       <div class="${mode === "perRun" ? "hl" : ""}"><dt>経験値/周</dt><dd>${r.expPerRun == null ? "―" : formatCount(r.expPerRun)}${r.lfm.exp !== 1 ? `<small class="muted">（L/F${multLabel(r.lfm.exp)}込み）</small>` : ""}</dd></div>`}
       ${t.turns ? `<div><dt>クリアターン</dt><dd>${t.turns}ターン</dd></div>` : ""}
-      <div><dt>高速モード</dt><dd>${t.fastMode === true ? "ON" : t.fastMode === false ? "OFF" : `<span class="muted">不明</span>`}</dd></div>
+      <div><dt>高速モード</dt><dd>${(() => {
+        const tt = teamTimes(t);
+        return tt.on != null && tt.off != null ? "ON・OFF両方" : tt.on != null ? "ON" : tt.off != null ? "OFF" : `<span class="muted">不明</span>`;
+      })()}</dd></div>
       ${(() => {
         const pi = partBreakInfo(t, r.dungeon);
         return pi ? `<div class="wide"><dt>部位破壊</dt><dd>${esc(pi.can)}${pi.drop ? `・${esc(pi.drop)}` : ""}${pi.note ? `<br><small class="muted">${esc(pi.note)}</small>` : ""}</dd></div>` : "";
@@ -2590,10 +2611,11 @@ async function saveRegForm() {
     const name = $("#reg-dungeon-name").value.trim();
     if (!name) return regMessage("新しいダンジョン名を入力してください。", false);
   }
-  const min = Number($("#reg-min").value || 0);
-  const sec = Number($("#reg-sec").value || 0);
-  const timeSec = Math.round(min * 60 + sec);
-  if (!timeSec) return regMessage("1周のタイムを入力してください。", false);
+  // 高速ON・OFFそれぞれのタイム（どちらか必須）
+  const readTime = (k) => Math.round(Number($(`#reg-min-${k}`).value || 0) * 60 + Number($(`#reg-sec-${k}`).value || 0)) || null;
+  const times = { on: readTime("on"), off: readTime("off") };
+  if (!times.on && !times.off) return regMessage("1周のタイム（高速ONかOFFのどちらか）を入力してください。", false);
+  const timeSec = Math.min(...[times.on, times.off].filter(Boolean));
 
   // モンスター
   const members = [];
@@ -2650,8 +2672,7 @@ async function saveRegForm() {
 
   const stepsText = $("#reg-steps").value;
   const turns = Number($("#reg-turns").value || 0) || undefined;
-  const fast = $("#reg-fast").value;
-  if (!fast) return regMessage("高速モードのON/OFFを選んでください。", false);
+
   const team = {
     id: regEditingId ?? `u${Date.now()}`,
     userAdded: true,
@@ -2659,7 +2680,8 @@ async function saveRegForm() {
     title: $("#reg-title").value.trim() || `${dungeon.name} 編成`,
     timeSec,
     ...(turns ? { turns } : {}),
-    fastMode: fast === "on",
+    times: Object.fromEntries(Object.entries(times).filter(([, v]) => v)),
+    ...(times.on && !times.off ? { fastMode: true } : !times.on && times.off ? { fastMode: false } : {}),
     ...(Object.keys(yields).length ? { yields } : {}),
     members,
     steps: stepsText.split(/\r?\n/).map((l) => l.trim()).filter(Boolean),
@@ -2902,10 +2924,14 @@ function loadIntoRegForm(id) {
   regEditingId = t.id;
   renderRegDungeons(t.dungeonId);
   $("#reg-title").value = t.title;
-  $("#reg-min").value = Math.floor(t.timeSec / 60);
-  $("#reg-sec").value = t.timeSec % 60;
+  const tt = teamTimes(t);
+  for (const k of ["on", "off"]) {
+    const v = tt[k];
+    $(`#reg-min-${k}`).value = v != null ? Math.floor(v / 60) : "";
+    $(`#reg-sec-${k}`).value = v != null ? +(v % 60).toFixed(1) : "";
+  }
   $("#reg-turns").value = t.turns ?? "";
-  $("#reg-fast").value = t.fastMode === true ? "on" : t.fastMode === false ? "off" : "";
+
   $("#reg-plus").value = t.yields?.plus ?? "";
   $("#reg-exp").value = t.yields?.exp ?? "";
   $("#reg-891").value = t.plus891Choice ?? "";
@@ -3616,6 +3642,7 @@ async function runRegOcr() {
   const url = $("#reg-ocr-url").value.trim();
   const msg = (t) => ($("#reg-ocr-msg").textContent = t);
   if (!pdc && !clear) return msg("画像を選んでください。");
+  if (clear && !$("#reg-ocr-fast").value) return msg("クリア画像の高速モード（ON/OFF）を選んでください。タイムをどちらの欄に入れるかに使います。");
   $("#reg-ocr-run").disabled = true;
   const notes = [];
   try {
@@ -3651,8 +3678,9 @@ async function runRegOcr() {
     if (clear) {
       const c = parseClear(await ocr(clear, "jpn+eng", (p) => msg(`クリア画像を読み取り中… ${p}%`)));
       if (c.min != null) {
-        $("#reg-min").value = c.min;
-        $("#reg-sec").value = c.sec;
+        const k = $("#reg-ocr-fast").value || "off";
+        $(`#reg-min-${k}`).value = c.min;
+        $(`#reg-sec-${k}`).value = c.sec;
         notes.push("タイム");
       }
       if (c.turns) ($("#reg-turns").value = c.turns), notes.push("クリアターン");

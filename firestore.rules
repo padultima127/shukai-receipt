@@ -22,7 +22,7 @@ service cloud.firestore {
     function validTeam(d) {
       return d.keys().hasOnly(['id', 'userAdded', 'dungeonId', 'title', 'timeSec', 'turns', 'yields', 'members',
           'steps', 'source', 'author', 'sourceDate', 'metrics', 'plus891Choice', 'newDungeon',
-          'status', 'ownerUid', 'ownerName', 'createdAt', 'icons', 'fastMode'])
+          'status', 'ownerUid', 'ownerName', 'createdAt', 'icons', 'fastMode', 'times'])
         && shortStr(d.title, 80)
         && shortStr(d.dungeonId, 60)
         && d.timeSec is number && d.timeSec > 0 && d.timeSec < 36000
@@ -32,7 +32,8 @@ service cloud.firestore {
         && (!('ownerName' in d) || shortStr(d.ownerName, 60))
         // 画像から切り抜いたキャラのアイコン（図鑑No. → 64pxのwebp）。枠の数まで
         && (!('icons' in d) || (d.icons is map && d.icons.size() <= 12))
-        && (!('fastMode' in d) || d.fastMode is bool);
+        && (!('fastMode' in d) || d.fastMode is bool)
+        && (!('times' in d) || (d.times is map && d.times.keys().hasOnly(['on', 'off'])));
     }
     // 連投制限: 前回の登録から60秒以上あいていること（初回はOK）
     function notTooFast(uid) {
