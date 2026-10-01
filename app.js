@@ -1304,14 +1304,28 @@ function latentStripHTML(teamId, idx) {
   return `<div class="awk-row"><span class="awk-sep">潜在</span><span class="latent-strip" title="潜在覚醒（PDCレシートより）" style="background-image:url('latents.webp?v=${L.ver}');background-size:${L.cols * 100}% ${L.rows * 100}%;background-position:${pos}"></span></div>`;
 }
 // PDCで選んだバッジ（レシートのタイトルの左のアイコン。badges.webp から、画像から登録した編成は badgeIcon）
+// PDCのQRコードのバッジ番号 → バッジ名（名前はゲームウィズのバッジ一覧の絵と見比べて確認）
+const BADGE_NAMES = {
+  2: "HP強化＋", 7: "落ちコンなし", 9: "全体攻撃", 18: "バインド耐性",
+  41: "神タイプ強化", 42: "ドラゴンタイプ強化", 43: "悪魔タイプ強化", 44: "マシンタイプ強化", 46: "攻撃タイプ強化",
+  61: "星を紡ぐ精霊", 86: "L字消し攻撃", 97: "銀魂", 98: "2体攻撃強化", 103: "火列強化", 104: "T字消し攻撃", 105: "水コンボ強化",
+  110: "アイドルマスター",
+};
+function badgeNameOf(t) {
+  const id = t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
+  return t.badgeName ?? (id != null ? BADGE_NAMES[id] : null) ?? null;
+}
 function badgeIconHTML(t) {
   const B = window.PAD_BADGES;
   const i = B?.index?.[t.id] ?? (t.badgeId != null ? B?.byId?.[t.badgeId] : null);
+  const name = badgeNameOf(t);
+  const label = name ? `<span class="pdc-badge-name">${esc(name)}</span>` : "";
+  const title = `PDCで選んだバッジ${name ? `: ${esc(name)}` : ""}`;
   if (i != null) {
     const pos = `${((i % B.cols) / Math.max(1, B.cols - 1)) * 100}% ${(Math.floor(i / B.cols) / Math.max(1, B.rows - 1)) * 100}%`;
-    return `<span class="pdc-badge" title="PDCで選んだバッジ" style="background-image:url('badges.webp?v=${B.ver}');background-size:${B.cols * 100}% ${B.rows * 100}%;background-position:${pos}"></span>`;
+    return `<span class="pdc-badge-wrap"><span class="pdc-badge" title="${title}" style="background-image:url('badges.webp?v=${B.ver}');background-size:${B.cols * 100}% ${B.rows * 100}%;background-position:${pos}"></span>${label}</span>`;
   }
-  if (t.badgeIcon && /^data:image\/webp;base64,/.test(t.badgeIcon)) return `<span class="pdc-badge" title="PDCで選んだバッジ" style="background-image:url('${t.badgeIcon}');background-size:cover"></span>`;
+  if (t.badgeIcon && /^data:image\/webp;base64,/.test(t.badgeIcon)) return `<span class="pdc-badge-wrap"><span class="pdc-badge" title="${title}" style="background-image:url('${t.badgeIcon}');background-size:cover"></span>${label}</span>`;
   return "";
 }
 function renderGimmicks(d) {

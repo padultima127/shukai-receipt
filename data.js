@@ -11131,6 +11131,7 @@ window.PAD_SEED = {
     },
     {
       "id": "kirisame-hinata-nanaminn",
+      "badgeName": "回復強化＋",
       "dungeonId": "kirisame",
       "title": "日向ずらし編成",
       "timeSec": 1003,
@@ -14620,6 +14621,7 @@ window.PAD_SEED = {
     },
     {
       "id": "tenkyu-ichigo-jakusha",
+      "badgeId": 98,
       "dungeonId": "tenkyu",
       "title": "黒崎一護 全部位破壊",
       "timeSec": 902,
@@ -22190,6 +22192,7 @@ window.PAD_SEED = {
     },
     {
       "id": "jupiter-bambi-onsen",
+      "badgeName": "ブリーチ",
       "dungeonId": "jupiter",
       "title": "バンビ×山本元柳斎 ほぼずらし（部位ボ7）",
       "timeSec": 510,
@@ -25277,6 +25280,7 @@ window.PAD_SEED = {
     },
     {
       "id": "mercury-berger-ao-v2",
+      "badgeName": "大罪龍と鍵の勇者",
       "dungeonId": "mercury",
       "title": "ベルガー×チャオリンループ 第2弾（部位破壊9）",
       "timeSec": 979,
@@ -25507,6 +25511,7 @@ window.PAD_SEED = {
     },
     {
       "id": "mercury-berger-ao-v1",
+      "badgeName": "大罪龍と鍵の勇者",
       "dungeonId": "mercury",
       "title": "ベルガー×チャオリンループ（部位破壊9）",
       "timeSec": 1069,
@@ -27794,6 +27799,7 @@ window.PAD_SEED = {
     },
     {
       "id": "venus-douma-nanaminn",
+      "badgeName": "バランスタイプ強化",
       "dungeonId": "venus",
       "title": "童磨 All+297",
       "timeSec": 817,
@@ -43524,6 +43530,7 @@ window.PAD_SEED = {
     },
     {
       "id": "shinokuchou-kikoru-lancelot",
+      "badgeName": "怪獣8号",
       "dungeonId": "shinokuchou",
       "title": "キコル ほぼずらし",
       "timeSec": 539,

@@ -30,7 +30,7 @@ LABEL = re.compile(r"N[oO0]\.?\s*(\d{3,5})")
 
 def load_teams():
     out = subprocess.run(
-        ["node", "-e", "global.window={};eval(require('fs').readFileSync(process.argv[1],'utf8'));const s=window.PAD_SEED;const mon=new Map(s.monsters.map(m=>[m.id,m]));console.log(JSON.stringify(s.teams.map(t=>({id:t.id,source:t.source||'',multi:!!t.multi,m:t.members.map(m=>[mon.get(m.id)?.no??null,Number(String(m.assist??'').match(/No\\.(\\d+)/)?.[1])||null])}))))", str(ROOT / "data.js")],
+        ["node", "-e", "global.window={};eval(require('fs').readFileSync(process.argv[1],'utf8'));const s=window.PAD_SEED;const mon=new Map(s.monsters.map(m=>[m.id,m]));console.log(JSON.stringify(s.teams.map(t=>({id:t.id,source:t.source||'',multi:!!t.multi,badgeId:t.badgeId??null,m:t.members.map(m=>[mon.get(m.id)?.no??null,Number(String(m.assist??'').match(/No\\.(\\d+)/)?.[1])||null])}))))", str(ROOT / "data.js")],
         capture_output=True, text=True, check=True,
     ).stdout
     return json.loads(out)
@@ -278,9 +278,21 @@ def badge_box_old(region):
     return (x0, y0, x1 + 1, y1 + 1)
 
 
+DEBUG_BADGE = os.environ.get("DEBUG_BADGE")
+
+
+def badge_quality(raw):
+    """切り抜きの画質の目安: 元の大きさ（ピクセル数）× くっきり度（輪郭の強さ）"""
+    from PIL import ImageFilter, ImageStat
+    g = raw.convert("L").resize((BADGE_W, BADGE_H), Image.LANCZOS)
+    edge = ImageStat.Stat(g.filter(ImageFilter.FIND_EDGES)).var[0]
+    return raw.width * raw.height * edge
+
+
 def crop_badges(teams, ocr):
     """PDCで選んだバッジ（タイトルの左のアイコン）を編成ごとに切り抜いて badges.webp にまとめる"""
     found = {}
+    quality = {}
     latents = {}
     for t in teams:
         m = re.search(r"status/(\d+)", t["source"])
@@ -318,7 +330,9 @@ def crop_badges(teams, ocr):
                     region = bim.crop((0, int(max(0, btop - bcell * 0.85)), int(bcell * 0.75), int(btop)))
                     box = badge_box(region) or badge_box_old(region)
                     if box:
-                        found[t["id"]] = region.crop(box).resize((BADGE_W, BADGE_H), Image.LANCZOS)
+                        raw = region.crop(box)
+                        found[t["id"]] = raw.resize((BADGE_W, BADGE_H), Image.LANCZOS)
+                        quality[t["id"]] = badge_quality(raw)
                         break
             # 潜在覚醒（アシストの段と本体の段の間、各枠の下側）。最大8枠が2段で並ぶ
             base_top = base_b * H + cell * 0.04 - cell
@@ -327,6 +341,51 @@ def crop_badges(teams, ocr):
                     continue
                 strip = im.crop((int(col * cell + cell * 0.02), int(base_top - cell * 0.46), int((col + 1) * cell - cell * 0.02), int(base_top - cell * 0.01)))
                 latents[f'{t["id"]}:{col}'] = strip.resize((LAT_W, LAT_H), Image.LANCZOS)
+    # 同じバッジ（QRコードのバッジ番号が同じ）は、一番くっきり写っている切り抜きを全部の編成で使う
+    groups = {}
+    for t in teams:
+        if t["id"] in found and t.get("badgeId"):
+            groups.setdefault(t["badgeId"], []).append(t["id"])
+    # バッジ番号がない編成は、見た目が一番近い「番号がわかっている切り抜き」と同じバッジとみなす
+    # （ぼやけた切り抜きでも比べられるように、両方をぼかして小さくしてから比べる。別のバッジとの差がはっきりある時だけ）
+    from PIL import ImageFilter
+    bid = {t["id"]: t.get("badgeId") for t in teams}
+    inferred = {}
+    small = {k: list([c for px in v.filter(ImageFilter.GaussianBlur(3)).resize((12, 9), Image.BOX).getdata() for c in px]) for k, v in found.items()}
+    dist = lambda a, b: sum((x - y) ** 2 for x, y in zip(small[a], small[b])) / len(small[a])
+    for k in found:
+        if bid[k]:
+            continue
+        best = {}
+        for o in found:
+            if bid[o]:
+                best[bid[o]] = min(best.get(bid[o], 1e9), dist(k, o))
+        ranked = sorted(best.items(), key=lambda x: x[1])
+        if ranked and ranked[0][1] < 250 and (len(ranked) < 2 or ranked[1][1] > ranked[0][1] * 1.3):
+            groups.setdefault(ranked[0][0], []).append(k)
+            inferred[k] = ranked[0][0]
+        if DEBUG_BADGE:
+            print("番号なし", k, [(b, int(d)) for b, d in ranked[:2]])
+    picked = {}
+    for tids in groups.values():
+        # 同じ番号でも見た目が違うバッジ（キャラのバッジなど）があるので、見た目が近いものだけ差し替える
+        for k in tids:
+            near_ones = [o for o in tids if dist(k, o) < 330]
+            best = max(near_ones, key=lambda o: quality[o])
+            if k not in picked or quality[best] > quality[picked[k]]:
+                picked[k] = best
+            if best != k and DEBUG_BADGE:
+                print("差し替え", k, "<-", best, int(dist(k, best)))
+    if DEBUG_BADGE:
+        pairs = sorted((k, v) for k, v in picked.items() if k != v)
+        dbg = Image.new("RGB", (BADGE_W * 2 + 8, BADGE_H * len(pairs)), (255, 255, 255))
+        for i, (k, v) in enumerate(pairs):
+            dbg.paste(found[k], (0, i * BADGE_H)); dbg.paste(found[v], (BADGE_W + 8, i * BADGE_H))
+        dbg.save(SCRATCH / "badge_pairs.png")
+        print("\n".join(f"{i} {k} <- {v} {int(dist(k, v))}" for i, (k, v) in enumerate(pairs)))
+    for k in list(found):
+        if k in picked:
+            found[k] = found[picked[k]]
     ids = sorted(found)
     cols = 16
     rows = max(1, (len(ids) + cols - 1) // cols)
@@ -349,8 +408,8 @@ def crop_badges(teams, ocr):
                 if tw in t["source"] and t["id"] in found and mm.group(1) not in by_id:
                     by_id[mm.group(1)] = ids.index(t["id"])
     with open(ROOT / "icons.js", "a", encoding="utf-8") as f:
-        f.write("// PDCで選んだバッジ（タイトルの左のアイコン）。badges.webp の何番目か（index: 編成id、byId: QRコードのバッジ番号）\nwindow.PAD_BADGES = { ver: %s, cols: %d, rows: %d, index: %s, byId: %s };\n"
-                % (json.dumps(ver), cols, rows, json.dumps({tid: i for i, tid in enumerate(ids)}, ensure_ascii=False), json.dumps(by_id)))
+        f.write("// PDCで選んだバッジ（タイトルの左のアイコン）。badges.webp の何番目か（index: 編成id、byId: QRコードのバッジ番号、idOf: 番号のない編成を見た目で推定した番号）\nwindow.PAD_BADGES = { ver: %s, cols: %d, rows: %d, index: %s, byId: %s, idOf: %s };\n"
+                % (json.dumps(ver), cols, rows, json.dumps({tid: i for i, tid in enumerate(ids)}, ensure_ascii=False), json.dumps(by_id), json.dumps(inferred, ensure_ascii=False)))
     print(f"バッジ {len(ids)}編成")
     keys = sorted(latents)
     lcols = 12
