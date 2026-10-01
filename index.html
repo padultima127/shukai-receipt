@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261001102304">
+  <link rel="stylesheet" href="style.css?v=20261001123825">
 </head>
 <body>
   <header>
@@ -13,7 +13,7 @@
       <button class="tab active" data-tab="search">編成検索</button>
       <button class="tab" data-tab="box">手持ちBOX</button>
       <button class="tab" data-tab="register">編成登録</button>
-      <button class="tab" data-tab="data">データ管理</button>
+      <button class="tab" data-tab="data" hidden>データ管理</button>
     </nav>
   </header>
 
@@ -216,6 +216,7 @@ F: 光輝の聖騎士
   <section class="card feedback" id="feedback">
     <h2>感想・要望を送る</h2>
     <p class="hint">使ってみた感想、欲しい機能、データの間違いなど気軽にどうぞ（ログイン不要・1000字まで）。返信が欲しい場合はXのIDなど連絡先を書いてください（任意、管理者だけが見られます）。</p>
+    <p class="hint">X（Twitter）の <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> / <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> へのリプライやDMでも受け付けています。<strong>Xの方が反応が早い</strong>ので、急ぎの場合はそちらへどうぞ。</p>
     <form id="fb-form">
       <textarea id="fb-text" rows="4" maxlength="1000" placeholder="例: 〇〇の代用候補が役に立った／〇〇ダンジョンの編成が欲しい"></textarea>
       <div class="row">
@@ -238,11 +239,11 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261001102304"></script>
-  <script src="firebase-backend.js?v=20261001102304"></script>
-  <script src="monsters-db.js?v=20261001102304"></script>
-  <script src="monsters-changes.js?v=20261001102304"></script>
-  <script src="data.js?v=20261001102304"></script>
-  <script src="app.js?v=20261001102304"></script>
+  <script src="firebase-config.js?v=20261001123825"></script>
+  <script src="firebase-backend.js?v=20261001123825"></script>
+  <script src="monsters-db.js?v=20261001123825"></script>
+  <script src="monsters-changes.js?v=20261001123825"></script>
+  <script src="data.js?v=20261001123825"></script>
+  <script src="app.js?v=20261001123825"></script>
 </body>
 </html>

@@ -85,7 +85,8 @@ def split_variants(text, default_no):
     戻り値は (敵No., 文, 先制の表記があるか)"""
     marks = list(re.finditer(r"((?:@@E\d+@@\s*)+)の先制行動", text))
     if not marks:
-        return [(default_no, re.sub(r"@@E\d+@@", "", text), "先制行動" in text)]
+        # 敵1体の欄は「先制行動と特性」の列そのものなので、表記がなくても最初の行動は先制（霧雨4Fの10,395,000など。本人確認済み）
+        return [(default_no, re.sub(r"@@E\d+@@", "", text), True)]
     out = []
     for i, m in enumerate(marks):
         no = int(re.findall(r"@@E(\d+)@@", m.group(1))[-1])
@@ -121,7 +122,7 @@ def hits_of(text, attrs, threshold, sub_attrs=None, labeled=True):
         body = re.sub(r"[（(][^）)]*?(?:以降|次回|次ターン)[^）)]*[）)]", "", body)  # 「（※以降、◯ダメージ）」は予告なので除く
         body = "\n".join(l for l in body.split("\n") if not l.strip().startswith("※"))  # 「※既にリダチェン時」など条件付きの注記は除く
         if marker is None:
-            # 「の先制行動」と書かれた敵だけが先制攻撃をする（本人談）。表記がない欄の最初のダメージは先制ではない
+            # 複数の敵をまとめた欄では「の先制行動」と書かれた敵だけが先制攻撃をする
             kind, label = ("preemptive", "先制") if labeled else ("turn", "行動（先制の表記なし）")
         elif "超根性" in marker and ("発動" in marker or "行動" in marker):
             kind, label = "superResolve", "超根性発動時"

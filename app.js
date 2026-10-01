@@ -1332,6 +1332,7 @@ function enduranceSetup(t0, opts = {}) {
   const badge = t.badge ?? null;
   // 加護: 耐久チェックでユーザーが選んだもの（なし/陽/陰）。未選択ならダンジョンのデータ
   const dungeonKago = opts.kago !== undefined ? opts.kago || null : db.dungeons.find((x) => x.id === t.dungeonId)?.kago ?? null;
+  const dungeonBoost = db.dungeons.find((x) => x.id === t.dungeonId)?.typeBoost ?? null;
   // 属性変更スキル（自分の属性が◯属性に変化）で主属性が変わった時のHPも出せるように、関数にしておく
   // floor: 熟成（バトル5以降1.5倍、10以降2倍）の判定に使う階
   // parts: 部位を壊した後か（部位破壊ボーナス 1つにつき1.2倍、複数なら掛け算）
@@ -1407,6 +1408,12 @@ function enduranceSetup(t0, opts = {}) {
       if (id === 129 && dungeonKago !== "陰") continue;
       hp *= v;
       mults.push(`${STAT_NAME[id]}×${v}`);
+    }
+    // ダンジョンのタイプ強化（深遠の万龍【回復タイプ強化】なら回復タイプのHP1.5倍など）
+    const tb = dungeonBoost;
+    if (tb?.hp && String(row0[13] ?? "").split(".").some((x) => tb.types.includes(Number(x)))) {
+      hp *= tb.hp;
+      mults.push(`${tb.label}×${tb.hp}`);
     }
     // 部位破壊ボーナス（本体の通常覚醒・選んだ超覚醒・武器の覚醒）: 部位を壊した後、1つにつき1.2倍
     if (parts) {
@@ -2545,7 +2552,12 @@ function renderAdminPanel() {
   const panel = $("#admin-panel");
   adminUnsubs.forEach((u) => u?.());
   adminUnsubs = [];
-  if (shared.mode !== "firebase" || !shared.fb.isAdmin) {
+  // データ管理タブは管理者だけに出す（それ以外の人には不要）
+  const isAdmin = shared.mode === "firebase" && shared.fb.isAdmin;
+  const dataTab = document.querySelector('.tab[data-tab="data"]');
+  dataTab.hidden = !isAdmin;
+  if (!isAdmin && dataTab.classList.contains("active")) document.querySelector(".tab").click();
+  if (!isAdmin) {
     panel.hidden = true;
     return;
   }

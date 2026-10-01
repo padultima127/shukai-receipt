@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 80,
+  "version": 83,
   "seed": true,
   "monsters": [
     {
@@ -1416,6 +1416,111 @@ window.PAD_SEED = {
       "name": "冨岡義勇＆竈門炭治郎",
       "attr": "水",
       "tags": []
+    },
+    {
+      "id": "n12235",
+      "no": 12235,
+      "name": "Zガンダム バイオセンサー起動",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n10938",
+      "no": 10938,
+      "name": "情愛の聖柏神・ノア",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n11180",
+      "no": 11180,
+      "name": "ラクス・クライン＆エターナル",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n11210",
+      "no": 11210,
+      "name": "命天龍・ゼルクレア",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n13442",
+      "no": 13442,
+      "name": "リュグナー",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13440",
+      "no": 13440,
+      "name": "腐敗の賢老・クヴァール",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13394",
+      "no": 13394,
+      "name": "博愛を具現化する幻画師・プリム",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n9732",
+      "no": 9732,
+      "name": "カミーユ・ビダン",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n13363",
+      "no": 13363,
+      "name": "テレシア・ヴァン・アストレア",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n14061",
+      "no": 14061,
+      "name": "卯ノ花八千流",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n5286",
+      "no": 5286,
+      "name": "ぐでたま【オムライス】",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n11403",
+      "no": 11403,
+      "name": "ジェレミア＆サザーランド・ジーク",
+      "attr": "木",
+      "tags": []
+    },
+    {
+      "id": "n7712",
+      "no": 7712,
+      "name": "レオナ",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n2691",
+      "no": 2691,
+      "name": "十番隊隊長・日番谷冬獅郎",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n2314",
+      "no": 2314,
+      "name": "覚醒・ミニへらうるず↑↑",
+      "attr": "火",
+      "tags": []
     }
   ],
   "items": [
@@ -1845,10 +1950,10 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/372893",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -1885,9 +1990,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 120000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "木"
@@ -1904,9 +2009,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1472000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水",
                   "闇"
@@ -1941,9 +2046,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 350000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -1958,9 +2063,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 650000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水",
@@ -1991,9 +2096,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 710000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -2007,25 +2112,25 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1520000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1512000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1520000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -2049,17 +2154,17 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 740000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 740000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -2294,10 +2399,10 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/562297",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -2346,9 +2451,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 10395000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -2370,9 +2475,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 10890000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -2386,9 +2491,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 15000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -2410,17 +2515,17 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 5500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 9900000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -2446,9 +2551,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 16000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -2465,9 +2570,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし） 現HP350%割合",
+                "label": "先制 現HP350%割合",
                 "ratio": 350,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -2481,9 +2586,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 19000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -2505,9 +2610,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 19152000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水"
@@ -2524,9 +2629,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 19950000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -2540,9 +2645,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 10450000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -2564,9 +2669,9 @@ window.PAD_SEED = {
             "floor": 15,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 21582000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -2722,10 +2827,10 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/545668",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -2764,9 +2869,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "行動（先制の表記なし） 現HP99%割合",
+                "label": "先制 現HP99%割合",
                 "ratio": 99,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -2783,9 +2888,9 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 5000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水"
@@ -2816,17 +2921,17 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2250000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2250000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -2850,9 +2955,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -2866,9 +2971,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -2882,9 +2987,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -2915,9 +3020,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -2943,17 +3048,17 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -2968,9 +3073,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし） 現HP120%割合",
+                "label": "先制 現HP120%割合",
                 "ratio": 120,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -2996,9 +3101,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 9000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -3021,9 +3126,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 10000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -3176,34 +3281,34 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/574144",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 22500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 22500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 45000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -3219,9 +3324,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6120000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -3252,9 +3357,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 7400000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -3279,17 +3384,17 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3780000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3780000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -3311,9 +3416,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8206275,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -3327,9 +3432,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 9450000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -3355,17 +3460,17 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3780000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 7560000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -3408,9 +3513,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 14400000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水",
@@ -3452,9 +3557,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 16200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -3621,26 +3726,26 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/551905",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 54000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 45000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -3686,25 +3791,25 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -3756,9 +3861,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6480000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -3782,17 +3887,17 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2070000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 5300000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ],
@@ -3815,9 +3920,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 7020000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -3895,9 +4000,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 9000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -4057,10 +4162,10 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/564989",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
@@ -4073,9 +4178,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 10000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -4089,17 +4194,17 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -4113,9 +4218,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3300000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -4137,9 +4242,9 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 12000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -4153,25 +4258,25 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -4194,9 +4299,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 15000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -4210,17 +4315,17 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし） 現HP350%割合",
+                "label": "先制 現HP350%割合",
                 "ratio": 350,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 17000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -4234,9 +4339,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 17500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -4257,9 +4362,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 21000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -4281,9 +4386,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 22000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水"
@@ -4300,9 +4405,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 22080000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -4324,9 +4429,9 @@ window.PAD_SEED = {
             "floor": 15,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 22500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
@@ -4736,18 +4841,18 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/516407",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 25350,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -4762,9 +4867,9 @@ window.PAD_SEED = {
                 "threshold": 5
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 25350,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -4809,9 +4914,9 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3890000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -4837,9 +4942,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3900000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -4856,33 +4961,33 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 975000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 975000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 975000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -4899,33 +5004,33 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 980000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 979983,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -4942,9 +5047,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -5006,9 +5111,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3735000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -5025,9 +5130,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4230000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5061,9 +5166,9 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4250000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5077,9 +5182,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5264,26 +5369,26 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/531389",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 37500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 37500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -5300,9 +5405,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5336,17 +5441,17 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 3100000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5371,9 +5476,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 5500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -5404,9 +5509,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "火"
@@ -5423,9 +5528,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水",
@@ -5444,9 +5549,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -5463,9 +5568,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -5491,9 +5596,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8100000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火",
                   "闇"
@@ -5510,17 +5615,17 @@ window.PAD_SEED = {
             "floor": 12,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -5549,9 +5654,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -5573,9 +5678,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8820000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -5792,26 +5897,26 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/542373",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 37500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 44730,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -5830,9 +5935,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "水",
@@ -5851,17 +5956,17 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
@@ -5879,9 +5984,9 @@ window.PAD_SEED = {
             "floor": 4,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 5000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "火"
@@ -5930,9 +6035,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5947,9 +6052,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1600000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -5975,9 +6080,9 @@ window.PAD_SEED = {
             "floor": 8,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -5994,9 +6099,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -6018,9 +6123,9 @@ window.PAD_SEED = {
             "floor": 10,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 7500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "火"
@@ -6059,9 +6164,9 @@ window.PAD_SEED = {
             "floor": 11,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 8200000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
@@ -6094,9 +6199,9 @@ window.PAD_SEED = {
             "floor": 13,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 9000000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -6118,9 +6223,9 @@ window.PAD_SEED = {
             "floor": 14,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 4500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -6134,9 +6239,9 @@ window.PAD_SEED = {
             "floor": 15,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 6506000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
@@ -6733,34 +6838,34 @@ window.PAD_SEED = {
         "source": {
           "site": "ゲームウィズ",
           "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/451977",
-          "date": "2026-09-30"
+          "date": "2026-10-01"
         },
         "auto": true,
-        "note": "ゲームウィズの表から自動で取り込み（要確認）。「の先制行動」と書かれた敵の攻撃だけを先制として数え、表記のない行動と初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
         "floors": [
           {
             "floor": 1,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 23100,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "闇"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 23100,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 23100,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "木",
@@ -6783,9 +6888,9 @@ window.PAD_SEED = {
             "floor": 2,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 2500000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木",
                   "水",
@@ -6804,9 +6909,9 @@ window.PAD_SEED = {
             "floor": 3,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 154500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "闇"
@@ -6845,33 +6950,33 @@ window.PAD_SEED = {
             "floor": 5,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 33000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "火"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 33000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 33000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "木"
                 ]
               },
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 33000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光"
                 ]
@@ -6889,9 +6994,9 @@ window.PAD_SEED = {
             "floor": 6,
             "hits": [
               {
-                "label": "行動（先制の表記なし） 現HP500%割合",
+                "label": "先制 現HP500%割合",
                 "ratio": 500,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "木",
@@ -6914,9 +7019,9 @@ window.PAD_SEED = {
             "floor": 7,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1450000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "光",
                   "木",
@@ -6949,9 +7054,9 @@ window.PAD_SEED = {
             "floor": 9,
             "hits": [
               {
-                "label": "行動（先制の表記なし）",
+                "label": "先制",
                 "dmg": 1600000,
-                "kind": "turn",
+                "kind": "preemptive",
                 "attrs": [
                   "水"
                 ],
@@ -6993,6 +7098,809 @@ window.PAD_SEED = {
             ],
             "enemyAttrsAfter": [
               "水"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju",
+      "name": "深遠の万龍【回復タイプ強化】",
+      "aliases": [
+        "新万寿",
+        "深遠の万龍",
+        "新万寿チャレンジ",
+        "深遠の万龍【超重力】",
+        "再臨の超星",
+        "超星"
+      ],
+      "stamina": 99,
+      "battles": 11,
+      "note": "再臨の超星【超重力】。回復タイプのHP1.5倍。ボスの超根性後に約800万の大ダメージ",
+      "typeBoost": {
+        "types": [
+          3
+        ],
+        "hp": 1.5,
+        "label": "回復タイプ強化"
+      },
+      "drops": [
+        {
+          "itemId": "plus",
+          "rate": 2970
+        },
+        {
+          "itemId": "exp",
+          "rate": 75121460
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 5,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "rainbowmetal",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "killer",
+          "rate": 4,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "sixslot",
+          "rate": 3,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "gimmicks": {
+        "all": [
+          "resolve",
+          "bigHit",
+          "awakenVoid",
+          "assistVoid",
+          "unerasable",
+          "dmgVoid",
+          "board54",
+          "skillSeal",
+          "tape",
+          "dmgAbsorb",
+          "spike",
+          "healDown",
+          "weakenAwaken",
+          "jammer",
+          "lock",
+          "roulette",
+          "darkness",
+          "timeDown",
+          "poison"
+        ],
+        "partial": [
+          {
+            "key": "bind",
+            "sites": [
+              "ゲームウィズ"
+            ]
+          },
+          {
+            "key": "cloud",
+            "sites": [
+              "ゲームウィズ"
+            ]
+          },
+          {
+            "key": "skillDelay",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "damageCap",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "comboAbsorb",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "comboDown",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "shield",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "atkDown",
+            "sites": [
+              "ゲームエイト"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/458481",
+            "date": "2026-10-01"
+          },
+          {
+            "site": "ゲームエイト",
+            "url": "https://game8.jp/pazudora/630873",
+            "date": "2026-09-25"
+          }
+        ],
+        "notes": [
+          "バインド（9F）・雲（5F・10F）: 対策ギミック欄はゲームウィズのみ。ゲームエイトも階層表には記載",
+          "スキル遅延（2F）・ダメージ上限値変化（3F）・コンボ吸収（6F・10F）・シールド（10F・11F）: 対策ギミック欄はゲームエイトのみ。ゲームウィズも敵行動表には記載",
+          "最大HP半減（5F）: 両サイトの敵行動表に記載"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "damage": {
+        "source": {
+          "site": "ゲームウィズ",
+          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/458481",
+          "date": "2026-10-01"
+        },
+        "auto": true,
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "floors": [
+          {
+            "floor": 1,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 28350,
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 30450,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "火",
+              "闇"
+            ],
+            "note": "敵は4種類のうち3体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 2,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 940000,
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "初回行動時",
+                "dmg": 6559880,
+                "kind": "turn",
+                "attrs": [
+                  "火"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ]
+          },
+          {
+            "floor": 3,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 1436400,
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "初回行動時",
+                "dmg": 1723680,
+                "kind": "turn",
+                "attrs": [
+                  "火"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "火",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "光",
+              "闇"
+            ],
+            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 4,
+            "hits": [],
+            "enemyAttrs": [
+              "木",
+              "火"
+            ],
+            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 5,
+            "hits": [],
+            "enemyAttrs": [
+              "光"
+            ]
+          },
+          {
+            "floor": 6,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 737100,
+                "kind": "preemptive",
+                "attrs": [
+                  "水"
+                ],
+                "note": "表には2件のダメージ（敵1体につき1回として最大の値）"
+              },
+              {
+                "label": "先制",
+                "dmg": 739200,
+                "kind": "preemptive",
+                "attrs": [
+                  "闇"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "水",
+              "闇"
+            ]
+          },
+          {
+            "floor": 7,
+            "hits": [
+              {
+                "label": "初回行動時",
+                "dmg": 6787200,
+                "kind": "turn",
+                "attrs": [
+                  "光"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "光"
+            ],
+            "enemyAttrsAfter": [
+              "光"
+            ]
+          },
+          {
+            "floor": 8,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 887670,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "闇"
+            ],
+            "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
+          },
+          {
+            "floor": 9,
+            "hits": [],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
+            "enemyAttrsAfter": [
+              "木",
+              "火",
+              "闇"
+            ],
+            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 10,
+            "hits": [],
+            "enemyAttrs": [
+              "木"
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "お邪魔"
+                ],
+                "dur": 10
+              }
+            ]
+          },
+          {
+            "floor": 11,
+            "hits": [
+              {
+                "label": "先制 現HP400%割合",
+                "ratio": 400,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              },
+              {
+                "label": "超根性発動時",
+                "dmg": 7843500,
+                "kind": "superResolve",
+                "attrs": [
+                  "闇"
+                ],
+                "threshold": 50
+              }
+            ],
+            "enemyAttrs": [
+              "木"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou",
+      "name": "星砕の兆龍【超高度/神タイプ強化】",
+      "aliases": [
+        "新凶兆",
+        "星砕の兆龍",
+        "新凶兆チャレンジ",
+        "再臨の超星",
+        "超星"
+      ],
+      "stamina": 99,
+      "battles": 12,
+      "note": "再臨の超星【超重力】。超高度（回復力1/2）、神タイプのHP1.5倍。5F・9F・12Fに700万超の大ダメージ",
+      "typeBoost": {
+        "types": [
+          5
+        ],
+        "hp": 1.5,
+        "label": "神タイプ強化"
+      },
+      "drops": [
+        {
+          "itemId": "plus",
+          "rate": 6600
+        },
+        {
+          "itemId": "exp",
+          "rate": 82917013
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 5,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "kingdragon",
+          "rate": 5,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "sixslot",
+          "rate": 3,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "gimmicks": {
+        "all": [
+          "atkDown",
+          "damageCap",
+          "unerasable",
+          "poison",
+          "assistVoid",
+          "timeDown",
+          "healDown",
+          "board54",
+          "bigHit",
+          "skillDelay",
+          "jammer",
+          "cloud",
+          "tape",
+          "roulette",
+          "spike"
+        ],
+        "partial": [
+          {
+            "key": "maxHpDown",
+            "sites": [
+              "ゲームウィズ"
+            ]
+          },
+          {
+            "key": "resolve",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "comboAbsorb",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "weakenAwaken",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "awakenVoid",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "dmgAbsorb",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "dmgVoid",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "attrAbsorb",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "lock",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "shield",
+            "sites": [
+              "ゲームエイト"
+            ]
+          },
+          {
+            "key": "darkness",
+            "sites": [
+              "ゲームエイト"
+            ]
+          }
+        ],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/466138",
+            "date": "2026-10-01"
+          },
+          {
+            "site": "ゲームエイト",
+            "url": "https://game8.jp/pazudora/642012",
+            "date": "2026-09-25"
+          }
+        ],
+        "notes": [
+          "最大HP変更: ゲームウィズのみ記載",
+          "根性・コンボ吸収・覚醒無効・ダメージ吸収/無効・属性吸収・ロック・シールド・暗闇: 対策ギミック欄はゲームエイトのみ",
+          "部位破壊で凶玉（最大2個）"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "damage": {
+        "source": {
+          "site": "ゲームウィズ",
+          "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/466138",
+          "date": "2026-10-01"
+        },
+        "auto": true,
+        "note": "ゲームウィズの表から自動で取り込み（要確認）。敵1体の欄は最初の行動を先制、複数の敵をまとめた欄は「の先制行動」と書かれた敵だけを先制として数える。初回行動はワンパン前提で受けない扱い。超根性発動時の攻撃は数える",
+        "floors": [
+          {
+            "floor": 1,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 21000,
+                "kind": "preemptive",
+                "attrs": [
+                  "火"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 21000,
+                "kind": "preemptive",
+                "attrs": [
+                  "水"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 21000,
+                "kind": "preemptive",
+                "attrs": [
+                  "木"
+                ]
+              },
+              {
+                "label": "先制",
+                "dmg": 21000,
+                "kind": "preemptive",
+                "attrs": [
+                  "光",
+                  "闇"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "木",
+              "水",
+              "火",
+              "闇"
+            ],
+            "note": "敵は5種類のうち4体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 2,
+            "hits": [],
+            "enemyAttrs": [
+              "光",
+              "水",
+              "火",
+              "闇"
+            ],
+            "note": "敵は4種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 3,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 1890000,
+                "kind": "preemptive",
+                "attrs": [
+                  "光",
+                  "火",
+                  "闇"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "火",
+              "闇"
+            ],
+            "note": "敵は3種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 4,
+            "hits": [
+              {
+                "label": "超根性発動時",
+                "dmg": 7800000,
+                "kind": "superResolve",
+                "attrs": [
+                  "闇"
+                ],
+                "threshold": 1
+              }
+            ],
+            "enemyAttrs": [
+              "光"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
+            ]
+          },
+          {
+            "floor": 5,
+            "hits": [
+              {
+                "label": "初回行動時",
+                "dmg": 7245000,
+                "kind": "turn",
+                "attrs": [
+                  "木"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
+            ]
+          },
+          {
+            "floor": 6,
+            "hits": [],
+            "enemyAttrs": [
+              "闇"
+            ]
+          },
+          {
+            "floor": 7,
+            "hits": [
+              {
+                "label": "先制 現HP450%割合",
+                "ratio": 450,
+                "kind": "preemptive",
+                "attrs": [
+                  "木",
+                  "水",
+                  "火"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "木",
+              "水",
+              "火"
+            ],
+            "note": "いずれか1体出現の枠は先制ダメージが大きい方で計算"
+          },
+          {
+            "floor": 8,
+            "hits": [],
+            "enemyAttrs": [
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "火"
+            ]
+          },
+          {
+            "floor": 9,
+            "hits": [
+              {
+                "label": "初回行動時",
+                "dmg": 7590000,
+                "kind": "turn",
+                "attrs": [
+                  "闇"
+                ]
+              }
+            ],
+            "enemyAttrs": [
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "闇"
+            ]
+          },
+          {
+            "floor": 10,
+            "hits": [
+              {
+                "label": "超根性発動時",
+                "dmg": 2448000,
+                "kind": "superResolve",
+                "attrs": [
+                  "火"
+                ],
+                "threshold": 75
+              }
+            ],
+            "enemyAttrs": [
+              "光",
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "水",
+              "火"
+            ],
+            "note": "敵は2種類のうち1体。先制ダメージが大きい組み合わせで計算（安全側）"
+          },
+          {
+            "floor": 11,
+            "hits": [],
+            "enemyAttrs": [
+              "闇"
+            ]
+          },
+          {
+            "floor": 12,
+            "hits": [
+              {
+                "label": "先制",
+                "dmg": 2430000,
+                "kind": "preemptive",
+                "attrs": [
+                  "闇"
+                ]
+              },
+              {
+                "label": "初回行動時",
+                "dmg": 8100000,
+                "kind": "turn",
+                "attrs": [
+                  "闇"
+                ]
+              },
+              {
+                "label": "超根性発動時",
+                "dmg": 2700000,
+                "kind": "superResolve",
+                "attrs": [
+                  "火"
+                ],
+                "threshold": 50
+              }
+            ],
+            "enemyAttrs": [
+              "闇"
+            ],
+            "enemyAttrsAfter": [
+              "火"
+            ],
+            "awaken": [
+              {
+                "names": [
+                  "闇",
+                  "猛毒"
+                ],
+                "dur": 10
+              }
             ]
           }
         ]
@@ -7573,32 +8481,61 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "チューリップの標本 No.12447"
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "latentHp": 13.5
+          }
         },
         {
           "id": "n14010",
           "role": "S",
-          "assist": "無一郎と蜜璃の鎹鴉 No.12817"
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 128
+          }
         },
         {
           "id": "n14005",
           "role": "S",
-          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006"
+          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138
+          }
         },
         {
           "id": "n14135",
           "role": "S",
-          "assist": "ユラの封呪符 No.14139"
+          "assist": "ユラの封呪符 No.14139",
+          "build": {
+            "lv": 99,
+            "plus": 300
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "ヘッドマウントディスプレイ No.13081"
+          "assist": "ヘッドマウントディスプレイ No.13081",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "latentHp": 13.5
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947"
+          "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "latentHp": 13.5
+          }
         }
       ],
       "steps": [
@@ -24785,6 +25722,1801 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-zgundam-kasajizo",
+      "dungeonId": "shinbanju",
+      "title": "Zガンダム＆バレノア ずらし",
+      "timeSec": 412,
+      "turns": 15,
+      "yields": {
+        "exp": 78877533,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n12235",
+          "role": "L",
+          "assist": "夏フェスのHEARTS・エキドナ -SARA-のうちわ No.10383"
+        },
+        {
+          "id": "n12235",
+          "role": "S",
+          "assist": "キング・オブ・ハートの紋章 No.11129"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "法陣 No.11705"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "水咎刀士アオトのカード No.11903"
+        },
+        {
+          "id": "n12235",
+          "role": "S",
+          "assist": "プー【フォト】 No.11795"
+        },
+        {
+          "id": "n11180",
+          "role": "F",
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+        }
+      ],
+      "steps": [
+        "最初の1コンボ以外ずらしで駆け抜けられる（プレイ履歴は6分52秒・15ターン）",
+        "3F以降はノア①→ノア②→Zガンダム×2のループ。Zガンダムは後打ちを意識",
+        "最大HP減少（5F）と消せない覚醒無効（8F）はラクスで返す",
+        "スキブ23・HP589,364（必要HP526,680）・木軽減潜在×1・全員スキルマ",
+        "代用: エキドナ装備→7強+持ちの威嚇装備、ゴッドガンダム装備→エニグマ装備",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/kasajizo_pad/status/1893700950537183492",
+      "author": {
+        "name": "かさじぞう"
+      },
+      "sourceDate": "2025-02-23",
+      "metrics": {
+        "chars": 251,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "②アオト装備"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→Zガンダムx2"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ノア①"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "パイモン→ノ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ノア②→"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→Zガンダム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "はラクスで返"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ノア①"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "②ノア②→"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "→Zガンダムx2"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "③ノア①"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "④ノア②→"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→Zガンダム"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-zgundam-kasajizo-2",
+      "dungeonId": "shinbanju",
+      "title": "Zガンダム＆バレノア 別バージョン",
+      "timeSec": 415,
+      "turns": 15,
+      "yields": {
+        "exp": 78877533,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n12235",
+          "role": "L",
+          "assist": "アムロ・レイ No.9724"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "法陣 No.11705"
+        },
+        {
+          "id": "n10938",
+          "role": "S",
+          "assist": "水咎刀士アオトのカード No.11903"
+        },
+        {
+          "id": "n12235",
+          "role": "S",
+          "assist": "ポチャッコのアイスクリーム No.11654"
+        },
+        {
+          "id": "n12235",
+          "role": "S",
+          "assist": "キング・オブ・ハートの紋章 No.11129"
+        },
+        {
+          "id": "n11180",
+          "role": "F",
+          "assist": "破壊されたポスト No.11295"
+        }
+      ],
+      "steps": [
+        "バレノア編成の別バージョン。クオリティを下げずに代用できる組み合わせ（プレイ履歴は6分54秒・15ターン）",
+        "2Fの1コンボ以外はずらし。3F以降は同じループ手順",
+        "最大HP減少（5F）と消せない覚醒無効（8F）はラクスで返す",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/kasajizo_pad/status/1894749934362165345",
+      "author": {
+        "name": "かさじぞう"
+      },
+      "sourceDate": "2025-02-26",
+      "metrics": {
+        "chars": 211,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→Zガンダム→ノ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→ノア①"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ノア②→"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→Zガンダム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "はラクスで返"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①ノア①"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ノア②→"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "→Zガンダムx2"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "③ノア①"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "④ノア②→"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→Zガンダム"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-mastergundam-nanaminn",
+      "dungeonId": "shinbanju",
+      "title": "マスターガンダム ほぼずらし（+297）",
+      "timeSec": 357,
+      "turns": 17,
+      "yields": {
+        "exp": 80455084,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n11149",
+          "role": "L",
+          "assist": "黒薔薇の種子 No.12441"
+        },
+        {
+          "id": "n11149",
+          "role": "S",
+          "assist": "双頭犬の支援機・オルトス No.11460"
+        },
+        {
+          "id": "n11149",
+          "role": "S",
+          "assist": "清海の女神・イシス＆ネフティスのうちわ No.11451"
+        },
+        {
+          "id": "n12530",
+          "role": "S",
+          "assist": "バリアブルロッドライフル No.11147"
+        },
+        {
+          "id": "n12849",
+          "role": "S",
+          "assist": "聖片の花嫁・サフィーラの指輪 No.12602"
+        },
+        {
+          "id": "n11149",
+          "role": "F",
+          "assist": "デッドプール＆ウルヴァリン 【コラボカバー・1】 No.11525"
+        }
+      ],
+      "steps": [
+        "慣れれば最速5分台（プレイ履歴は5分56秒・17ターン）",
+        "ほぼずらしで+297でいける",
+        "4Fは泥弱注意（事故った時は3パンでも可）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pad_nanaminn/status/1962777468399690114",
+      "author": {
+        "name": "七海黄猿"
+      },
+      "sourceDate": "2025-09-02",
+      "metrics": {
+        "chars": 193,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "（ネレ、）"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "（ネレとマ"
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "ネレ、a"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ネレ、d"
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→ネレ、a"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-kikoru-yu",
+      "dungeonId": "shinbanju",
+      "title": "キコル 光L1コンボ（4分台）",
+      "timeSec": 294,
+      "turns": 14,
+      "yields": {
+        "exp": 75121460,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n12930",
+          "role": "L",
+          "assist": "Ax-0112 No.12931"
+        },
+        {
+          "id": "n12715",
+          "role": "S",
+          "assist": "流華龍の神器・カヌー No.10554"
+        },
+        {
+          "id": "n11210",
+          "role": "S",
+          "assist": "破毒の孔雀王・ユリシャのブローチ No.9402"
+        },
+        {
+          "id": "n6978",
+          "role": "S",
+          "assist": "聖祭の慈愛神・ヴィーナスのスノードーム No.8170"
+        },
+        {
+          "id": "n12930",
+          "role": "S",
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+        },
+        {
+          "id": "n12960",
+          "role": "F",
+          "assist": "シャオチューフの酒壺 No.12618"
+        }
+      ],
+      "steps": [
+        "4分台（プレイ履歴は4分53秒・14ターン）。キコルを引き当てること以外難しいところはない",
+        "全階層で光L字1コンボ。ヴィーナスはスキルLv1",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/yu_mopa25/status/1971768961860858029",
+      "author": {
+        "name": "yu"
+      },
+      "sourceDate": "2025-09-27",
+      "metrics": {
+        "chars": 158,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "Sキコル裏"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "①ゼルクレア裏→"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "→アルトゥラ裏→"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→キコル"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①キコル ②"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "②キコル→功"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→功"
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①キコル→ア"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→アルトゥラ"
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "①ゼルクレア→キ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→キコル"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①キコル"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①キコル→ア"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→アルトゥラ ②"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②キコル"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①キコル→ゼ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→ゼルクレア→功"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→功"
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①キコル"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①キコル ②"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②キコル→ア"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "→アルトゥラ"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "キコル→サ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→サノス"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-ryugner-yu",
+      "dungeonId": "shinbanju",
+      "title": "リュグナー（4分台）",
+      "timeSec": 279,
+      "turns": 14,
+      "yields": {
+        "exp": 75121460,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n13442",
+          "role": "L",
+          "assist": "ワルりんの悪果実 No.9617"
+        },
+        {
+          "id": "n13074",
+          "role": "S",
+          "assist": "法陣 No.11705"
+        },
+        {
+          "id": "n13444",
+          "role": "S",
+          "assist": "宇髄の額当て No.12815"
+        },
+        {
+          "id": "n13440",
+          "role": "S",
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+        },
+        {
+          "id": "n13442",
+          "role": "S",
+          "assist": "堕姫の帯 No.10826"
+        },
+        {
+          "id": "n13442",
+          "role": "F",
+          "assist": "ハクの誓いのチョーカー No.11323"
+        }
+      ],
+      "steps": [
+        "4分台（プレイ履歴は4分38秒・14ターン）",
+        "キコルの方が使い勝手はいいが、キコルは他で使う場面が多いので新万寿専用機にするのもあり",
+        "8Fは盤面次第でリュグナーを打っても打たなくてもOK",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/yu_mopa25/status/2025470468036407515",
+      "author": {
+        "name": "yu"
+      },
+      "sourceDate": "2026-02-22",
+      "metrics": {
+        "chars": 153,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "①マグナモン裏 "
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "①ザイン裏O"
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①リュグナー"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "②ザイン→リ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "→リュグナー"
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①マグナモン→リ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→リュグナー O"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "リュグナー"
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "（ザイン）→"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "（リュグナー）"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "①リュグナー"
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "①マグナモン→リ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→リュグナー"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "①リュグナー→ク"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "→クヴァール"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-kikoru-yp",
+      "dungeonId": "shinbanju",
+      "title": "キコル（高速モード3分半）",
+      "timeSec": 209,
+      "turns": 13,
+      "yields": {
+        "exp": 80455084,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n12930",
+          "role": "L",
+          "assist": "学園の放送部・セイレーン＆リリスの弁当箱 No.13601"
+        },
+        {
+          "id": "n13596",
+          "role": "S",
+          "assist": "全ての鬼を滅するために作った刀 No.12848"
+        },
+        {
+          "id": "n13394",
+          "role": "S",
+          "assist": "キャプテン・マーベル＆ミズ・マーベル 【コラボカバー・1】 No.10710"
+        },
+        {
+          "id": "n9732",
+          "role": "S",
+          "assist": "ポチャッコのアイスクリーム No.11654"
+        },
+        {
+          "id": "n6978",
+          "role": "S",
+          "assist": "高垣楓のCD No.13578"
+        },
+        {
+          "id": "n12930",
+          "role": "F",
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266"
+        }
+      ],
+      "steps": [
+        "高速モードで3分半（プレイ履歴は3分29秒・13ターン）",
+        "ネヴァン武器はスキルLv1",
+        "6Fは7×6マスなので光L字が繋がらないように注意",
+        "同じ編成のYogupinoさんの投稿（4分17秒）もあり",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/YP_Pad_Hensei/status/2092235305416032326",
+      "author": {
+        "name": "YP(レシート投稿用)"
+      },
+      "sourceDate": "2026-08-25",
+      "metrics": {
+        "chars": 316,
+        "puzzle": 2,
+        "branch": 4,
+        "caution": 4,
+        "zurashi": 4,
+        "plus891": 0.4,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "ゼラ裏、"
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "、カミーユ裏、"
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "Fキコル裏、"
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "raw": "Lキコル裏、"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ゼラ、F"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fキコル"
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "raw": "プリム裏、"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）キコル"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "）ゼラ、キ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "キコル"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "キコル"
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "キコル※は"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "）キコル、プ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、プリム"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）キコル、ゼ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ゼラ"
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "キコル、カ"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、カミーユ"
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fキコル"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "Lキコル、プ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、プリム"
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "Fキコル、サ"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、サノス"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-gintoki-amakura",
+      "dungeonId": "shinbanju",
+      "title": "銀時 全ずらし（5分ちょっと）",
+      "timeSec": 304,
+      "turns": 12,
+      "yields": {
+        "exp": 80455084,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "ワルりんのカード No.12344"
+        },
+        {
+          "id": "n11210",
+          "role": "S",
+          "assist": "フチャの式札 No.7783"
+        },
+        {
+          "id": "n13596",
+          "role": "S",
+          "assist": "全ての鬼を滅するために作った刀 No.12848"
+        },
+        {
+          "id": "n13363",
+          "role": "S",
+          "assist": "暗殺道具 No.10225"
+        },
+        {
+          "id": "n6978",
+          "role": "S",
+          "assist": "アレキサンダーの見聞録 No.8443"
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "虚栄の汰魔悟 No.13505"
+        }
+      ],
+      "steps": [
+        "アシスト無効対策不要、スキルを打ってずらすだけで5分ちょっと（プレイ履歴は5分04秒・12ターン）",
+        "HP199,411・スキブ30。3Fとボスはグラビティでスキップ",
+        "全員スキルLv最大、全色ドロ強40%",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Amakura_pad_/status/2051554839713431793",
+      "author": {
+        "name": "あまくら"
+      },
+      "sourceDate": "2026-05-05",
+      "metrics": {
+        "chars": 179,
+        "puzzle": 0,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0.75,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ゼラチェ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラチェルン、ゼ"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "、ゼルクレア裏、"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ゼラチェ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラチェルン"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "、テレシア裏"
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ゼラチェ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラチェルン、ゼ"
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ゼルクレア"
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "、ゼルクレア"
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": " テレシア、ゼ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "、ゼラチェ"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "ラチェルン、銀"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、サノス"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-bambi-macaron",
+      "dungeonId": "shinbanju",
+      "title": "山本×バンビエッタ（約6分）",
+      "timeSec": 373,
+      "turns": 16,
+      "yields": {
+        "exp": 75121460,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n14040",
+          "role": "L",
+          "assist": "天王寺松右衛門 No.12809"
+        },
+        {
+          "id": "n14040",
+          "role": "S",
+          "assist": "ユーハバッハのマント No.14031"
+        },
+        {
+          "id": "n14028",
+          "role": "S",
+          "assist": "極醒の秘術神・オーディンのティアラ No.7637"
+        },
+        {
+          "id": "n14061",
+          "role": "S",
+          "assist": "シャオチューフの酒壺 No.12618"
+        },
+        {
+          "id": "n6978",
+          "role": "S",
+          "assist": "アレキサンダーの見聞録 No.8443"
+        },
+        {
+          "id": "n14072",
+          "role": "F",
+          "assist": "黒尾のユニフォーム No.12303"
+        }
+      ],
+      "steps": [
+        "高速モードで約6分（プレイ履歴は6分12秒・16ターン、1パズルミスで10秒前後遅延）",
+        "3Fから卯ノ花ループ、5Fから山本ループ",
+        "4F・5Fは1ターン耐久あり（4Fは闇を組まない）",
+        "11Fはサノスの順番注意",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/macaron_pad/status/2102080095829754230",
+      "author": {
+        "name": "マカロン"
+      },
+      "sourceDate": "2026-09-21",
+      "metrics": {
+        "chars": 251,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 4,
+        "zurashi": 2,
+        "plus891": 0.67,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、バンビエッタ、卵"
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "ら卯ノ花ルー"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、サノス※順"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-bambi-macaron-2",
+      "dungeonId": "shinbanju",
+      "title": "山本×バンビエッタ 速い版（4分台後半）",
+      "timeSec": 284,
+      "turns": 13,
+      "yields": {
+        "exp": 76623889,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n14040",
+          "role": "L",
+          "assist": "リクウの宝杯 No.12675"
+        },
+        {
+          "id": "n14040",
+          "role": "S",
+          "assist": "虚栄の汰魔悟 No.13505"
+        },
+        {
+          "id": "n14028",
+          "role": "S",
+          "assist": "ヴァーチェの天空刃 No.11516"
+        },
+        {
+          "id": "n5286",
+          "role": "S",
+          "assist": "全ての鬼を滅するために作った刀 No.12848"
+        },
+        {
+          "id": "n6978",
+          "role": "S",
+          "assist": "アレキサンダーの見聞録 No.8443"
+        },
+        {
+          "id": "n14072",
+          "role": "F",
+          "assist": "ユラの封呪符 No.14139"
+        }
+      ],
+      "steps": [
+        "約6分版より速さ重視。編成難易度は上がっている（プレイ履歴は4分44秒・13ターン）",
+        "武器含め全てスキルマ、ぐでたまはLv99でOK",
+        "5Fを除いてバンビエッタでずらしのみ。5Fはぐでたまの上側で光L字（超暗闇と順番注意）",
+        "4Fはルーレット注意、6F・11Fは順番注意",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/macaron_pad/status/2104419226975174671",
+      "author": {
+        "name": "マカロン"
+      },
+      "sourceDate": "2026-09-28",
+      "metrics": {
+        "chars": 286,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 10,
+        "zurashi": 1,
+        "plus891": 0.67,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "ぐでたま、一"
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "てバンビエッタでず"
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": "、ぐでたま上側"
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、サノス＊順"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-bazzb-payato",
+      "dungeonId": "shinbanju",
+      "title": "バズビー（高速モード3分57秒）",
+      "timeSec": 237,
+      "turns": 12,
+      "yields": {
+        "exp": 76623889,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n14078",
+          "role": "L",
+          "assist": "神才マクスウェルのカード No.12460"
+        },
+        {
+          "id": "n14080",
+          "role": "S",
+          "assist": "鳳凰機・Gフェニックスのスクロール No.14133"
+        },
+        {
+          "id": "n14080",
+          "role": "S"
+        },
+        {
+          "id": "n13999",
+          "role": "S"
+        },
+        {
+          "id": "n11403",
+          "role": "S",
+          "assist": "端居の筆龍楽士・ミナカの常夏ジュース No.14013"
+        },
+        {
+          "id": "n14078",
+          "role": "F",
+          "assist": "虚栄の汰魔悟 No.13505"
+        }
+      ],
+      "steps": [
+        "高速モードで3分57秒（12ターン）",
+        "L字パズルだけめんどい（4F）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Luluna_pad/status/2102372556330406051",
+      "author": {
+        "name": "ぱやと"
+      },
+      "sourceDate": "2026-09-22",
+      "metrics": {
+        "chars": 166,
+        "puzzle": 2,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "：バズビーB裏"
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "raw": "→リジェ・バロ裏→"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビーB→"
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "：バズビーA裏"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビーB"
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "：リジェ・バロx2"
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "→ジェレミア裏→"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビーB"
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "：リジェ・バロ x"
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": " ジェレミア"
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "①バズビー ②"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "②ジェレミア→バ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビー"
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→リジェ・バロx2"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→バズビー"
+          }
+        ]
+      }
+    },
+    {
+      "id": "shinbanju-bazzb-payato-2",
+      "dungeonId": "shinbanju",
+      "title": "バズビー（高速モード3分25秒）",
+      "timeSec": 206,
+      "turns": 11,
+      "yields": {
+        "exp": 75121460,
+        "plus": 2970
+      },
+      "members": [
+        {
+          "id": "n14078",
+          "role": "L",
+          "assist": "#UNICUS 夢見りあむのCD No.14151"
+        },
+        {
+          "id": "n14080",
+          "role": "S",
+          "assist": "豪鬼の大念珠 No.5092"
+        },
+        {
+          "id": "n14080",
+          "role": "S",
+          "assist": "フローディアのリースロッド No.13166"
+        },
+        {
+          "id": "n7712",
+          "role": "S",
+          "assist": "ペニー・パーカー【コミックカバー・1】 No.6943"
+        },
+        {
+          "id": "n2691",
+          "role": "S",
+          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584"
+        },
+        {
+          "id": "n14078",
+          "role": "F",
+          "assist": "[うつつの華模様]塩見周子 No.14167"
+        }
+      ],
+      "steps": [
+        "高速モードで3分25秒（11ターン）",
+        "3F・8F・9Fは火の4つ消し1セット",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Luluna_pad/status/2103764986061639937",
+      "author": {
+        "name": "ぱやと"
+      },
+      "sourceDate": "2026-09-26",
+      "metrics": {
+        "chars": 191,
+        "puzzle": 4,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "：バズビーB裏"
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "→日番谷裏→"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビーB→"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→バズビーA裏"
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "：バズビーB"
+          }
+        ],
+        "3": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "：リジェA裏"
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "raw": "→リジェB→"
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "raw": "→レオナ裏（"
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "：リジェAB"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→バズビー"
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "raw": " レオナ→バ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビー（火"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "バズビー（火"
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "：日番谷→バ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "→バズビー"
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "raw": "：リジェAB"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "→バズビー"
+          }
+        ]
+      }
+    },
+    {
+      "id": "kyouchou-kikoru-yp",
+      "dungeonId": "kyouchou",
+      "title": "キコル×ハデドラ（高速モード4分半）",
+      "timeSec": 276,
+      "turns": 21,
+      "yields": {
+        "exp": 82917013,
+        "plus": 6600
+      },
+      "members": [
+        {
+          "id": "n12930",
+          "role": "L",
+          "assist": "鬼蜘蛛の式札 No.6679"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "カルキノス【索敵モード】 No.12250"
+        },
+        {
+          "id": "n9927",
+          "role": "S",
+          "assist": "風雪魔獣・スノーティアの耳飾り No.13489"
+        },
+        {
+          "id": "n2314",
+          "role": "S",
+          "assist": "夕凪の魔女・ドーナの常夏ジュース No.14015"
+        },
+        {
+          "id": "n12847",
+          "role": "S",
+          "assist": "アジサイの標本 No.7328"
+        },
+        {
+          "id": "n12930",
+          "role": "F",
+          "assist": "Ax-0112 No.12931"
+        }
+      ],
+      "steps": [
+        "高速モードで4分半くらい（プレイ履歴は4分35秒・21ターン）",
+        "ハデドラは左からA、B。ドーナ武器はスキルLv MAX",
+        "2F・10Fはルーレット注意。8Fは7Fで出た敵で分岐",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/YP_Pad_Hensei/status/2092235305416032326#kyouchou",
+      "author": {
+        "name": "YP(レシート投稿用)"
+      },
+      "sourceDate": "2026-08-25",
+      "metrics": {
+        "chars": 316,
+        "puzzle": 2,
+        "branch": 4,
+        "caution": 4,
+        "zurashi": 4,
+        "plus891": 0.4,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "assist",
+            "raw": "Lキコル裏"
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "raw": "、鋼鐵塚裏、"
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "raw": "Lキコル裏）"
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "raw": "Fキコル裏"
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、鋼鐵塚、キ"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "キコル、ハ"
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、鋼鐵塚、キ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "キコル"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）キコルずら"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "）キコルで半"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）キコル、鋼"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、鋼鐵塚"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "）キコルずら"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）キコルずら"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "）キコルで半"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "）キコル、鋼"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "、鋼鐵塚"
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "キコル、ハ"
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル ※"
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "）キコル"
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "raw": "）鋼鐵塚、キ"
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "raw": "）キコル"
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "raw": "、キコル"
           }
         ]
       }

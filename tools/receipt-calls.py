@@ -152,13 +152,10 @@ def main():
         m = re.search(r"status/(\d+)", team.get("source") or "")
         if not m:
             continue
-        texts = []
-        for k in sorted(ocr):
-            if k.startswith(m.group(1)):
-                t = lines_of(ocr[k])
-                if any("PDC" in l for l in t):
-                    texts = t
-                    break
+        # 1つのツイートに2編成ある時（source に #ダンジョンid）は2枚目のレシート
+        pdc = [t for k in sorted(ocr) if k.startswith(m.group(1)) for t in [lines_of(ocr[k])] if any("PDC" in l for l in t)]
+        nth = 1 if "#" in team["source"] else 0
+        texts = pdc[nth] if len(pdc) > nth else []
         if not texts:
             continue
         calls = parse_team(team, texts)
