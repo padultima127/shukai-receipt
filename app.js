@@ -2070,9 +2070,9 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   const hit = (f, h, tn) => {
     updateHpMult(tn);
     const raw = h.ratio ? (hp * h.ratio) / 100 : h.dmg;
-    // 割合ダメージには属性軽減を乗せない（安全側）
+    // 割合ダメージにも属性軽減は乗る（本人談）
     const attrs = enemyAttrAt(tn, h.attrs ?? []);
-    const worst = h.ratio || !attrs.length ? null : attrs.reduce((w, a) => (attrRed(a) < attrRed(w) ? a : w), attrs[0]);
+    const worst = !attrs.length ? null : attrs.reduce((w, a) => (attrRed(a) < attrRed(w) ? a : w), attrs[0]);
     const ar = worst ? attrRed(worst) : 0;
     const sk = skillAt(tn);
     // マイクロ後（noLsReduce）はLSの軽減だけ剥がれ、スキルの軽減は効果ターンが残っていれば効く
@@ -2083,7 +2083,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     rows.push({ floor: f.floor, label: h.label, turn: tn, sk, hpMult, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
     if (hp <= 0) {
       deadAt = f.floor;
-      fail = { attrs: h.ratio ? [] : attrs };
+      fail = { attrs };
     }
     return hp > 0;
   };
@@ -2135,7 +2135,7 @@ function suggestLatents(d, setup, maxHp, skillRed, latent0) {
     const sim = simulateEndurance(d, setup, maxHp, skillRed, current());
     if (sim.deadAt == null) return { ok: true, slots };
     const cand = (sim.fail?.attrs ?? []).filter((a) => ATTRS5.includes(a));
-    if (!cand.length) return { ok: false, slots, floor: sim.deadAt, reason: "属性軽減が効かない攻撃（無属性・割合ダメージ）" };
+    if (!cand.length) return { ok: false, slots, floor: sim.deadAt, reason: "属性軽減が効かない攻撃（無属性）" };
     // 敵が数体のうち1体の場合は、一番軽減が少ない属性に1枠足す
     const cur = current();
     const a = cand.reduce((w, x) => ((setup.awkAttr[x] ?? 0) + cur[x] < (setup.awkAttr[w] ?? 0) + cur[w] ? x : w), cand[0]);
@@ -2272,7 +2272,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
   const plusLines = renderPlusAdvice(setup, maxHp, need0, "スキルなしで、") + (setup.skillRed ? renderPlusAdvice(setup, maxHp, need1, "レシートどおりのスキルで、") : "");
   return `${need}${autoNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
-    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計。割合ダメージには属性軽減を乗せていません。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
+    <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計（割合ダメージにも乗せています）。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
