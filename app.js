@@ -3871,8 +3871,129 @@ async function readPdcStepsText(file, data, onStep) {
   g.fillStyle = "#fff";
   g.fillRect(0, 0, c.width, c.height);
   g.drawImage(bmp, 0, y0, bmp.width, c.height, 0, 0, c.width, c.height);
-  const { data: d2 } = await Tesseract.recognize(c, "jpn", { logger: (m) => m.status === "recognizing text" && onStep?.(Math.round(m.progress * 100)) });
-  return cleanSteps((d2.text ?? "").split("\n"));
+  // 小さい画像は2倍にしてから読む（大きい画像は拡大すると崩れる）
+  const src = bmp.width < 800 ? scaleCanvas(c, 2) : c;
+  const { data: d2 } = await Tesseract.recognize(src, "jpn", { logger: (m) => m.status === "recognizing text" && onStep?.(Math.round(m.progress * 100)) });
+  // 絵文字（🟢🔴🟡🔵🟣🟠🪓 など）は文字として読めないので、色で見つけてその位置に差し込む
+  const blobs = findEmojiBlobs(src);
+  const lines = blobs.length ? rebuildLinesWithEmoji(d2, blobs) : (d2.text ?? "").split("\n");
+  return cleanSteps(lines);
+}
+function scaleCanvas(c, k) {
+  const o = document.createElement("canvas");
+  o.width = c.width * k;
+  o.height = c.height * k;
+  const g = o.getContext("2d");
+  g.imageSmoothingQuality = "high";
+  g.drawImage(c, 0, 0, o.width, o.height);
+  return o;
+}
+// 色の付いた部分（彩度の高い塊）を探して、丸い色の絵文字は色ごとに、斧（🪓）は形で見分ける
+function findEmojiBlobs(c) {
+  const step = 2;
+  const W = Math.floor(c.width / step);
+  const H = Math.floor(c.height / step);
+  const px = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height).data;
+  const hsv = (i) => {
+    const r = px[i] / 255, g = px[i + 1] / 255, b = px[i + 2] / 255;
+    const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
+    let h = 0;
+    if (d) h = mx === r ? ((g - b) / d) % 6 : mx === g ? (b - r) / d + 2 : (r - g) / d + 4;
+    return [(h * 60 + 360) % 360, mx ? d / mx : 0, mx];
+  };
+  const mask = new Uint8Array(W * H);
+  const hue = new Float32Array(W * H);
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      const i = (y * step * c.width + x * step) * 4;
+      const [h, sat, v] = hsv(i);
+      if (sat > 0.45 && v > 0.3) {
+        mask[y * W + x] = 1;
+        hue[y * W + x] = h;
+      }
+    }
+  const seen = new Uint8Array(W * H);
+  const out = [];
+  for (let i = 0; i < W * H; i++) {
+    if (!mask[i] || seen[i]) continue;
+    const stack = [i];
+    seen[i] = 1;
+    let n = 0, x0 = W, y0 = H, x1 = 0, y1 = 0, hx = 0, hy = 0;
+    const pts = [];
+    while (stack.length) {
+      const j = stack.pop();
+      const x = j % W, y = (j / W) | 0;
+      n++;
+      pts.push(x, y);
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
+      hx += Math.cos((hue[j] * Math.PI) / 180); hy += Math.sin((hue[j] * Math.PI) / 180);
+      for (const k of [j - 1, j + 1, j - W, j + W]) if (k >= 0 && k < W * H && mask[k] && !seen[k] && Math.abs((k % W) - x) <= 1) (seen[k] = 1), stack.push(k);
+    }
+    const bw = x1 - x0 + 1, bh = y1 - y0 + 1;
+    if (bw < 5 || bh < 5 || bw > bh * 2.2 || bh > bw * 2.2) continue;
+    const h = ((Math.atan2(hy, hx) * 180) / Math.PI + 360) % 360;
+    // 丸かどうか: 真ん中が詰まっていて、四隅が空いている
+    let center = 0, centerN = 0, corner = 0, cornerN = 0;
+    const inBlob = new Set();
+    for (let k = 0; k < pts.length; k += 2) inBlob.add(pts[k + 1] * W + pts[k]);
+    for (let y = y0; y <= y1; y++)
+      for (let x = x0; x <= x1; x++) {
+        const fx = (x - x0 + 0.5) / bw, fy = (y - y0 + 0.5) / bh;
+        const on = inBlob.has(y * W + x);
+        if (Math.abs(fx - 0.5) < 0.22 && Math.abs(fy - 0.5) < 0.22) (centerN++, on && center++);
+        if ((fx < 0.15 || fx > 0.85) && (fy < 0.15 || fy > 0.85)) (cornerN++, on && corner++);
+      }
+    const round = bw <= bh * 1.3 && bh <= bw * 1.3 && centerN && center / centerN > 0.85 && (!cornerN || corner / cornerN < 0.2);
+    // 周りに灰色（斧の刃など、色の薄い部分）が多いものは丸い絵文字ではない
+    let gray = 0;
+    const ex = Math.round(bw * 0.4), ey = Math.round(bh * 0.4);
+    for (let y = Math.max(0, y0 - ey); y <= Math.min(H - 1, y1 + ey); y++)
+      for (let x = Math.max(0, x0 - ex); x <= Math.min(W - 1, x1 + ex); x++) {
+        const i = (y * step * c.width + x * step) * 4;
+        const mx = Math.max(px[i], px[i + 1], px[i + 2]), mn = Math.min(px[i], px[i + 1], px[i + 2]);
+        if (mx >= 110 && mx < 235 && mx - mn < 40) gray++;
+      }
+    const grayish = gray / n > 0.3;
+    let emoji;
+    if (round && !grayish) emoji = h < 15 || h >= 335 ? "🔴" : h < 45 ? "🟠" : h < 70 ? "🟡" : h < 170 ? "🟢" : h < 255 ? "🔵" : "🟣";
+    // 丸くない・灰色を伴う赤〜茶色の塊は斧（🪓）の一部とみなす（PDCの立ち回りでよく使われる）
+    else if (h < 50 || h >= 330) emoji = "🪓";
+    else continue;
+    out.push({ x0: x0 * step, y0: y0 * step, x1: (x1 + 1) * step, y1: (y1 + 1) * step, emoji });
+  }
+  // 斧は柄と刃先が別の塊になるので、近いものは1つにまとめる
+  const merged = [];
+  for (const b of out.sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0)) {
+    const size = Math.max(b.x1 - b.x0, b.y1 - b.y0);
+    const m = b.emoji === "🪓" && merged.find((x) => x.emoji === "🪓" && b.x0 <= x.x1 + size && b.x1 >= x.x0 - size && b.y0 <= x.y1 + size && b.y1 >= x.y0 - size);
+    if (m) Object.assign(m, { x0: Math.min(m.x0, b.x0), y0: Math.min(m.y0, b.y0), x1: Math.max(m.x1, b.x1), y1: Math.max(m.y1, b.y1) });
+    else merged.push({ ...b });
+  }
+  return merged.sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
+}
+// 読み取った行の単語の並びに、見つけた絵文字を差し込む（絵文字の上に重なった読み違いの文字は捨てる）
+function rebuildLinesWithEmoji(data, blobs) {
+  const used = new Set();
+  const lines = (data.lines ?? []).map((l) => {
+    const words = (l.words ?? []).map((w) => ({ x: w.bbox.x0, text: w.text, bbox: w.bbox }));
+    const cy0 = l.bbox.y0, cy1 = l.bbox.y1;
+    const mine = blobs.filter((b, i) => !used.has(i) && (b.y0 + b.y1) / 2 >= cy0 - 4 && (b.y0 + b.y1) / 2 <= cy1 + 4 && used.add(i));
+    // 絵文字の灰色の部分（斧の刃など）は色で拾えないので、少し広げた範囲に重なる文字を捨てる
+    const overlaps = (w) => !/^[→>＞]+$/.test(w.text) && mine.some((b) => {
+      const pad = b.emoji === "🪓" ? (b.x1 - b.x0) * 0.6 : (b.x1 - b.x0) * 0.15;
+      const ox = Math.min(w.bbox.x1, b.x1 + pad) - Math.max(w.bbox.x0, b.x0 - pad);
+      return ox > (w.bbox.x1 - w.bbox.x0) * 0.5;
+    });
+    const items = [...words.filter((w) => !overlaps(w)), ...mine.map((b) => ({ x: b.x0, text: b.emoji }))].sort((a, b) => a.x - b.x);
+    return items.map((x) => x.text).join(" ");
+  });
+  // 文字の行に入らなかった絵文字だけの行（🪓だけの行など）
+  const rest = blobs.filter((b, i) => !used.has(i));
+  if (rest.length) {
+    const all = [...lines.map((t, i) => ({ y: data.lines[i].bbox.y0, t })), ...rest.map((b) => ({ y: b.y0, t: b.emoji }))].sort((a, b) => a.y - b.y);
+    return all.map((x) => x.t);
+  }
+  return lines;
 }
 // 立ち回りの文字の後処理（空白・矢印・よくある読み違い）
 function cleanSteps(lines) {
@@ -3883,6 +4004,11 @@ function cleanSteps(lines) {
     .map((l) => l.replace(/ +/g, (sp, at, str) => (jp.test(str[at - 1] ?? "") || jp.test(str[at + sp.length] ?? "") ? "" : " ")))
     // 「→」が「っ」「う」と読まれやすい（行頭やキャラ名の後ろのひらがなは矢印とみなす）
     .map((l) => l.replace(/^[っうぅ][3っうぅ]?(?=[\u30A0-\u30FF\u4E00-\u9FFF])/, "→").replace(/^3(?=[\u30A0-\u30FF\u4E00-\u9FFF])/, "→").replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF)）])[っうぅ]{1,3}/g, "→"))
+    // 名前・絵文字の間の「つ」「っ」（と「う」）は矢印の読み違い
+    .map((l) => l.replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF\p{Extended_Pictographic})）])[つっ]{1,2}(?=[\u30A0-\u30FF\u4E00-\u9FFF\p{Extended_Pictographic}(（])/gu, "→").replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF\p{Extended_Pictographic}])う(?=[\u30A0-\u30FF\p{Extended_Pictographic}])/gu, "→"))
+    .map((l) => l.replace(/→[つっう]+/g, "→"))
+    // 「1f」が「Tf」「If」と読まれやすい
+    .map((l) => l.replace(/^[TIl|](?=\d?\s*[fFＦ]$)/, "1"))
     // 「裏」が「衰」と読まれやすい
     .map((l) => l.replace(/衰/g, "裏"))
     // 丸数字が2つ続くのは読み違い（③⑫ → ③）
