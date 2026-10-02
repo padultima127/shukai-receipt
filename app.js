@@ -99,7 +99,7 @@ function applySuperPicks() {
 applySuperPicks();
 // 耐久チェックで「レシートのビルドが分かっている」とみなすか（超覚醒だけ分かった・自分で選んだだけの枠は含めない）
 const isFullBuild = (b) => !!b && !b.superOnly && !b.userPicked;
-let mode = "balance";
+let mode = "speed";
 let fastFilter = "all"; // 高速モード: "all"（どちらも）| "on" | "off"
 // 編成のタイム。times があれば高速ON/OFFそれぞれ、なければ fastMode と timeSec から（不明は any）
 function teamTimes(t) {
@@ -825,7 +825,7 @@ function partDropSure(t, d) {
   if (pb.can === false) return false;
   return !!pb.sure || partRate(t, d, awakeningCountOf(t, 131).min).rate >= 100;
 }
-// 点数の下に出す「部位破壊した場合のドロップ率」（部位のあるダンジョンだけ）
+// 編成の右上に出す「部位破壊した場合のドロップ率」（部位のあるダンジョンだけ）
 function partRateBadge(t, d) {
   if (!d?.parts) return "";
   const text = [t.title, ...(t.steps ?? [])].join(" ");
@@ -962,21 +962,18 @@ function search() {
     // 1周あたり（素材で探す→その素材の数、ダンジョンで探す→経験値）
     r.effPerRun = item ? (r.rate > 0 ? r.rate : null) : r.expPerRun;
   }
+  // 点数評価はいったん廃止（本人指定）。選んだ指標で並べるだけ（点数は出さない）
   const expKey = EXP_MODES[mode];
+  const timeOf = (r) => effTime(r.team) ?? Infinity;
   if (expKey) {
-    // 経験値効率順: 一番効率のいい編成を100点。データがない編成は最後に回す
-    const max = Math.max(...rows.map((r) => r[expKey] ?? 0), 1e-9);
-    for (const r of rows) r.score = r[expKey] == null ? null : (r[expKey] / max) * 100 - penalty(r);
-    rows.sort((a, b) => (b.score ?? -Infinity) - (a.score ?? -Infinity));
+    // 効率順。データがない編成は最後に回す
+    rows.sort((a, b) => (b[expKey] ?? -Infinity) - (a[expKey] ?? -Infinity) || timeOf(a) - timeOf(b));
   } else if (mode === "dbonus") {
-    // ダンボ数順: 確定している数が多い順、同じならバランスの点数順
-    const w = MODE_WEIGHTS.balance;
-    for (const r of rows) r.score = r.speedScore * w.speed + r.easeScore * w.ease - penalty(r);
-    rows.sort((a, b) => b.dbonus.min - a.dbonus.min || b.dbonus.max - a.dbonus.max || b.score - a.score);
+    // ダンボ数順: 確定している数が多い順、同じなら1周が速い順
+    rows.sort((a, b) => b.dbonus.min - a.dbonus.min || b.dbonus.max - a.dbonus.max || timeOf(a) - timeOf(b));
   } else {
-    const w = MODE_WEIGHTS[mode];
-    for (const r of rows) r.score = r.speedScore * w.speed + r.easeScore * w.ease - penalty(r);
-    rows.sort((a, b) => b.score - a.score);
+    // 速さ: 1周のタイムが短い順
+    rows.sort((a, b) => timeOf(a) - timeOf(b));
   }
 
   const head =
@@ -1609,11 +1606,10 @@ function renderResult(r, i, item) {
     <div class="res-head">
       <span class="rank">${i + 1}</span>
       <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
-      <div class="score-col"><span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>${partRateBadge(t, r.dungeon)}</div>
+      <div class="score-col">${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
-    <div class="bars">${bar("速さ", r.speedScore)}</div>
-    ${"" /* 楽さの点数・内訳は基準を見直すまで表示しない（本人指定） */}
+    ${"" /* 点数評価（速さ・楽さの点数）は見直しのため表示しない（本人指定） */}
     <dl class="stats">
       <div><dt>1周</dt><dd>${formatTime(effTime(t))}${est("timeSec")}${(() => {
         const tt = teamTimes(t);
