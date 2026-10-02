@@ -22,7 +22,7 @@ service cloud.firestore {
     function validTeam(d) {
       return d.keys().hasOnly(['id', 'userAdded', 'dungeonId', 'title', 'timeSec', 'turns', 'yields', 'members',
           'steps', 'source', 'author', 'sourceDate', 'metrics', 'plus891Choice', 'newDungeon',
-          'status', 'ownerUid', 'ownerName', 'createdAt', 'icons', 'fastMode', 'times', 'badgeIcon', 'badgeId'])
+          'status', 'ownerUid', 'ownerName', 'createdAt', 'icons', 'fastMode', 'times', 'badgeIcon', 'badgeId', 'partBreak'])
         && shortStr(d.title, 80)
         && shortStr(d.dungeonId, 60)
         && d.timeSec is number && d.timeSec > 0 && d.timeSec < 36000
@@ -35,7 +35,15 @@ service cloud.firestore {
         && (!('fastMode' in d) || d.fastMode is bool)
         && (!('times' in d) || (d.times is map && d.times.keys().hasOnly(['on', 'off'])))
         && (!('badgeIcon' in d) || shortStr(d.badgeIcon, 20000))
-        && (!('badgeId' in d) || d.badgeId is number);
+        && (!('badgeId' in d) || d.badgeId is number)
+        && (!('partBreak' in d) || validPartBreak(d.partBreak))
+        && (!('plus891Choice' in d) || d.plus891Choice in ['', 'required', 'some', 'not-required']);
+    }
+    // 部位破壊の設定（できる・確定ドロップ・メモ）
+    function validPartBreak(p) {
+      return p is map && p.keys().hasOnly(['can', 'sure', 'note', 'sureNote'])
+        && (!('can' in p) || p.can is bool) && (!('sure' in p) || p.sure is bool)
+        && (!('note' in p) || shortStr(p.note, 100)) && (!('sureNote' in p) || shortStr(p.sureNote, 60));
     }
     // 連投制限: 前回の登録から60秒以上あいていること（初回はOK）
     function notTooFast(uid) {
@@ -55,13 +63,29 @@ service cloud.firestore {
         && validTeam(request.resource.data)
         && notTooFast(request.auth.uid)
         && getAfter(/databases/$(database)/documents/users/$(request.auth.uid)).data.lastSubmitAt == request.time;
-      // 承認・却下は管理者だけ（中身は変えずに status と reviewedAt だけ）
-      allow update: if isAdmin()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt'])
-        && request.resource.data.status in ['approved', 'rejected', 'pending'];
+      // 管理者: 承認・却下・非公開・再公開（status）と、+891必須・部位破壊の設定
+      // 本人: +891必須・部位破壊の設定はいつでも。公開中⇄本人が非公開（hidden）の切り替えだけできる（却下・承認待ちは変えられない）
+      allow update: if ((isAdmin()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt', 'plus891Choice', 'partBreak'])
+          && request.resource.data.status in ['approved', 'rejected', 'pending', 'hidden'])
+        || (signedIn() && resource.data.ownerUid == request.auth.uid
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt', 'plus891Choice', 'partBreak'])
+          && (request.resource.data.status == resource.data.status
+            || (resource.data.status in ['approved', 'hidden'] && request.resource.data.status in ['approved', 'hidden']))))
+        && (!('partBreak' in request.resource.data) || validPartBreak(request.resource.data.partBreak))
+        && (!('plus891Choice' in request.resource.data) || request.resource.data.plus891Choice in ['', 'required', 'some', 'not-required']);
       // 削除（取り下げ）: 管理者、または登録した本人ならいつでも（承認待ち・公開中・非公開どれでも）
       allow delete: if isAdmin()
         || (signedIn() && resource.data.ownerUid == request.auth.uid);
+    }
+
+    // 初期データ（サイトに最初から入っている編成）の +891必須・部位破壊の上書き。誰でも読める・書けるのは管理者だけ
+    match /overrides/{id} {
+      allow read: if true;
+      allow write: if isAdmin()
+        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'updatedAt'])
+        && (!('partBreak' in request.resource.data) || validPartBreak(request.resource.data.partBreak))
+        && (!('plus891Choice' in request.resource.data) || request.resource.data.plus891Choice in ['', 'required', 'some', 'not-required']);
     }
 
     match /users/{uid} {

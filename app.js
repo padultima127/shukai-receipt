@@ -843,11 +843,63 @@ function partRateBadge(t, d) {
   }
   return `<span class="part-rate" title="部位破壊した場合の${esc(d.parts.item)}のドロップ率${pb.sure ? "（投稿・レシートの記載）" : `（(基本${d.parts.baseRate}%＋部位破壊ボーナス1つにつき10%)${multNote}で推定）`}">部位ドロップ<b>${v}</b></span>`;
 }
+// 管理者が設定した初期データの編成の上書き（+891必須・部位破壊）。{ 編成id: { plus891Choice, partBreak } }
+let teamOverrides = {};
+const settingOf = (t, key) => (teamOverrides[t.id] && key in teamOverrides[t.id] ? teamOverrides[t.id][key] : t[key]);
+// 登録した本人と管理者は、+891必須・部位破壊を後から直せる（初期データの編成は管理者だけ）
+function canEditSettings(t) {
+  if (shared.mode !== "firebase" || !shared.fb?.user) return false;
+  if (shared.fb.isAdmin) return true;
+  return !!t.shared && t.ownerUid === shared.fb.user.uid;
+}
+function renderTeamSettings(t, d) {
+  if (!canEditSettings(t)) return "";
+  const p891 = settingOf(t, "plus891Choice") ?? "";
+  const pb = settingOf(t, "partBreak");
+  const pbVal = !pb ? "" : pb.can === false ? "no" : pb.sure ? "sure" : "can";
+  const who = shared.fb.isAdmin ? "管理者" : "登録者";
+  return `<div class="wide"><details class="team-settings" data-settings="${esc(t.id)}"><summary>設定を直す（${who}）</summary>
+    <label>+891 <select data-set="plus891Choice">${[["", "分からない"], ["required", "必須"], ["some", "一部だけ"], ["not-required", "不要（+297でOK）"]].map(([v, l]) => `<option value="${v}"${v === p891 ? " selected" : ""}>${l}</option>`).join("")}</select></label>
+    ${d?.parts ? `<label>部位破壊 <select data-set="partBreak">${[["", "記載なし（自動判定）"], ["can", "部位破壊できる"], ["sure", "部位破壊できる・部位ドロップ確定"], ["no", "部位破壊しない"]].map(([v, l]) => `<option value="${v}"${v === pbVal ? " selected" : ""}>${l}</option>`).join("")}</select></label>` : ""}
+    <button type="button" class="primary" data-save-settings="${esc(t.id)}">保存</button> <span class="muted" data-settings-msg></span>
+  </details></div>`;
+}
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-save-settings]");
+  if (!b) return;
+  const id = b.dataset.saveSettings;
+  const box = b.closest("[data-settings]");
+  const t = db.teams.find((x) => x.id === id);
+  if (!t || !box) return;
+  const msgEl = box.querySelector("[data-settings-msg]");
+  const v891 = box.querySelector('[data-set="plus891Choice"]')?.value ?? "";
+  const vpb = box.querySelector('[data-set="partBreak"]')?.value;
+  const patch = { plus891Choice: v891 || null };
+  if (vpb !== undefined) patch.partBreak = vpb === "can" ? { can: true } : vpb === "sure" ? { can: true, sure: true, sureNote: shared.fb.isAdmin ? "管理者の設定" : "登録者の設定" } : vpb === "no" ? { can: false } : null;
+  b.disabled = true;
+  try {
+    if (t.shared) await shared.fb.updateTeam(id, patch);
+    else {
+      const o = {};
+      for (const [k, v] of Object.entries(patch)) if (v != null) o[k] = v;
+      await shared.fb.setOverride(id, o);
+      teamOverrides[id] = o;
+    }
+    Object.assign(t, Object.fromEntries(Object.entries(patch).map(([k, v]) => [k, v ?? undefined])));
+    msgEl.textContent = "保存しました";
+    search();
+    document.querySelectorAll(`details[data-settings="${CSS.escape(id)}"]`).forEach((d) => (d.open = true));
+  } catch (err) {
+    msgEl.textContent = `保存できませんでした（${err.message}）`;
+  } finally {
+    b.disabled = false;
+  }
+});
 function partBreakInfo(t, d) {
   if (!d?.parts) return null;
   // 登録データがなければ、立ち回り・タイトルの文から読み取る（画像から登録した編成など）
   const text = [t.title, ...(t.steps ?? [])].join(" ");
-  const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { can: true, sure: true, sureNote: "レシートの記載より" } : /部位/.test(text) ? { can: true } : {});
+  const pb = settingOf(t, "partBreak") ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { can: true, sure: true, sureNote: "レシートの記載より" } : /部位/.test(text) ? { can: true } : {});
   const bonus = awakeningCountOf(t, 131);
   const rate = (n) => partRate(t, d, n).rate;
   const mult = partRate(t, d, 0).mult;
@@ -1633,7 +1685,8 @@ function renderResult(r, i, item) {
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>`
-        : renderEaseStats(t.metrics)}
+        : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}) })}
+      ${renderTeamSettings(t, r.dungeon)}
       ${staminaLine}
     </dl>
     ${warn}
@@ -3268,6 +3321,11 @@ async function initShared() {
       shared.teams = teams;
       applyShared();
     });
+    // 初期データの編成の +891必須・部位破壊（管理者が設定したもの）
+    shared.fb.watchOverrides?.((map) => {
+      teamOverrides = map;
+      if (!$("#tab-search").hidden && $("#q").value.trim() && $("#results").children.length) search();
+    });
     updateRegMode();
     return;
   }
@@ -3342,6 +3400,18 @@ function renderAdminPanel() {
               <button type="button" class="danger" data-purge="${esc(t.id)}">削除</button></div></li>`)
             .join("")}</ul>`
         : `<p class="hint">承認待ちはありません。</p>`;
+    })
+  );
+  adminUnsubs.push(
+    shared.fb.watchHidden((list) => {
+      $("#admin-hidden").innerHTML = list.length
+        ? `<ul class="reg-list">${list
+            .map((t) => `<li><div class="reg-info"><strong><span class="badge badge-local">${t.status === "hidden" ? "本人が非公開" : "却下・非公開"}</span>${esc(t.title)}</strong>
+              <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ 登録者 ${esc(t.ownerName ?? "")}</span></div>
+              <div class="row"><button type="button" class="primary" data-approve="${esc(t.id)}">再公開</button>
+              <button type="button" class="danger" data-purge="${esc(t.id)}">削除</button></div></li>`)
+            .join("")}</ul>`
+        : `<p class="hint">非公開の編成はありません。</p>`;
     })
   );
   adminUnsubs.push(
@@ -3461,9 +3531,13 @@ function renderRegList() {
               ? `<span class="badge badge-pending">承認待ち</span>`
               : t.status === "rejected"
                 ? `<span class="badge badge-local">非公開</span>`
-                : `<span class="badge">公開中</span>`;
+                : t.status === "hidden"
+                  ? `<span class="badge badge-local">非公開（自分で）</span>`
+                  : `<span class="badge">公開中</span>`;
+          const own = shared.mode === "firebase" && t.shared && t.ownerUid === shared.fb.user?.uid;
+          const toggle = own && t.status === "approved" ? `<button type="button" data-ownhide="${esc(t.id)}">一時的に非公開にする</button>` : own && t.status === "hidden" ? `<button type="button" class="primary" data-ownshow="${esc(t.id)}">公開に戻す</button>` : "";
           const buttons = canEdit || canDelete
-            ? `<div class="row">${canEdit ? `<button type="button" data-edit="${esc(t.id)}">編集</button>` : ""}
+            ? `<div class="row">${canEdit ? `<button type="button" data-edit="${esc(t.id)}">編集</button>` : ""}${toggle}
                <button type="button" class="danger" data-del="${esc(t.id)}">${regDeleteArmed === t.id ? "もう一度押すと削除" : t.status === "approved" ? "取り下げ（削除）" : "削除"}</button></div>`
             : "";
           return `<li><div class="reg-icons">${icons}</div>
@@ -3807,6 +3881,22 @@ $("#reg-reset").addEventListener("click", () => {
 $("#reg-list").addEventListener("click", async (e) => {
   const edit = e.target.closest("[data-edit]");
   if (edit) return loadIntoRegForm(edit.dataset.edit);
+  // 本人が公開中⇄非公開を切り替える
+  const vis = e.target.closest("[data-ownhide], [data-ownshow]");
+  if (vis) {
+    const id = vis.dataset.ownhide ?? vis.dataset.ownshow;
+    const to = vis.dataset.ownhide ? "hidden" : "approved";
+    try {
+      await shared.fb.setStatus(id, to);
+      const t = db.teams.find((x) => x.id === id);
+      if (t) t.status = to;
+      renderRegList();
+      regMessage(to === "hidden" ? "非公開にしました（編成検索に出なくなります。いつでも公開に戻せます）。" : "公開に戻しました。", true);
+    } catch {
+      regMessage("切り替えられませんでした。登録したときと同じアカウントでログインしているか確認してください。", false);
+    }
+    return;
+  }
   const del = e.target.closest("[data-del]");
   if (!del) return;
   const id = del.dataset.del;

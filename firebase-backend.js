@@ -2,7 +2,8 @@
 // firebase-config.js に設定がない、または SDK が読み込めない環境（claude.ai の公開ページ等）では何もしない。
 //
 // データ構成（Firestore）
-//   teams/{id}    : 登録された編成。status = "pending"（承認待ち）/ "approved"（公開）/ "rejected"
+//   teams/{id}    : 登録された編成。status = "pending"（承認待ち）/ "approved"（公開）/ "rejected"（却下・管理者が非公開）/ "hidden"（本人が一時的に非公開）
+//   overrides/{id}: 初期データの編成の +891必須・部位破壊の上書き（管理者だけが書ける）
 //                   ownerUid・ownerName・createdAt、新しいダンジョンは newDungeon に埋め込み
 //   users/{uid}   : 連投制限用。lastSubmitAt（最後に登録した時刻）
 //   reports/{id}  : 通報。teamId・reason・reporterUid・createdAt（管理者だけが読める）
@@ -79,6 +80,29 @@
     },
     setStatus(id, status) {
       return fs.collection("teams").doc(id).update({ status, reviewedAt: ts() });
+    },
+    // +891必須・部位破壊の設定（本人か管理者）
+    updateTeam(id, patch) {
+      const p = {};
+      for (const k of ["plus891Choice", "partBreak"]) if (k in patch) p[k] = patch[k] ?? firebase.firestore.FieldValue.delete();
+      return fs.collection("teams").doc(id).update(p);
+    },
+    // 初期データの編成の上書き（管理者だけ）
+    setOverride(teamId, patch) {
+      return fs.collection("overrides").doc(teamId).set({ ...patch, updatedAt: ts() });
+    },
+    watchOverrides(cb) {
+      return fs.collection("overrides").onSnapshot(
+        (snap) => cb(Object.fromEntries(snap.docs.map((d) => [d.id, d.data()]))),
+        (e) => console.warn("overrides", e)
+      );
+    },
+    // 非公開（本人が隠した hidden・管理者が却下した rejected）の編成（管理者用）
+    watchHidden(cb) {
+      return fs.collection("teams").where("status", "in", ["hidden", "rejected"]).onSnapshot(
+        (snap) => cb(snap.docs.map((d) => ({ ...d.data(), id: d.id }))),
+        (e) => console.warn("hidden", e)
+      );
     },
     watchPending(cb) {
       return fs.collection("teams").where("status", "==", "pending").onSnapshot(

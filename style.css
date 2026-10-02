@@ -404,3 +404,8 @@ button:disabled { opacity: .6; cursor: wait; }
 
 #leader-dungeon-wrap[hidden] { display: none; }
 #reg-ocr-msg { white-space: pre-line; }
+
+.team-settings { margin-top: 4px; font-size: 13px; }
+.team-settings summary { cursor: pointer; color: var(--muted); }
+.team-settings label { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.team-settings select { width: auto; flex: 1; }
