@@ -1612,8 +1612,8 @@ function renderResult(r, i, item) {
       <div class="score-col"><span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
-    <div class="bars">${bar("速さ", r.speedScore)}${bar("楽さ", r.easeScore)}</div>
-    ${r.ease.legacy ? "" : renderEaseBreakdown(r.ease.parts)}
+    <div class="bars">${bar("速さ", r.speedScore)}</div>
+    ${"" /* 楽さの点数・内訳は基準を見直すまで表示しない（本人指定） */}
     <dl class="stats">
       <div><dt>1周</dt><dd>${formatTime(effTime(t))}${est("timeSec")}${(() => {
         const tt = teamTimes(t);
@@ -1633,8 +1633,7 @@ function renderResult(r, i, item) {
       <div class="${mode === "dbonus" ? "hl" : ""}"><dt>ダンジョンボーナス</dt><dd>${formatDungeonBonus(r.dbonus ?? dungeonBonusOf(t))}</dd></div>
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
-        ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>
-           <div><dt>楽さ</dt><dd>${"★".repeat(t.ease)}${"☆".repeat(5 - t.ease)}${est("ease")}</dd></div>`
+        ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>`
         : renderEaseStats(t.metrics)}
       ${staminaLine}
     </dl>
