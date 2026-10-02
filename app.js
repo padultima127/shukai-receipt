@@ -862,12 +862,19 @@ function renderTeamSettings(t, d, bare = false) {
   const pbVal = !pb ? "" : pb.can === false ? "no" : pb.sure ? "sure" : "can";
   const who = shared.fb.isAdmin ? "管理者" : "登録者";
   const saved = lastSavedSettings === t.id;
-  return `${bare ? "" : `<div class="wide">`}<details class="team-settings" data-settings="${esc(t.id)}"${saved && bare ? " open" : ""}><summary>${bare ? `+891・部位破壊を直す<small class="muted">（今: +891 ${{ "": "分からない", required: "必須", some: "一部だけ", "not-required": "不要" }[p891] ?? "分からない"}${d?.parts ? `／部位破壊 ${{ "": "記載なし", can: "できる", sure: "できる・確定", no: "しない" }[pbVal]}` : ""}）</small>` : `設定を直す（${who}）`}</summary>
+  return `${bare ? "" : `<div class="wide">`}<details class="team-settings" data-settings="${esc(t.id)}"${saved && bare ? " open" : ""}><summary>${bare ? `+891・部位破壊を直す<small class="muted">（今: +891 ${{ "": "分からない", required: "必須", some: `一部だけ${(settingOf(t, "plus891Members") ?? []).length ? `（${(settingOf(t, "plus891Members") ?? []).map((i) => esc(slotNames(t)[i] ?? "")).join("・")}）` : ""}`, "not-required": "不要" }[p891] ?? "分からない"}${d?.parts ? `／部位破壊 ${{ "": "記載なし", can: "できる", sure: "できる・確定", no: "しない" }[pbVal]}` : ""}）</small>` : `設定を直す（${who}）`}</summary>
     <label>+891 <select data-set="plus891Choice">${[["", "分からない"], ["required", "必須"], ["some", "一部だけ"], ["not-required", "不要（+297でOK）"]].map(([v, l]) => `<option value="${v}"${v === p891 ? " selected" : ""}>${l}</option>`).join("")}</select></label>
+    <div class="p891-members" data-891-members${p891 === "some" ? "" : " hidden"}><span class="muted">+891が必要なキャラ</span>${slotNames(t).map((n, i) => `<label class="check"><input type="checkbox" value="${i}"${(settingOf(t, "plus891Members") ?? []).includes(i) ? " checked" : ""}> ${esc(n)}</label>`).join("")}</div>
     ${d?.parts ? `<label>部位破壊 <select data-set="partBreak">${[["", "記載なし（自動判定）"], ["can", "部位破壊できる"], ["sure", "部位破壊できる・部位ドロップ確定"], ["no", "部位破壊しない"]].map(([v, l]) => `<option value="${v}"${v === pbVal ? " selected" : ""}>${l}</option>`).join("")}</select></label>` : ""}
     <button type="button" class="primary" data-save-settings="${esc(t.id)}">保存</button> <span class="muted" data-settings-msg>${saved && bare ? "保存しました" : ""}</span>
   </details>${bare ? "" : `</div>`}`;
 }
+// 「一部だけ」を選んだ時だけ、対象キャラのチェック欄を出す
+document.addEventListener("change", (e) => {
+  if (!e.target.matches('[data-set="plus891Choice"]')) return;
+  const box = e.target.closest("[data-settings]")?.querySelector("[data-891-members]");
+  if (box) box.hidden = e.target.value !== "some";
+});
 document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-save-settings]");
   if (!b) return;
@@ -879,7 +886,7 @@ document.addEventListener("click", async (e) => {
   const msgEl = box.querySelector("[data-settings-msg]");
   const v891 = box.querySelector('[data-set="plus891Choice"]')?.value ?? "";
   const vpb = box.querySelector('[data-set="partBreak"]')?.value;
-  const patch = { plus891Choice: v891 || null };
+  const patch = { plus891Choice: v891 || null, plus891Members: v891 === "some" ? [...box.querySelectorAll("[data-891-members] input:checked")].map((x) => Number(x.value)) : null };
   if (vpb !== undefined) patch.partBreak = vpb === "can" ? { can: true } : vpb === "sure" ? { can: true, sure: true, sureNote: shared.fb.isAdmin ? "管理者の設定" : "登録者の設定" } : vpb === "no" ? { can: false } : null;
   b.disabled = true;
   try {
@@ -1617,7 +1624,15 @@ function renderMembers(r, part) {
     .join("");
 }
 
+// 編成の枠ごとの短い名前（「一部だけ+891」の対象を書く用）。管理画面の生データ（m.name / m.no）にも対応
+function slotNames(t) {
+  return (t.members ?? []).map((m) => {
+    const name = monster(m.id)?.name ?? m.name ?? MDB.get(Number(m.no))?.[1] ?? "?";
+    return name.replace(/【[^】]*】|\[[^\]]*\]|［[^］]*］/g, "").split(/[・＆]/).filter(Boolean).pop() || name;
+  });
+}
 function plus891Label(m) {
+  if (m.plus891Names?.length) return `一部だけ（${m.plus891Names.map(esc).join("・")}）`;
   if (m.plus891Text === "required") return "必須";
   if (m.plus891Text === "not-required") return "不要";
   if (m.plus891 >= 0.99) return "全員";
@@ -1691,7 +1706,7 @@ function renderResult(r, i, item) {
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>`
-        : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}) })}
+        : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}), plus891Names: settingOf(t, "plus891Choice") === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : null })}
       ${renderTeamSettings(t, r.dungeon)}
       ${staminaLine}
     </dl>
@@ -3201,6 +3216,7 @@ async function saveRegForm() {
     sourceDate: new Date().toISOString().slice(0, 10),
     metrics: metricsFromText(stepsText, $("#reg-891").value),
     plus891Choice: $("#reg-891").value,
+    ...($("#reg-891").value === "some" ? { plus891Members: [...document.querySelectorAll("#reg-891-members input:checked")].map((x) => Number(x.value)) } : {}),
   };
   // 画像から切り抜いたアイコン（枠ごと。登録時にその枠に入っているキャラの分で、まだサイトにアイコンがないもの）
   const icons = {};
@@ -3493,6 +3509,7 @@ function loadIntoRegForm(id) {
   $("#reg-coin").value = t.yields?.coin ?? "";
   renderDropRows(t.yields);
   $("#reg-891").value = t.plus891Choice ?? "";
+  renderReg891Members(t.plus891Members ?? []);
   const order = { L: 0, S: 1, F: 2 };
   const sorted = [...t.members].sort((a, b) => order[a.role] - order[b.role]);
   const slots = { L: [0], S: [1, 2, 3, 4], F: [5] };
@@ -4669,3 +4686,19 @@ async function checkAppVersion() {
 checkAppVersion();
 document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && checkAppVersion());
 setInterval(checkAppVersion, 10 * 60 * 1000);
+
+// 編成登録: +891「一部だけ」の時に、どのキャラが必須かを選ぶ欄
+function renderReg891Members(checked) {
+  const box = $("#reg-891-members");
+  if (!box) return;
+  const keep = checked ?? [...box.querySelectorAll("input:checked")].map((x) => Number(x.value));
+  box.hidden = $("#reg-891").value !== "some";
+  const roles = ["リーダー", "サブ1", "サブ2", "サブ3", "サブ4", "フレンド"];
+  box.innerHTML = `<span class="muted">+891が必要なキャラ</span>` + roles.map((r, i) => {
+    const v = $(`#reg-m-${i}`)?.value.replace(/\s*No\.?\s*\d+.*$/, "").split(/[・＆]/).pop() || r;
+    return `<label class="check"><input type="checkbox" value="${i}"${keep.includes(i) ? " checked" : ""}> ${esc(v)}</label>`;
+  }).join("");
+}
+$("#reg-891").addEventListener("change", () => renderReg891Members());
+// キャラを入れ替えたら名前を更新
+$("#reg-form").addEventListener("change", (e) => /^reg-m-\d$/.test(e.target.id) && $("#reg-891").value === "some" && renderReg891Members());

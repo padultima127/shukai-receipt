@@ -22,7 +22,7 @@ service cloud.firestore {
     function validTeam(d) {
       return d.keys().hasOnly(['id', 'userAdded', 'dungeonId', 'title', 'timeSec', 'turns', 'yields', 'members',
           'steps', 'source', 'author', 'sourceDate', 'metrics', 'plus891Choice', 'newDungeon',
-          'status', 'ownerUid', 'ownerName', 'createdAt', 'icons', 'fastMode', 'times', 'badgeIcon', 'badgeId', 'partBreak'])
+          'status', 'ownerUid', 'ownerName', 'createdAt', 'icons', 'fastMode', 'times', 'badgeIcon', 'badgeId', 'partBreak', 'plus891Members'])
         && shortStr(d.title, 80)
         && shortStr(d.dungeonId, 60)
         && d.timeSec is number && d.timeSec > 0 && d.timeSec < 36000
@@ -37,6 +37,7 @@ service cloud.firestore {
         && (!('badgeIcon' in d) || shortStr(d.badgeIcon, 20000))
         && (!('badgeId' in d) || d.badgeId is number)
         && (!('partBreak' in d) || validPartBreak(d.partBreak))
+        && (!('plus891Members' in d) || (d.plus891Members is list && d.plus891Members.size() <= 12))
         && (!('plus891Choice' in d) || d.plus891Choice in ['', 'required', 'some', 'not-required']);
     }
     // 部位破壊の設定（できる・確定ドロップ・メモ）
@@ -66,10 +67,10 @@ service cloud.firestore {
       // 管理者: 承認・却下・非公開・再公開（status）と、+891必須・部位破壊の設定
       // 本人: +891必須・部位破壊の設定はいつでも。公開中⇄本人が非公開（hidden）の切り替えだけできる（却下・承認待ちは変えられない）
       allow update: if ((isAdmin()
-          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt', 'plus891Choice', 'partBreak'])
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt', 'plus891Choice', 'partBreak', 'plus891Members'])
           && request.resource.data.status in ['approved', 'rejected', 'pending', 'hidden'])
         || (signedIn() && resource.data.ownerUid == request.auth.uid
-          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt', 'plus891Choice', 'partBreak'])
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'reviewedAt', 'plus891Choice', 'partBreak', 'plus891Members'])
           && (request.resource.data.status == resource.data.status
             || (resource.data.status in ['approved', 'hidden'] && request.resource.data.status in ['approved', 'hidden']))))
         && (!('partBreak' in request.resource.data) || validPartBreak(request.resource.data.partBreak))
@@ -83,7 +84,7 @@ service cloud.firestore {
     match /overrides/{id} {
       allow read: if true;
       allow write: if isAdmin()
-        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'plus891Members', 'updatedAt'])
         && (!('partBreak' in request.resource.data) || validPartBreak(request.resource.data.partBreak))
         && (!('plus891Choice' in request.resource.data) || request.resource.data.plus891Choice in ['', 'required', 'some', 'not-required']);
     }

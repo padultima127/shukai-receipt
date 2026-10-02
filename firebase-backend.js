@@ -84,7 +84,7 @@
     // +891必須・部位破壊の設定（本人か管理者）
     updateTeam(id, patch) {
       const p = {};
-      for (const k of ["plus891Choice", "partBreak"]) if (k in patch) p[k] = patch[k] ?? firebase.firestore.FieldValue.delete();
+      for (const k of ["plus891Choice", "partBreak", "plus891Members"]) if (k in patch) p[k] = patch[k] ?? firebase.firestore.FieldValue.delete();
       return fs.collection("teams").doc(id).update(p);
     },
     // 初期データの編成の上書き（管理者だけ）
