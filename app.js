@@ -1316,23 +1316,78 @@ const BADGE_HP = { 2: 15, 86: 5, 98: 5, 104: 5 };
 const BADGE_TYPE = { 41: 5, 42: 4, 43: 7, 44: 8, 46: 6 }; // 神・ドラゴン・悪魔・マシン・攻撃（タイプ番号）
 const BADGE_TYPE_BY_NAME = { バランスタイプ強化: 1, 体力タイプ強化: 2, 回復タイプ強化: 3, ドラゴンタイプ強化: 4, 神タイプ強化: 5, 攻撃タイプ強化: 6, 悪魔タイプ強化: 7, マシンタイプ強化: 8 };
 function badgeEffectOf(t, mems) {
-  const id = t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
+  const p = pickedBadge(t);
+  const id = p ? p.id : t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
   const name = badgeNameOf(t);
   if (!name) return null;
   if (BADGE_HP[id]) return { name, hp: BADGE_HP[id] };
+  if (BADGE_HP_BY_NAME[name]) return { name, hp: BADGE_HP_BY_NAME[name] };
+  if (name === "HP強化＋") return { name, hp: 15 };
   const type = BADGE_TYPE[id] ?? BADGE_TYPE_BY_NAME[name];
   if (type == null) return null;
   const targetNos = mems.map((m) => monster(m.id)?.no).filter((no) => String(MDB.get(no)?.[13] ?? "").split(".").includes(String(type)));
   return targetNos.length ? { name, hp: 5, targetNos } : null;
 }
+// レシートからバッジが分からない編成で、見る人がバッジ一覧から選んだもの（このブラウザだけに保存）。{ 編成id: "id:104" | "name:回復強化＋" | "none" }
+const BADGE_PICK_KEY = "pad-farming-badge-picks";
+let badgePicks = loadJSON(BADGE_PICK_KEY, {});
+// 選べるバッジ（番号が分かっているものは番号、それ以外は名前。HPに効くかどうかは BADGE_HP / BADGE_TYPE で判定）
+const BADGE_CHOICES = [
+  ...Object.entries(BADGE_NAMES).map(([id, name]) => ({ val: `id:${id}`, name })),
+  ...["HP強化", "回復強化＋", "攻撃強化＋", "スキルブースト＋＋", "状態異常耐性", "十字消し攻撃", "4色攻撃強化", "3色攻撃強化", "5色攻撃強化", "ダメージ無効貫通",
+    "バランスタイプ強化", "体力タイプ強化", "回復タイプ強化", "ブリーチ", "銀魂", "鬼滅の刃", "怪獣8号", "大罪龍と鍵の勇者", "フリーレン", "リゼロ", "呪術廻戦", "ガンダム"].map((name) => ({ val: `name:${name}`, name })),
+];
+const BADGE_HP_BY_NAME = { HP強化: 5, 十字消し攻撃: 5, "4色攻撃強化": 5, "3色攻撃強化": 5, "5色攻撃強化": 5, ダメージ無効貫通: 5 };
+// レシート（QR・画像）でバッジが分かっているか
+function badgeKnown(t) {
+  return t.badgeId != null || t.badgeName != null || window.PAD_BADGES?.index?.[t.id] != null || window.PAD_BADGES?.idOf?.[t.id] != null || !!t.badgeIcon;
+}
+function pickedBadge(t) {
+  if (badgeKnown(t)) return null;
+  const v = badgePicks[t.id];
+  if (!v || v === "none") return null;
+  return v.startsWith("id:") ? { id: Number(v.slice(3)) } : { name: v.slice(5) };
+}
 function badgeNameOf(t) {
+  const p = pickedBadge(t);
+  if (p) return p.name ?? BADGE_NAMES[p.id] ?? null;
   const id = t.badgeId ?? window.PAD_BADGES?.idOf?.[t.id];
   return t.badgeName ?? (id != null ? BADGE_NAMES[id] : null) ?? null;
 }
+// バッジ一覧から選ぶ（超覚醒と同じ。レシートで分かっている編成には出さない）
+function renderBadgePicker(t) {
+  if (badgeKnown(t)) return "";
+  const cur = badgePicks[t.id] ?? "";
+  const B = window.PAD_BADGES;
+  const icon = (val) => {
+    const id = val.startsWith("id:") ? val.slice(3) : null;
+    const i = id != null ? B?.byId?.[id] : null;
+    if (i == null) return "";
+    const pos = `${((i % B.cols) / Math.max(1, B.cols - 1)) * 100}% ${(Math.floor(i / B.cols) / Math.max(1, B.rows - 1)) * 100}%`;
+    return `<span class="pdc-badge pdc-badge-sm" style="background-image:url('badges.webp?v=${B.ver}');background-size:${B.cols * 100}% ${B.rows * 100}%;background-position:${pos}"></span>`;
+  };
+  return `<details class="badge-pick" data-badge-team="${esc(t.id)}"><summary>バッジ不明${cur && cur !== "none" ? `・選択中: ${esc(badgeNameOf(t) ?? "")}` : cur === "none" ? "・なしを選択中" : "（一覧から選ぶ）"}</summary><div class="badge-pick-list">
+    ${[...BADGE_CHOICES, { val: "none", name: "バッジなし" }].map((c) => `<button type="button" class="badge-pick-btn${c.val === cur ? " on" : ""}" data-badge-team="${esc(t.id)}" data-badge-val="${esc(c.val)}" aria-pressed="${c.val === cur}">${icon(c.val)}${esc(c.name)}</button>`).join("")}
+    </div><small class="muted">レシートからはバッジが分かりません。選ぶと耐久チェック（バッジのHPアップ）に反映されます（このブラウザに保存）${cur ? ` ・ <button type="button" class="linkish" data-badge-team="${esc(t.id)}" data-badge-val="">選択を外す</button>` : ""}</small></details>`;
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-badge-val]");
+  if (!b) return;
+  e.preventDefault();
+  const id = b.dataset.badgeTeam;
+  const v = b.dataset.badgeVal;
+  if (!v || badgePicks[id] === v) delete badgePicks[id];
+  else badgePicks[id] = v;
+  saveJSON(BADGE_PICK_KEY, badgePicks);
+  if ($("#results").children.length) search();
+  document.querySelectorAll(`details.badge-pick[data-badge-team="${CSS.escape(id)}"]`).forEach((d) => (d.open = true));
+});
 function badgeIconHTML(t) {
   const B = window.PAD_BADGES;
-  const i = B?.index?.[t.id] ?? (t.badgeId != null ? B?.byId?.[t.badgeId] : null);
+  const p = pickedBadge(t);
+  const i = B?.index?.[t.id] ?? (t.badgeId != null ? B?.byId?.[t.badgeId] : p?.id != null ? B?.byId?.[p.id] : null);
   const name = badgeNameOf(t);
+  if (i == null && p && name) return `<span class="pdc-badge-wrap"><span class="pdc-badge-name">${esc(name)}（自分で選択）</span></span>`;
   const label = name ? `<span class="pdc-badge-name">${esc(name)}</span>` : "";
   const title = `PDCで選んだバッジ${name ? `: ${esc(name)}` : ""}`;
   if (i != null) {
@@ -1553,7 +1608,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div></div>
+      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
       <div class="score-col"><span class="score">${r.score == null ? `<small>データなし</small>` : `${Math.round(r.score)}<small>点</small>`}</span>${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
@@ -1597,12 +1652,20 @@ function renderResult(r, i, item) {
 //   毎ターン使うスキルで回復ドロップを生成する → 毎ターンHP満タン（100%回復）として計算
 //   そうでない → 編成内のリジェネ（◯ターンの間HPを◯%回復）の値で計算
 function lsNumbers(no) {
-  const [red, hp] = String(MDB.get(no)?.[19] ?? "").split("|");
+  // 変身キャラの変身前（ダイヤKを宿す者・ダインなど）は潜入時のLSしかないので、変身後（スキルで変身した後）のLSを使う
+  let ls = String(MDB.get(no)?.[19] ?? "");
+  const fam = MDB.get(no)?.[9];
+  if (!ls && fam) {
+    const later = (familyRows.get(fam) ?? []).filter((r) => r[0] !== no && r[19]);
+    if (later.length) ls = String(later[later.length - 1][19]);
+  }
+  const [red, hp, fx] = ls.split("|");
   const mults = (hp ?? "").split(",").filter(Boolean).map((x) => {
     const [cond, m] = x.split("=");
     return { cond, mult: Number(m) };
   });
-  return { red: Number(red) || 0, mults };
+  // fx: LSの固定ダメージの追い打ち（万）
+  return { red: Number(red) || 0, mults, fixed: Number(String(fx ?? "").replace("fx", "")) || 0 };
 }
 
 function hpMultFor(row, ls) {
@@ -1886,6 +1949,8 @@ function enduranceSetup(t0, opts = {}) {
   const rp = { 1: teamHpWith(new Map(), 1, true).total / Math.max(1, total), 5: teamHpWith(new Map(), 5, true).total / Math.max(1, total), 10: teamHpWith(new Map(), 10, true).total / Math.max(1, total) };
   const floorRatio = (f, parts = false) => (parts ? rp[f >= 10 ? 10 : f >= 5 ? 5 : 1] : f >= 10 ? r10 : f >= 5 ? r5 : 1);
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
+  // LSの固定ダメージの追い打ちがあれば、超根性（HP1で耐える）の敵もそのターンに倒せる
+  const fixedFollow = lsL.fixed + lsF.fixed;
   // 回復: 毎ターン使うスキルが回復ドロップを生成するか
   const everyTurn = (t.constraints ?? []).filter((c) => c.type === "skillEveryTurn").map((c) => c.target);
   const genRows = (no) => (MDB.get(no)?.[9] ? familyRows.get(MDB.get(no)[9]) : [MDB.get(no)]).filter(Boolean);
@@ -2033,7 +2098,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
+  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, fixedFollow, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -2062,6 +2127,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let fail = null;
   let turn = 0;
   const firstTurn = {};
+  const lastTurn = {};
   // 条件（敵の属性）は使った時点で判定。満たすと効果も効果ターンも◯倍（日番谷など）
   // 条件判定に使う敵の属性: その階に出る可能性のある敵全員（ダメージのない敵も含む）。なければ攻撃の属性から
   const floorAttrMap = Object.fromEntries(d.damage.floors.map((f) => [f.floor, f.enemyAttrs?.length ? f.enemyAttrs : [...new Set(f.hits.flatMap((h) => h.attrs ?? []))]]));
@@ -2086,14 +2152,16 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     (useSkill && (setup.awakenGrants ?? []).some((g) => g.names.includes(name) && activeAt(g, tn))) ||
     enemyAwaken.some((g) => g.names.includes(name) && g.from <= tn && tn <= g.from + g.dur - 1);
   // そのターンに効いている効果のうち、最後に使ったもの（目覚めが条件の効果は、目覚めが出ている時だけ）
-  const lastActive = (list, tn) => {
-    const active = (list ?? []).filter((r) => startOf(r) != null && activeAt(r, tn, durOf(r)) && (!r.awaken || awakenAt(r.awaken, tn)));
+  // flex: 軽減・最大HPアップは、レシートのターンの区切りが当てにならないので、その階の最後のターンに使った場合（次の階の先制まで効く）も含めて耐えられる方で見る
+  const lastActive = (list, tn, flex = false) => {
+    const inFlex = (r) => flex && lastTurn[r.floor] != null && startOf(r) <= tn && tn <= lastTurn[r.floor] + durOf(r) - 1;
+    const active = (list ?? []).filter((r) => startOf(r) != null && (activeAt(r, tn, durOf(r)) || inFlex(r)) && (!r.awaken || awakenAt(r.awaken, tn)));
     return active.sort((a, b) => b.order - a.order)[0] ?? null;
   };
   // 「敵が◯属性の時、効果◯倍」は、敵に1体でもその属性がいれば数値も倍（軽減は100%まで）
   const condVal = (r, v) => (r && condMet(r) ? v * r.cond.v : v);
   const skillAt = (tn) => {
-    const r = useSkill ? lastActive(setup.reductions, tn) : null;
+    const r = useSkill ? lastActive(setup.reductions, tn, true) : null;
     return r ? Math.min(100, condVal(r, r.red)) : 0;
   };
   // 最大HPの倍率（スキル・熟成・部位破壊ボーナス・属性変更）。切れて下がった時は新しい最大HPで頭打ち
@@ -2118,7 +2186,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let curParts = false;
   // playerPhase: 味方のターン（スキル・回復）。部位はそのターンの攻撃で壊すので、最初のターンの回復はまだ壊す前
   const updateHpMult = (tn, playerPhase = false) => {
-    const up = useSkill ? lastActive(setup.hpUps, tn) : null;
+    const up = useSkill ? lastActive(setup.hpUps, tn, true) : null;
     // 「敵が◯属性の時、効果が◯倍」: その階の敵に1体でもその属性がいれば倍率の効果を倍にする
     let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
     // 熟成（階が進むとチームHPが上がる）と部位破壊ボーナス（部位のある階で、最初の攻撃の後）
@@ -2172,7 +2240,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       rows.push({ floor: f.floor, label: h.label, skipped: "ワンパンする前提なので受けない（1ターンで倒せないと受ける）" });
     }
     const sr = f.hits.filter((x) => x.kind === "superResolve");
-    const stripped = sr.length ? stripBy(f, sr[0]) : null;
+    const stripped = sr.length ? (setup.fixedFollow ? `LSの固定追撃（${setup.fixedFollow.toLocaleString("ja-JP")}万）` : stripBy(f, sr[0])) : null;
     // その階のターン数: レシートに書かれたターン数（①②…）と、超根性を剥がさない場合の2ターンの大きい方
     const turns = Math.max(setup.floorTurns?.[f.floor] ?? 1, sr.length && !stripped ? 2 : 1);
     for (let i = 0; i < turns; i++) {
@@ -2190,11 +2258,12 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       hp = setup.healGen || fullHeal || rg + inst <= 0 ? maxAt() : Math.min(maxAt(), hp + (maxAt() * (rg + inst)) / 100);
       if (i === 0) {
         for (const h of sr) {
-          if (stripped) rows.push({ floor: f.floor, label: h.label, skipped: `${stripped}で超根性を剥がしてワンパンするため受けない` });
+          if (stripped) rows.push({ floor: f.floor, label: h.label, skipped: setup.fixedFollow ? `${stripped}で、超根性でHP1で耐えた敵をそのターンに倒すため受けない` : `${stripped}で超根性を剥がしてワンパンするため受けない` });
           else if (!hit(f, h, turn)) return { rows, deadAt, fail };
         }
       }
     }
+    lastTurn[f.floor] = turn;
     // 突破時の1ターン経過（マイクロ）
     if (f.turnPassOnClear) turn++;
   }

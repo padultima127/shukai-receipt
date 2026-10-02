@@ -246,7 +246,8 @@ def leader_numbers(ls):
     # 「激減」は75%（本人談）
     if "ダメージを激減" in text:
         red = max(red, 75.0)
-    for n in re.findall(r"ダメージを([\d.]+)[%％]軽減", text):
+    # 「ダメージを82%軽減」のほか「ダメージ82％軽減」（を なし）も
+    for n in re.findall(r"ダメージを?([\d.]+)[%％]軽減", text):
         red = max(red, float(n))
     hp = []
     for sentence in text.split("。"):
@@ -262,9 +263,13 @@ def leader_numbers(ls):
             for name in re.findall(r"[火水木光闇]", grp):
                 hp.append(f"a{ATTR_ID[name]}={mult}")
         if not hp:
-            m = re.search(r"(?:^|、)HP(?:と[^。倍]*)?が([\d.]+)倍", sentence)
+            m = re.search(r"(?:^|、|場合、)(?:HP|全パラメータ)(?:と[^。倍]*)?が([\d.]+)倍", sentence)
             if m:
                 hp.append(f"all={m.group(1)}")
+    # 固定ダメージの追い打ち（「固定1400万ダメージ」）: 超根性でHP1で耐えた敵もそのターンに倒せる → 超根性の後の行動を受けない
+    fx = max((int(n) for n in re.findall(r"固定(\d+)万ダメージ", text)), default=0)
+    if fx:
+        return f"{red:g}|{','.join(hp)}|fx{fx}"
     return f"{red:g}|{','.join(hp)}" if red or hp else ""
 
 

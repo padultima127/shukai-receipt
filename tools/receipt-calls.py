@@ -78,13 +78,18 @@ def keys_of(name):
 CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
 BRANCH = re.compile(r"^\s*(通常|乱入|[■●□○]|.{0,10}の(場合|とき|時)|[火水木光闇][アグリ色]?(の場合|なら))")
 TURN_END = re.compile(r"盤面\s*\d+\s*[cCｃ]|[+＋]?\s*\d\s*[cCｃ](?!(?![xX]\s*\d)[a-zA-Z])|ずらし|[0０]\s*[cCｃ]|全力|[LＬ]字|十字|列")
-FLOOR = re.compile(r"^[\s◆◇●■・•★☆【]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:)")
+FLOOR = re.compile(r"^[\s◆◇●■・•★☆【]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:|：|，|,|、(?!\d))")
+# 「1テレシア裏・…」「3 ①L」のように数字のすぐ後に名前や①が続く行も階（数字の後が数字・個・c・%・ターンなどの時は除く）
+FLOOR_LOOSE = re.compile(r"^\s*(\d{1,2})(?=\s*[①-⑳]|[^\d\s個cCｃ%％ターン秒倍枠体回日時分月年万億つ件人ヶ箇kKmM.．,，、:：x×])")
 
 
 def parse_team(team, texts):
     idx = next((i for i, l in enumerate(texts) if "PDC" in l or "パズドラダメージ計算" in l), None)
     if idx is None:
-        return None
+        # 立ち回りだけを別の画像に書いている場合（PDCの文字がない）: 階の行が4つ以上あれば最初から読む
+        if sum(1 for l in texts if FLOOR.match(l)) < 4:
+            return None
+        idx = -1
     members = team["members"]
     mkeys = [keys_of(m["name"]) for m in members]
     akeys = [[k for k in keys_of(re.sub(r"\s*No\.?\s*\d+.*$", "", m.get("assist") or "")) if len(k) >= 3] for m in members]
@@ -92,8 +97,9 @@ def parse_team(team, texts):
     floor = None
     seen_order = {}
     turn_base = 0  # その階で、この行より前に終わったターンの数（盤面◯c・ずらし・①②などで区切る）
+    loose = sum(1 for l in texts[idx + 1:] if FLOOR_LOOSE.match(l)) >= 4 and sum(1 for l in texts[idx + 1:] if FLOOR.match(l)) < 4
     for line in texts[idx + 1:]:
-        m = FLOOR.match(line)
+        m = FLOOR.match(line) or (FLOOR_LOOSE.match(line) if loose else None)
         if m:
             floor = int(m.group(1))
             line = line[m.end():]
@@ -181,7 +187,8 @@ def main():
         if not m:
             continue
         # 1つのツイートに2編成ある時（source に #ダンジョンid）は2枚目のレシート
-        pdc = [t for k in sorted(ocr) if k.startswith(m.group(1)) for t in [lines_of(ocr[k])] if any("PDC" in l for l in t)]
+        pdc = [t for k in sorted(ocr) if k.startswith(m.group(1)) for t in [lines_of(ocr[k])]
+               if any("PDC" in l for l in t) or sum(1 for l in t if FLOOR.match(l)) >= 4]
         nth = 1 if "#" in team["source"] else 0
         if nth == 0 and len(pdc) > 1:
             # 立ち回りが書いてある画像（階の行が一番多いもの）

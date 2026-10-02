@@ -394,3 +394,10 @@ button:disabled { opacity: .6; cursor: wait; }
 
 .pdc-label { font-size: .7rem; font-weight: 800; color: var(--accent); line-height: 1; }
 .latent-strip { display: inline-block; width: 150px; height: 50px; max-width: 100%; border-radius: 4px; background-repeat: no-repeat; }
+
+.badge-pick { margin-top: 6px; font-size: 13px; }
+.badge-pick summary { cursor: pointer; color: var(--muted, #888); }
+.badge-pick-list { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+.badge-pick-btn { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line, #ccc); background: transparent; color: inherit; font: inherit; font-size: 12px; cursor: pointer; }
+.badge-pick-btn.on { border-color: var(--accent, #3b82f6); box-shadow: 0 0 0 1px var(--accent, #3b82f6) inset; font-weight: 600; }
+.pdc-badge-sm { width: 22px; height: 16px; border-radius: 3px; }

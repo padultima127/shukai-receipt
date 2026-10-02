@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 102,
+  "version": 103,
   "seed": true,
   "monsters": [
     {
@@ -10844,7 +10844,135 @@ window.PAD_SEED = {
           "text": "真田武器の代わりにシュタルク装備（スキルLv1）"
         }
       ],
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 1
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          }
+        ]
+      }
     },
     {
       "id": "kirisame-heartia-eriryuu",
@@ -12669,7 +12797,93 @@ window.PAD_SEED = {
         "plus891": 1,
         "plus891Text": null
       },
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "fuun-dain-nanaminn",
@@ -14568,6 +14782,383 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "13": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 6
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 6
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 7
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 8
+          }
+        ]
       }
     },
     {
@@ -15723,6 +16314,253 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 1,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "13": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          }
+        ]
       }
     },
     {
@@ -16088,6 +16926,190 @@ window.PAD_SEED = {
       },
       "yields": {
         "exp": 448000000
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "14": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "15": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
       }
     },
     {
@@ -16219,21 +17241,78 @@ window.PAD_SEED = {
         "plus891Text": "not-required"
       },
       "receiptCalls": {
-        "3": [
-          {
-            "mi": 4,
-            "part": "auto",
-            "turn": 1
-          },
+        "1": [
           {
             "mi": 1,
             "part": "auto",
-            "turn": 1
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
             "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -24580,7 +25659,244 @@ window.PAD_SEED = {
         "plus891": 0,
         "plus891Text": null
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "13": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 5
+          }
+        ]
+      }
     },
     {
       "id": "mercury-reinhard-mori",
@@ -24819,16 +26135,18 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 1
-          },
+          }
+        ],
+        "6": [
           {
             "mi": 4,
             "part": "auto",
-            "turn": 2
+            "turn": 0
           },
           {
             "mi": 0,
             "part": "auto",
-            "turn": 2
+            "turn": 0
           },
           {
             "mi": 4,
@@ -31598,6 +32916,308 @@ window.PAD_SEED = {
         "zurashi": 6,
         "plus891": 0.8333333333333334,
         "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "15": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 6
+          },
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 6
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 7
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 7
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 8
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          }
+        ]
       }
     },
     {
@@ -32648,7 +34268,160 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 5
+          }
+        ]
+      }
     },
     {
       "id": "sun-dain-yomogi",
@@ -44217,7 +45990,248 @@ window.PAD_SEED = {
         "can": true,
         "note": "12Fで部位2個破壊（レシートより）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 6
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 7
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-bakugo-matsuda",
@@ -44361,7 +46375,246 @@ window.PAD_SEED = {
         "sureNote": "全部位破壊確定（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "12": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-kikoru-matsuda",
