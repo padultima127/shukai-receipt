@@ -899,7 +899,9 @@ function search() {
   const leaderFams = searchType === "leader" ? leaderNosFor(q) : null;
   const famOf = (no) => MDB.get(no)?.[9] || no;
   const leaderHit = (t) => t.members.some((m) => (m.role === "L" || m.role === "F") && leaderFams.has(famOf(monster(m.id)?.no)));
-  if (leaderFams) dungeons = db.dungeons.filter((d) => db.teams.some((t) => t.dungeonId === d.id && leaderHit(t)));
+  // ダンジョン指定（リーダー・フレンドで探す時だけ。空なら一致する全てのダンジョン）
+  const leaderDg = leaderFams ? $("#leader-dungeon").value : "";
+  if (leaderFams) dungeons = db.dungeons.filter((d) => (!leaderDg || d.id === leaderDg) && db.teams.some((t) => t.dungeonId === d.id && leaderHit(t)));
   const boxActive = box.size > 0;
   // 部位破壊のあるダンジョンが対象の時だけ「部位ドロップ確定だけ」のチェックを出す
   const hasParts = dungeons.some((d) => d.parts);
@@ -918,7 +920,8 @@ function search() {
   );
   const total = rows.length;
   if (!total && leaderFams) {
-    out.innerHTML = `<div class="card unregistered"><p>「${esc(q)}」がリーダーかフレンドの編成は見つかりませんでした。図鑑No.か名前の一部で探せます（候補はリーダー・フレンドに使われているキャラだけ）。</p></div>`;
+    const dgName = leaderDg ? db.dungeons.find((d) => d.id === leaderDg)?.name : null;
+    out.innerHTML = `<div class="card unregistered"><p>「${esc(q)}」がリーダーかフレンドの編成は${dgName ? `「${esc(dgName)}」に` : ""}見つかりませんでした。図鑑No.か名前の一部で探せます（候補はリーダー・フレンドに使われているキャラだけ）。</p></div>`;
     return;
   }
   if (!total) {
@@ -980,7 +983,7 @@ function search() {
     (item
       ? `<p class="summary">「${esc(item.name)}」が出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件</p>`
       : leaderFams
-        ? `<p class="summary">「${esc(q)}」がリーダーかフレンドの編成 ${rows.length}件（${new Set(rows.map((r) => r.dungeon.id)).size}ダンジョン）</p>`
+        ? `<p class="summary">「${esc(q)}」がリーダーかフレンドの編成 ${rows.length}件（${leaderDg ? esc(db.dungeons.find((d) => d.id === leaderDg)?.name ?? "") : `${new Set(rows.map((r) => r.dungeon.id)).size}ダンジョン`}）</p>`
         : `<p class="summary">編成 ${rows.length}件</p>`) +
     `<p class="caution">⚠️ 編成・アシスト・立ち回りは要約や読み取りのため、誤りや省略があるかもしれません。参考にするときは<strong>必ず各編成の「元のポスト／元の記事」のリンク先を確認</strong>してください。</p>`;
 
@@ -3401,8 +3404,23 @@ function setSearchType(type) {
   document.querySelectorAll("#search-type button").forEach((x) => x.classList.toggle("active", x.dataset.type === type));
   $("#q-label").textContent = t.label;
   $("#q").placeholder = t.placeholder;
+  $("#leader-dungeon-wrap").hidden = type !== "leader";
+  if (type === "leader") renderLeaderDungeons();
   renderSuggestions();
 }
+// リーダー・フレンドで探す時のダンジョン指定（区分ごと・実装順）
+function renderLeaderDungeons() {
+  const sel = $("#leader-dungeon");
+  const cur = sel.value;
+  const groups = new Map();
+  for (const d of sortedDungeons()) {
+    const g = dungeonGroup(d).name;
+    (groups.get(g) ?? groups.set(g, []).get(g)).push(d);
+  }
+  sel.innerHTML = `<option value="">すべてのダンジョン</option>` + [...groups].map(([g, ds]) => `<optgroup label="${esc(g)}">${ds.map((d) => `<option value="${esc(d.id)}">${esc(d.name)}</option>`).join("")}</optgroup>`).join("");
+  sel.value = cur;
+}
+$("#leader-dungeon").addEventListener("change", () => $("#q").value.trim() && search());
 
 document.querySelectorAll("#search-type button").forEach((b) =>
   b.addEventListener("click", () => {
