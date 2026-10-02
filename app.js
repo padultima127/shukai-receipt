@@ -4282,36 +4282,40 @@ $("#fb-form")?.addEventListener("submit", async (e) => {
 });
 
 // 古い版のページが開かれたままになっていないか確認（アプリ内ブラウザなどでキャッシュされた古いページから登録するとエラーになるため）
-(async () => {
+// 開いた時・画面に戻ってきた時・10分ごとに version.json を見て、新しい版があれば読み直す
+// （編成登録の入力途中は消えないように、自動では読み直さず案内だけ出す）
+async function checkAppVersion() {
   try {
     const mine = new URL(document.querySelector('script[src*="app.js"]').src).searchParams.get("v");
     const res = await fetch(`version.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) return;
     const { v } = await res.json();
     if (!v || !mine || v === mine) return;
-    // 1回だけ自動で読み直す。それでも古い時は案内を出す
+    const reload = (tag) => {
+      const u = new URL(location.href);
+      u.searchParams.set("v", tag);
+      location.replace(u.toString());
+    };
+    const typing = !$("#tab-register").hidden && [...document.querySelectorAll("#reg-form input, #reg-form textarea")].some((el) => el.type !== "file" && el.type !== "checkbox" && el.value.trim());
     const key = "pad-farming-reloaded-for";
     let tried = null;
     try {
       tried = sessionStorage.getItem(key);
     } catch {}
-    if (tried !== v) {
+    if (!typing && tried !== v) {
       try {
         sessionStorage.setItem(key, v);
       } catch {}
-      const u = new URL(location.href);
-      u.searchParams.set("v", v);
-      location.replace(u.toString());
-      return;
+      return reload(v);
     }
+    if (document.querySelector(".update-banner")) return;
     const bar = document.createElement("div");
     bar.className = "banner update-banner";
-    bar.innerHTML = `新しい版が公開されています。<button type="button" class="linkish">再読み込み</button>（直らない時は、ブラウザのメニューから「ブラウザで開く」を選んでください）`;
-    bar.querySelector("button").addEventListener("click", () => {
-      const u = new URL(location.href);
-      u.searchParams.set("v", `${v}-${Date.now()}`);
-      location.replace(u.toString());
-    });
+    bar.innerHTML = `新しい版が公開されています。<button type="button" class="linkish">再読み込み</button>${typing ? "（入力中の内容は消えます）" : "（直らない時は、ブラウザのメニューから「ブラウザで開く」を選んでください）"}`;
+    bar.querySelector("button").addEventListener("click", () => reload(`${v}-${Date.now()}`));
     document.body.prepend(bar);
   } catch {}
-})();
+}
+checkAppVersion();
+document.addEventListener("visibilitychange", () => document.visibilityState === "visible" && checkAppVersion());
+setInterval(checkAppVersion, 10 * 60 * 1000);
