@@ -11,4 +11,6 @@ v = time.strftime("%Y%m%d%H%M%S")
 s = p.read_text(encoding="utf-8")
 s = re.sub(r'((?:src|href)="(?:[\w-]+)\.(?:js|css))(\?v=\d+)?"', rf'\1?v={v}"', s)
 p.write_text(s, encoding="utf-8")
+# 開いているページが古い版のままか判定するための版番号（app.js が起動時に読みに行く）
+(p.parent / "version.json").write_text('{"v": "%s"}\n' % v, encoding="utf-8")
 print("cache version", v)

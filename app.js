@@ -3855,6 +3855,38 @@ function parsePdcNumbers(data) {
 }
 
 // PDCのレシートの立ち回り（「Created by PDC」より下の行）
+async function readPdcStepsText(file, data, onStep) {
+  const bmp = await createImageBitmap(file);
+  const k = (data.imageWidth ?? bmp.width) / bmp.width;
+  const line = (data.lines ?? []).find((l) => /PDC|パズドラダメージ計算/.test(l.text ?? ""));
+  if (!line?.bbox) return null;
+  const y0 = Math.min(bmp.height - 1, Math.round(line.bbox.y1 / k) + 2);
+  const c = document.createElement("canvas");
+  c.width = bmp.width;
+  c.height = bmp.height - y0;
+  if (c.height < 40) return null;
+  const g = c.getContext("2d");
+  g.fillStyle = "#fff";
+  g.fillRect(0, 0, c.width, c.height);
+  g.drawImage(bmp, 0, y0, bmp.width, c.height, 0, 0, c.width, c.height);
+  const { data: d2 } = await Tesseract.recognize(c, "jpn", { logger: (m) => m.status === "recognizing text" && onStep?.(Math.round(m.progress * 100)) });
+  return cleanSteps((d2.text ?? "").split("\n"));
+}
+// 立ち回りの文字の後処理（空白・矢印・よくある読み違い）
+function cleanSteps(lines) {
+  const jp = /[^\x00-\x7F]/;
+  return lines
+    .map((l) => l.trim())
+    .filter(Boolean)
+    .map((l) => l.replace(/ +/g, (sp, at, str) => (jp.test(str[at - 1] ?? "") || jp.test(str[at + sp.length] ?? "") ? "" : " ")))
+    // 「→」が「っ」「う」と読まれやすい（行頭やキャラ名の後ろのひらがなは矢印とみなす）
+    .map((l) => l.replace(/^[っうぅ]{1,3}(?=[\u30A0-\u30FF\u4E00-\u9FFF])/, "→").replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF)）])[っうぅ]{1,3}/g, "→"))
+    // 「裏」が「衰」と読まれやすい
+    .map((l) => l.replace(/衰/g, "裏"))
+    // 丸数字が2つ続くのは読み違い（③⑫ → ③）
+    .map((l) => l.replace(/^([①-⑳])[①-⑳]+/, "$1"))
+    .join("\n");
+}
 function parsePdcSteps(data) {
   const lines = (data.text ?? "").split("\n").map((l) => l.trim());
   const i = lines.findIndex((l) => /PDC|パズドラダメージ計算/.test(l));
@@ -4174,7 +4206,14 @@ async function runRegOcr() {
           regSupers = {};
         }
       } else if (!qr) notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
-      const steps = parsePdcSteps(d);
+      // 立ち回りは「Created by PDC」より下だけを切り出して、拡大せず日本語だけで読み直す方が正確（拡大すると大きい文字が崩れる）
+      let steps = null;
+      try {
+        steps = await readPdcStepsText(pdc, d, (p) => msg(`立ち回りを読み取り中… ${p}%`));
+      } catch {
+        steps = null;
+      }
+      steps ||= parsePdcSteps(d);
       if (steps) {
         $("#reg-steps").value = steps;
         notes.push("立ち回り");
@@ -4241,3 +4280,38 @@ $("#fb-form")?.addEventListener("submit", async (e) => {
     msg(`送れませんでした: ${err.message}`, false);
   }
 });
+
+// 古い版のページが開かれたままになっていないか確認（アプリ内ブラウザなどでキャッシュされた古いページから登録するとエラーになるため）
+(async () => {
+  try {
+    const mine = new URL(document.querySelector('script[src*="app.js"]').src).searchParams.get("v");
+    const res = await fetch(`version.json?t=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) return;
+    const { v } = await res.json();
+    if (!v || !mine || v === mine) return;
+    // 1回だけ自動で読み直す。それでも古い時は案内を出す
+    const key = "pad-farming-reloaded-for";
+    let tried = null;
+    try {
+      tried = sessionStorage.getItem(key);
+    } catch {}
+    if (tried !== v) {
+      try {
+        sessionStorage.setItem(key, v);
+      } catch {}
+      const u = new URL(location.href);
+      u.searchParams.set("v", v);
+      location.replace(u.toString());
+      return;
+    }
+    const bar = document.createElement("div");
+    bar.className = "banner update-banner";
+    bar.innerHTML = `新しい版が公開されています。<button type="button" class="linkish">再読み込み</button>（直らない時は、ブラウザのメニューから「ブラウザで開く」を選んでください）`;
+    bar.querySelector("button").addEventListener("click", () => {
+      const u = new URL(location.href);
+      u.searchParams.set("v", `${v}-${Date.now()}`);
+      location.replace(u.toString());
+    });
+    document.body.prepend(bar);
+  } catch {}
+})();
