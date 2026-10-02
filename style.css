@@ -401,3 +401,5 @@ button:disabled { opacity: .6; cursor: wait; }
 .badge-pick-btn { display: inline-flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: 999px; border: 1px solid var(--line, #ccc); background: transparent; color: inherit; font: inherit; font-size: 12px; cursor: pointer; }
 .badge-pick-btn.on { border-color: var(--accent, #3b82f6); box-shadow: 0 0 0 1px var(--accent, #3b82f6) inset; font-weight: 600; }
 .pdc-badge-sm { width: 22px; height: 16px; border-radius: 3px; }
+
+#leader-dungeon-wrap[hidden] { display: none; }
