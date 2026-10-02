@@ -4070,21 +4070,21 @@ function findEmojiBlobs(c) {
   }
   return merged.sort((a, b) => a.y0 - b.y0 || a.x0 - b.x0);
 }
-// 読み取った行の単語の並びに、見つけた絵文字を差し込む（絵文字の上に重なった読み違いの文字は捨てる）
+// 読み取った行の文字の並びに、見つけた絵文字を差し込む（絵文字の上に重なった読み違いの文字は1文字単位で捨てる）
 function rebuildLinesWithEmoji(data, blobs) {
   const used = new Set();
+  const hit = (sym, b) => {
+    const pad = b.emoji === "🪓" ? (b.x1 - b.x0) * 0.5 : (b.x1 - b.x0) * 0.1;
+    const ox = Math.min(sym.bbox.x1, b.x1 + pad) - Math.max(sym.bbox.x0, b.x0 - pad);
+    return ox > (sym.bbox.x1 - sym.bbox.x0) * 0.4;
+  };
   const lines = (data.lines ?? []).map((l) => {
-    const words = (l.words ?? []).map((w) => ({ x: w.bbox.x0, text: w.text, bbox: w.bbox }));
+    const syms = (l.words ?? []).flatMap((w) => (w.symbols?.length ? w.symbols : [{ text: w.text, bbox: w.bbox }]).map((x) => ({ text: x.text, bbox: x.bbox, gap: w })));
     const cy0 = l.bbox.y0, cy1 = l.bbox.y1;
     const mine = blobs.filter((b, i) => !used.has(i) && (b.y0 + b.y1) / 2 >= cy0 - 4 && (b.y0 + b.y1) / 2 <= cy1 + 4 && used.add(i));
-    // 絵文字の灰色の部分（斧の刃など）は色で拾えないので、少し広げた範囲に重なる文字を捨てる
-    const overlaps = (w) => !/^[→>＞]+$/.test(w.text) && mine.some((b) => {
-      const pad = b.emoji === "🪓" ? (b.x1 - b.x0) * 0.6 : (b.x1 - b.x0) * 0.15;
-      const ox = Math.min(w.bbox.x1, b.x1 + pad) - Math.max(w.bbox.x0, b.x0 - pad);
-      return ox > (w.bbox.x1 - w.bbox.x0) * 0.5;
-    });
-    const items = [...words.filter((w) => !overlaps(w)), ...mine.map((b) => ({ x: b.x0, text: b.emoji }))].sort((a, b) => a.x - b.x);
-    return items.map((x) => x.text).join(" ");
+    const keep = syms.filter((x) => /^[→>＞]$/.test(x.text) || !mine.some((b) => hit(x, b)));
+    const items = [...keep.map((x) => ({ x: x.bbox.x0, text: x.text })), ...mine.map((b) => ({ x: b.x0, text: b.emoji }))].sort((a, b) => a.x - b.x);
+    return items.map((x) => x.text).join("");
   });
   // 文字の行に入らなかった絵文字だけの行（🪓だけの行など）
   const rest = blobs.filter((b, i) => !used.has(i));
@@ -4106,12 +4106,25 @@ function cleanSteps(lines) {
     // 名前・絵文字の間の「つ」「っ」（と「う」）は矢印の読み違い
     .map((l) => l.replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF\p{Extended_Pictographic})）])[つっ]{1,2}(?=[\u30A0-\u30FF\u4E00-\u9FFF\p{Extended_Pictographic}(（])/gu, "→").replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF\p{Extended_Pictographic}])う(?=[\u30A0-\u30FF\p{Extended_Pictographic}])/gu, "→"))
     .map((l) => l.replace(/→[つっう]+/g, "→"))
+    // 絵文字の縁が丸数字やへに化けたもの（🟡⑮功、🪓へ）と、絵文字の間の「-」は矢印
+    .map((l) => l.replace(/(?<=\p{Extended_Pictographic})[①-⑳]+/gu, "").replace(/(?<=🪓)[へヘ]/g, "").replace(/(?<=\p{Extended_Pictographic})[-ー一](?=\p{Extended_Pictographic})/gu, "→"))
     // 「1f」が「Tf」「If」と読まれやすい
     .map((l) => l.replace(/^[TIl|](?=\d?\s*[fFＦ]$)/, "1"))
     // 「裏」が「衰」と読まれやすい
     .map((l) => l.replace(/衰/g, "裏"))
     // 丸数字が2つ続くのは読み違い（③⑫ → ③）
     .map((l) => l.replace(/^([①-⑳])[①-⑳]+/, "$1"))
+    .reduce((acc, l, i, arr) => {
+      // 階の見出し（「1f」など）が1文字に化けた行（「山」「本」）は、前後の見出しから番号が1つに決まる時だけ直す
+      const fl = (x) => Number(x.match(/^(\d{1,2})\s*[fFＦ階]$/)?.[1]) || null;
+      if (/^[^\x00-\x7F→\p{Extended_Pictographic}]$/u.test(l)) {
+        const prev = [...arr.slice(0, i)].reverse().map(fl).find(Boolean) ?? 0;
+        const next = arr.slice(i + 1).map(fl).find(Boolean);
+        if (next && next - prev === 2) l = `${prev + 1}f`;
+      }
+      acc.push(l);
+      return acc;
+    }, [])
     .join("\n");
 }
 function parsePdcSteps(data) {
