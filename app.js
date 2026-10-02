@@ -1227,7 +1227,7 @@ function renderSuperList(r) {
   const picked = mem.build?.userPicked ? mem.build.super : null;
   return `<details class="awk-supers" data-super-key="${esc(key)}"><summary>超覚醒一覧（${ids.length}）${picked ? "・選択中" : ""}</summary><div class="awk-row">${ids
     .map((id) => `<button type="button" class="awk-pick${id === picked ? " on" : ""}" data-pick-key="${esc(key)}" data-pick-super="${id}" aria-pressed="${id === picked}">${awkIcon(id, id === picked ? "awk-super" : "")}</button>`)
-    .join("")}</div><small class="muted">レシートからは選んだ超覚醒が分かりません。選ぶとダンボ数と耐久チェックに反映されます（このブラウザに保存）${picked ? ` ・ <button type="button" class="linkish" data-pick-key="${esc(key)}" data-pick-super="">選択を外す</button>` : ""}</small></details>`;
+    .join("")}</div><small class="muted">レシートからは選んだ超覚醒が分かりません。選ぶとダンボ数に反映されます（このブラウザに保存）${picked ? ` ・ <button type="button" class="linkish" data-pick-key="${esc(key)}" data-pick-super="">選択を外す</button>` : ""}</small></details>`;
 }
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-pick-key]");
@@ -1433,7 +1433,7 @@ function renderBadgePicker(t) {
   };
   return `<details class="badge-pick" data-badge-team="${esc(t.id)}"><summary>バッジ不明${cur && cur !== "none" ? `・選択中: ${esc(badgeNameOf(t) ?? "")}` : cur === "none" ? "・なしを選択中" : "（一覧から選ぶ）"}</summary><div class="badge-pick-list">
     ${[...BADGE_CHOICES, { val: "none", name: "バッジなし" }].map((c) => `<button type="button" class="badge-pick-btn${c.val === cur ? " on" : ""}" data-badge-team="${esc(t.id)}" data-badge-val="${esc(c.val)}" aria-pressed="${c.val === cur}">${icon(c.val)}${esc(c.name)}</button>`).join("")}
-    </div><small class="muted">レシートからはバッジが分かりません。選ぶと耐久チェック（バッジのHPアップ）に反映されます（このブラウザに保存）${cur ? ` ・ <button type="button" class="linkish" data-badge-team="${esc(t.id)}" data-badge-val="">選択を外す</button>` : ""}</small></details>`;
+    </div><small class="muted">レシートからはバッジが分かりません。選ぶとバッジ名が表示されます（このブラウザに保存）${cur ? ` ・ <button type="button" class="linkish" data-badge-team="${esc(t.id)}" data-badge-val="">選択を外す</button>` : ""}</small></details>`;
 }
 document.addEventListener("click", (e) => {
   const b = e.target.closest("[data-badge-val]");
@@ -1713,7 +1713,7 @@ function renderResult(r, i, item) {
     ${warn}
     ${renderConstraints(t)}
     ${renderMembers(r, "details")}
-    ${renderEndurance(t, r.dungeon)}
+    ${ENDURANCE_ENABLED ? renderEndurance(t, r.dungeon) : ""}
     ${t.steps?.length ? `<details><summary>立ち回り</summary><ul class="steps">${t.steps.map((s) => `<li>${esc(s)}</li>`).join("")}</ul></details>` : ""}
     ${src}
   </article>`;
@@ -2645,6 +2645,8 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
     </tbody></table></div>`;
 }
 
+// 耐久チェックは計算に不備があるため、見直しが済むまで表示しない（本人指定 2026-10-02）。計算のコードは残してある
+const ENDURANCE_ENABLED = false;
 function renderEndurance(t, d) {
   if (!d?.damage?.floors?.length || t.multi) return "";
   const setup = enduranceSetup(t);
@@ -3454,6 +3456,18 @@ function renderAdminPanel() {
     })
   );
   adminUnsubs.push(
+    shared.fb.watchRequests((list) => {
+      $("#admin-requests").innerHTML = list.length
+        ? `<ul class="reg-list">${list
+            .map((q) => `<li><div class="reg-info"><a href="${esc(q.url)}" target="_blank" rel="noopener">${esc(q.url)}</a>
+              <span class="muted">${q.note ? `${esc(q.note)} ・ ` : ""}${q.createdAt?.toDate ? esc(q.createdAt.toDate().toLocaleString("ja-JP")) : ""}</span></div>
+              <div class="row"><button type="button" data-reqdel="${esc(q.id)}">対応済みにする（削除）</button></div></li>`)
+            .join("")}</ul><p class="hint">リンクをまとめてコピー: <button type="button" class="linkish" data-reqcopy>コピー</button></p>`
+        : `<p class="hint">登録依頼はありません。</p>`;
+      adminRequestUrls = list.map((q) => q.url);
+    })
+  );
+  adminUnsubs.push(
     shared.fb.watchFeedback((list) => {
       $("#admin-feedback").innerHTML = list.length
         ? `<ul class="reg-list">${list
@@ -3891,6 +3905,11 @@ $("#admin-panel").addEventListener("click", async (e) => {
     if (b.dataset.hide) await shared.fb.setStatus(b.dataset.hide, "rejected");
     if (b.dataset.resolve) await shared.fb.resolveReport(b.dataset.resolve);
     if (b.dataset.fbdel) await shared.fb.removeFeedback(b.dataset.fbdel);
+    if (b.dataset.reqdel) await shared.fb.removeRequest(b.dataset.reqdel);
+    if ("reqcopy" in b.dataset) {
+      await navigator.clipboard.writeText(adminRequestUrls.join("\n")).catch(() => {});
+      b.textContent = "コピーしました";
+    }
   } catch (err) {
     alert?.(`操作に失敗しました: ${err.message}`);
   }
@@ -4634,6 +4653,27 @@ renderDropRows();
     .map((d, i) => `<details${i === 0 ? " open" : ""}><summary>${esc(d.date)}${i === 0 ? ' <span class="badge">最新</span>' : ""}</summary><ul>${d.items.map((x) => `<li>${esc(x)}</li>`).join("")}</ul></details>`)
     .join("");
 })();
+
+// ---------- Xのリンクでの登録依頼 ----------
+let adminRequestUrls = [];
+$("#req-card").hidden = !window.PAD_FIREBASE;
+$("#req-form")?.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const msg = (t, ok) => (($("#req-msg").className = `msg ${ok ? "ok" : "err"}`), ($("#req-msg").textContent = t));
+  // 余計な ?s=20 などは落として、ポストのリンクの形だけ受け付ける
+  const m = $("#req-url").value.trim().match(/^https?:\/\/(?:mobile\.)?(?:x|twitter)\.com\/([A-Za-z0-9_]+)\/status\/(\d+)/);
+  if (!m) return msg("Xのポストのリンク（https://x.com/ユーザー名/status/数字）を入れてください。", false);
+  const url = `https://x.com/${m[1]}/status/${m[2]}`;
+  if (db.teams.some((t) => (t.source ?? "").includes(`/status/${m[2]}`))) return msg("このポストの編成は、すでに登録されています。", false);
+  try {
+    await shared.fb.sendRequest(url, $("#req-note").value.trim());
+    $("#req-url").value = "";
+    $("#req-note").value = "";
+    msg("依頼を送りました。確認して登録します。ありがとうございます！", true);
+  } catch (err) {
+    msg(`送れませんでした: ${err.message}`, false);
+  }
+});
 
 // ---------- 感想・要望 ----------
 // Firebase が使える時だけ（claude.ai 版などでは非表示）

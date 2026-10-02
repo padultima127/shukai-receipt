@@ -149,6 +149,22 @@
         (e) => console.warn("feedback", e)
       );
     },
+    // Xのリンクでの登録依頼（ログインなしでも送れる。読めるのは管理者だけ）
+    sendRequest(url, note) {
+      const u = auth.currentUser;
+      const doc = { url: String(url).slice(0, 300), uid: u?.uid ?? null, createdAt: ts() };
+      if (note) doc.note = String(note).slice(0, 200);
+      return fs.collection("requests").add(doc);
+    },
+    watchRequests(cb) {
+      return fs.collection("requests").orderBy("createdAt", "desc").limit(200).onSnapshot(
+        (snap) => cb(snap.docs.map((d) => ({ ...d.data(), id: d.id }))),
+        (e) => console.warn("requests", e)
+      );
+    },
+    removeRequest(id) {
+      return fs.collection("requests").doc(id).delete();
+    },
     removeFeedback(id) {
       return fs.collection("feedback").doc(id).delete();
     },

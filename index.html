@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261002131238">
+  <link rel="stylesheet" href="style.css?v=20261002132957">
 </head>
 <body>
   <header>
@@ -66,6 +66,18 @@
 
     <!-- 編成登録 -->
     <section id="tab-register" class="panel" hidden>
+      <div class="card" id="req-card">
+        <h2>Xのリンクで登録を依頼</h2>
+        <p class="hint">編成が載っているX（Twitter）のポストのリンクを送ると、管理者が内容を確認して登録します（ログイン不要）。PDCのレシート画像が付いているポストだと、キャラ・アシスト・超覚醒・潜在まで正確に登録できます。反映まで時間がかかることがあります。</p>
+        <form id="req-form">
+          <input id="req-url" type="url" maxlength="300" placeholder="https://x.com/ユーザー名/status/…" autocomplete="off" required>
+          <div class="row">
+            <input id="req-note" maxlength="200" placeholder="メモ（任意）例: 大樹の周回編成です" autocomplete="off">
+            <button type="submit" class="primary">依頼する</button>
+          </div>
+          <p id="req-msg" class="msg" role="status"></p>
+        </form>
+      </div>
       <form id="reg-form" class="card" novalidate>
         <h2 id="reg-heading">編成を登録</h2>
         <p id="reg-mode" class="hint">登録した編成はこのブラウザに保存され、編成検索に並びます。</p>
@@ -183,6 +195,8 @@
       <div id="admin-hidden"></div>
       <h2>通報</h2>
       <div id="admin-reports"></div>
+      <h2>Xのリンクでの登録依頼</h2>
+      <div id="admin-requests"></div>
       <h2>感想・要望</h2>
       <div id="admin-feedback"></div>
       <h2>アイコン画像がないキャラ</h2>
@@ -262,20 +276,20 @@ F: 光輝の聖騎士
     <p>参考にした投稿の画像や本文は、要約のために読み取るだけで、このサイトにはそのまま保存・掲載していません（掲載しているのは要約と、タイム・編成などの数値、元の投稿へのリンクです）。ただし、<strong>キャラのアイコン画像は、各投稿のPDCレシート画像（画像から登録された編成はその画像）から切り抜いて保存し、編成の表示に使っています</strong>（キャラの権利はガンホー・オンライン・エンターテイメント株式会社に帰属します。掲載に問題がある場合はご連絡ください）。また、投稿の内容をAIの学習用に提供したり、学習に使ったりはしていません。サイトの閲覧中や編成登録の際にAIへデータが送られることもありません（画像からの登録はお使いのブラウザの中だけで読み取り、画像そのものは保存しません。アイコン部分の切り抜きは、登録する方が許可した時だけ保存します）。</p>
     <p>サイトから自分で登録した編成は、編成登録タブの「登録された編成」からいつでも削除（取り下げ）できます（登録したときと同じアカウントでログインしてください）。それ以外の編成の掲載取り下げ・修正のご希望は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> または <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> までご連絡ください。確認後すぐに対応します。</p>
     <p class="muted">覚醒スキルのアイコン画像: <a href="https://x.com/pad_awokenskill" target="_blank" rel="noopener">高画質覚醒スキル（@pad_awokenskill）</a>様の画像をお借りしています（<a href="https://yuunium.github.io/awokenskill/link.html" target="_blank" rel="noopener">覚醒スキル画像ツール</a>経由で表示）。</p>
-    <p class="muted">図鑑データ: <a href="https://padmdb.rainbowsite.net/" target="_blank" rel="noopener">みんなで作るパズドラモンスターデータベース</a> ／ ギミック: 各攻略サイト（出典は各ダンジョンに記載） ／ 敵のダメージ: <a href="https://zeinchu.livedoor.blog/" target="_blank" rel="noopener">ぜいんちゅ</a>（掲載許可済み。実測が中心で一部は引用）・ゲームウィズ（出典は各ダンジョンの耐久チェックに記載）</p>
+    <p class="muted">図鑑データ: <a href="https://padmdb.rainbowsite.net/" target="_blank" rel="noopener">みんなで作るパズドラモンスターデータベース</a> ／ ギミック: 各攻略サイト（出典は各ダンジョンに記載） ／ 敵のダメージ: <a href="https://zeinchu.livedoor.blog/" target="_blank" rel="noopener">ぜいんちゅ</a>（掲載許可済み。実測が中心で一部は引用）・ゲームウィズ（耐久チェックの見直し中のため、現在は表示していません）</p>
     <p class="muted">© GungHo Online Entertainment Inc. All Rights Reserved.<br>当コンテンツの再利用（再転載・配布など）は、禁止しています。</p>
   </footer>
 
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261002131238"></script>
-  <script src="firebase-backend.js?v=20261002131238"></script>
-  <script src="changelog.js?v=20261002131238"></script>
-  <script src="icons.js?v=20261002131238"></script>
-  <script src="monsters-db.js?v=20261002131238"></script>
-  <script src="monsters-changes.js?v=20261002131238"></script>
-  <script src="data.js?v=20261002131238"></script>
-  <script src="app.js?v=20261002131238"></script>
+  <script src="firebase-config.js?v=20261002132957"></script>
+  <script src="firebase-backend.js?v=20261002132957"></script>
+  <script src="changelog.js?v=20261002132957"></script>
+  <script src="icons.js?v=20261002132957"></script>
+  <script src="monsters-db.js?v=20261002132957"></script>
+  <script src="monsters-changes.js?v=20261002132957"></script>
+  <script src="data.js?v=20261002132957"></script>
+  <script src="app.js?v=20261002132957"></script>
 </body>
 </html>

@@ -114,6 +114,17 @@ service cloud.firestore {
     }
 
     // 感想・要望: ログインなしでも送れる（文字数を制限）。読む・消すのは管理者だけ
+    // Xのリンクでの登録依頼（ログインなしでも送れる。読める・消せるのは管理者だけ）
+    match /requests/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['url', 'note', 'uid', 'createdAt'])
+        && request.resource.data.url is string && request.resource.data.url.size() <= 300
+        && request.resource.data.url.matches('^https://(x|twitter)[.]com/[A-Za-z0-9_]+/status/[0-9]+.*')
+        && (!('note' in request.resource.data) || shortStr(request.resource.data.note, 200))
+        && request.resource.data.createdAt == request.time
+        && (request.resource.data.uid == null || (signedIn() && request.resource.data.uid == request.auth.uid));
+      allow read, delete: if isAdmin();
+    }
+
     match /feedback/{id} {
       allow create: if request.resource.data.keys().hasOnly(['text', 'uid', 'createdAt', 'contact'])
         && request.resource.data.text is string
