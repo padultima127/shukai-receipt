@@ -1814,9 +1814,108 @@ function resolveReceiptUses(t) {
   return uses;
 }
 
+// ---------- 立ち回りの文章から「誰のスキルを使ったか」を読む（サイトから登録された編成用。tools/receipt-calls.py と同じ考え方） ----------
+function stepKeysOf(name) {
+  if (!name) return [];
+  const n = name.replace(/【[^】]*】|\[[^\]]*\]|［[^］]*］|\([^)]*\)|（[^）]*）/g, "");
+  const parts = n.split(/[・＆&\s]/).filter(Boolean);
+  const keys = new Set([n, parts.at(-1) ?? n, ...parts.filter((p) => p.length >= 2)]);
+  for (const k of [...keys]) {
+    if (k.length >= 4 && !/^[\u30A0-\u30FF]+$/.test(k)) keys.add(k.slice(0, 3));
+    for (const kata of k.match(/[\u30A0-\u30FFー]{2,}/g) ?? []) {
+      keys.add(kata);
+      if (kata.length >= 6) for (let i = 3; i < 6; i++) keys.add(kata.slice(-i));
+    }
+  }
+  return [...keys].filter((k) => k.length >= 2);
+}
+const STEP_FLOOR = /^[\s◆◇●■・•★☆【]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:|：|，|,|、(?!\d))/;
+const STEP_CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩";
+function stepsToCalls(t) {
+  const lines = (t.steps ?? []).flatMap((l) => String(l).split("\n"));
+  if (!lines.length) return null;
+  const members = t.members;
+  const mkeys = members.map((m) => stepKeysOf(monster(m.id)?.name ?? ""));
+  const akeys = members.map((m) => stepKeysOf(String(m.assist ?? "").replace(/\s*No\.?\s*\d+.*$/, "")).filter((k) => k.length >= 3));
+  const matchMember = (text) => {
+    let best = null;
+    for (const [i, ks] of mkeys.entries()) for (const k of ks) if (text.includes(k) && (!best || k.length > best.len)) best = { mi: i, part: "auto", len: k.length };
+    for (const [i, ks] of akeys.entries()) for (const k of ks) if (text.includes(k) && (!best || k.length > best.len)) best = { mi: i, part: "assist", len: k.length };
+    if (best && /裏|上/.test(text)) best.part = "assist";
+    return best;
+  };
+  // 絵文字の凡例（「🪓＝キコル使用」「🪓はキコル」など）: その絵文字はそのキャラのスキルを使ったものとして数える
+  const legend = new Map();
+  for (const l of lines) {
+    const m = l.match(/^\s*(\p{Extended_Pictographic}\uFE0F?)\s*(?:[=＝:：]|は|→)\s*(.+)$/u);
+    if (!m) continue;
+    const who = matchMember(m[2]);
+    if (who) legend.set(m[1].replace("\uFE0F", ""), who);
+  }
+  const calls = {};
+  let floor = null;
+  const seenOrder = {};
+  for (let line of lines) {
+    const fm = line.match(STEP_FLOOR);
+    if (fm) {
+      floor = Number(fm[1]);
+      line = line.slice(fm[0].length);
+    }
+    if (floor == null || floor > 30) continue;
+    // 凡例の行・「※…不要」の注意書きは使用に数えない
+    if (/^\s*\p{Extended_Pictographic}\uFE0F?\s*(?:[=＝:：]|は)/u.test(line)) continue;
+    if (/^\s*[※＊*]/.test(line) && /不要|いらない|なしでも|省略/.test(line)) continue;
+    const found = [];
+    for (const [i, ks] of mkeys.entries()) for (const k of ks) for (const mm of line.matchAll(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"))) found.push({ st: mm.index, en: mm.index + k.length, mi: i, assist: false, k });
+    for (const [i, ks] of akeys.entries()) for (const k of ks) for (const mm of line.matchAll(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"))) found.push({ st: mm.index, en: mm.index + k.length, mi: i, assist: true, k });
+    // 1文字の名前（「功」など）は前後が区切りの時だけ
+    for (const [i, m] of members.entries()) {
+      const name = monster(m.id)?.name ?? "";
+      const last = name.slice(-1);
+      if (name.length >= 3 && /[\u4E00-\u9FFF]/.test(last))
+        for (const mm of line.matchAll(new RegExp(`(?<=^|[→⇒>、,，\\s(（\\p{Extended_Pictographic}])${last}(?=$|[→⇒>、,，\\s)）(（裏表上下\\p{Extended_Pictographic}])`, "gu"))) found.push({ st: mm.index, en: mm.index + 1, mi: i, assist: false, k: last });
+    }
+    for (const mm of line.matchAll(/\p{Extended_Pictographic}/gu)) {
+      const who = legend.get(mm[0]);
+      if (who) found.push({ st: mm.index, en: mm.index + mm[0].length, mi: who.mi, assist: who.part === "assist", k: mm[0] });
+    }
+    // 長い名前を優先して、重ならないものだけ
+    found.sort((a, b) => b.en - b.st - (a.en - a.st) || a.st - b.st);
+    const taken = [];
+    const picked = [];
+    for (const f of found) {
+      if (taken.some(([a, b]) => !(f.en <= a || f.st >= b))) continue;
+      taken.push([f.st, f.en]);
+      picked.push(f);
+    }
+    picked.sort((a, b) => a.st - b.st);
+    for (const f of picked) {
+      const after = line.slice(f.en, f.en + 3);
+      if (/^\s*[（(]?(変身|進化)後/.test(after)) continue;
+      const transform = /^\s*[（(]?(変身|進化)/.test(after);
+      let part = f.assist || /^\s*[（(]?(裏|上)(?![か手])/.test(after) ? "assist" : transform || /^\s*[（(]?(表|下)(?![か手])/.test(after) ? "base" : "auto";
+      let mi = f.mi;
+      const same = mkeys.map((ks, j) => (ks.includes(f.k) ? j : -1)).filter((j) => j >= 0);
+      if (!f.assist && same.length > 1) {
+        const sm = after.match(/^([ABab①②])/);
+        if (sm) mi = same[Math.min({ A: 0, "①": 0, B: 1, "②": 1 }[sm[1].toUpperCase()] ?? 0, same.length - 1)];
+        else {
+          const n = seenOrder[f.k] ?? 0;
+          mi = same[n % same.length];
+          seenOrder[f.k] = n + 1;
+        }
+      }
+      (calls[floor] ??= []).push({ mi, part, turn: 0 });
+    }
+  }
+  return Object.keys(calls).length ? calls : null;
+}
+
 function enduranceSetup(t0, opts = {}) {
-  // 手で登録した receiptUses があればそれ、なければレシートの呼び出しから判定
-  const t = t0.receiptUses || !t0.receiptCalls ? t0 : { ...t0, receiptUses: resolveReceiptUses(t0) };
+  // 手で登録した receiptUses があればそれ、なければレシートの呼び出し（なければ立ち回りの文章）から判定
+  const calls0 = t0.receiptCalls ?? (t0.userAdded ? stepsToCalls(t0) : null);
+  const t0c = calls0 && !t0.receiptCalls ? { ...t0, receiptCalls: calls0 } : t0;
+  const t = t0c.receiptUses || !t0c.receiptCalls ? t0c : { ...t0c, receiptUses: resolveReceiptUses(t0c) };
   const mems = t.members.filter((m) => m.role !== "free");
   const leader = mems.find((m) => m.role === "L");
   const friend = mems.find((m) => m.role === "F");
