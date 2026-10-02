@@ -3882,7 +3882,7 @@ function cleanSteps(lines) {
     .filter(Boolean)
     .map((l) => l.replace(/ +/g, (sp, at, str) => (jp.test(str[at - 1] ?? "") || jp.test(str[at + sp.length] ?? "") ? "" : " ")))
     // 「→」が「っ」「う」と読まれやすい（行頭やキャラ名の後ろのひらがなは矢印とみなす）
-    .map((l) => l.replace(/^[っうぅ]{1,3}(?=[\u30A0-\u30FF\u4E00-\u9FFF])/, "→").replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF)）])[っうぅ]{1,3}/g, "→"))
+    .map((l) => l.replace(/^[っうぅ][3っうぅ]?(?=[\u30A0-\u30FF\u4E00-\u9FFF])/, "→").replace(/^3(?=[\u30A0-\u30FF\u4E00-\u9FFF])/, "→").replace(/(?<=[\u30A0-\u30FF\u4E00-\u9FFF)）])[っうぅ]{1,3}/g, "→"))
     // 「裏」が「衰」と読まれやすい
     .map((l) => l.replace(/衰/g, "裏"))
     // 丸数字が2つ続くのは読み違い（③⑫ → ③）
@@ -4162,6 +4162,7 @@ async function runRegOcr() {
   if (clear && !$("#reg-ocr-fast").value) return msg("クリア画像の高速モード（ON/OFF）を選んでください。タイムをどちらの欄に入れるかに使います。");
   $("#reg-ocr-run").disabled = true;
   const notes = [];
+  const warnings = [];
   try {
     msg("読み取りの準備中…（初回は数十秒かかります）");
     await loadTesseract();
@@ -4184,7 +4185,18 @@ async function runRegOcr() {
         notes.push(`QRコードからモンスター${qr.length}体（レベル・＋値・超覚醒・潜在も）`);
       }
       const d = await ocr(pdc, "jpn+eng", (p) => msg(`PDCのレシートを読み取り中… ${p}%`));
-      const slots = parsePdcNumbers(d);
+      let slots = parsePdcNumbers(d);
+      // QRが読めず、図鑑No.も半分も読めない時は、読み違いを入れるより空欄のまま案内する（縮小された画像など）
+      const pdcBmp = await createImageBitmap(pdc);
+      const small = pdcBmp.width < 800;
+      if (!qr && slots && slots.filter((x) => x.base).length < 4) slots = null;
+      if (!qr) {
+        warnings.push(
+          small
+            ? `画像が小さい（横${pdcBmp.width}px）ため、QRコードと図鑑No.が正しく読めませんでした。PDCの画像保存で保存した元の画像（縮小・切り抜きしていないもの）を使うと、キャラ・アシスト・超覚醒・潜在まで自動で入ります。`
+            : "QRコードが読めませんでした。QRコードが写っている元の画像を使うと、キャラ・アシスト・超覚醒・潜在まで自動で入ります。"
+        );
+      }
       if (slots && qr) {
         // 切り抜き（アイコン・バッジ）用に位置だけ使う。キャラはQRの方が正確
         regIcons = cropRegIcons(d, slots);
@@ -4244,7 +4256,7 @@ async function runRegOcr() {
       const author = await fetchTweetAuthor(url);
       if (author) ($("#reg-author").value = author), notes.push("作者");
     }
-    msg(`読み取りました: ${notes.join("・")}。下の内容を確認してから登録してください。`);
+    msg(`読み取りました: ${notes.join("・") || "（自動で入れられた項目はありません）"}。下の内容を確認してから登録してください。${warnings.length ? `\n⚠ ${warnings.join("\n⚠ ")}` : ""}`);
     $("#reg-fields").hidden = false;
   } catch (e) {
     msg(`読み取りに失敗しました: ${e.message}`);

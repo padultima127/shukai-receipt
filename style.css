@@ -403,3 +403,4 @@ button:disabled { opacity: .6; cursor: wait; }
 .pdc-badge-sm { width: 22px; height: 16px; border-radius: 3px; }
 
 #leader-dungeon-wrap[hidden] { display: none; }
+#reg-ocr-msg { white-space: pre-line; }
