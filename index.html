@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261002132957">
+  <link rel="stylesheet" href="style.css?v=20261002135532">
 </head>
 <body>
   <header>
@@ -84,10 +84,10 @@
         <div id="reg-auth" class="row" hidden></div>
         <fieldset class="ocr-box">
           <legend>画像から登録</legend>
-          <p class="note"><strong>PDCのレシート画像は必須</strong>です。QRコードが写っていれば、キャラ・アシスト・レベル・＋値・超覚醒・潜在をそのまま読み取ります（写っていない・読めない時は文字から読み取り）。<strong>クリア画像（プレイ履歴）はあれば</strong>選んでください。タイム・ターン・報酬・ダンジョンを読み取ります。ない場合は、1周のタイム・経験値・コイン・ドロップなどを下で手入力してください。</p>
-          <p class="hint">PDCのレシート画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・立ち回り・タイム・クリアターン・報酬を読み取ります。読み取りはこのブラウザの中だけで行い、画像そのものは送信・保存しません（まだサイトにアイコンがないキャラは、登録の前に確認のうえ、許可された時だけアイコン部分を切り抜いて保存します）。読み取った内容は下に表示されるので、読み違いを直してから登録してください。</p>
+          <p class="note"><strong>PDCの編成画像（QRコードが写っているもの）は必須</strong>です。QRコードから、キャラ・アシスト・レベル・＋値・超覚醒・潜在・バッジをそのまま読み取ります。立ち回りを書き込んだレシートでなく、<strong>編成だけの画像でOK</strong>です（立ち回りは下の欄に手入力か貼り付けてください）。<strong>クリア画像（プレイ履歴）はあれば</strong>選んでください。タイム・ターン・報酬・ダンジョンを読み取ります。ない場合は、1周のタイム・経験値・コイン・ドロップなどを下で手入力してください。</p>
+          <p class="hint">PDCの編成画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・タイム・クリアターン・報酬を読み取ります。PDCで保存した元の画像（縮小・スクショでないもの）を使ってください。読み取りはこのブラウザの中だけで行い、画像そのものは送信・保存しません（まだサイトにアイコンがないキャラは、登録の前に確認のうえ、許可された時だけアイコン部分を切り抜いて保存します）。読み取った内容は下に表示されるので、読み違いを直してから登録してください。</p>
           <div class="form-grid">
-            <label for="reg-img-pdc">PDCのレシート画像<span class="req">必須</span></label>
+            <label for="reg-img-pdc">PDCの編成画像（QRコード付き）<span class="req">必須</span></label>
             <input id="reg-img-pdc" type="file" accept="image/*">
             <label for="reg-img-clear">クリア画像（プレイ履歴）<span class="opt">あれば</span></label>
             <input id="reg-img-clear" type="file" accept="image/*">
@@ -97,6 +97,8 @@
               <option value="on">ON（高速モードでクリア）</option>
               <option value="off">OFF</option>
             </select>
+            <label for="reg-ocr-steps">立ち回りの読み取り</label>
+            <label class="check"><input type="checkbox" id="reg-ocr-steps"> 画像に書いた立ち回りも読み取る<small class="muted">（読み違いが多いので、手入力・貼り付けがおすすめです。使う時は必ず見直してください）</small></label>
             <label for="reg-ocr-url">投稿のリンク（任意）</label>
             <input id="reg-ocr-url" type="url" placeholder="https://x.com/.../status/..." autocomplete="off">
           </div>
@@ -160,7 +162,7 @@
         <h3 class="form-sub">モンスターとアシスト</h3>
         <ol id="reg-slots" class="reg-slots"></ol>
 
-        <label for="reg-steps">立ち回り（1行に1つ）</label>
+        <label for="reg-steps">立ち回り（1行に1つ。手入力か、メモ・ポストからの貼り付け。絵文字もそのまま使えます）</label>
         <textarea id="reg-steps" rows="8" placeholder="1F: ダイアモス変身、ダイン変身、日番谷
 2F: イズナ、日番谷、ダイアモス（光L字×2）"></textarea>
 
@@ -283,13 +285,13 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261002132957"></script>
-  <script src="firebase-backend.js?v=20261002132957"></script>
-  <script src="changelog.js?v=20261002132957"></script>
-  <script src="icons.js?v=20261002132957"></script>
-  <script src="monsters-db.js?v=20261002132957"></script>
-  <script src="monsters-changes.js?v=20261002132957"></script>
-  <script src="data.js?v=20261002132957"></script>
-  <script src="app.js?v=20261002132957"></script>
+  <script src="firebase-config.js?v=20261002135532"></script>
+  <script src="firebase-backend.js?v=20261002135532"></script>
+  <script src="changelog.js?v=20261002135532"></script>
+  <script src="icons.js?v=20261002135532"></script>
+  <script src="monsters-db.js?v=20261002135532"></script>
+  <script src="monsters-changes.js?v=20261002135532"></script>
+  <script src="data.js?v=20261002135532"></script>
+  <script src="app.js?v=20261002135532"></script>
 </body>
 </html>

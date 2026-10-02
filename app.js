@@ -4533,7 +4533,7 @@ async function runRegOcr() {
   const clear = $("#reg-img-clear").files[0];
   const url = $("#reg-ocr-url").value.trim();
   const msg = (t) => ($("#reg-ocr-msg").textContent = t);
-  if (!pdc) return msg("PDCのレシート画像は必須です。クリア画像（プレイ履歴）は、あれば一緒に選んでください。");
+  if (!pdc) return msg("PDCの編成画像（QRコード付き）は必須です。クリア画像（プレイ履歴）は、あれば一緒に選んでください。");
   if (clear && !$("#reg-ocr-fast").value) return msg("クリア画像の高速モード（ON/OFF）を選んでください。タイムをどちらの欄に入れるかに使います。");
   $("#reg-ocr-run").disabled = true;
   const notes = [];
@@ -4559,7 +4559,7 @@ async function runRegOcr() {
         });
         notes.push(`QRコードからモンスター${qr.length}体（レベル・＋値・超覚醒・潜在も）`);
       }
-      const d = await ocr(pdc, "jpn+eng", (p) => msg(`PDCのレシートを読み取り中… ${p}%`));
+      const d = await ocr(pdc, "jpn+eng", (p) => msg(`PDCの画像を読み取り中… ${p}%`));
       let slots = parsePdcNumbers(d);
       // QRが読めず、図鑑No.も半分も読めない時は、読み違いを入れるより空欄のまま案内する（縮小された画像など）
       const pdcBmp = await createImageBitmap(pdc);
@@ -4596,13 +4596,16 @@ async function runRegOcr() {
         }
       } else if (!qr) notes.push("図鑑No.が読み取れませんでした（手で入力してください）");
       // 立ち回りは「Created by PDC」より下だけを切り出して、拡大せず日本語だけで読み直す方が正確（拡大すると大きい文字が崩れる）
+      // 立ち回りは読み違いが多いので、チェックした時だけ読み取る（基本は手入力・貼り付け。本人指定）
       let steps = null;
-      try {
-        steps = await readPdcStepsText(pdc, d, (p) => msg(`立ち回りを読み取り中… ${p}%`));
-      } catch {
-        steps = null;
+      if ($("#reg-ocr-steps")?.checked) {
+        try {
+          steps = await readPdcStepsText(pdc, d, (p) => msg(`立ち回りを読み取り中… ${p}%`));
+        } catch {
+          steps = null;
+        }
+        steps ||= parsePdcSteps(d);
       }
-      steps ||= parsePdcSteps(d);
       if (steps) {
         $("#reg-steps").value = steps;
         notes.push("立ち回り");
