@@ -3111,6 +3111,7 @@ function clearRegForm() {
   $("#reg-fields").hidden = true;
   $("#reg-ocr-msg").textContent = "";
   regIcons = {};
+  if ($("#reg-icon-consent-wrap")) $("#reg-icon-consent-wrap").hidden = true;
   regSupers = {};
   regBadge = null;
   regQr = null;
@@ -3219,11 +3220,13 @@ async function saveRegForm() {
     ...($("#reg-891").value === "some" ? { plus891Members: [...document.querySelectorAll("#reg-891-members input:checked")].map((x) => Number(x.value)) } : {}),
   };
   // 画像から切り抜いたアイコン（枠ごと。登録時にその枠に入っているキャラの分で、まだサイトにアイコンがないもの）
+  // 保存するのは、登録する人が「保存してよい」にチェックした時だけ（本人指定）
+  const iconOk = $("#reg-icon-consent")?.checked;
   const icons = {};
-  for (const [i, no, part] of slotNos) if (no && regIcons[i]?.[part] && window.PAD_ICONS?.index?.[no] == null) icons[no] = regIcons[i][part];
+  for (const [i, no, part] of slotNos) if (iconOk && no && regIcons[i]?.[part] && window.PAD_ICONS?.index?.[no] == null) icons[no] = regIcons[i][part];
   if (Object.keys(icons).length) team.icons = icons;
   if (regQr?.badge) team.badgeId = regQr.badge;
-  if (regBadge && !(regQr?.badge && window.PAD_BADGES?.byId?.[regQr.badge] != null)) team.badgeIcon = regBadge;
+  if (iconOk && regBadge && !(regQr?.badge && window.PAD_BADGES?.byId?.[regQr.badge] != null)) team.badgeIcon = regBadge;
   const verb = regEditingId ? "更新" : "登録";
   const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
   let where = "local";
@@ -4609,6 +4612,7 @@ async function runRegOcr() {
       const author = await fetchTweetAuthor(url);
       if (author) ($("#reg-author").value = author), notes.push("作者");
     }
+    updateIconConsent();
     msg(`読み取りました: ${notes.join("・") || "（自動で入れられた項目はありません）"}。下の内容を確認してから登録してください。${warnings.length ? `\n⚠ ${warnings.join("\n⚠ ")}` : ""}`);
     $("#reg-fields").hidden = false;
   } catch (e) {
@@ -4702,3 +4706,20 @@ function renderReg891Members(checked) {
 $("#reg-891").addEventListener("change", () => renderReg891Members());
 // キャラを入れ替えたら名前を更新
 $("#reg-form").addEventListener("change", (e) => /^reg-m-\d$/.test(e.target.id) && $("#reg-891").value === "some" && renderReg891Members());
+
+// 編成登録: まだサイトにアイコンがないキャラ（とバッジ）を、PDC画像から切り抜いて保存してよいかの確認
+function updateIconConsent() {
+  const wrap = $("#reg-icon-consent-wrap");
+  if (!wrap) return;
+  const names = [];
+  for (let i = 0; i < REG_ROLES.length; i++)
+    for (const [sel, part] of [[`#reg-m-${i}`, "base"], [`#reg-a-${i}`, "assist"]]) {
+      const no = Number($(sel)?.value.match(/No\.?\s*(\d+)/)?.[1] ?? $(sel)?.dataset.no);
+      if (no && regIcons[i]?.[part] && window.PAD_ICONS?.index?.[no] == null && !SHARED_ICONS[no]) names.push(MDB.get(no)?.[1] ?? `No.${no}`);
+    }
+  const badge = !!regBadge && !(regQr?.badge && window.PAD_BADGES?.byId?.[regQr.badge] != null);
+  wrap.hidden = !names.length && !badge;
+  if (wrap.hidden) return;
+  $("#reg-icon-consent-list").textContent = [...new Set(names), ...(badge ? ["バッジ"] : [])].join("、");
+}
+$("#reg-form").addEventListener("change", (e) => /^reg-[ma]-\d$/.test(e.target.id) && updateIconConsent());

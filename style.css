@@ -413,3 +413,7 @@ button:disabled { opacity: .6; cursor: wait; }
 .p891-members { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; margin: 4px 0 8px; font-size: 13px; }
 .p891-members[hidden] { display: none; }
 .p891-members .check { margin: 0; }
+
+.consent-box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 8px 0; font-size: 13px; }
+.consent-box[hidden] { display: none; }
+.consent-box p { margin: 0 0 4px; }
