@@ -852,25 +852,30 @@ function canEditSettings(t) {
   if (shared.fb.isAdmin) return true;
   return !!t.shared && t.ownerUid === shared.fb.user.uid;
 }
-function renderTeamSettings(t, d) {
+// 管理画面の一覧（承認待ち・非公開）に出ている編成（db.teams に入っていないもの）
+const adminTeamDocs = new Map();
+let lastSavedSettings = null;
+function renderTeamSettings(t, d, bare = false) {
   if (!canEditSettings(t)) return "";
   const p891 = settingOf(t, "plus891Choice") ?? "";
   const pb = settingOf(t, "partBreak");
   const pbVal = !pb ? "" : pb.can === false ? "no" : pb.sure ? "sure" : "can";
   const who = shared.fb.isAdmin ? "管理者" : "登録者";
-  return `<div class="wide"><details class="team-settings" data-settings="${esc(t.id)}"><summary>設定を直す（${who}）</summary>
+  const saved = lastSavedSettings === t.id;
+  return `${bare ? "" : `<div class="wide">`}<details class="team-settings" data-settings="${esc(t.id)}"${saved && bare ? " open" : ""}><summary>${bare ? `+891・部位破壊を直す<small class="muted">（今: +891 ${{ "": "分からない", required: "必須", some: "一部だけ", "not-required": "不要" }[p891] ?? "分からない"}${d?.parts ? `／部位破壊 ${{ "": "記載なし", can: "できる", sure: "できる・確定", no: "しない" }[pbVal]}` : ""}）</small>` : `設定を直す（${who}）`}</summary>
     <label>+891 <select data-set="plus891Choice">${[["", "分からない"], ["required", "必須"], ["some", "一部だけ"], ["not-required", "不要（+297でOK）"]].map(([v, l]) => `<option value="${v}"${v === p891 ? " selected" : ""}>${l}</option>`).join("")}</select></label>
     ${d?.parts ? `<label>部位破壊 <select data-set="partBreak">${[["", "記載なし（自動判定）"], ["can", "部位破壊できる"], ["sure", "部位破壊できる・部位ドロップ確定"], ["no", "部位破壊しない"]].map(([v, l]) => `<option value="${v}"${v === pbVal ? " selected" : ""}>${l}</option>`).join("")}</select></label>` : ""}
-    <button type="button" class="primary" data-save-settings="${esc(t.id)}">保存</button> <span class="muted" data-settings-msg></span>
-  </details></div>`;
+    <button type="button" class="primary" data-save-settings="${esc(t.id)}">保存</button> <span class="muted" data-settings-msg>${saved && bare ? "保存しました" : ""}</span>
+  </details>${bare ? "" : `</div>`}`;
 }
 document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-save-settings]");
   if (!b) return;
   const id = b.dataset.saveSettings;
   const box = b.closest("[data-settings]");
-  const t = db.teams.find((x) => x.id === id);
+  const t = db.teams.find((x) => x.id === id) ?? adminTeamDocs.get(id);
   if (!t || !box) return;
+  const isDoc = !!t.shared || adminTeamDocs.has(id);
   const msgEl = box.querySelector("[data-settings-msg]");
   const v891 = box.querySelector('[data-set="plus891Choice"]')?.value ?? "";
   const vpb = box.querySelector('[data-set="partBreak"]')?.value;
@@ -878,7 +883,8 @@ document.addEventListener("click", async (e) => {
   if (vpb !== undefined) patch.partBreak = vpb === "can" ? { can: true } : vpb === "sure" ? { can: true, sure: true, sureNote: shared.fb.isAdmin ? "管理者の設定" : "登録者の設定" } : vpb === "no" ? { can: false } : null;
   b.disabled = true;
   try {
-    if (t.shared) await shared.fb.updateTeam(id, patch);
+    lastSavedSettings = id;
+    if (isDoc) await shared.fb.updateTeam(id, patch);
     else {
       const o = {};
       for (const [k, v] of Object.entries(patch)) if (v != null) o[k] = v;
@@ -887,7 +893,7 @@ document.addEventListener("click", async (e) => {
     }
     Object.assign(t, Object.fromEntries(Object.entries(patch).map(([k, v]) => [k, v ?? undefined])));
     msgEl.textContent = "保存しました";
-    search();
+    if ($("#results").children.length) search();
     document.querySelectorAll(`details[data-settings="${CSS.escape(id)}"]`).forEach((d) => (d.open = true));
   } catch (err) {
     msgEl.textContent = `保存できませんでした（${err.message}）`;
@@ -3395,6 +3401,7 @@ function renderAdminPanel() {
               <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ ${formatTime(t.timeSec)} ・ 登録者 ${esc(t.ownerName ?? "")}</span>
               ${t.source ? `<a href="${esc(t.source)}" target="_blank" rel="noopener">参考元</a>` : ""}
               <span class="muted">${esc((t.members ?? []).map((m) => m.name).join(" / "))}</span></div>
+              ${(adminTeamDocs.set(t.id, t), renderTeamSettings(t, db.dungeons.find((d) => d.id === t.dungeonId) ?? t.newDungeon, true))}
               <div class="row"><button type="button" class="primary" data-approve="${esc(t.id)}">承認して公開</button>
               <button type="button" data-reject="${esc(t.id)}">却下</button>
               <button type="button" class="danger" data-purge="${esc(t.id)}">削除</button></div></li>`)
@@ -3408,6 +3415,7 @@ function renderAdminPanel() {
         ? `<ul class="reg-list">${list
             .map((t) => `<li><div class="reg-info"><strong><span class="badge badge-local">${t.status === "hidden" ? "本人が非公開" : "却下・非公開"}</span>${esc(t.title)}</strong>
               <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ 登録者 ${esc(t.ownerName ?? "")}</span></div>
+              ${(adminTeamDocs.set(t.id, t), renderTeamSettings(t, db.dungeons.find((d) => d.id === t.dungeonId) ?? t.newDungeon, true))}
               <div class="row"><button type="button" class="primary" data-approve="${esc(t.id)}">再公開</button>
               <button type="button" class="danger" data-purge="${esc(t.id)}">削除</button></div></li>`)
             .join("")}</ul>`
