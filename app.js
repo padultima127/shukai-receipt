@@ -3354,6 +3354,8 @@ function renderRegList() {
           const d = db.dungeons.find((x) => x.id === t.dungeonId);
           const icons = t.members.map((m) => iconHTML(monster(m.id))).join("");
           const canEdit = !t.shared || (shared.mode === "firebase" ? t.status === "pending" && t.ownerUid === shared.fb.user?.uid : shared.canWrite !== false);
+          // 削除（取り下げ）は登録した本人ならいつでも（公開中・非公開でも）
+          const canDelete = canEdit || (shared.mode === "firebase" && t.ownerUid === shared.fb.user?.uid);
           const badge = !t.shared
             ? `<span class="badge badge-local">このブラウザのみ</span>`
             : t.status === "pending"
@@ -3361,9 +3363,9 @@ function renderRegList() {
               : t.status === "rejected"
                 ? `<span class="badge badge-local">非公開</span>`
                 : `<span class="badge">公開中</span>`;
-          const buttons = canEdit
-            ? `<div class="row"><button type="button" data-edit="${esc(t.id)}">編集</button>
-               <button type="button" class="danger" data-del="${esc(t.id)}">${regDeleteArmed === t.id ? "もう一度押すと削除" : "削除"}</button></div>`
+          const buttons = canEdit || canDelete
+            ? `<div class="row">${canEdit ? `<button type="button" data-edit="${esc(t.id)}">編集</button>` : ""}
+               <button type="button" class="danger" data-del="${esc(t.id)}">${regDeleteArmed === t.id ? "もう一度押すと削除" : t.status === "approved" ? "取り下げ（削除）" : "削除"}</button></div>`
             : "";
           return `<li><div class="reg-icons">${icons}</div>
             <div class="reg-info"><strong>${badge}${esc(t.title)}</strong><span class="muted">${esc(d?.name ?? "")} ・ ${formatTime(t.timeSec)}</span></div>
@@ -3727,7 +3729,7 @@ $("#reg-list").addEventListener("click", async (e) => {
       if (shared.mode === "firebase") await shared.fb.remove(id);
       else await shared.db.doc(`teams/${id}`).delete();
     } catch {
-      return regMessage("共有データから削除できませんでした（削除できるのは作成者と編集者だけです）。", false);
+      return regMessage("削除できませんでした。登録したときと同じアカウントでログインしているか確認してください。", false);
     }
   }
   db.teams = db.teams.filter((t) => t.id !== id);
