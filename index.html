@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261002140429">
+  <link rel="stylesheet" href="style.css?v=20261003212050">
 </head>
 <body>
   <header>
@@ -84,7 +84,7 @@
         <div id="reg-auth" class="row" hidden></div>
         <fieldset class="ocr-box">
           <legend>画像から登録</legend>
-          <p class="note"><strong>PDCの編成画像（QRコードが写っているもの）は必須</strong>です。QRコードから、キャラ・アシスト・レベル・＋値・超覚醒・潜在・バッジをそのまま読み取ります。立ち回りを書き込んだレシートでなく、<strong>編成だけの画像でOK</strong>です。<strong>立ち回りは、PDCのメモから文章だけをコピーして下の欄に貼り付けるのがおすすめ</strong>です（一番正確です。画像からの読み取りもできますが、読み違いが多めです）。<strong>クリア画像（プレイ履歴）はあれば</strong>選んでください。タイム・ターン・報酬・ダンジョンを読み取ります。ない場合は、1周のタイム・経験値・コイン・ドロップなどを下で手入力してください。</p>
+          <p class="note"><strong>PDCの編成画像（QRコードが写っているもの）は必須</strong>です。QRコードから、キャラ・アシスト・レベル・＋値・超覚醒・潜在・バッジをそのまま読み取ります。立ち回りを書き込んだレシートでなく、<strong>編成だけの画像でOK</strong>です。<strong>立ち回りは、PDCのメモから文章だけをコピーして下の欄に貼り付けるのがおすすめ</strong>です（一番正確です。画像からの読み取りもできますが、読み違いが多めです）。PDCのメモが手元にない時は、<strong>iPhoneの写真アプリ（Androidはグーグルレンズ）で画像の文字を選んでコピー</strong>すると正確です。<strong>クリア画像（プレイ履歴）はあれば</strong>選んでください。タイム・ターン・報酬・ダンジョンを読み取ります。ない場合は、1周のタイム・経験値・コイン・ドロップなどを下で手入力してください。</p>
           <p class="hint">PDCの編成画像とクリア画像（プレイ履歴）を選んで「読み取る」を押すと、モンスター・アシスト・タイム・クリアターン・報酬を読み取ります。PDCで保存した元の画像（縮小・スクショでないもの）を使ってください。読み取りはこのブラウザの中だけで行い、画像そのものは送信・保存しません（まだサイトにアイコンがないキャラは、登録の前に確認のうえ、許可された時だけアイコン部分を切り抜いて保存します）。読み取った内容は下に表示されるので、読み違いを直してから登録してください。</p>
           <div class="form-grid">
             <label for="reg-img-pdc">PDCの編成画像（QRコード付き）<span class="req">必須</span></label>
@@ -162,7 +162,7 @@
         <h3 class="form-sub">モンスターとアシスト</h3>
         <ol id="reg-slots" class="reg-slots"></ol>
 
-        <label for="reg-steps">立ち回り（1行に1つ。<strong>PDCから立ち回りの文章だけをコピーして貼り付けるのがおすすめ</strong>。絵文字もそのまま使えます）</label>
+        <label for="reg-steps">立ち回り（1行に1つ。<strong>PDCから立ち回りの文章だけをコピーして貼り付けるのがおすすめ</strong>。メモがない時はiPhoneの写真アプリ・グーグルレンズで画像の文字をコピー。絵文字もそのまま使えます）</label>
         <textarea id="reg-steps" rows="8" placeholder="1F: ダイアモス変身、ダイン変身、日番谷
 2F: イズナ、日番谷、ダイアモス（光L字×2）"></textarea>
 
@@ -285,13 +285,13 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261002140429"></script>
-  <script src="firebase-backend.js?v=20261002140429"></script>
-  <script src="changelog.js?v=20261002140429"></script>
-  <script src="icons.js?v=20261002140429"></script>
-  <script src="monsters-db.js?v=20261002140429"></script>
-  <script src="monsters-changes.js?v=20261002140429"></script>
-  <script src="data.js?v=20261002140429"></script>
-  <script src="app.js?v=20261002140429"></script>
+  <script src="firebase-config.js?v=20261003212050"></script>
+  <script src="firebase-backend.js?v=20261003212050"></script>
+  <script src="changelog.js?v=20261003212050"></script>
+  <script src="icons.js?v=20261003212050"></script>
+  <script src="monsters-db.js?v=20261003212050"></script>
+  <script src="monsters-changes.js?v=20261003212050"></script>
+  <script src="data.js?v=20261003212050"></script>
+  <script src="app.js?v=20261003212050"></script>
 </body>
 </html>
