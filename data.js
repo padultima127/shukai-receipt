@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 104,
+  "version": 105,
   "seed": true,
   "monsters": [
     {
@@ -48084,18 +48084,17 @@ window.PAD_SEED = {
       "id": "hyaku-gimlet-ultima",
       "dungeonId": "hyakushiki",
       "title": "テキーラギムレット 3分台・9ターン",
-      "timeSec": 201,
+      "timeSec": 187,
       "turns": 9,
       "yields": {
         "exp": 63003413,
-        "plus": 2970,
-        "coin": 1000640500
+        "plus": 2970
       },
       "members": [
         {
           "id": "n14202",
           "role": "L",
-          "assist": "ナラ＆クインアスラ No.13980",
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
           "build": {
             "lv": 120,
             "plus": 300,
@@ -48132,9 +48131,21 @@ window.PAD_SEED = {
           }
         },
         {
+          "id": "n14090",
+          "role": "S",
+          "assist": "彦星の短冊 No.8992",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
           "id": "n10638",
           "role": "S",
-          "assist": "全ての鬼を滅するために作った刀 No.12848",
+          "assist": "クラウディアの掃除機 No.13851",
           "build": {
             "lv": 120,
             "plus": 297,
@@ -48142,18 +48153,6 @@ window.PAD_SEED = {
             "latents": [
               56
             ],
-            "fromQr": true
-          }
-        },
-        {
-          "id": "n14028",
-          "role": "S",
-          "assist": "ヒュギエイアの医療水 No.13287",
-          "build": {
-            "lv": 120,
-            "plus": 300,
-            "super": 56,
-            "latents": [],
             "fromQr": true
           }
         },
@@ -48173,24 +48172,22 @@ window.PAD_SEED = {
         }
       ],
       "steps": [
-        "テキーラギムレットのグラビティで削る編成。気をつけるのはグラビティスキルの使用順と、2Fのシラナキ（L字の繋がり）くらいでとても楽",
-        "一護織姫は報酬版でも余裕（投稿2枚目のPDC）。ギムレットだけを使う階は省略",
-        "1F: Lギムレット裏→シラナキ裏→一護織姫裏→Lギムレット→Fギムレット裏",
+        "テキーラギムレットのグラビティで削る編成（最初の投稿の編成に欠陥があったため上げ直した版）。気をつけるのはグラビティの使用順と、2Fのシラナキ（L字の繋がり）くらい",
+        "リーダーの武器はネヴァンでもクインアスラでもOK。シラナキの武器のクラウディアの掃除機は投稿者が未所持のため未検証",
+        "プレイ履歴（3分7.3秒・9ターン）は、リーダーの武器クインアスラ・シラナキの武器が鬼を滅するために作った刀・ディボックの武器の片方を鋼鐵塚にした編成でのクリア",
+        "1F: シラナキ裏→Fギムレット裏→一護織姫裏→Fギムレット→Lギムレット裏",
         "2F: Lギムレット→シラナキ→ディボック",
-        "5F: Fギムレット→一護織姫（代用で覚醒無効回復がない場合はシラナキ）",
+        "5F: Fギムレット→一護織姫",
         "8F: Lギムレット→ディボック",
-        "9F: Fギムレット→一護織姫",
-        "代用: バッジは代用可（毒・お邪魔耐性がおすすめ）。バッジを代える場合はフレンドにドラゴンキラーを3つ以上",
-        "代用（本体）: ディボック→サノス、一護織姫→シールドを2枚破壊できるキャラ",
-        "代用（武器）: クインアスラ→ネヴァン・デスピリトゥスのグラス／アレキサンダー・プレーナ→ドロ強＆スキブ／ヒュギエイア→3ターン以上ヘイストかつ毒・お邪魔耐性、または2ターン以上ヘイストの覚醒無効回復"
+        "9F: Fギムレット→一護織姫"
       ],
-      "source": "https://x.com/127Ultima/status/2107068906338992158",
+      "source": "https://x.com/127Ultima/status/2107105017362792651",
       "author": {
         "name": "AMR_Ultima 127"
       },
       "sourceDate": "2026-10-05",
       "metrics": {
-        "chars": 420,
+        "chars": 324,
         "puzzle": 1,
         "branch": 0,
         "caution": 0,
@@ -48201,13 +48198,18 @@ window.PAD_SEED = {
       "plus891Choice": "not-required",
       "fastMode": true,
       "times": {
-        "on": 201
+        "on": 187
       },
       "badgeId": 45,
       "receiptCalls": {
         "1": [
           {
-            "mi": 0,
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
             "part": "assist",
             "turn": 0
           },
@@ -48217,17 +48219,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 0,
+            "mi": 5,
             "part": "base",
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "assist",
             "turn": 0
           }
@@ -48239,7 +48236,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -48256,7 +48253,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -48280,7 +48277,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
