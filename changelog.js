@@ -3,6 +3,7 @@ window.PAD_CHANGELOG = [
   {
     date: "2026-10-05",
     items: [
+      "編成登録がログインなしでもできるように（登録した編成の削除・非公開は、登録したブラウザから。あとからGoogleでログインすると引き継げます）",
       "アクセス数の集計（Cloudflare Web Analytics）を開始。Cookieは使わず、個人を特定する情報は集めません"
     ]
   },

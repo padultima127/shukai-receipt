@@ -3233,7 +3233,13 @@ async function saveRegForm() {
   const editingShared = regEditingId && db.teams.find((t) => t.id === regEditingId)?.shared;
   let where = "local";
   if (shared.mode === "firebase") {
-    if (!shared.fb.user) return regMessage("共有登録にはGoogleでログインしてください（上の「Googleでログイン」）。", false);
+    if (!shared.fb.user) {
+      try {
+        await shared.fb.ensureUser();
+      } catch (err) {
+        return regMessage(`登録の準備ができませんでした（${err.message}）。時間をおいてもう一度試すか、Googleでログインしてください。`, false);
+      }
+    }
     $("#reg-submit").disabled = true;
     try {
       await shared.fb.submit({ ...toSharedTeam(team), ...(newDungeon ? { newDungeon: toSharedDungeon(newDungeon) } : {}) });
@@ -3486,12 +3492,14 @@ function updateRegMode() {
   const authBox = $("#reg-auth");
   if (shared.mode === "firebase") {
     const u = shared.fb.user;
-    el.textContent = "登録した編成は管理者の確認後に公開され、他の人の編成検索にも表示されます（Googleログインが必要です）。";
+    el.textContent = "登録した編成は管理者の確認後に公開され、他の人の編成検索にも表示されます。ログインなしでも登録できます。";
     el.className = "note";
     authBox.hidden = false;
-    authBox.innerHTML = u
+    authBox.innerHTML = u && !u.isAnonymous
       ? `<span class="muted">ログイン中: ${esc(u.displayName || u.email || "")}${shared.fb.isAdmin ? "（管理者）" : ""}</span> <button type="button" id="fb-signout">ログアウト</button>`
-      : `<button type="button" class="primary" id="fb-signin">Googleでログイン</button>`;
+      : u
+        ? `<span class="muted">ログインなしで登録中（登録した編成の削除・非公開は、このブラウザからだけできます）</span> <button type="button" id="fb-signin">Googleアカウントに引き継ぐ</button>`
+        : `<span class="muted">ログインなしで登録できます（登録した編成の削除・非公開は、登録したブラウザからだけできます）。別の端末からも管理したい場合は</span> <button type="button" id="fb-signin">Googleでログイン</button>`;
     return;
   }
   if (shared.db && shared.canWrite !== false) {
@@ -3892,7 +3900,11 @@ $("#reset").addEventListener("click", () => {
 renderRegSlots();
 renderRegDungeons();
 $("#reg-auth").addEventListener("click", (e) => {
-  if (e.target.id === "fb-signin") shared.fb.signIn().catch((err) => regMessage(`ログインできませんでした（${err.message}）`, false));
+  if (e.target.id === "fb-signin")
+    shared.fb
+      .signIn()
+      .then(() => shared.fb.lostAnonymous && regMessage("このGoogleアカウントは以前の登録で使われていたため、ログインなしで登録した編成は引き継げませんでした（取り下げたい時はXでご連絡ください）。", false))
+      .catch((err) => regMessage(`ログインできませんでした（${err.message}）`, false));
   if (e.target.id === "fb-signout") shared.fb.signOut();
 });
 $("#admin-panel").addEventListener("click", async (e) => {

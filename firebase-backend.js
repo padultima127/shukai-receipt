@@ -53,15 +53,36 @@
         emit();
       });
     },
-    signIn() {
-      return auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    // Googleでログイン。ログインなしで登録していた（匿名）時は、そのアカウントをGoogleに引き継ぐ（登録した編成の本人のまま）
+    async signIn() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      const cur = auth.currentUser;
+      if (cur?.isAnonymous) {
+        try {
+          return await cur.linkWithPopup(provider);
+        } catch (e) {
+          // このGoogleアカウントが別の登録で使われている時は、引き継がずにGoogleでログインし直す
+          if (e.code === "auth/credential-already-in-use" || e.code === "auth/email-already-in-use") {
+            api.lostAnonymous = true;
+            return auth.signInWithCredential(e.credential ?? firebase.auth.GoogleAuthProvider.credentialFromError?.(e));
+          }
+          throw e;
+        }
+      }
+      return auth.signInWithPopup(provider);
+    },
+    // ログインなしの登録用: まだログインしていなければ匿名でログインする（このブラウザだけの登録者になる）
+    async ensureUser() {
+      if (auth.currentUser) return auth.currentUser;
+      const cred = await auth.signInAnonymously();
+      return cred.user;
     },
     signOut() {
       return auth.signOut();
     },
     // 新規登録は必ず承認待ち。users/{uid}.lastSubmitAt と同時に書き込み、ルールで1分に1件に制限する
     async submit(team) {
-      const u = auth.currentUser;
+      const u = auth.currentUser ?? (await api.ensureUser());
       if (!u) throw Object.assign(new Error("ログインしてください"), { code: "unauthenticated" });
       const batch = fs.batch();
       const ref = fs.collection("teams").doc(team.id);
@@ -69,7 +90,7 @@
         ...team,
         status: "pending",
         ownerUid: u.uid,
-        ownerName: u.displayName || "名無し",
+        ownerName: u.displayName || (u.isAnonymous ? "ログインなし" : "名無し"),
         createdAt: ts(),
       });
       batch.set(fs.collection("users").doc(u.uid), { lastSubmitAt: ts() }, { merge: true });
