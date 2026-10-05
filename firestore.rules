@@ -80,11 +80,12 @@ service cloud.firestore {
         || (signedIn() && resource.data.ownerUid == request.auth.uid);
     }
 
-    // 初期データ（サイトに最初から入っている編成）の +891必須・部位破壊の上書き。誰でも読める・書けるのは管理者だけ
+    // 初期データ（サイトに最初から入っている編成）の +891必須・部位破壊・非表示の上書き。誰でも読める・書けるのは管理者だけ
     match /overrides/{id} {
       allow read: if true;
       allow write: if isAdmin()
-        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'plus891Members', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'plus891Members', 'hidden', 'updatedAt'])
+        && (!('hidden' in request.resource.data) || request.resource.data.hidden is bool)
         && (!('partBreak' in request.resource.data) || validPartBreak(request.resource.data.partBreak))
         && (!('plus891Choice' in request.resource.data) || request.resource.data.plus891Choice in ['', 'required', 'some', 'not-required']);
     }

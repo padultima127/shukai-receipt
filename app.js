@@ -845,6 +845,8 @@ function partRateBadge(t, d) {
 }
 // 管理者が設定した初期データの編成の上書き（+891必須・部位破壊）。{ 編成id: { plus891Choice, partBreak } }
 let teamOverrides = {};
+// 管理者が非表示にした初期データの編成（管理者には「非表示中」として出す）
+const adminHidden = (t) => !t.shared && !!teamOverrides[t.id]?.hidden;
 const settingOf = (t, key) => (teamOverrides[t.id] && key in teamOverrides[t.id] ? teamOverrides[t.id][key] : t[key]);
 // 登録した本人と管理者は、+891必須・部位破壊を後から直せる（初期データの編成は管理者だけ）
 function canEditSettings(t) {
@@ -866,8 +868,41 @@ function renderTeamSettings(t, d, bare = false) {
     <label>+891 <select data-set="plus891Choice">${[["", "分からない"], ["required", "必須"], ["some", "一部だけ"], ["not-required", "不要（+297でOK）"]].map(([v, l]) => `<option value="${v}"${v === p891 ? " selected" : ""}>${l}</option>`).join("")}</select></label>
     <div class="p891-members" data-891-members${p891 === "some" ? "" : " hidden"}><span class="muted">+891が必要なキャラ</span>${slotNames(t).map((n, i) => `<label class="check"><input type="checkbox" value="${i}"${(settingOf(t, "plus891Members") ?? []).includes(i) ? " checked" : ""}> ${esc(n)}</label>`).join("")}</div>
     ${d?.parts ? `<label>部位破壊 <select data-set="partBreak">${[["", "記載なし（自動判定）"], ["can", "部位破壊できる"], ["sure", "部位破壊できる・部位ドロップ確定"], ["no", "部位破壊しない"]].map(([v, l]) => `<option value="${v}"${v === pbVal ? " selected" : ""}>${l}</option>`).join("")}</select></label>` : ""}
+    ${shared.fb.isAdmin && (t.shared || !adminTeamDocs.has(t.id)) && !bare ? `<div class="row">${t.shared ? `<button type="button" data-hide="${esc(t.id)}">この編成を非公開にする（管理者）</button>` : adminHidden(t) ? `<button type="button" class="primary" data-seedshow="${esc(t.id)}">表示に戻す（管理者）</button>` : `<button type="button" data-seedhide="${esc(t.id)}">この編成を非表示にする（管理者）</button>`}</div>` : ""}
     <button type="button" class="primary" data-save-settings="${esc(t.id)}">保存</button> <span class="muted" data-settings-msg>${saved && bare ? "保存しました" : ""}</span>
   </details>${bare ? "" : `</div>`}`;
+}
+// 管理者: 編成を非表示・表示に戻す（初期データは overrides、登録された編成は status）
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-seedhide], [data-seedshow], .team-settings [data-hide]");
+  if (!b || !shared.fb?.isAdmin) return;
+  e.preventDefault();
+  b.disabled = true;
+  try {
+    if (b.dataset.hide) {
+      await shared.fb.setStatus(b.dataset.hide, "rejected");
+    } else {
+      const id = b.dataset.seedhide ?? b.dataset.seedshow;
+      const hidden = !!b.dataset.seedhide;
+      await shared.fb.setOverride(id, { hidden: hidden || null });
+      teamOverrides[id] = { ...(teamOverrides[id] ?? {}), hidden };
+      if (!hidden) delete teamOverrides[id].hidden;
+    }
+    if ($("#results").children.length) search();
+    renderAdminSeedHidden();
+  } catch (err) {
+    b.disabled = false;
+    alert?.(`操作に失敗しました: ${err.message}`);
+  }
+});
+// 管理画面: 非表示にした初期データの編成の一覧
+function renderAdminSeedHidden() {
+  const el = $("#admin-seed-hidden");
+  if (!el) return;
+  const list = db.teams.filter(adminHidden);
+  el.innerHTML = list.length
+    ? `<ul class="reg-list">${list.map((t) => `<li><div class="reg-info"><strong><span class="badge badge-local">管理者が非表示</span>${esc(t.title)}</strong><span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? "")}</span></div><div class="row"><button type="button" class="primary" data-seedshow="${esc(t.id)}">表示に戻す</button></div></li>`).join("")}</ul>`
+    : `<p class="hint">非表示にした初期データの編成はありません。</p>`;
 }
 // 「一部だけ」を選んだ時だけ、対象キャラのチェック欄を出す
 document.addEventListener("change", (e) => {
@@ -895,8 +930,9 @@ document.addEventListener("click", async (e) => {
     else {
       const o = {};
       for (const [k, v] of Object.entries(patch)) if (v != null) o[k] = v;
-      await shared.fb.setOverride(id, o);
-      teamOverrides[id] = o;
+      await shared.fb.setOverride(id, { plus891Choice: null, partBreak: null, plus891Members: null, ...o });
+      const { hidden } = teamOverrides[id] ?? {};
+      teamOverrides[id] = { ...o, ...(hidden ? { hidden } : {}) };
     }
     Object.assign(t, Object.fromEntries(Object.entries(patch).map(([k, v]) => [k, v ?? undefined])));
     msgEl.textContent = "保存しました";
@@ -981,7 +1017,7 @@ function search() {
 
   let rows = dungeons.flatMap((d) =>
     // 高速モードONのみ・OFFのみの時は、その条件のタイムがある編成だけ
-    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null && (!leaderFams || leaderHit(t))).map((t) => evaluate(t, d, item, boxActive))
+    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null && (!leaderFams || leaderHit(t)) && (!adminHidden(t) || shared.fb?.isAdmin)).map((t) => evaluate(t, d, item, boxActive))
   );
   const total = rows.length;
   if (!total && leaderFams) {
@@ -1681,7 +1717,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
+      <div><h3>${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
       <div class="score-col">${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
@@ -3357,6 +3393,7 @@ async function initShared() {
     // 初期データの編成の +891必須・部位破壊（管理者が設定したもの）
     shared.fb.watchOverrides?.((map) => {
       teamOverrides = map;
+      renderAdminSeedHidden();
       if (!$("#tab-search").hidden && $("#q").value.trim() && $("#results").children.length) search();
     });
     updateRegMode();
@@ -3420,6 +3457,7 @@ function renderAdminPanel() {
   }
   panel.hidden = false;
   renderNoIconList();
+  renderAdminSeedHidden();
   adminUnsubs.push(
     shared.fb.watchPending((list) => {
       $("#admin-pending").innerHTML = list.length

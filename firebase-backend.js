@@ -110,7 +110,10 @@
     },
     // 初期データの編成の上書き（管理者だけ）
     setOverride(teamId, patch) {
-      return fs.collection("overrides").doc(teamId).set({ ...patch, updatedAt: ts() });
+      // 送った項目だけ更新（null はその項目を消す）
+      const p = { updatedAt: ts() };
+      for (const [k, v] of Object.entries(patch)) p[k] = v == null ? firebase.firestore.FieldValue.delete() : v;
+      return fs.collection("overrides").doc(teamId).set(p, { merge: true });
     },
     watchOverrides(cb) {
       return fs.collection("overrides").onSnapshot(
