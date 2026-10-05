@@ -21,7 +21,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-SCRATCH = Path("/private/tmp/claude-501/-Users-hm-Desktop-cloud/0eb1ef7d-c9ca-4c34-bba3-a2c311f021c1/scratchpad")
+SCRATCH = ROOT / ".work"  # OCR・QR・原寸画像（一時フォルダは消えるので退避先）
 OUT = ROOT / "icons"
 TILE = 96
 COLS = 24

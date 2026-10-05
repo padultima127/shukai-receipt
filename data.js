@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 103,
+  "version": 104,
   "seed": true,
   "monsters": [
     {
@@ -1723,6 +1723,20 @@ window.PAD_SEED = {
       "no": 13320,
       "name": "ナツキ・スバルの介添え人 レム",
       "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n14202",
+      "no": 14202,
+      "name": "陶酔の仮装祭・テキーラギムレット",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n10638",
+      "no": 10638,
+      "name": "仮装祭の鬼蜘蛛・シラナキ",
+      "attr": "光",
       "tags": []
     }
   ],
@@ -17006,6 +17020,13 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "9": [
           {
             "mi": 4,
@@ -17049,13 +17070,6 @@ window.PAD_SEED = {
             "part": "auto",
             "turn": 1
           },
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
-        "8": [
           {
             "mi": 0,
             "part": "auto",
@@ -22016,23 +22030,6 @@ window.PAD_SEED = {
         "plus891Text": "required"
       },
       "receiptCalls": {
-        "13": [
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "1": [
           {
             "mi": 5,
@@ -22207,6 +22204,23 @@ window.PAD_SEED = {
           }
         ],
         "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
           {
             "mi": 3,
             "part": "auto",
@@ -24349,23 +24363,6 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "5": [
-          {
-            "mi": 1,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 0,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 4,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "1": [
           {
             "mi": 4,
@@ -24435,6 +24432,23 @@ window.PAD_SEED = {
         "4": [
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -25727,6 +25741,18 @@ window.PAD_SEED = {
             "turn": 1
           }
         ],
+        "6": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
         "7": [
           {
             "mi": 2,
@@ -25777,18 +25803,6 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 0
-          }
-        ],
-        "6": [
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 2
           }
         ],
         "8": [
@@ -26910,6 +26924,18 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "3": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "5": [
           {
             "mi": 2,
@@ -26951,18 +26977,6 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
-        "3": [
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -27780,13 +27794,6 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
-        "17": [
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 1
-          }
-        ],
         "9": [
           {
             "mi": 1,
@@ -27818,6 +27825,13 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 0
+          }
+        ],
+        "17": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
           }
         ]
       },
@@ -30007,23 +30021,6 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "10": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "assist",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "1": [
           {
             "mi": 0,
@@ -30140,6 +30137,23 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "11": [
@@ -37934,23 +37948,6 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "7": [
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 1
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "1": [
           {
             "mi": 1,
@@ -38046,6 +38043,23 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "8": [
@@ -38439,13 +38453,6 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "3": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "1": [
           {
             "mi": 3,
@@ -38513,6 +38520,13 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 3
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
           }
         ]
       },
@@ -38648,6 +38662,18 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "2": [
           {
             "mi": 1,
@@ -38698,18 +38724,6 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 3
-          }
-        ],
-        "1": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
           }
         ]
       },
@@ -39302,23 +39316,6 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
-        "8": [
-          {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          }
-        ],
         "1": [
           {
             "mi": 1,
@@ -39365,6 +39362,23 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 1
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "9": [
@@ -40158,6 +40172,13 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "receiptCalls": {
+        "2": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "5": [
           {
             "mi": 5,
@@ -40167,13 +40188,6 @@ window.PAD_SEED = {
           {
             "mi": 3,
             "part": "assist",
-            "turn": 0
-          }
-        ],
-        "2": [
-          {
-            "mi": 3,
-            "part": "auto",
             "turn": 0
           }
         ],
@@ -48065,6 +48079,213 @@ window.PAD_SEED = {
       },
       "fastMode": false,
       "badgeId": 9
+    },
+    {
+      "id": "hyaku-gimlet-ultima",
+      "dungeonId": "hyakushiki",
+      "title": "テキーラギムレット 3分台・9ターン",
+      "timeSec": 201,
+      "turns": 9,
+      "yields": {
+        "exp": 63003413,
+        "plus": 2970,
+        "coin": 1000640500
+      },
+      "members": [
+        {
+          "id": "n14202",
+          "role": "L",
+          "assist": "ナラ＆クインアスラ No.13980",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 127,
+            "latents": [
+              47,
+              5
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13978",
+          "role": "S",
+          "assist": "アレキサンダーの見聞録 No.8443",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13978",
+          "role": "S",
+          "assist": "プレーナのGEAR STEPパーカー No.9915",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n10638",
+          "role": "S",
+          "assist": "全ての鬼を滅するために作った刀 No.12848",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 108,
+            "latents": [
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14028",
+          "role": "S",
+          "assist": "ヒュギエイアの医療水 No.13287",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14202",
+          "role": "F",
+          "assist": "月夜の元気娘・赤ずきんのクッキー缶 No.14201",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 127,
+            "latents": [
+              5
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "テキーラギムレットのグラビティで削る編成。気をつけるのはグラビティスキルの使用順と、2Fのシラナキ（L字の繋がり）くらいでとても楽",
+        "一護織姫は報酬版でも余裕（投稿2枚目のPDC）。ギムレットだけを使う階は省略",
+        "1F: Lギムレット裏→シラナキ裏→一護織姫裏→Lギムレット→Fギムレット裏",
+        "2F: Lギムレット→シラナキ→ディボック",
+        "5F: Fギムレット→一護織姫（代用で覚醒無効回復がない場合はシラナキ）",
+        "8F: Lギムレット→ディボック",
+        "9F: Fギムレット→一護織姫",
+        "代用: バッジは代用可（毒・お邪魔耐性がおすすめ）。バッジを代える場合はフレンドにドラゴンキラーを3つ以上",
+        "代用（本体）: ディボック→サノス、一護織姫→シールドを2枚破壊できるキャラ",
+        "代用（武器）: クインアスラ→ネヴァン・デスピリトゥスのグラス／アレキサンダー・プレーナ→ドロ強＆スキブ／ヒュギエイア→3ターン以上ヘイストかつ毒・お邪魔耐性、または2ターン以上ヘイストの覚醒無効回復"
+      ],
+      "source": "https://x.com/127Ultima/status/2107068906338992158",
+      "author": {
+        "name": "AMR_Ultima 127"
+      },
+      "sourceDate": "2026-10-05",
+      "metrics": {
+        "chars": 420,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": "not-required"
+      },
+      "plus891Choice": "not-required",
+      "fastMode": true,
+      "times": {
+        "on": 201
+      },
+      "badgeId": 45,
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
     }
   ],
   "removed": {
