@@ -847,6 +847,8 @@ function partRateBadge(t, d) {
 let teamOverrides = {};
 // 管理者が非表示にした初期データの編成（管理者には「非表示中」として出す）
 const adminHidden = (t) => !t.shared && !!teamOverrides[t.id]?.hidden;
+// 管理者が削除した初期データの編成（誰にも出さない。次にデータを更新する時に data.js からも消す）
+const adminDeleted = (t) => !t.shared && !!teamOverrides[t.id]?.deleted;
 const settingOf = (t, key) => (teamOverrides[t.id] && key in teamOverrides[t.id] ? teamOverrides[t.id][key] : t[key]);
 // 登録した本人と管理者は、+891必須・部位破壊を後から直せる（初期データの編成は管理者だけ）
 function canEditSettings(t) {
@@ -868,10 +870,48 @@ function renderTeamSettings(t, d, bare = false) {
     <label>+891 <select data-set="plus891Choice">${[["", "分からない"], ["required", "必須"], ["some", "一部だけ"], ["not-required", "不要（+297でOK）"]].map(([v, l]) => `<option value="${v}"${v === p891 ? " selected" : ""}>${l}</option>`).join("")}</select></label>
     <div class="p891-members" data-891-members${p891 === "some" ? "" : " hidden"}><span class="muted">+891が必要なキャラ</span>${slotNames(t).map((n, i) => `<label class="check"><input type="checkbox" value="${i}"${(settingOf(t, "plus891Members") ?? []).includes(i) ? " checked" : ""}> ${esc(n)}</label>`).join("")}</div>
     ${d?.parts ? `<label>部位破壊 <select data-set="partBreak">${[["", "記載なし（自動判定）"], ["can", "部位破壊できる"], ["sure", "部位破壊できる・部位ドロップ確定"], ["no", "部位破壊しない"]].map(([v, l]) => `<option value="${v}"${v === pbVal ? " selected" : ""}>${l}</option>`).join("")}</select></label>` : ""}
-    ${shared.fb.isAdmin && (t.shared || !adminTeamDocs.has(t.id)) && !bare ? `<div class="row">${t.shared ? `<button type="button" data-hide="${esc(t.id)}">この編成を非公開にする（管理者）</button>` : adminHidden(t) ? `<button type="button" class="primary" data-seedshow="${esc(t.id)}">表示に戻す（管理者）</button>` : `<button type="button" data-seedhide="${esc(t.id)}">この編成を非表示にする（管理者）</button>`}</div>` : ""}
+    ${shared.fb.isAdmin && (t.shared || !adminTeamDocs.has(t.id)) && !bare ? `<div class="row">${t.shared ? `<button type="button" data-hide="${esc(t.id)}">この編成を非公開にする（管理者）</button>` : adminHidden(t) ? `<button type="button" class="primary" data-seedshow="${esc(t.id)}">表示に戻す（管理者）</button>` : `<button type="button" data-seedhide="${esc(t.id)}">この編成を非表示にする（管理者）</button>`}
+      <button type="button" class="danger" data-admindel="${esc(t.id)}">${adminDelArmed === t.id ? "もう一度押すと削除" : "この編成を削除する（管理者）"}</button></div>` : ""}
     <button type="button" class="primary" data-save-settings="${esc(t.id)}">保存</button> <span class="muted" data-settings-msg>${saved && bare ? "保存しました" : ""}</span>
   </details>${bare ? "" : `</div>`}`;
 }
+// 管理者: 編成を削除（登録された編成は Firestore から削除。初期データは deleted の印を付けて誰にも出さない）。2回押しで確定
+let adminDelArmed = null;
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-admindel], [data-seedrestore]");
+  if (!b || !shared.fb?.isAdmin) return;
+  e.preventDefault();
+  if (b.dataset.seedrestore) {
+    await shared.fb.setOverride(b.dataset.seedrestore, { deleted: null }).catch((err) => alert?.(err.message));
+    if (teamOverrides[b.dataset.seedrestore]) delete teamOverrides[b.dataset.seedrestore].deleted;
+    renderAdminSeedHidden();
+    return;
+  }
+  const id = b.dataset.admindel;
+  if (adminDelArmed !== id) {
+    adminDelArmed = id;
+    b.textContent = "もう一度押すと削除";
+    setTimeout(() => adminDelArmed === id && ((adminDelArmed = null), (b.textContent = "この編成を削除する（管理者）")), 4000);
+    return;
+  }
+  adminDelArmed = null;
+  const t = db.teams.find((x) => x.id === id);
+  b.disabled = true;
+  try {
+    if (t?.shared) {
+      await shared.fb.remove(id);
+      db.teams = db.teams.filter((x) => x.id !== id);
+    } else {
+      await shared.fb.setOverride(id, { deleted: true });
+      teamOverrides[id] = { ...(teamOverrides[id] ?? {}), deleted: true };
+    }
+    if ($("#results").children.length) search();
+    renderAdminSeedHidden();
+  } catch (err) {
+    b.disabled = false;
+    alert?.(`削除できませんでした: ${err.message}`);
+  }
+});
 // 管理者: 編成を非表示・表示に戻す（初期データは overrides、登録された編成は status）
 document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-seedhide], [data-seedshow], .team-settings [data-hide]");
@@ -899,10 +939,10 @@ document.addEventListener("click", async (e) => {
 function renderAdminSeedHidden() {
   const el = $("#admin-seed-hidden");
   if (!el) return;
-  const list = db.teams.filter(adminHidden);
+  const list = db.teams.filter((t) => adminHidden(t) || adminDeleted(t));
   el.innerHTML = list.length
-    ? `<ul class="reg-list">${list.map((t) => `<li><div class="reg-info"><strong><span class="badge badge-local">管理者が非表示</span>${esc(t.title)}</strong><span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? "")}</span></div><div class="row"><button type="button" class="primary" data-seedshow="${esc(t.id)}">表示に戻す</button></div></li>`).join("")}</ul>`
-    : `<p class="hint">非表示にした初期データの編成はありません。</p>`;
+    ? `<ul class="reg-list">${list.map((t) => `<li><div class="reg-info"><strong><span class="badge badge-local">${adminDeleted(t) ? "削除済み（次の更新でデータからも消去）" : "管理者が非表示"}</span>${esc(t.title)}</strong><span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? "")}</span></div><div class="row">${adminDeleted(t) ? `<button type="button" data-seedrestore="${esc(t.id)}">削除を取り消す</button>` : `<button type="button" class="primary" data-seedshow="${esc(t.id)}">表示に戻す</button> <button type="button" class="danger" data-admindel="${esc(t.id)}">削除</button>`}</div></li>`).join("")}</ul>`
+    : `<p class="hint">非表示・削除した初期データの編成はありません。</p>`;
 }
 // 「一部だけ」を選んだ時だけ、対象キャラのチェック欄を出す
 document.addEventListener("change", (e) => {
@@ -1017,7 +1057,7 @@ function search() {
 
   let rows = dungeons.flatMap((d) =>
     // 高速モードONのみ・OFFのみの時は、その条件のタイムがある編成だけ
-    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null && (!leaderFams || leaderHit(t)) && (!adminHidden(t) || shared.fb?.isAdmin)).map((t) => evaluate(t, d, item, boxActive))
+    db.teams.filter((t) => t.dungeonId === d.id && effTime(t) != null && (!leaderFams || leaderHit(t)) && !adminDeleted(t) && (!adminHidden(t) || shared.fb?.isAdmin)).map((t) => evaluate(t, d, item, boxActive))
   );
   const total = rows.length;
   if (!total && leaderFams) {
@@ -3639,6 +3679,8 @@ function renderRegList() {
 // ---------- イベント ----------
 document.querySelectorAll(".tab").forEach((b) =>
   b.addEventListener("click", () => {
+    // タブを切り替えたらページの一番上へ
+    window.scrollTo({ top: 0, behavior: "instant" });
     document.querySelectorAll(".tab").forEach((x) => x.classList.toggle("active", x === b));
     document.querySelectorAll(".panel").forEach((p) => (p.hidden = p.id !== `tab-${b.dataset.tab}`));
     if (b.dataset.tab === "register") {

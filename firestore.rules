@@ -84,7 +84,8 @@ service cloud.firestore {
     match /overrides/{id} {
       allow read: if true;
       allow write: if isAdmin()
-        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'plus891Members', 'hidden', 'updatedAt'])
+        && request.resource.data.keys().hasOnly(['plus891Choice', 'partBreak', 'plus891Members', 'hidden', 'deleted', 'updatedAt'])
+        && (!('deleted' in request.resource.data) || request.resource.data.deleted is bool)
         && (!('hidden' in request.resource.data) || request.resource.data.hidden is bool)
         && (!('partBreak' in request.resource.data) || validPartBreak(request.resource.data.partBreak))
         && (!('plus891Choice' in request.resource.data) || request.resource.data.plus891Choice in ['', 'required', 'some', 'not-required']);
