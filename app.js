@@ -3425,7 +3425,7 @@ function renderAdminPanel() {
       $("#admin-pending").innerHTML = list.length
         ? `<ul class="reg-list">${list
             .map((t) => `<li><div class="reg-info"><strong>${esc(t.title)}</strong>
-              <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ ${formatTime(t.timeSec)} ・ 登録者 ${esc(t.ownerName ?? "")}</span>
+              <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ ${formatTime(t.timeSec)} ・ 登録者 ${esc(t.ownerName === "ログインなし" ? "ゲスト" : t.ownerName ?? "")}</span>
               ${t.source ? `<a href="${esc(t.source)}" target="_blank" rel="noopener">参考元</a>` : ""}
               <span class="muted">${esc((t.members ?? []).map((m) => m.name).join(" / "))}</span></div>
               ${(adminTeamDocs.set(t.id, t), renderTeamSettings(t, db.dungeons.find((d) => d.id === t.dungeonId) ?? t.newDungeon, true))}
@@ -3441,7 +3441,7 @@ function renderAdminPanel() {
       $("#admin-hidden").innerHTML = list.length
         ? `<ul class="reg-list">${list
             .map((t) => `<li><div class="reg-info"><strong><span class="badge badge-local">${t.status === "hidden" ? "本人が非公開" : "却下・非公開"}</span>${esc(t.title)}</strong>
-              <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ 登録者 ${esc(t.ownerName ?? "")}</span></div>
+              <span class="muted">${esc(db.dungeons.find((d) => d.id === t.dungeonId)?.name ?? t.newDungeon?.name ?? t.dungeonId)} ・ 登録者 ${esc(t.ownerName === "ログインなし" ? "ゲスト" : t.ownerName ?? "")}</span></div>
               ${(adminTeamDocs.set(t.id, t), renderTeamSettings(t, db.dungeons.find((d) => d.id === t.dungeonId) ?? t.newDungeon, true))}
               <div class="row"><button type="button" class="primary" data-approve="${esc(t.id)}">再公開</button>
               <button type="button" class="danger" data-purge="${esc(t.id)}">削除</button></div></li>`)
@@ -3498,8 +3498,8 @@ function updateRegMode() {
     authBox.innerHTML = u && !u.isAnonymous
       ? `<span class="muted">ログイン中: ${esc(u.displayName || u.email || "")}${shared.fb.isAdmin ? "（管理者）" : ""}</span> <button type="button" id="fb-signout">ログアウト</button>`
       : u
-        ? `<span class="muted">ログインなしで登録中（登録した編成の削除・非公開は、このブラウザからだけできます）</span> <button type="button" id="fb-signin">Googleアカウントに引き継ぐ</button>`
-        : `<span class="muted">ログインなしで登録できます（登録した編成の削除・非公開は、登録したブラウザからだけできます）。別の端末からも管理したい場合は</span> <button type="button" id="fb-signin">Googleでログイン</button>`;
+        ? `<span class="muted">ゲストとして登録中（登録した編成の削除・非公開は、このブラウザからだけできます）</span> <button type="button" id="fb-signin">Googleアカウントに引き継ぐ</button>`
+        : `<span class="muted">ログインなし（ゲスト）で登録できます（登録した編成の削除・非公開は、登録したブラウザからだけできます）。別の端末からも管理したい場合は</span> <button type="button" id="fb-signin">Googleでログイン</button>`;
     return;
   }
   if (shared.db && shared.canWrite !== false) {

@@ -90,7 +90,7 @@
         ...team,
         status: "pending",
         ownerUid: u.uid,
-        ownerName: u.displayName || (u.isAnonymous ? "ログインなし" : "名無し"),
+        ownerName: u.displayName || (u.isAnonymous ? "ゲスト" : "名無し"),
         createdAt: ts(),
       });
       batch.set(fs.collection("users").doc(u.uid), { lastSubmitAt: ts() }, { merge: true });
