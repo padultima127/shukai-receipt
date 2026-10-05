@@ -3746,7 +3746,7 @@ document.querySelectorAll("#mode button").forEach((b) =>
   })
 );
 
-$("#run").addEventListener("click", search);
+$("#run")?.addEventListener("click", search);
 async function loadVotes(teamId) {
   if (shared.mode !== "firebase") return;
   const list = await shared.fb.getVotes(teamId).catch(() => []);
@@ -3858,16 +3858,26 @@ $("#results").addEventListener("click", (e) => {
 });
 // 入力を一括で消す×ボタン（文字がある時だけ表示）
 const syncQClear = () => ($("#q-clear").hidden = !$("#q").value);
+// 入力したら自動で検索（「最適編成を探す」ボタンは廃止）。打っている途中は待って、候補に当てはまる時だけ検索する
+let autoSearchTimer = null;
 $("#q").addEventListener("input", () => {
   suggestIndex = -1;
   syncQClear();
   renderSuggestions();
+  clearTimeout(autoSearchTimer);
+  autoSearchTimer = setTimeout(() => {
+    const q = $("#q").value.trim();
+    if (!q) return ($("#results").innerHTML = "");
+    const hit = searchType === "leader" ? leaderNosFor(q).size > 0 : (({ dungeons, item }) => !!item || dungeons.length > 0)(resolveQuery(q, searchType));
+    if (hit) search();
+  }, 500);
 });
 $("#q-clear").addEventListener("mousedown", (e) => e.preventDefault());
 $("#q-clear").addEventListener("click", () => {
   $("#q").value = "";
   syncQClear();
   suggestIndex = -1;
+  $("#results").innerHTML = "";
   $("#q").focus();
   renderSuggestions();
 });
