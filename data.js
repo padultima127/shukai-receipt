@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 105,
+  "version": 106,
   "seed": true,
   "monsters": [
     {
@@ -1737,6 +1737,153 @@ window.PAD_SEED = {
       "no": 10638,
       "name": "仮装祭の鬼蜘蛛・シラナキ",
       "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n14030",
+      "no": 14030,
+      "name": "ユーハバッハ",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12654",
+      "no": 12654,
+      "name": "辛口の雫・ギブソン",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n5331",
+      "no": 5331,
+      "name": "清麗の琴龍楽士・ルティナ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n14146",
+      "no": 14146,
+      "name": "LOVE LAIKA",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n14161",
+      "no": 14161,
+      "name": "鷺沢文香",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n13919",
+      "no": 13919,
+      "name": "雷霆の超越神・インドラ",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n9237",
+      "no": 9237,
+      "name": "マリウス【ダークカラー】",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12316",
+      "no": 12316,
+      "name": "澤村 大地",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12282",
+      "no": 12282,
+      "name": "烏野高校・影山 飛雄",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12181",
+      "no": 12181,
+      "name": "ガンダムF91 最大稼働",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n12196",
+      "no": 12196,
+      "name": "百式",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n12193",
+      "no": 12193,
+      "name": "ガンダムDX",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n11835",
+      "no": 11835,
+      "name": "オーロラ姫【プリンセス】",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12296",
+      "no": 12296,
+      "name": "月島 蛍",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13220",
+      "no": 13220,
+      "name": "「紙肢」エッジショット",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13616",
+      "no": 13616,
+      "name": "科学部の怪異・ユラ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n12905",
+      "no": 12905,
+      "name": "亜白ミナ＆保科宗四郎",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12208",
+      "no": 12208,
+      "name": "リボーンズガンダム",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12920",
+      "no": 12920,
+      "name": "第1部隊隊長・鳴海弦",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12936",
+      "no": 12936,
+      "name": "緒方ジュウゴ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n6551",
+      "no": 6551,
+      "name": "胡蝶しのぶ",
+      "attr": "闇",
       "tags": []
     }
   ],
@@ -8868,6 +9015,191 @@ window.PAD_SEED = {
         "baseRate": 10,
         "note": "ボスの部位破壊で希石（0〜4個、ボスと同じ属性）。基本のドロップ率10%（新凶兆以外は原則10%）＋部位破壊ボーナス1つにつき+10%。リーダーの「タマゴと部位破壊素材のドロップ率」アップは未計算"
       }
+    },
+    {
+      "id": "urajuoku",
+      "name": "裏未知の新星ラッシュ【超重力】",
+      "aliases": [
+        "裏十億",
+        "裏未知の新星ラッシュ",
+        "裏十億チャレンジ",
+        "裏「十億」チャレンジ",
+        "裏10億",
+        "∞級1人専用コロシアム"
+      ],
+      "battles": 15,
+      "note": "∞級1人専用コロシアム（未知の新星ラッシュをクリアで解放）。超重力2000分の1。ルゥの部位破壊でモリりん・ワルりんの希石。旧「裏十億チャレンジ」（制限時間60分・経験値10億）のクリア記録の編成も含む",
+      "drops": [
+        {
+          "itemId": "exp",
+          "rate": 110000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "coin",
+          "rate": 1000000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "delay",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "nijipii",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "goldtama",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "sixslot",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "killer",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "kingdragon",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "gimmicks": {
+        "all": [
+          "resolve",
+          "bigHit",
+          "skillDelay",
+          "weakenAwaken",
+          "maxHpDown"
+        ],
+        "partial": [],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/489821",
+            "date": "2026-10-06"
+          }
+        ],
+        "notes": [
+          "ゲームウィズの「攻略ポイント」から（全ギミックの一覧ではありません）",
+          "ボスの初回行動と超根性発動の次のターンに1200万ダメージ。B5先制で300%割合・最大HP半減",
+          "スキル遅延: B1先制3ターン・B5のHP0時2ターン・B13の超根性時3ターン",
+          "B12先制で50%の弱体化目覚め。B2・B4・B7のどれかにルウが乱入し、先制でスキル効果を消す",
+          "B10の超根性時にパズル教室（0コンボ）が2回"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの記載（経験値1.1億・コイン10億）。各ドロップの個数は記載がないため1体で計算"
+    },
+    {
+      "id": "juoku",
+      "name": "未知の新星ラッシュ【超重力】",
+      "aliases": [
+        "十億",
+        "十億ダンジョン",
+        "十億チャレンジ",
+        "表十億",
+        "未知の新星ラッシュ",
+        "10億"
+      ],
+      "battles": 15,
+      "note": "十億ダンジョン（ダンジョンショップで期間限定販売・100億コイン）。制限時間60分・超重力2000分の1・リーダーチェンジ無効",
+      "drops": [
+        {
+          "itemId": "exp",
+          "rate": 1000000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "coin",
+          "rate": 1000000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "delay",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "nijipii",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "sixslot",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "gimmicks": {
+        "all": [
+          "resolve",
+          "bigHit",
+          "skillDelay",
+          "healDown"
+        ],
+        "partial": [],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/470060",
+            "date": "2026-10-06"
+          }
+        ],
+        "notes": [
+          "ゲームウィズの「攻略ポイント」から（全ギミックの一覧ではありません）",
+          "B1先制で合計8万ダメージ（潜入直後でLS軽減なし）。B3はLS軽減なしで20万。B5先制で500%割合",
+          "スキル遅延: B1で4ターン・B2でリーダー/助っ人4ターン・B13で全員4ターン",
+          "ボス超根性時に1000万ダメージ。B10の超根性時にパズル教室（0コンボ）が2回"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの記載（経験値10億・コイン10億）"
     }
   ],
   "teams": [
@@ -48282,6 +48614,1453 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
+      }
+    },
+    {
+      "id": "urajuoku-esupel-maeba",
+      "dungeonId": "urajuoku",
+      "title": "エスペル×日番谷 部位破壊（編成難易度低め）",
+      "timeSec": 597,
+      "turns": 24,
+      "yields": {
+        "exp": 161700000
+      },
+      "members": [
+        {
+          "id": "n14095",
+          "role": "L",
+          "assist": "五色のユニフォーム No.12313"
+        },
+        {
+          "id": "n13394",
+          "role": "S",
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+        },
+        {
+          "id": "n14030",
+          "role": "S",
+          "assist": "賢玉龍・メルクリア No.3540"
+        },
+        {
+          "id": "n7327",
+          "role": "S",
+          "assist": "義勇の日輪刀＆炭治郎の日輪刀 No.12813"
+        },
+        {
+          "id": "n14107",
+          "role": "S",
+          "assist": "ランタン祭りの青龍契士・リューネの常夏ジュース No.12776"
+        },
+        {
+          "id": "hitsugaya",
+          "role": "F",
+          "assist": "氷輪丸 No.14069"
+        }
+      ],
+      "steps": [
+        "1周10分弱。BLEACHキャラを使いつつ、トランプ龍は1体まで。最後のシールド6枚全破壊",
+        "スペディオルはスキルレベル1。ナツルのターンは水2セット＋回復、スペディオルはずらし",
+        "1F: ナツル変身（1段階目）、日番谷変身、ユーハ裏、スペ変身、日番谷、エスペル変身（全体攻撃）",
+        "2F: スペ、日番谷、ナツル変身（2段階目）。ルウ乱入時は日番谷・スペ・ナツル変身で全体攻撃",
+        "代用（スキブ20・部位破壊6以上に調整）: プリム→水属性含むL2つ＋シールド×2破壊、パイモン→泥強＋2ターン継続W吸収＋2ヘイスト、メルクリア→水付与＋エンハ＋2ヘイスト ほか",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/break_my_teeth/status/2102410214628852104",
+      "author": {
+        "name": "前歯ニキ"
+      },
+      "sourceDate": "2026-09-22",
+      "metrics": {
+        "chars": 287,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-hitsugaya-harami",
+      "dungeonId": "urajuoku",
+      "title": "日番谷×鷺沢 ほぼずらし（もりりんカード集め）",
+      "timeSec": 857,
+      "turns": 37,
+      "yields": {
+        "exp": 115500000,
+        "coin": 1000000000
+      },
+      "badgeId": 45,
+      "members": [
+        {
+          "id": "hitsugaya",
+          "role": "L",
+          "assist": "［インペリウム・セレスト］渋谷凛のCD No.13572",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              10,
+              10,
+              10,
+              12,
+              18
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12654",
+          "role": "S",
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              55,
+              12,
+              18
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n5331",
+          "role": "S",
+          "assist": "ヒュギエイアの医療水 No.13287",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [
+              58,
+              12,
+              18
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14146",
+          "role": "S",
+          "assist": "竜神ヒスイのカード No.11880",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              12,
+              18,
+              10,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14146",
+          "role": "S",
+          "assist": "織姫のヘアピン No.14029",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              12,
+              18,
+              10,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14161",
+          "role": "F",
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 52,
+            "latents": [
+              10,
+              10,
+              10,
+              18,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "ほぼずらし（ずらしで11c）。耐久ループはボス以外不要。ラブライカのみでワンパン（ルウ・ノア・凶兆龍・億兆龍を除く）",
+        "日番谷＋1体かアイマス全員+891なら闇軽減は不要",
+        "「ずらし」は最上段か最下段の水か回復を横に1つずらす（7×6なら上か下2番目、5×4なら縦にずらす）",
+        "ルウ乱入時は2F・4F・7Fで立ち回りが変わる（レシート参照）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/harami_2311/status/2105440142928593182",
+      "author": {
+        "name": "はらみ"
+      },
+      "sourceDate": "2026-09-30",
+      "metrics": {
+        "chars": 180,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-heartia-mushroom",
+      "dungeonId": "urajuoku",
+      "title": "ハーティア×セイハーツ 部位破壊9（確定ドロップ）10分台",
+      "timeSec": 635,
+      "turns": 30,
+      "yields": {
+        "exp": 164934000,
+        "coin": 827936316
+      },
+      "badgeId": 103,
+      "members": [
+        {
+          "id": "n14101",
+          "role": "L",
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              5,
+              5,
+              5
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13919",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n9237",
+          "role": "S",
+          "assist": "九兵衛の刀 No.13711",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 70,
+            "latents": [
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14110",
+          "role": "S",
+          "assist": "ビャクレンコウの戦斧 No.11584",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              5,
+              5,
+              5
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14110",
+          "role": "S",
+          "assist": "緋窮の億兆龍・アグリゲートのブローチ No.11561",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              39
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14072",
+          "role": "F",
+          "assist": "ダリアの黒絢星霊・フィリス No.12450",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              56,
+              31
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "10分30秒〜11分。部位破壊9で部位確定ドロップ",
+        "母体・フィリスはスキルレベル最大、それ以外は1。消し方の指定がなければずらし",
+        "代用: フィリス→5ターン以内のバインド回復・最大HP変更（HP変更が1ターンだけでチームHP覚醒がない場合は、マリウスに水軽減大×2・小×1。5Fは2ターン突破になる）",
+        "2F・4F・7Fはルウ乱入の有無で立ち回りが変わる。まだ乱入されていない時は5Fで回復を残す",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pad_mushroom/status/2101647098458546435",
+      "author": {
+        "name": "まっしゅるうむ"
+      },
+      "sourceDate": "2026-09-20",
+      "metrics": {
+        "chars": 210,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-karasuno-nanaminn",
+      "dungeonId": "urajuoku",
+      "title": "烏野チーム 部位破壊7（ドロップ率96%）18〜19分台",
+      "timeSec": 1128,
+      "turns": 35,
+      "badgeId": 55,
+      "members": [
+        {
+          "id": "n12316",
+          "role": "L",
+          "assist": "星砕の凶兆龍・ゼンチョウガのブレスレット No.11550",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 130,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12270",
+          "role": "S",
+          "assist": "冥冥の鳥 No.11676",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12282",
+          "role": "S",
+          "assist": "愛縁の鍵勇者・アムリ＆リネアのショコラ No.12164",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12298",
+          "role": "S",
+          "assist": "織姫の櫛 No.11201",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              12,
+              12,
+              12,
+              30,
+              30,
+              16
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12282",
+          "role": "S",
+          "assist": "アルミダの武装ユニット No.12130",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              22,
+              22,
+              16
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12279",
+          "role": "F",
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              30,
+              30,
+              16
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "影山が2体必要。慣れれば安定して高速周回できる。旧「裏十億チャレンジ」でのクリア記録",
+        "乱入の階（2F・4F・7F）ごとに立ち回りを少し変えたレシートが3枚",
+        "以降10Fまでは ①日向2→日向影山2→ヘイスト→日向1 ②日向2→ヘイスト→日向影山1→日向1 のループ",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pad_nanaminn/status/1903722913863463318",
+      "author": {
+        "name": "七海黄猿"
+      },
+      "sourceDate": "2025-03-23",
+      "metrics": {
+        "chars": 145,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-hinata-kinoko",
+      "dungeonId": "urajuoku",
+      "title": "日向 影山2体 部位確定ドロップ 22〜25分",
+      "timeSec": 1324,
+      "turns": 40,
+      "members": [
+        {
+          "id": "n12282",
+          "role": "L",
+          "assist": "フクロウ？のようなチョコ No.12157"
+        },
+        {
+          "id": "n12270",
+          "role": "S",
+          "assist": "死天龍のソウル No.11579"
+        },
+        {
+          "id": "n12316",
+          "role": "S",
+          "assist": "教祖クロウリーのカード No.11869"
+        },
+        {
+          "id": "n12298",
+          "role": "S",
+          "assist": "アグリゲートの天弓 No.11555"
+        },
+        {
+          "id": "n12282",
+          "role": "S",
+          "assist": "アルミダの武装ユニット No.12130"
+        },
+        {
+          "id": "n12279",
+          "role": "F",
+          "assist": "永久竜カナンのカード No.11872"
+        }
+      ],
+      "steps": [
+        "2F乱入で22分ちょい、4F・7F乱入で24分前後。旧「裏十億チャレンジ」でのクリア記録",
+        "回復L字を組む場面なし。毒も棘もいくら消しても平気。スキルだけ間違えないように（日向は毎ターン使うので省略）",
+        "1F: 日向&影山1→澤村→日向&影山2→影山B→東峰→影山A→日向（全体含める）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/kinoko_pazz/status/1903255302335865009",
+      "author": {
+        "name": "きのこ@パズドラ"
+      },
+      "sourceDate": "2025-03-22",
+      "metrics": {
+        "chars": 155,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-f91-mamedora",
+      "dungeonId": "urajuoku",
+      "title": "ガンダムF91 列を組むだけ",
+      "timeSec": 1502,
+      "turns": 52,
+      "badgeId": 44,
+      "members": [
+        {
+          "id": "n12181",
+          "role": "L",
+          "assist": "公安スーツ No.10799",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12196",
+          "role": "S",
+          "assist": "命天龍・ゼルクレアの首飾り No.11211",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12196",
+          "role": "S",
+          "assist": "命天龍・ゼルクレアの首飾り No.11211",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12193",
+          "role": "S",
+          "assist": "∀ガンダムのビーム・ライフル No.12173",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11835",
+          "role": "S",
+          "assist": "黒鉄の銀機士・クラウディアのブレスレット No.12127",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              55
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12181",
+          "role": "F",
+          "assist": "ラクシュミのカード No.11863",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "回復4消しすら不要で、列を組んでいるだけで勝てる。旧「裏十億チャレンジ」でのクリア記録",
+        "1F: ゼルクレア×2→オーロラ→ガンダム→F91→百式→F91",
+        "ダメージ吸収はDX、敵の大ダメージはDXとオーロラで受ける",
+        "代用: 荒井→泥強・HP盛り／ゼルクレア→スキブ・チーム回復力・ヘイスト・火力盛り／∀ガンダム→副属性光・ヘイスト・火力盛り／クラウディア→マシン付与・HP盛り・泥強／ラクシュミー→自由枠",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/mamedorazunda/status/1900734968810401963",
+      "author": {
+        "name": "豆ドラ【YouTube】"
+      },
+      "sourceDate": "2025-03-15",
+      "metrics": {
+        "chars": 214,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-hinata-junyama",
+      "dungeonId": "urajuoku",
+      "title": "影山1体 ヘイストループ 部位6（約91%）",
+      "timeSec": 1606,
+      "turns": 45,
+      "badgeId": 55,
+      "members": [
+        {
+          "id": "n12282",
+          "role": "L",
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12298",
+          "role": "S",
+          "assist": "アグリゲートの天弓 No.11555",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              54,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12316",
+          "role": "S",
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 108,
+            "latents": [
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12270",
+          "role": "S",
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              54,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12296",
+          "role": "S",
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 130,
+            "latents": [
+              12,
+              12,
+              54
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12279",
+          "role": "F",
+          "assist": "冥窮の億兆龍・アグリゲートの首飾り No.11558",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "影山1体のみのヘイストループ。ルゥは部位込みでワンパン可能。旧「裏十億チャレンジ」でのクリア記録",
+        "3F以降: 日向①→ヘイスト→日向②を繰り返す。火力が出ないターンは耐久。盤面拡張とHP半減には日影",
+        "日影を撃つタイミングさえ間違えなければ死ぬことはない",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/junyama_sub/status/1903039456833356283",
+      "author": {
+        "name": "ヤマジュン"
+      },
+      "sourceDate": "2025-03-21",
+      "metrics": {
+        "chars": 140,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-gintoki-uch",
+      "dungeonId": "urajuoku",
+      "title": "スオウ銀時 部位破壊11（パズル教室スキップ）",
+      "timeSec": 1044,
+      "turns": 36,
+      "yields": {
+        "exp": 115500000
+      },
+      "badgeId": 18,
+      "members": [
+        {
+          "id": "n13692",
+          "role": "L",
+          "assist": "織姫の櫛 No.11201",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13419",
+          "role": "S",
+          "assist": "チューリップの標本 No.12447",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              34,
+              31
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12903",
+          "role": "S",
+          "assist": "天王寺松右衛門 No.12809",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13676",
+          "role": "S",
+          "assist": "［インペリウム・セレスト］渋谷凛のCD No.13572",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              46,
+              31
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "教師ミオンのサポート龍・ストラ No.13606",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              12,
+              46,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              46,
+              31
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "基本ずらし、後半は待ちターンあり。+891必須（毒目覚め潜在を光軽減＋にすると＋の要求値が少し下がる。カフカレノは891推奨）",
+        "2F乱入時はほぼ全ずらし。4F乱入が一番だるい。毒が生成されたら消えないように",
+        "クーバンシェンがきつい",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/_uc_h/status/2052192303096418800",
+      "author": {
+        "name": "シグラ"
+      },
+      "sourceDate": "2026-05-07",
+      "plus891Choice": "required",
+      "metrics": {
+        "chars": 129,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 1,
+        "plus891Text": "required"
+      }
+    },
+    {
+      "id": "urajuoku-gintoki-booflamy",
+      "dungeonId": "urajuoku",
+      "title": "銀時 ほぼずらし（ワルりんのカード回収用）",
+      "timeSec": 771,
+      "turns": 30,
+      "yields": {
+        "exp": 115500000
+      },
+      "badgeId": 43,
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              46,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13596",
+          "role": "S",
+          "assist": "逃匿の魔女・チャコルのキャンディ No.10652",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              41
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13220",
+          "role": "S",
+          "assist": "遊びの空間・ジントニックの宝杯 No.13291",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              55
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13616",
+          "role": "S",
+          "assist": "夕刻の時龍士・ミルの常夏ジュース No.12743",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 56,
+            "latents": [
+              12,
+              12,
+              58
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13616",
+          "role": "S",
+          "assist": "フチャの式札 No.7783",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 56,
+            "latents": [
+              12,
+              12,
+              41
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              46,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "ほぼずらしなので楽。代用はほぼ無理",
+        "1F: ゼラチ裏→銀時裏→銀時裏→ゼラチ→銀時",
+        "2F・4F・7Fはルウ乱入の有無で立ち回りが変わる（レシート参照）。10Fの②〜③はパズル教室",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/booflamy_pad/status/2055940426780307754",
+      "author": {
+        "name": "柚理 ☪︎"
+      },
+      "sourceDate": "2026-05-17",
+      "metrics": {
+        "chars": 103,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-narumi-rikopin",
+      "dungeonId": "urajuoku",
+      "title": "鳴海弦 部位7（確定）15分台",
+      "timeSec": 956,
+      "turns": 31,
+      "yields": {
+        "exp": 138600000,
+        "coin": 1000000000
+      },
+      "members": [
+        {
+          "id": "n12907",
+          "role": "L",
+          "assist": "SW-2033 No.12926"
+        },
+        {
+          "id": "n12907",
+          "role": "S",
+          "assist": "不死川実弥の日輪刀 No.12827"
+        },
+        {
+          "id": "n12905",
+          "role": "S",
+          "assist": "イシス＆ネフティスのオーシャンパングル No.11443"
+        },
+        {
+          "id": "n12208",
+          "role": "S",
+          "assist": "日向のユニフォーム No.12280"
+        },
+        {
+          "id": "n12920",
+          "role": "S",
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658"
+        },
+        {
+          "id": "n12920",
+          "role": "F",
+          "assist": "SW-2033 No.12926"
+        }
+      ],
+      "steps": [
+        "多少のパズルを楽しみたい人向け。全スキルマ。基本は火・闇・回復の盤面3c（十字含む）",
+        "3色陣で火・闇が4以下だと②（特に1Fと3F）",
+        "1F: L鳴海8号①→S隊長変身→F隊長変身→L鳴海8号②",
+        "8F以降は隊長を先打ちでループ。10Fの②③はパズル教室",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/detteiuRIKOPIN/status/1978986552186265990",
+      "author": {
+        "name": "リコピン"
+      },
+      "sourceDate": "2025-10-17",
+      "metrics": {
+        "chars": 138,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-kikoru-regina",
+      "dungeonId": "urajuoku",
+      "title": "四ノ宮キコル 部位破壊9 ほぼずらし 16〜17分台",
+      "timeSec": 978,
+      "turns": 53,
+      "yields": {
+        "exp": 115500000,
+        "coin": 1000000000
+      },
+      "badgeId": 74,
+      "members": [
+        {
+          "id": "n12930",
+          "role": "L",
+          "assist": "Ax-0112 No.12931",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12930",
+          "role": "S",
+          "assist": "Ax-0112 No.12931",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12936",
+          "role": "S",
+          "assist": "幸運機・メタルラクシュミーのブローチ No.11198",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n6551",
+          "role": "S",
+          "assist": "ソロモンの指輪 No.12592",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 70,
+            "latents": [
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12960",
+          "role": "S",
+          "assist": "豪雷銃槍エクスラギア No.6462",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12,
+              10,
+              10
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12960",
+          "role": "F",
+          "assist": "Ax-0112 No.12931",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "ほぼずらしでクリア可能。ルーレットの時はキコル使用後、ルーレットの箇所をすぐに掴む",
+        "立ち回りのレシートは投稿のリプライ欄（再掲版）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/regina_297/status/1983086061443252538",
+      "author": {
+        "name": "れじ"
+      },
+      "sourceDate": "2025-10-28",
+      "metrics": {
+        "chars": 80,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "urajuoku-douma-reall",
+      "dungeonId": "urajuoku",
+      "title": "童磨 部位破壊 メニチャオのグラビティで時短（30〜32ターン）",
+      "timeSec": 938,
+      "turns": 30,
+      "yields": {
+        "exp": 115500000,
+        "coin": 1000000000
+      },
+      "members": [
+        {
+          "id": "n12832",
+          "role": "L",
+          "assist": "T-25101985 No.12918"
+        },
+        {
+          "id": "n12729",
+          "role": "S",
+          "assist": "シャオチューフの酒壺 No.12618"
+        },
+        {
+          "id": "n12729",
+          "role": "S",
+          "assist": "ビームのズボン No.10777"
+        },
+        {
+          "id": "n12844",
+          "role": "S",
+          "assist": "稽古のご飯 No.12821"
+        },
+        {
+          "id": "n12844",
+          "role": "S",
+          "assist": "蒼天龍のソウル No.11574"
+        },
+        {
+          "id": "n12832",
+          "role": "F",
+          "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527"
+        }
+      ],
+      "steps": [
+        "メニチャオのグラビティで大幅に時間短縮。パズルも単調で扱いやすい",
+        "全員+891。本体スキルは全てmax、武器はNo.12918（T-25101985）のみスキルレベル1",
+        "2〜8Fはルウ乱入の階で立ち回りが分かれる（レシート参照）。10Fはパズル教室",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Pad_Reall/status/1989168023660556416",
+      "author": {
+        "name": "Re.all"
+      },
+      "sourceDate": "2025-11-14",
+      "plus891Choice": "required",
+      "metrics": {
+        "chars": 138,
+        "puzzle": 1,
+        "branch": 1,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 1,
+        "plus891Text": "required"
+      }
+    },
+    {
+      "id": "juoku-rose-e8igh8t",
+      "dungeonId": "juoku",
+      "title": "LFロゼ 光十字を組むだけ",
+      "timeSec": 616,
+      "turns": 29,
+      "fastMode": true,
+      "times": {
+        "on": 616
+      },
+      "yields": {
+        "exp": 2362500000,
+        "coin": 1000000000
+      },
+      "badgeId": 102,
+      "members": [
+        {
+          "id": "n13967",
+          "role": "L",
+          "assist": "オメガブレード No.13142",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13416",
+          "role": "S",
+          "assist": "夜一の髪留め No.14056",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "dain",
+          "role": "S",
+          "assist": "聖饒の花嫁・テュオレの指輪 No.11333",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              31,
+              31,
+              31
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13676",
+          "role": "S",
+          "assist": "新型フレイヤ・エリミネーター No.13965",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14048",
+          "role": "S",
+          "assist": "アルトゥラの壊れた手枷 No.12716",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13967",
+          "role": "F",
+          "assist": "北のユニフォーム No.12331",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              36
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "指減少対策をした状態で光十字を組むだけでサクサク進む。クリア履歴は高速モード・パズパス使用",
+        "ダインとテュオレはスキルレベル1、他は基本的に最大。光十字の所はフェルンを打たなくても削れる",
+        "1F: ①神楽→フェルン変身1C ②フェルン→ロゼ片方変身→フェルン→ダイン変身→ハッシュ→ロゼ変身後、神楽→ロゼもう片方変身",
+        "14F以降ダインとハッシュヴァルトはループ。15Fはアグリゲートの残り2枚まで神楽温存",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/e8igh8t/status/2102348498968736139",
+      "author": {
+        "name": "88。！(エイトハチ)🥚"
+      },
+      "sourceDate": "2026-09-22",
+      "metrics": {
+        "chars": 213,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
       }
     }
   ],
