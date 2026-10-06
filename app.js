@@ -1741,6 +1741,7 @@ function plus891Badge(t) {
   return ` <span class="p891 p891-${kind}">${text}</span>`;
 }
 function plus891Label(m) {
+  if (m.badgeText) return m.badgeText;
   if (m.plus891Names?.length) return `一部だけ（${m.plus891Names.map(esc).join("・")}）`;
   if (m.plus891Text === "required") return "必須";
   if (m.plus891Text === "not-required") return "不要";
@@ -1815,7 +1816,7 @@ function renderResult(r, i, item) {
       <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>`
-        : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}), plus891Names: settingOf(t, "plus891Choice") === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : null })}
+        : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}), plus891Names: settingOf(t, "plus891Choice") === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : null, badgeText: plus891Badge(t).replace(/<[^>]+>/g, "").replace(/^\s*\+891/, "").trim() || null })}
       ${renderTeamSettings(t, r.dungeon)}
       ${staminaLine}
     </dl>
