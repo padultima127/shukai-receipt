@@ -417,3 +417,6 @@ button:disabled { opacity: .6; cursor: wait; }
 .consent-box { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 8px 0; font-size: 13px; }
 .consent-box[hidden] { display: none; }
 .consent-box p { margin: 0 0 4px; }
+
+.badge-warn { background: #fff1d6; color: #8a5300; border: 1px solid #f0c060; }
+@media (prefers-color-scheme: dark) { .badge-warn { background: #3a2a10; color: #ffcf7a; border-color: #8a6a2a; } }

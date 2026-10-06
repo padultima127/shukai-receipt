@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 107,
+  "version": 108,
   "seed": true,
   "monsters": [
     {
@@ -49914,32 +49914,103 @@ window.PAD_SEED = {
         {
           "id": "n12832",
           "role": "L",
-          "assist": "T-25101985 No.12918"
+          "assist": "T-25101985 No.12918",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12729",
           "role": "S",
-          "assist": "シャオチューフの酒壺 No.12618"
+          "assist": "シャオチューフの酒壺 No.12618",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127,
+            "latents": [
+              56,
+              32
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12729",
           "role": "S",
-          "assist": "ビームのズボン No.10777"
+          "assist": "ビームのズボン No.10777",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 131,
+            "latents": [
+              58,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12844",
           "role": "S",
-          "assist": "稽古のご飯 No.12821"
+          "assist": "稽古のご飯 No.12821",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127,
+            "latents": [
+              41,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12844",
           "role": "S",
-          "assist": "蒼天龍のソウル No.11574"
+          "assist": "蒼天龍のソウル No.11574",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 127,
+            "latents": [
+              54,
+              18,
+              12
+            ],
+            "fromQr": true
+          }
         },
         {
           "id": "n12832",
           "role": "F",
-          "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527"
+          "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
         }
       ],
       "steps": [
@@ -49965,7 +50036,8 @@ window.PAD_SEED = {
       },
       "partBreak": {
         "can": true
-      }
+      },
+      "badgeId": 45
     },
     {
       "id": "juoku-rose-e8igh8t",

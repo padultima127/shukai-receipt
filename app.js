@@ -846,6 +846,15 @@ function partRateBadge(t, d) {
 }
 // 管理者が設定した初期データの編成の上書き（+891必須・部位破壊）。{ 編成id: { plus891Choice, partBreak } }
 let teamOverrides = {};
+// 超覚醒を選べるキャラなのに、レシート（QR・画像）から超覚醒が分からない枠がある編成（自分で選んだものは分かったことにしない）
+function superUnknown(t) {
+  return t.members.some((m) => {
+    const row = MDB.get(monster(m.id)?.no);
+    if (!row || !String(row[11] ?? "").split(".").filter(Boolean).length) return false;
+    if (m.build?.lv != null && m.build.lv < 110) return false;
+    return m.build?.super == null || !!m.build.userPicked;
+  });
+}
 // 管理者が非表示にした初期データの編成（管理者には「非表示中」として出す）
 const adminHidden = (t) => !t.shared && !!teamOverrides[t.id]?.hidden;
 // 管理者が削除した初期データの編成（誰にも出さない。次にデータを更新する時に data.js からも消す）
@@ -1758,7 +1767,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
+      <div><h3>${superUnknown(t) ? `<span class="badge badge-warn" title="超覚醒を選べるキャラのうち、レシートから超覚醒が分からない枠があります">超覚醒不明・必ず元の編成を確認</span>` : ""}${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
       <div class="score-col">${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
