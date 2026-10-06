@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261006154845">
+  <link rel="stylesheet" href="style.css?v=20261006155113">
 </head>
 <body>
   <header>
@@ -98,7 +98,7 @@
               <option value="off">OFF</option>
             </select>
             <label for="reg-ocr-steps">立ち回りの読み取り</label>
-            <label class="check"><input type="checkbox" id="reg-ocr-steps"> 画像に書いた立ち回りも読み取る<small class="muted">（おすすめは、PDCから立ち回りの文章だけをコピーして貼り付ける方法です。画像からの読み取りは読み違いが多いので、使う時は必ず見直してください）</small></label>
+            <label class="check"><input type="checkbox" id="reg-ocr-steps"> 画像に書いた立ち回りも読み取る<small class="muted">（画像からの読み取りは読み違いが出ることがあるので、使う時は必ず見直してください）</small></label>
             <label for="reg-ocr-url">投稿のリンク（任意）</label>
             <input id="reg-ocr-url" type="url" placeholder="https://x.com/.../status/..." autocomplete="off">
           </div>
@@ -162,7 +162,7 @@
         <h3 class="form-sub">モンスターとアシスト</h3>
         <ol id="reg-slots" class="reg-slots"></ol>
 
-        <label for="reg-steps">立ち回り（1行に1つ。<strong>PDCから立ち回りの文章だけをコピーして貼り付けるのがおすすめ</strong>。メモがない時はiPhoneの写真アプリ・グーグルレンズで画像の文字をコピー。絵文字もそのまま使えます）</label>
+        <label for="reg-steps">立ち回り（1行に1つ。絵文字もそのまま使えます。画像から読み取った場合は読み違いがないか見直してください）</label>
         <textarea id="reg-steps" rows="8" placeholder="1F: ダイアモス変身、ダイン変身、日番谷
 2F: イズナ、日番谷、ダイアモス（光L字×2）"></textarea>
 
@@ -287,14 +287,14 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261006154845"></script>
-  <script src="firebase-backend.js?v=20261006154845"></script>
-  <script src="changelog.js?v=20261006154845"></script>
-  <script src="icons.js?v=20261006154845"></script>
-  <script src="monsters-db.js?v=20261006154845"></script>
-  <script src="monsters-changes.js?v=20261006154845"></script>
-  <script src="data.js?v=20261006154845"></script>
-  <script src="app.js?v=20261006154845"></script>
+  <script src="firebase-config.js?v=20261006155113"></script>
+  <script src="firebase-backend.js?v=20261006155113"></script>
+  <script src="changelog.js?v=20261006155113"></script>
+  <script src="icons.js?v=20261006155113"></script>
+  <script src="monsters-db.js?v=20261006155113"></script>
+  <script src="monsters-changes.js?v=20261006155113"></script>
+  <script src="data.js?v=20261006155113"></script>
+  <script src="app.js?v=20261006155113"></script>
   <!-- Cloudflare Web Analytics（アクセス数の集計。Cookieなし・個人を特定しない） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0152013b56ea4ec9800ca72574da31e8"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
