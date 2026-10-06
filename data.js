@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 108,
+  "version": 109,
   "seed": true,
   "monsters": [
     {
@@ -48634,32 +48634,70 @@ window.PAD_SEED = {
         {
           "id": "n14095",
           "role": "L",
-          "assist": "五色のユニフォーム No.12313"
+          "assist": "五色のユニフォーム No.12313",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n13394",
           "role": "S",
-          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646"
+          "assist": "奇怪冠の聖魔王・パイモンのキャンディ No.10646",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n14030",
           "role": "S",
-          "assist": "賢玉龍・メルクリア No.3540"
+          "assist": "賢玉龍・メルクリア No.3540",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 137,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n7327",
           "role": "S",
-          "assist": "義勇の日輪刀＆炭治郎の日輪刀 No.12813"
+          "assist": "義勇の日輪刀＆炭治郎の日輪刀 No.12813",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n14107",
           "role": "S",
-          "assist": "ランタン祭りの青龍契士・リューネの常夏ジュース No.12776"
+          "assist": "ランタン祭りの青龍契士・リューネの常夏ジュース No.12776",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "hitsugaya",
           "role": "F",
-          "assist": "氷輪丸 No.14069"
+          "assist": "氷輪丸 No.14069",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "superOnly": true,
+            "fromImage": true
+          }
         }
       ],
       "steps": [
@@ -49704,32 +49742,72 @@ window.PAD_SEED = {
         {
           "id": "n12907",
           "role": "L",
-          "assist": "SW-2033 No.12926"
+          "assist": "SW-2033 No.12926",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 138,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n12907",
           "role": "S",
-          "assist": "不死川実弥の日輪刀 No.12827"
+          "assist": "不死川実弥の日輪刀 No.12827",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 59,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n12905",
           "role": "S",
-          "assist": "イシス＆ネフティスのオーシャンパングル No.11443"
+          "assist": "イシス＆ネフティスのオーシャンパングル No.11443",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 59,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n12208",
           "role": "S",
-          "assist": "日向のユニフォーム No.12280"
+          "assist": "日向のユニフォーム No.12280",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 108,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n12920",
           "role": "S",
-          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658"
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "superOnly": true,
+            "fromImage": true
+          }
         },
         {
           "id": "n12920",
           "role": "F",
-          "assist": "SW-2033 No.12926"
+          "assist": "SW-2033 No.12926",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "superOnly": true,
+            "fromImage": true
+          }
         }
       ],
       "steps": [
