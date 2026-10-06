@@ -1714,8 +1714,31 @@ function renderMembers(r, part) {
 function slotNames(t) {
   return (t.members ?? []).map((m) => {
     const name = monster(m.id)?.name ?? m.name ?? MDB.get(Number(m.no))?.[1] ?? "?";
-    return name.replace(/【[^】]*】|\[[^\]]*\]|［[^］]*］/g, "").split(/[・＆]/).filter(Boolean).pop() || name;
+    const n = name.replace(/【[^】]*】|\[[^\]]*\]|［[^］]*］/g, "");
+    // 「科学部の怪異・ユラ」→ユラ、「坂田銀時＆スオウ衣装」→坂田銀時、「愛弟子の入学記念・ゼラ＆チェルン」→ゼラ＆チェルン
+    return (n.includes("・") ? n.split("・").filter(Boolean).pop() : n.split("＆")[0]) || name;
   });
+}
+// 編成名の右に出す +891 の目印（必須・一部・なし）。管理者・登録者が直した設定を優先
+function plus891Badge(t) {
+  const choice = settingOf(t, "plus891Choice");
+  const m = t.metrics ?? {};
+  const names = choice === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : [];
+  let kind, text;
+  // 指定がなく、レシート（QR・画像）で＋値が分かっている時は、実際に＋891の枠を数える
+  const known = t.members.filter((x) => x.role !== "free" && x.build?.plus != null);
+  if (!choice && !m.plus891Text && known.length === t.members.filter((x) => x.role !== "free").length && known.length) {
+    const idx = t.members.map((x, i) => (x.build?.plus >= 891 ? i : -1)).filter((i) => i >= 0);
+    if (!idx.length) [kind, text] = ["none", "+891なし"];
+    else if (idx.length === known.length) [kind, text] = ["req", "+891全員"];
+    else [kind, text] = ["some", `+891一部（${[...new Set(idx.map((i) => slotNames(t)[i]))].map(esc).join("・")}）`];
+    return ` <span class="p891 p891-${kind}" title="レシートの＋値から（必須かどうかは元の編成を確認）">${text}</span>`;
+  }
+  if (choice === "required" || (!choice && (m.plus891Text === "required" || m.plus891 >= 0.99))) [kind, text] = ["req", "+891必須"];
+  else if (choice === "some" || (!choice && m.plus891 > 0)) [kind, text] = ["some", names.length ? `+891一部（${names.map(esc).join("・")}）` : choice ? "+891一部" : `+891一部（${Math.round(m.plus891 * 6)}体）`];
+  else if (choice === "not-required" || m.plus891Text === "not-required" || t.metrics) [kind, text] = ["none", "+891なし"];
+  else return "";
+  return ` <span class="p891 p891-${kind}">${text}</span>`;
 }
 function plus891Label(m) {
   if (m.plus891Names?.length) return `一部だけ（${m.plus891Names.map(esc).join("・")}）`;
@@ -1767,7 +1790,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${superUnknown(t) ? `<span class="badge badge-warn" title="超覚醒を選べるキャラのうち、レシートから超覚醒が分からない枠があります">超覚醒不明・必ず元の編成を確認</span>` : ""}${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
+      <div><h3>${superUnknown(t) ? `<span class="badge badge-warn" title="超覚醒を選べるキャラのうち、レシートから超覚醒が分からない枠があります">超覚醒不明・必ず元の編成を確認</span>` : ""}${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}${plus891Badge(t)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
       <div class="score-col">${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}

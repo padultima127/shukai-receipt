@@ -422,3 +422,13 @@ button:disabled { opacity: .6; cursor: wait; }
 @media (prefers-color-scheme: dark) { .badge-warn { background: #3a2a10; color: #ffcf7a; border-color: #8a6a2a; } }
 
 .note.recommend { border-left: 4px solid var(--accent); }
+
+.p891 { display: inline-block; margin-left: 6px; padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; vertical-align: middle; white-space: nowrap; }
+.p891-req { background: #ffe1e1; color: #b3261e; border: 1px solid #f2a7a2; }
+.p891-some { background: #fff1d6; color: #8a5300; border: 1px solid #f0c060; }
+.p891-none { background: #def5e5; color: #1f7a45; border: 1px solid #9fd8b2; }
+@media (prefers-color-scheme: dark) {
+  .p891-req { background: #4a1f1f; color: #ffb4ab; border-color: #8c3b36; }
+  .p891-some { background: #3a2a10; color: #ffcf7a; border-color: #8a6a2a; }
+  .p891-none { background: #173a26; color: #8fe0ac; border-color: #2f7a4d; }
+}
