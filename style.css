@@ -420,3 +420,5 @@ button:disabled { opacity: .6; cursor: wait; }
 
 .badge-warn { background: #fff1d6; color: #8a5300; border: 1px solid #f0c060; }
 @media (prefers-color-scheme: dark) { .badge-warn { background: #3a2a10; color: #ffcf7a; border-color: #8a6a2a; } }
+
+.note.recommend { border-left: 4px solid var(--accent); }
