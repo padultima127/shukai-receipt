@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 109,
+  "version": 110,
   "seed": true,
   "monsters": [
     {
@@ -9357,12 +9357,18 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "izuna",
@@ -9370,7 +9376,8 @@ window.PAD_SEED = {
           "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
           "build": {
             "super": 128,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -9379,7 +9386,8 @@ window.PAD_SEED = {
           "assist": "ホワイトレディの宝杯 No.12634",
           "build": {
             "super": 108,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -9388,13 +9396,17 @@ window.PAD_SEED = {
           "assist": "西谷のユニフォーム No.12301",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "黒猫アーサー No.11384"
+          "assist": "黒猫アーサー No.11384",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -10700,7 +10712,10 @@ window.PAD_SEED = {
         {
           "id": "n14101",
           "role": "L",
-          "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947"
+          "assist": "FAIRY TAILの単行本50巻【ナツ・ドラグニル】 No.11947",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14010",
@@ -10708,28 +10723,41 @@ window.PAD_SEED = {
           "assist": "ハイビスカスの標本 No.7324",
           "build": {
             "super": 128,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n11327",
           "role": "S",
-          "assist": "たまのネジ No.13717"
+          "assist": "たまのネジ No.13717",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n12206",
           "role": "S",
-          "assist": "古城の女主神・カーリーのキャンディ No.7991"
+          "assist": "古城の女主神・カーリーのキャンディ No.7991",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006"
+          "assist": "エルフリーデの竹刀とフィアメルの木剣 No.14006",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "ヘッドマウントディスプレイ No.13081"
+          "assist": "ヘッドマウントディスプレイ No.13081",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -11805,7 +11833,8 @@ window.PAD_SEED = {
           "assist": "ひとり読書の地王神・クロノスの弁当箱 No.13619",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -11814,23 +11843,33 @@ window.PAD_SEED = {
           "assist": "アームド・アーマーDE No.12199",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n12804",
           "role": "S",
-          "assist": "トメノスケ・ヒート・ホーク No.12176"
+          "assist": "トメノスケ・ヒート・ホーク No.12176",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13305",
           "role": "S",
-          "assist": "炎天魔龍・ブラムベルのブレスレット No.13486"
+          "assist": "炎天魔龍・ブラムベルのブレスレット No.13486",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n12279",
           "role": "S",
-          "assist": "日向のユニフォーム No.12280"
+          "assist": "日向のユニフォーム No.12280",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13964",
@@ -11838,7 +11877,8 @@ window.PAD_SEED = {
           "assist": "仮装祭の紅剣姫・エルフリーデのキャンディ No.11598",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 600
           }
         }
       ],
@@ -13247,12 +13287,18 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13419",
           "role": "S",
-          "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510"
+          "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n12956",
@@ -13260,7 +13306,8 @@ window.PAD_SEED = {
           "assist": "死天龍・アークヴェルザのブレスレット No.11213",
           "build": {
             "super": 108,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -13269,7 +13316,8 @@ window.PAD_SEED = {
           "assist": "Bros No.13200",
           "build": {
             "super": 130,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -13278,13 +13326,17 @@ window.PAD_SEED = {
           "assist": "ゼウスの仕掛け絵本 No.12011",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "雷神の玉 No.12407"
+          "assist": "雷神の玉 No.12407",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -15019,12 +15071,18 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "千本桜 No.14066"
+          "assist": "千本桜 No.14066",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14063",
@@ -15032,23 +15090,33 @@ window.PAD_SEED = {
           "assist": "脱出用ゴーレム No.13437",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n14016",
           "role": "S",
-          "assist": "雷神の玉 No.12407"
+          "assist": "雷神の玉 No.12407",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14010",
           "role": "S",
-          "assist": "張り切る守護神・アテナのショコラ No.13404"
+          "assist": "張り切る守護神・アテナのショコラ No.13404",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "千本桜 No.14066"
+          "assist": "千本桜 No.14066",
+          "build": {
+            "plus": 297
+          }
         }
       ],
       "steps": [
@@ -15526,32 +15594,50 @@ window.PAD_SEED = {
         {
           "id": "hitsugaya",
           "role": "L",
-          "assist": "新聞部の特命記者・猿飛佐助の学生証 No.7139"
+          "assist": "新聞部の特命記者・猿飛佐助の学生証 No.7139",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14063",
           "role": "S",
-          "assist": "熱血の龍喚士・エースのスクロール No.13955"
+          "assist": "熱血の龍喚士・エースのスクロール No.13955",
+          "build": {
+            "plus": 600
+          }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "聖片の花嫁・サフィーラの指輪 No.12602"
+          "assist": "聖片の花嫁・サフィーラの指輪 No.12602",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14107",
           "role": "S",
-          "assist": "帝人の携帯電話 No.11292"
+          "assist": "帝人の携帯電話 No.11292",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14107",
           "role": "S",
-          "assist": "想海の師弟愛・ノルザ＆マールのショコラ No.13388"
+          "assist": "想海の師弟愛・ノルザ＆マールのショコラ No.13388",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "hitsugaya",
           "role": "F",
-          "assist": "波遊び天鬼姫・風神のうちわ No.7589"
+          "assist": "波遊び天鬼姫・風神のうちわ No.7589",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -15733,17 +15819,26 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "千本桜 No.14066"
+          "assist": "千本桜 No.14066",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14063",
           "role": "S",
-          "assist": "脱出用ゴーレム No.13437"
+          "assist": "脱出用ゴーレム No.13437",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14016",
@@ -15751,7 +15846,8 @@ window.PAD_SEED = {
           "assist": "星砕の凶兆龍・ゼンチョウガのブレスレット No.11550",
           "build": {
             "super": 128,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -15760,13 +15856,17 @@ window.PAD_SEED = {
           "assist": "張り切る守護神・アテナのショコラ No.13404",
           "build": {
             "super": 128,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "ダイヤ龍・ダイアモスのトランプ No.14114"
+          "assist": "ダイヤ龍・ダイアモスのトランプ No.14114",
+          "build": {
+            "plus": 297
+          }
         }
       ],
       "steps": [
@@ -15805,7 +15905,10 @@ window.PAD_SEED = {
         {
           "id": "n14035",
           "role": "L",
-          "assist": "Zi-アポロの起動キー No.13971"
+          "assist": "Zi-アポロの起動キー No.13971",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14028",
@@ -15813,28 +15916,41 @@ window.PAD_SEED = {
           "assist": "栗花落カナヲの日輪刀 No.10859",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n14076",
           "role": "S",
-          "assist": "科学部の怪異・ユラの弁当箱 No.13617"
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14032",
           "role": "S",
-          "assist": "リズレット＆エルシャのクリスマスプレゼント No.13156"
+          "assist": "リズレット＆エルシャのクリスマスプレゼント No.13156",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14076",
           "role": "S",
-          "assist": "織姫のヘアピン No.14029"
+          "assist": "織姫のヘアピン No.14029",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14043",
           "role": "F",
-          "assist": "張り切る守護神・アテナのショコラ No.13404"
+          "assist": "張り切る守護神・アテナのショコラ No.13404",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -16135,7 +16251,10 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "戦馬の支援機・スティード No.11458"
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14010",
@@ -16143,13 +16262,17 @@ window.PAD_SEED = {
           "assist": "ゾッダ虫 No.13334",
           "build": {
             "super": 128,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n14038",
           "role": "S",
-          "assist": "ケリ姫＆飛行士の写真 No.11866"
+          "assist": "ケリ姫＆飛行士の写真 No.11866",
+          "build": {
+            "plus": 300
+          }
         },
         {
           "id": "n9087",
@@ -16157,18 +16280,25 @@ window.PAD_SEED = {
           "assist": "雷神の玉 No.12407",
           "build": {
             "super": 56,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 300
           }
         },
         {
           "id": "n13416",
           "role": "S",
-          "assist": "『龍剣』レイド No.13327"
+          "assist": "『龍剣』レイド No.13327",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "命天龍のソウル No.11578"
+          "assist": "命天龍のソウル No.11578",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -16605,12 +16735,18 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "千本桜 No.14066"
+          "assist": "千本桜 No.14066",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14028",
@@ -16618,7 +16754,8 @@ window.PAD_SEED = {
           "assist": "GS-3305 No.12921",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -16627,7 +16764,8 @@ window.PAD_SEED = {
           "assist": "ジェントルの紅茶 No.13224",
           "build": {
             "super": 142,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -16636,13 +16774,17 @@ window.PAD_SEED = {
           "assist": "たまのネジ No.13717",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "ダイヤ龍・ダイアモスのトランプ No.14114"
+          "assist": "ダイヤ龍・ダイアモスのトランプ No.14114",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -17680,7 +17822,10 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "スザクの騎士証 No.11383"
+          "assist": "スザクの騎士証 No.11383",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13550",
@@ -17688,13 +17833,17 @@ window.PAD_SEED = {
           "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
           "build": {
             "super": 129,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n12377",
           "role": "S",
-          "assist": "フリーレンの杖 No.13411"
+          "assist": "フリーレンの杖 No.13411",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n2390",
@@ -17702,18 +17851,25 @@ window.PAD_SEED = {
           "assist": "赤霊の命央神・タカミムスビの耳飾り No.7265",
           "build": {
             "super": 70,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "liltotto",
           "role": "S",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "雷神の玉 No.12407"
+          "assist": "雷神の玉 No.12407",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -19711,12 +19867,18 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n12972",
@@ -19724,13 +19886,17 @@ window.PAD_SEED = {
           "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n12558",
           "role": "S",
-          "assist": "仮装祭の魔女・チャコルのキャンディ No.7961"
+          "assist": "仮装祭の魔女・チャコルのキャンディ No.7961",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "liltotto",
@@ -19738,13 +19904,17 @@ window.PAD_SEED = {
           "assist": "雷神の玉 No.12407",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "張り切る守護神・アテナのショコラ No.13404"
+          "assist": "張り切る守護神・アテナのショコラ No.13404",
+          "build": {
+            "plus": 297
+          }
         }
       ],
       "steps": [
@@ -20544,7 +20714,8 @@ window.PAD_SEED = {
           "assist": "エキドナのお茶 No.13367",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -20553,23 +20724,33 @@ window.PAD_SEED = {
           "assist": "九兵衛の刀 No.13711",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n12804",
           "role": "S",
-          "assist": "トメノスケ・ヒート・ホーク No.12176"
+          "assist": "トメノスケ・ヒート・ホーク No.12176",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n13305",
           "role": "S",
-          "assist": "新型フレイヤ・エリミネーター No.13965"
+          "assist": "新型フレイヤ・エリミネーター No.13965",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n12279",
           "role": "S",
-          "assist": "黒鉄の銀機士・クラウディアのブレスレット No.12127"
+          "assist": "黒鉄の銀機士・クラウディアのブレスレット No.12127",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n13964",
@@ -20577,7 +20758,8 @@ window.PAD_SEED = {
           "assist": "柳蔭の宝杯 No.12652",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         }
       ],
@@ -21421,12 +21603,18 @@ window.PAD_SEED = {
         {
           "id": "dain",
           "role": "L",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "滅却師の弓 No.14039"
+          "assist": "滅却師の弓 No.14039",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n12972",
@@ -21434,7 +21622,8 @@ window.PAD_SEED = {
           "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -21443,7 +21632,8 @@ window.PAD_SEED = {
           "assist": "防衛隊のスーツ No.12904",
           "build": {
             "super": 108,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -21452,13 +21642,17 @@ window.PAD_SEED = {
           "assist": "雷神の玉 No.12407",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "diamos",
           "role": "F",
-          "assist": "張り切る守護神・アテナのショコラ No.13404"
+          "assist": "張り切る守護神・アテナのショコラ No.13404",
+          "build": {
+            "plus": 297
+          }
         }
       ],
       "steps": [
@@ -23185,17 +23379,26 @@ window.PAD_SEED = {
         {
           "id": "n12914",
           "role": "L",
-          "assist": "ポピーの標本 No.13746"
+          "assist": "ポピーの標本 No.13746",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n12808",
           "role": "S",
-          "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510"
+          "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
+          "build": {
+            "plus": 300
+          }
         },
         {
           "id": "n6549",
           "role": "S",
-          "assist": "グリーフシード No.13890"
+          "assist": "グリーフシード No.13890",
+          "build": {
+            "plus": 300
+          }
         },
         {
           "id": "n14012",
@@ -23203,18 +23406,25 @@ window.PAD_SEED = {
           "assist": "緋天龍のソウル No.11573",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 300
           }
         },
         {
           "id": "n12808",
           "role": "S",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "plus": 300
+          }
         },
         {
           "id": "n14005",
           "role": "F",
-          "assist": "エルフリーデの紅焔剣 No.9354"
+          "assist": "エルフリーデの紅焔剣 No.9354",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -23977,7 +24187,8 @@ window.PAD_SEED = {
           "assist": "神威の衣装 No.13723",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -23986,7 +24197,8 @@ window.PAD_SEED = {
           "assist": "山本のユニフォーム No.12327",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -23995,13 +24207,17 @@ window.PAD_SEED = {
           "assist": "戦魂獣・エンキドゥ＝クルのブローチ No.10198",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n14028",
           "role": "S",
-          "assist": "ヒトヨタケの胞子 No.13739"
+          "assist": "ヒトヨタケの胞子 No.13739",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14088",
@@ -24009,7 +24225,8 @@ window.PAD_SEED = {
           "assist": "爆豪のサポートアイテム No.6303",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -24018,7 +24235,8 @@ window.PAD_SEED = {
           "assist": "山本のユニフォーム No.12327",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         }
       ],
@@ -24085,17 +24303,26 @@ window.PAD_SEED = {
         {
           "id": "n13916",
           "role": "L",
-          "assist": "メタトロンのおせち料理 No.13244"
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "hitsugaya",
           "role": "S",
-          "assist": "セイナ専従の式神アゴウ No.12561"
+          "assist": "セイナ専従の式神アゴウ No.12561",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n7629",
           "role": "S",
-          "assist": "冥境の黒熾龍・ゴウテンの櫛 No.10305"
+          "assist": "冥境の黒熾龍・ゴウテンの櫛 No.10305",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14028",
@@ -24103,18 +24330,25 @@ window.PAD_SEED = {
           "assist": "月の守護妖魔・セレナディアのブローチ No.13054",
           "build": {
             "super": 142,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n14110",
           "role": "S",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n14110",
           "role": "F",
-          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239"
+          "assist": "シャア・アズナブル（GQuuuuuuX） No.12239",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -25113,7 +25347,10 @@ window.PAD_SEED = {
         {
           "id": "n14034",
           "role": "L",
-          "assist": "コーネリアの銃 No.11402"
+          "assist": "コーネリアの銃 No.11402",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14076",
@@ -25121,18 +25358,25 @@ window.PAD_SEED = {
           "assist": "ヒトヨタケの胞子 No.13739",
           "build": {
             "super": 136,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n14067",
           "role": "S",
-          "assist": "SW-2033 No.12926"
+          "assist": "SW-2033 No.12926",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14076",
           "role": "S",
-          "assist": "月詠のクナイ No.13709"
+          "assist": "月詠のクナイ No.13709",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n13828",
@@ -25140,7 +25384,8 @@ window.PAD_SEED = {
           "assist": "バンビエッタのサーベル No.14073",
           "build": {
             "super": 56,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -25149,7 +25394,8 @@ window.PAD_SEED = {
           "assist": "マミのマスケット銃 No.13899",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         }
       ],
@@ -27186,12 +27432,18 @@ window.PAD_SEED = {
         {
           "id": "n13681",
           "role": "L",
-          "assist": "たまのネジ No.13717"
+          "assist": "たまのネジ No.13717",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13193",
           "role": "S",
-          "assist": "空のデジヴァイス No.11736"
+          "assist": "空のデジヴァイス No.11736",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13757",
@@ -27199,13 +27451,17 @@ window.PAD_SEED = {
           "assist": "二ケの戦勝旗 No.13284",
           "build": {
             "super": 130,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n12115",
           "role": "S",
-          "assist": "チューリップの球根 No.12448"
+          "assist": "チューリップの球根 No.12448",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13596",
@@ -27213,13 +27469,17 @@ window.PAD_SEED = {
           "assist": "木星の魔導神機・ジュピトールのブレスレット No.10527",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
           "id": "n13681",
           "role": "F",
-          "assist": "織姫の櫛 No.11201"
+          "assist": "織姫の櫛 No.11201",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -27335,32 +27595,50 @@ window.PAD_SEED = {
         {
           "id": "n10421",
           "role": "L",
-          "assist": "T-25101985 No.12918"
+          "assist": "T-25101985 No.12918",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13444",
           "role": "S",
-          "assist": "麒麟の化身・ミニさくや No.1789"
+          "assist": "麒麟の化身・ミニさくや No.1789",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13513",
           "role": "S",
-          "assist": "不死川実弥の日輪刀 No.12827"
+          "assist": "不死川実弥の日輪刀 No.12827",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n10820",
           "role": "S",
-          "assist": "双頭犬の支援機・オルトス No.11460"
+          "assist": "双頭犬の支援機・オルトス No.11460",
+          "build": {
+            "plus": 300
+          }
         },
         {
           "id": "n13513",
           "role": "S",
-          "assist": "迎春の妖精王・アルバートの年賀状 No.12106"
+          "assist": "迎春の妖精王・アルバートの年賀状 No.12106",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n10421",
           "role": "F",
-          "assist": "T-25101985 No.12918"
+          "assist": "T-25101985 No.12918",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -27576,32 +27854,50 @@ window.PAD_SEED = {
         {
           "id": "n10421",
           "role": "L",
-          "assist": "T-25101985 No.12918"
+          "assist": "T-25101985 No.12918",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13444",
           "role": "S",
-          "assist": "お面屋の太陽神・ラーの常夏ジュース No.12764"
+          "assist": "お面屋の太陽神・ラーの常夏ジュース No.12764",
+          "build": {
+            "plus": 399
+          }
         },
         {
           "id": "n13513",
           "role": "S",
-          "assist": "不死川実弥の日輪刀 No.12827"
+          "assist": "不死川実弥の日輪刀 No.12827",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n13099",
           "role": "S",
-          "assist": "風雪魔獣・スノーティアの耳飾り No.13489"
+          "assist": "風雪魔獣・スノーティアの耳飾り No.13489",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n13513",
           "role": "S",
-          "assist": "魔獣グラシャラボラスのカード No.8830"
+          "assist": "魔獣グラシャラボラスのカード No.8830",
+          "build": {
+            "plus": 891
+          }
         },
         {
           "id": "n10421",
           "role": "F",
-          "assist": "T-25101985 No.12918"
+          "assist": "T-25101985 No.12918",
+          "build": {
+            "plus": 891
+          }
         }
       ],
       "steps": [
@@ -29896,7 +30192,10 @@ window.PAD_SEED = {
         {
           "id": "n12832",
           "role": "L",
-          "assist": "渚の守護者・エレインのうちわ No.11453"
+          "assist": "渚の守護者・エレインのうちわ No.11453",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n12274",
@@ -29904,7 +30203,8 @@ window.PAD_SEED = {
           "assist": "伊黒小芭内の日輪刀 No.12830",
           "build": {
             "super": 106,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -29913,7 +30213,8 @@ window.PAD_SEED = {
           "assist": "玉壺の壺 No.10829",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -29922,7 +30223,8 @@ window.PAD_SEED = {
           "assist": "波遊び天鬼姫・風神のうちわ No.7589",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -29931,13 +30233,17 @@ window.PAD_SEED = {
           "assist": "赤井のライフル No.12381",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n12832",
           "role": "F",
-          "assist": "不死川実弥の日輪刀 No.12827"
+          "assist": "不死川実弥の日輪刀 No.12827",
+          "build": {
+            "plus": 297
+          }
         }
       ],
       "steps": [
@@ -37797,7 +38103,10 @@ window.PAD_SEED = {
         {
           "id": "n14072",
           "role": "L",
-          "assist": "エキドナのお茶 No.13367"
+          "assist": "エキドナのお茶 No.13367",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14090",
@@ -37805,12 +38114,16 @@ window.PAD_SEED = {
           "assist": "クウカンの封呪符 No.6693",
           "build": {
             "super": 104,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
           "id": "n14063",
-          "role": "S"
+          "role": "S",
+          "build": {
+            "plus": 297
+          }
         },
         {
           "id": "n14040",
@@ -37818,7 +38131,8 @@ window.PAD_SEED = {
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
             "super": 142,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -37826,7 +38140,8 @@ window.PAD_SEED = {
           "role": "S",
           "build": {
             "super": 129,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         },
         {
@@ -37835,7 +38150,8 @@ window.PAD_SEED = {
           "assist": "メタトロンのおせち料理 No.13244",
           "build": {
             "super": 142,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 297
           }
         }
       ],
@@ -46268,7 +46584,8 @@ window.PAD_SEED = {
           "assist": "FS-1002 No.12961",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -46277,7 +46594,8 @@ window.PAD_SEED = {
           "assist": "星砕の凶兆龍・ゼンチョウガのブレスレット No.11550",
           "build": {
             "super": 131,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -46286,7 +46604,8 @@ window.PAD_SEED = {
           "assist": "不死川実弥の日輪刀 No.12827",
           "build": {
             "super": 127,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -46295,7 +46614,8 @@ window.PAD_SEED = {
           "assist": "友情のデジメンタル No.13117",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -46304,7 +46624,8 @@ window.PAD_SEED = {
           "assist": "Ax-0112 No.12931",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         },
         {
@@ -46313,7 +46634,8 @@ window.PAD_SEED = {
           "assist": "Ax-0112 No.12931",
           "build": {
             "super": 138,
-            "superOnly": true
+            "superOnly": true,
+            "plus": 891
           }
         }
       ],
@@ -49152,32 +49474,56 @@ window.PAD_SEED = {
         {
           "id": "n12282",
           "role": "L",
-          "assist": "フクロウ？のようなチョコ No.12157"
+          "assist": "フクロウ？のようなチョコ No.12157",
+          "build": {
+            "lv": 99,
+            "plus": 297
+          }
         },
         {
           "id": "n12270",
           "role": "S",
-          "assist": "死天龍のソウル No.11579"
+          "assist": "死天龍のソウル No.11579",
+          "build": {
+            "lv": 120,
+            "plus": 297
+          }
         },
         {
           "id": "n12316",
           "role": "S",
-          "assist": "教祖クロウリーのカード No.11869"
+          "assist": "教祖クロウリーのカード No.11869",
+          "build": {
+            "lv": 120,
+            "plus": 297
+          }
         },
         {
           "id": "n12298",
           "role": "S",
-          "assist": "アグリゲートの天弓 No.11555"
+          "assist": "アグリゲートの天弓 No.11555",
+          "build": {
+            "lv": 120,
+            "plus": 297
+          }
         },
         {
           "id": "n12282",
           "role": "S",
-          "assist": "アルミダの武装ユニット No.12130"
+          "assist": "アルミダの武装ユニット No.12130",
+          "build": {
+            "lv": 99,
+            "plus": 297
+          }
         },
         {
           "id": "n12279",
           "role": "F",
-          "assist": "永久竜カナンのカード No.11872"
+          "assist": "永久竜カナンのカード No.11872",
+          "build": {
+            "lv": 99,
+            "plus": 297
+          }
         }
       ],
       "steps": [

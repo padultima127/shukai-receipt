@@ -1719,26 +1719,26 @@ function slotNames(t) {
     return (n.includes("・") ? n.split("・").filter(Boolean).pop() : n.split("＆")[0]) || name;
   });
 }
-// 編成名の右に出す +891 の目印（必須・一部・なし）。管理者・登録者が直した設定を優先
+// 編成名の右に出す +891 の目印（必須・一部・なし）。元の編成（レシートの＋値）が＋891かどうかで判別する（本人指定）
+// レシートの＋値が分からない編成だけ、管理者・登録者が直した設定を使う。どちらもなければ出さない
 function plus891Badge(t) {
-  const choice = settingOf(t, "plus891Choice");
-  const m = t.metrics ?? {};
-  const names = choice === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : [];
+  const mem = t.members.filter((x) => x.role !== "free");
+  const known = mem.filter((x) => x.build?.plus != null);
   let kind, text;
-  // 指定がなく、レシート（QR・画像）で＋値が分かっている時は、実際に＋891の枠を数える
-  const known = t.members.filter((x) => x.role !== "free" && x.build?.plus != null);
-  if (!choice && !m.plus891Text && known.length === t.members.filter((x) => x.role !== "free").length && known.length) {
-    const idx = t.members.map((x, i) => (x.build?.plus >= 891 ? i : -1)).filter((i) => i >= 0);
+  if (known.length && known.length === mem.length) {
+    const idx = t.members.map((x, i) => (x.role !== "free" && x.build?.plus >= 891 ? i : -1)).filter((i) => i >= 0);
     if (!idx.length) [kind, text] = ["none", "+891なし"];
-    else if (idx.length === known.length) [kind, text] = ["req", "+891全員"];
+    else if (idx.length === mem.length) [kind, text] = ["req", "+891必須"];
     else [kind, text] = ["some", `+891一部（${[...new Set(idx.map((i) => slotNames(t)[i]))].map(esc).join("・")}）`];
-    return ` <span class="p891 p891-${kind}" title="レシートの＋値から（必須かどうかは元の編成を確認）">${text}</span>`;
+    return ` <span class="p891 p891-${kind}" title="元の編成（レシート）の＋値から">${text}</span>`;
   }
-  if (choice === "required" || (!choice && (m.plus891Text === "required" || m.plus891 >= 0.99))) [kind, text] = ["req", "+891必須"];
-  else if (choice === "some" || (!choice && m.plus891 > 0)) [kind, text] = ["some", names.length ? `+891一部（${names.map(esc).join("・")}）` : choice ? "+891一部" : `+891一部（${Math.round(m.plus891 * 6)}体）`];
-  else if (choice === "not-required" || m.plus891Text === "not-required" || t.metrics) [kind, text] = ["none", "+891なし"];
-  else return "";
-  return ` <span class="p891 p891-${kind}">${text}</span>`;
+  const choice = settingOf(t, "plus891Choice");
+  if (!choice) return "";
+  const names = choice === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : [];
+  if (choice === "required") [kind, text] = ["req", "+891必須"];
+  else if (choice === "some") [kind, text] = ["some", names.length ? `+891一部（${names.map(esc).join("・")}）` : "+891一部"];
+  else [kind, text] = ["none", "+891なし"];
+  return ` <span class="p891 p891-${kind}" title="管理者・登録者の設定から">${text}</span>`;
 }
 function plus891Label(m) {
   if (m.badgeText) return m.badgeText;
