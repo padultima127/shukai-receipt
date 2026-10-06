@@ -823,7 +823,7 @@ function partDropSure(t, d) {
   const text = [t.title, ...(t.steps ?? [])].join(" ");
   const pb = t.partBreak ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { sure: true } : {});
   if (pb.can === false) return false;
-  return !!pb.sure || partRate(t, d, awakeningCountOf(t, 131).min).rate >= 100;
+  return !!pb.sure || partRate(t, d, pb.count ?? awakeningCountOf(t, 131).min).rate >= 100;
 }
 // 編成の右上に出す「部位破壊した場合のドロップ率」（部位のあるダンジョンだけ）
 function partRateBadge(t, d) {
@@ -836,7 +836,8 @@ function partRateBadge(t, d) {
   if (pb.sure) v = "確定";
   else {
     // 超覚醒は元のレシートのもの（分からない枠は部位破壊ボーナスにしていない扱い）
-    const b = awakeningCountOf(t, 131);
+    // 投稿者が書いた部位破壊ボーナスの数（partBreak.count）があればそれを優先
+    const b = pb.count != null ? { min: pb.count, max: pb.count } : awakeningCountOf(t, 131);
     const lo = partRate(t, d, b.min);
     v = `推定${lo.rate}%`;
     multNote = lo.mult !== 1 ? `×リーダー・フレンドの倍率${+lo.mult.toFixed(2)}` : "";
@@ -989,7 +990,7 @@ function partBreakInfo(t, d) {
   // 登録データがなければ、立ち回り・タイトルの文から読み取る（画像から登録した編成など）
   const text = [t.title, ...(t.steps ?? [])].join(" ");
   const pb = settingOf(t, "partBreak") ?? (/部位[^、。]{0,8}確定|凶玉確定|部位確ドロ/.test(text) ? { can: true, sure: true, sureNote: "レシートの記載より" } : /部位/.test(text) ? { can: true } : {});
-  const bonus = awakeningCountOf(t, 131);
+  const bonus = pb.count != null ? { min: pb.count, max: pb.count } : awakeningCountOf(t, 131);
   const rate = (n) => partRate(t, d, n).rate;
   const mult = partRate(t, d, 0).mult;
   const can = pb.can === true ? "部位破壊できる" : pb.can === false ? "部位破壊しない" : "部位破壊の記載なし";

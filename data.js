@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 106,
+  "version": 107,
   "seed": true,
   "monsters": [
     {
@@ -9118,7 +9118,12 @@ window.PAD_SEED = {
           "B10の超根性時にパズル教室（0コンボ）が2回"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの記載（経験値1.1億・コイン10億）。各ドロップの個数は記載がないため1体で計算"
+      "rewardNote": "報酬はゲームウィズの記載（経験値1.1億・コイン10億）。各ドロップの個数は記載がないため1体で計算",
+      "parts": {
+        "item": "モリりん・ワルりんの希石",
+        "baseRate": 10,
+        "note": "ルゥの部位破壊でモリりん・ワルりんの希石。基本のドロップ率10%＋部位破壊ボーナス1つにつき+10%（投稿の「部位破壊7でドロップ率96%（日向F×1.2）」「部位破壊6で約91%（影山L×1.1・日向F×1.2）」「部位破壊9で確定」から逆算）"
+      }
     },
     {
       "id": "juoku",
@@ -48678,6 +48683,9 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true
       }
     },
     {
@@ -48948,6 +48956,12 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位破壊9で確定ドロップ（投稿者談）",
+        "count": 9
       }
     },
     {
@@ -49083,6 +49097,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊7でドロップ率96%（投稿者談）",
+        "count": 7
       }
     },
     {
@@ -49142,6 +49161,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位確定ドロップ（投稿者談）"
       }
     },
     {
@@ -49402,6 +49426,11 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊6で基礎ドロップ込み約91%（投稿者談）",
+        "count": 6
       }
     },
     {
@@ -49529,6 +49558,11 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 1,
         "plus891Text": "required"
+      },
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊11（投稿者談）",
+        "count": 11
       }
     },
     {
@@ -49718,6 +49752,12 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "sure": true,
+        "sureNote": "部位破壊7で確定（投稿者談）",
+        "count": 7
       }
     },
     {
@@ -49853,6 +49893,11 @@ window.PAD_SEED = {
         "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
+      },
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊9（投稿者談）",
+        "count": 9
       }
     },
     {
@@ -49917,6 +49962,9 @@ window.PAD_SEED = {
         "zurashi": 0,
         "plus891": 1,
         "plus891Text": "required"
+      },
+      "partBreak": {
+        "can": true
       }
     },
     {
