@@ -2998,6 +2998,7 @@ const DUNGEON_GROUPS = [
   ["守霊の天体", ["jupiter", "mercury", "venus", "moon", "sun"]],
   ["天空の儚域", ["fuun", "kirisame", "tenkyu"]],
   ["奈落の重界", ["guren", "taiju"]],
+  ["イベント", ["wanggren"]],
   ["∞級コロシアム", ["juoku", "urajuoku"]],
   ["その他", ["noel", "plusparadise"]],
 ];

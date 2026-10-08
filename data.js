@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 110,
+  "version": 111,
   "seed": true,
   "monsters": [
     {
@@ -1883,6 +1883,104 @@ window.PAD_SEED = {
       "id": "n6551",
       "no": 6551,
       "name": "胡蝶しのぶ",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n3973",
+      "no": 3973,
+      "name": "スーパーノエルドラゴン",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n12806",
+      "no": 12806,
+      "name": "秘術の超越神・オーディン",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n11546",
+      "no": 11546,
+      "name": "護世の超越神・ノア",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n10003",
+      "no": 10003,
+      "name": "無心の退魔師・セイナ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n6238",
+      "no": 6238,
+      "name": "転生上杉謙信",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n4833",
+      "no": 4833,
+      "name": "古城の灯龍喚士・マイネ",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13704",
+      "no": 13704,
+      "name": "快援隊・坂本辰馬",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n14198",
+      "no": 14198,
+      "name": "仮装祭の冥月神・アリアンロッド",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n13142",
+      "no": 13142,
+      "name": "オメガブレード",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n12317",
+      "no": 12317,
+      "name": "澤村のユニフォーム",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n520",
+      "no": 520,
+      "name": "ノエルドラゴン・ルージュ",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n9348",
+      "no": 9348,
+      "name": "悪童の魔女・チャコル",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n2407",
+      "no": 2407,
+      "name": "古城の女主神・カーリー",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n14200",
+      "no": 14200,
+      "name": "月夜の元気娘・赤ずきん",
       "attr": "闇",
       "tags": []
     }
@@ -9205,6 +9303,60 @@ window.PAD_SEED = {
         ]
       },
       "rewardNote": "報酬はゲームウィズの記載（経験値10億・コイン10億）"
+    },
+    {
+      "id": "wanggren",
+      "name": "ワングレン＆ベイツール降臨",
+      "aliases": [
+        "ワングレン降臨",
+        "ワングレン",
+        "ベイツール",
+        "仮装祭の双子龍",
+        "ハロウィン降臨",
+        "ワングレン&ベイツール降臨"
+      ],
+      "battles": 7,
+      "note": "ハロウィンイベントの降臨（期間限定）。ボスのワングレン＆ベイツールの部位破壊で「双龍の紅蒼ランタンの希石」（50個で武器「双龍の紅蒼ランタン」と交換）",
+      "drops": [
+        {
+          "itemId": "exp",
+          "rate": 25000000,
+          "observed": true
+        },
+        {
+          "itemId": "coin",
+          "rate": 25000000,
+          "observed": true
+        }
+      ],
+      "parts": {
+        "item": "双龍の紅蒼ランタンの希石",
+        "baseRate": 10,
+        "note": "ボスの部位破壊で双龍の紅蒼ランタンの希石。基本のドロップ率は不明のため原則の10%で計算（ゲームウィズ「元々のドロップ率は高くない」）＋部位破壊ボーナス1つにつき+10%"
+      },
+      "gimmicks": {
+        "all": [
+          "bigHit",
+          "awakenVoid",
+          "maxHpDown",
+          "shield"
+        ],
+        "partial": [],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/579535",
+            "date": "2026-10-08"
+          }
+        ],
+        "notes": [
+          "ゲームウィズの「攻略ポイント」から（全ギミックの一覧ではありません）",
+          "B4で約1224万の大ダメージ。常時700万前後の耐久力も欲しい",
+          "B3で覚醒無効＆最大HP半減。リーダーにリーダーチェンジ耐性、シールド破壊スキルがあると楽",
+          "リーダーチェンジあり（リーダーにリーダーチェンジ耐性を付与）"
+        ]
+      },
+      "rewardNote": "経験値・コインはプレイ履歴の実績（ランク経験値ブースト分を除いた値）"
     }
   ],
   "teams": [
@@ -50599,6 +50751,1168 @@ window.PAD_SEED = {
       "sourceDate": "2026-09-22",
       "metrics": {
         "chars": 213,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-player-v2",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 完全ずらし改良版 プラマラ自由枠3（部位破壊5〜）",
+      "timeSec": 202,
+      "turns": 11,
+      "fastMode": true,
+      "times": {
+        "on": 202
+      },
+      "yields": {
+        "exp": 26775000,
+        "coin": 25500000
+      },
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "ナラ＆クインアスラ No.13980",
+          "build": {
+            "plus": 891
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "plus": 891
+          }
+        },
+        {
+          "id": "n3973",
+          "role": "S",
+          "assist": "転生ブリギッド No.8294",
+          "build": {
+            "plus": 300
+          }
+        },
+        {
+          "id": "n3973",
+          "role": "S",
+          "assist": "new generations 島村卯月のCD No.13556",
+          "build": {
+            "plus": 300
+          }
+        },
+        {
+          "id": "n3973",
+          "role": "S",
+          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
+          "build": {
+            "plus": 300
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "かるた大会の読手・エリスのかるた札 No.13261",
+          "build": {
+            "plus": 891
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊5〜（投稿者談）"
+      },
+      "steps": [
+        "3分20秒台（高速モード使用）。完全ずらし立ち回りの改良版",
+        "スーパーノエル（またはノエルドラゴン）の枠は育成枠（育てたいキャラでOK。武器のスキルが使えればよい）。育成枠Aは裏がスキブ分、Bはスキブ+5、Cはスキブ+15で使えればOK",
+        "LF逆不可。バッジ自由（HP注意）。スキブ26以上（バッジか育成枠で9盛る）。HP193,000以上が目安（ダンジョン補正込み）。HPは育成枠の潜在も活用",
+        "1F: S銀時裏、L銀時裏、F銀時裏、C裏、LかF銀時",
+        "代用: 北条加蓮武器→ブラムベル武器・メルナ武器（闇付与注意）、正月エリス武器→学園ゼラ＆チェルン武器 ほか（投稿2枚目はユラを使う版）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/YT_player_dy/status/2107437593990463606",
+      "author": {
+        "name": "ぷれいや"
+      },
+      "sourceDate": "2026-10-06",
+      "metrics": {
+        "chars": 304,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-player-v1",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 プラマラ自由枠3 3分0秒台（部位破壊5）",
+      "timeSec": 190,
+      "turns": 10,
+      "fastMode": true,
+      "times": {
+        "on": 190
+      },
+      "yields": {
+        "exp": 26250000,
+        "coin": 25000000
+      },
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "皆尽 No.14062",
+          "build": {
+            "plus": 891
+          }
+        },
+        {
+          "id": "n3973",
+          "role": "S",
+          "assist": "杏子の槍 No.13902",
+          "build": {
+            "plus": 297
+          }
+        },
+        {
+          "id": "n3973",
+          "role": "S",
+          "assist": "new generations 島村卯月のCD No.13556",
+          "build": {
+            "plus": 297
+          }
+        },
+        {
+          "id": "n3973",
+          "role": "S",
+          "assist": "転生ブリギッド No.8294",
+          "build": {
+            "plus": 297
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "plus": 891
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "ナラ＆クインアスラ No.13980",
+          "build": {
+            "plus": 891
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "count": 5,
+        "note": "部位破壊5（投稿者談）"
+      },
+      "steps": [
+        "3分0秒台（高速モード使用）。5Fの追加コンボが面倒なら、HPを盛って完全ずらしの方が安定（タイムは少し遅くなる）",
+        "スーパーノエル（またはノエルドラゴン）の枠は育成枠（育てたいキャラでOK。武器のスキルが使えればよい）。育成枠Aは裏がスキブ分、Bはスキブ+4、Cはスキブ+14で使えればOK",
+        "LF逆可能。バッジ自由。スキブ26以上（バッジか育成枠で12盛る）。HP150,000以上が目安、165,000以上で完全ずらし可能",
+        "1F: S銀時裏、F銀時裏、L銀時裏、A裏、LかF銀時",
+        "代用（合計5ターン分のヘイストが必要）: 卯ノ花武器→坂田銀時＆高杉晋助武器（必要HPが増える）、佐倉杏子武器→ヘイスト・6ターン以上のコンボ加算",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/YT_player_dy/status/2107297291719832035",
+      "author": {
+        "name": "ぷれいや"
+      },
+      "sourceDate": "2026-10-06",
+      "metrics": {
+        "chars": 326,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-multi-samidare",
+      "dungeonId": "wanggren",
+      "title": "マルチ（オーディン×謙信）",
+      "multi": true,
+      "timeSec": 240,
+      "estimated": [
+        "timeSec"
+      ],
+      "members": [
+        {
+          "id": "n12806",
+          "role": "L",
+          "p": "A",
+          "assist": "演習の荊龍喚士・ヴェルドのキャンディ No.7986",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11546",
+          "role": "S",
+          "p": "A",
+          "assist": "ショートのコスチュームγ No.13197",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n10003",
+          "role": "S",
+          "p": "A",
+          "assist": "ロザリンのパンプキンバケット No.12968",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n2691",
+          "role": "S",
+          "p": "A",
+          "assist": "謀略の狂戦士・ロキのカード No.11935",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n6238",
+          "role": "S",
+          "p": "A",
+          "assist": "腐敗の賢老・クヴァール No.13440",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n6238",
+          "role": "L",
+          "p": "B",
+          "assist": "演習の荊龍喚士・ヴェルドのキャンディ No.7986",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n10003",
+          "role": "S",
+          "p": "B",
+          "assist": "アジサイのハーバリウム No.7371",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12806",
+          "role": "S",
+          "p": "B",
+          "assist": "全知全能・サノス No.6978",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n2691",
+          "role": "S",
+          "p": "B",
+          "assist": "謀略の狂戦士・ロキのカード No.11935",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12806",
+          "role": "S",
+          "p": "B",
+          "assist": "全知全能・サノス No.6978",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "協力プレイ用（🆎募集）。タイムの記載がないため1周4分で仮置き",
+        "ヴェルドはスキルマ、日番谷・ロキのカードはスキルレベル1",
+        "1F: ヴェルド（オーディン）、ショート ／ 2F: ヴェルド（謙信） ／ 3F: ロザリン、日番谷 ／ 4F: アジサイ、サノス ／ 5F: ノア ／ 6F: 日番谷、サノス ／ 7F: ヴェルド（LかF）、クヴァール"
+      ],
+      "source": "https://x.com/samidare__pad/status/2107370747597578492",
+      "author": {
+        "name": "さみだれ"
+      },
+      "sourceDate": "2026-10-06",
+      "metrics": {
+        "chars": 170,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-mushroom",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 3分 部位破壊7（多分確定）",
+      "timeSec": 183,
+      "turns": 9,
+      "yields": {
+        "exp": 15750000
+      },
+      "badgeId": 7,
+      "members": [
+        {
+          "id": "n13692",
+          "role": "L",
+          "assist": "蛇王姫の式札 No.13551",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 129,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n4833",
+          "role": "S",
+          "assist": "ミナカの風鈴 No.9067",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13978",
+          "role": "S",
+          "assist": "ソロモンの指輪 No.12592",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [
+              10,
+              41
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13704",
+          "role": "S",
+          "assist": "new generations 島村卯月のCD No.13556",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 111,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "count": 7,
+        "note": "部位破壊7（多分確定ドロップ、投稿者談）"
+      },
+      "steps": [
+        "3分で周回。母体はスキルレベル最大",
+        "1F: F裏、S裏、クチナ、銀時",
+        "4Fは銀時→ディボック（使用順注意）。7Fはルーレット注意",
+        "代用（スキブ30以上・HP70万以上）: クチナ→2ヘイスト・5ターン60%リジェネ、ミナカ→4c加算、ソロモン→スキブ4、マイネ→火か水属性持ちの裏が使えるハロウィンキャラ（ステータス要員）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pad_mushroom/status/2106968106551898561",
+      "author": {
+        "name": "まっしゅるうむ"
+      },
+      "sourceDate": "2026-10-05",
+      "metrics": {
+        "chars": 174,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-arianrhod-tngk",
+      "dungeonId": "wanggren",
+      "title": "アリアンロッド×ギムレット 育成枠2（部位破壊5）",
+      "timeSec": 183,
+      "turns": 11,
+      "yields": {
+        "exp": 36750000,
+        "coin": 35000000
+      },
+      "badgeId": 75,
+      "members": [
+        {
+          "id": "n14198",
+          "role": "L",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13142",
+          "role": "S",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12317",
+          "role": "S",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14202",
+          "role": "S",
+          "assist": "［ワールドエンド・ブライド］北条加蓮のCD No.13584",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 129,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "全ての鬼を滅するために作った刀 No.12848",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14198",
+          "role": "F",
+          "assist": "月夜の元気娘・赤ずきんのクッキー缶 No.14201",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "count": 5,
+        "note": "部位破壊5（投稿者談）"
+      },
+      "steps": [
+        "育成枠は2枠（オメガブレード・澤村のユニフォームの枠）。育成枠でスキブ最低4。左はスキブ+16、右はスキブ+7で裏を使う",
+        "2Fのルーレットの継続ターンは、闇が消えていなくても倒せるので無視して大丈夫。ギムレットが+891なら潜在は不要かも",
+        "1F: ユーハバッハ、北条武器、鋼鐵塚武器、赤ずきん武器、銀時",
+        "育成枠の候補: リュウメイは左不可・ワングレン＆ベイツールと同時不可、他は左右どちらでも（投稿4枚目）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/tngk248/status/2107742220002771313",
+      "author": {
+        "name": "谷さん"
+      },
+      "sourceDate": "2026-10-07",
+      "metrics": {
+        "chars": 216,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-kutou",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 育成枠1 部位破壊6（おそらく100%）",
+      "timeSec": 200,
+      "turns": 10,
+      "yields": {
+        "exp": 26250000,
+        "coin": 25000000
+      },
+      "badgeId": 8,
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 56,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "皆尽 No.14062",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n520",
+          "role": "S",
+          "assist": "アムリネアのショコラアソート No.12163",
+          "build": {
+            "lv": 1,
+            "plus": 300,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12972",
+          "role": "S",
+          "assist": "ラビリル＆ルウの仲良しセット No.14003",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              54
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n9348",
+          "role": "S",
+          "assist": "防衛隊のハンドガン No.12945",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13692",
+          "role": "F",
+          "assist": "ユークスのシルクハット＆ミヤのお面 No.14176",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "count": 6,
+        "note": "部位破壊6（おそらく100%、投稿者談）"
+      },
+      "steps": [
+        "育成枠（ノエルドラゴンの枠）は条件なし。母体・アシスト全員スキルマ",
+        "1F: 銀時L裏、銀時S裏、神楽裏、銀時",
+        "5Fはヘラ裏（4コンボ加算）、銀時",
+        "代用: アムリネア武器→部位破壊覚醒持ちの覚醒無効回復・最大HP1.5倍が2ターン継続、防衛隊のハンドガン→渋谷凛のCD（No.13570）、ラビリル&ルゥ武器→1ターン4加算以上",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Kutou10_1001_/status/2107045460963958942",
+      "author": {
+        "name": "くとうてん 🍙🌽🎧🔧🧯"
+      },
+      "sourceDate": "2026-10-05",
+      "metrics": {
+        "chars": 176,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-puzdlife-1",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 アシストなし（部位7〜8）その1",
+      "timeSec": 210,
+      "estimated": [
+        "timeSec"
+      ],
+      "badgeId": 21,
+      "members": [
+        {
+          "id": "n13692",
+          "role": "L",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13838",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13142",
+          "role": "S",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              35
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14032",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊7〜8（投稿者談）"
+      },
+      "steps": [
+        "アシストなしの編成（投稿に2編成）。タイムの記載がないため3分30秒で仮置き",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/puzdlife/status/2108030873119698988",
+      "author": {
+        "name": "パズドライフ"
+      },
+      "sourceDate": "2026-10-08",
+      "metrics": {
+        "chars": 54,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-puzdlife-2",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 アシストなし（部位7〜8）その2",
+      "timeSec": 210,
+      "estimated": [
+        "timeSec"
+      ],
+      "badgeId": 21,
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13916",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14088",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14090",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 131,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13692",
+          "role": "F",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊7〜8（投稿者談）"
+      },
+      "steps": [
+        "アシストなしの編成（投稿に2編成）。タイムの記載がないため3分30秒で仮置き",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/puzdlife/status/2108030873119698988",
+      "author": {
+        "name": "パズドライフ"
+      },
+      "sourceDate": "2026-10-08",
+      "metrics": {
+        "chars": 54,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-hppon",
+      "dungeonId": "wanggren",
+      "title": "簡易スオウ銀時 ずらすだけ",
+      "timeSec": 203,
+      "turns": 10,
+      "yields": {
+        "exp": 26250000,
+        "coin": 25000000
+      },
+      "badgeId": 2,
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "蒼氷鍵の装具・銀嶺の氷槌 No.7235",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "S",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12972",
+          "role": "S",
+          "assist": "怠惰の汰魔悟 No.6407",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              54
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n2407",
+          "role": "S",
+          "assist": "ノルザの魔魚杖・メズレイ No.6157",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n9348",
+          "role": "S",
+          "assist": "ガルルキャノン No.13145",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13692",
+          "role": "F",
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              46
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "頭空っぽでずらすだけ。部位破壊で交換できる武器（双龍の紅蒼ランタン）がまあまあ優秀なので確保推奨",
+        "B1: 左銀時、ユーハバッハ、無一郎甘露寺 ／ B2: 銀時 ／ B3: 怠惰、銀時 ／ B4: ノルザ、銀時、2パン ／ B5: 銀時 ／ B6: 銀時、オメガモン、神楽、2パン ／ B7: カーリー、ヘラLuna、銀時→チャコル、銀時"
+      ],
+      "source": "https://x.com/h_ppon/status/2107798528651370774",
+      "author": {
+        "name": "オーガch.@パズドラまとめブログ"
+      },
+      "sourceDate": "2026-10-07",
+      "metrics": {
+        "chars": 167,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "wanggren-gintoki-kt",
+      "dungeonId": "wanggren",
+      "title": "スオウ銀時 プラマラ3体同時（赤ずきん・アリアンロッド固定）",
+      "timeSec": 210,
+      "estimated": [
+        "timeSec"
+      ],
+      "badgeId": 8,
+      "members": [
+        {
+          "id": "n13681",
+          "role": "L",
+          "assist": "虚の心臓 No.13673",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14200",
+          "role": "S",
+          "assist": "堕王エビルアーサーのカード No.11883",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 129,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14149",
+          "role": "S",
+          "assist": "ナラ＆クインアスラ No.13980",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14198",
+          "role": "S",
+          "assist": "ノクタリアの手燭 No.13843",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 129,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n520",
+          "role": "S",
+          "assist": "オメガブレード No.13142",
+          "build": {
+            "lv": 1,
+            "plus": 297,
+            "super": 0,
+            "latents": [],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13681",
+          "role": "F",
+          "assist": "ユーハバッハ No.14030",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [
+              41,
+              4
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "プラマラ3体同時（赤ずきん・アリアンロッド固定、ノエルドラゴンの枠が自由枠）。タイムの記載がないため3分30秒で仮置き",
+        "自由枠の条件: オメガブレード（13142）が7Fで打てればOK（スキブ＋18ターン以内）",
+        "1F: F銀時（裏）、UNICUS（裏）、赤ずきん（裏）、UNICUS、F銀時、L銀時（裏）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/KT_paaka/status/2107177426333974603",
+      "author": {
+        "name": "KT"
+      },
+      "sourceDate": "2026-10-05",
+      "metrics": {
+        "chars": 166,
         "puzzle": 1,
         "branch": 0,
         "caution": 0,
