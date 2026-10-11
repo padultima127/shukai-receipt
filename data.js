@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 111,
+  "version": 112,
   "seed": true,
   "monsters": [
     {
@@ -1982,6 +1982,13 @@ window.PAD_SEED = {
       "no": 14200,
       "name": "月夜の元気娘・赤ずきん",
       "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12576",
+      "no": 12576,
+      "name": "気配り執事・リュウメイ",
+      "attr": "光",
       "tags": []
     }
   ],
@@ -51917,6 +51924,375 @@ window.PAD_SEED = {
         "branch": 0,
         "caution": 0,
         "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "jupiter-tequila-yamajun",
+      "dungeonId": "jupiter",
+      "title": "テキーラギムレット 5分前半安定周回（部位破壊なし）",
+      "timeSec": 310,
+      "turns": 16,
+      "fastMode": true,
+      "times": {
+        "on": 310
+      },
+      "yields": {
+        "exp": 68670000
+      },
+      "badgeId": 9,
+      "members": [
+        {
+          "id": "n14202",
+          "role": "L",
+          "assist": "織姫のヘアピン No.14029",
+          "build": {
+            "lv": 120,
+            "plus": 420,
+            "super": 127,
+            "latents": [
+              41,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14149",
+          "role": "S",
+          "assist": "謎の幼獣 No.12915",
+          "build": {
+            "lv": 120,
+            "plus": 450,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14149",
+          "role": "S",
+          "assist": "アウラ＆メリディスの鏡台 No.13247",
+          "build": {
+            "lv": 120,
+            "plus": 450,
+            "super": 142,
+            "latents": [
+              48,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12576",
+          "role": "S",
+          "assist": "神罰の審理者・ミニめたとろんのノート No.13542",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13924",
+          "role": "S",
+          "assist": "チューリップの球根 No.12448",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 127,
+            "latents": [
+              12,
+              12,
+              29,
+              12,
+              12,
+              30
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14202",
+          "role": "F",
+          "assist": "織姫のヘアピン No.14029",
+          "build": {
+            "lv": 120,
+            "plus": 420,
+            "super": 127,
+            "latents": [
+              41,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "base",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 1,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "base",
+            "turn": 0
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
+      },
+      "steps": [
+        "5分10秒・16ターン（高速モード使用、プレイ履歴より）。部位破壊はしない",
+        "1階の釘も確定で必要数消えるので脳死度が高い。マブ友（ニスカ）の枠のルレが実質ボス。ずらす際はルレに注意",
+        "プラスは平均400くらいあれば足りる。UNICUSは2体（a・b）、①②③はスキルを使う順",
+        "1F: UNICUS a（裏）、LFテキーラ（裏）、UNICUS a①、ニスカ（裏）、リュウメイ進化、テキーラ",
+        "武器は全て代用あり（代用する場合もヘイストは最低1必要、投稿者談）: 一護＆織姫武器→浮遊付与武器（遅延耐性がなければボス1で1コンボを挟む）、謎の幼獣（カフカ武器）→HP潜在を1つマシンキラーか体力キラーにした釘生成武器（生成数15個以上が望ましい）、アウラ＆メリディス武器→カフカ武器を2way持ちの釘生成武器にして、消せない解除潜在を入れ替えた覚醒無効回復＋コンボ吸収武器、ミニめたとろん武器→スキルターン重めでHPが盛れれば何でも、チューリップ武器→2ターンリジェネ",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/junyama_sub/status/2108930761089065391",
+      "author": {
+        "name": "ヤマジュン"
+      },
+      "sourceDate": "2026-10-10",
+      "metrics": {
+        "chars": 433,
+        "puzzle": 1,
+        "branch": 2,
+        "caution": 1,
+        "zurashi": 1,
         "plus891": 0,
         "plus891Text": null
       }
