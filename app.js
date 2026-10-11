@@ -638,6 +638,10 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     const resetRisk = part === "assist" && partRoles.some((v) => v.fireAtFloor && avFloors.some((f) => f < v.fireAtFloor))
       ? avFloors.filter((f) => partRoles.some((v) => v.fireAtFloor > f))[0] : 0;
     const multRatio = !skillFree && oMult > 1 && cMult > 0 ? cMult / oMult : null;
+    // リジェネ（毎ターン回復%）が元より下がる時は注意書き（範囲内なら候補には出す）
+    const regenOf = (r) => Number(String(r?.[16] ?? "0").split(":")[0]) || 0;
+    const oRegen = !skillFree ? regenOf(orig?.row) : 0;
+    const regenDown = oRegen && regenOf(row) && regenOf(row) < oRegen ? [oRegen, regenOf(row)] : null;
     let score = w(kept) - w(lost) - Math.abs(turnDiff) - Math.abs(hasteDiff) * 2 - Math.max(0, -durDiff) * 1.5;
     if (multRatio) score += Math.max(-6, Math.min(3, Math.log2(multRatio) * 3));
     if (durShort) score -= 20;
@@ -680,7 +684,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, derived: isEndorsed && !!endorsed.derived, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, regenDown, endorsed: isEndorsed, derived: isEndorsed && !!endorsed.derived, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -1189,6 +1193,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const reset = c.resetRisk ? `<span class="ng">✗${c.resetRisk}Fのアシスト無効でスキルターンがリセットされ、間に合わない可能性</span>` : "";
     const short = c.durShort ? `<span class="ng">✗効果${c.cDur}ターンで、必要な${c.durShort}ターンに届かない</span>` : "";
     const dur = c.durDiff ? `<span class="${c.durDiff < 0 ? "warnc" : "ok"}">△効果が${Math.abs(c.durDiff)}ターン${c.durDiff > 0 ? "長い" : "短い"}</span>` : "";
+    const regen = c.regenDown ? `<span class="warnc">△リジェネの回復量が下がる（${c.regenDown[0]}%→${c.regenDown[1]}%）</span>` : "";
     const mult = c.multRatio && Math.abs(c.multRatio - 1) > 0.05 ? `<span class="${c.multRatio < 1 ? "warnc" : "ok"}">攻撃倍率 ×${c.multRatio.toFixed(2)}</span>` : "";
     const sa = c.fire?.candSA && AWAKEN_NAME[c.fire.candSA] ? `<span class="muted">超覚醒: ${esc(AWAKEN_NAME[c.fire.candSA] ?? "")}を選ぶ想定</span>` : "";
     const reasons = Object.entries(c.votes.reasons ?? {}).sort((a, b) => b[1] - a[1]);
@@ -1213,7 +1218,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
     return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, sa, as, short, hs, late, reset, sb, kept, lost, turn, haste, dur, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
+      <div class="alt-caps">${[attr, fire, sa, as, short, hs, late, reset, sb, kept, lost, turn, haste, dur, regen, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
   });
   return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
 }
