@@ -286,7 +286,7 @@ const GIMMICK_COUNTERS = {
 const CAP_LABEL = {
   voidPierce: "無効貫通", voidPierceAwk: "無効貫通(覚醒)", dmgAbsorbNull: "ダメージ吸収無効", attrAbsorbNull: "属性吸収無効",
   comboAbsorbNull: "コンボ吸収無効", unerasableHeal: "消せないドロップ回復", shieldBreak: "シールド破壊", dropEnhanceAwk: "強化ドロップ目覚め", board76: "7×6化", board65: "6×5化", delay: "遅延", reduce: "軽減", hpUp: "HP倍率",
-  heal: "回復", regen: "リジェネ", enhance: "エンハンス", capUp: "上限解放", comboAdd: "コンボ加算", noSkyfall: "落ちコンなし",
+  heal: "HP回復", regen: "リジェネ", enhance: "エンハンス", capUp: "上限解放", comboAdd: "コンボ加算", noSkyfall: "落ちコンなし",
   lockRelease: "ロック解除", awakenHeal: "覚醒無効回復", bindHeal: "バインド回復", gravity: "割合ダメージ", fixedDmg: "固定ダメージ",
   orbChange: "ドロップ変換", boardRefresh: "陣", attrChange: "属性変化", transform: "変身", delayResist: "遅延耐性",
   sealResist: "封印耐性", levitate: "浮遊", assistVoidResist: "アシスト無効耐性", cloudResist: "雲耐性",
