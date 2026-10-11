@@ -601,6 +601,11 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const keys = [...important.keys()].filter((k) => !important.get(k).note);
     const kept = keys.filter((c) => caps.has(c));
+    // 候補自身にはなく、同じ枠のもう片方（本体の代用なら今の武器、武器の代用なら今の本体）が持っている能力
+    const ownCaps = new Set(cand?.all ?? []);
+    const otherNo = part === "base" ? assistNo : baseNo;
+    const otherCaps = new Set((otherNo ? capsOfNo(otherNo, part === "base") : null)?.all ?? []);
+    const viaOther = kept.filter((c) => !ownCaps.has(c) && otherCaps.has(c));
     const lost = keys.filter((c) => !caps.has(c));
     const w = (list) => list.reduce((sum, c) => sum + important.get(c).weight, 0);
     // スキルを使わない武器（作者が「スキルは何でもよい」とした枠）はターン・倍率を比べない
@@ -684,7 +689,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, regenDown, endorsed: isEndorsed, derived: isEndorsed && !!endorsed.derived, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, regenDown, viaOther, endorsed: isEndorsed, derived: isEndorsed && !!endorsed.derived, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -1166,7 +1171,8 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
   if (!list.length) return `<div class="sub-line">${label}の代用: ${pool === "all" ? "条件に合う候補なし" : "手持ちに候補なし"}</div>`;
   const items = list.map((c) => {
     const minorLost = c.lost.filter((k) => !c.lostMajor.includes(k));
-    const kept = c.keptMajor.map((k) => `<span class="ok">✓${esc(capLabel(k))}</span>`).join(" ");
+    const via = label === "本体" ? "（今の武器のスキル）" : "（今の本体）";
+    const kept = c.keptMajor.map((k) => `<span class="ok">✓${esc(capLabel(k))}${c.viaOther?.includes(k) ? `<small>${via}</small>` : ""}</span>`).join(" ");
     const lost = [
       ...c.lostMajor.map((k) => `<span class="ng">✗${esc(capLabel(k))}がなくなる</span>`),
       ...(minorLost.length ? [`<span class="warnc">耐性など: ${esc(minorLost.map(capLabel).join("・"))}がなくなる</span>`] : []),
