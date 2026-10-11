@@ -153,7 +153,7 @@
       const id = `${teamId}_${baseNo}_${candFamily}_${u.uid}`.replace(/[^\w-]/g, "-");
       const doc = { teamId, baseNo, candFamily, ok: !!ok, uid: u.uid, at: ts() };
       if (!ok && reason) doc.reason = String(reason).slice(0, 30);
-      if (!ok && note) doc.note = String(note).slice(0, 200);
+      if (note) doc.note = String(note).slice(0, 200);
       return fs.collection("subVotes").doc(id).set(doc);
     },
     async getVotes(teamId) {

@@ -572,7 +572,8 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
   for (const no of nos) {
     if (used.has(familyOf(no))) continue;
     const row = MDB.get(no);
-    if (!row || (part === "assist" && !row[4])) continue;
+    // 進化スキルのキャラはアシストにできない（本人指定）
+    if (!row || (part === "assist" && (!row[4] || row[29]))) continue;
     // 本体の代用に装備（覚醒アシスト持ちの武器）は使えない
     if (part === "base" && row[8]) continue;
     if (noTransform && row[9]) continue;
@@ -661,7 +662,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     // 作者がレシートで挙げている代用は最優先
     const endorsed = endorsedFor(team, part === "base" ? baseNo : assistNo);
     const isEndorsed = endorsed?.nos.some((n) => familyOf(n) === familyOf(no));
-    if (isEndorsed) score += 100;
+    if (isEndorsed) score += endorsed.derived ? 60 : 100;
     // 使った人の評価（回れた +、回れなかった −）
     const v = votesFor(team.id, mem, no);
     score += (v.ok - v.ng) * 4;
@@ -679,7 +680,7 @@ function findSubstitutes(part, mem, important, team, { pool = "owned", limit = 3
     }
     const major = (list) => list.filter((c) => important.get(c).weight >= MAJOR_WEIGHT);
     const isOwned = owned.has(familyOf(no));
-    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, votes: v });
+    out.push({ no, name: row[1], kept, lost, keptMajor: major(kept), lostMajor: major(lost), turnDiff, hasteDiff, durDiff, durShort, cDur: roleDur, hasteShort, candHaste: cand.haste, lateFire, resetRisk, sbShort, activeShort, candTurn: cand.turn, origTurn: orig?.turn, multRatio, score, owned: isOwned, attr, fire, endorsed: isEndorsed, derived: isEndorsed && !!endorsed.derived, votes: v });
   }
   // 図鑑全体から探す時は、手持ちにいるキャラを先に並べる
   const rank = (c) => (pool === "all" && c.owned ? 1e6 : 0) + c.score;
@@ -1178,7 +1179,7 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
           ? `<span class="warnc">△副属性が違う（${esc(os || "なし")}→${esc(cs || "なし")}）</span>`
           : `<span class="ok">✓属性同じ（${esc(om)}${os ? "/" + esc(os) : ""}）</span>`;
     }
-    const endorsedBadge = c.endorsed ? `<span class="st st-ok">作者公認の代用</span> ` : "";
+    const endorsedBadge = c.endorsed ? (c.derived ? `<span class="st st-sub">作者の条件に合う</span> ` : `<span class="st st-ok">作者公認の代用</span> `) : "";
     const hs = c.hasteShort ? `<span class="ng">✗ヘイスト${c.candHaste || 0}ターン（必要${c.hasteShort}ターン。足りない分をほかの枠で補う必要あり）</span>` : "";
     const late = c.lateFire ? `<span class="ng">✗スキル${c.candTurn}ターンで元（${c.origTurn}ターン）より重く、${c.lateFire}Fで使えない可能性</span>` : "";
     const as = c.activeShort
@@ -1294,7 +1295,15 @@ function renderAwakenings(mem) {
   const a = MDB.get(assistNoOf(mem));
   const aIds = a?.[8] ? String(a[27] ?? "").split(".").filter(Boolean).map(Number).filter((x) => x !== 49) : [];
   const weapon = aIds.length ? `<div class="awk-row awk-weapon"><span class="awk-sep">武器</span>${aIds.map((x) => awkIcon(x)).join("")}</div>` : "";
-  return `<div class="awk-row">${ids.map((x) => awkIcon(x)).join("")}${sup}${syn}</div>${weapon}`;
+  // 消滅武器: スキルを使うと武器の覚醒が消え、代わりに付与される覚醒が付く（元の覚醒と違う時だけ表示）
+  let vanish = "";
+  const aTags = String(a?.[28] ?? "").split("|");
+  if (aTags.includes("消滅")) {
+    const granted = (aTags.find((x) => x.startsWith("付与:"))?.slice(3) ?? "").split(".").filter(Boolean).map(Number);
+    const same = granted.length === aIds.length && [...granted].sort().join(".") === [...aIds].sort().join(".");
+    if (granted.length && !same) vanish = `<div class="awk-row awk-weapon"><span class="awk-sep">消滅後</span>${granted.map((x) => awkIcon(x)).join("")}</div>`;
+  }
+  return `<div class="awk-row">${ids.map((x) => awkIcon(x)).join("")}${sup}${syn}</div>${weapon}${vanish}`;
 }
 
 // 名前の横の「超覚醒一覧」: レシートで選ばれていない超覚醒も確認できる（選ばれているものは枠付き）
@@ -1422,18 +1431,72 @@ function searchAltFor(teamId, idx) {
   const important = importantCaps(mem, team, dungeon);
   const note = `<p class="hint">図鑑全体から探しています。</p>`;
   const opts = { pool: "all", limit: 5 };
+  // 作者の記載・条件に合う候補が多い時は、全部出るように件数を増やす
+  const optsFor = (no) => ({ ...opts, limit: Math.max(5, endorsedFor(team, no)?.nos.length ?? 0) });
   const ns = noSubstituteReason(team, mem);
-  const baseList = mem.role === "S" && !ns ? findSubstitutes("base", mem, important, team, opts) : null;
+  const baseList = mem.role === "S" && !ns ? findSubstitutes("base", mem, important, team, optsFor(monster(mem.id)?.no)) : null;
   const nsNote = ns ? `<p class="endorsed-note"><span class="st st-ng">本体は原則代用不可</span> ${esc(ns)}（作者本人の説明）。武器の代用だけを探します。</p>` : "";
-  const assistList = assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, opts) : null;
+  const assistList = assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, optsFor(assistNoOf(mem))) : null;
   const endorsedNotes = [monster(mem.id)?.no, assistNoOf(mem)]
     .map((no) => endorsedFor(team, no))
     .filter(Boolean)
     .filter((e) => mem.role === "S" || e.part === "assist")
-    .map((e) => `<p class="endorsed-note"><span class="st st-ok">作者の記載</span> ${esc(e.text)}</p>`)
+    .map((e) => `<p class="endorsed-note"><span class="st ${e.derived ? "st-sub" : "st-ok"}">${e.derived ? "作者の条件から図鑑で抽出" : "作者の記載"}</span> ${esc(e.text)}</p>`)
     .join("");
   const weaponNote = mem.role !== "S" ? `<p class="hint">リーダー・フレンドはリーダースキルが変わるため、武器（アシスト）の代用だけを探します。</p>` : "";
-  return note + nsNote + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "");
+  return note + nsNote + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "") + renderReportedAlts(team, mem, [...(baseList ?? []), ...(assistList ?? [])]);
+}
+
+// 使った人が「代用できた」と入力したキャラ・武器（候補に出ていないものも）と、その入力フォーム
+function renderReportedAlts(team, mem, shown) {
+  if (shared.mode !== "firebase") return "";
+  const prefix = `${team.id}|${monster(mem.id)?.no ?? mem.id}|`;
+  const shownFam = new Set(shown.map((c) => familyOf(c.no)));
+  const items = [...subVotes]
+    .filter(([k, v]) => k.startsWith(prefix) && v.ok > 0 && !shownFam.has(Number(k.slice(prefix.length))))
+    .sort((a, b) => b[1].ok - a[1].ok)
+    .map(([k, v]) => {
+      const no = Number(k.slice(prefix.length));
+      const notes = (v.okNotes ?? []).map((t) => `<q>${esc(t)}</q>`).join("");
+      return `<li>${iconHTML(no, { assist: !!MDB.get(no)?.[8] })}<strong>${esc(MDB.get(no)?.[1] ?? `No.${no}`)}</strong> <a class="no" href="${padmdbUrl(no)}" target="_blank" rel="noopener">No.${no}</a>
+        <span class="votes">回れた ${v.ok}${v.ng ? ` / 回れなかった ${v.ng}` : ""}</span>${notes ? `<div class="vote-reasons">${notes}</div>` : ""}</li>`;
+    })
+    .join("");
+  const weaponOnly = mem.role !== "S";
+  const target = weaponOnly ? "武器" : assistNoOf(mem) ? "武器・キャラ" : "キャラ";
+  ensureNameLists();
+  return `${items ? `<div class="sub-line">使った人が入力した代用:</div><ul class="alts">${items}</ul>` : ""}
+    <form class="alt-report-form">
+      <label>代用できた${target}を入力 <input name="name" maxlength="60" required placeholder="名前かNo.（例: 魔導書ネクロノミコン / 12980）" autocomplete="off" list="${weaponOnly ? "mdb-assist-names" : "mdb-all-names"}"></label>
+      <input name="note" maxlength="200" placeholder="メモ（任意）例: スキルLv1でOK・ボス1で1コンボ挟む">
+      <button type="submit" class="link">送る</button>
+      <small class="muted alt-report-msg">候補に出ていなくても、実際に回れた${target}を教えてください（ログインなしで送れます）</small>
+    </form>`;
+}
+// 入力欄の名前候補（初めてフォームを出した時に1回だけ作る）。武器の枠はアシストにできるキャラだけ
+function ensureNameLists() {
+  if (document.getElementById("mdb-all-names")) return;
+  const make = (id, rows) => {
+    const dl = document.createElement("datalist");
+    dl.id = id;
+    dl.innerHTML = rows.map((r) => `<option value="${esc(r[1])}"></option>`).join("");
+    document.body.append(dl);
+  };
+  make("mdb-all-names", MDB_ROWS);
+  make("mdb-assist-names", MDB_ROWS.filter((r) => r[4] && !r[29]));
+}
+// 入力された名前・No.から図鑑のキャラを探す（完全一致 → No. → 部分一致で1体に絞れる時）
+function resolveMonsterInput(text, { assistOnly = false } = {}) {
+  const q = String(text).trim().replace(/^No\.?\s*/i, "");
+  const ok = (r) => r && (!assistOnly || (r[4] && !r[29]));
+  if (/^\d+$/.test(q)) return ok(MDB.get(Number(q))) ? { row: MDB.get(Number(q)) } : { error: `No.${q} は${assistOnly ? "アシストにできるキャラに" : "図鑑に"}見つかりません` };
+  const rows = MDB_ROWS.filter(ok);
+  const exact = rows.filter((r) => r[1] === q);
+  if (exact.length) return { row: exact[0] };
+  const part = rows.filter((r) => r[1].includes(q));
+  if (part.length === 1) return { row: part[0] };
+  if (!part.length) return { error: `「${q}」は図鑑に見つかりません` };
+  return { error: `「${q}」に当てはまるキャラが${part.length}体います。名前を正確に入れるかNo.で入力してください（例: ${part.slice(0, 3).map((r) => `${r[1]}=${r[0]}`).join("、")}）` };
 }
 
 // ダンジョンのギミック（2サイト以上で確認。片方のサイトにしかないものは明記）
@@ -3793,6 +3856,7 @@ async function loadVotes(teamId) {
     v.ok ? cur.ok++ : cur.ng++;
     if (!v.ok && v.reason) cur.reasons[v.reason] = (cur.reasons[v.reason] ?? 0) + 1;
     if (!v.ok && v.note && cur.notes.length < 3) cur.notes.push(v.note);
+    if (v.ok && v.note) (cur.okNotes ??= []).length < 3 && cur.okNotes.push(v.note);
     subVotes.set(k, cur);
   }
 }
@@ -3827,6 +3891,30 @@ $("#results").addEventListener("input", (e) => {
   // 加護を変えたら推定HPも変わるので入れ直す
   if (e.target.matches(".end-kago")) box.querySelector(".end-hp").value = enduranceSetup(t, { kago }).estHp;
   box.querySelector(".end-result").innerHTML = renderEnduranceResult(t, d, Number(box.querySelector(".end-hp").value), latent, kago);
+});
+
+// 「代用できた」キャラ・武器の入力フォーム
+$("#results").addEventListener("submit", async (e) => {
+  const form = e.target.closest(".alt-report-form");
+  if (!form) return;
+  e.preventDefault();
+  const box = form.closest(".alt-search");
+  const btn = box.querySelector(".alt-btn");
+  const team = db.teams.find((t) => t.id === btn.dataset.team);
+  const mem = team.members[Number(btn.dataset.idx)];
+  const msg = form.querySelector(".alt-report-msg");
+  const hit = resolveMonsterInput(form.name.value, { assistOnly: mem.role !== "S" });
+  if (hit.error) return (msg.textContent = hit.error);
+  try {
+    await shared.fb.ensureUser();
+    await shared.fb.vote({ teamId: team.id, baseNo: monster(mem.id)?.no ?? 0, candFamily: familyOf(hit.row[0]), ok: true, note: form.note.value.trim() });
+    await loadVotes(team.id);
+    box.querySelector(".alt-out").innerHTML = searchAltFor(team.id, Number(btn.dataset.idx));
+    const m2 = box.querySelector(".alt-report-msg");
+    if (m2) m2.textContent = `「${hit.row[1]}」を代用できたとして送りました。ありがとうございます`;
+  } catch (err) {
+    msg.textContent = `送れませんでした: ${err.message}`;
+  }
 });
 
 // 「回れなかった」の理由フォーム
