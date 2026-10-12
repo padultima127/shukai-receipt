@@ -1428,13 +1428,17 @@ function altButton(r) {
   const team = db.teams.find((t) => t.id === r.teamId);
   const ns = noSubstituteReason(team, r.mem);
   if (ns && r.mem.role === "S" && !assistNoOf(r.mem)) return `<div class="sub-line"><span class="st st-ng">原則代用不可</span> ${esc(ns)}</div>`;
-  const weaponOnly = r.mem.role !== "S";
-  if (weaponOnly && !assistNoOf(r.mem)) return "";
-  const label = weaponOnly ? "武器の代用を探す" : "代用を探す";
-  return `<div class="alt-search"><button type="button" class="alt-btn" data-team="${esc(r.teamId)}" data-idx="${r.idx}" data-label="${label}">${label}</button><div class="alt-out"></div></div>`;
+  // 本体と武器（アシスト）のどちらの代用を探すかを先に選ぶ（リーダー・フレンドは武器だけ）
+  const parts = [];
+  if (r.mem.role === "S" && !ns) parts.push(["base", "本体の代用を探す"]);
+  if (assistNoOf(r.mem)) parts.push(["assist", "武器（アシスト）の代用を探す"]);
+  if (!parts.length) return "";
+  return `<div class="alt-search" data-team="${esc(r.teamId)}" data-idx="${r.idx}"><div class="alt-btns">${parts
+    .map(([part, label]) => `<button type="button" class="alt-btn" data-part="${part}" data-label="${label}" aria-pressed="false">${label}</button>`)
+    .join("")}</div><div class="alt-out"></div></div>`;
 }
 
-function searchAltFor(teamId, idx) {
+function searchAltFor(teamId, idx, part) {
   const team = db.teams.find((t) => t.id === teamId);
   const mem = team?.members[idx];
   if (!mem) return "";
@@ -1445,26 +1449,37 @@ function searchAltFor(teamId, idx) {
   // 作者の記載・条件に合う候補が多い時は、全部出るように件数を増やす
   const optsFor = (no) => ({ ...opts, limit: Math.max(5, endorsedFor(team, no)?.nos.length ?? 0) });
   const ns = noSubstituteReason(team, mem);
-  const baseList = mem.role === "S" && !ns ? findSubstitutes("base", mem, important, team, optsFor(monster(mem.id)?.no)) : null;
-  const nsNote = ns ? `<p class="endorsed-note"><span class="st st-ng">本体は原則代用不可</span> ${esc(ns)}（作者本人の説明）。武器の代用だけを探します。</p>` : "";
-  const assistList = assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, optsFor(assistNoOf(mem))) : null;
-  const endorsedNotes = [monster(mem.id)?.no, assistNoOf(mem)]
+  const baseList = part === "base" && mem.role === "S" && !ns ? findSubstitutes("base", mem, important, team, optsFor(monster(mem.id)?.no)) : null;
+  const nsNote = ns && part === "assist" ? `<p class="endorsed-note"><span class="st st-ng">本体は原則代用不可</span> ${esc(ns)}（作者本人の説明）。武器の代用だけを探します。</p>` : "";
+  const assistList = part === "assist" && assistNoOf(mem) ? findSubstitutes("assist", mem, important, team, optsFor(assistNoOf(mem))) : null;
+  const endorsedNotes = [part === "base" ? monster(mem.id)?.no : assistNoOf(mem)]
     .map((no) => endorsedFor(team, no))
     .filter(Boolean)
-    .filter((e) => mem.role === "S" || e.part === "assist")
+    .filter((e) => (e.part ?? "base") === part)
     .map((e) => `<p class="endorsed-note"><span class="st ${e.derived ? "st-sub" : "st-ok"}">${e.derived ? "作者の条件から図鑑で抽出" : "作者の記載"}</span> ${esc(e.text)}</p>`)
     .join("");
-  const weaponNote = mem.role !== "S" ? `<p class="hint">リーダー・フレンドはリーダースキルが変わるため、武器（アシスト）の代用だけを探します。</p>` : "";
-  return note + nsNote + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "") + renderReportedAlts(team, mem, [...(baseList ?? []), ...(assistList ?? [])]);
+  const weaponNote = mem.role !== "S" && part === "assist" ? `<p class="hint">リーダー・フレンドはリーダースキルが変わるため、武器（アシスト）の代用だけを探します。</p>` : "";
+  return note + nsNote + endorsedNotes + weaponNote + (baseList ? renderAlt("本体", baseList, opts) : "") + (assistList ? renderAlt("アシスト", assistList, opts) : "") + renderReportedAlts(team, mem, part, [...(baseList ?? []), ...(assistList ?? [])]);
+}
+
+// 代用候補の欄（選んだ方＝本体か武器かを見出しに出す）
+function altOutHTML(box) {
+  const part = box.dataset.part;
+  return `<p class="alt-head">${part === "base" ? "本体（キャラ）の代用候補" : "武器（アシスト）の代用候補"}</p>` + searchAltFor(box.dataset.team, Number(box.dataset.idx), part);
 }
 
 // 使った人が「代用できた」と入力したキャラ・武器（候補に出ていないものも）と、その入力フォーム
-function renderReportedAlts(team, mem, shown) {
+function renderReportedAlts(team, mem, part, shown) {
   if (shared.mode !== "firebase") return "";
   const prefix = `${team.id}|${monster(mem.id)?.no ?? mem.id}|`;
   const shownFam = new Set(shown.map((c) => familyOf(c.no)));
   const items = [...subVotes]
     .filter(([k, v]) => k.startsWith(prefix) && v.ok > 0 && !shownFam.has(Number(k.slice(prefix.length))))
+    // 入力は本体・武器の区別を持たないので、武器（覚醒アシスト）は武器の代用、それ以外は本体の代用に出す
+    .filter(([k]) => {
+      const row = MDB.get(Number(k.slice(prefix.length)));
+      return part === "assist" ? row?.[4] && !row?.[29] : !row?.[8];
+    })
     .sort((a, b) => b[1].ok - a[1].ok)
     .map(([k, v]) => {
       const no = Number(k.slice(prefix.length));
@@ -1473,8 +1488,8 @@ function renderReportedAlts(team, mem, shown) {
         <span class="votes">回れた ${v.ok}${v.ng ? ` / 回れなかった ${v.ng}` : ""}</span>${notes ? `<div class="vote-reasons">${notes}</div>` : ""}</li>`;
     })
     .join("");
-  const weaponOnly = mem.role !== "S";
-  const target = weaponOnly ? "武器" : assistNoOf(mem) ? "武器・キャラ" : "キャラ";
+  const weaponOnly = part === "assist";
+  const target = weaponOnly ? "武器（アシスト）" : "キャラ（本体）";
   ensureNameLists();
   return `${items ? `<div class="sub-line">使った人が入力した代用:</div><ul class="alts">${items}</ul>` : ""}
     <form class="alt-report-form">
@@ -3910,17 +3925,16 @@ $("#results").addEventListener("submit", async (e) => {
   if (!form) return;
   e.preventDefault();
   const box = form.closest(".alt-search");
-  const btn = box.querySelector(".alt-btn");
-  const team = db.teams.find((t) => t.id === btn.dataset.team);
-  const mem = team.members[Number(btn.dataset.idx)];
+  const team = db.teams.find((t) => t.id === box.dataset.team);
+  const mem = team.members[Number(box.dataset.idx)];
   const msg = form.querySelector(".alt-report-msg");
-  const hit = resolveMonsterInput(form.name.value, { assistOnly: mem.role !== "S" });
+  const hit = resolveMonsterInput(form.name.value, { assistOnly: box.dataset.part === "assist" });
   if (hit.error) return (msg.textContent = hit.error);
   try {
     await shared.fb.ensureUser();
     await shared.fb.vote({ teamId: team.id, baseNo: monster(mem.id)?.no ?? 0, candFamily: familyOf(hit.row[0]), ok: true, note: form.note.value.trim() });
     await loadVotes(team.id);
-    box.querySelector(".alt-out").innerHTML = searchAltFor(team.id, Number(btn.dataset.idx));
+    box.querySelector(".alt-out").innerHTML = altOutHTML(box);
     const m2 = box.querySelector(".alt-report-msg");
     if (m2) m2.textContent = `「${hit.row[1]}」を代用できたとして送りました。ありがとうございます`;
   } catch (err) {
@@ -3934,14 +3948,13 @@ $("#results").addEventListener("submit", (e) => {
   if (!form) return;
   e.preventDefault();
   const box = form.closest(".alt-search");
-  const btn = box.querySelector(".alt-btn");
-  const team = db.teams.find((t) => t.id === btn.dataset.team);
-  const mem = team.members[Number(btn.dataset.idx)];
+  const team = db.teams.find((t) => t.id === box.dataset.team);
+  const mem = team.members[Number(box.dataset.idx)];
   if (!shared.fb?.user) return window.alert?.("評価にはGoogleログインが必要です（編成登録タブからログインできます）");
   shared.fb
     .vote({ teamId: team.id, baseNo: monster(mem.id)?.no ?? 0, candFamily: familyOf(Number(form.dataset.cand)), ok: false, reason: form.reason.value, note: form.note.value.trim() })
     .then(() => loadVotes(team.id))
-    .then(() => (box.querySelector(".alt-out").innerHTML = searchAltFor(team.id, Number(btn.dataset.idx))))
+    .then(() => (box.querySelector(".alt-out").innerHTML = altOutHTML(box)))
     .catch((err) => window.alert?.(`評価できませんでした: ${err.message}`));
 });
 
@@ -3955,14 +3968,13 @@ $("#results").addEventListener("click", (e) => {
   const vb = e.target.closest(".vote-btn");
   if (vb) {
     const box = vb.closest(".alt-search");
-    const btn = box.querySelector(".alt-btn");
-    const team = db.teams.find((t) => t.id === btn.dataset.team);
-    const mem = team.members[Number(btn.dataset.idx)];
+    const team = db.teams.find((t) => t.id === box.dataset.team);
+    const mem = team.members[Number(box.dataset.idx)];
     if (!shared.fb?.user) return window.alert?.("評価にはGoogleログインが必要です（編成登録タブからログインできます）");
     shared.fb
       .vote({ teamId: team.id, baseNo: monster(mem.id)?.no ?? 0, candFamily: familyOf(Number(vb.dataset.cand)), ok: vb.dataset.ok === "1" })
       .then(() => loadVotes(team.id))
-      .then(() => (box.querySelector(".alt-out").innerHTML = searchAltFor(team.id, Number(btn.dataset.idx))))
+      .then(() => (box.querySelector(".alt-out").innerHTML = altOutHTML(box)))
       .catch((err) => window.alert?.(`評価できませんでした: ${err.message}`));
     return;
   }
@@ -3975,20 +3987,29 @@ $("#results").addEventListener("click", (e) => {
   }
   const btn = e.target.closest(".alt-btn");
   if (!btn) return;
-  const out = btn.nextElementSibling;
-  if (out.innerHTML) {
+  const box = btn.closest(".alt-search");
+  const out = box.querySelector(".alt-out");
+  const btns = [...box.querySelectorAll(".alt-btn")];
+  const reset = () => btns.forEach((b) => ((b.textContent = b.dataset.label), b.setAttribute("aria-pressed", "false"), b.classList.remove("on")));
+  // 開いている方をもう一度押したら閉じる
+  if (out.innerHTML && box.dataset.part === btn.dataset.part) {
     out.innerHTML = "";
-    btn.textContent = btn.dataset.label;
+    delete box.dataset.part;
+    reset();
     return;
   }
+  reset();
+  box.dataset.part = btn.dataset.part;
   btn.disabled = true;
   btn.textContent = "探しています…";
   // 図鑑1.4万体を調べるので、表示を更新してから計算する
   setTimeout(async () => {
-    await loadVotes(btn.dataset.team);
-    out.innerHTML = searchAltFor(btn.dataset.team, Number(btn.dataset.idx));
+    await loadVotes(box.dataset.team);
+    out.innerHTML = altOutHTML(box);
     btn.disabled = false;
-    btn.textContent = "代用候補を閉じる";
+    btn.textContent = btn.dataset.part === "base" ? "本体の代用候補を閉じる" : "武器の代用候補を閉じる";
+    btn.setAttribute("aria-pressed", "true");
+    btn.classList.add("on");
   }, 20);
 });
 // 入力を一括で消す×ボタン（文字がある時だけ表示）
