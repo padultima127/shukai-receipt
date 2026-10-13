@@ -4,27 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>周回レシート図鑑</title>
-  <link rel="stylesheet" href="style.css?v=20261013182643">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="style.css?v=20261013183900">
 </head>
 <body>
   <header>
-    <h1>周回レシート図鑑 <span class="beta">β版</span></h1>
+    <div class="hdr">
+    <h1 class="brand"><span class="brand-mark" aria-hidden="true"></span>周回レシート図鑑 <span class="beta">β版</span></h1>
     <nav>
       <button class="tab active" data-tab="search">編成検索</button>
       <button class="tab" data-tab="register">編成登録</button>
       <button class="tab" data-tab="data" hidden>データ管理</button>
     </nav>
+    </div>
   </header>
 
-  <div class="banner beta-banner">β版です。データの誤り・不具合・掲載取り下げのご連絡は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> / <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> まで。 <a href="#changelog">更新履歴</a><br><strong>🆕 編成登録がログインなし（ゲスト）でもできるようになりました！</strong> 編成登録タブから、PDCの編成画像を選ぶだけで登録できます。<br><strong>表示がおかしい・登録でエラーが出る時は、ページを再読み込みしてください</strong>（Xのアプリ内ブラウザでは古い版が残ることがあります。メニューの「ブラウザで開く」もおすすめです）</div>
+  <details class="notice">
+    <summary><span class="notice-new">NEW</span><span class="notice-text">編成登録がログインなし（ゲスト）でもできるようになりました</span><span class="notice-more">お知らせ・連絡先</span></summary>
+    <div class="notice-body">
+      <p>編成登録タブから、PDCの編成画像を選ぶだけで登録できます。</p>
+      <p><strong>表示がおかしい・登録でエラーが出る時は、ページを再読み込みしてください</strong>（Xのアプリ内ブラウザでは古い版が残ることがあります。メニューの「ブラウザで開く」もおすすめです）</p>
+      <p>β版です。データの誤り・不具合・掲載取り下げのご連絡は <a href="https://x.com/127Ultima" target="_blank" rel="noopener">@127Ultima</a> / <a href="https://x.com/pad_ultima127" target="_blank" rel="noopener">@pad_ultima127</a> まで。 <a href="#changelog">更新履歴</a></p>
+    </div>
+  </details>
   <div id="sample-banner" class="banner" hidden>
     初期データは攻略サイト（出典リンク付き）の実在編成です。<strong>「推定」</strong>が付いた値は出典に記載がないため仮の値です。
   </div>
 
   <main>
     <!-- 編成検索 -->
-    <section id="tab-search" class="panel">
-      <div class="card">
+    <section id="tab-search" class="panel search-layout">
+      <aside class="search-side">
+      <div class="card search-card">
         <div class="seg seg-wide" id="search-type">
           <button data-type="item" class="active">素材で探す</button>
           <button data-type="dungeon">ダンジョンで探す</button>
@@ -60,6 +73,7 @@
         </div>
         <label class="check" id="parts-only-wrap" hidden><input type="checkbox" id="parts-only"> 部位ドロップ確定の編成だけ表示<small class="muted">（記載で確定、または部位破壊ボーナスから推定100%）</small></label>
       </div>
+      </aside>
       <div id="results"></div>
     </section>
 
@@ -254,6 +268,7 @@ F: 光輝の聖騎士
     </section>
   </main>
 
+  <div class="page-extra">
   <section class="card changelog" id="changelog">
     <h2>更新履歴</h2>
     <div id="changelog-list"></div>
@@ -272,6 +287,7 @@ F: 光輝の聖騎士
       <p id="fb-msg" class="msg" role="status"></p>
     </form>
   </section>
+  </div>
 
   <footer class="site-footer">
     <p><strong>非公式のファンツールです。</strong>ガンホー・オンライン・エンターテイメント株式会社とは関係ありません。非商用で運営しています。</p>
@@ -287,14 +303,14 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261013182643"></script>
-  <script src="firebase-backend.js?v=20261013182643"></script>
-  <script src="changelog.js?v=20261013182643"></script>
-  <script src="icons.js?v=20261013182643"></script>
-  <script src="monsters-db.js?v=20261013182643"></script>
-  <script src="monsters-changes.js?v=20261013182643"></script>
-  <script src="data.js?v=20261013182643"></script>
-  <script src="app.js?v=20261013182643"></script>
+  <script src="firebase-config.js?v=20261013183900"></script>
+  <script src="firebase-backend.js?v=20261013183900"></script>
+  <script src="changelog.js?v=20261013183900"></script>
+  <script src="icons.js?v=20261013183900"></script>
+  <script src="monsters-db.js?v=20261013183900"></script>
+  <script src="monsters-changes.js?v=20261013183900"></script>
+  <script src="data.js?v=20261013183900"></script>
+  <script src="app.js?v=20261013183900"></script>
   <!-- Cloudflare Web Analytics（アクセス数の集計。Cookieなし・個人を特定しない） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0152013b56ea4ec9800ca72574da31e8"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
