@@ -1206,14 +1206,16 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
     const reasonLine = reasons.length || c.votes.notes?.length
       ? `<div class="vote-reasons">回れなかった理由: ${reasons.map(([r, n]) => `${esc(r)}×${n}`).join("、")}${(c.votes.notes ?? []).map((t) => `<q>${esc(t)}</q>`).join("")}</div>`
       : "";
-    const votes = shared.mode === "firebase"
-      ? `<span class="votes">使った人: 回れた ${c.votes.ok} / 回れなかった ${c.votes.ng}
-         <button type="button" class="link vote-btn" data-cand="${c.no}" data-ok="1">回れた</button>
-         <button type="button" class="link vote-ng-open" data-cand="${c.no}">回れなかった</button></span>
-         <form class="vote-ng-form" data-cand="${c.no}" hidden>
-           <label>理由 <select name="reason">${NG_REASONS.map((r) => `<option>${r}</option>`).join("")}</select></label>
+    // 使った人の評価: 件数つきの小さなボタン。理由の入力欄は「回れなかった」を押した時だけ開く
+    const fb = shared.mode === "firebase";
+    const votes = fb
+      ? `<button type="button" class="vote-chip vote-btn" data-cand="${c.no}" data-ok="1" title="この代用で回れた">回れた <b>${c.votes.ok}</b></button><button type="button" class="vote-chip vote-ng vote-ng-open" data-cand="${c.no}" title="この代用では回れなかった（理由を送れます）">回れなかった <b>${c.votes.ng}</b></button>`
+      : "";
+    const voteForm = fb
+      ? `<form class="vote-ng-form" data-cand="${c.no}" hidden>
+           <select name="reason" aria-label="理由">${NG_REASONS.map((r) => `<option>${r}</option>`).join("")}</select>
            <input name="note" maxlength="200" placeholder="くわしく（任意）例: 6Fで火力が足りずワンパンできない">
-           <button type="submit" class="link">送る</button>
+           <button type="submit" class="vote-chip">送る</button>
          </form>${reasonLine}`
       : "";
     let fire = "";
@@ -1223,10 +1225,27 @@ function renderAlt(label, list, { pool = "owned" } = {}) {
       fire = `<span class="${cls}">火力覚醒 ${fmtMult(c.fire.orig)}→${fmtMult(c.fire.cand)}${lost}</span>`;
     }
     const own = pool === "all" && box.size ? (c.owned ? `<span class="st st-ok">所持</span> ` : "") : "";
-    return `<li>${iconHTML(c.no, { assist: label === "アシスト" })}${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a>
-      <div class="alt-caps">${[attr, fire, sa, as, short, hs, late, reset, sb, kept, lost, turn, haste, dur, regen, mult].filter(Boolean).join(" ") || "重要な能力の指定なし"}</div>${votes}</li>`;
+    // 1段目: 名前と重要な判定（✓残る能力・✗致命的な問題）。細かい差（△・火力・属性など）は「詳しく」に畳む
+    const attrNg = c.attr && c.attr.main[0] !== c.attr.main[1] ? attr : "";
+    const major = [attrNg, as, short, hs, late, reset, sb, kept, c.lostMajor.map((k) => `<span class="ng">✗${esc(capLabel(k))}がなくなる</span>`).join(" ")].filter(Boolean);
+    const minorLostTxt = minorLost.length ? `<span class="warnc">耐性など: ${esc(minorLost.map(capLabel).join("・"))}がなくなる</span>` : "";
+    const detail = [attrNg ? "" : attr, fire, sa, minorLostTxt, turn, haste, dur, regen, mult].filter(Boolean);
+    const warnN = detail.filter((x) => x.includes("warnc") || x.includes('"ng"')).length;
+    const more = detail.length
+      ? `<details class="alt-more"><summary>詳しく${warnN ? `<span class="alt-warn-n">注意${warnN}</span>` : ""}</summary><div class="alt-caps">${detail.join(" ")}</div></details>`
+      : "";
+    return `<li class="alt-card">
+      <div class="alt-top">${iconHTML(c.no, { assist: label === "アシスト" })}<div class="alt-name">${endorsedBadge}${own}<strong>${esc(c.name)}</strong> <a class="no" href="${padmdbUrl(c.no)}" target="_blank" rel="noopener">No.${c.no}</a></div>${votes ? `<div class="alt-vote">${votes}</div>` : ""}</div>
+      <div class="alt-caps">${major.join(" ") || `<span class="muted">重要な能力の指定なし</span>`}</div>${more}${voteForm}</li>`;
   });
-  return `<div class="sub-line">${label}の代用候補（要確認）:<ol class="alts">${items.join("")}</ol></div>`;
+  // 最初は上位だけ表示し、残りは「残り◯件を表示」で開く
+  const FIRST = 6;
+  const head = items.slice(0, FIRST).join("");
+  const rest = items.slice(FIRST);
+  const restHTML = rest.length
+    ? `${rest.map((x) => x.replace('<li class="alt-card">', '<li class="alt-card alt-extra" hidden>')).join("")}</ol><button type="button" class="alt-show-more" data-n="${rest.length}">残り${rest.length}件を表示</button>`
+    : "</ol>";
+  return `<div class="alt-list"><div class="alt-list-head">${label}の代用候補 <small class="muted">${list.length}件・要確認</small></div><ol class="alts">${head}${restHTML}</div>`;
 }
 
 // 役割一覧は本体と武器（アシスト）に分けて表示する
@@ -3959,6 +3978,12 @@ $("#results").addEventListener("submit", (e) => {
 });
 
 $("#results").addEventListener("click", (e) => {
+  const moreBtn = e.target.closest(".alt-show-more");
+  if (moreBtn) {
+    moreBtn.previousElementSibling.querySelectorAll(".alt-extra").forEach((li) => (li.hidden = false));
+    moreBtn.remove();
+    return;
+  }
   const ngOpen = e.target.closest(".vote-ng-open");
   if (ngOpen) {
     const form = ngOpen.closest("li").querySelector(`.vote-ng-form[data-cand="${ngOpen.dataset.cand}"]`);

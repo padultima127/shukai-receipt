@@ -201,6 +201,30 @@ a.no:hover { text-decoration: underline; }
 .tags .tag small { color: var(--muted); margin-left: 2px; }
 .tag.partial { border-style: dashed; }
 .alts { margin: 2px 0 0; padding-left: 1.3em; display: grid; gap: 4px; }
+/* 代用候補カード: 1段目に名前と重要な判定、細かい差は「詳しく」に畳む */
+.alt-list { margin-top: 8px; }
+.alt-list-head { font-weight: 700; font-size: .85rem; margin-bottom: 6px; }
+.alt-list .alts { padding-left: 0; list-style: none; counter-reset: alt; gap: 6px; }
+.alt-card { counter-increment: alt; padding: 8px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); display: grid; gap: 4px; }
+.alt-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.alt-top::before { content: counter(alt); font-size: .72rem; font-weight: 700; color: var(--muted); min-width: 1.2em; text-align: right; }
+.alt-name { flex: 1 1 240px; min-width: 0; display: flex; align-items: center; flex-wrap: wrap; gap: 4px 6px; }
+.alt-name strong { font-size: .9rem; }
+.alt-vote { display: flex; gap: 4px; margin-left: auto; }
+.vote-chip { font-size: .72rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; line-height: 1.6; }
+.vote-chip b { color: var(--text); margin-left: 2px; }
+.vote-chip:hover { border-color: var(--ok); color: var(--ok); }
+.vote-chip.vote-ng:hover { border-color: var(--ng); color: var(--ng); }
+.alt-more { font-size: .76rem; }
+.alt-more > summary { cursor: pointer; color: var(--muted); width: fit-content; }
+.alt-more > summary:hover { color: var(--accent); }
+.alt-more[open] > summary { margin-bottom: 2px; }
+.alt-warn-n { margin-left: 6px; padding: 0 6px; border-radius: 999px; background: color-mix(in srgb, var(--sub) 22%, transparent); color: var(--sub); font-size: .68rem; }
+.alt-show-more { margin-top: 6px; width: 100%; font-size: .8rem; padding: 6px; border: 1px dashed var(--line); border-radius: 8px; background: transparent; color: var(--accent); cursor: pointer; }
+.alt-show-more:hover { border-color: var(--accent); }
+.vote-ng-form[hidden] { display: none; }
+.alt-card .icon { width: 34px; height: 34px; margin-right: 0; }
+.alt-card .icon-assist { width: 34px; height: 34px; margin: 0; }
 .alt-caps { font-size: .78rem; display: flex; flex-wrap: wrap; gap: 2px 8px; }
 .alt-caps .ok { color: var(--ok); }
 .alt-caps .ng { color: var(--ng); }
