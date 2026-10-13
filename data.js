@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 112,
+  "version": 113,
   "seed": true,
   "monsters": [
     {
@@ -1989,6 +1989,139 @@ window.PAD_SEED = {
       "no": 12576,
       "name": "気配り執事・リュウメイ",
       "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n13854",
+      "no": 13854,
+      "name": "買い出しメイド・ミナカ",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n13850",
+      "no": 13850,
+      "name": "清掃モードのメイド・クラウディア",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13745",
+      "no": 13745,
+      "name": "ポピーの慰星霊・ケイシー",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12987",
+      "no": 12987,
+      "name": "セイナハローキティ＆リュウメイポムポムプリン",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12967",
+      "no": 12967,
+      "name": "仮装祭の凛星霊・ロザリン",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12944",
+      "no": 12944,
+      "name": "斑鳩亮",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n11614",
+      "no": 11614,
+      "name": "ウィッチ・オリアポチャッコ",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n10498",
+      "no": 10498,
+      "name": "焔勝獣・フレイ＝ウィルド",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12238",
+      "no": 12238,
+      "name": "白いガンダム",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n11719",
+      "no": 11719,
+      "name": "八神太一＆ウォーグレイモン",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n10712",
+      "no": 10712,
+      "name": "ウルヴァリン＆マグニートー",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n11731",
+      "no": 11731,
+      "name": "八神ヒカリ＆エンジェウーモン",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n12540",
+      "no": 12540,
+      "name": "服飾メイド・カミムスビ",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12845",
+      "no": 12845,
+      "name": "「蟲の呼吸」の使い手・胡蝶しのぶ",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13180",
+      "no": 13180,
+      "name": "インゲニウム＆ショート",
+      "attr": "火",
+      "tags": []
+    },
+    {
+      "id": "n12266",
+      "no": 12266,
+      "name": "白虎星の超越神・ハク",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n12591",
+      "no": 12591,
+      "name": "堕落した英明王・ソロモン",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n11054",
+      "no": 11054,
+      "name": "オール・フォー・ワンの後継者・死柄木弔",
+      "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n13187",
+      "no": 13187,
+      "name": "全因解放・オール・フォー・ワン",
+      "attr": "闇",
       "tags": []
     }
   ],
@@ -9364,6 +9497,251 @@ window.PAD_SEED = {
         ]
       },
       "rewardNote": "経験値・コインはプレイ履歴の実績（ランク経験値ブースト分を除いた値）"
+    },
+    {
+      "id": "keiyaku",
+      "name": "契約の天使【超重力】",
+      "aliases": [
+        "十一億",
+        "十一億ダンジョン",
+        "十一億チャレンジ",
+        "契約",
+        "契約チャレンジ",
+        "契約十一億",
+        "11億",
+        "契約の天使",
+        "十一億ダンジョン【1人専用/ノーコン】"
+      ],
+      "battles": 15,
+      "note": "十一億ダンジョン（契約チャレンジ）。制限時間60分・超重力2000分の1・リーダーチェンジ無効",
+      "drops": [
+        {
+          "itemId": "exp",
+          "rate": 1100000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "coin",
+          "rate": 1100000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "delay",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "nijipii",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "sixslot",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "killer",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "kingdragon",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "gimmicks": {
+        "all": [
+          "bigHit",
+          "skillDelay",
+          "awakenVoid",
+          "dmgVoid",
+          "dmgAbsorb",
+          "attrAbsorb",
+          "comboAbsorb",
+          "resolve",
+          "assistVoid",
+          "skillSeal",
+          "buffClear",
+          "shield",
+          "roulette",
+          "cloud",
+          "tape",
+          "spike",
+          "poison",
+          "jammer",
+          "lock",
+          "unerasable",
+          "weakenAwaken",
+          "darkness",
+          "damageCap",
+          "maxHpDown",
+          "healDown",
+          "atkDown"
+        ],
+        "partial": [],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/512173",
+            "date": "2026-10-13"
+          }
+        ],
+        "notes": [
+          "ゲームウィズのフロアごとの敵の行動から",
+          "B1先制で合計10.8万ダメージ（潜入直後でLS軽減なし）。B1・B9の先制で全員スキル遅延3ターン",
+          "B6の超根性時に覚醒無効＋約214万ダメージ。B12の初ターンに約1093万、ボスの超根性の次のターンに約1163万ダメージ",
+          "B5・ボスでシールド（600億）、B5でスキル効果解除とアシスト無効4ターン"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの記載（経験値11億・コイン11億）。個数の記載がないドロップは1体で計算"
+    },
+    {
+      "id": "ginyoku",
+      "name": "銀翼の白迅帝【超重力】",
+      "aliases": [
+        "十二億",
+        "十二億ダンジョン",
+        "十二億チャレンジ",
+        "銀翼",
+        "銀翼チャレンジ",
+        "12億",
+        "銀翼の白迅帝",
+        "十二億ダンジョン【1人専用/ノーコン】"
+      ],
+      "battles": 16,
+      "note": "十二億ダンジョン（銀翼チャレンジ）。制限時間60分・超重力2000分の1・リーダーチェンジ無効",
+      "drops": [
+        {
+          "itemId": "exp",
+          "rate": 1200000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "coin",
+          "rate": 1200000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "kingtama",
+          "rate": 2,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "nijipii",
+          "rate": 2,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "supernoel",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "delay",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "latentpp",
+          "rate": 4,
+          "siteSource": [
+            "ゲームウィズ"
+          ],
+          "note": "ランダム4体"
+        },
+        {
+          "itemId": "killer",
+          "rate": 1,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        }
+      ],
+      "parts": {
+        "item": "ディープシーカーの左腕・右腕の希石",
+        "baseRate": 10,
+        "note": "5Fのディープシーカーの両腕の部位破壊で希石。基本のドロップ率は不明のため原則の10%で計算（推定）＋部位破壊ボーナス1つにつき+10%"
+      },
+      "gimmicks": {
+        "all": [
+          "bigHit",
+          "skillDelay",
+          "awakenVoid",
+          "assistVoid",
+          "buffClear",
+          "dmgVoid",
+          "dmgAbsorb",
+          "attrAbsorb",
+          "comboAbsorb",
+          "resolve",
+          "skillSeal",
+          "shield",
+          "board54",
+          "roulette",
+          "cloud",
+          "spike",
+          "bomb",
+          "jammer",
+          "poison",
+          "lock",
+          "weakenAwaken",
+          "darkness",
+          "damageCap",
+          "healDown",
+          "timeDown",
+          "atkDown"
+        ],
+        "partial": [],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/521286",
+            "date": "2026-10-13"
+          }
+        ],
+        "notes": [
+          "ゲームウィズのフロアごとの敵の行動から",
+          "B1・B5で全員スキル遅延3ターン（遅延耐性3つで安定）。B4のアシスト無効は最大5ターン、B4とボスの先制でスキル効果解除",
+          "B3で2000万、B8で2800万、B10で約2668万、B11で約1498万×2、ボスの超根性の次のターンに1750万×2の大ダメージ",
+          "リーダー軽減なしだとB13の先制で14.7万ダメージ"
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの記載（経験値12億・コイン12億）。個数の記載がないドロップは1体で計算"
     }
   ],
   "teams": [
@@ -52395,6 +52773,2303 @@ window.PAD_SEED = {
           "text": "ミニ闇メタトロン武器の代用は「スキルターン重めでHPが盛れれば何でもいい」（作者談）"
         }
       ]
+    },
+    {
+      "id": "keiyaku-minaka-issei",
+      "dungeonId": "keiyaku",
+      "title": "LFミナカ クラウディア・ケイシーループ（セシリア確定1パン版）",
+      "timeSec": 1358.5,
+      "turns": 42,
+      "badgeId": 11,
+      "members": [
+        {
+          "id": "n13854",
+          "role": "L",
+          "assist": "ゾッダ虫 No.13334",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              62
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13850",
+          "role": "S",
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              10,
+              10,
+              4
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13850",
+          "role": "S",
+          "assist": "科学部の怪異・ユラの弁当箱 No.13617",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              10,
+              10,
+              4
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13745",
+          "role": "S",
+          "assist": "真紅の花嫁・ユウリの指輪 No.8931",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              55,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13967",
+          "role": "S",
+          "assist": "ファセットの装身具 No.5145",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              36,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13854",
+          "role": "F",
+          "assist": "ジーニー【フォト】 No.11807",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              62
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "1周22分38秒・42ターン（更新前の版のプレイ履歴）。1周42.8億（広告使用時85.6億）",
+        "基本消し: 青4・紫4を含む3色＋回復（11F以降は4消し推奨）。指6秒（ケイシーループ開始後は12秒）なので注意。パズルが不安なら指が伸びるバッジ（パズパスバッジなど）推奨（それでも78億）",
+        "更新版: 防御力無視潜在でセシリアを確定1パン。潜在は先にむこかん武器をアシストしてから振り、その後でレシートの武器に変える",
+        "1F: ①クラウディア裏×2→Lミナカ裏→Fミナカ裏→ロゼ変身→青か黄か紫4 ②Lミナカ→クラウディア×2→ケイシー変身→Fミナカ（以降クラウディアループ）",
+        "3Fは必ずロゼ→クラウディアの順。6F以降ケイシーループ、10F以降ミナカ・ロゼループ。ボスは発狂時にロゼ（超根性後はロゼ温存推奨）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/isseicross_pad/status/2081928157440217189",
+      "author": {
+        "name": "イッセー@クロス"
+      },
+      "sourceDate": "2026-07-28",
+      "metrics": {
+        "chars": 365,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 4
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "keiyaku-seina-zeinchu",
+      "dungeonId": "keiyaku",
+      "title": "セイナキティ＆リュウメイプリン（怪獣・鬼滅パと共存）",
+      "timeSec": 1005.8,
+      "turns": 36,
+      "badgeId": 11,
+      "members": [
+        {
+          "id": "n12987",
+          "role": "L",
+          "assist": "キャプテン・マーベル【クラシックカバー】 No.6916",
+          "build": {
+            "lv": 99,
+            "plus": 813,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              10,
+              6
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12967",
+          "role": "S",
+          "assist": "緋天龍のソウル No.11573",
+          "build": {
+            "lv": 120,
+            "plus": 813,
+            "super": 130,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              4,
+              4
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12944",
+          "role": "S",
+          "assist": "山本のユニフォーム No.12327",
+          "build": {
+            "lv": 120,
+            "plus": 813,
+            "super": 138,
+            "latents": [
+              6,
+              10,
+              8,
+              8
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11614",
+          "role": "S",
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 813,
+            "super": 108,
+            "latents": [
+              12,
+              18,
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12987",
+          "role": "S",
+          "assist": "黒尾のユニフォーム No.12303",
+          "build": {
+            "lv": 99,
+            "plus": 813,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              32,
+              32
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12987",
+          "role": "F",
+          "assist": "ソニアの野球道具 No.11093",
+          "build": {
+            "lv": 99,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              18,
+              6,
+              10
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "1周16分45秒・36ターン（プレイ履歴）。怪獣パ・鬼滅パと共存できるキャラで組んだ編成",
+        "記載の読み方: 「火L（1）+光」は火をL字で消して強化ドロップ1個以上・光は消し方自由、「火3」は3消し固定。一部回復消しの指定は省略あり",
+        "B1: ロザリン裏、斑鳩亮裏、L・Sキティプリン変身、ポチャッコ裏、斑鳩亮、キティプリン、Fキティプリン変身→火L＋光",
+        "以降はキティプリンを軸に、ロザリン・斑鳩亮・ポチャッコを階ごとに挟む。B7はトゲ処理推奨、B10は攻撃力減少の時だけ盤面4C",
+        "レシートは経験値バッジ版（+813）と育成版（全員+300・HPバッジ）の2種類あり",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/Zee_ikusane/status/1982382228245213298",
+      "author": {
+        "name": "ぜいんちゅ"
+      },
+      "sourceDate": "2025-10-26",
+      "metrics": {
+        "chars": 293,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      }
+    },
+    {
+      "id": "keiyaku-kafka-gacha",
+      "dungeonId": "keiyaku",
+      "title": "カフカ 炭治郎禰豆子ループ 12分半",
+      "timeSec": 745.4,
+      "turns": 27,
+      "members": [
+        {
+          "id": "n12914",
+          "role": "L",
+          "assist": "極醒の裁秤神・エスカマリのティアラ No.7658",
+          "build": {
+            "lv": 99,
+            "plus": 891
+          }
+        },
+        {
+          "id": "n10498",
+          "role": "S",
+          "assist": "防衛隊のスーツ No.12904",
+          "build": {
+            "lv": 120,
+            "plus": 300
+          }
+        },
+        {
+          "id": "n12238",
+          "role": "S",
+          "assist": "スオウのティーセット No.12553",
+          "build": {
+            "lv": 120,
+            "plus": 300
+          }
+        },
+        {
+          "id": "n12808",
+          "role": "S",
+          "assist": "山本のユニフォーム No.12327",
+          "build": {
+            "lv": 120,
+            "plus": 891
+          }
+        },
+        {
+          "id": "n12808",
+          "role": "S",
+          "assist": "無一郎と蜜璃の鎹鴉 No.12817",
+          "build": {
+            "lv": 120,
+            "plus": 891
+          }
+        },
+        {
+          "id": "n12914",
+          "role": "F",
+          "assist": "音駒高校横断幕 No.12273",
+          "build": {
+            "lv": 99,
+            "plus": 891
+          }
+        }
+      ],
+      "steps": [
+        "1周12分25秒・27ターン（プレイ履歴）。投稿では「12分半で39億経験値」",
+        "1F: スオウ、無一郎、フレ、リダ、炭治郎禰豆子で1＋2コンボ（以降は炭治郎禰豆子のループ）",
+        "5F: ①白いガンダムでL字 ②殴る＋3コンボ ③フレイ＋3コンボ（以降ずらしに＋1コンボ） ④エスカマリ、フレ ⑤殴る",
+        "13F・15Fは炭治郎禰豆子を追加で使う",
+        "レシートはQRコードなしの画像のため、超覚醒・潜在は不明",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/t0643902l2r/status/1997190337329279043",
+      "author": {
+        "name": "ガチャ芸人P【YouTube】"
+      },
+      "sourceDate": "2025-12-06",
+      "metrics": {
+        "chars": 209,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 3
+          }
+        ],
+        "6": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "13": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "juoku-taichi-danna",
+      "dungeonId": "juoku",
+      "title": "太一 全耐性（初手1コンボ×2）",
+      "timeSec": 1264.1,
+      "turns": 46,
+      "badgeId": 36,
+      "members": [
+        {
+          "id": "n11719",
+          "role": "L",
+          "assist": "シーウルフのヒートエッジ No.9807",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              6,
+              6
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n10712",
+          "role": "S",
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 110,
+            "latents": [
+              7,
+              4,
+              12,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11714",
+          "role": "S",
+          "assist": "デッドプール【コミックカバー・2】 No.6948",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 96,
+            "latents": [
+              48,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11731",
+          "role": "S",
+          "assist": "ギアスのカ No.11374",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              55,
+              22
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11734",
+          "role": "S",
+          "assist": "カエルのイースターエッグ No.8664",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              10,
+              10,
+              6,
+              6
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11719",
+          "role": "F",
+          "assist": "シーウルフのヒートエッジ No.9807",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              34,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "1周21分4秒・46ターン（プレイ履歴）。初手に1コンボが2回必要な代わりに全耐性。毒・お邪魔・爆弾が作られないので盤面の強化ドロップが潰されず安定",
+        "キャラは全てスキルマ。操作時間12秒。毒・お邪魔・暗闇・帯・雲・全色ドロ強80%あり。火十字＋光十字のみで暗闇目覚め全回復",
+        "1F: ①スティード、デッドプール、ヒカリ変身、L太一変身、1C×2 ②F太一変身、空変身、L太一、オメガモン①、火4・5＋光4・5",
+        "基本は火4＋光4。4Fは指3秒、15Fの⑧は指6秒なので注意。10Fはパズル教室×2",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/pandora_danna/status/1863431307839373550",
+      "author": {
+        "name": "旦那(￣▽￣;)"
+      },
+      "sourceDate": "2024-12-02",
+      "metrics": {
+        "chars": 259,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "2": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "5": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ]
+      }
+    },
+    {
+      "id": "juoku-ichigo-ryuka",
+      "dungeonId": "juoku",
+      "title": "一護ミナカ ダンボ3（33億）",
+      "timeSec": 582.5,
+      "turns": 25,
+      "badgeId": 11,
+      "members": [
+        {
+          "id": "n14035",
+          "role": "L",
+          "assist": "銀の認識票 No.12043",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "fromQr": false
+          }
+        },
+        {
+          "id": "n14028",
+          "role": "S",
+          "assist": "ジーニー【フォト】 No.11807",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 138,
+            "fromQr": false
+          }
+        },
+        {
+          "id": "n13996",
+          "role": "S",
+          "assist": "ロベリアの標本 No.13742",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 108,
+            "fromQr": false
+          }
+        },
+        {
+          "id": "n12540",
+          "role": "S",
+          "assist": "ギルドからの依頼書 No.12079",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "fromQr": false
+          }
+        },
+        {
+          "id": "n14076",
+          "role": "S",
+          "assist": "ポチャッコのアイスクリーム No.11654",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "fromQr": false
+          }
+        },
+        {
+          "id": "n13854",
+          "role": "F",
+          "assist": "たまのネジ No.13717",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "fromQr": false
+          }
+        }
+      ],
+      "steps": [
+        "1周9分42秒・25ターン（最新版のプレイ履歴）。最新版で悪魔キラーを追加し、ゼンチョウガで闇泥強がない時も追加コンボ不要に",
+        "基本はカミムスビ・ジゼルをループさせながら闇4＋回復消し。虚一護は必ずカミムスビの後に使う。虚一護裏・ルルーシュ裏はスキルLv1、他はスキルマ",
+        "虚一護＋一護織姫裏＋ジゼル裏でカミムスビが進化できるようにすること。暗闇目覚めが気になるなら受付嬢→ユリウス武器に変更。ジーニー武器は浮遊ヘイスト武器で代用可",
+        "1F: 虚一護変身、一護織姫裏、ジゼル裏、カミムスビ進化、一護織姫①、ミナカ裏、一護織姫②、カミムスビ、虚一護。10Fはパズル教室",
+        "最新版のレシートはQRコードが読めないため、キャラ・超覚醒は前の版のQRから（潜在は最新版で変わっているため省略）",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/ryuka__pad/status/2095806202424984036",
+      "author": {
+        "name": "リュカ"
+      },
+      "sourceDate": "2026-09-04",
+      "metrics": {
+        "chars": 350,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "11": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "14": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "15": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "ginyoku-ichigo-ryuka",
+      "dungeonId": "ginyoku",
+      "title": "一護ミナカ 部位破壊 9分半前後",
+      "timeSec": 578.3,
+      "turns": 27,
+      "badgeId": 98,
+      "members": [
+        {
+          "id": "n14035",
+          "role": "L",
+          "assist": "Zi-アポロの起動キー No.13971",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              21,
+              31,
+              31,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14035",
+          "role": "S",
+          "assist": "Zi-アポロの起動キー No.13971",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              21,
+              31,
+              31,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12907",
+          "role": "S",
+          "assist": "黒薔薇の標本 No.12440",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              4,
+              4,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12845",
+          "role": "S",
+          "assist": "鳳凰機・Gフェニックスのスクロール No.14133",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [
+              9,
+              9,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14076",
+          "role": "S",
+          "assist": "魔剣「天魔」 No.11233",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 136,
+            "latents": [
+              56,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13854",
+          "role": "F",
+          "assist": "炎翔神・ミニほるすのノート No.13535",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              43,
+              43,
+              43,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊覚醒の恩恵が大きいダンジョン（投稿者談）"
+      },
+      "steps": [
+        "1周9分38秒・27ターン（プレイ履歴）。速い人は8分台も狙える（投稿者談）",
+        "基本は胡蝶・ジゼルをループさせながら闇4＋回復消し。一護は必ず胡蝶の後に使う。本体・アシストとも全てスキルマ",
+        "必要スキブ20以上、封印耐性100%必須。一護の武器は一護かアッシュの武器（理想は一護武器×2）",
+        "1F: 一護変身×2、胡蝶裏、ミナカ裏、胡蝶、一護×2",
+        "9Fがマシンゼウスの時は3ターン操作時間に注意。11Fはスキルの使用順に注意。16Fは超根性後に鳴海8号②、胡蝶、L一護（倒せなければジゼル）",
+        "編成協力: @_Everett_pad さん",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/ryuka__pad/status/2101204476917166262",
+      "author": {
+        "name": "リュカ"
+      },
+      "sourceDate": "2026-09-19",
+      "metrics": {
+        "chars": 276,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "16": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "ginyoku-ichigo-ryuka-v2",
+      "dungeonId": "ginyoku",
+      "title": "一護ミナカ 改良版（一護武器1体代用可・十億の一護と併用可）",
+      "timeSec": 560.5,
+      "turns": 27,
+      "badgeId": 98,
+      "members": [
+        {
+          "id": "n14035",
+          "role": "L",
+          "assist": "Zi-アポロの起動キー No.13971",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              6,
+              6,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14035",
+          "role": "S",
+          "assist": "Zi-アポロの起動キー No.13971",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              6,
+              6,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12907",
+          "role": "S",
+          "assist": "黒薔薇の標本 No.12440",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              4,
+              4,
+              12,
+              12,
+              12,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12845",
+          "role": "S",
+          "assist": "鳳凰機・Gフェニックスのスクロール No.14133",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 56,
+            "latents": [
+              31,
+              31,
+              17,
+              12,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14076",
+          "role": "S",
+          "assist": "アメノミナカヌシの裁縫レシピ No.13865",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              56,
+              12,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13854",
+          "role": "F",
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              31,
+              31,
+              31,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "partBreak": {
+        "can": true,
+        "note": "部位破壊覚醒の恩恵が大きいダンジョン（投稿者談）"
+      },
+      "endorsedAlts": [
+        {
+          "target": 13971,
+          "part": "assist",
+          "nos": [
+            13354
+          ],
+          "text": "一護かアッシュの武器のうち1体は代用可: 闇属性付与＋10コンボ強化＋アシスト共鳴＋部位破壊の武器（投稿のレシート2枚目はライの剣）"
+        }
+      ],
+      "steps": [
+        "1周9分20秒・27ターン（プレイ履歴）。潜在覚醒を調整し、十億の一護と併用できるように",
+        "基本は胡蝶・ジゼルをループさせながら闇4＋回復消し。一護は必ず胡蝶の後に使う。本体・アシストとも全てスキルマ",
+        "必要スキブ20以上、封印耐性100%必須。一護の武器は一護かアッシュの武器（理想は一護武器×2）",
+        "1F: 一護変身×2、胡蝶裏、ミナカ裏、胡蝶、一護×2",
+        "9Fがマシンゼウスの時は3ターン操作時間に注意。11Fはスキルの使用順に注意。16Fは超根性後に鳴海8号②、胡蝶、L一護（倒せなければジゼル）",
+        "2Fはジゼル裏で闇4＋1C。12Fで盤面に闇の強化ドロップが1個もない時は追加で1C",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/ryuka__pad/status/2101347678051545593",
+      "author": {
+        "name": "リュカ"
+      },
+      "sourceDate": "2026-09-19",
+      "metrics": {
+        "chars": 302,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "5": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "16": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          }
+        ]
+      }
+    },
+    {
+      "id": "ginyoku-ichigo-knight",
+      "dungeonId": "ginyoku",
+      "title": "一護ミナカ ダンボ4 ジゼル2体（10分半）",
+      "timeSec": 624.7,
+      "turns": 31,
+      "badgeId": 98,
+      "members": [
+        {
+          "id": "n14035",
+          "role": "L",
+          "assist": "銀の認識票 No.12043",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              10,
+              12,
+              12,
+              21,
+              28
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13180",
+          "role": "S",
+          "assist": "ステイタスの用紙 No.12024",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14076",
+          "role": "S",
+          "assist": "ほむらの盾 No.13905",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12266",
+          "role": "S",
+          "assist": "交通誘導の魔帽子・スモック＆フーリオ No.13597",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              28
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14076",
+          "role": "S",
+          "assist": "強欲の汰魔悟 No.6410",
+          "build": {
+            "lv": 120,
+            "plus": 300,
+            "super": 108,
+            "latents": [
+              12,
+              12,
+              56
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13854",
+          "role": "F",
+          "assist": "戦馬の支援機・スティード No.11458",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              28
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "1周10分24秒・31ターン（デイトナ4パンの時。5パンの時は10分34秒・32ターン）",
+        "基本は闇way＋回復。ジゼルのジュエルを崩してwayを組む。レシートは自分用のためミスがあるかも（投稿者談）",
+        "1F: セフ、一護、スティード、ほむら、ハク、ショート、一護→闇way＋回復",
+        "16Fは一護以外のダメージ上限が変わった時と、一護の上限が変わった時で手順が違う",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/tZ1uflobDVNayIM/status/2101080704360870086",
+      "author": {
+        "name": "ナイト　ナナヲ使徒"
+      },
+      "sourceDate": "2026-09-18",
+      "metrics": {
+        "chars": 192,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 3
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "14": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          }
+        ],
+        "16": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "ginyoku-solomon-e8igh8t",
+      "dungeonId": "ginyoku",
+      "title": "ソロモン死柄木 ダンボ2＋経験値バッジ（消滅武器なし）",
+      "timeSec": 652.9,
+      "turns": 30,
+      "badgeId": 11,
+      "members": [
+        {
+          "id": "n12591",
+          "role": "L",
+          "assist": "メタトロンのおせち料理 No.13244",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11054",
+          "role": "S",
+          "assist": "ギャルの龍喚士・カンナの学生証 No.12362",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n11054",
+          "role": "S",
+          "assist": "ステイタスの用紙 No.12024",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12907",
+          "role": "S",
+          "assist": "黒薔薇の種子 No.12441",
+          "build": {
+            "lv": 120,
+            "plus": 891,
+            "super": 138,
+            "latents": [
+              12,
+              12,
+              12,
+              28,
+              28,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13187",
+          "role": "S",
+          "assist": "黒霧 No.13177",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              31,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n12591",
+          "role": "F",
+          "assist": "凶禍龍・アマージュ No.7549",
+          "build": {
+            "lv": 99,
+            "plus": 891,
+            "super": 0,
+            "latents": [
+              12,
+              12,
+              12,
+              31,
+              31,
+              17
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "1周10分52秒・30ターン（プレイ履歴）。お邪魔加護の火力が2倍→10倍に強化されたので、消滅武器なしでも回れる",
+        "全員+891、スキルLvは最大。獲得経験値は12億×1.5×1.5×1.1×1.04＝30.89億（パズパスで32.43億）",
+        "1F: 死柄木2体変身→鳴海8号裏→AFO変身→F変身→L変身→F①、死柄木片方。2F以降は指示がない限り死柄木のスキルは毎回最後に打つ",
+        "4Fはトゲを触りすぎると負けるので注意。5Fはディープシーカーの両腕のどちらかにタゲを入れる。11F〜15Fはルーレットに注意",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/e8igh8t/status/2101617952902840464",
+      "author": {
+        "name": "88。！(エイトハチ)🥚"
+      },
+      "sourceDate": "2026-09-20",
+      "metrics": {
+        "chars": 266,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 0,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "8": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "10": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "11": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "15": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "16": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
+          }
+        ]
+      }
     }
   ],
   "removed": {
