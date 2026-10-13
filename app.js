@@ -1860,7 +1860,6 @@ function plus891Label(m) {
 
 function renderEaseStats(m) {
   return `<div><dt>レシート</dt><dd>${m.chars}字</dd></div>
-    <div><dt>パズル指定</dt><dd>${m.puzzle}</dd></div>
     <div><dt>分岐</dt><dd>${m.branch > 0 ? "あり" : "なし"}</dd></div>
     <div><dt>ずらし</dt><dd>${m.zurashi}</dd></div>
     <div><dt>+891</dt><dd>${plus891Label(m)}</dd></div>`;
