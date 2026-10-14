@@ -582,3 +582,12 @@ details > summary { color: var(--accent); }
 @media (max-width: 979px) {
   .seg-wide button { white-space: normal; font-size: .82rem; line-height: 1.3; padding: 8px 4px; }
 }
+
+/* 素材を複数選ぶ（OR・AND） */
+.item-logic-row { margin: 0 0 12px; }
+.item-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; font-size: .85rem; }
+.item-chips .muted { margin: 0; font-size: .8rem; }
+.item-chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 4px 3px 10px; border-radius: 999px; background: var(--accent-soft); color: var(--text); font-weight: 600; }
+.item-chip button { border: 0; background: transparent; color: var(--muted); padding: 0 6px; font-size: .95rem; line-height: 1; border-radius: 999px; }
+.item-chip button:hover { color: var(--ng); }
+.chip-join { color: var(--muted); font-size: .75rem; }

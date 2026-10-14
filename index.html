@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="style.css?v=20261013221047">
+  <link rel="stylesheet" href="style.css?v=20261014150707">
 </head>
 <body>
   <header>
@@ -43,7 +43,16 @@
           <button data-type="dungeon">ダンジョンで探す</button>
           <button data-type="leader">リーダー・フレンドで探す</button>
         </div>
+        <div class="row item-logic-row" id="item-logic-wrap">
+          <span class="label">素材の数</span>
+          <div class="seg" id="item-logic">
+            <button type="button" data-logic="one" class="active">1種類</button>
+            <button type="button" data-logic="or">どれか（OR）</button>
+            <button type="button" data-logic="and">すべて（AND）</button>
+          </div>
+        </div>
         <label for="q" id="q-label">集めたい素材</label>
+        <div id="item-chips" class="item-chips" hidden></div>
         <div class="suggest-wrap">
           <input id="q" placeholder="例: スパノエ、プラス" autocomplete="off" role="combobox" aria-expanded="false" aria-controls="q-suggest">
           <button type="button" id="q-clear" class="input-clear" aria-label="入力を消す" title="入力を消す" hidden>×</button>
@@ -303,14 +312,14 @@ F: 光輝の聖騎士
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261013221047"></script>
-  <script src="firebase-backend.js?v=20261013221047"></script>
-  <script src="changelog.js?v=20261013221047"></script>
-  <script src="icons.js?v=20261013221047"></script>
-  <script src="monsters-db.js?v=20261013221047"></script>
-  <script src="monsters-changes.js?v=20261013221047"></script>
-  <script src="data.js?v=20261013221047"></script>
-  <script src="app.js?v=20261013221047"></script>
+  <script src="firebase-config.js?v=20261014150707"></script>
+  <script src="firebase-backend.js?v=20261014150707"></script>
+  <script src="changelog.js?v=20261014150707"></script>
+  <script src="icons.js?v=20261014150707"></script>
+  <script src="monsters-db.js?v=20261014150707"></script>
+  <script src="monsters-changes.js?v=20261014150707"></script>
+  <script src="data.js?v=20261014150707"></script>
+  <script src="app.js?v=20261014150707"></script>
   <!-- Cloudflare Web Analytics（アクセス数の集計。Cookieなし・個人を特定しない） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0152013b56ea4ec9800ca72574da31e8"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

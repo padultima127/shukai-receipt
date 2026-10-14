@@ -117,6 +117,11 @@ function effTime(t, f = fastFilter) {
   return v.length ? Math.min(...v) : t.timeSec;
 }
 let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョンで探す)
+// 素材で探す時の条件: "one"（1種類）| "or"（どれかが出る）| "and"（全部出る）。or/and は選んだ素材を itemPicks に並べる
+let itemLogic = "one";
+let itemPicks = [];
+const multiItem = () => searchType === "item" && itemLogic !== "one";
+const hasQuery = () => !!$("#q").value.trim() || (multiItem() && itemPicks.length > 0);
 const SEARCH_TYPES = {
   item: { label: "集めたい素材", placeholder: "例: スパノエ、プラス", noun: "素材" },
   dungeon: { label: "周回したいダンジョン", placeholder: "例: 万寿、ノエル大集合", noun: "ダンジョン" },
@@ -1032,10 +1037,11 @@ function evaluate(team, dungeon, item, boxActive) {
   // 部位破壊の数などで編成ごとに報酬が違う場合は team.yields を優先
   // リーダー・フレンドの潜入時倍率（タマゴ＝モンスターのドロップ、コイン、ランク経験値）
   const lfm = lfMultipliers(team);
-  const itemMult = !item ? 1 : item.id === "coin" ? lfm.coin : item.egg ? lfm.egg : 1;
-  const rate = !item
-    ? 1
-    : (team.yields?.[item.id] ?? dungeon.drops.filter((d) => d.itemId === item.id).reduce((s, d) => s + d.rate, 0)) * itemMult;
+  const multOf = (it) => (it.id === "coin" ? lfm.coin : it.egg ? lfm.egg : 1);
+  const countOf = (it) => (team.yields?.[it.id] ?? dungeon.drops.filter((d) => d.itemId === it.id).reduce((s, d) => s + d.rate, 0)) * multOf(it);
+  const itemMult = !item || item.multi ? 1 : multOf(item);
+  const multiRates = item?.multi ? item.multi.map((it) => ({ item: it, rate: countOf(it) })) : null;
+  const rate = !item ? 1 : multiRates ? multiRates.reduce((s, x) => s + x.rate, 0) : countOf(item);
   const runSec = effTime(team) + RUN_OVERHEAD_SEC;
   const perHour = (3600 / runSec) * rate;
   const staminaPer = rate > 0 ? dungeon.stamina / rate : Infinity;
@@ -1050,12 +1056,25 @@ function evaluate(team, dungeon, item, boxActive) {
   const missing = count("missing", side);
   const substituted = count("substitute", side) + count("partial", side);
   const ease = easeOf(team);
-  return { team, dungeon, members, side, rate, runSec, perHour, staminaPer, expPerHour, expPerStamina, expPerRun: expPerRun || null, lfm, itemMult, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
+  return { team, dungeon, members, side, rate, multiRates, runSec, perHour, staminaPer, expPerHour, expPerStamina, expPerRun: expPerRun || null, lfm, itemMult, missing, substituted, easeScore: ease.score, ease, dbonus: dungeonBonusOf(team) };
 }
 
 function search() {
   const q = $("#q").value;
   let { dungeons, item, canonical } = searchType === "leader" ? { dungeons: [], item: null, canonical: q } : resolveQuery(q, searchType);
+  // 素材を複数選んだ時: OR はどれかが出る、AND は全部が出るダンジョン。素材の数は合計で並べる
+  if (multiItem()) {
+    const items = itemPicks.map((id) => db.items.find((x) => x.id === id)).filter(Boolean);
+    if (!items.length) {
+      $("#results").innerHTML = `<p class="empty">素材を選んでください。候補から選ぶと${itemLogic === "or" ? "「どれか」" : "「すべて」"}の条件に追加されます。</p>`;
+      $("#parts-only-wrap").hidden = true;
+      return;
+    }
+    const has = (d, it) => d.drops.some((x) => x.itemId === it.id);
+    dungeons = sortedDungeons(db.dungeons.filter((d) => (itemLogic === "or" ? items.some((it) => has(d, it)) : items.every((it) => has(d, it)))));
+    item = items.length === 1 ? items[0] : { id: "__multi", name: items.map((x) => x.name).join(itemLogic === "or" ? " または " : " と "), multi: items, logic: itemLogic };
+    canonical = item.name;
+  }
   // リーダー・フレンドで探す: そのキャラがリーダーかフレンドの編成（ダンジョンはまたがる）
   const leaderFams = searchType === "leader" ? leaderNosFor(q) : null;
   const famOf = (no) => MDB.get(no)?.[9] || no;
@@ -1070,7 +1089,7 @@ function search() {
   const partsOnly = hasParts && $("#parts-only").checked;
   const out = $("#results");
 
-  if (!q.trim()) {
+  if (!q.trim() && !multiItem()) {
     out.innerHTML = `<p class="empty">${SEARCH_TYPES[searchType].noun}名を入力してください。</p>`;
     return;
   }
@@ -1083,6 +1102,10 @@ function search() {
   if (!total && leaderFams) {
     const dgName = leaderDg ? db.dungeons.find((d) => d.id === leaderDg)?.name : null;
     out.innerHTML = `<div class="card unregistered"><p>「${esc(q)}」がリーダーかフレンドの編成は${dgName ? `「${esc(dgName)}」に` : ""}見つかりませんでした。図鑑No.か名前の一部で探せます（候補はリーダー・フレンドに使われているキャラだけ）。</p></div>`;
+    return;
+  }
+  if (!total && item?.multi) {
+    out.innerHTML = `<div class="card unregistered"><p>${item.multi.map((x) => `「${esc(x.name)}」`).join(item.logic === "or" ? "・" : "と")}${item.logic === "or" ? "のどれかが" : "が全部"}出るダンジョンの周回編成はまだありません。</p>${item.logic === "and" ? `<p class="hint">「どれか（OR）」に切り替えると、どれか1つでも出るダンジョンを探せます。</p>` : ""}</div>`;
     return;
   }
   if (!total) {
@@ -1141,7 +1164,9 @@ function search() {
   }
 
   const head =
-    (item
+    (item?.multi
+      ? `<p class="summary">${item.multi.map((x) => `「${esc(x.name)}」`).join(item.logic === "or" ? "・" : "と")}${item.logic === "or" ? "のどれかが" : "が全部"}出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件<small class="muted">（素材/時・素材/周は選んだ素材の合計）</small></p>`
+      : item
       ? `<p class="summary">「${esc(item.name)}」が出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件</p>`
       : leaderFams
         ? `<p class="summary">「${esc(q)}」がリーダーかフレンドの編成 ${rows.length}件（${leaderDg ? esc(db.dungeons.find((d) => d.id === leaderDg)?.name ?? "") : `${new Set(rows.map((r) => r.dungeon.id)).size}ダンジョン`}）</p>`
@@ -1875,7 +1900,7 @@ function renderEaseBreakdown(p) {
 
 function renderResult(r, i, item) {
   const t = r.team;
-  const unit = item ? `${esc(item.name)} / 時` : "周 / 時";
+  const unit = item?.multi ? "素材の合計 / 時" : item ? `${esc(item.name)} / 時` : "周 / 時";
   const est = (key) => (t.estimated?.includes(key) ? `<span class="est">推定</span>` : "");
   const dropEst = item && r.dungeon.drops.some((d) => d.itemId === item.id && d.estimated)
     ? `<span class="est">推定</span>`
@@ -1887,7 +1912,12 @@ function renderResult(r, i, item) {
       ? `<span class="est" title="${esc(r.dungeon.rewardNote ?? "")}">1周分の実績</span>`
       : "";
   let staminaLine = "";
-  if (item && r.dungeon.stamina > 0 && r.rate > 0) {
+  if (r.multiRates) {
+    const hl = mode === "perRun" ? "hl" : "";
+    staminaLine = `<div class="wide ${hl}"><dt>1周あたり</dt><dd>${r.multiRates
+      .map((x) => `${esc(x.item.name)} ${x.rate > 0 ? `${formatCount(x.rate)}${x.item.id === "coin" ? "" : "個"}` : `<span class="muted">出ない</span>`}`)
+      .join(" ／ ")}${r.multiRates.length > 1 ? `<small class="muted">（合計 ${formatCount(r.rate)}。L/Fの倍率込み）</small>` : ""}</dd></div>`;
+  } else if (item && r.dungeon.stamina > 0 && r.rate > 0) {
     const hl = mode === "perRun" ? "hl" : "";
     staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}${item.id === "coin" ? "" : "個"}${r.itemMult !== 1 ? `<small class="muted">（L/F${item.id === "coin" ? "のコイン" : "のタマゴ"}${multLabel(r.itemMult)}込み）</small>` : ""}${dropEst}</dd></div>`;
   }
@@ -3121,7 +3151,7 @@ function sortedDungeons(list = db.dungeons) {
 }
 
 function suggestionsFor(q) {
-  const list = searchType === "dungeon" ? sortedDungeons() : searchType === "leader" ? leaderSuggestions() : db.items;
+  const list = searchType === "dungeon" ? sortedDungeons() : searchType === "leader" ? leaderSuggestions() : multiItem() ? db.items.filter((x) => !itemPicks.includes(x.id)) : db.items;
   if (!q.trim()) return list;
   const n = norm(canonicalName(q));
   const raw = norm(q);
@@ -3151,7 +3181,63 @@ function renderSuggestions() {
   $("#q").setAttribute("aria-expanded", String(!el.hidden));
 }
 
+// 複数素材の選択中チップ（×で外す）
+function renderItemChips() {
+  const el = $("#item-chips");
+  if (!el) return;
+  const on = multiItem();
+  el.hidden = !on;
+  $("#q").placeholder = on ? (itemPicks.length ? "素材を追加（候補から選ぶ）" : "素材を入力して候補から選ぶ") : SEARCH_TYPES[searchType].placeholder;
+  el.innerHTML = on
+    ? itemPicks.length
+      ? itemPicks
+          .map((id, i) => `${i ? `<span class="chip-join">${itemLogic === "or" ? "または" : "と"}</span>` : ""}<span class="item-chip">${esc(db.items.find((x) => x.id === id)?.name ?? id)}<button type="button" data-unpick="${esc(id)}" aria-label="外す">×</button></span>`)
+          .join("")
+      : `<span class="muted">${itemLogic === "or" ? "どれか1つでも出るダンジョンを探します" : "選んだ素材が全部出るダンジョンを探します"}。素材を2つ以上選んでください</span>`
+    : "";
+}
+document.addEventListener("click", (e) => {
+  const un = e.target.closest("[data-unpick]");
+  if (un) {
+    itemPicks = itemPicks.filter((x) => x !== un.dataset.unpick);
+    renderItemChips();
+    if (itemPicks.length) search();
+    else $("#results").innerHTML = "";
+    return;
+  }
+  const lb = e.target.closest("#item-logic button");
+  if (!lb || lb.dataset.logic === itemLogic) return;
+  const prev = itemLogic;
+  itemLogic = lb.dataset.logic;
+  document.querySelectorAll("#item-logic button").forEach((x) => x.classList.toggle("active", x === lb));
+  if (prev === "one" && itemLogic !== "one") {
+    // 1種類で入れていた素材を、そのまま1つ目にする
+    const it = resolveQuery($("#q").value, "item").item;
+    if (it && !itemPicks.includes(it.id)) itemPicks.unshift(it.id);
+    $("#q").value = "";
+    syncQClear();
+  } else if (itemLogic === "one") {
+    const first = db.items.find((x) => x.id === itemPicks[0]);
+    $("#q").value = first?.name ?? "";
+    syncQClear();
+  }
+  renderItemChips();
+  if (hasQuery()) search();
+  else $("#results").innerHTML = "";
+});
+
 function pickSuggestion(name) {
+  if (multiItem()) {
+    const it = db.items.find((x) => x.name === name);
+    if (it && !itemPicks.includes(it.id)) itemPicks.push(it.id);
+    $("#q").value = "";
+    syncQClear();
+    $("#q-suggest").hidden = true;
+    suggestIndex = -1;
+    renderItemChips();
+    search();
+    return;
+  }
   $("#q").value = name;
   syncQClear();
   $("#q-suggest").hidden = true;
@@ -3557,7 +3643,7 @@ function applyShared() {
     renderRegDungeons($("#reg-dungeon").value);
     renderRegList();
   }
-  if (!$("#tab-search").hidden && $("#q").value.trim() && $("#results").children.length) search();
+  if (!$("#tab-search").hidden && hasQuery() && $("#results").children.length) search();
 }
 
 async function initShared() {
@@ -3577,7 +3663,7 @@ async function initShared() {
     shared.fb.watchOverrides?.((map) => {
       teamOverrides = map;
       renderAdminSeedHidden();
-      if (!$("#tab-search").hidden && $("#q").value.trim() && $("#results").children.length) search();
+      if (!$("#tab-search").hidden && hasQuery() && $("#results").children.length) search();
     });
     updateRegMode();
     return;
@@ -3853,6 +3939,8 @@ function setSearchType(type) {
   $("#q-label").textContent = t.label;
   $("#q").placeholder = t.placeholder;
   $("#leader-dungeon-wrap").hidden = type !== "leader";
+  $("#item-logic-wrap").hidden = type !== "item";
+  renderItemChips();
   if (type === "leader") renderLeaderDungeons();
   renderSuggestions();
 }
@@ -3868,7 +3956,7 @@ function renderLeaderDungeons() {
   sel.innerHTML = `<option value="">すべてのダンジョン</option>` + [...groups].map(([g, ds]) => `<optgroup label="${esc(g)}">${ds.map((d) => `<option value="${esc(d.id)}">${esc(d.name)}</option>`).join("")}</optgroup>`).join("");
   sel.value = cur;
 }
-$("#leader-dungeon").addEventListener("change", () => $("#q").value.trim() && search());
+$("#leader-dungeon").addEventListener("change", () => hasQuery() && search());
 
 document.querySelectorAll("#search-type button").forEach((b) =>
   b.addEventListener("click", () => {
@@ -3885,7 +3973,7 @@ document.querySelectorAll("#mode button").forEach((b) =>
   b.addEventListener("click", () => {
     mode = b.dataset.mode;
     document.querySelectorAll("#mode button").forEach((x) => x.classList.toggle("active", x === b));
-    if ($("#q").value.trim()) search();
+    if (hasQuery()) search();
   })
 );
 
@@ -4047,6 +4135,7 @@ $("#q").addEventListener("input", () => {
   clearTimeout(autoSearchTimer);
   autoSearchTimer = setTimeout(() => {
     const q = $("#q").value.trim();
+    if (multiItem()) return;
     if (!q) return ($("#results").innerHTML = "");
     const hit = searchType === "leader" ? leaderNosFor(q).size > 0 : (({ dungeons, item }) => !!item || dungeons.length > 0)(resolveQuery(q, searchType));
     if (hit) search();
@@ -4074,7 +4163,10 @@ $("#q").addEventListener("keydown", (e) => {
     $("#q-suggest").hidden = true;
   } else if (e.key === "Enter" && !e.isComposing) {
     if (open && suggestIndex >= 0) pickSuggestion(items[suggestIndex].dataset.name);
-    else {
+    else if (multiItem()) {
+      const it = resolveQuery($("#q").value, "item").item;
+      if (it) pickSuggestion(it.name);
+    } else {
       $("#q-suggest").hidden = true;
       search();
     }
@@ -4087,12 +4179,12 @@ $("#q-suggest").addEventListener("mousedown", (e) => {
   if (!li.dataset.name) return;
   pickSuggestion(li.dataset.name);
 });
-$("#parts-only").addEventListener("change", () => $("#q").value.trim() && search());
+$("#parts-only").addEventListener("change", () => hasQuery() && search());
 document.querySelectorAll("#fast-filter button").forEach((b) =>
   b.addEventListener("click", () => {
     fastFilter = b.dataset.fast;
     document.querySelectorAll("#fast-filter button").forEach((x) => x.classList.toggle("active", x === b));
-    if ($("#q").value.trim()) search();
+    if (hasQuery()) search();
   })
 );
 
