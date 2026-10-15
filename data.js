@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 113,
+  "version": 114,
   "seed": true,
   "monsters": [
     {
@@ -2497,6 +2497,13 @@ window.PAD_SEED = {
           "siteSource": [
             "ゲームウィズ"
           ]
+        },
+        {
+          "itemId": "sixslot",
+          "rate": 1,
+          "siteSource": [
+            "蒼さんのnote"
+          ]
         }
       ],
       "gimmicks": {
@@ -2825,7 +2832,8 @@ window.PAD_SEED = {
             ]
           }
         ]
-      }
+      },
+      "rewardNote": "一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）"
     },
     {
       "id": "plusparadise",
@@ -2890,11 +2898,11 @@ window.PAD_SEED = {
         },
         {
           "itemId": "delay",
-          "rate": 11,
+          "rate": 10.5,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "note": "最大11体"
+          "note": "乱入が5Fなら10個・6Fなら11個"
         },
         {
           "itemId": "defignore",
@@ -2905,11 +2913,11 @@ window.PAD_SEED = {
         },
         {
           "itemId": "sixslot",
-          "rate": 16,
+          "rate": 7.5,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "note": "いずれか最大8体"
+          "note": "乱入が5Fなら8個・6Fなら7個"
         },
         {
           "itemId": "coin",
@@ -2995,7 +3003,7 @@ window.PAD_SEED = {
           "ダメージ無効の階層: ゲームウィズはB4・B7・B13、AppMediaはB5〜6・B13と記載"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ぜいんちゅ",
@@ -3324,7 +3332,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "kago": "陽"
+      "kago": "陽",
+      "exchange": "200周"
     },
     {
       "id": "fuun",
@@ -3813,7 +3822,8 @@ window.PAD_SEED = {
             "parts": true
           }
         ]
-      }
+      },
+      "exchange": "200周"
     },
     {
       "id": "tenkyu",
@@ -4286,7 +4296,8 @@ window.PAD_SEED = {
             "parts": true
           }
         ]
-      }
+      },
+      "exchange": "200周"
     },
     {
       "id": "guren",
@@ -4307,20 +4318,26 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 110000000,
+          "rate": 100000000,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
           "itemId": "latentpp",
-          "rate": 6,
-          "observed": true
+          "rate": 7,
+          "observed": true,
+          "siteSource": [
+            "蒼さんのnote"
+          ]
         },
         {
           "itemId": "reducep",
-          "rate": 5,
-          "observed": true
+          "rate": 6,
+          "observed": true,
+          "siteSource": [
+            "蒼さんのnote"
+          ]
         },
         {
           "itemId": "kingdragon",
@@ -4409,7 +4426,7 @@ window.PAD_SEED = {
           "スキル封印の階層: ゲームウィズはB5・B10、ゲームエイトは10F（超根性後）"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ぜいんちゅ",
@@ -4745,7 +4762,8 @@ window.PAD_SEED = {
             "parts": true
           }
         ]
-      }
+      },
+      "exchange": "200周"
     },
     {
       "id": "taiju",
@@ -4800,6 +4818,14 @@ window.PAD_SEED = {
           "siteSource": [
             "ゲームウィズ"
           ]
+        },
+        {
+          "itemId": "goldtama",
+          "rate": 1,
+          "siteSource": [
+            "蒼さんのnote"
+          ],
+          "note": "確率ドロップ（1体で計算）"
         }
       ],
       "gimmicks": {
@@ -4886,7 +4912,7 @@ window.PAD_SEED = {
           "5×4盤面: ゲームウィズはB2・B10・B15、ゲームエイトは2F・10F"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ぜいんちゅ",
@@ -5219,7 +5245,8 @@ window.PAD_SEED = {
             "parts": true
           }
         ]
-      }
+      },
+      "exchange": "200周"
     },
     {
       "id": "jupiter",
@@ -5243,9 +5270,9 @@ window.PAD_SEED = {
         },
         {
           "itemId": "exp",
-          "rate": 68000000,
+          "rate": 65000000,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
@@ -5264,35 +5291,35 @@ window.PAD_SEED = {
         },
         {
           "itemId": "latentpp",
-          "rate": 7,
+          "rate": 8,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
           "note": "7〜8体"
         },
         {
           "itemId": "sagepii",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "tojitama",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "modoritto",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "coin",
@@ -5357,7 +5384,8 @@ window.PAD_SEED = {
           "B7のスキル効果解除でループ系のスキルが切れる（両サイト）"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算"
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
+      "exchange": "50周"
     },
     {
       "id": "mercury",
@@ -5412,27 +5440,27 @@ window.PAD_SEED = {
         },
         {
           "itemId": "sagepii",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "modoritto",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "tojitama",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "coin",
@@ -5500,7 +5528,8 @@ window.PAD_SEED = {
           "属性吸収: ゲームエイトは7Fで光闇吸収、ゲームウィズはB7のシールド破壊時に火水木吸収と記載"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算"
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
+      "exchange": "100周"
     },
     {
       "id": "venus",
@@ -5550,9 +5579,9 @@ window.PAD_SEED = {
         },
         {
           "itemId": "coin",
-          "rate": 250000,
+          "rate": 5000000000,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
           "note": "称号チャレンジ版の記載の可能性あり"
         }
@@ -5616,7 +5645,7 @@ window.PAD_SEED = {
           "B3・B7・B11・B13は溜め行動の後に大ダメージ（両サイト）"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ゲームウィズ",
@@ -5987,7 +6016,8 @@ window.PAD_SEED = {
             ]
           }
         ]
-      }
+      },
+      "exchange": "100周"
     },
     {
       "id": "moon",
@@ -6016,9 +6046,9 @@ window.PAD_SEED = {
         },
         {
           "itemId": "kingdragon",
-          "rate": 9,
+          "rate": 10,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
           "note": "8〜10体"
         },
@@ -6031,8 +6061,12 @@ window.PAD_SEED = {
         },
         {
           "itemId": "tojitama",
-          "rate": 1,
-          "observed": true
+          "rate": 0.3333333333333333,
+          "observed": true,
+          "siteSource": [
+            "蒼さんのnote"
+          ],
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "souso",
@@ -6043,19 +6077,19 @@ window.PAD_SEED = {
         },
         {
           "itemId": "sagepii",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "modoritto",
-          "rate": 1,
+          "rate": 0.3333333333333333,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "countUnknown": true
+          "note": "サゲピィ・とじたまドラ・モドリットのどれか1体（確率）"
         },
         {
           "itemId": "goldtama",
@@ -6154,7 +6188,7 @@ window.PAD_SEED = {
           "B2・B6・B14で2000万超えの大ダメージ（攻略サイトの概要より）"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ぜいんちゅ",
@@ -6501,7 +6535,8 @@ window.PAD_SEED = {
             ]
           }
         ]
-      }
+      },
+      "exchange": "100周"
     },
     {
       "id": "sun",
@@ -7098,7 +7133,8 @@ window.PAD_SEED = {
             ]
           }
         ]
-      }
+      },
+      "exchange": "100周"
     },
     {
       "id": "hyakushiki",
@@ -7137,9 +7173,9 @@ window.PAD_SEED = {
         },
         {
           "itemId": "reducep",
-          "rate": 2,
+          "rate": 6,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
@@ -7253,7 +7289,7 @@ window.PAD_SEED = {
           "陽の加護あり（陽の加護を持つキャラはHP・回復力2倍、攻撃力5倍。攻略サイトより）"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "gimmickFloors": {
         "assistVoid": [
           2
@@ -7506,7 +7542,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "kago": "陽"
+      "kago": "陽",
+      "exchange": "50周"
     },
     {
       "id": "senju",
@@ -7543,9 +7580,9 @@ window.PAD_SEED = {
         },
         {
           "itemId": "pii",
-          "rate": 3,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
@@ -7658,7 +7695,7 @@ window.PAD_SEED = {
           "盤面変化: ゲームウィズは5×4マスと6×5マスの両方を記載"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ゲームウィズ",
@@ -7926,7 +7963,8 @@ window.PAD_SEED = {
             ]
           }
         ]
-      }
+      },
+      "exchange": "50周"
     },
     {
       "id": "shinbanju",
@@ -7977,9 +8015,9 @@ window.PAD_SEED = {
         },
         {
           "itemId": "killer",
-          "rate": 4,
+          "rate": 5,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
@@ -8087,7 +8125,7 @@ window.PAD_SEED = {
           "最大HP半減（5F）: 両サイトの敵行動表に記載"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。個数の記載がないものはプレイ履歴1周分の実績、どちらもないものは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ゲームウィズ",
@@ -8322,7 +8360,8 @@ window.PAD_SEED = {
             ]
           }
         ]
-      }
+      },
+      "exchange": "50周"
     },
     {
       "id": "kyouchou",
@@ -8754,7 +8793,8 @@ window.PAD_SEED = {
         "item": "凶玉",
         "baseRate": 50,
         "note": "ボスの部位破壊で凶玉（最大2個）。基本のドロップ率50%＋部位破壊ボーナス1つにつき+10%"
-      }
+      },
+      "exchange": "50周"
     },
     {
       "id": "shinokuchou",
@@ -8797,10 +8837,11 @@ window.PAD_SEED = {
         },
         {
           "itemId": "kingdragon",
-          "rate": 10,
+          "rate": 8.5,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "7〜10体"
         },
         {
           "itemId": "goldtama",
@@ -8913,7 +8954,7 @@ window.PAD_SEED = {
           "「ダンボ」はタマゴ・部位破壊素材のドロップ率を上げるダンジョンボーナス（リーダースキルなど）の数"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。経験値は攻略サイトの1億（プレイ履歴はボーナス込みで1億400万〜1億6900万）",
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載を優先。経験値は攻略サイトの1億（プレイ履歴はボーナス込みで1億400万〜1億6900万）。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "damage": {
         "source": {
           "site": "ゲームウィズ",
@@ -9252,7 +9293,8 @@ window.PAD_SEED = {
         "item": "アグリゲートの希石",
         "baseRate": 10,
         "note": "ボスの部位破壊で希石（0〜4個、ボスと同じ属性）。基本のドロップ率10%（新凶兆以外は原則10%）＋部位破壊ボーナス1つにつき+10%。リーダーの「タマゴと部位破壊素材のドロップ率」アップは未計算"
-      }
+      },
+      "exchange": "1属性につき約65周"
     },
     {
       "id": "urajuoku",
@@ -9284,51 +9326,61 @@ window.PAD_SEED = {
         },
         {
           "itemId": "supernoel",
-          "rate": 1,
+          "rate": 3,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
           "itemId": "delay",
-          "rate": 1,
+          "rate": 3,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
           "itemId": "nijipii",
-          "rate": 1,
+          "rate": 3,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
           "itemId": "goldtama",
           "rate": 1,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "確率ドロップ"
         },
         {
           "itemId": "sixslot",
-          "rate": 1,
+          "rate": 0.5,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "6枠潜在かキラー潜在のどれか1体"
         },
         {
           "itemId": "killer",
-          "rate": 1,
+          "rate": 0.5,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "6枠潜在かキラー潜在のどれか1体"
         },
         {
           "itemId": "kingdragon",
-          "rate": 1,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
+          ]
+        },
+        {
+          "itemId": "latentpp",
+          "rate": 2,
+          "siteSource": [
+            "蒼さんのnote"
           ]
         }
       ],
@@ -9356,12 +9408,13 @@ window.PAD_SEED = {
           "B10の超根性時にパズル教室（0コンボ）が2回"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの記載（経験値1.1億・コイン10億）。各ドロップの個数は記載がないため1体で計算",
+      "rewardNote": "報酬はゲームウィズの記載（経験値1.1億・コイン10億）。各ドロップの個数は記載がないため1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
       "parts": {
         "item": "モリりん・ワルりんの希石",
         "baseRate": 10,
         "note": "ルゥの部位破壊でモリりん・ワルりんの希石。基本のドロップ率10%＋部位破壊ボーナス1つにつき+10%（投稿の「部位破壊7でドロップ率96%（日向F×1.2）」「部位破壊6で約91%（影山L×1.1・日向F×1.2）」「部位破壊9で確定」から逆算）"
-      }
+      },
+      "exchange": "ボス約550周・乱入部位25周"
     },
     {
       "id": "juoku",
@@ -9393,31 +9446,50 @@ window.PAD_SEED = {
         },
         {
           "itemId": "supernoel",
-          "rate": 1,
+          "rate": 3.5,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "3〜4体（目安）"
         },
         {
           "itemId": "delay",
-          "rate": 1,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ]
         },
         {
           "itemId": "nijipii",
-          "rate": 1,
+          "rate": 3.5,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "3〜4体（目安）"
         },
         {
           "itemId": "sixslot",
+          "rate": 1.5,
+          "siteSource": [
+            "蒼さんのnote"
+          ],
+          "note": "1〜2体（目安）"
+        },
+        {
+          "itemId": "latentpp",
+          "rate": 1.5,
+          "siteSource": [
+            "蒼さんのnote"
+          ],
+          "note": "1〜2体（目安）"
+        },
+        {
+          "itemId": "kingdragon",
           "rate": 1,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "0〜2体（目安）"
         }
       ],
       "gimmicks": {
@@ -9442,7 +9514,8 @@ window.PAD_SEED = {
           "ボス超根性時に1000万ダメージ。B10の超根性時にパズル教室（0コンボ）が2回"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの記載（経験値10億・コイン10億）"
+      "rewardNote": "報酬はゲームウィズの記載（経験値10億・コイン10億）。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
+      "exchange": "約550周"
     },
     {
       "id": "wanggren",
@@ -9531,45 +9604,59 @@ window.PAD_SEED = {
         },
         {
           "itemId": "supernoel",
-          "rate": 1,
+          "rate": 3,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "2〜4体（目安）"
         },
         {
           "itemId": "delay",
-          "rate": 1,
+          "rate": 2.5,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "2〜3体（目安）"
         },
         {
           "itemId": "nijipii",
-          "rate": 1,
+          "rate": 3,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "2〜4体（目安）"
         },
         {
           "itemId": "sixslot",
-          "rate": 1,
+          "rate": 0.75,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "6枠潜在かキラー潜在で1〜2体（目安）"
         },
         {
           "itemId": "killer",
-          "rate": 1,
+          "rate": 0.75,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "6枠潜在かキラー潜在で1〜2体（目安）"
         },
         {
           "itemId": "kingdragon",
-          "rate": 1,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "1〜3体（目安）"
+        },
+        {
+          "itemId": "latentpp",
+          "rate": 1.5,
+          "siteSource": [
+            "蒼さんのnote"
+          ],
+          "note": "1〜2体（目安）"
         }
       ],
       "gimmicks": {
@@ -9616,7 +9703,7 @@ window.PAD_SEED = {
           "B5・ボスでシールド（600億）、B5でスキル効果解除とアシスト無効4ターン"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの記載（経験値11億・コイン11億）。個数の記載がないドロップは1体で計算"
+      "rewardNote": "報酬はゲームウィズの記載（経験値11億・コイン11億）。個数の記載がないドロップは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）"
     },
     {
       "id": "ginyoku",
@@ -9652,44 +9739,49 @@ window.PAD_SEED = {
           "itemId": "kingtama",
           "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "最大2体（確定ではない）"
         },
         {
           "itemId": "nijipii",
           "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "最大2体（確定ではない）"
         },
         {
           "itemId": "supernoel",
-          "rate": 1,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "最大2体（確定ではない）"
         },
         {
           "itemId": "delay",
-          "rate": 1,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "最大2体（確定ではない）"
         },
         {
           "itemId": "latentpp",
           "rate": 4,
           "siteSource": [
-            "ゲームウィズ"
+            "蒼さんのnote"
           ],
-          "note": "ランダム4体"
+          "note": "最大4体（確定ではない）"
         },
         {
           "itemId": "killer",
-          "rate": 1,
+          "rate": 2,
           "siteSource": [
-            "ゲームウィズ"
-          ]
+            "蒼さんのnote"
+          ],
+          "note": "最大2体（確定ではない）"
         }
       ],
       "parts": {
@@ -9741,7 +9833,8 @@ window.PAD_SEED = {
           "リーダー軽減なしだとB13の先制で14.7万ダメージ"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの記載（経験値12億・コイン12億）。個数の記載がないドロップは1体で計算"
+      "rewardNote": "報酬はゲームウィズの記載（経験値12億・コイン12億）。個数の記載がないドロップは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
+      "exchange": "5Fの部位20周"
     }
   ],
   "teams": [

@@ -1898,6 +1898,8 @@ function renderEaseBreakdown(p) {
     <p class="hint">バーが長いほど楽。重み: クリアターン30%・レシートの長さ30%・複雑さ25%・+891 15%</p></details>`;
 }
 
+// 報酬の個数・交換に必要な周回数の出典（掲載許可済み）
+const AO_NOTE_URL = "https://note.com/aodao__/n/n413fd52f9fc9";
 function renderResult(r, i, item) {
   const t = r.team;
   const unit = item?.multi ? "素材の合計 / 時" : item ? `${esc(item.name)} / 時` : "周 / 時";
@@ -1928,7 +1930,7 @@ function renderResult(r, i, item) {
   return `<article class="result ${i === 0 ? "best" : ""}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
-      <div><h3>${superUnknown(t) ? `<span class="badge badge-warn" title="超覚醒を選べるキャラのうち、レシートから超覚醒が分からない枠があります">超覚醒不明・必ず元の編成を確認</span>` : ""}${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}${plus891Badge(t)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
+      <div><h3>${superUnknown(t) ? `<span class="badge badge-warn" title="超覚醒を選べるキャラのうち、レシートから超覚醒が分からない枠があります">超覚醒不明・必ず元の編成を確認</span>` : ""}${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}${plus891Badge(t)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}${r.dungeon.exchange ? `<span class="exchange-runs">交換に必要な周回数: ${esc(r.dungeon.exchange)}<small>（<a href="${AO_NOTE_URL}" target="_blank" rel="noopener">蒼さんのnote</a>より）</small></span>` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
       <div class="score-col">${partRateBadge(t, r.dungeon)}</div>
     </div>
     ${renderMembers(r, "row")}
