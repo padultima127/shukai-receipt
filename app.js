@@ -1887,7 +1887,11 @@ function renderEaseStats(m) {
   return `<div><dt>レシート</dt><dd>${m.chars}字</dd></div>
     <div><dt>分岐</dt><dd>${m.branch > 0 ? "あり" : "なし"}</dd></div>
     <div><dt>ずらし</dt><dd>${m.zurashi}</dd></div>
-    <div><dt>+891</dt><dd>${plus891Label(m)}</dd></div>`;
+    ${(() => {
+      // 「一部（キャラ名…）」のように長い時は1行まるごと使う（丸い枠からはみ出さないように）
+      const v = plus891Label(m);
+      return `<div class="${v.replace(/<[^>]+>/g, "").length > 6 ? "wide" : ""}"><dt>+891</dt><dd>${v}</dd></div>`;
+    })()}`;
 }
 
 // 楽さの内訳（楽なほど棒が長い）
