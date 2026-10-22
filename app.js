@@ -1166,7 +1166,7 @@ function search() {
 
   const head =
     (item?.multi
-      ? `<p class="summary">${item.multi.map((x) => `「${esc(x.name)}」`).join(item.logic === "or" ? "・" : "と")}${item.logic === "or" ? "のどれかが" : "が全部"}出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件<small class="muted">（素材/時・素材/周は選んだ素材の合計）</small></p>`
+      ? `<p class="summary">${item.multi.map((x) => `「${esc(x.name)}」`).join(item.logic === "or" ? "・" : "と")}${item.logic === "or" ? "のどれかが" : "が全部"}出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件<small class="muted">（素材/時・素材/周で並べる時は、選んだ素材の数を足した順）</small></p>`
       : item
       ? `<p class="summary">「${esc(item.name)}」が出るダンジョン ${dungeons.length}件 / 編成 ${rows.length}件</p>`
       : leaderFams
@@ -1907,7 +1907,7 @@ function renderEaseBreakdown(p) {
 const AO_NOTE_URL = "https://note.com/aodao__/n/n413fd52f9fc9";
 function renderResult(r, i, item) {
   const t = r.team;
-  const unit = item?.multi ? "素材の合計 / 時" : item ? `${esc(item.name)} / 時` : "周 / 時";
+  const unit = item?.multi ? "素材ごと / 時" : item ? `${esc(item.name)} / 時` : "周 / 時";
   const est = (key) => (t.estimated?.includes(key) ? `<span class="est">推定</span>` : "");
   const dropEst = item && r.dungeon.drops.some((d) => d.itemId === item.id && d.estimated)
     ? `<span class="est">推定</span>`
@@ -1923,7 +1923,7 @@ function renderResult(r, i, item) {
     const hl = mode === "perRun" ? "hl" : "";
     staminaLine = `<div class="wide ${hl}"><dt>1周あたり</dt><dd>${r.multiRates
       .map((x) => `${esc(x.item.name)} ${x.rate > 0 ? `${formatCount(x.rate)}${x.item.id === "coin" ? "" : "個"}` : `<span class="muted">出ない</span>`}`)
-      .join(" ／ ")}${r.multiRates.length > 1 ? `<small class="muted">（合計 ${formatCount(r.rate)}）</small>` : ""}</dd></div>`;
+      .join(" ／ ")}</dd></div>`;
   } else if (item && r.dungeon.stamina > 0 && r.rate > 0) {
     const hl = mode === "perRun" ? "hl" : "";
     // 倍率の説明や出典の印が付くと長くなるので、1行まるごと使う
@@ -1958,7 +1958,9 @@ function renderResult(r, i, item) {
         return pi ? `<div class="wide"><dt>部位破壊</dt><dd>${esc(pi.can)}${pi.drop ? `・${esc(pi.drop)}` : ""}${pi.note ? `<br><small class="muted">${esc(pi.note)}</small>` : ""}</dd></div>` : "";
       })()}
       <div class="${mode === "dbonus" ? "hl" : ""}"><dt>ダンジョンボーナス</dt><dd>${formatDungeonBonus(r.dbonus ?? dungeonBonusOf(t))}</dd></div>
-      <div class="${item ? "wide" : ""} ${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
+      <div class="${item ? "wide" : ""} ${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${r.multiRates
+        ? r.multiRates.map((x) => `${esc(x.item.name)} ${x.rate > 0 ? formatCount((3600 / r.runSec) * x.rate) : `<span class="muted">出ない</span>`}`).join(" ／ ")
+        : formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>`
         : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}), plus891Names: settingOf(t, "plus891Choice") === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : null, badgeText: plus891Badge(t).replace(/<[^>]+>/g, "").replace(/^\s*\+891/, "").trim() || null })}
