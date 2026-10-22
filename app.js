@@ -1037,7 +1037,8 @@ function evaluate(team, dungeon, item, boxActive) {
   // 部位破壊の数などで編成ごとに報酬が違う場合は team.yields を優先
   // リーダー・フレンドの潜入時倍率（タマゴ＝モンスターのドロップ、コイン、ランク経験値）
   const lfm = lfMultipliers(team);
-  const multOf = (it) => (it.id === "coin" ? lfm.coin : it.egg ? lfm.egg : 1);
+  // タマゴのドロップ率アップは確定ドロップの個数を増やさない（本人談）ので、素材の個数には掛けない。コインだけ倍率を掛ける
+  const multOf = (it) => (it.id === "coin" ? lfm.coin : 1);
   const countOf = (it) => (team.yields?.[it.id] ?? dungeon.drops.filter((d) => d.itemId === it.id).reduce((s, d) => s + d.rate, 0)) * multOf(it);
   const itemMult = !item || item.multi ? 1 : multOf(item);
   const multiRates = item?.multi ? item.multi.map((it) => ({ item: it, rate: countOf(it) })) : null;
@@ -1922,7 +1923,7 @@ function renderResult(r, i, item) {
     const hl = mode === "perRun" ? "hl" : "";
     staminaLine = `<div class="wide ${hl}"><dt>1周あたり</dt><dd>${r.multiRates
       .map((x) => `${esc(x.item.name)} ${x.rate > 0 ? `${formatCount(x.rate)}${x.item.id === "coin" ? "" : "個"}` : `<span class="muted">出ない</span>`}`)
-      .join(" ／ ")}${r.multiRates.length > 1 ? `<small class="muted">（合計 ${formatCount(r.rate)}。L/Fの倍率込み）</small>` : ""}</dd></div>`;
+      .join(" ／ ")}${r.multiRates.length > 1 ? `<small class="muted">（合計 ${formatCount(r.rate)}）</small>` : ""}</dd></div>`;
   } else if (item && r.dungeon.stamina > 0 && r.rate > 0) {
     const hl = mode === "perRun" ? "hl" : "";
     // 倍率の説明や出典の印が付くと長くなるので、1行まるごと使う
