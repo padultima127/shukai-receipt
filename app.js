@@ -5142,3 +5142,18 @@ function updateIconConsent() {
   $("#reg-icon-consent-list").textContent = [...new Set(names), ...(badge ? ["バッジ"] : [])].join("、");
 }
 $("#reg-form").addEventListener("change", (e) => /^reg-[ma]-\d$/.test(e.target.id) && updateIconConsent());
+
+// スマホの下メニュー（検索・登録は上のタブと同じ動き、履歴・要望はその場所までスクロール）
+document.querySelectorAll(".tabbar [data-goto]").forEach((b) =>
+  b.addEventListener("click", () => {
+    const to = b.dataset.goto;
+    const tab = document.querySelector(`header .tab[data-tab="${to}"]`);
+    if (tab) {
+      tab.click();
+      window.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      document.getElementById(to)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    document.querySelectorAll(".tabbar [data-goto]").forEach((x) => x.classList.toggle("active", x === b));
+  })
+);

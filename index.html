@@ -6,8 +6,8 @@
   <title>周回レシート図鑑</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap">
-  <link rel="stylesheet" href="style.css?v=20261015191723">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap">
+  <link rel="stylesheet" href="style.css?v=20261022125801">
 </head>
 <body>
   <header>
@@ -309,17 +309,24 @@ F: 光輝の聖騎士
     <p class="muted">© GungHo Online Entertainment Inc. All Rights Reserved.<br>当コンテンツの再利用（再転載・配布など）は、禁止しています。</p>
   </footer>
 
+  <!-- スマホ用の下メニュー -->
+  <nav class="tabbar" aria-label="メニュー">
+    <button type="button" data-goto="search" class="active">検索</button>
+    <button type="button" data-goto="register">登録</button>
+    <button type="button" data-goto="changelog">履歴</button>
+    <button type="button" data-goto="feedback">要望</button>
+  </nav>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js?v=20261015191723"></script>
-  <script src="firebase-backend.js?v=20261015191723"></script>
-  <script src="changelog.js?v=20261015191723"></script>
-  <script src="icons.js?v=20261015191723"></script>
-  <script src="monsters-db.js?v=20261015191723"></script>
-  <script src="monsters-changes.js?v=20261015191723"></script>
-  <script src="data.js?v=20261015191723"></script>
-  <script src="app.js?v=20261015191723"></script>
+  <script src="firebase-config.js?v=20261022125801"></script>
+  <script src="firebase-backend.js?v=20261022125801"></script>
+  <script src="changelog.js?v=20261022125801"></script>
+  <script src="icons.js?v=20261022125801"></script>
+  <script src="monsters-db.js?v=20261022125801"></script>
+  <script src="monsters-changes.js?v=20261022125801"></script>
+  <script src="data.js?v=20261022125801"></script>
+  <script src="app.js?v=20261022125801"></script>
   <!-- Cloudflare Web Analytics（アクセス数の集計。Cookieなし・個人を特定しない） --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "0152013b56ea4ec9800ca72574da31e8"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
