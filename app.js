@@ -1925,7 +1925,8 @@ function renderResult(r, i, item) {
       .join(" ／ ")}${r.multiRates.length > 1 ? `<small class="muted">（合計 ${formatCount(r.rate)}。L/Fの倍率込み）</small>` : ""}</dd></div>`;
   } else if (item && r.dungeon.stamina > 0 && r.rate > 0) {
     const hl = mode === "perRun" ? "hl" : "";
-    staminaLine = `<div class="${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}${item.id === "coin" ? "" : "個"}${r.itemMult !== 1 ? `<small class="muted">（L/F${item.id === "coin" ? "のコイン" : "のタマゴ"}${multLabel(r.itemMult)}込み）</small>` : ""}${dropEst}</dd></div>`;
+    // 倍率の説明や出典の印が付くと長くなるので、1行まるごと使う
+    staminaLine = `<div class="wide ${hl}"><dt>1周あたり</dt><dd>${formatCount(r.rate)}${item.id === "coin" ? "" : "個"}${r.itemMult !== 1 ? `<small class="muted">（L/F${item.id === "coin" ? "のコイン" : "のタマゴ"}${multLabel(r.itemMult)}込み）</small>` : ""}${dropEst}</dd></div>`;
   }
   const warn = r.missing
     ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
@@ -1956,7 +1957,7 @@ function renderResult(r, i, item) {
         return pi ? `<div class="wide"><dt>部位破壊</dt><dd>${esc(pi.can)}${pi.drop ? `・${esc(pi.drop)}` : ""}${pi.note ? `<br><small class="muted">${esc(pi.note)}</small>` : ""}</dd></div>` : "";
       })()}
       <div class="${mode === "dbonus" ? "hl" : ""}"><dt>ダンジョンボーナス</dt><dd>${formatDungeonBonus(r.dbonus ?? dungeonBonusOf(t))}</dd></div>
-      <div class="${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
+      <div class="${item ? "wide" : ""} ${item && mode === "expHour" ? "hl" : ""}"><dt>${unit}</dt><dd>${formatCount(r.perHour)}${est("timeSec") || dropEst}</dd></div>
       ${r.ease.legacy
         ? `<div><dt>安定率</dt><dd>${t.stability}%${est("stability")}</dd></div>`
         : renderEaseStats({ ...t.metrics, ...(settingOf(t, "plus891Choice") ? { plus891Text: settingOf(t, "plus891Choice") === "some" ? null : settingOf(t, "plus891Choice"), plus891: { required: 1, some: 0.5, "not-required": 0 }[settingOf(t, "plus891Choice")] } : {}), plus891Names: settingOf(t, "plus891Choice") === "some" ? (settingOf(t, "plus891Members") ?? []).map((i) => slotNames(t)[i]).filter(Boolean) : null, badgeText: plus891Badge(t).replace(/<[^>]+>/g, "").replace(/^\s*\+891/, "").trim() || null })}

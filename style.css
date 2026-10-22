@@ -759,3 +759,4 @@ button.link, .linkish { background: none; border: 0; color: var(--accent); }
   .stats dt { font-size: .68rem; white-space: normal; }
   .stats dd { text-align: left; }
 }
+.stats .wide { order: 10; }
