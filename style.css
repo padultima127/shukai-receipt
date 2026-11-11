@@ -828,6 +828,7 @@ body.rc-open { overflow: hidden; }
 .alts li.alt-card .icon { width: 36px; height: 36px; }
 .alts li.alt-card .icon-assist { width: 36px; height: 36px; margin: 0; }
 
+.rc-plus-sep { align-self: center; color: #c03; font-weight: 900; font-size: 12px; margin: 0 -2px 14px; }
 .rc-wait { align-self: center; margin-left: 6px; padding: 2px 8px; border-radius: 999px; background: #fff6e0; border: 1px solid #e0a43a; color: #8a5a00; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .rc-line .rc-turn + .rc-wait { margin-left: 0; }
 .rc-loop { margin: 6px 0 4px 10px; padding: 6px 8px; border-radius: 8px; background: #eef4ff; border: 1px dashed #8aa8e8; font-size: 12px; }

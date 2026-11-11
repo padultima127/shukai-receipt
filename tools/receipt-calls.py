@@ -83,6 +83,7 @@ def keys_of(name):
         # 5文字（四楓院夜一）は後ろ2文字の名前で呼ばれる
         elif re.fullmatch(r"[\u4E00-\u9FFF]{5}", p):
             keys.add(p[-2:])
+            keys.add(p[-3:])  # 竈門炭治郎 → 炭治郎
     return [k for k in keys if len(k) >= 2]
 
 
@@ -265,16 +266,16 @@ def parse_team(team, texts):
             taken.append((st, en))
             picked.append((st, en, i, k))
         picked.sort()
-        # 前の行の末尾だけで完結している名前は、前の行で数え済み
-        picked = [p for p in picked if p[1] > cut]
         # 「一護＆織姫」「一護織姫」のように同じキャラの名前が続けて当たった時は1回に数える
+        # （前の行の末尾の名前ともつなげてから見る: 「…義勇炭治」「郎（裏）」は前の行で数えた義勇炭治郎の続き）
         merged = []
         for p in picked:
-            if merged and merged[-1][2] == p[2] and not p[3].startswith("@") and not merged[-1][3].startswith("@") and re.fullmatch(r"[＆&・]?", line[merged[-1][1]:p[0]]):
-                merged[-1] = (merged[-1][0], p[1], p[2], merged[-1][3])
+            if merged and merged[-1][2] == p[2] and not p[3].startswith("@") and not merged[-1][3].startswith("@") and re.fullmatch(r"[＆&・]?|[\u4E00-\u9FFF]", line[merged[-1][1]:p[0]]):
+                merged[-1] = (merged[-1][0], p[1], p[2], merged[-1][3], merged[-1][4])
                 continue
-            merged.append(p)
-        picked = merged
+            merged.append((*p, p[1] <= cut))
+        # 前の行の末尾で始まって、前の行ですでに数えた名前（の続き）は数えない
+        picked = [p[:4] for p in merged if p[1] > cut and not p[4]]
         for st, en, i, k in picked:
             # 「服部温存」「ダイン間違って打たない」「ミナカ891推奨」は使った記録ではない
             if MENTION.match(line[en:en + 14]) or PLUS_NOTE.match(line[en:en + 6]):

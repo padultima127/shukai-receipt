@@ -2068,6 +2068,8 @@ function stageRow(no, k) {
 // 武器だけ使った後は、ターン経過やヘイストで本体のターン分溜まった時だけ本体を使ったとみなす。
 // 溜まり: 最初はパーティーのスキブ、1ターンごとに＋1、ほかのキャラのヘイスト（自分以外が◯ターン溜まる）で＋◯
 const receiptOrder = new Map();
+// 呼び出しごとに、実際に使ったと判定したスキル（"assist" | "base" | "both"）{ 階: [レシートの順] }
+const receiptParts = new Map();
 function resolveReceiptUses(t) {
   if (!t.receiptCalls) return null;
   const sb = teamSkillBoost(t, t.members[0]);
@@ -2167,6 +2169,7 @@ function resolveReceiptUses(t) {
   const uses = {};
   // 表示用: レシートに書かれた順（ターンの見積もりで並びが変わらないように）
   const order = {};
+  const parts = {};
   let first = true;
   let prevFl = 0;
   for (const [fl, calls] of Object.entries(t.receiptCalls).sort((a, b) => Number(a[0]) - Number(b[0]))) {
@@ -2197,6 +2200,8 @@ function resolveReceiptUses(t) {
         pressed.add(c.mi);
         const used = press(c.mi, c.part, fl, tn);
         if (used) ((order[fl] ??= [])[c.idx] = used.map((r) => r[0]));
+        // 表示用: 裏の表記がない呼び出しも、溜まり具合から武器・本体・両方のどれを使ったか
+        if (used) ((parts[fl] ??= [])[c.idx] = used.length > 1 ? "both" : used[0] === st[c.mi].a ? "assist" : "base");
       }
       loopFire(Number(fl), tn, pressed);
     }
@@ -2209,6 +2214,7 @@ function resolveReceiptUses(t) {
   }
   // ターンごとの配列にそろえる（使っていないターンは空）
   for (const fl of Object.keys(uses)) uses[fl] = Array.from(uses[fl], (x) => x ?? []);
+  receiptParts.set(t.id, parts);
   receiptOrder.set(t.id, Object.fromEntries(Object.entries(order).map(([fl, v]) => [fl, v.filter(Boolean).flat()])));
   return uses;
 }
@@ -5426,7 +5432,10 @@ function receiptHTML(t) {
   const chip = (c) => {
     const m = t.members[c.mi];
     if (!m) return `<span class="rc-chip"><small>?</small></span>`;
-    const isAssist = c.part === "assist";
+    // レシートに「裏」と書いていなくても、溜まり具合（スキブ・ターン経過・ヘイスト）から武器を使ったと判定したものは武器として出す。
+    // 武器と本体の両方が溜まっていて両方使った時は、武器＋本体の2つ
+    if (c.rp === "both") return `${chip({ mi: c.mi, part: "assist" })}<span class="rc-plus-sep">＋</span>${chip({ mi: c.mi, part: "base" })}`;
+    const isAssist = c.rp ? c.rp === "assist" : c.part === "assist";
     usesAssist ||= isAssist;
     const a = assistNoOf(m);
     const mon = monster(m.id);
@@ -5445,9 +5454,22 @@ function receiptHTML(t) {
       .join("");
   };
   let floors = "";
+  // 本体・武器のどちらを使ったかの判定（耐久チェックと同じ計算）
+  let rparts = {};
+  try {
+    if (calls) {
+      resolveReceiptUses({ ...t, receiptCalls: calls, receiptLoops: t.receiptLoops ?? (t.userAdded && !t.receiptCalls ? stepLoops.get(t) : undefined) });
+      rparts = receiptParts.get(t.id) ?? {};
+    }
+  } catch (e) {
+    rparts = {};
+  }
   for (const [fl, list] of Object.entries(calls ?? {}).sort((a, b) => Number(a[0]) - Number(b[0]))) {
     const turns = new Map();
-    for (const c of list) (turns.get(c.turn ?? 0) ?? turns.set(c.turn ?? 0, []).get(c.turn ?? 0)).push(c);
+    for (const [idx, c0] of list.entries()) {
+      const c = { ...c0, rp: rparts[fl]?.[idx] };
+      (turns.get(c.turn ?? 0) ?? turns.set(c.turn ?? 0, []).get(c.turn ?? 0)).push(c);
+    }
     // ずらし・+1c・0c で終わるターン（1ターン耐久）: その行の最後に「⏳ +1Cで耐久」の札
     const waits = new Map();
     for (const w of t.receiptWaits?.[fl] ?? []) {
