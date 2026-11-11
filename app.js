@@ -2103,6 +2103,57 @@ function resolveReceiptUses(t) {
       x.charge = Math.max(0, Math.min(x.charge, cap || x.charge) - n);
     });
   };
+  // スキルを1回押す（part: "base" | "assist" | "auto"）。使ったスキルの行を返す
+  const press = (mi, part, fl, tn) => {
+    const x = st[mi];
+    const c = { mi, part };
+    // 進化スキルは使った回数で段階が変わる（スキルターンも段階ごと）
+    // 変身キャラは変身前の姿で始まるので、最初に押した時は変身前のスキル（セイハーツの「自分以外2ターン」など）
+    const fam = MDB.get(x.bNo)?.[9];
+    x.b = x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam) ? MDB.get(fam) : stageRow(x.bNo, x.bUse);
+    x.a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
+    if (!x?.b) return null;
+    const aCT = x.a?.[5] || 0;
+    const bCT = x.b[5] || 0;
+    let used;
+    if (c.part === "assist" && x.a) used = [x.a];
+    else if (!x.a) used = [x.b];
+    else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
+    // 武器の番でも、武器のスキルターン分たまっていなければ武器は撃てないので本体（セッカ8Fなど）
+    else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : x.charge >= aCT ? [x.a] : [x.b];
+    else used = [x.b];
+    // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
+    x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
+    x.charge = 0;
+    if (used.includes(x.a)) {
+      x.aUse++;
+      // 使うと消える武器は、以降はアシストなし（次から本体だけ）
+      if (/(^|\|)消滅(\||$)/.test(String(x.a[28] ?? ""))) {
+        x.aNo = null;
+        x.phase = "base";
+      }
+    }
+    if (used.includes(x.b)) x.bUse++;
+    fire(mi, used);
+    ((uses[fl] ??= [])[tn] ??= []).push(...used.map((r) => r[0]));
+    return used;
+  };
+  // 「以降◯◯ループ」: その階から、溜まっていてレシートに書かれていないターンは自動で使ったとみなす
+  const loops = (t.receiptLoops ?? []).filter((l) => Array.isArray(l.mi));
+  const readyNow = (mi) => {
+    const x = st[mi];
+    const fam = MDB.get(x.bNo)?.[9];
+    const b = x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam) ? MDB.get(fam) : stageRow(x.bNo, x.bUse);
+    const a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
+    if (!b) return false;
+    const need = x.phase === "assist" && a ? a[5] || 0 : b[5] || 0;
+    return x.charge >= need;
+  };
+  const loopFire = (fl, tn, pressed) => {
+    const who = new Set(loops.filter((l) => l.from <= fl).flatMap((l) => l.mi));
+    for (const mi of who) if (!pressed.has(mi) && st[mi] && readyNow(mi)) press(mi, "auto", fl, tn);
+  };
+  const lastFloor = Math.max(dungeon?.battles ?? 0, ...(dungeon?.damage?.floors ?? []).map((x) => x.floor), 0);
   const uses = {};
   // 表示用: レシートに書かれた順（ターンの見積もりで並びが変わらないように）
   const order = {};
@@ -2114,6 +2165,7 @@ function resolveReceiptUses(t) {
       if (!first) st.forEach((x) => x.charge++);
       first = false;
       applyDelay(f);
+      loopFire(f, 0, new Set());
     }
     prevFl = Number(fl);
     // 同じキャラが何回出てくるかで、その階のターン数を見積もる
@@ -2130,40 +2182,20 @@ function resolveReceiptUses(t) {
       if (!first) st.forEach((x) => x.charge++);
       first = false;
       if (tn === 0) applyDelay(Number(fl));
+      const pressed = new Set();
       for (const c of withTurn.filter((c) => c.turn === tn)) {
-        const x = st[c.mi];
-        // 進化スキルは使った回数で段階が変わる（スキルターンも段階ごと）
-        // 変身キャラは変身前の姿で始まるので、最初に押した時は変身前のスキル（セイハーツの「自分以外2ターン」など）
-        const fam = MDB.get(x.bNo)?.[9];
-        x.b = x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam) ? MDB.get(fam) : stageRow(x.bNo, x.bUse);
-        x.a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
-        if (!x?.b) continue;
-        const aCT = x.a?.[5] || 0;
-        const bCT = x.b[5] || 0;
-        let used;
-        if (c.part === "assist" && x.a) used = [x.a];
-        else if (!x.a) used = [x.b];
-        else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
-        // 武器の番でも、武器のスキルターン分たまっていなければ武器は撃てないので本体（セッカ8Fなど）
-        else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : x.charge >= aCT ? [x.a] : [x.b];
-        else used = [x.b];
-        // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
-        x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
-        x.charge = 0;
-        if (used.includes(x.a)) {
-          x.aUse++;
-          // 使うと消える武器は、以降はアシストなし（次から本体だけ）
-          if (/(^|\|)消滅(\||$)/.test(String(x.a[28] ?? ""))) {
-            x.aNo = null;
-            x.phase = "base";
-          }
-        }
-        if (used.includes(x.b)) x.bUse++;
-        fire(c.mi, used);
-        ((uses[fl] ??= [])[tn] ??= []).push(...used.map((r) => r[0]));
-        ((order[fl] ??= [])[c.idx] = used.map((r) => r[0]));
+        pressed.add(c.mi);
+        const used = press(c.mi, c.part, fl, tn);
+        if (used) ((order[fl] ??= [])[c.idx] = used.map((r) => r[0]));
       }
+      loopFire(Number(fl), tn, pressed);
     }
+  }
+  // 最後に書かれた階より後（ボスまで）も、ループの分は回す
+  for (let f = prevFl + 1; f <= lastFloor; f++) {
+    st.forEach((x) => x.charge++);
+    applyDelay(f);
+    loopFire(f, 0, new Set());
   }
   // ターンごとの配列にそろえる（使っていないターンは空）
   for (const fl of Object.keys(uses)) uses[fl] = Array.from(uses[fl], (x) => x ?? []);
@@ -2404,6 +2436,9 @@ function enduranceSetup(t0, opts = {}) {
   return { total, teamHp, unknown, detail };
   };
   const { total, teamHp, unknown, detail } = teamHpWith();
+  // 部位を壊して進む編成か（投稿の記載。壊した後は部位破壊ボーナスが以降の階も続く）
+  const partsText = `${t.title ?? ""} ${(t.steps ?? []).join(" ")}`.replace(/部位破壊(?:なし|無し|しない|せず|不可|は不要)[^、。 ]*/g, "");
+  const partsPersist = !!t.partBreak?.can || /部位破壊|全部位|部位を(?:壊|破壊)/.test(partsText);
   // 熟成で階ごとにチームHPが変わる割合（1〜4階を基準）
   const r5 = teamHpWith(new Map(), 5).total / Math.max(1, total);
   const r10 = teamHpWith(new Map(), 10).total / Math.max(1, total);
@@ -2560,7 +2595,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, fixedFollow, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
+  return { partsPersist, floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, fixedFollow, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -2646,13 +2681,15 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
   let floorAttrs = [];
   let curFloor = 1;
   let curParts = false;
+  // 部位を壊した後は、次の階からもずっと部位破壊ボーナスが効く（部位を壊して進む編成だけ）
+  let partsBroken = false;
   // playerPhase: 味方のターン（スキル・回復）。部位はそのターンの攻撃で壊すので、最初のターンの回復はまだ壊す前
   const updateHpMult = (tn, playerPhase = false) => {
     const up = useSkill ? lastActive(setup.hpUps, tn, true) : null;
     // 「敵が◯属性の時、効果が◯倍」: その階の敵に1体でもその属性がいれば倍率の効果を倍にする
     let m = up ? (condMet(up) ? up.mult * up.cond.v : up.mult) : 1;
     // 熟成（階が進むとチームHPが上がる）と部位破壊ボーナス（部位のある階で、最初の攻撃の後）
-    m *= setup.floorRatio?.(curFloor, curParts && firstTurn[curFloor] != null && (playerPhase ? tn > firstTurn[curFloor] : tn >= firstTurn[curFloor])) ?? 1;
+    m *= setup.floorRatio?.(curFloor, partsBroken || (curParts && firstTurn[curFloor] != null && (playerPhase ? tn > firstTurn[curFloor] : tn >= firstTurn[curFloor]))) ?? 1;
     // 自分の属性変更でアシスト共鳴などが変わる分（その間だけチームHPが ratio 倍）
     if (useSkill) for (const x of activeAttr(tn).values()) m *= x.ratio;
     // 消える武器を使った後（以降ずっと）。今のHPは変えない
@@ -2726,6 +2763,7 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
       }
     }
     lastTurn[f.floor] = turn;
+    if (f.parts && setup.partsPersist) partsBroken = true;
     // 突破時の1ターン経過（マイクロ）
     if (f.turnPassOnClear) turn++;
   }
