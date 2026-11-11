@@ -10483,6 +10483,24 @@ window.PAD_SEED = {
             "turn": 5
           }
         ]
+      },
+      "receiptWaits": {
+        "13": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "15": [
+          {
+            "turn": 3,
+            "label": "+1C"
+          },
+          {
+            "turn": 4,
+            "label": "+1C"
+          }
+        ]
       }
     },
     {
@@ -11326,7 +11344,23 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 104
+      "badgeId": 104,
+      "receiptWaits": {
+        "13": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "kirisame-heartia-370id",
@@ -11699,6 +11733,22 @@ window.PAD_SEED = {
             "turn": 5
           }
         ]
+      },
+      "receiptWaits": {
+        "13": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          },
+          {
+            "turn": 3,
+            "label": "1C"
+          }
+        ]
       }
     },
     {
@@ -11984,7 +12034,165 @@ window.PAD_SEED = {
           ],
           "raw": "以降、セイハーツとフェニックスはループで使用"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "14": [
+          {
+            "turn": 2,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          },
+          {
+            "turn": 4,
+            "label": "ずらし"
+          },
+          {
+            "turn": 5,
+            "label": "ずらし"
+          }
+        ],
+        "15": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          },
+          {
+            "turn": 4,
+            "label": "ずらし"
+          },
+          {
+            "turn": 5,
+            "label": "ずらし"
+          },
+          {
+            "turn": 6,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "kirisame-heartia-eriryuu",
@@ -12446,7 +12654,19 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": true,
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "12": [
+          {
+            "turn": 2,
+            "label": "1C"
+          },
+          {
+            "turn": 4,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "kirisame-hinata-nanaminn",
@@ -13201,7 +13421,37 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C×3"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "15": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "kirisame-heartia-underbar",
@@ -13685,7 +13935,35 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "12": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ],
+        "15": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "kirisame-heartia-furuki",
@@ -14479,7 +14757,39 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "3": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "6": [
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "fuun-heartia-yu",
@@ -15012,7 +15322,29 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "3": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ],
+        "5": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "fuun-challenge-fern",
@@ -18066,6 +18398,50 @@ window.PAD_SEED = {
             "turn": 3
           }
         ]
+      },
+      "receiptWaits": {
+        "5": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "15": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 4,
+            "label": "ずらし"
+          }
+        ]
       }
     },
     {
@@ -18501,7 +18877,31 @@ window.PAD_SEED = {
           ],
           "raw": "以降一護ループー"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "3": [
+          {
+            "turn": 0,
+            "label": "0C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ],
+        "15": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "tenkyu-unicus-schwarze",
@@ -19170,6 +19570,26 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 7
+          }
+        ]
+      },
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 1,
+            "label": "ずらし"
           }
         ]
       }
@@ -19945,6 +20365,52 @@ window.PAD_SEED = {
             "turn": 3
           }
         ]
+      },
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "+1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 2,
+            "label": "1C"
+          },
+          {
+            "turn": 3,
+            "label": "1C"
+          }
+        ]
       }
     },
     {
@@ -20463,7 +20929,21 @@ window.PAD_SEED = {
           ],
           "raw": "わない、ダイン、セッカ、雨竜はループ"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "7": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 4,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "guren-hitsugaya-jones",
@@ -21238,7 +21718,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 104
+      "badgeId": 104,
+      "receiptWaits": {
+        "11": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "guren-shiva-underbar",
@@ -22236,7 +22724,43 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": true
+      "fastMode": true,
+      "receiptWaits": {
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "14": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "taiju-dain-nanaminn",
@@ -23584,7 +24108,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "taiju-dain-matsu-final",
@@ -24001,6 +24533,34 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "auto",
             "turn": 5
+          }
+        ]
+      },
+      "receiptWaits": {
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "14": [
+          {
+            "turn": 1,
+            "label": "ずらし"
           }
         ]
       }
@@ -24733,7 +25293,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "15": [
+          {
+            "turn": 0,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "taiju-challenge-morgan",
@@ -25039,7 +25607,25 @@ window.PAD_SEED = {
           ],
           "raw": "イルミナ武器使って1c→朧、モルガンループ開始して突破"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "taiju-rose-nekomaru",
@@ -25383,7 +25969,19 @@ window.PAD_SEED = {
           ],
           "raw": "の場合、そのままアマテラスループしつつ13Fのアマテラスと"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "taiju-tanjiro-nanaminn",
@@ -25603,7 +26201,27 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-shiva-kasajizo",
@@ -26013,7 +26631,19 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": true,
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "11": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-hitsugaya-yamajun",
@@ -26249,7 +26879,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-bambi-onsen",
@@ -26636,6 +27274,14 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 1
+          }
+        ]
+      },
+      "receiptWaits": {
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
           }
         ]
       }
@@ -27296,7 +27942,97 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし×2"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-gintoki-yamajun",
@@ -27527,7 +28263,31 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-ichigo-onsen",
@@ -28031,7 +28791,49 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 61
+      "badgeId": 61,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          },
+          {
+            "turn": 2,
+            "label": "0C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-reinhard-yamajun",
@@ -28202,7 +29004,41 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "jupiter-challenge-rosetta-yamajun",
@@ -28388,7 +29224,39 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 2
+      "badgeId": 2,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "mercury-mina-shion",
@@ -29342,7 +30210,93 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "mercury-dain-cclemon",
@@ -29631,7 +30585,23 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 104
+      "badgeId": 104,
+      "receiptWaits": {
+        "13": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          },
+          {
+            "turn": 2,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "mercury-gintoki-tension",
@@ -30042,7 +31012,29 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 42
+      "badgeId": 42,
+      "receiptWaits": {
+        "6": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "mercury-gintoki-mori",
@@ -31572,7 +32564,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "12": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-yamajun-10",
@@ -31738,7 +32738,19 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "12": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-yamajun-11",
@@ -32386,7 +33398,19 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "12": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-yamajun-rabiril",
@@ -32843,7 +33867,21 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 43
+      "badgeId": 43,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-yamajun-final",
@@ -33444,7 +34482,21 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "venus-reinhard-mirei",
@@ -34136,7 +35188,21 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "7": [
+          {
+            "turn": 2,
+            "label": "+1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "moon-gintoki-nanaminn",
@@ -34715,7 +35781,37 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "moon-rosetta-kuma",
@@ -35745,7 +36841,63 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 97
+      "badgeId": 97,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "14": [
+          {
+            "turn": 4,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "moon-reinhard-nekomaru",
@@ -35999,7 +37151,15 @@ window.PAD_SEED = {
           ],
           "raw": "ラインハルト＆スターループ開始して削る→インドラ、フェ"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C×3"
+          }
+        ]
+      }
     },
     {
       "id": "moon-arkvelza-nekomaru",
@@ -36250,7 +37410,23 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 43
+      "badgeId": 43,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "moon-multi-danna",
@@ -37135,7 +38311,21 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 44
+      "badgeId": 44,
+      "receiptWaits": {
+        "3": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C×2"
+          }
+        ]
+      }
     },
     {
       "id": "sun-dain-kinoko",
@@ -37616,6 +38806,46 @@ window.PAD_SEED = {
             "turn": 4
           }
         ]
+      },
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "15": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          }
+        ]
       }
     },
     {
@@ -37920,7 +39150,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 98
+      "badgeId": 98,
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "sun-elfriede-agepan",
@@ -38384,7 +39622,145 @@ window.PAD_SEED = {
           ],
           "raw": "以降、セイハーツはループで使用"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "14": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "15": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          },
+          {
+            "turn": 5,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "sun-dain-ana",
@@ -38655,7 +40031,21 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 104
+      "badgeId": 104,
+      "receiptWaits": {
+        "4": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C×2"
+          }
+        ]
+      }
     },
     {
       "id": "sun-reinhard-hani",
@@ -38947,6 +40337,30 @@ window.PAD_SEED = {
             "mi": 3,
             "part": "auto",
             "turn": 5
+          }
+        ]
+      },
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
           }
         ]
       }
@@ -39242,6 +40656,22 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 4
+          }
+        ]
+      },
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
           }
         ]
       }
@@ -39567,7 +40997,15 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C×2"
+          }
+        ]
+      }
     },
     {
       "id": "sun-rosetta-reall",
@@ -39707,7 +41145,31 @@ window.PAD_SEED = {
         "plus891Text": null
       },
       "fastMode": false,
-      "badgeId": 43
+      "badgeId": 43,
+      "receiptWaits": {
+        "4": [
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "14": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "hyaku-kikoru-nanaminn",
@@ -40276,7 +41738,21 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": true,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "5": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "hyaku-kikoru-mori",
@@ -41325,7 +42801,15 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 2,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "hyaku-bazzb-totakke",
@@ -41978,7 +43462,15 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "7": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "senju-gintoki-yp",
@@ -42230,7 +43722,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "7": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "senju-bambi-shion",
@@ -42347,6 +43847,14 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 0
+          }
+        ]
+      },
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
           }
         ]
       }
@@ -43233,7 +44741,15 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinbanju-zgundam-kasajizo",
@@ -43443,7 +44959,15 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinbanju-zgundam-kasajizo-2",
@@ -43640,7 +45164,23 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinbanju-mastergundam-nanaminn",
@@ -44573,7 +46113,37 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": true,
-      "badgeId": 86
+      "badgeId": 86,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "shinbanju-gintoki-amakura",
@@ -45043,7 +46613,21 @@ window.PAD_SEED = {
           ],
           "raw": "※ここから卯ノ花ループ"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "shinbanju-bambi-macaron-2",
@@ -45249,7 +46833,15 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "shinbanju-bazzb-payato",
@@ -45979,7 +47571,37 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": true,
-      "badgeId": 86
+      "badgeId": 86,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-omegamon-tapioka",
@@ -46209,7 +47831,55 @@ window.PAD_SEED = {
         "sureNote": "部位破壊5で凶玉確定（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C×3"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          },
+          {
+            "turn": 3,
+            "label": "1C"
+          },
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-varenoa-kasajizo-1228",
@@ -46559,7 +48229,25 @@ window.PAD_SEED = {
         "can": true
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-varenoa-kasajizo-0130",
@@ -46918,7 +48606,31 @@ window.PAD_SEED = {
         "note": "メタルスピカ装備をカノのぬいぐるみで代用すると部位ドロ率-10%（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "0C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-varenoa-nanaminn",
@@ -47324,7 +49036,21 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "1C×2"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-varenoa-kasajizo-natsu",
@@ -47654,7 +49380,67 @@ window.PAD_SEED = {
         "can": true,
         "note": "盤面のドロ強次第では部位破壊しきれない場合あり。部位破壊する場合はノアの豆を閉じない（投稿者談）"
       },
-      "fastMode": false
+      "fastMode": false,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 1,
+            "label": "0C×2"
+          },
+          {
+            "turn": 2,
+            "label": "0C"
+          },
+          {
+            "turn": 3,
+            "label": "0C"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          },
+          {
+            "turn": 4,
+            "label": "0C"
+          },
+          {
+            "turn": 5,
+            "label": "0C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-varenoa-reall",
@@ -47939,7 +49725,79 @@ window.PAD_SEED = {
         "note": "部位破壊ボーナス5個搭載（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 44
+      "badgeId": 44,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "0C"
+          },
+          {
+            "turn": 4,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 2,
+            "label": "0C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 3,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-douma-nanaminn",
@@ -48209,7 +50067,27 @@ window.PAD_SEED = {
         "sureNote": "部位確定ドロップ（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C×2"
+          }
+        ],
+        "11": [
+          {
+            "turn": 1,
+            "label": "1C×2"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-tanjiro-kazu",
@@ -48457,7 +50335,15 @@ window.PAD_SEED = {
         "sureNote": "部位破壊5・たぶん確定（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "kyouchou-reinhard-rei",
@@ -48747,7 +50633,15 @@ window.PAD_SEED = {
         "can": true
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-seihearts-matsuda-19",
@@ -49105,7 +50999,95 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": true,
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 3,
+            "label": "ずらし"
+          },
+          {
+            "turn": 4,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 6,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-seihearts-sigu",
@@ -49874,7 +51856,109 @@ window.PAD_SEED = {
         "note": "アグリのコアを割るなら3パン（レシートより）"
       },
       "fastMode": true,
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "2": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          },
+          {
+            "turn": 4,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 6,
+            "label": "ずらし"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-seihearts-matsuda-15",
@@ -50273,7 +52357,97 @@ window.PAD_SEED = {
         "sureNote": "部位確定（投稿者談）"
       },
       "fastMode": true,
-      "badgeId": 103
+      "badgeId": 103,
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "3": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "4": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ],
+        "5": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "8": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          },
+          {
+            "turn": 3,
+            "label": "ずらし"
+          }
+        ],
+        "10": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ],
+        "11": [
+          {
+            "turn": 5,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-kafka-matsuda",
@@ -50596,7 +52770,25 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "0C"
+          }
+        ],
+        "10": [
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-douma-matsuda",
@@ -50890,7 +53082,19 @@ window.PAD_SEED = {
         "sureNote": "部位確定（投稿者談）"
       },
       "fastMode": false,
-      "badgeId": 7
+      "badgeId": 7,
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-kikoru-lancelot",
@@ -51233,6 +53437,24 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 0
+          }
+        ]
+      },
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 4,
+            "label": "+1C"
           }
         ]
       }
@@ -51611,6 +53833,34 @@ window.PAD_SEED = {
             "mi": 1,
             "part": "auto",
             "turn": 3
+          }
+        ]
+      },
+      "receiptWaits": {
+        "8": [
+          {
+            "turn": 0,
+            "label": "0C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 3,
+            "label": "1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "1C"
           }
         ]
       }
@@ -52012,7 +54262,15 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-rem-matsuda-19",
@@ -52484,7 +54742,25 @@ window.PAD_SEED = {
           ],
           "raw": "以下基本レムループ♥4 3でOK"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "0C×2"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "0C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-gintoki-junyama",
@@ -52688,7 +54964,19 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 46
+      "badgeId": 46,
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "shinokuchou-rem-matsuda-20",
@@ -53083,7 +55371,35 @@ window.PAD_SEED = {
           ],
           "raw": "以下基本レムループ♥ 3でok"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "9": [
+          {
+            "turn": 0,
+            "label": "0C×2"
+          }
+        ],
+        "11": [
+          {
+            "turn": 0,
+            "label": "0C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "0C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ]
+      }
     },
     {
       "id": "hyaku-gimlet-ultima",
@@ -53780,6 +56096,36 @@ window.PAD_SEED = {
             "turn": 2
           }
         ]
+      },
+      "receiptWaits": {
+        "4": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "+1C"
+          }
+        ],
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 0,
+            "label": "ずらし"
+          },
+          {
+            "turn": 1,
+            "label": "ずらし"
+          },
+          {
+            "turn": 2,
+            "label": "ずらし"
+          }
+        ]
       }
     },
     {
@@ -54242,6 +56588,24 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "assist",
             "turn": 0
+          }
+        ]
+      },
+      "receiptWaits": {
+        "10": [
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ],
+        "13": [
+          {
+            "turn": 0,
+            "label": "0C"
+          },
+          {
+            "turn": 1,
+            "label": "0C"
           }
         ]
       }
@@ -54893,6 +57257,20 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "auto",
             "turn": 3
+          }
+        ]
+      },
+      "receiptWaits": {
+        "6": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 1,
+            "label": "+1C"
           }
         ]
       }
@@ -56357,7 +58735,45 @@ window.PAD_SEED = {
           ],
           "raw": "以降 神楽ループ"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "ずらし"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "14": [
+          {
+            "turn": 1,
+            "label": "+1C"
+          },
+          {
+            "turn": 2,
+            "label": "+1C"
+          },
+          {
+            "turn": 3,
+            "label": "+1C"
+          },
+          {
+            "turn": 4,
+            "label": "+1C"
+          }
+        ]
+      }
     },
     {
       "id": "urajuoku-gintoki-booflamy",
@@ -57106,6 +59522,14 @@ window.PAD_SEED = {
             "turn": 4
           }
         ]
+      },
+      "receiptWaits": {
+        "5": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ]
       }
     },
     {
@@ -57392,6 +59816,56 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 0
+          }
+        ]
+      },
+      "receiptWaits": {
+        "0": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ],
+        "2": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "6": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 0,
+            "label": "+1C"
+          },
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ],
+        "14": [
+          {
+            "turn": 2,
+            "label": "+1C"
+          },
+          {
+            "turn": 3,
+            "label": "+1C"
           }
         ]
       }
@@ -57726,7 +60200,27 @@ window.PAD_SEED = {
           ],
           "raw": "以降ダインとハッシュヴァルトはループ"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C"
+          }
+        ],
+        "10": [
+          {
+            "turn": 1,
+            "label": "0C"
+          }
+        ],
+        "12": [
+          {
+            "turn": 1,
+            "label": "1C"
+          }
+        ]
+      }
     },
     {
       "id": "wanggren-gintoki-player-v2",
@@ -58094,6 +60588,14 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 0
+          }
+        ]
+      },
+      "receiptWaits": {
+        "7": [
+          {
+            "turn": 0,
+            "label": "ずらし"
           }
         ]
       }
@@ -60674,7 +63176,15 @@ window.PAD_SEED = {
           ],
           "raw": "※以降炭治郎禰豆子21ループ"
         }
-      ]
+      ],
+      "receiptWaits": {
+        "5": [
+          {
+            "turn": 1,
+            "label": "ずらし"
+          }
+        ]
+      }
     },
     {
       "id": "juoku-taichi-danna",
@@ -60972,6 +63482,14 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 0
+          }
+        ]
+      },
+      "receiptWaits": {
+        "1": [
+          {
+            "turn": 0,
+            "label": "1C×2"
           }
         ]
       }
@@ -62059,6 +64577,14 @@ window.PAD_SEED = {
             "turn": 3
           }
         ]
+      },
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "+1C"
+          }
+        ]
       }
     },
     {
@@ -62552,6 +65078,14 @@ window.PAD_SEED = {
             "turn": 4
           }
         ]
+      },
+      "receiptWaits": {
+        "16": [
+          {
+            "turn": 3,
+            "label": "+1C"
+          }
+        ]
       }
     },
     {
@@ -62767,6 +65301,14 @@ window.PAD_SEED = {
             "mi": 0,
             "part": "auto",
             "turn": 2
+          }
+        ]
+      },
+      "receiptWaits": {
+        "2": [
+          {
+            "turn": 0,
+            "label": "1C"
           }
         ]
       }

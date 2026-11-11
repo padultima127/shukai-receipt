@@ -5448,9 +5448,15 @@ function receiptHTML(t) {
   for (const [fl, list] of Object.entries(calls ?? {}).sort((a, b) => Number(a[0]) - Number(b[0]))) {
     const turns = new Map();
     for (const c of list) (turns.get(c.turn ?? 0) ?? turns.set(c.turn ?? 0, []).get(c.turn ?? 0)).push(c);
+    // ずらし・+1c・0c で終わるターン（1ターン耐久）: その行の最後に「⏳ +1Cで耐久」の札
+    const waits = new Map();
+    for (const w of t.receiptWaits?.[fl] ?? []) {
+      if (!turns.has(w.turn)) turns.set(w.turn, []);
+      waits.set(w.turn, [...(waits.get(w.turn) ?? []), w.label]);
+    }
     const lines = [...turns]
       .sort((a, b) => a[0] - b[0])
-      .map(([, cs], j, arr) => `<div class="rc-line">${arr.length > 1 ? `<b class="rc-turn">(${j + 1})</b>` : ""}${cs.map(chip).join(`<span class="rc-sep">▶</span>`)}</div>`)
+      .map(([tn, cs], j, arr) => `<div class="rc-line">${arr.length > 1 ? `<b class="rc-turn">(${j + 1})</b>` : ""}${cs.map(chip).join(`<span class="rc-sep">▶</span>`)}${(waits.get(tn) ?? []).map((lb) => `<span class="rc-wait" title="このターンは倒さずに1ターン耐える（レシートの「${esc(lb)}」）">⏳ ${esc(lb)}で耐久</span>`).join("")}</div>`)
       .join("");
     floors += `<div class="rc-floor">【${esc(fl)}階】</div><div class="rc-step">${lines}</div>${loopHTML(Number(fl))}`;
   }

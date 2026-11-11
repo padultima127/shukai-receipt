@@ -335,6 +335,18 @@ def parse_team(team, texts):
             for one in (both if len(both) > 1 else [mi]):
                 calls.setdefault(str(floor), []).append({"mi": one, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2]})
         if floor is not None:
+            # ずらし・0c・+1c で終わるターンは1ターン耐久（レシートの画面に「⏳ +1Cで耐久」と出す）
+            body_line = line[cut:]
+            for mm in TURN_END.finditer(body_line):
+                w = mm.group(0)
+                if not re.fullmatch(r"ずらし|[+＋]?\s*[01０１]\s*[cCｃ]", w.strip()):
+                    continue
+                n_before = sum(1 for e in ends if e < mm.end())
+                # ①②…の印があれば、そのターン番号（呼び出しの turn と同じ数え方）
+                n_before = max([turn_base + n_before] + [n for pos, n in marks if pos <= mm.start()]) - turn_base
+                rep = re.match(r"\s*[xX×]\s*(\d)", body_line[mm.end():])
+                label = re.sub(r"\s+", "", w).replace("ｃ", "C").replace("c", "C").replace("＋", "+") + (f"×{rep.group(1)}" if rep else "")
+                WAITS.setdefault(team["id"], {}).setdefault(str(floor), []).append({"turn": turn_base + n_before, "label": label})
             turn_base += len(ends)
     if loops:
         LOOPS[team["id"]] = loops
@@ -342,6 +354,7 @@ def parse_team(team, texts):
 
 
 LOOPS = {}
+WAITS = {}
 
 
 def main():
@@ -370,6 +383,9 @@ def main():
     # ループの記載（2つ目の引数があれば）: { チームid: [ {from: 階, mi: [枠], raw: 元の文字} ] }
     if len(sys.argv) > 2:
         Path(sys.argv[2]).write_text(json.dumps(LOOPS, ensure_ascii=False, indent=1), encoding="utf-8")
+    # 1ターン耐久の記載（3つ目の引数があれば）: { チームid: { 階: [ {turn: 終わるターン(0始まり), label: "+1C"} ] } }
+    if len(sys.argv) > 3:
+        Path(sys.argv[3]).write_text(json.dumps(WAITS, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(result)}編成: 階の数・呼び出し数")
     for s in stats[:200]:
         print(" ", *s)
