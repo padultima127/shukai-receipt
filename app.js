@@ -40,6 +40,9 @@ function saveJSON(key, value) {
 
 // 旧バージョンの架空サンプルが保存されていたら実データの初期データに置き換える
 let db = loadJSON(DATA_KEY, null);
+// data.js の中身が変わった時（?v= のキャッシュ番号が変わった時）も読み直す。version を上げ忘れても、レシートの読み直しなどが届くように
+const SEED_TAG = document.querySelector('script[src^="data.js"]')?.getAttribute("src")?.match(/[?&]v=([^&]+)/)?.[1] ?? null;
+if (db && !db.sample && SEED_TAG && db.seedTag !== SEED_TAG) db.version = Math.min(db.version ?? 0, window.PAD_SEED.version - 1);
 if (!db || db.sample) db = structuredClone(window.PAD_SEED);
 else if ((db.version ?? 0) < window.PAD_SEED.version) {
   // 初期データが更新されていたら、同じidは上書き・新しいidは追加（自分で取り込んだデータは残す）
@@ -64,6 +67,11 @@ else if ((db.version ?? 0) < window.PAD_SEED.version) {
     if (seedTeam) t.dungeonId = seedTeam.dungeonId;
   }
   db.version = window.PAD_SEED.version;
+  db.seedTag = SEED_TAG;
+  saveJSON(DATA_KEY, db);
+}
+if (db.seedTag !== SEED_TAG && SEED_TAG) {
+  db.seedTag = SEED_TAG;
   saveJSON(DATA_KEY, db);
 }
 // 手持ちBOXは廃止（2026-10-01）。所持チェックまわりの処理は空のBOXとして動かす
