@@ -6536,7 +6536,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "exchange": "100周"
+      "exchange": "100周",
+      "kago": "陰"
     },
     {
       "id": "sun",
@@ -8361,7 +8362,8 @@ window.PAD_SEED = {
           }
         ]
       },
-      "exchange": "50周"
+      "exchange": "50周",
+      "kago": "陽"
     },
     {
       "id": "kyouchou",

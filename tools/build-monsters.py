@@ -91,6 +91,9 @@ DMG_AWAKENS = {
 
 
 def fetch(name):
+    # PADMDB_DIR があれば、そこに置いた JSON を読む（検証用。ネットに取りに行かない）
+    if os.environ.get("PADMDB_DIR"):
+        return json.load(open(Path(os.environ["PADMDB_DIR"]) / name, encoding="utf-8"))
     req = urllib.request.Request(BASE + name, headers={"User-Agent": "pad-farming"})
     with urllib.request.urlopen(req) as r:
         return json.load(r)
@@ -184,6 +187,12 @@ TYPE_ID = {"バランス": 1, "体力": 2, "回復": 3, "ドラゴン": 4, "神"
 ATTR_ID = {v: k for k, v in ATTR.items()}
 
 
+# 「（受ける）ダメージを無効化」。属性限定（火属性ダメージを無効化）と選択式（…or…）は除く
+DMG_VOID = re.compile(r"(?<![火水木光闇]属性)(?<![火水木光闇]属性の)(?:受ける)?ダメージを無効化(?!or)")
+# 軽減の書き方（%あり・なし、半減、激減）。効果ターン reduce の判定用
+DMG_REDUCE = re.compile(r"ダメージを(?:[\d.]+[%％])?(?:軽減|半減|激減)")
+
+
 def endurance_numbers(ids, skills):
     """耐久チェック用: "リジェネ%:毎ターン回復生成:スキル軽減%:最大HP倍率:即時回復%"。
     即時回復は「HPを◯%回復」「HPを全回復」（ターン指定なし）。リジェネ（継続回復）とは別枠
@@ -211,6 +220,9 @@ def endurance_numbers(ids, skills):
                 # 「激減」は75%（本人談）
                 if re.search(r"ダメージを激減", sentence):
                     red = max(red, 75)
+                # 「ダメージを無効化」は100%（「火属性ダメージを無効化」など属性限定のもの、「◯◯or…」の選択式は除く）
+                if DMG_VOID.search(sentence):
+                    red = 100
                 for n in re.findall(r"最大HPが([\d.]+)倍", sentence):
                     hpm = max(hpm, float(n))
             else:
@@ -277,6 +289,7 @@ def effect_durations(ids, skills):
     """能力ごとの効果ターン "voidPierce:12,dmgAbsorbNull:5"（文単位で「◯ターンの間」を結びつける）"""
     ids = ids if isinstance(ids, list) else [ids]
     out = {}
+    void_dur, plain_dur = 0, 0
     for sid in ids:
         s = skills.get(str(sid)) if sid else None
         if not s:
@@ -288,6 +301,17 @@ def effect_durations(ids, skills):
             for tag, pat in SKILL_TAGS:
                 if re.search(pat, sentence):
                     out[tag] = max(out.get(tag, 0), int(m.group(1)))
+            # 耐久チェック用: 能力タグ（代用の判定）は変えずに、効果ターンだけ入れる
+            # 「3ターンの間、ダメージを軽減」（%なし・「受ける」なし）は reduce のタグに当たらず、効果ターンが1扱いになっていた
+            if DMG_VOID.search(sentence):
+                void_dur = max(void_dur, int(m.group(1)))
+            elif DMG_REDUCE.search(sentence) and "reduce" not in out:
+                plain_dur = max(plain_dur, int(m.group(1)))
+    # ダメージ無効化があるスキルは、その効果ターンを reduce に入れる（endurance_numbers の軽減100%と対になる）
+    if void_dur:
+        out["reduce"] = void_dur
+    elif plain_dur and "reduce" not in out:
+        out["reduce"] = plain_dur
     return ",".join(f"{k}:{v}" for k, v in sorted(out.items()))
 
 
@@ -304,7 +328,7 @@ def gravity_pct(ids, skills):
 
 
 # 自分の全パラメータを掛ける覚醒（HP推定用）。138 アシスト共鳴・139 自力・128/129 加護は条件付き、63 スキルボイスは素のステータスだけ
-STAT_MULT_AWAKENS = {63, 127, 128, 129, 130, 132, 138, 139, 142, 146, 147}
+STAT_MULT_AWAKENS = {63, 127, 128, 129, 130, 132, 138, 139, 142, 145, 146, 147}
 
 
 def attr_changes(ids, skills):
@@ -484,12 +508,14 @@ def main():
             evolve_stages(m.get("skill"), skills),
             # リーダーで潜入した時のドロップ倍率（タマゴ・部位破壊素材・ランク経験値・コイン）
             drop_bonus(leaders.get(str(m.get("leaderSkill")))) if m.get("leaderSkill", 1) > 1 else "",
+            # 第3属性（LSの「◯属性のHP◯倍」は主・副・第3のどれかが合えば掛かる）
+            ATTR.get(attrs[2] if len(attrs) > 2 else None, ""),
         ])
     record_changes(rows, updated)
     out = Path(__file__).resolve().parent.parent / "monsters-db.js"
     out.write_text(
         "// 自動生成: tools/build-monsters.py（出典: みんなで作るパズドラモンスターデータベース）\n"
-        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更, 進化スキルの段階, 潜入時ドロップ倍率]\n"
+        "// [No, 名前, 主属性, 副属性, アシスト可, スキル最短ターン, スキル能力タグ, 覚醒能力タグ, 覚醒アシスト, 変身グループ, 火力覚醒, 超覚醒, スキル数値, タイプ, 暗闇.お邪魔.毒耐性%, スキブ数, リジェネ%:回復生成, 最大HP, HP覚醒:チームHP強化数, LS軽減%|HP倍率, ◯ターン後に発動, 能力ごとの効果ターン, 属性軽減覚醒の数 火.水.木.光.闇, グラビティ%, Lv99最大HP, 全パラ系覚醒, シンクロ覚醒, 通常覚醒, 属性変更, 進化スキルの段階, 潜入時ドロップ倍率, 第3属性]\n"
         f"// 更新: {updated}\n"
         "window.PAD_AWAKEN_NAMES = " + json.dumps({k: v["name"] for k, v in AWAKENS.items() if k.isdigit()}, ensure_ascii=False, separators=(",", ":")) + ";\n"
         f"window.PAD_MONSTER_DB = {{ updated: {json.dumps(updated)}, rows: "

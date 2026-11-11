@@ -1618,8 +1618,9 @@ function badgeEffectOf(t, mems) {
   if (name === "HP強化＋") return { name, hp: 15 };
   const type = BADGE_TYPE[id] ?? BADGE_TYPE_BY_NAME[name];
   if (type == null) return null;
-  const targetNos = mems.map((m) => monster(m.id)?.no).filter((no) => String(MDB.get(no)?.[13] ?? "").split(".").includes(String(type)));
-  return targetNos.length ? { name, hp: 5, targetNos } : null;
+  // タイプ強化バッジ: 対象は耐久チェックの側で、武器のタイプ追加も入れた実際のタイプで判定する（type はゲーム内のタイプ番号）
+  const targetNos = mems.map((m) => monster(m.id)?.no).filter((no) => MDB.get(no) && effTypesAttrs(MDB.get(no)).types.has(String(type)));
+  return { name, hp: 5, targetNos, type };
 }
 // レシートからバッジが分からない編成で、見る人がバッジ一覧から選んだもの（このブラウザだけに保存）。{ 編成id: "id:104" | "name:回復強化＋" | "none" }
 const BADGE_PICK_KEY = "pad-farming-badge-picks";
@@ -2006,9 +2007,25 @@ function lsNumbers(no) {
   return { red: Number(red) || 0, mults, fixed: Number(String(fx ?? "").replace("fx", "")) || 0 };
 }
 
-function hpMultFor(row, ls) {
-  const types = String(row[13] ?? "").split(".");
-  const attrs = [row[2], row[3]];
+// monsters-db.js のタイプ番号（padmdb: 1神 2ドラゴン 3悪魔 4マシン 5バランス 6攻撃 7体力 8回復）→ ゲーム内の番号（1バランス 2体力 3回復 4ドラゴン 5神 6攻撃 7悪魔 8マシン）
+// LSの条件（t8＝マシン）・ダンジョンのタイプ強化・バッジはゲーム内の番号なので、比べる前にそろえる
+const PADMDB_TYPE = { 1: 5, 2: 4, 3: 7, 4: 8, 5: 1, 6: 6, 7: 2, 8: 3 };
+// タイプ追加の覚醒（83〜90）→ ゲーム内のタイプ番号、副属性変更の覚醒（91〜95）→ 属性
+const TYPE_ADD_AWK = { 83: 4, 84: 5, 85: 7, 86: 8, 87: 1, 88: 6, 89: 2, 90: 3 };
+const SUB_ATTR_AWK = { 91: "火", 92: "水", 93: "木", 94: "光", 95: "闇" };
+// そのキャラの実際のタイプ（ゲーム内の番号の文字列）と属性。awks: 本体の覚醒・選んだ超覚醒・武器（覚醒アシスト）の覚醒・スキルで付与された覚醒
+function effTypesAttrs(row, awks = []) {
+  const types = new Set(String(row[13] ?? "").split(".").filter(Boolean).map((x) => String(PADMDB_TYPE[x] ?? x)));
+  let sub = row[3];
+  for (const a of awks) {
+    if (TYPE_ADD_AWK[a]) types.add(String(TYPE_ADD_AWK[a]));
+    if (SUB_ATTR_AWK[a]) sub = SUB_ATTR_AWK[a];
+  }
+  return { types, attrs: [row[2], sub, row[31]].filter(Boolean) };
+}
+function hpMultFor(row, ls, eff = effTypesAttrs(row)) {
+  const types = [...eff.types];
+  const attrs = eff.attrs;
   const ATTR_BY_ID = { 1: "火", 2: "水", 3: "木", 4: "光", 5: "闇" };
   let m = 1;
   for (const { cond, mult } of ls.mults) {
@@ -2298,7 +2315,8 @@ function enduranceSetup(t0, opts = {}) {
     const lv = row[9] ? b.lv ?? 110 : canLimitBreak ? 120 : 99;
     let hp = lv >= 120 ? row[17] + hp99 * 0.1 : lv >= 110 ? row[17] : hp99;
     // スキルボイスは素のステータスだけに1.1倍（＋値・潜在には乗らない）
-    const ownAwk = String(row[25] ?? "").split(".").filter(Boolean).map(Number);
+    // 全パラ系の覚醒は覚醒の全リスト（col27）から拾う（col25 には希望のソウルが入っていないため）
+    const ownAwk = String(row[27] ?? "").split(".").filter(Boolean).map(Number).filter((a) => a === 63 || a === 130 || STAT_MULT[a]);
     hp *= 1.1 ** ownAwk.filter((a) => a === 63).length;
     // ＋値: HP・攻撃・回復に均等に振る前提（＋3でHP＋1）。HP＋1につき10（＋297 → 990、＋891 → 2970）。全パラ系の倍率はこの分にも乗る
     hp += Math.round((b.plus ?? 297) / 3) * 10;
@@ -2314,6 +2332,13 @@ function enduranceSetup(t0, opts = {}) {
       hp += af;
       teamHp += ac;
     }
+    // 実際のタイプ・属性（武器のタイプ追加・副属性変更の覚醒、消える武器が付与した覚醒も入れる）
+    const eff = effTypesAttrs(row, [
+      ...String(row[27] ?? "").split("."),
+      b.super,
+      ...(a?.[8] ? String(a[27] ?? "").split(".") : []),
+      ...(gone ? vanished.get(mi) : []),
+    ].map(Number).filter(Boolean));
     // 潜在のHP（HP強化1.5%/枠、＋4.5%、＋＋10%）
     hp *= 1 + (b.latentHp ?? 0) / 100;
     // 全パラ系の覚醒（通常覚醒・選んだ超覚醒・シンクロ覚醒）。アシスト共鳴は主属性とタイプが一致したときだけ、自力はアシストなしのときだけ
@@ -2347,7 +2372,7 @@ function enduranceSetup(t0, opts = {}) {
     }
     // ダンジョンのタイプ強化（深遠の万龍【回復タイプ強化】なら回復タイプのHP1.5倍など）
     const tb = dungeonBoost;
-    if (tb?.hp && String(row0[13] ?? "").split(".").some((x) => tb.types.includes(Number(x)))) {
+    if (tb?.hp && tb.types.some((x) => eff.types.has(String(x)))) {
       hp *= tb.hp;
       mults.push(`${tb.label}×${tb.hp}`);
     }
@@ -2362,18 +2387,18 @@ function enduranceSetup(t0, opts = {}) {
         mults.push(`部位破壊ボーナス×${(1.2 ** pb).toFixed(2)}`);
       }
     }
-    const lsm = hpMultFor(row, lsL) * hpMultFor(row, lsF);
+    const lsm = hpMultFor(row, lsL, eff) * hpMultFor(row, lsF, eff);
     // ＋値のHP1あたりのHP（10 × 潜在 × 全パラ系 × LS）。チームHP強化は最後に掛ける
     const perPlus = 10 * (1 + (b.latentHp ?? 0) / 100) * mults.reduce((x, t) => x * Number(t.split("×")[1]), 1) * lsm;
     const hpPlus = Math.min(297, Math.round((b.plus ?? 297) / 3));
-    detail.push({ no, name: row[1], hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: isFullBuild(m.build), perPlus, hpPlus });
+    detail.push({ no, name: row[1], types: eff.types, hp: Math.round(hp * lsm), mults, lv, latentHp: b.latentHp ?? 0, known: isFullBuild(m.build), perPlus, hpPlus });
     total += Math.max(1, hp) * lsm;
   }
   total = total * (1 + 0.05 * teamHp);
   if (badge?.hp) {
     // 全体に効くバッジはチームHPに掛ける。コラボバッジなど対象キャラ限定はそのキャラのHPだけ
     if (!badge.targetNos) total *= 1 + badge.hp / 100;
-    else total += detail.filter((x) => badge.targetNos.includes(x.no)).reduce((n, x) => n + x.hp * (1 + 0.05 * teamHp) * (badge.hp / 100), 0);
+    else total += detail.filter((x) => (badge.type != null ? x.types.has(String(badge.type)) : badge.targetNos.includes(x.no))).reduce((n, x) => n + x.hp * (1 + 0.05 * teamHp) * (badge.hp / 100), 0);
   }
   total = Math.round(total);
   return { total, teamHp, unknown, detail };
@@ -2541,8 +2566,8 @@ function enduranceSetup(t0, opts = {}) {
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
 // 全パラメータを掛ける覚醒（127 全パラ強化、142 全パラ強化＋、138 アシスト共鳴、139 自力、146/147 ソウル）
 // 132 アフタヌーンティー: HP1.25倍（PDCの値との照合から。なつみかんさんの霧雨ハーティア編成のハーティアが 13,337×共鳴3×1.25＝50,013 で一致）
-const STAT_MULT = { 127: 1.5, 142: 1.8, 138: 3, 139: 3, 146: 1.5, 147: 1.5, 128: 2, 129: 2, 132: 1.25 };
-const STAT_NAME = { 127: "全パラ強化", 142: "全パラ強化＋", 138: "アシスト共鳴", 139: "自力", 146: "勇気のソウル", 147: "幸運のソウル", 128: "陽の加護", 129: "陰の加護", 132: "アフタヌーンティー" };
+const STAT_MULT = { 127: 1.5, 142: 1.8, 138: 3, 139: 3, 145: 1.5, 146: 1.5, 147: 1.5, 128: 2, 129: 2, 132: 1.25 };
+const STAT_NAME = { 127: "全パラ強化", 142: "全パラ強化＋", 138: "アシスト共鳴", 139: "自力", 145: "希望のソウル", 146: "勇気のソウル", 147: "幸運のソウル", 128: "陽の加護", 129: "陰の加護", 132: "アフタヌーンティー" };
 // 潜在の属性軽減: 1枠で1%、「＋」は2枠で2.5%。n枠で出せる最大の%
 const latentPct = (slots) => Math.floor(slots / 2) * 2.5 + (slots % 2);
 const latentText = (slots) => {
