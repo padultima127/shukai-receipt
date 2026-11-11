@@ -33714,6 +33714,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "assist",
             "turn": 0
@@ -43065,6 +43070,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 0,
+            "part": "base",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "base",
             "turn": 0
@@ -48044,6 +48054,11 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "base",
             "turn": 0
           },
           {

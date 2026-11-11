@@ -313,9 +313,14 @@ def parse_team(team, texts):
                 same = [j for j in same if members[j]["no"] == members[same[0]]["no"]]
                 i = same[0]
             mi = i
+            both = []
             if len(same) > 1:
                 # L/S/F の頭文字、A/B の後ろ文字、どちらもなければ出てきた順
-                if before.upper() in ("L", "S", "F"):
+                # 「LF童磨変身」はリーダーとフレンドの両方
+                if re.search(r"(?:^|[^0-9０-９A-Za-zＡ-Ｚ])(?:LF|FL|L[・&＆]F|F[・&＆]L)$", line[max(cut, st - 4):st]):
+                    both = [j for j in same if members[j]["role"] in ("L", "F")]
+                    mi = both[0] if both else i
+                elif before.upper() in ("L", "S", "F"):
                     mi = next((j for j in same if members[j]["role"] == before.upper()), i)
                 elif sm := re.match(r"([ABab①②])", after):
                     mi = same[min({"A": 0, "①": 0, "B": 1, "②": 1}.get(sm.group(1).upper(), 0), len(same) - 1)]
@@ -327,7 +332,8 @@ def parse_team(team, texts):
             for pos, n in marks:
                 if pos <= st - cut:
                     turn = max(turn, n)
-            calls.setdefault(str(floor), []).append({"mi": mi, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2]})
+            for one in (both if len(both) > 1 else [mi]):
+                calls.setdefault(str(floor), []).append({"mi": one, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2]})
         if floor is not None:
             turn_base += len(ends)
     if loops:
