@@ -1999,12 +1999,13 @@ function lsNumbers(no) {
     if (later.length) ls = String(later[later.length - 1][19]);
   }
   const [red, hp, fx] = ls.split("|");
+  // 「82c」: 軽減の条件がドロップを消すこと（3色同時攻撃・光5個つなげ消し・L字消しなど）。1Fの先制には効かない
   const mults = (hp ?? "").split(",").filter(Boolean).map((x) => {
     const [cond, m] = x.split("=");
     return { cond, mult: Number(m) };
   });
   // fx: LSの固定ダメージの追い打ち（万）
-  return { red: Number(red) || 0, mults, fixed: Number(String(fx ?? "").replace("fx", "")) || 0 };
+  return { red: parseFloat(red) || 0, redByMatch: /c$/.test(red ?? ""), mults, fixed: Number(String(fx ?? "").replace("fx", "")) || 0 };
 }
 
 // monsters-db.js のタイプ番号（padmdb: 1神 2ドラゴン 3悪魔 4マシン 5バランス 6攻撃 7体力 8回復）→ ゲーム内の番号（1バランス 2体力 3回復 4ドラゴン 5神 6攻撃 7悪魔 8マシン）
@@ -2212,6 +2213,13 @@ function stepKeysOf(name) {
   const keys = new Set([n, parts.at(-1) ?? n, ...parts.filter((p) => p.length >= 2)]);
   // 漢字4文字の名前（服部平次・黒崎一護）は名字だけ・名前だけでも呼ばれる
   for (const p of parts) if (/^[\u4E00-\u9FFF]{4}$/.test(p)) keys.add(p.slice(0, 2)).add(p.slice(2));
+  // 2人組の略し方（日向＆影山 → 日影、メニット＆チャオリン → メニチャオ）
+  const duo = n.split("・").at(-1).split(/[＆&]/).map((h) => h.trim().split(/\s+/)[0]);
+  if (duo.length === 2) {
+    keys.add(duo[0] + duo[1]);
+    if (/^[\u4E00-\u9FFF]/.test(duo[0]) && /^[\u4E00-\u9FFF]/.test(duo[1])) keys.add(duo[0][0] + duo[1][0]);
+    if (/^[\u30A0-\u30FF]{3}/.test(duo[0]) && /^[\u30A0-\u30FF]{3}/.test(duo[1])) for (const x of [2, 3]) for (const y of [2, 3]) keys.add(duo[0].slice(0, x) + duo[1].slice(0, y)); // フリーレン＆フェルン → フリフェル
+  }
   for (const k of [...keys]) {
     if (k.length >= 4 && !/^[\u30A0-\u30FF]+$/.test(k)) keys.add(k.slice(0, 3));
     for (const kata of k.match(/[\u30A0-\u30FFー]{2,}/g) ?? []) {
@@ -2480,6 +2488,8 @@ function enduranceSetup(t0, opts = {}) {
   const rp = { 1: teamHpWith(new Map(), 1, true).total / Math.max(1, total), 5: teamHpWith(new Map(), 5, true).total / Math.max(1, total), 10: teamHpWith(new Map(), 10, true).total / Math.max(1, total) };
   const floorRatio = (f, parts = false) => (parts ? rp[f >= 10 ? 10 : f >= 5 ? 5 : 1] : f >= 10 ? r10 : f >= 5 ? r5 : 1);
   const reduce = 1 - (1 - lsL.red / 100) * (1 - lsF.red / 100);
+  // まだ1回もドロップを消していない時（1Fの先制）のLSの軽減: 消すのが条件の軽減は効かない
+  const reduceFirst = 1 - (1 - (lsL.redByMatch ? 0 : lsL.red) / 100) * (1 - (lsF.redByMatch ? 0 : lsF.red) / 100);
   // LSの固定ダメージの追い打ちがあれば、超根性（HP1で耐える）の敵もそのターンに倒せる
   const fixedFollow = lsL.fixed + lsF.fixed;
   // 回復: 毎ターン使うスキルが回復ドロップを生成するか
@@ -2629,7 +2639,7 @@ function enduranceSetup(t0, opts = {}) {
   }
   const teamHpMult = (1 + 0.05 * teamHp) * (badge?.hp && !badge.targetNos ? 1 + badge.hp / 100 : 1);
   for (const x of detail) x.perPlus *= teamHpMult;
-  return { partsPersist, floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, fixedFollow, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
+  return { reduceFirst, partsPersist, floorRatio, r5, r10, rp, badge, reductions, hpUps, selfAttr, enemyAttr, awakenGrants, autoLatent, latentPool, fixedFollow, estHp: total, unknown, reduce, healGen, regens, instantHeals, healTurns, vanishes, teamHp, skillRed, skillRedFrom, strip, awkAttr, detail, uses: Object.fromEntries(Object.entries(t.receiptUses ?? {}).map(([f, v]) => [f, v.flat()])), floorTurns, hasBuilds: mems.some((m) => isFullBuild(m.build)) };
 }
 
 const ATTRS5 = ["火", "水", "木", "光", "闇"];
@@ -2750,11 +2760,14 @@ function simulateEndurance(d, setup, maxHp, useSkill = 0, latent = {}) {
     const ar = worst ? attrRed(worst) : 0;
     const sk = skillAt(tn);
     // マイクロ後（noLsReduce）はLSの軽減だけ剥がれ、スキルの軽減は効果ターンが残っていれば効く
-    const base = h.noLsReduce ? sk / 100 : 1 - (1 - setup.reduce) * (1 - sk / 100);
+    // 1Fの先制は、まだドロップを消していないので「消すのが条件」のLSの軽減は効かない
+    const first = f.floor === 1 && h.kind === "preemptive" && (setup.reduceFirst ?? setup.reduce) < setup.reduce;
+    const lsRed = first ? setup.reduceFirst : setup.reduce;
+    const base = h.noLsReduce ? sk / 100 : 1 - (1 - lsRed) * (1 - sk / 100);
     const red = 1 - (1 - base) * (1 - ar / 100);
     const taken = Math.round(raw * (1 - red));
     hp -= taken;
-    rows.push({ floor: f.floor, label: h.label, turn: tn, sk, hpMult, attrs, worst, ar, noLs: !!h.noLsReduce, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
+    rows.push({ floor: f.floor, label: h.label, turn: tn, sk, hpMult, attrs, worst, ar, noLs: !!h.noLsReduce, firstPre: first, raw: Math.round(raw), taken, left: Math.max(0, Math.round(hp)), ok: hp > 0 });
     if (hp <= 0) {
       deadAt = f.floor;
       fail = { attrs };
@@ -3079,7 +3092,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   return `${verdict}${compromise}${need}${autoNote}${ambNote}${main.deadAt == null || lowered ? skillLine : ""}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計（割合ダメージにも乗せています）。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
-    ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
+    ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : r.firstPre ? ` <span class="st st-ng" title="まだドロップを消していないので、消すのが条件のLSの軽減は効かない">LS軽減なし（1Fの先制）</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
     </tbody></table></div>`;
 }
 

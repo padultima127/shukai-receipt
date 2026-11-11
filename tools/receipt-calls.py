@@ -137,11 +137,49 @@ def parse_team(team, texts):
             # 漢字の頭1文字ずつの略し方（日向＆影山 → 日影）
             if re.match(r"[\u4E00-\u9FFF]", a) and re.match(r"[\u4E00-\u9FFF]", b):
                 mkeys[i].append(a[0] + b[0])
+            # カタカナの頭2文字ずつの略し方（メニット＆チャオリン → メニチャオ）
+            if re.match(r"[\u30A0-\u30FF]{3}", a) and re.match(r"[\u30A0-\u30FF]{3}", b):
+                mkeys[i] += [a[:x] + b[:y] for x in (2, 3) for y in (2, 3)]  # フリーレン＆フェルン → フリフェル
     akeys = [[k for k in keys_of(re.sub(r"\s*No\.?\s*\d+.*$", "", m.get("assist") or "")) if len(k) >= 3] for m in members]
     body = "\n".join(texts[idx + 1:])
     # 1回も名前が見つからないキャラは、OCRの読み違いをならした文字で探す
     fold_members = {i for i, ks in enumerate(mkeys) if ks and not any(k in body for k in ks)}
     fkeys = {i: sorted({fold(k) for k in mkeys[i]}) for i in fold_members}
+    # それでも見つからないキャラは消去法: レシートに出てくる「誰にも当たらない呼び方」のうち、
+    # そのキャラの名前の文字を順番どおりに拾ってできるもの（メニット＆チャオリン → メニチャオ）をそのキャラの呼び方にする
+    still = [i for i in fold_members if not any(k in fold(body) for k in fkeys[i])]
+    if still:
+        allkeys = [k for ks in mkeys for k in ks] + [k for ks in akeys for k in ks]
+        toks = set()
+        for tok in re.split(r"[、,，→⇒▶>\s・。()（）「」【】:：/／+＋※＊*]+", body):
+            tok = re.sub(r"^[LFＬＦ①-⑩]+", "", tok)
+            tok = re.sub(r"(裏|表|上|下|変身|進化|[①-⑩\dａ-ｚabAB])+$", "", tok)
+            if re.fullmatch(r"[\u30A0-\u30FFー]{3,7}|[\u4E00-\u9FFF]{2,4}", tok) and not any(k in tok or tok in k for k in allkeys):
+                toks.add(tok)
+
+        def spells(tok, name):
+            # 名前のどこかの区切り（・＆の後ろ、先頭）から始まって、トークンの文字が順番どおりに出てくる
+            n = re.sub(r"【[^】]*】", "", name or "")
+            starts = [0] + [mm.end() for mm in re.finditer(r"[・＆&\s]", n)]
+            for st0 in starts:
+                if not n[st0:].startswith(tok[0]):
+                    continue
+                pos = st0
+                for ch in tok:
+                    pos = n.find(ch, pos)
+                    if pos < 0:
+                        break
+                    pos += 1
+                else:
+                    return True
+            return False
+
+        for tok in toks:
+            cand = [i for i in still if spells(tok, members[i]["name"])]
+            if len(cand) == 1:
+                mkeys[cand[0]] = mkeys[cand[0]] + [tok]
+                if os.environ.get("ELIM_DEBUG"): print("ELIM", team["id"], tok, "->", members[cand[0]]["name"], file=sys.stderr)
+                fkeys[cand[0]] = sorted(set(fkeys[cand[0]]) | {fold(tok)})
     loops = []
     prev_tail = ""
     calls = {}

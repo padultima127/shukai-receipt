@@ -261,6 +261,17 @@ def leader_numbers(ls):
     # 「ダメージを82%軽減」のほか「ダメージ82％軽減」（を なし）も
     for n in re.findall(r"ダメージを?([\d.]+)[%％]軽減", text):
         red = max(red, float(n))
+    # 軽減の条件がドロップを消すこと（「3色同時攻撃で」「光を5個つなげて消すと」「[L字消し攻撃]発動で」）なら c を付ける。
+    # 1Fの先制はまだ1回も消していないので、この軽減は効かない
+    if red:
+        sent = next((x for x in text.split("。") if re.search(r"ダメージを?(半減|激減|[\d.]+[%％]軽減)", x)), "")
+        cond = re.split(r"ダメージを?(?:半減|激減|[\d.]+[%％]軽減)", sent)[0]
+        if re.search(r"消す|消し|同時攻撃|コンボ|つなげ|発動|個以上|十字|ドロップ", cond):
+            red_c = "c"
+        else:
+            red_c = ""
+    else:
+        red_c = ""
     hp = []
     for sentence in text.split("。"):
         for grp, mult in re.findall(r"((?:\[[^\]]+\](?:属性|タイプ)?[と・、]?)+)の(?:HP|全パラメータ)[^。倍]*?([\d.]+)倍", sentence):
@@ -281,8 +292,8 @@ def leader_numbers(ls):
     # 固定ダメージの追い打ち（「固定1400万ダメージ」）: 超根性でHP1で耐えた敵もそのターンに倒せる → 超根性の後の行動を受けない
     fx = max((int(n) for n in re.findall(r"固定(\d+)万ダメージ", text)), default=0)
     if fx:
-        return f"{red:g}|{','.join(hp)}|fx{fx}"
-    return f"{red:g}|{','.join(hp)}" if red or hp else ""
+        return f"{red:g}{red_c}|{','.join(hp)}|fx{fx}"
+    return f"{red:g}{red_c}|{','.join(hp)}" if red or hp else ""
 
 
 def effect_durations(ids, skills):
