@@ -5094,7 +5094,8 @@ $("#fb-form")?.addEventListener("submit", async (e) => {
 // （編成登録の入力途中は消えないように、自動では読み直さず案内だけ出す）
 async function checkAppVersion() {
   try {
-    const mine = new URL(document.querySelector('script[src*="app.js"]').src).searchParams.get("v");
+    // 開いているページの版番号（index.html の meta。古い index.html の時は app.js の ?v=）
+    const mine = document.querySelector('meta[name="app-version"]')?.content ?? new URL(document.querySelector('script[src*="app.js"]').src).searchParams.get("v");
     const res = await fetch(`version.json?t=${Date.now()}`, { cache: "no-store" });
     if (!res.ok) return;
     const { v } = await res.json();
