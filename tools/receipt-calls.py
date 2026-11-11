@@ -70,16 +70,19 @@ def keys_of(name):
             keys.add(kata)
             # 長いカタカナ名は後ろの部分でも呼ばれる（アリナウィッシュミーメル → ミーメル）
             if len(kata) >= 6:
-                for n in range(3, 6):
-                    keys.add(kata[-n:])
+                for ln in range(3, 6):
+                    keys.add(kata[-ln:])
                 # 頭の部分でも呼ばれる（アマテラスオオカミ → アマテラス）
-                for n in range(4, 6):
-                    keys.add(kata[:n])
+                for ln in range(4, 6):
+                    keys.add(kata[:ln])
     # 漢字4文字の名前（服部平次・黒崎一護・坂田銀時）は名字だけ・名前だけでも呼ばれる
-    for p in parts:
+    for p in [p for p in re.split(r"[＆&\s]", n.split("・")[-1]) if p]:
         if re.fullmatch(r"[\u4E00-\u9FFF]{4}", p):
             keys.add(p[:2])
             keys.add(p[2:])
+        # 5文字（四楓院夜一）は後ろ2文字の名前で呼ばれる
+        elif re.fullmatch(r"[\u4E00-\u9FFF]{5}", p):
+            keys.add(p[-2:])
     return [k for k in keys if len(k) >= 2]
 
 
@@ -97,14 +100,14 @@ def fold(s):
 
 # 名前のすぐ後に「温存」「打たない」「不要」などが続くのは、スキルを使った記録ではない（「服部温存」「ダイン間違って打たない」）
 MENTION = re.compile(
-    r"^[\s①-⑩\dabAB裏表上下]*[はをがも]?[^\s、,，→⇒▶>（(]{0,6}?(温存|打たない|打たず|使わない|使わず|不要|いらない|切れたら|残り\d|は残す|(?:は|を)?(?:基本)?ループ)"
+    r"^[\s①-⑩\dabAB裏表上下]*[はをがも]?[^\s、,，→⇒▶>（(]{0,6}?(温存|打たない|打たず|打たなく|使わない|使わず|使わなく|不要|いらない|切れたら|残り\d|は残す|(?:は|を)?(?:基本)?ループ)"
     # 「雨竜→9Fまで温存」
     r"|^\s*[→⇒]?\s*\d+\s*[FfＦ階]?まで(?:温存|打たない|使わない)"
 )
 # 「ミナカ891推奨」のように＋値を書いているだけ
 PLUS_NOTE = re.compile(r"^\s*[+＋]?(297|891|99)\b")
 # 以降のループ（「以降クラウディアループ」「イシス、日番谷、ダインはループ」）
-LOOP = re.compile(r"ループ|以降.{0,12}(毎回|毎ターン)|毎ターン使う|(以降|以後).{0,6}(省略|区別なし)")
+LOOP = re.compile(r"ループ(?!.{0,2}(ズレ|ずれ))|以降.{0,12}(毎回|毎ターン)|毎ターン使う")
 
 
 CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
@@ -131,6 +134,9 @@ def parse_team(team, texts):
             a, b = re.split(r"[＆&]", n, maxsplit=1)
             a, b = a.split()[0] if a.split() else a, b.split()[0] if b.split() else b
             mkeys[i] += [f"{a}＆{b}", f"{a}&{b}", f"{a}{b}"]
+            # 漢字の頭1文字ずつの略し方（日向＆影山 → 日影）
+            if re.match(r"[\u4E00-\u9FFF]", a) and re.match(r"[\u4E00-\u9FFF]", b):
+                mkeys[i].append(a[0] + b[0])
     akeys = [[k for k in keys_of(re.sub(r"\s*No\.?\s*\d+.*$", "", m.get("assist") or "")) if len(k) >= 3] for m in members]
     body = "\n".join(texts[idx + 1:])
     # 1回も名前が見つからないキャラは、OCRの読み違いをならした文字で探す
@@ -166,8 +172,23 @@ def parse_team(team, texts):
         if line.lstrip().startswith(("※", "＊", "*")) and re.search(r"不要|いらない|なしでも|省略", line):
             continue
         # ループの記載は別に取っておく（どの階から・誰が）。階ごとの記録には足さない
-        if LOOP.search(line) and floor is not None:
-            who = sorted({i for i, ks in enumerate(mkeys) for k in ks if k in line})
+        lm = LOOP.search(line)
+        if lm and floor is not None:
+            # ループする人は、同じ文（。→▶ で区切る）の中で「ループ」より前に書かれた名前だけ
+            clause = re.split(r"[。→⇒▶]", line[:lm.start()])[-1]
+            hits = {i: {k for k in ks if k in clause} for i, ks in enumerate(mkeys)}
+            hits = {i: h for i, h in hits.items() if h}
+            def dominated(i):
+                # 同じ呼び方で、ほかのキャラの方がより多く当たっている（「ミヤ神楽」→神楽＆ミヤ衣装）。同じなら単体の名前を残す
+                for j, h in hits.items():
+                    if members[j]["no"] == members[i]["no"]:
+                        continue
+                    if hits[i] < h:
+                        return True
+                    if hits[i] == h and ("＆" in (members[i]["name"] or "")) and "＆" not in (members[j]["name"] or ""):
+                        return True
+                return False
+            who = sorted(i for i in hits if not dominated(i))
             if who:
                 loops.append({"from": floor, "mi": who, "raw": line.strip()[:80]})
         # 区切り（→ など）がOCRで消えることがあるので、行の中からキャラ名の出てくる位置を探す
@@ -195,8 +216,8 @@ def parse_team(team, texts):
         for i, m1 in enumerate(members):
             last = re.sub(r"[^\u4E00-\u9FFF]", "", (m1["name"] or "")[-1:])
             if last and len(m1["name"] or "") >= 3:
-                for mm in re.finditer(rf"(?:^|(?<=[→⇒>、,，\s(（]))({re.escape(last)})(?=$|[→⇒>、,，\s)）(（裏表])", line):
-                    found.append((mm.start(1), mm.end(1), i, last))
+                for mm in re.finditer(rf"(?:^|(?<=[→⇒>、,，\s(（①-⑩]))({re.escape(last)})(?=$|[→⇒>、,，\s)）(（裏表上下①-⑩])", line[cut:]):
+                    found.append((mm.start(1) + cut, mm.end(1) + cut, i, last))
         # 長い名前を優先して、重ならないものだけ残す
         found.sort(key=lambda f: (-(f[1] - f[0]), f[0]))
         taken, picked = [], []
@@ -235,13 +256,23 @@ def parse_team(team, texts):
             # そのキャラのほかの呼び方（「ミヤ」など）が出てくる方。どちらでもなければ2人組でない方（単体の名前）
             nos = {members[j]["no"] for j in same}
             if len(nos) > 1:
-                near = line[max(0, st - 6):en + 6]
                 def score(j):
-                    other = sum(1 for kk in mkeys[j] if kk != k and kk in near)
-                    combo = "＆" in (members[j]["name"] or "") or "&" in (members[j]["name"] or "")
-                    return (other, 0 if combo else 1)
+                    nm = members[j]["name"] or ""
+                    # すぐ前・すぐ後ろに、そのキャラのほかの呼び方がくっついているか（「ミヤ神楽」「キコル8号」）
+                    other = sum(1 for kk in mkeys[j] if kk != k and k not in kk and (line[en:].startswith(kk) or line[:st].endswith(kk)))
+                    halves = re.split(r"[＆&]", re.sub(r"【[^】]*】", "", nm).split("・")[-1])
+                    if len(halves) > 1:
+                        partner = next((h for h in halves if k not in h), "")
+                        if any(partner[a:a + 2] and line[en:en + 2] == partner[a:a + 2] for a in range(len(partner) - 1)):
+                            other += 1
+                    combo = "＆" in nm or "&" in nm
+                    # 呼び方が名前の最後の部分そのもの（「ハーデス」＝冥界の超越神・ハーデス）なら、そのキャラ
+                    exact = re.sub(r"【[^】]*】", "", nm).split("・")[-1] == k
+                    return (other, 0 if combo else 1, 1 if exact else 0)
                 best = max(score(j) for j in same)
                 same = [j for j in same if score(j) == best]
+                # 残りが別々のキャラなら、最初のキャラ（と同じキャラの2体目以降）だけにする
+                same = [j for j in same if members[j]["no"] == members[same[0]]["no"]]
                 i = same[0]
             mi = i
             if len(same) > 1:

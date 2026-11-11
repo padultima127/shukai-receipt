@@ -13912,16 +13912,7 @@ window.PAD_SEED = {
             "turn": 0
           }
         ]
-      },
-      "receiptLoops": [
-        {
-          "from": 1,
-          "mi": [
-            0
-          ],
-          "raw": "エルフィア進化→ハーティア変身→グレダイ（以降ループ）→"
-        }
-      ]
+      }
     },
     {
       "id": "fuun-dain-nanaminn",
@@ -15873,6 +15864,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
@@ -15908,6 +15904,11 @@ window.PAD_SEED = {
         "3": [
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 1
           },
@@ -15953,12 +15954,22 @@ window.PAD_SEED = {
         ],
         "6": [
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -16007,12 +16018,22 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 2
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -16113,6 +16134,11 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 1
@@ -16147,6 +16173,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -16174,6 +16205,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -16196,6 +16232,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 3,
             "part": "auto",
             "turn": 0
@@ -16207,6 +16248,11 @@ window.PAD_SEED = {
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 1
           },
@@ -16247,6 +16293,11 @@ window.PAD_SEED = {
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 5
           },
@@ -16281,7 +16332,8 @@ window.PAD_SEED = {
         {
           "from": 11,
           "mi": [
-            2
+            2,
+            4
           ],
           "raw": "以降夜一と石田は基本ループだが15F⑥には合わせる"
         }
@@ -16639,14 +16691,6 @@ window.PAD_SEED = {
       },
       "receiptLoops": [
         {
-          "from": 5,
-          "mi": [
-            3,
-            4
-          ],
-          "raw": "、①スペディオル （以降基本区別なし＆省略）"
-        },
-        {
           "from": 6,
           "mi": [
             0,
@@ -16841,7 +16885,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 0,
             "part": "base",
             "turn": 0
           },
@@ -17111,7 +17155,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
@@ -17190,7 +17234,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -17319,8 +17363,7 @@ window.PAD_SEED = {
         {
           "from": 15,
           "mi": [
-            1,
-            5
+            1
           ],
           "raw": "初手剣八、藍染。織姫はループ。"
         }
@@ -18687,6 +18730,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -18733,6 +18781,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 1
@@ -18746,6 +18799,11 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
@@ -18765,6 +18823,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 2
@@ -18772,12 +18835,22 @@ window.PAD_SEED = {
         ],
         "9": [
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 1
           },
           {
             "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 1,
             "part": "auto",
             "turn": 1
           },
@@ -18831,6 +18904,11 @@ window.PAD_SEED = {
         ],
         "11": [
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 1
@@ -18855,6 +18933,11 @@ window.PAD_SEED = {
         ],
         "13": [
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 1
@@ -18872,12 +18955,22 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
+            "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 2
           }
         ],
         "15": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 3
+          },
           {
             "mi": 0,
             "part": "auto",
@@ -18897,6 +18990,11 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 3
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 7
           },
           {
             "mi": 2,
@@ -24220,17 +24318,7 @@ window.PAD_SEED = {
           }
         ]
       },
-      "badgeId": 103,
-      "receiptLoops": [
-        {
-          "from": 9,
-          "mi": [
-            4,
-            5
-          ],
-          "raw": "、①セイハーツ（以降区別なし）"
-        }
-      ]
+      "badgeId": 103
     },
     {
       "id": "taiju-suzaku-matsu",
@@ -24475,16 +24563,7 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false,
-      "receiptLoops": [
-        {
-          "from": 13,
-          "mi": [
-            3
-          ],
-          "raw": "ループズレてもエミリア②のタイミングさえ合えばなんとかな"
-        }
-      ]
+      "fastMode": false
     },
     {
       "id": "taiju-challenge-morgan",
@@ -24657,7 +24736,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -24696,7 +24775,7 @@ window.PAD_SEED = {
         ],
         "5": [
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -24708,7 +24787,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -24735,7 +24814,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -24749,7 +24828,7 @@ window.PAD_SEED = {
         ],
         "11": [
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -25354,16 +25433,7 @@ window.PAD_SEED = {
           }
         ]
       },
-      "fastMode": false,
-      "receiptLoops": [
-        {
-          "from": 1,
-          "mi": [
-            3
-          ],
-          "raw": "ここから炭禰豆は1→2の順にループし、ミナカよりもさきに使"
-        }
-      ]
+      "fastMode": false
     },
     {
       "id": "jupiter-shiva-kasajizo",
@@ -27257,7 +27327,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
@@ -28216,6 +28286,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -28226,12 +28301,32 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
             "turn": 0
           }
         ],
         "4": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
           {
             "mi": 0,
             "part": "auto",
@@ -28245,6 +28340,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 0
@@ -28260,21 +28360,56 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 0
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 2,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 1
           }
         ],
         "6": [
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 1,
@@ -28284,12 +28419,37 @@ window.PAD_SEED = {
         ],
         "7": [
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 0,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 1
           },
@@ -28302,6 +28462,11 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
           },
           {
             "mi": 2,
@@ -28316,6 +28481,11 @@ window.PAD_SEED = {
         ],
         "8": [
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 0
@@ -28323,12 +28493,27 @@ window.PAD_SEED = {
         ],
         "9": [
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 1,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 2
           },
@@ -28340,6 +28525,21 @@ window.PAD_SEED = {
         ],
         "10": [
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 2
@@ -28351,6 +28551,16 @@ window.PAD_SEED = {
           },
           {
             "mi": 1,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 1
           }
@@ -28362,17 +28572,77 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 1
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 1,
             "part": "auto",
             "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 5
           }
         ],
         "13": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 5
+          },
           {
             "mi": 0,
             "part": "auto",
@@ -28382,6 +28652,21 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "auto",
             "turn": 5
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 1,
@@ -28394,9 +28679,24 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 4
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 4
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 5
           },
           {
             "mi": 1,
@@ -28409,7 +28709,17 @@ window.PAD_SEED = {
             "turn": 5
           }
         ]
-      }
+      },
+      "receiptLoops": [
+        {
+          "from": 1,
+          "mi": [
+            3,
+            4
+          ],
+          "raw": "以降炭治郎ループ"
+        }
+      ]
     },
     {
       "id": "mercury-reinhard-mori",
@@ -29029,6 +29339,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "assist",
             "turn": 0
@@ -29051,6 +29366,11 @@ window.PAD_SEED = {
         ],
         "2": [
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 3,
             "part": "auto",
             "turn": 1
@@ -29069,6 +29389,11 @@ window.PAD_SEED = {
           }
         ],
         "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
           {
             "mi": 3,
             "part": "auto",
@@ -29096,6 +29421,11 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
+            "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 1
@@ -29111,6 +29441,11 @@ window.PAD_SEED = {
         "13": [
           {
             "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -33752,7 +34087,7 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 3,
+            "mi": 0,
             "part": "assist",
             "turn": 2
           },
@@ -33985,7 +34320,7 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 3,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -34025,7 +34360,7 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 3,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
@@ -34975,7 +35310,7 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 3,
+            "mi": 0,
             "part": "auto",
             "turn": 2
           },
@@ -35015,7 +35350,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 3,
+            "mi": 0,
             "part": "auto",
             "turn": 3
           },
@@ -36620,6 +36955,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "base",
             "turn": 0
@@ -36632,6 +36972,11 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "base",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
             "turn": 0
           },
           {
@@ -36659,6 +37004,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -36679,6 +37029,11 @@ window.PAD_SEED = {
         "5": [
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -36720,6 +37075,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 0,
             "part": "auto",
             "turn": 0
@@ -36738,6 +37098,11 @@ window.PAD_SEED = {
         "7": [
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -36774,6 +37139,11 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 2
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 2
@@ -36785,6 +37155,11 @@ window.PAD_SEED = {
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 2
           },
@@ -36824,6 +37199,11 @@ window.PAD_SEED = {
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 1
           },
@@ -36872,6 +37252,11 @@ window.PAD_SEED = {
         "14": [
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -36928,6 +37313,11 @@ window.PAD_SEED = {
             "turn": 4
           },
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 4
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 4
@@ -36959,6 +37349,11 @@ window.PAD_SEED = {
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 8
+          },
+          {
+            "mi": 3,
             "part": "auto",
             "turn": 8
           },
@@ -37895,7 +38290,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -37939,7 +38334,7 @@ window.PAD_SEED = {
         ],
         "4": [
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -37965,7 +38360,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
@@ -38001,7 +38396,7 @@ window.PAD_SEED = {
         ],
         "15": [
           {
-            "mi": 4,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           },
@@ -39267,6 +39662,11 @@ window.PAD_SEED = {
         ],
         "4": [
           {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "auto",
             "turn": 0
@@ -39311,6 +39711,11 @@ window.PAD_SEED = {
           }
         ],
         "9": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
           {
             "mi": 1,
             "part": "auto",
@@ -40426,6 +40831,13 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "4": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "5": [
           {
             "mi": 1,
@@ -40638,11 +41050,6 @@ window.PAD_SEED = {
           }
         ],
         "7": [
-          {
-            "mi": 3,
-            "part": "auto",
-            "turn": 0
-          },
           {
             "mi": 3,
             "part": "auto",
@@ -42185,12 +42592,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -42216,16 +42623,6 @@ window.PAD_SEED = {
           }
         ],
         "7": [
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 1
-          },
           {
             "mi": 2,
             "part": "auto",
@@ -42428,6 +42825,11 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
           }
         ],
         "3": [
@@ -42447,6 +42849,11 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
@@ -42457,6 +42864,11 @@ window.PAD_SEED = {
           }
         ],
         "6": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
           {
             "mi": 4,
             "part": "auto",
@@ -42505,6 +42917,11 @@ window.PAD_SEED = {
         "10": [
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -43532,7 +43949,7 @@ window.PAD_SEED = {
         ],
         "3": [
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -43542,7 +43959,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 1
           }
@@ -43554,7 +43971,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -43566,24 +43983,19 @@ window.PAD_SEED = {
         ],
         "8": [
           {
-            "mi": 0,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 2,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           }
         ],
         "9": [
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -43595,14 +44007,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 0,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 4,
+            "mi": 0,
             "part": "auto",
             "turn": 0
           },
@@ -45392,14 +45804,14 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
-            "mi": 3,
+            "mi": 1,
             "part": "assist",
             "turn": 0
           }
         ],
         "6": [
           {
-            "mi": 4,
+            "mi": 1,
             "part": "assist",
             "turn": 0
           }
@@ -45413,14 +45825,14 @@ window.PAD_SEED = {
         ],
         "10": [
           {
-            "mi": 3,
+            "mi": 1,
             "part": "auto",
             "turn": 1
           }
         ],
         "12": [
           {
-            "mi": 4,
+            "mi": 1,
             "part": "auto",
             "turn": 1
           }
@@ -47285,7 +47697,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 4,
             "part": "assist",
             "turn": 0
           },
@@ -47335,7 +47747,7 @@ window.PAD_SEED = {
         ],
         "7": [
           {
-            "mi": 3,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -47376,7 +47788,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 2,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -47415,7 +47827,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -47558,6 +47970,11 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 0
@@ -47580,6 +47997,20 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "3": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "6": [
           {
             "mi": 2,
@@ -47594,7 +48025,19 @@ window.PAD_SEED = {
             "turn": 0
           }
         ],
+        "9": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
         "12": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
           {
             "mi": 2,
             "part": "auto",
@@ -50134,14 +50577,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 3,
             "part": "auto",
             "turn": 0
           }
         ],
         "2": [
           {
-            "mi": 4,
+            "mi": 5,
             "part": "assist",
             "turn": 0
           },
@@ -50151,7 +50594,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -50163,19 +50606,19 @@ window.PAD_SEED = {
         ],
         "3": [
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "4": [
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
@@ -50187,14 +50630,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
         ],
         "6": [
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
@@ -50206,53 +50649,53 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "8": [
           {
-            "mi": 5,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 4,
             "part": "auto",
             "turn": 0
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
         ],
         "9": [
           {
-            "mi": 4,
-            "part": "auto",
-            "turn": 1
-          },
-          {
             "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
             "mi": 4,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "10": [
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -50262,14 +50705,14 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
         ],
         "11": [
           {
-            "mi": 5,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           }
@@ -50281,36 +50724,6 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 4,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 1
-          },
-          {
-            "mi": 4,
-            "part": "auto",
-            "turn": 2
-          },
-          {
-            "mi": 5,
-            "part": "auto",
-            "turn": 3
-          },
-          {
-            "mi": 4,
-            "part": "auto",
-            "turn": 4
-          },
-          {
-            "mi": 2,
-            "part": "auto",
-            "turn": 0
-          },
-          {
             "mi": 5,
             "part": "auto",
             "turn": 0
@@ -50338,20 +50751,50 @@ window.PAD_SEED = {
           {
             "mi": 2,
             "part": "auto",
-            "turn": 5
+            "turn": 0
           },
           {
             "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 4
+          },
+          {
+            "mi": 2,
             "part": "auto",
             "turn": 5
           },
           {
             "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 6
           },
           {
-            "mi": 4,
+            "mi": 5,
             "part": "auto",
             "turn": 7
           },
@@ -50739,18 +51182,7 @@ window.PAD_SEED = {
             "turn": 3
           }
         ]
-      },
-      "receiptLoops": [
-        {
-          "from": 2,
-          "mi": [
-            1,
-            2,
-            3
-          ],
-          "raw": "以下ノア①→②ループ"
-        }
-      ]
+      }
     },
     {
       "id": "shinokuchou-kikoru-matsuda",
@@ -50949,6 +51381,11 @@ window.PAD_SEED = {
         ],
         "3": [
           {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 3,
             "part": "auto",
             "turn": 0
@@ -50990,6 +51427,11 @@ window.PAD_SEED = {
         ],
         "6": [
           {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 5,
             "part": "auto",
             "turn": 0
@@ -51029,6 +51471,11 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "auto",
             "turn": 1
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 2
           },
           {
             "mi": 3,
@@ -51075,6 +51522,11 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
+            "mi": 0,
+            "part": "auto",
+            "turn": 4
+          },
+          {
             "mi": 2,
             "part": "auto",
             "turn": 4
@@ -51115,6 +51567,11 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "auto",
             "turn": 3
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 4
           },
           {
             "mi": 3,
@@ -53530,12 +53987,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "base",
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "base",
             "turn": 0
           },
@@ -53547,12 +54004,12 @@ window.PAD_SEED = {
         ],
         "2": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 2,
             "part": "auto",
             "turn": 0
           },
@@ -53564,7 +54021,7 @@ window.PAD_SEED = {
         ],
         "3": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53584,7 +54041,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 1
           },
@@ -53594,19 +54056,14 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 1,
-            "part": "auto",
-            "turn": 1
-          },
-          {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           }
         ],
         "4": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53628,7 +54085,12 @@ window.PAD_SEED = {
         ],
         "5": [
           {
-            "mi": 1,
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 2,
             "part": "auto",
             "turn": 0
           },
@@ -53638,17 +54100,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -53670,7 +54127,12 @@ window.PAD_SEED = {
         ],
         "6": [
           {
-            "mi": 1,
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -53680,12 +54142,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
-          },
-          {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           }
@@ -53707,7 +54164,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -53717,12 +54174,12 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 2,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           }
@@ -53744,27 +54201,27 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53789,14 +54246,14 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           }
         ],
         "11": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53811,12 +54268,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 2,
             "part": "auto",
             "turn": 1
           },
@@ -53828,7 +54285,7 @@ window.PAD_SEED = {
         ],
         "12": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53843,7 +54300,12 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
+            "part": "auto",
+            "turn": 2
+          },
+          {
+            "mi": 4,
             "part": "auto",
             "turn": 2
           },
@@ -53853,19 +54315,14 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 1,
-            "part": "auto",
-            "turn": 2
-          },
-          {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 2
           }
         ],
         "13": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53885,7 +54342,12 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 1,
+            "mi": 5,
+            "part": "auto",
+            "turn": 5
+          },
+          {
+            "mi": 2,
             "part": "auto",
             "turn": 5
           },
@@ -53895,19 +54357,14 @@ window.PAD_SEED = {
             "turn": 5
           },
           {
-            "mi": 1,
-            "part": "auto",
-            "turn": 5
-          },
-          {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 5
           }
         ],
         "14": [
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -53922,22 +54379,22 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 2
           },
@@ -53952,12 +54409,27 @@ window.PAD_SEED = {
             "turn": 2
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 2
           },
           {
-            "mi": 1,
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 3
+          },
+          {
+            "mi": 5,
             "part": "auto",
             "turn": 3
           },
@@ -53972,37 +54444,22 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "auto",
             "turn": 3
           },
           {
-            "mi": 1,
-            "part": "auto",
-            "turn": 3
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 3
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 3
-          },
-          {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 3
           }
@@ -54119,7 +54576,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "auto",
             "turn": 0
           },
@@ -54173,7 +54630,7 @@ window.PAD_SEED = {
             "turn": 3
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "auto",
             "turn": 3
           },
@@ -54289,7 +54746,7 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 1,
+            "mi": 4,
             "part": "auto",
             "turn": 1
           },
@@ -54551,7 +55008,7 @@ window.PAD_SEED = {
             "turn": 0
           },
           {
-            "mi": 1,
+            "mi": 5,
             "part": "auto",
             "turn": 1
           },
@@ -54989,6 +55446,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "auto",
             "turn": 0
@@ -54999,24 +55461,29 @@ window.PAD_SEED = {
             "turn": 1
           },
           {
-            "mi": 3,
+            "mi": 0,
             "part": "base",
             "turn": 1
           },
           {
-            "mi": 3,
+            "mi": 5,
             "part": "base",
             "turn": 1
           }
         ],
         "2": [
           {
-            "mi": 3,
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
           {
-            "mi": 3,
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
             "part": "auto",
             "turn": 0
           },
@@ -55051,6 +55518,11 @@ window.PAD_SEED = {
             "mi": 5,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 1
           },
           {
             "mi": 5,
@@ -55264,11 +55736,6 @@ window.PAD_SEED = {
             "mi": 3,
             "part": "auto",
             "turn": 1
-          },
-          {
-            "mi": 1,
-            "part": "auto",
-            "turn": 0
           }
         ],
         "3": [
@@ -55448,7 +55915,6 @@ window.PAD_SEED = {
         {
           "from": 8,
           "mi": [
-            0,
             3
           ],
           "raw": "以降ミヤ神楽ループ"
@@ -55456,8 +55922,7 @@ window.PAD_SEED = {
         {
           "from": 10,
           "mi": [
-            0,
-            3
+            0
           ],
           "raw": "以降 神楽ループ"
         }
@@ -59704,6 +60169,16 @@ window.PAD_SEED = {
             "mi": 4,
             "part": "assist",
             "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
           }
         ],
         "5": [
@@ -59758,7 +60233,17 @@ window.PAD_SEED = {
             "turn": 3
           }
         ]
-      }
+      },
+      "receiptLoops": [
+        {
+          "from": 1,
+          "mi": [
+            3,
+            4
+          ],
+          "raw": "※以降炭治郎禰豆子21ループ"
+        }
+      ]
     },
     {
       "id": "juoku-taichi-danna",

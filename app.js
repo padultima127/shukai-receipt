@@ -5207,6 +5207,13 @@ document.querySelectorAll(".tabbar [data-goto]").forEach((b) =>
 function receiptNames(t) {
   // 短い名前。同じキャラが複数いる時は、リーダー・フレンドは L/F、サブは a・b… を付ける
   const names = slotNames(t);
+  // 別のキャラと短い名前がかぶる2人組（「日向 翔陽」と「日向 翔陽＆影山 飛雄」）は「日向＆影山」にする
+  t.members.forEach((m, i) => {
+    const full = (monster(m.id)?.name ?? "").replace(/【[^】]*】/g, "").split("・").pop();
+    if (!/[＆&]/.test(full)) return;
+    const clash = t.members.some((x, j) => j !== i && names[j] === names[i] && monster(x.id)?.no !== monster(m.id)?.no);
+    if (clash) names[i] = full.split(/[＆&]/).map((h) => h.trim().split(/\s+/)[0]).join("＆");
+  });
   const nos = t.members.map((m) => monster(m.id)?.no ?? m.id);
   return names.map((n, i) => {
     const same = nos.map((x, j) => (x === nos[i] ? j : -1)).filter((j) => j >= 0);
