@@ -2210,6 +2210,8 @@ function stepKeysOf(name) {
   const n = name.replace(/【[^】]*】|\[[^\]]*\]|［[^］]*］|\([^)]*\)|（[^）]*）/g, "");
   const parts = n.split(/[・＆&\s]/).filter(Boolean);
   const keys = new Set([n, parts.at(-1) ?? n, ...parts.filter((p) => p.length >= 2)]);
+  // 漢字4文字の名前（服部平次・黒崎一護）は名字だけ・名前だけでも呼ばれる
+  for (const p of parts) if (/^[\u4E00-\u9FFF]{4}$/.test(p)) keys.add(p.slice(0, 2)).add(p.slice(2));
   for (const k of [...keys]) {
     if (k.length >= 4 && !/^[\u30A0-\u30FF]+$/.test(k)) keys.add(k.slice(0, 3));
     for (const kata of k.match(/[\u30A0-\u30FFー]{2,}/g) ?? []) {
@@ -2221,12 +2223,19 @@ function stepKeysOf(name) {
 }
 const STEP_FLOOR = /^[\s◆◇●■・•★☆【]*(?:B|b)?(\d{1,2})\s*(?:[fFＦ階]|\.|．|:|：|，|,|、(?!\d))/;
 const STEP_CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩";
+const STEP_MENTION = /^[\s①-⑩\dabAB裏表上下]*[はをがも]?[^\s、,，→⇒▶>（(]{0,6}?(温存|打たない|打たず|打たなく|使わない|使わず|使わなく|不要|いらない|切れたら|残り\d|は残す|(?:は|を)?(?:基本)?ループ)|^\s*[→⇒]?\s*\d+\s*[FfＦ階]?まで(?:温存|打たない|使わない)/;
+const STEP_LOOP = /ループ(?!.{0,2}(ズレ|ずれ))|以降.{0,12}(毎回|毎ターン)|毎ターン使う/;
 function stepsToCalls(t) {
   const lines = (t.steps ?? []).flatMap((l) => String(l).split("\n"));
   if (!lines.length) return null;
   const members = t.members;
   const mkeys = members.map((m) => stepKeysOf(monster(m.id)?.name ?? ""));
-  const akeys = members.map((m) => stepKeysOf(String(m.assist ?? "").replace(/\s*No\.?\s*\d+.*$/, "")).filter((k) => k.length >= 3));
+  // 武器は「狐構の仙杖」→「仙杖」のように「の」の後ろだけでも呼ばれる
+  const akeys = members.map((m) => {
+    const an = String(m.assist ?? "").replace(/\s*No\.?\s*\d+.*$/, "");
+    const tailNo = (an.split(/[・＆&\s]/).filter(Boolean).at(-1) ?? "").split("の").at(-1) ?? "";
+    return [...new Set([...stepKeysOf(an).filter((k) => k.length >= 3), ...(tailNo.length >= 2 && tailNo !== an ? [tailNo] : [])])];
+  });
   const matchMember = (text) => {
     let best = null;
     for (const [i, ks] of mkeys.entries()) for (const k of ks) if (text.includes(k) && (!best || k.length > best.len)) best = { mi: i, part: "auto", len: k.length };
@@ -2243,6 +2252,7 @@ function stepsToCalls(t) {
     if (who) legend.set(m[1].replace("\uFE0F", ""), who);
   }
   const calls = {};
+  const loops = [];
   let floor = null;
   const seenOrder = {};
   for (let line of lines) {
@@ -2255,6 +2265,24 @@ function stepsToCalls(t) {
     // 凡例の行・「※…不要」の注意書きは使用に数えない
     if (/^\s*\p{Extended_Pictographic}\uFE0F?\s*(?:[=＝:：]|は)/u.test(line)) continue;
     if (/^\s*[※＊*]/.test(line) && /不要|いらない|なしでも|省略/.test(line)) continue;
+    // 「以降クラウディアループ」: その階から溜まり次第使う（同じ文の中で「ループ」より前に書かれた名前）
+    const lm = line.match(STEP_LOOP);
+    if (lm) {
+      const clause = line.slice(0, lm.index).split(/[。→⇒▶]/).at(-1);
+      // 長い呼び方を優先（「ギムレット」の中の「レット」でスカーレットを拾わない）。同じキャラが2体いれば両方
+      const hits = mkeys.flatMap((ks, i) => ks.flatMap((k) => [...clause.matchAll(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"))].map((mm) => ({ st: mm.index, en: mm.index + k.length, i }))));
+      hits.sort((a, b) => b.en - b.st - (a.en - a.st) || a.st - b.st);
+      const span = [];
+      const who = [];
+      for (const h of hits) {
+        const sp = span.find(([a, b]) => !(h.en <= a || h.st >= b));
+        if (sp && !(sp[0] === h.st && sp[1] === h.en)) continue;
+        if (!sp) span.push([h.st, h.en]);
+        if (!who.includes(h.i)) who.push(h.i);
+      }
+      who.sort((a, b) => a - b);
+      if (who.length) loops.push({ from: floor, mi: who, raw: line.trim().slice(0, 80) });
+    }
     const found = [];
     for (const [i, ks] of mkeys.entries()) for (const k of ks) for (const mm of line.matchAll(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"))) found.push({ st: mm.index, en: mm.index + k.length, mi: i, assist: false, k });
     for (const [i, ks] of akeys.entries()) for (const k of ks) for (const mm of line.matchAll(new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "g"))) found.push({ st: mm.index, en: mm.index + k.length, mi: i, assist: true, k });
@@ -2280,6 +2308,8 @@ function stepsToCalls(t) {
     }
     picked.sort((a, b) => a.st - b.st);
     for (const f of picked) {
+      // 「服部温存」「ダイン打たない」「ミナカ891推奨」は使った記録ではない
+      if (STEP_MENTION.test(line.slice(f.en, f.en + 14)) || /^\s*[+＋]?(297|891|99)(?!\d)/.test(line.slice(f.en, f.en + 6))) continue;
       const after = line.slice(f.en, f.en + 3);
       if (/^\s*[（(]?(変身|進化)後/.test(after)) continue;
       const transform = /^\s*[（(]?(変身|進化)/.test(after);
@@ -2298,13 +2328,15 @@ function stepsToCalls(t) {
       (calls[floor] ??= []).push({ mi, part, turn: 0 });
     }
   }
+  if (loops.length) stepLoops.set(t, loops);
   return Object.keys(calls).length ? calls : null;
 }
+const stepLoops = new WeakMap();
 
 function enduranceSetup(t0, opts = {}) {
   // 手で登録した receiptUses があればそれ、なければレシートの呼び出し（なければ立ち回りの文章）から判定
   const calls0 = t0.receiptCalls ?? (t0.userAdded ? stepsToCalls(t0) : null);
-  const t0c = calls0 && !t0.receiptCalls ? { ...t0, receiptCalls: calls0 } : t0;
+  const t0c = calls0 && !t0.receiptCalls ? { ...t0, receiptCalls: calls0, receiptLoops: t0.receiptLoops ?? stepLoops.get(t0) } : t0;
   const t = t0c.receiptUses || !t0c.receiptCalls ? t0c : { ...t0c, receiptUses: resolveReceiptUses(t0c) };
   const mems = t.members.filter((m) => m.role !== "free");
   const leader = mems.find((m) => m.role === "L");
@@ -5383,7 +5415,7 @@ function receiptHTML(t) {
     return `<span class="rc-chip${isAssist ? " rc-ura" : ""}" title="${esc(isAssist ? `${names[c.mi]}の武器: ${MDB.get(a)?.[1] ?? ""}` : mon?.name ?? "")}">${icon}${isAssist && !showWeapon ? `<i class="rc-ura-mark">裏</i>` : ""}<small>${esc(label)}</small></span>`;
   };
   // 「以降◯◯ループ」の記載: 書かれた階の下に出す（その後の階には書かれていないことが多いので、手順を補う目安）
-  const loopsLeft = [...(t.receiptLoops ?? [])];
+  const loopsLeft = [...(t.receiptLoops ?? (t.userAdded && !t.receiptCalls ? stepLoops.get(t) : null) ?? [])];
   const loopHTML = (fl) => {
     const here = loopsLeft.filter((l) => l.from <= fl);
     here.forEach((l) => loopsLeft.splice(loopsLeft.indexOf(l), 1));
