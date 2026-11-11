@@ -2920,6 +2920,74 @@ function usedSkillNames(t, setup) {
   }
   return out.length ? out.map(esc).join("・") : "スキルの使用なし";
 }
+// 編成の潜在を変えた時に、レシートどおりのスキルで全フロア耐えられるか（チームHPは推定HPの比で入力値を伸び縮み）
+function enduranceSurvives(t, d, kago, maxHp, baseEst, latent, info) {
+  const s0 = enduranceSetup(t, { kago });
+  const { alloc } = allocateLatentPool(d, s0, s0.skillRed);
+  const setup = { ...s0, awkAttr: Object.fromEntries(ATTRS5.map((a) => [a, s0.awkAttr[a] + alloc[a]])) };
+  const hp = baseEst ? (maxHp * s0.estHp) / baseEst : maxHp;
+  const r = simulateEndurance(d, setup, hp, s0.skillRed || 0, latent);
+  if (info && r.deadAt != null) Object.assign(info, { floor: r.deadAt, label: r.rows.find((x) => !x.ok && !x.skipped)?.label ?? "" });
+  return r.deadAt == null;
+}
+// 潜在の妥協ライン: 属性軽減の潜在・HP潜在を、耐えられる限り1つずつ外す（効きの小さいものから試す）
+// 値は試す順番の重み（大きいものから外してみる）。表示は個数で数える
+const LAT_RED = { 14: 1, 15: 1, 16: 1, 17: 1, 18: 1, 28: 2, 29: 2, 30: 2, 31: 2, 32: 2 };
+const LAT_HP = { 1: 1, 20: 2, 42: 3 };
+function latentCompromise(t, d, kago, maxHp, latent, kinds) {
+  const base = enduranceSetup(t, { kago }).estHp;
+  let cur = t;
+  const removed = [];
+  const fail = {}; // 1つも外せない時に、どの階で倒れるか
+  for (let guard = 0; guard < 40; guard++) {
+    // 外せる候補（キャラと潜在の組）。枠の大きいものから試す
+    const cands = [];
+    cur.members.forEach((m, mi) => (m.build?.latents ?? []).forEach((c, li) => kinds[c] && cands.push({ mi, li, c })));
+    cands.sort((a, b) => kinds[b.c] - kinds[a.c]);
+    const seen = new Set();
+    let next = null;
+    for (const x of cands) {
+      const key = `${cur.members[x.mi].id}:${x.c}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      const members = cur.members.map((m, i) => (i === x.mi ? { ...m, build: { ...m.build, latents: m.build.latents.filter((_, j) => j !== x.li) } } : m));
+      const t2 = { ...cur, members };
+      if (enduranceSurvives(t2, d, kago, maxHp, base, latent, removed.length ? null : fail)) {
+        next = { t2, x };
+        break;
+      }
+    }
+    if (!next) break;
+    removed.push({ mi: next.x.mi, code: next.x.c });
+    cur = next.t2;
+  }
+  const total = t.members.reduce((n, m) => n + (m.build?.latents ?? []).filter((c) => kinds[c]).length, 0);
+  return { total, removed, slots: removed.length, fail };
+}
+function renderCompromise(t, d, kago, maxHp, latent, setup, need) {
+  const names = slotNames(t);
+  const hasLat = t.members.some((m) => Array.isArray(m.build?.latents));
+  const latLine = (kinds, label) => {
+    if (!hasLat) return `<li>${label}: レシートの潜在が未登録のため判定できません</li>`;
+    const r = latentCompromise(t, d, kago, maxHp, latent, kinds);
+    if (!r.total) return `<li>${label}: 元の編成に入っていません</li>`;
+    if (!r.slots) return `<li>${label}: 全${r.total}個とも外せません（1つ外すと${r.fail.floor ? `${r.fail.floor}F「${esc(r.fail.label)}」` : ""}で倒れる計算）</li>`;
+    const by = new Map();
+    for (const x of r.removed) by.set(`${names[x.mi]}の${PDC_LATENT[x.code]}`, (by.get(`${names[x.mi]}の${PDC_LATENT[x.code]}`) ?? 0) + 1);
+    return `<li>${label}: ${r.slots === r.total ? `全${r.total}個とも外しても耐えられます` : `全${r.total}個のうち<strong>${r.slots}個</strong>外しても耐えられます`}<br><small class="muted">外せる例: ${[...by].map(([k, n]) => `${esc(k)}${n > 1 ? `×${n}` : ""}`).join("、")}</small></li>`;
+  };
+  // ＋値: キャラごとの最低ライン（全員＋297から、HPが伸びやすいキャラの順に上げた一例）
+  const b = hpBudget(setup, maxHp, need);
+  let plusLine = "";
+  if (b) {
+    const need891 = new Map(b.plan.map((p) => [p.name, p.to]));
+    plusLine = `<li>＋値: ${b.minOk ? (b.plan.length ? "下のキャラ以外は＋297で大丈夫です（一例）" : "全員＋297でも耐えられます") : "全員＋891でも足りない計算です"}${
+      b.plan.length ? `<ul class="plus-list">${setup.detail.filter((x) => need891.has(x.name)).map((x) => `<li>${esc(x.name)} ＋${need891.get(x.name)}以上</li>`).join("")}</ul>` : ""
+    }${setup.teamHp && b.cutNow ? `<br><small class="muted">今の＋値のままなら、チームHP強化を${b.cutNow}個減らしても耐えられます</small>` : ""}</li>`;
+  }
+  return `<div class="advice compromise"><p><strong>どこまで妥協できるか</strong>（レシートどおりのスキルで、ほかはそのままにして1つずつ試した結果）</p><ul>
+    ${plusLine}${latLine(LAT_RED, "属性軽減の潜在")}${latLine(LAT_HP, "HPの潜在")}</ul></div>`;
+}
 function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
   const setup0 = enduranceSetup(t, { kago });
   // 属性不明の潜在は、スキル軽減ありの想定（あれば）で一番効く属性に振って固定する
@@ -2959,17 +3027,24 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
       ? `%回復（${[...new Set(setup.regens.map((r) => `${esc(r.name)}${r.pct}%・${r.dur}ターン`))].join("／")}）が効いているターンはその分だけ回復、それ以外のターンは回復ドロップを組んで全回復として計算（回復生成スキルを使った階は全回復）`
       : "%回復スキルなし → 毎ターン回復ドロップを組んで全回復として計算（回復生成スキルを使った階も全回復）";
   const awk = ATTRS5.filter((a) => setup.awkAttr[a]).map((a) => `${a}${setup.awkAttr[a]}%`).join("・");
-  const verdict = sim.deadAt == null
-    ? `<p class="ok"><strong>全フロア耐えられる計算です</strong></p>`
-    : `<p class="ng"><strong>${sim.deadAt}Fで倒れる計算です</strong></p>`;
+  // 判定はレシートどおりのスキルを使った結果（なければスキルなし）。投稿の編成は実際にクリアされているので、
+  // 倒れる計算になった時は計算に入っていない要素がある＝「判定保留」。入力したHP・潜在を下げて倒れる時だけ「倒れる」
+  const main = withSkill ?? sim;
+  const lowered = maxHp < setup0.estHp - 1 || ATTRS5.some((a) => (latent[a] ?? 0) < 0);
+  const verdict = main.deadAt == null
+    ? `<p class="ok verdict"><span class="vd vd-ok">耐える</span><strong>全フロア耐えられる計算です</strong></p>`
+    : lowered
+      ? `<p class="ng verdict"><span class="vd vd-ng">倒れる</span><strong>${main.deadAt}Fで倒れる計算です</strong></p>`
+      : `<p class="hold verdict"><span class="vd vd-hold">判定保留</span><strong>計算では${main.deadAt}Fで倒れますが、実際にクリアされている編成です</strong><br><small>レシートから読めていないスキルの使い方（割合ダメージを受けた階・温存の指示など）や、データにない要素があるため、この編成の耐久は判定できません。妥協ラインも出していません。</small></p>`;
   const attrCell = (r) => (r.worst ? `${esc(r.worst)}${r.attrs.length > 1 ? `<small class="muted">（${esc(r.attrs.join("・"))}のどれか）</small>` : ""}${r.ar ? `<small> −${r.ar}%</small>` : ""}` : r.attrs?.includes("無") ? "無" : "―");
   const need0 = requiredHp(d, setup, 0, latent);
   const need1 = setup.skillRed ? requiredHp(d, setup, setup.skillRed, latent) : null;
   const fmt = (n) => (n == null ? "―（HPでは耐えられない）" : `${n.toLocaleString("ja-JP")}`);
   const need = `<p class="need">全フロア耐えるのに必要なHP: スキルなし <strong>${fmt(need0)}</strong>${setup.skillRed ? `／レシートどおり <strong>${fmt(need1)}</strong>` : ""}
     <small class="muted">（実際にクリアできている編成で推定HPが足りない場合は、潜在・超覚醒・Lv120などでこのHPまで補っているはずです）</small></p>`;
-  const plusLines = setup.skillRed ? renderHpBudget(setup, maxHp, need1, "レシートどおりのスキルで、") : renderHpBudget(setup, maxHp, need0, "スキルなしで、");
-  return `${need}${autoNote}${ambNote}${verdict}${renderLatentAdvice(d, setup, maxHp, 0, latent, sim)}${skillLine}${plusLines}
+  // 耐えられる時だけ、どこまで妥協できるか（＋値・属性軽減の潜在・HP潜在）
+  const compromise = main.deadAt == null ? renderCompromise(t, d, kago, maxHp, latent, setup, setup.skillRed ? need1 : need0) : "";
+  return `${verdict}${compromise}${need}${autoNote}${ambNote}${main.deadAt == null || lowered ? skillLine : ""}
     <p class="hint">%指定のない「軽減」は35%として計算。スキルの軽減・最大HPアップは、レシートに使う階が書かれているものだけを、スキルに書かれたターン数の間だけ乗せています（重なった場合は最後に使ったもの。書かれていないスキルは使っていない扱い）。属性軽減は覚醒（${awk || "なし"}）と、上で入力した潜在の合計（割合ダメージにも乗せています）。<br>下の表は${withSkill ? "レシートどおりにスキルを使った場合" : "スキルなし"}。軽減: リーダー・フレンドのLSで${Math.round(setup.reduce * 1000) / 10}%（LSの条件を毎ターン満たす前提）／${heal}</p>
     <div class="table-wrap"><table class="end-table"><thead><tr><th>階</th><th>攻撃</th><th>スキル軽減</th><th>属性</th><th>ダメージ</th><th>軽減後</th><th>残りHP</th></tr></thead><tbody>
     ${(withSkill ?? sim).rows.map((r) => r.skipped ? `<tr class="muted"><td>${r.floor}F</td><td>${esc(r.label)}</td><td colspan="5">${esc(r.skipped)}</td></tr>` : `<tr class="${r.ok ? "" : "ng"}"><td>${r.floor}F<small class="muted">（${r.turn}T）</small></td><td>${esc(r.label)}${r.noLs ? ` <span class="st st-ng">LS軽減なし</span>` : ""}</td><td>${r.sk ? `${r.sk}%` : "―"}</td><td>${attrCell(r)}</td><td>${r.raw.toLocaleString("ja-JP")}</td><td>${r.taken.toLocaleString("ja-JP")}</td><td>${r.ok ? r.left.toLocaleString("ja-JP") : "✗ 倒れる"}</td></tr>`).join("")}
@@ -2977,7 +3052,7 @@ function renderEnduranceResult(t, d, maxHp, latent = {}, kago) {
 }
 
 // 耐久チェックは計算に不備があるため、見直しが済むまで表示しない（本人指定 2026-10-02）。計算のコードは残してある
-const ENDURANCE_ENABLED = false;
+const ENDURANCE_ENABLED = true;
 function renderEndurance(t, d) {
   if (!d?.damage?.floors?.length || t.multi) return "";
   const setup = enduranceSetup(t);

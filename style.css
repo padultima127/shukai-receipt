@@ -831,3 +831,15 @@ body.rc-open { overflow: hidden; }
 .rc-loop b { color: #2a5bd7; display: block; }
 .rc-loop-who { display: flex; flex-wrap: wrap; gap: 2px; margin: 4px 0 2px; }
 .rc-loop small { color: #555; display: block; }
+
+/* 耐久チェックの判定（3段階） */
+.verdict { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; padding: 8px 12px; border-radius: 10px; background: rgba(255, 255, 255, .45); border: 2px solid #8a6a35; }
+.verdict small { flex: 1 1 100%; color: #4a3612; }
+.vd { font-family: "M PLUS Rounded 1c", sans-serif; font-weight: 900; padding: 2px 10px; border-radius: 999px; color: #fff; font-size: .82rem; }
+.vd-ok { background: #2c7a10; }
+.vd-hold { background: #9a5200; }
+.vd-ng { background: #b3261e; }
+.hold { color: var(--ink); }
+.compromise ul { margin: 6px 0 0; padding-left: 1.2em; display: grid; gap: 6px; }
+.compromise .plus-list { margin: 4px 0 0; }
+.endurance .advice { background: rgba(255, 248, 220, .7); border: 2px solid #c9a76a; color: var(--ink); }
