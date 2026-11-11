@@ -1968,6 +1968,7 @@ function renderResult(r, i, item) {
       ${staminaLine}
     </dl>
     ${warn}
+    <div class="res-acts"><button type="button" class="primary receipt-btn" data-receipt="${esc(t.id)}">レシートを見る</button></div>
     ${renderConstraints(t)}
     ${renderMembers(r, "details")}
     ${ENDURANCE_ENABLED ? renderEndurance(t, r.dungeon) : ""}
@@ -5165,3 +5166,129 @@ document.querySelectorAll(".tabbar [data-goto]").forEach((b) =>
     document.querySelectorAll(".tabbar [data-goto]").forEach((x) => x.classList.toggle("active", x === b));
   })
 );
+
+// ---------- レシートを見る（PCは右からスマホの画面、スマホは全画面） ----------
+// 元の画像は載せず、サイトのデータ（編成・注意書き・階ごとのスキルの使い方）から組み立てる
+function receiptNames(t) {
+  // 短い名前。同じキャラが複数いる時は、リーダー・フレンドは L/F、サブは a・b… を付ける
+  const names = slotNames(t);
+  const nos = t.members.map((m) => monster(m.id)?.no ?? m.id);
+  return names.map((n, i) => {
+    const same = nos.map((x, j) => (x === nos[i] ? j : -1)).filter((j) => j >= 0);
+    if (same.length < 2) return n;
+    const role = t.members[i].role;
+    if (role === "L" || role === "F") return `${role}${n}`;
+    const subs = same.filter((j) => t.members[j].role !== "L" && t.members[j].role !== "F");
+    return subs.length > 1 ? `${n} ${"abcdef"[subs.indexOf(i)]}` : n;
+  });
+}
+// 武器（裏）のスキルの出し方: "char"（キャラのアイコン＋裏）| "assist"（武器のアイコン）。このブラウザに保存
+const RC_ASSIST_KEY = "pad-farming-receipt-assist";
+function receiptAssistMode() {
+  try {
+    return localStorage.getItem(RC_ASSIST_KEY) === "assist" ? "assist" : "char";
+  } catch {
+    return "char";
+  }
+}
+// 「科学部の怪異・ユラの弁当箱」→「ユラの弁当箱」のように短くする
+function shortName(name) {
+  const n = String(name).replace(/【[^】]*】|\[[^\]]*\]|［[^］]*］/g, "");
+  return (n.includes("・") ? n.split("・").filter(Boolean).pop() : n) || name;
+}
+let receiptOpenId = null;
+function receiptHTML(t) {
+  const d = db.dungeons.find((x) => x.id === t.dungeonId);
+  const names = receiptNames(t);
+  const team = t.members
+    .map((m) => {
+      const a = assistNoOf(m);
+      const mon = monster(m.id);
+      return `<div class="rc-cell">${a ? iconHTML(a, { assist: true }) : `<span class="rc-none"></span>`}<span class="rc-arrow">${a ? "▼継承" : "&nbsp;"}</span>${mon ? iconHTML(mon) : `<span class="rc-none rc-none-b">自由</span>`}<span class="rc-plus">${m.build?.plus != null ? `+${m.build.plus}` : "&nbsp;"}</span></div>`;
+    })
+    .join("");
+  const notes = (t.steps ?? []).filter((x) => !/^\s*(\d+F|B\d+)\s*[:：]|全フロアの手順/.test(x)).map((x) => `・${esc(x)}`);
+  const noteHTML = notes.slice(0, 3).join("<br>") + (notes.length > 3 ? `<details class="rc-more"><summary>注意書きをもっと見る（${notes.length - 3}件）</summary>${notes.slice(3).join("<br>")}</details>` : "");
+  const calls = t.receiptCalls ?? (t.userAdded ? stepsToCalls(t) : null);
+  // スキル回しはアイコンで表示。武器（裏）のスキルは、キャラのアイコン＋「裏」か、武器のアイコンかを切り替えられる
+  const assistMode = receiptAssistMode();
+  let usesAssist = false;
+  const chip = (c) => {
+    const m = t.members[c.mi];
+    if (!m) return `<span class="rc-chip"><small>?</small></span>`;
+    const isAssist = c.part === "assist";
+    usesAssist ||= isAssist;
+    const a = assistNoOf(m);
+    const mon = monster(m.id);
+    const showWeapon = isAssist && assistMode === "assist" && a;
+    const icon = showWeapon ? iconHTML(a, { assist: true }) : mon ? iconHTML(mon) : "";
+    const label = showWeapon ? shortName(MDB.get(a)?.[1] ?? "") : `${names[c.mi] ?? "?"}${isAssist ? "裏" : ""}`;
+    return `<span class="rc-chip${isAssist ? " rc-ura" : ""}" title="${esc(isAssist ? `${names[c.mi]}の武器: ${MDB.get(a)?.[1] ?? ""}` : mon?.name ?? "")}">${icon}${isAssist && !showWeapon ? `<i class="rc-ura-mark">裏</i>` : ""}<small>${esc(label)}</small></span>`;
+  };
+  let floors = "";
+  for (const [fl, list] of Object.entries(calls ?? {}).sort((a, b) => Number(a[0]) - Number(b[0]))) {
+    const turns = new Map();
+    for (const c of list) (turns.get(c.turn ?? 0) ?? turns.set(c.turn ?? 0, []).get(c.turn ?? 0)).push(c);
+    const lines = [...turns]
+      .sort((a, b) => a[0] - b[0])
+      .map(([, cs], j, arr) => `<div class="rc-line">${arr.length > 1 ? `<b class="rc-turn">(${j + 1})</b>` : ""}${cs.map(chip).join(`<span class="rc-sep">▶</span>`)}</div>`)
+      .join("");
+    floors += `<div class="rc-floor">【${esc(fl)}階】</div><div class="rc-step">${lines}</div>`;
+  }
+  const src = sourceInfo(t);
+  const link = src?.postUrl ? `<a href="${esc(src.postUrl)}" target="_blank" rel="noopener">${src.postLabel}</a>` : "元の投稿";
+  return `<div class="rc-title">${esc(t.title)}</div>
+    <div class="rc-team" style="--n:${Math.min(6, t.members.length)}">${team}</div>
+    <div class="rc-src">周回レシート図鑑のデータから表示（${esc(d?.name ?? "")}）</div>
+    <div class="rc-notes">${noteHTML}</div>
+    ${floors ? `${usesAssist ? `<div class="rc-toggle" role="group" aria-label="武器のスキルの表示"><span>武器（裏）のスキル:</span><button type="button" data-rc-assist="char" class="${assistMode === "char" ? "on" : ""}">キャラ＋裏</button><button type="button" data-rc-assist="assist" class="${assistMode === "assist" ? "on" : ""}">武器のアイコン</button></div>` : ""}<p class="rc-hint">(1)(2)はその階のターンの目安</p>${floors}` : `<div class="rc-foot">階ごとの手順は読み取れていません。${link}の画像を見てください</div>`}
+    <div class="rc-foot">要約・読み取りのため、誤りや省略があるかもしれません。必ず${link}を確認してください${src?.label ? `（作者: ${esc(src.label)}さん）` : ""}</div>`;
+}
+function openReceipt(id) {
+  const t = db.teams.find((x) => x.id === id);
+  if (!t) return;
+  let el = $("#receipt-drawer");
+  if (!el) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<div id="receipt-dim" class="rc-dim"></div>
+       <div id="receipt-drawer" class="rc-drawer" role="dialog" aria-modal="true" aria-label="レシート"><div class="rc-phone">
+         <button type="button" class="danger rc-close" id="receipt-close" aria-label="閉じる">×</button>
+         <div class="rc-screen"><div class="rc-bar">レシート</div><div class="rc-body" id="receipt-body"></div><div class="rc-home"></div></div>
+       </div></div>`
+    );
+    el = $("#receipt-drawer");
+    $("#receipt-close").addEventListener("click", closeReceipt);
+    $("#receipt-dim").addEventListener("click", closeReceipt);
+  }
+  receiptOpenId = id;
+  $("#receipt-body").innerHTML = receiptHTML(t);
+  $("#receipt-body").scrollTop = 0;
+  // 表示を更新してから開く（スライドのアニメーションが効くように）
+  requestAnimationFrame(() => {
+    el.classList.add("on");
+    $("#receipt-dim").classList.add("on");
+    document.body.classList.add("rc-open");
+  });
+}
+function closeReceipt() {
+  $("#receipt-drawer")?.classList.remove("on");
+  $("#receipt-dim")?.classList.remove("on");
+  document.body.classList.remove("rc-open");
+}
+document.addEventListener("click", (e) => {
+  const b = e.target.closest("[data-receipt]");
+  if (b) return openReceipt(b.dataset.receipt);
+  const tg = e.target.closest("[data-rc-assist]");
+  if (tg) {
+    try {
+      localStorage.setItem(RC_ASSIST_KEY, tg.dataset.rcAssist);
+    } catch {}
+    const t = db.teams.find((x) => x.id === receiptOpenId);
+    const body = $("#receipt-body");
+    const y = body.scrollTop;
+    if (t) body.innerHTML = receiptHTML(t);
+    body.scrollTop = y;
+  }
+});
+document.addEventListener("keydown", (e) => e.key === "Escape" && closeReceipt());
