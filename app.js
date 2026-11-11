@@ -119,6 +119,9 @@ function effTime(t, f = fastFilter) {
 let searchType = "item"; // "item"(素材で探す) | "dungeon"(ダンジョンで探す)
 // 素材で探す時の条件: "one"（1種類）| "or"（どれかが出る）| "and"（全部出る）。or/and は選んだ素材を itemPicks に並べる
 let itemLogic = "one";
+// 共有リンク（#team-編成id）で開いた編成のid（結果を描き直しても目印を付け直す）
+let hashTeamDone = null;
+let hashScrollUntil = 0; // 開いた直後は、あとから結果を描き直してもその編成の位置に戻す
 let itemPicks = [];
 const multiItem = () => searchType === "item" && itemLogic !== "one";
 const hasQuery = () => !!$("#q").value.trim() || (multiItem() && itemPicks.length > 0);
@@ -1181,6 +1184,11 @@ function search() {
     return;
   }
   out.innerHTML = head + rows.map((r, i) => renderResult(r, i, item)).join("");
+  if (hashTeamDone) {
+    const el = document.getElementById(`team-${hashTeamDone}`);
+    el?.classList.add("linked");
+    if (el && Date.now() < hashScrollUntil) el.scrollIntoView({ block: "start", behavior: "instant" });
+  }
 }
 
 // ---------- 描画 ----------
@@ -1933,7 +1941,7 @@ function renderResult(r, i, item) {
     ? `<p class="warn">代用できない枠が${r.missing}つあります。モンスターを入手するか、別の編成を検討してください。</p>`
     : "";
   const src = renderSource(t) + reportButton(t);
-  return `<article class="result ${i === 0 ? "best" : ""}">
+  return `<article class="result ${i === 0 ? "best" : ""}" id="team-${esc(t.id)}">
     <div class="res-head">
       <span class="rank">${i + 1}</span>
       <div><h3>${superUnknown(t) ? `<span class="badge badge-warn" title="超覚醒を選べるキャラのうち、レシートから超覚醒が分からない枠があります">超覚醒不明・必ず元の編成を確認</span>` : ""}${adminHidden(t) ? `<span class="badge badge-local">非表示中（管理者だけに表示）</span>` : ""}${t.multi ? `<span class="badge">マルチ</span>` : ""}${t.userAdded ? (isMine(t) ? `<span class="badge badge-mine">自分で登録</span>` : `<span class="badge">ユーザー登録</span>`) : ""}${esc(t.title)}${plus891Badge(t)}</h3><p class="muted">${esc(r.dungeon.name)}${r.dungeon.note ? ` ― ${esc(r.dungeon.note)}` : ""}${r.dungeon.exchange ? `<span class="exchange-runs">交換に必要な周回数: ${esc(r.dungeon.exchange)}<small>（<a href="${AO_NOTE_URL}" target="_blank" rel="noopener">蒼さんのnote</a>より）</small></span>` : ""}</p><div class="gim-row">${badgeIconHTML(t)}${renderGimmicks(r.dungeon)}</div>${t.multi ? "" : renderBadgePicker(t)}</div>
@@ -1968,7 +1976,7 @@ function renderResult(r, i, item) {
       ${staminaLine}
     </dl>
     ${warn}
-    <div class="res-acts"><button type="button" class="primary receipt-btn" data-receipt="${esc(t.id)}">レシートを見る</button></div>
+    <div class="res-acts"><button type="button" class="primary receipt-btn" data-receipt="${esc(t.id)}">レシートを見る</button><button type="button" class="share-btn" data-share="${esc(t.id)}">リンクをコピー</button></div>
     ${renderConstraints(t)}
     ${renderMembers(r, "details")}
     ${ENDURANCE_ENABLED ? renderEndurance(t, r.dungeon) : ""}
@@ -3655,6 +3663,7 @@ function applyShared() {
     renderRegList();
   }
   if (!$("#tab-search").hidden && hasQuery() && $("#results").children.length) search();
+  openTeamFromHash();
 }
 
 async function initShared() {
@@ -5292,3 +5301,67 @@ document.addEventListener("click", (e) => {
   }
 });
 document.addEventListener("keydown", (e) => e.key === "Escape" && closeReceipt());
+
+// ---------- 編成ごとの共有リンク（…/#team-編成id） ----------
+// リンクを開くと、その編成のダンジョンで検索して、その編成までスクロールする
+function openTeamFromHash() {
+  const m = location.hash.match(/^#team-(.+)$/);
+  if (!m) return;
+  const id = decodeURIComponent(m[1]);
+  if (hashTeamDone === id) return;
+  const t = db.teams.find((x) => x.id === id);
+  // 登録された編成はあとから読み込まれるので、まだ無ければ次の読み込みを待つ
+  if (!t || adminDeleted(t) || (adminHidden(t) && !shared.fb?.isAdmin)) return;
+  const d = db.dungeons.find((x) => x.id === t.dungeonId);
+  if (!d) return;
+  hashTeamDone = id;
+  hashScrollUntil = Date.now() + 5000;
+  document.querySelector('header .tab[data-tab="search"]')?.click();
+  // 絞り込みで隠れないように条件を戻す
+  itemLogic = "one";
+  itemPicks = [];
+  document.querySelectorAll("#item-logic button").forEach((x) => x.classList.toggle("active", x.dataset.logic === "one"));
+  setSearchType("dungeon");
+  fastFilter = "all";
+  document.querySelectorAll("#fast-filter button").forEach((x) => x.classList.toggle("active", x.dataset.fast === "all"));
+  $("#parts-only").checked = false;
+  $("#q").value = d.name;
+  syncQClear();
+  $("#q-suggest").hidden = true;
+  search();
+  const el = document.getElementById(`team-${id}`);
+  if (!el) return;
+  el.classList.add("linked");
+  requestAnimationFrame(() => el.scrollIntoView({ block: "start", behavior: "instant" }));
+}
+window.addEventListener("hashchange", () => {
+  hashTeamDone = null;
+  openTeamFromHash();
+});
+openTeamFromHash();
+document.addEventListener("click", async (e) => {
+  const b = e.target.closest("[data-share]");
+  if (!b) return;
+  const url = `${location.origin}${location.pathname}#team-${encodeURIComponent(b.dataset.share)}`;
+  const done = (text) => {
+    b.textContent = text;
+    setTimeout(() => (b.textContent = "リンクをコピー"), 2500);
+  };
+  try {
+    await navigator.clipboard.writeText(url);
+    done("コピーしました");
+  } catch {
+    // コピーできない環境では、リンクを表示して自分で選んでもらう
+    let box = b.parentElement.querySelector(".share-url");
+    if (!box) {
+      box = document.createElement("input");
+      box.className = "share-url";
+      box.readOnly = true;
+      b.parentElement.append(box);
+    }
+    box.value = url;
+    box.focus();
+    box.select();
+    done("下のリンクをコピーしてください");
+  }
+});

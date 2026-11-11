@@ -817,3 +817,12 @@ body.rc-open { overflow: hidden; }
 .rc-toggle { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; margin-top: 10px; font-size: 11px; color: #555; }
 .rc-toggle button { -webkit-text-stroke: 0; font-family: inherit; letter-spacing: 0; box-shadow: none; filter: none; transform: none; padding: 3px 10px; border-radius: 999px; border: 1px solid #bbb; background: #fff; color: #333; font-size: 11px; font-weight: 700; }
 .rc-toggle button.on { background: #2a5bd7; border-color: #2a5bd7; color: #fff; }
+
+/* 共有リンク */
+.res-acts .share-btn { padding: 8px 14px; font-size: .85rem; -webkit-text-stroke: 4px #0d0802; paint-order: stroke fill; font-family: "M PLUS Rounded 1c", "Noto Sans JP", sans-serif; font-weight: 900; }
+.res-acts .share-url { flex: 1 1 100%; font-size: .8rem !important; padding: 6px 10px !important; }
+.result { scroll-margin-top: calc(var(--hdr-h) + 12px); }
+.result.linked { box-shadow: 0 0 0 4px var(--gold), inset 0 0 0 2px rgba(255, 240, 200, .45), 0 6px 0 #070502; }
+/* 代用候補のアイコン（小さくなっていたのを直す） */
+.alts li.alt-card .icon { width: 36px; height: 36px; }
+.alts li.alt-card .icon-assist { width: 36px; height: 36px; margin: 0; }
