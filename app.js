@@ -2116,7 +2116,8 @@ function resolveReceiptUses(t) {
     const aCT = x.a?.[5] || 0;
     const bCT = x.b[5] || 0;
     let used;
-    if (c.part === "assist" && x.a) used = [x.a];
+    if (c.part === "loop") used = [x.b];
+    else if (c.part === "assist" && x.a) used = [x.a];
     else if (!x.a) used = [x.b];
     else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
     // 武器の番でも、武器のスキルターン分たまっていなければ武器は撃てないので本体（セッカ8Fなど）
@@ -2146,12 +2147,12 @@ function resolveReceiptUses(t) {
     const b = x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam) ? MDB.get(fam) : stageRow(x.bNo, x.bUse);
     const a = x.aNo ? stageRow(x.aNo, x.aUse) : null;
     if (!b) return false;
-    const need = x.phase === "assist" && a ? a[5] || 0 : b[5] || 0;
-    return x.charge >= need;
+    // ループは本体のスキル（武器は使わない）。本体のスキルターン分たまっていれば使う
+    return x.charge >= (b[5] || 0);
   };
   const loopFire = (fl, tn, pressed) => {
     const who = new Set(loops.filter((l) => l.from <= fl).flatMap((l) => l.mi));
-    for (const mi of who) if (!pressed.has(mi) && st[mi] && readyNow(mi)) press(mi, "auto", fl, tn);
+    for (const mi of who) if (!pressed.has(mi) && st[mi] && readyNow(mi)) press(mi, "loop", fl, tn);
   };
   const lastFloor = Math.max(dungeon?.battles ?? 0, ...(dungeon?.damage?.floors ?? []).map((x) => x.floor), 0);
   const uses = {};
@@ -2437,8 +2438,9 @@ function enduranceSetup(t0, opts = {}) {
   };
   const { total, teamHp, unknown, detail } = teamHpWith();
   // 部位を壊して進む編成か（投稿の記載。壊した後は部位破壊ボーナスが以降の階も続く）
-  const partsText = `${t.title ?? ""} ${(t.steps ?? []).join(" ")}`.replace(/部位破壊(?:なし|無し|しない|せず|不可|は不要)[^、。 ]*/g, "");
-  const partsPersist = !!t.partBreak?.can || /部位破壊|全部位|部位を(?:壊|破壊)/.test(partsText);
+  const partsText = `${t.title ?? ""} ${(t.steps ?? []).join(" ")}`.replace(/部位破壊(?:は|を)?(?:なし|無し|しない|せず|不可|不要)[^、。 ]*/g, "");
+  // 登録で「部位破壊しない」と決まっている編成は対象外
+  const partsPersist = t.partBreak?.can !== false && (!!t.partBreak?.can || /部位破壊|全部位|部位を(?:壊|破壊)/.test(partsText));
   // 熟成で階ごとにチームHPが変わる割合（1〜4階を基準）
   const r5 = teamHpWith(new Map(), 5).total / Math.max(1, total);
   const r10 = teamHpWith(new Map(), 10).total / Math.max(1, total);
