@@ -5343,7 +5343,10 @@ openTeamFromHash();
 document.addEventListener("click", async (e) => {
   const b = e.target.closest("[data-share]");
   if (!b) return;
-  const url = `${location.origin}${location.pathname}#team-${encodeURIComponent(b.dataset.share)}`;
+  // 図鑑ページ（claude.ai のアーティファクト）など公開サイト以外で開いている時は、公開サイトのリンクにする
+  const here = /github\.io$|^localhost$|^127\.0\.0\.1$/.test(location.hostname);
+  const base = here ? `${location.origin}${location.pathname}` : "https://padultima127.github.io/shukai-receipt/";
+  const url = `${base}#team-${encodeURIComponent(b.dataset.share)}`;
   const done = (text) => {
     b.textContent = text;
     setTimeout(() => (b.textContent = "リンクをコピー"), 2500);
