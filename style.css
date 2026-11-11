@@ -826,3 +826,8 @@ body.rc-open { overflow: hidden; }
 /* 代用候補のアイコン（小さくなっていたのを直す） */
 .alts li.alt-card .icon { width: 36px; height: 36px; }
 .alts li.alt-card .icon-assist { width: 36px; height: 36px; margin: 0; }
+
+.rc-loop { margin: 6px 0 4px 10px; padding: 6px 8px; border-radius: 8px; background: #eef4ff; border: 1px dashed #8aa8e8; font-size: 12px; }
+.rc-loop b { color: #2a5bd7; display: block; }
+.rc-loop-who { display: flex; flex-wrap: wrap; gap: 2px; margin: 4px 0 2px; }
+.rc-loop small { color: #555; display: block; }

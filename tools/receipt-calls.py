@@ -72,7 +72,39 @@ def keys_of(name):
             if len(kata) >= 6:
                 for n in range(3, 6):
                     keys.add(kata[-n:])
+                # 頭の部分でも呼ばれる（アマテラスオオカミ → アマテラス）
+                for n in range(4, 6):
+                    keys.add(kata[:n])
+    # 漢字4文字の名前（服部平次・黒崎一護・坂田銀時）は名字だけ・名前だけでも呼ばれる
+    for p in parts:
+        if re.fullmatch(r"[\u4E00-\u9FFF]{4}", p):
+            keys.add(p[:2])
+            keys.add(p[2:])
     return [k for k in keys if len(k) >= 2]
+
+
+# OCRの読み違いをならす（濁点・半濁点なし、小さい字 → 大きい字、X → メ）。1文字ずつの置き換えなので位置はずれない。
+# 名前が1回も見つからないキャラだけに使う（全部に使うと「ダイン」が「バレンタイン」の中に当たるなど誤検出が増えるため）
+_FOLD = str.maketrans(
+    "ガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポヴァィゥェォッャュョXxＸ",
+    "カキクケコサシスセソタチツテトハヒフヘホハヒフヘホウアイウエオツヤユヨメメメ",
+)
+
+
+def fold(s):
+    return (s or "").translate(_FOLD)
+
+
+# 名前のすぐ後に「温存」「打たない」「不要」などが続くのは、スキルを使った記録ではない（「服部温存」「ダイン間違って打たない」）
+MENTION = re.compile(
+    r"^[\s①-⑩\dabAB裏表上下]*[はをがも]?[^\s、,，→⇒▶>（(]{0,6}?(温存|打たない|打たず|使わない|使わず|不要|いらない|切れたら|残り\d|は残す|(?:は|を)?(?:基本)?ループ)"
+    # 「雨竜→9Fまで温存」
+    r"|^\s*[→⇒]?\s*\d+\s*[FfＦ階]?まで(?:温存|打たない|使わない)"
+)
+# 「ミナカ891推奨」のように＋値を書いているだけ
+PLUS_NOTE = re.compile(r"^\s*[+＋]?(297|891|99)\b")
+# 以降のループ（「以降クラウディアループ」「イシス、日番谷、ダインはループ」）
+LOOP = re.compile(r"ループ|以降.{0,12}(毎回|毎ターン)|毎ターン使う|(以降|以後).{0,6}(省略|区別なし)")
 
 
 CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
@@ -92,13 +124,27 @@ def parse_team(team, texts):
         idx = -1
     members = team["members"]
     mkeys = [keys_of(m["name"]) for m in members]
+    # 「日向＆影山」「キコル8号」のように2人組の名前は、続けて書いた形でも呼ばれる
+    for i, m in enumerate(members):
+        n = re.sub(r"【[^】]*】|\[[^\]]*\]|［[^］]*］", "", m["name"] or "").split("・")[-1]
+        if "＆" in n or "&" in n:
+            a, b = re.split(r"[＆&]", n, maxsplit=1)
+            a, b = a.split()[0] if a.split() else a, b.split()[0] if b.split() else b
+            mkeys[i] += [f"{a}＆{b}", f"{a}&{b}", f"{a}{b}"]
     akeys = [[k for k in keys_of(re.sub(r"\s*No\.?\s*\d+.*$", "", m.get("assist") or "")) if len(k) >= 3] for m in members]
+    body = "\n".join(texts[idx + 1:])
+    # 1回も名前が見つからないキャラは、OCRの読み違いをならした文字で探す
+    fold_members = {i for i, ks in enumerate(mkeys) if ks and not any(k in body for k in ks)}
+    fkeys = {i: sorted({fold(k) for k in mkeys[i]}) for i in fold_members}
+    loops = []
+    prev_tail = ""
     calls = {}
     floor = None
     seen_order = {}
     turn_base = 0  # その階で、この行より前に終わったターンの数（盤面◯c・ずらし・①②などで区切る）
     loose = sum(1 for l in texts[idx + 1:] if FLOOR_LOOSE.match(l)) >= 4 and sum(1 for l in texts[idx + 1:] if FLOOR.match(l)) < 4
     for line in texts[idx + 1:]:
+        tail, prev_tail = prev_tail, line.rstrip()[-6:]
         m = FLOOR.match(line) or (FLOOR_LOOSE.match(line) if loose else None)
         if m:
             floor = int(m.group(1))
@@ -119,8 +165,23 @@ def parse_team(team, texts):
         # 「※盤面あればダイアモス不要」などの注意書きはスキルを使った記録ではない
         if line.lstrip().startswith(("※", "＊", "*")) and re.search(r"不要|いらない|なしでも|省略", line):
             continue
+        # ループの記載は別に取っておく（どの階から・誰が）。階ごとの記録には足さない
+        if LOOP.search(line) and floor is not None:
+            who = sorted({i for i, ks in enumerate(mkeys) for k in ks if k in line})
+            if who:
+                loops.append({"from": floor, "mi": who, "raw": line.strip()[:80]})
         # 区切り（→ など）がOCRで消えることがあるので、行の中からキャラ名の出てくる位置を探す
         found = []
+        # 行の折り返しで名前が切れることがある（「…アマテ」「ラス、…」）ので、前の行の末尾をつなげて探す
+        if m:
+            tail = ""
+        line = tail + line
+        cut = len(tail)
+        for i, ks in fkeys.items():
+            fl = fold(line)
+            for k in ks:
+                for mm in re.finditer(re.escape(k), fl):
+                    found.append((mm.start(), mm.end(), i, mkeys[i][0] if mkeys[i] else k))
         for i, ks in enumerate(mkeys):
             for k in ks:
                 for mm in re.finditer(re.escape(k), line):
@@ -145,7 +206,20 @@ def parse_team(team, texts):
             taken.append((st, en))
             picked.append((st, en, i, k))
         picked.sort()
+        # 前の行の末尾だけで完結している名前は、前の行で数え済み
+        picked = [p for p in picked if p[1] > cut]
+        # 「一護＆織姫」「一護織姫」のように同じキャラの名前が続けて当たった時は1回に数える
+        merged = []
+        for p in picked:
+            if merged and merged[-1][2] == p[2] and not p[3].startswith("@") and not merged[-1][3].startswith("@") and re.fullmatch(r"[＆&・]?", line[merged[-1][1]:p[0]]):
+                merged[-1] = (merged[-1][0], p[1], p[2], merged[-1][3])
+                continue
+            merged.append(p)
+        picked = merged
         for st, en, i, k in picked:
+            # 「服部温存」「ダイン間違って打たない」「ミナカ891推奨」は使った記録ではない
+            if MENTION.match(line[en:en + 14]) or PLUS_NOTE.match(line[en:en + 6]):
+                continue
             after = line[en:en + 3]
             before = line[max(0, st - 1):st]
             # 「ダイン変身」「クチナ（変身）」は変身スキルを押したもの（本体）。「変身後」「進化後」はただの説明なので数えない
@@ -157,6 +231,18 @@ def parse_team(team, texts):
                     else "base" if transform or re.match(r"\s*[（(]?(表|下)(?![か手])", after) else "auto")
             k = k.lstrip("@")
             same = [j for j, ks in enumerate(mkeys) if k in ks]
+            # 同じ呼び方が別のキャラにもある時（「神楽」＝万事屋・神楽と神楽＆ミヤ衣装）は、前後の文字に
+            # そのキャラのほかの呼び方（「ミヤ」など）が出てくる方。どちらでもなければ2人組でない方（単体の名前）
+            nos = {members[j]["no"] for j in same}
+            if len(nos) > 1:
+                near = line[max(0, st - 6):en + 6]
+                def score(j):
+                    other = sum(1 for kk in mkeys[j] if kk != k and kk in near)
+                    combo = "＆" in (members[j]["name"] or "") or "&" in (members[j]["name"] or "")
+                    return (other, 0 if combo else 1)
+                best = max(score(j) for j in same)
+                same = [j for j in same if score(j) == best]
+                i = same[0]
             mi = i
             if len(same) > 1:
                 # L/S/F の頭文字、A/B の後ろ文字、どちらもなければ出てきた順
@@ -168,14 +254,19 @@ def parse_team(team, texts):
                     n = seen_order.get(k, 0)
                     mi = same[n % len(same)]
                     seen_order[k] = n + 1
-            turn = turn_base + sum(1 for e in ends if e <= st)
+            turn = turn_base + sum(1 for e in ends if e <= st - cut)
             for pos, n in marks:
-                if pos <= st:
+                if pos <= st - cut:
                     turn = max(turn, n)
             calls.setdefault(str(floor), []).append({"mi": mi, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2]})
         if floor is not None:
             turn_base += len(ends)
+    if loops:
+        LOOPS[team["id"]] = loops
     return calls or None
+
+
+LOOPS = {}
 
 
 def main():
@@ -201,6 +292,9 @@ def main():
             result[team["id"]] = calls
             stats.append((team["id"], len(calls), sum(len(v) for v in calls.values())))
     Path(sys.argv[1]).write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
+    # ループの記載（2つ目の引数があれば）: { チームid: [ {from: 階, mi: [枠], raw: 元の文字} ] }
+    if len(sys.argv) > 2:
+        Path(sys.argv[2]).write_text(json.dumps(LOOPS, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{len(result)}編成: 階の数・呼び出し数")
     for s in stats[:200]:
         print(" ", *s)

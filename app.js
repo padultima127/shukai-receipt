@@ -5260,6 +5260,15 @@ function receiptHTML(t) {
     const label = showWeapon ? shortName(MDB.get(a)?.[1] ?? "") : `${names[c.mi] ?? "?"}${isAssist ? "裏" : ""}`;
     return `<span class="rc-chip${isAssist ? " rc-ura" : ""}" title="${esc(isAssist ? `${names[c.mi]}の武器: ${MDB.get(a)?.[1] ?? ""}` : mon?.name ?? "")}">${icon}${isAssist && !showWeapon ? `<i class="rc-ura-mark">裏</i>` : ""}<small>${esc(label)}</small></span>`;
   };
+  // 「以降◯◯ループ」の記載: 書かれた階の下に出す（その後の階には書かれていないことが多いので、手順を補う目安）
+  const loopsLeft = [...(t.receiptLoops ?? [])];
+  const loopHTML = (fl) => {
+    const here = loopsLeft.filter((l) => l.from <= fl);
+    here.forEach((l) => loopsLeft.splice(loopsLeft.indexOf(l), 1));
+    return here
+      .map((l) => `<div class="rc-loop"><b>↻ ${esc(l.from)}階以降のくり返し</b><span class="rc-loop-who">${l.mi.map((mi) => chip({ mi, part: "base" })).join("")}</span><small>「${esc(l.raw)}」</small></div>`)
+      .join("");
+  };
   let floors = "";
   for (const [fl, list] of Object.entries(calls ?? {}).sort((a, b) => Number(a[0]) - Number(b[0]))) {
     const turns = new Map();
@@ -5268,8 +5277,9 @@ function receiptHTML(t) {
       .sort((a, b) => a[0] - b[0])
       .map(([, cs], j, arr) => `<div class="rc-line">${arr.length > 1 ? `<b class="rc-turn">(${j + 1})</b>` : ""}${cs.map(chip).join(`<span class="rc-sep">▶</span>`)}</div>`)
       .join("");
-    floors += `<div class="rc-floor">【${esc(fl)}階】</div><div class="rc-step">${lines}</div>`;
+    floors += `<div class="rc-floor">【${esc(fl)}階】</div><div class="rc-step">${lines}</div>${loopHTML(Number(fl))}`;
   }
+  floors += loopHTML(Infinity);
   const src = sourceInfo(t);
   const link = src?.postUrl ? `<a href="${esc(src.postUrl)}" target="_blank" rel="noopener">${src.postLabel}</a>` : "元の投稿";
   return `<div class="rc-title">${esc(t.title)}</div>
