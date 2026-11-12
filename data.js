@@ -10226,7 +10226,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -13929,7 +13929,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 6
           }
         ]
@@ -21888,7 +21888,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -22918,7 +22918,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -25465,7 +25465,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "base",
             "turn": 0
           },
           {

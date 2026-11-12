@@ -188,7 +188,9 @@ def parse_team(team, texts):
     seen_order = {}
     turn_base = 0  # その階で、この行より前に終わったターンの数（盤面◯c・ずらし・①②などで区切る）
     loose = sum(1 for l in texts[idx + 1:] if FLOOR_LOOSE.match(l)) >= 4 and sum(1 for l in texts[idx + 1:] if FLOOR.match(l)) < 4
-    for line in texts[idx + 1:]:
+    body = texts[idx + 1:]
+    for li, line in enumerate(body):
+        next_line = body[li + 1] if li + 1 < len(body) else ""
         tail, prev_tail = prev_tail, line.rstrip()[-6:]
         m = FLOOR.match(line) or (FLOOR_LOOSE.match(line) if loose else None)
         if m:
@@ -281,6 +283,9 @@ def parse_team(team, texts):
             if MENTION.match(line[en:en + 14]) or PLUS_NOTE.match(line[en:en + 6]):
                 continue
             after = line[en:en + 3]
+            # 行の折り返しで「一護織姫」「（裏）、日番谷…」のように裏が次の行の頭に来ることがある
+            if not line[en:].strip(" 　、,，") and next_line:
+                after = next_line.lstrip()[:3]
             before = line[max(0, st - 1):st]
             # 「ダイン変身」「クチナ（変身）」は変身スキルを押したもの（本体）。「変身後」「進化後」はただの説明なので数えない
             if re.match(r"\s*[（(]?(変身|進化)後", after):
