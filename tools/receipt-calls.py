@@ -111,6 +111,8 @@ PLUS_NOTE = re.compile(r"^\s*[+＋]?(297|891|99)\b")
 LOOP = re.compile(r"ループ(?!.{0,2}(ズレ|ずれ))|以降.{0,12}(毎回|毎ターン)|毎ターン使う")
 
 
+ASSIST_ALIAS = {"全ての鬼を滅するために作った刀": ["鋼塚"]}
+
 CIRCLED = "①②③④⑤⑥⑦⑧⑨⑩"
 BRANCH = re.compile(r"^\s*(通常|乱入|[■●□○]|.{0,10}の(場合|とき|時)|[火水木光闇][アグリ色]?(の場合|なら))")
 TURN_END = re.compile(r"盤面\s*\d+\s*[cCｃ]|[+＋]?\s*\d\s*[cCｃ](?!(?![xX]\s*\d)[a-zA-Z])|ずらし|[0０]\s*[cCｃ]|全力|[LＬ]字|十字|列")
@@ -142,6 +144,11 @@ def parse_team(team, texts):
             if re.match(r"[\u30A0-\u30FF]{3}", a) and re.match(r"[\u30A0-\u30FF]{3}", b):
                 mkeys[i] += [a[:x] + b[:y] for x in (2, 3) for y in (2, 3)]  # フリーレン＆フェルン → フリフェル
     akeys = [[k for k in keys_of(re.sub(r"\s*No\.?\s*\d+.*$", "", m.get("assist") or "")) if len(k) >= 3] for m in members]
+    # 名前に出てこない呼び方で呼ばれる武器（「全ての鬼を滅するために作った刀」→ 作った人の名前で「鋼塚」）
+    for i, m in enumerate(members):
+        for full, alias in ASSIST_ALIAS.items():
+            if full in (m.get("assist") or ""):
+                akeys[i] += alias
     body = "\n".join(texts[idx + 1:])
     # 1回も名前が見つからないキャラは、OCRの読み違いをならした文字で探す
     fold_members = {i for i, ks in enumerate(mkeys) if ks and not any(k in body for k in ks)}
@@ -319,6 +326,7 @@ def parse_team(team, texts):
                 same = [j for j in same if members[j]["no"] == members[same[0]]["no"]]
                 i = same[0]
             mi = i
+            why = None
             both = []
             if len(same) > 1:
                 # L/S/F の頭文字、A/B の後ろ文字、どちらもなければ出てきた順
@@ -328,18 +336,33 @@ def parse_team(team, texts):
                     mi = both[0] if both else i
                 elif before.upper() in ("L", "S", "F"):
                     mi = next((j for j in same if members[j]["role"] == before.upper()), i)
-                elif sm := re.match(r"([ABab①②])", after):
-                    mi = same[min({"A": 0, "①": 0, "B": 1, "②": 1}.get(sm.group(1).upper(), 0), len(same) - 1)]
+                elif before in ("左", "右"):
+                    # 「左銀時」「右銀時」: パーティーの並びの左・右
+                    mi = same[0] if before == "左" else same[-1]
+                    why = "lr"
+                elif sm := re.match(r"([ABab①②])|\s([ABab])(?![a-zA-Z])|([12１２])(?![cCｃ×xX0-9体段コ])", line[en:en + 4]):
+                    g = (sm.group(1) or sm.group(2) or sm.group(3)).upper()
+                    mi = same[min({"A": 0, "①": 0, "1": 0, "１": 0, "B": 1, "②": 1, "2": 1, "２": 1}.get(g, 0), len(same) - 1)]
+                    why = "num"
                 else:
                     n = seen_order.get(k, 0)
                     mi = same[n % len(same)]
                     seen_order[k] = n + 1
+                    # 同じキャラが2体いて、その階で片方だけ武器（裏）を先に使っている時は、本体の呼び出しはその子
+                    # （タカミムスビ（Fキコルの武器）→…→キコル→ネヴァン（Sキコルの武器） の「キコル」は Fキコル）
+                    if part != "assist":
+                        fc = calls.get(str(floor), [])
+                        last = {c["mi"]: c["part"] for c in fc}
+                        pending = [j for j in same if last.get(j) == "assist"]
+                        if len(pending) == 1:
+                            mi = pending[0]
+                            why = "pending"
             turn = turn_base + sum(1 for e in ends if e <= st - cut)
             for pos, n in marks:
                 if pos <= st - cut:
                     turn = max(turn, n)
             for one in (both if len(both) > 1 else [mi]):
-                calls.setdefault(str(floor), []).append({"mi": one, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2]})
+                calls.setdefault(str(floor), []).append({"mi": one, "part": part, "turn": turn, "raw": line[max(0, st - 1):en + 2], **({"why": why} if why and os.environ.get("WHY") else {})})
         if floor is not None:
             # ずらし・0c・+1c で終わるターンは1ターン耐久（レシートの画面に「⏳ +1Cで耐久」と出す）
             body_line = line[cut:]

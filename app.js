@@ -2130,6 +2130,8 @@ function resolveReceiptUses(t) {
     if (c.part === "loop") used = [x.b];
     else if (c.part === "assist" && x.a) used = [x.a];
     else if (!x.a) used = [x.b];
+    // 変身前のキャラ（アリナ→ウィッシュミーメル など）は、裏の表記がなければ変身（本体）のスキル
+    else if (c.part === "auto" && x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam)) used = [x.b];
     else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
     // 武器の番でも、武器のスキルターン分たまっていなければ武器は撃てないので本体（セッカ8Fなど）
     else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : x.charge >= aCT ? [x.a] : [x.b];
