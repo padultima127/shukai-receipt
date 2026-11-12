@@ -17398,7 +17398,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -46953,7 +46953,7 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -46970,7 +46970,7 @@ window.PAD_SEED = {
         "2": [
           {
             "mi": 0,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -47180,7 +47180,7 @@ window.PAD_SEED = {
         "1": [
           {
             "mi": 5,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -47195,7 +47195,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 0,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           }
         ],
@@ -47209,7 +47209,7 @@ window.PAD_SEED = {
         "3": [
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -50776,12 +50776,12 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -50929,7 +50929,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -51600,12 +51600,12 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -51743,7 +51743,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -52089,7 +52089,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -52128,7 +52128,7 @@ window.PAD_SEED = {
         "3": [
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -52916,7 +52916,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -52931,7 +52931,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -54415,7 +54415,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 1,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -55104,7 +55104,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 2,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -58481,7 +58481,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -58920,7 +58920,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -58935,7 +58935,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 3,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -58945,7 +58945,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -59009,7 +59009,7 @@ window.PAD_SEED = {
           },
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {
@@ -59033,7 +59033,7 @@ window.PAD_SEED = {
         "6": [
           {
             "mi": 4,
-            "part": "auto",
+            "part": "assist",
             "turn": 0
           },
           {

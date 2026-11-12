@@ -299,8 +299,8 @@ def parse_team(team, texts):
                 continue
             transform = bool(re.match(r"\s*[（(]?(変身|進化)", after))
             # PDCではアシストが上・本体が下に並ぶので「ヘラ上」は武器、「ヘラ下」は本体（まつりーたさんのレシートなど）
-            part = ("assist" if k.startswith("@") or re.match(r"\s*[（(]?(裏|上)(?![か手])", after)
-                    else "base" if transform or re.match(r"\s*[（(]?(表|下)(?![か手])", after) else "auto")
+            part = ("assist" if k.startswith("@") or re.match(r"\s*[（(]?(?:[ABCabc①②③]\s?)?(裏|上)(?![か手])", line[en:en + 5] if len(line) > en else after)
+                    else "base" if transform or re.match(r"\s*[（(]?(?:[ABCabc①②③]\s?)?(表|下)(?![か手])", line[en:en + 5] if len(line) > en else after) else "auto")
             k = k.lstrip("@")
             same = [j for j, ks in enumerate(mkeys) if k in ks]
             # 同じ呼び方が別のキャラにもある時（「神楽」＝万事屋・神楽と神楽＆ミヤ衣装）は、前後の文字に

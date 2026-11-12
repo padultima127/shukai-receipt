@@ -2134,7 +2134,8 @@ function resolveReceiptUses(t) {
     else if (c.part === "auto" && x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam)) used = [x.b];
     else if (c.part === "base") used = x.phase === "assist" && x.charge >= aCT + bCT ? [x.a, x.b] : [x.b];
     // 武器の番でも、武器のスキルターン分たまっていなければ武器は撃てないので本体（セッカ8Fなど）
-    else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : x.charge >= aCT ? [x.a] : [x.b];
+    // 裏と書いていない時は、本体が溜まっていれば本体（武器だけ溜まっている時だけ武器）
+    else if (x.phase === "assist") used = x.charge >= aCT + bCT ? [x.a, x.b] : x.charge >= bCT ? [x.b] : x.charge >= aCT ? [x.a] : [x.b];
     else used = [x.b];
     // 武器だけ使ったら、次は本体の番。本体を使ったら武器の番に戻る
     x.phase = used.length === 1 && used[0] === x.a ? "base" : x.a ? "assist" : "base";
