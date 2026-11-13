@@ -3333,7 +3333,13 @@ window.PAD_SEED = {
         ]
       },
       "kago": "陽",
-      "exchange": "200周"
+      "exchange": "200周",
+      "gimmickFloors": {
+        "assistVoid": [
+          4,
+          14
+        ]
+      }
     },
     {
       "id": "fuun",
@@ -5246,7 +5252,12 @@ window.PAD_SEED = {
           }
         ]
       },
-      "exchange": "200周"
+      "exchange": "200周",
+      "gimmickFloors": {
+        "assistVoid": [
+          4
+        ]
+      }
     },
     {
       "id": "jupiter",
@@ -9705,7 +9716,12 @@ window.PAD_SEED = {
           "B5・ボスでシールド（600億）、B5でスキル効果解除とアシスト無効4ターン"
         ]
       },
-      "rewardNote": "報酬はゲームウィズの記載（経験値11億・コイン11億）。個数の記載がないドロップは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）"
+      "rewardNote": "報酬はゲームウィズの記載（経験値11億・コイン11億）。個数の記載がないドロップは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
+      "gimmickFloors": {
+        "assistVoid": [
+          5
+        ]
+      }
     },
     {
       "id": "ginyoku",
@@ -9836,7 +9852,12 @@ window.PAD_SEED = {
         ]
       },
       "rewardNote": "報酬はゲームウィズの記載（経験値12億・コイン12億）。個数の記載がないドロップは1体で計算。一部の個数は蒼さんのnote「闘技場シリーズ 全報酬一覧」から（目安）",
-      "exchange": "5Fの部位20周"
+      "exchange": "5Fの部位20周",
+      "gimmickFloors": {
+        "assistVoid": [
+          4
+        ]
+      }
     }
   ],
   "teams": [

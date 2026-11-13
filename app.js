@@ -2114,6 +2114,18 @@ function resolveReceiptUses(t) {
       x.charge = Math.max(0, Math.min(x.charge, cap || x.charge) - n);
     });
   };
+  // アシスト無効を受けた階: 武器（アシスト）のスキルはため直し。本体の溜まりはそのまま残る
+  // （溜まりは本体→武器の順に貯まるので、武器の番なら本体のスキルターン分までに戻す）
+  const avFloors = new Set(dungeon?.gimmickFloors?.assistVoid ?? []);
+  const applyAssistVoid = (fl) => {
+    if (!avFloors.has(fl)) return;
+    st.forEach((x) => {
+      if (!x.aNo || x.phase !== "assist") return;
+      const fam = MDB.get(x.bNo)?.[9];
+      const b = x.bUse === 0 && fam && fam !== x.bNo && MDB.get(fam) ? MDB.get(fam) : stageRow(x.bNo, x.bUse);
+      x.charge = Math.min(x.charge, b?.[5] || 0);
+    });
+  };
   // スキルを1回押す（part: "base" | "assist" | "auto"）。使ったスキルの行を返す
   const press = (mi, part, fl, tn) => {
     const x = st[mi];
@@ -2181,6 +2193,7 @@ function resolveReceiptUses(t) {
       if (!first) st.forEach((x) => x.charge++);
       first = false;
       applyDelay(f);
+      applyAssistVoid(f);
       loopFire(f, 0, new Set());
     }
     prevFl = Number(fl);
@@ -2198,7 +2211,10 @@ function resolveReceiptUses(t) {
     for (let tn = 0; tn < turns; tn++) {
       if (!first) st.forEach((x) => x.charge++);
       first = false;
-      if (tn === 0) applyDelay(Number(fl));
+      if (tn === 0) {
+        applyDelay(Number(fl));
+        applyAssistVoid(Number(fl));
+      }
       const pressed = new Set();
       for (const c of withTurn.filter((c) => c.turn === tn)) {
         pressed.add(c.mi);
@@ -2214,6 +2230,7 @@ function resolveReceiptUses(t) {
   for (let f = prevFl + 1; f <= lastFloor; f++) {
     st.forEach((x) => x.charge++);
     applyDelay(f);
+    applyAssistVoid(f);
     loopFire(f, 0, new Set());
   }
   // ターンごとの配列にそろえる（使っていないターンは空）
