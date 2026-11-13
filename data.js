@@ -42552,12 +42552,14 @@ window.PAD_SEED = {
           {
             "mi": 1,
             "part": "auto",
-            "turn": 0
+            "turn": 0,
+            "branch": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "turn": 0
+            "turn": 1,
+            "branch": 2
           }
         ],
         "4": [
@@ -42569,14 +42571,22 @@ window.PAD_SEED = {
         ],
         "5": [
           {
-            "mi": 1,
+            "mi": 0,
             "part": "auto",
-            "turn": 0
+            "turn": 0,
+            "branch": 1
           },
           {
             "mi": 1,
             "part": "auto",
-            "turn": 0
+            "turn": 0,
+            "branch": 2
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0,
+            "branch": 3
           }
         ],
         "8": [
@@ -42610,7 +42620,18 @@ window.PAD_SEED = {
         ]
       },
       "fastMode": false,
-      "badgeId": 44
+      "badgeId": 44,
+      "receiptBranches": {
+        "2": [
+          "緑の敵",
+          "赤の敵"
+        ],
+        "5": [
+          "青→紫の敵",
+          "黄→紫の敵",
+          "黄の敵"
+        ]
+      }
     },
     {
       "id": "hyaku-mastergundam-nanaminn",

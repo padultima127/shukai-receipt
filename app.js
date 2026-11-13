@@ -2188,7 +2188,8 @@ function resolveReceiptUses(t) {
     // 同じキャラが何回出てくるかで、その階のターン数を見積もる
     // （レシートの区切りから読んだ c.turn も入っているが、編成によって良くも悪くもなるので調整が済むまで使わない）
     const seen = new Map();
-    const withTurn = calls.map((c, idx) => {
+    // 敵の色などで分かれる分岐は、分岐1の流れで計算する（branch がないものは共通）
+    const withTurn = calls.map((c, idx) => [c, idx]).filter(([c]) => !c.branch || c.branch === 1).map(([c, idx]) => {
       const k = seen.get(c.mi) ?? 0;
       seen.set(c.mi, k + 1);
       return { ...c, turn: k, idx };
@@ -5468,20 +5469,35 @@ function receiptHTML(t) {
     rparts = {};
   }
   for (const [fl, list] of Object.entries(calls ?? {}).sort((a, b) => Number(a[0]) - Number(b[0]))) {
-    const turns = new Map();
+    // 敵の色などで分かれる時は、分岐ごとに分けて並べる（branch がないものは共通の手順）
+    const groups = new Map();
     for (const [idx, c0] of list.entries()) {
+      const b = c0.branch ?? 0;
+      if (!groups.has(b)) groups.set(b, new Map());
+      const turns = groups.get(b);
       const c = { ...c0, rp: rparts[fl]?.[idx] };
       (turns.get(c.turn ?? 0) ?? turns.set(c.turn ?? 0, []).get(c.turn ?? 0)).push(c);
     }
     // ずらし・+1c・0c で終わるターン（1ターン耐久）: その行の最後に「⏳ +1Cで耐久」の札
     const waits = new Map();
     for (const w of t.receiptWaits?.[fl] ?? []) {
-      if (!turns.has(w.turn)) turns.set(w.turn, []);
-      waits.set(w.turn, [...(waits.get(w.turn) ?? []), w.label]);
+      const b = w.branch ?? 0;
+      if (!groups.has(b)) groups.set(b, new Map());
+      if (!groups.get(b).has(w.turn)) groups.get(b).set(w.turn, []);
+      const key = `${b}:${w.turn}`;
+      waits.set(key, [...(waits.get(key) ?? []), w.label]);
     }
-    const lines = [...turns]
-      .sort((a, b) => a[0] - b[0])
-      .map(([tn, cs], j, arr) => `<div class="rc-line">${arr.length > 1 ? `<b class="rc-turn">(${j + 1})</b>` : ""}${cs.map(chip).join(`<span class="rc-sep">▶</span>`)}${(waits.get(tn) ?? []).map((lb) => `<span class="rc-wait" title="このターンは倒さずに1ターン耐える（レシートの「${esc(lb)}」）">⏳ ${esc(lb)}で耐久</span>`).join("")}</div>`)
+    const linesOf = (b, turns) => {
+      // 分岐の中で、スキルを使わずに攻撃するだけのターンも (1)(2) の並びに入れる
+      if (b) for (let tn = 0; tn < Math.max(...turns.keys()); tn++) if (!turns.has(tn)) turns.set(tn, []);
+      return [...turns]
+        .sort((x, y) => x[0] - y[0])
+        .map(([tn, cs], j, arr) => `<div class="rc-line">${arr.length > 1 ? `<b class="rc-turn">(${j + 1})</b>` : ""}${cs.map(chip).join(`<span class="rc-sep">▶</span>`)}${!cs.length && !waits.has(`${b}:${tn}`) ? `<span class="rc-noskill">スキルなしで攻撃</span>` : ""}${(waits.get(`${b}:${tn}`) ?? []).map((lb) => `<span class="rc-wait" title="このターンは倒さずに1ターン耐える（レシートの「${esc(lb)}」）">⏳ ${esc(lb)}で耐久</span>`).join("")}</div>`)
+        .join("");
+    };
+    const lines = [...groups]
+      .sort((x, y) => x[0] - y[0])
+      .map(([b, turns]) => (b ? `<div class="rc-branch"><span class="rc-branch-label">${esc(t.receiptBranches?.[fl]?.[b - 1] ?? `分岐${b}`)}</span>${linesOf(b, turns)}</div>` : linesOf(0, turns)))
       .join("");
     floors += `<div class="rc-floor">【${esc(fl)}階】</div><div class="rc-step">${lines}</div>${loopHTML(Number(fl))}`;
   }
