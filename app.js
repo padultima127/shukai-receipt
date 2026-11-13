@@ -461,6 +461,8 @@ function teamSkillBoost(team, mem, part, candNo) {
     const b = fam && fam !== b0 && MDB.get(fam) ? fam : b0;
     const a = candNo && m === mem && part === "assist" ? candNo : assistNoOf(m);
     n += MDB.get(b)?.[15] ?? 0;
+    // 超覚醒のスキブ（21＝スキブ1つ・56＝スキブ+で2つ分）。本体を別のキャラに置き換えて考える時は数えない
+    if (!(candNo && m === mem && part === "base")) n += { 21: 1, 56: 2 }[m.build?.super] ?? 0;
     const ar = a && MDB.get(a);
     if (ar?.[8]) n += ar[15] ?? 0;
   }
