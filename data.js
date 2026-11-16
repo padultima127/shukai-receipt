@@ -15987,6 +15987,11 @@ window.PAD_SEED = {
             "mi": 6,
             "part": "auto",
             "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
           }
         ],
         "2": [
@@ -16240,6 +16245,11 @@ window.PAD_SEED = {
           {
             "mi": 6,
             "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
             "turn": 0
           }
         ],
@@ -43280,6 +43290,16 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 1,
             "part": "assist",
             "turn": 0
@@ -45663,6 +45683,11 @@ window.PAD_SEED = {
       "receiptCalls": {
         "1": [
           {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
             "mi": 4,
             "part": "assist",
             "turn": 0
@@ -45946,6 +45971,11 @@ window.PAD_SEED = {
             "mi": 2,
             "part": "assist",
             "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 1
           }
         ],
         "3": [
@@ -65439,6 +65469,11 @@ window.PAD_SEED = {
           }
         ],
         "12": [
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
           {
             "mi": 2,
             "part": "auto",

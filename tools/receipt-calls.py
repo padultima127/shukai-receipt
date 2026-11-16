@@ -196,6 +196,18 @@ def parse_team(team, texts):
     turn_base = 0  # その階で、この行より前に終わったターンの数（盤面◯c・ずらし・①②などで区切る）
     loose = sum(1 for l in texts[idx + 1:] if FLOOR_LOOSE.match(l)) >= 4 and sum(1 for l in texts[idx + 1:] if FLOOR.match(l)) < 4
     body = texts[idx + 1:]
+    # 「F裏，L裏」「リダ裏」のように、リーダー・フレンドを名前なしで書いた呼び出しは「L＋名前」に置き換えて読む
+    lf = {r: next((i for i, m in enumerate(members) if m["role"] == r), None) for r in ("L", "F")}
+    def name_of(i):
+        ks = sorted(mkeys[i], key=len, reverse=True)
+        return ks[0] if ks else None
+    def bare_lf(line):
+        def rep(mt):
+            r = {"L": "L", "Ｌ": "L", "リダ": "L", "リーダー": "L", "F": "F", "Ｆ": "F", "フレ": "F", "フレンド": "F"}[mt.group(2)]
+            i = lf[r]
+            return mt.group(1) + (r + name_of(i) if i is not None and name_of(i) else mt.group(2))
+        return re.sub(r"(^|[＜<〈（(,，、→\s・])(L|Ｌ|リーダー|リダ|F|Ｆ|フレンド|フレ)(?=裏|上|武器)", rep, line)
+    body = [bare_lf(l) for l in body]
     for li, line in enumerate(body):
         next_line = body[li + 1] if li + 1 < len(body) else ""
         tail, prev_tail = prev_tail, line.rstrip()[-6:]
