@@ -3372,7 +3372,7 @@ let suggestIndex = -1;
 // ダンジョンの区分と並び（区分も中身も実装順）。ここにないダンジョン（登録で増えたもの）は「その他」の最後
 const DUNGEON_GROUPS = [
   ["未知の新星", ["banryu"]],
-  ["再臨の超星", ["hyakushiki", "senju", "shinbanju", "kyouchou", "shinokuchou"]],
+  ["再臨の超星", ["hyakushiki", "senju", "shinbanju", "kyouchou", "shinokuchou", "gokuaku"]],
   ["守霊の天体", ["jupiter", "mercury", "venus", "moon", "sun"]],
   ["天空の儚域", ["fuun", "kirisame", "tenkyu"]],
   ["奈落の重界", ["guren", "taiju"]],
