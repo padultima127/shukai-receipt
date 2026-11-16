@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 114,
+  "version": 115,
   "seed": true,
   "monsters": [
     {
@@ -2122,6 +2122,20 @@ window.PAD_SEED = {
       "no": 13187,
       "name": "全因解放・オール・フォー・ワン",
       "attr": "闇",
+      "tags": []
+    },
+    {
+      "id": "n7546",
+      "no": 7546,
+      "name": "転生テテュス",
+      "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n13148",
+      "no": 13148,
+      "name": "石田ヤマト＆ワーガルルモン",
+      "attr": "水",
       "tags": []
     }
   ],
@@ -9858,6 +9872,131 @@ window.PAD_SEED = {
           4
         ]
       }
+    },
+    {
+      "id": "gokuaku",
+      "name": "暴乱の極悪生命体【超高度/バランスタイプ強化】",
+      "aliases": [
+        "新極悪",
+        "新極悪チャレンジ",
+        "暴乱の極悪生命体",
+        "極悪",
+        "再臨の超星",
+        "超星",
+        "暴乱の極悪生命体【超重力】"
+      ],
+      "battles": 13,
+      "note": "再臨の超星【超重力】。超重力（攻撃力約1667分の1）・超高度（回復力1/4）、バランスタイプのHP1.5倍。B3・B6・B9のどれかにバルドルが乱入",
+      "typeBoost": {
+        "types": [
+          1
+        ],
+        "hp": 1.5,
+        "label": "バランスタイプ強化"
+      },
+      "drops": [
+        {
+          "itemId": "plus",
+          "rate": 7777
+        },
+        {
+          "itemId": "exp",
+          "rate": 150000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ],
+          "note": "約1.5億（プレイ履歴は150,750,000）"
+        },
+        {
+          "itemId": "coin",
+          "rate": 5000000000,
+          "siteSource": [
+            "ゲームウィズ"
+          ],
+          "note": "約50億"
+        },
+        {
+          "itemId": "kingdragon",
+          "rate": 4,
+          "siteSource": [
+            "ゲームウィズ"
+          ],
+          "note": "4体か8体（バルドルの乱入階層で変わる）"
+        },
+        {
+          "itemId": "nijipii",
+          "rate": 3,
+          "siteSource": [
+            "ゲームウィズ"
+          ]
+        },
+        {
+          "itemId": "reducep",
+          "rate": 4,
+          "siteSource": [
+            "ゲームウィズ"
+          ],
+          "note": "0〜4体（確定ではない）"
+        }
+      ],
+      "parts": {
+        "item": "フリングホルニの希石",
+        "baseRate": 10,
+        "note": "道中に乱入するバルドルの部位破壊で一定確率。基本のドロップ率は不明のため原則の10%で計算（推定）＋部位破壊ボーナス1つにつき+10%"
+      },
+      "exchange": "フリングホルニの希石20個でフリングホルニと交換",
+      "gimmicks": {
+        "all": [
+          "resolve",
+          "bigHit",
+          "skillSeal",
+          "poison",
+          "dmgAbsorb",
+          "attrAbsorb",
+          "dmgVoid",
+          "awakenVoid",
+          "darkness",
+          "jammer",
+          "atkDown",
+          "skillDelay",
+          "spike",
+          "healDown",
+          "board54",
+          "maxHpDown",
+          "shield",
+          "unerasable",
+          "lock",
+          "timeDown",
+          "damageCap",
+          "comboAbsorb",
+          "comboDown",
+          "assistVoid",
+          "weakenAwaken",
+          "bind",
+          "roulette"
+        ],
+        "partial": [],
+        "sources": [
+          {
+            "site": "ゲームウィズ",
+            "url": "https://xn--0ck4aw2h.gamewith.jp/article/show/485329",
+            "date": "2026-11-16"
+          }
+        ],
+        "notes": [
+          "ゲームウィズのフロアごとの敵の行動から",
+          "対策したい最大ダメージは1320万。リーダーの軽減なしで58万を耐える必要あり（B4・B7の自滅で軽減が切れる）",
+          "B1の先制で全員スキル遅延3ターン、B10でスキル遅延2〜3ターン",
+          "B11の超根性時に現HPの300%の割合ダメージ（軽減70%程度あると安全）。B11の先制でアシスト無効4ターン",
+          "B4・B12の先制で覚醒無効2ターン。B9でリーダーチェンジ2ターン"
+        ]
+      },
+      "gimmickFloors": {
+        "assistVoid": [
+          11
+        ]
+      },
+      "rewardNote": "報酬はゲームウィズの「特徴とドロップ」の記載。経験値はプレイ履歴（1周150,750,000）も参考"
     }
   ],
   "teams": [
@@ -65332,6 +65471,385 @@ window.PAD_SEED = {
             "turn": 0,
             "label": "1C"
           }
+        ]
+      }
+    },
+    {
+      "id": "gokuaku-tequila-gabu",
+      "dungeonId": "gokuaku",
+      "title": "テキーラ 部位破壊なし（1c・0c数回、他は全ずらし）",
+      "timeSec": 338.9,
+      "turns": 20,
+      "badgeId": 45,
+      "members": [
+        {
+          "id": "n14202",
+          "role": "L",
+          "assist": "霊妙鍵の装具・霊泉の薙刀 No.13510",
+          "build": {
+            "lv": 120,
+            "plus": 390,
+            "super": 129,
+            "latents": [
+              47,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14063",
+          "role": "S",
+          "assist": "裁定機・シャマシュ＝クルの首飾り No.11200",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 142,
+            "latents": [
+              12,
+              12,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n7546",
+          "role": "S",
+          "assist": "死天龍・アークヴェルザのブレスレット No.11213",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [
+              54,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13148",
+          "role": "S",
+          "assist": "鏖砲イヴァン No.4150",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 130,
+            "latents": [
+              42,
+              42,
+              42,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13692",
+          "role": "S",
+          "assist": "ジェントルの紅茶 No.13224",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              12,
+              12,
+              12,
+              12,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14202",
+          "role": "F",
+          "assist": "マルシスのエレクトリックギター No.5684",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              12,
+              12,
+              46
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "yields": {
+        "exp": 150750000,
+        "plus": 7777
+      },
+      "steps": [
+        "1周5分38.9秒・20ターン（プレイ履歴）。1c・0cが数回で、他は全てずらし。部位破壊はしない",
+        "リーダー側を+30まで上げない場合、11Fで黄が出てきて神楽にダメージ上限10億が来たら、ボス1の1ターン目に+1c",
+        "ターン数は、立ち止まってもよいなら妥協できる。立ち止まりたくない場合は、LとFのテキーラを入れ替えるのは不可",
+        "代用は投稿者に聞いてほしいとのこと。レシート2枚目に枠ごとの条件あり（平子・テテュス・ヤマト・しづる武器・グラビティ武器3つ・ジェントル武器・マルシス武器）",
+        "1F: F裏、L裏→神楽裏→Lテキーラ。4F: 平子裏→テテュス裏→ヤマト裏→Lテキーラ。12F（20消覚）: Lテキーラ→1c→0c→0c→テキーラ。13F: ①神楽、テキーラ ②テキーラ",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/gabrielgames_pc/status/2122153263999201601",
+      "author": {
+        "name": "がぶ"
+      },
+      "sourceDate": "2026-11-16",
+      "fastMode": null,
+      "times": {},
+      "metrics": {
+        "chars": 350,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 1,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 1,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "6": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0,
+            "branch": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0,
+            "branch": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0,
+            "branch": 1
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0,
+            "branch": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0,
+            "branch": 2
+          }
+        ],
+        "7": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0,
+            "branch": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0,
+            "branch": 1
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0,
+            "branch": 1
+          },
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0,
+            "branch": 2
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0,
+            "branch": 2
+          }
+        ],
+        "11": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ],
+        "12": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 4
+          }
+        ],
+        "13": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 1
+          }
+        ]
+      },
+      "receiptWaits": {
+        "12": [
+          {
+            "turn": 1,
+            "label": "1C"
+          },
+          {
+            "turn": 2,
+            "label": "0C"
+          },
+          {
+            "turn": 3,
+            "label": "0C"
+          }
+        ]
+      },
+      "receiptBranches": {
+        "6": [
+          "紫のメタが出た時",
+          "それ以外"
+        ],
+        "10": [
+          "青の敵の時",
+          "それ以外"
         ]
       }
     }
