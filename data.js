@@ -14,7 +14,7 @@
 // estimated     : 出典に記載がなく推定した項目（画面に「推定」と表示する）
 //                 teams: "timeSec" / "ease" / "stability"、drops: estimated: true
 window.PAD_SEED = {
-  "version": 115,
+  "version": 116,
   "seed": true,
   "monsters": [
     {
@@ -2136,6 +2136,20 @@ window.PAD_SEED = {
       "no": 13148,
       "name": "石田ヤマト＆ワーガルルモン",
       "attr": "水",
+      "tags": []
+    },
+    {
+      "id": "n13398",
+      "no": 13398,
+      "name": "照れ屋な癒し手・アリナのショコラ",
+      "attr": "光",
+      "tags": []
+    },
+    {
+      "id": "n13015",
+      "no": 13015,
+      "name": "神魔黎明・ルシファーベリー＆チェリー",
+      "attr": "闇",
       "tags": []
     }
   ],
@@ -65886,6 +65900,266 @@ window.PAD_SEED = {
         "10": [
           "青の敵の時",
           "それ以外"
+        ]
+      }
+    },
+    {
+      "id": "senju-tequila-gabu",
+      "dungeonId": "senju",
+      "title": "テキーラ 全ずらし 3分20〜40秒（高速）",
+      "timeSec": 218,
+      "turns": 10,
+      "fastMode": true,
+      "times": {
+        "on": 218
+      },
+      "yields": {
+        "exp": 66350531,
+        "plus": 2970
+      },
+      "badgeId": 45,
+      "members": [
+        {
+          "id": "n14202",
+          "role": "L",
+          "assist": "ゴールドガチャドラの置物 No.10130",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              12,
+              12,
+              47
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13692",
+          "role": "S",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 137,
+            "latents": [
+              12,
+              12,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13398",
+          "role": "S",
+          "assist": "呪剣の溟手神・ネヴァンの首飾り No.7266",
+          "build": {
+            "lv": 1,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              20,
+              20,
+              20,
+              20
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n6978",
+          "role": "S",
+          "assist": "ゴールドガチャドラの置物 No.10130",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 56,
+            "latents": [
+              42,
+              42,
+              42,
+              42
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n13015",
+          "role": "S",
+          "assist": "十時愛梨 No.14153",
+          "build": {
+            "lv": 99,
+            "plus": 297,
+            "super": 0,
+            "latents": [
+              20,
+              20,
+              20,
+              20
+            ],
+            "fromQr": true
+          }
+        },
+        {
+          "id": "n14202",
+          "role": "F",
+          "assist": "ゴウテンバッドばつ丸のポーチ No.14311",
+          "build": {
+            "lv": 120,
+            "plus": 297,
+            "super": 129,
+            "latents": [
+              46,
+              12,
+              12
+            ],
+            "fromQr": true
+          }
+        }
+      ],
+      "steps": [
+        "1周3分38秒・10ターン（高速モード、プレイ履歴）。1ターン長くかかる敵を引いた遅い回の結果で、普段は3分20〜40秒（投稿者談）",
+        "全ずらし",
+        "代用は投稿者に聞いてほしいとのこと（ばつ丸武器・ベリーチェリー、たぶん神楽も代用なし）",
+        "1F: ベリーチェリー→F裏→アリナ裏→F→L裏。2F: Fテキーラ、神楽。3F: Lテキーラ、ベリーチェリー裏",
+        "7F: アリナ、テキーラ→テキーラ。8F: 神楽、テキーラ。9F: ベリーチェリー。10F: テキーラ→サノス",
+        "全フロアの手順は出典の画像を参照"
+      ],
+      "source": "https://x.com/GabrielGAMES_PC/status/2123051795111182590",
+      "author": {
+        "name": "がぶ"
+      },
+      "sourceDate": "2026-11-18",
+      "metrics": {
+        "chars": 240,
+        "puzzle": 1,
+        "branch": 0,
+        "caution": 0,
+        "zurashi": 1,
+        "plus891": 0,
+        "plus891Text": null
+      },
+      "receiptCalls": {
+        "1": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 2,
+            "part": "assist",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "2": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "3": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 4,
+            "part": "assist",
+            "turn": 0
+          }
+        ],
+        "4": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "5": [
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "6": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "7": [
+          {
+            "mi": 2,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "8": [
+          {
+            "mi": 1,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 0,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "9": [
+          {
+            "mi": 4,
+            "part": "auto",
+            "turn": 0
+          }
+        ],
+        "10": [
+          {
+            "mi": 5,
+            "part": "auto",
+            "turn": 0
+          },
+          {
+            "mi": 3,
+            "part": "auto",
+            "turn": 0
+          }
         ]
       }
     }
